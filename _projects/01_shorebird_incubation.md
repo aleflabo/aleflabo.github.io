@@ -2,7 +2,7 @@
 layout: page
 title: shorebird incubation
 description: Comparing incubation rhythms across shorebirds.
-img: assets/img/sh_inc_00_title.png
+img: assets/img/sesa_inc.jpg
 importance: 1
 category: science
 ---
