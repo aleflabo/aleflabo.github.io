@@ -19,7 +19,7 @@ favicon-url: assets/images/alessandro-flaborea-high-resolution-logo-color-on-tra
 
 # URL of the Image of Custom Hero Image (i.e., the image in the background of the very first section of the Homepage)
 # heroimage: https://images.pexels.com/photos/220444/pexels-photo-220444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-heroimage: /background_2.jpg
+heroimage: /background_2.png
 
 # Social Media and Contact
 # If you don't want to use any icon, you can leave them blank.
