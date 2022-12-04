@@ -74,7 +74,8 @@ a.navbar-item.is-active {
         margin: auto;
 
         img {
-            border: 0.25rem dotted black;
+            // border: 0.25rem dotted black;
+            border: 0.25 solid #7a7a7a;
         }
     }
 
