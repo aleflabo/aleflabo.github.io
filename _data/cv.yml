@@ -6,7 +6,23 @@
     - name: Date of Birth
       value: 31st August 1981
     - name: Languages
-      value: English, German, Czech, Slovak
+      value: English, German, Czech *native*, Slovak, Russian *basic*
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Postdoc
+      institution: Max Planck Institute for Biological Intelligence, Germany
+      year: 2023 - present
+    - title: Postdoc
+      institution: Czech University of Life Sciences Prague, Czechia
+      year: 2017 - present  
+    - title: Postdoc
+      institution: Max Planck Institute for Ornithology, Germany
+      year: 2019 - 2022
+    - title: Postdoc
+      institution: NIOZ Royal Netherlands Institute for Sea Research, the Netherlands
+      year: 2016 - 2019
 
 - title: Education
   type: time_table
@@ -18,21 +34,14 @@
       institution: Uni. of Natural Resources & Applied Life Sciences, Vienna
       year: 2010
     - title: Mgr
-      institution: Charles University in Prague, Vienna
+      institution: Charles University, Prague
       year: 2006
     - title: BSc
       institution: State University of New York, Prague
       year: 2004
-
-- title: Experience
-  type: time_table
-  contents:
-    - title: Post doc
-      institution: Max Planck Institute for Ornithology, Seeweisen
-      year: 2019 - present
-    - title: Post doc
-      institution: Czech University of Life Sciences Prague
-      year: 2017 - present
-    - title: Post doc
-      institution: NIOZ Royal Netherlands Institute for Sea Research
-      year: 2016 - 2019
+    - title: Graduation
+      institution: Gymnasium Arabska, Prague
+      year: 2000  
+    - title: Graduation
+      institution: Kendall Senior High School, United States
+      year: 1999  
