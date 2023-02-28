@@ -7,7 +7,7 @@ importance: 2
 category: science
 ---
 
-Ruff Calidris pugnax is a Palearctic lekking shorebird with three strikingly different mating morphs: aggressive Independents, semi-cooperative Satellites and female-mimic, Faeders. An autosomal inversion drives the developments of the major morph-differences in mating behaviours, ornamentation, and body size. 
+Ruff *Calidris pugnax* is a Palearctic lekking shorebird with three strikingly different mating morphs: aggressive Independents, semi-cooperative Satellites and female-mimic, Faeders. An autosomal inversion drives the development of the major morph differences in mating behaviours, ornamentation, and body size. 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -21,7 +21,7 @@ Ruff Calidris pugnax is a Palearctic lekking shorebird with three strikingly dif
     </div>
 </div>
 <div class="caption">
-    Three male mating morphs of ruffs. Aggresive Independent (left), semi-cooperative Sattelite (midle) and female-mimic, Faeder (right). Illustrations by Yifan Pei under Creative Commons Attribution (CC BY 4.0).
+    Three male mating morphs of ruffs. Aggressive Independent (left), semi-cooperative Sattelite (middle) and female-mimic, Faeder (right). Illustrations by Yifan Pei under Creative Commons Attribution (CC BY 4.0).
 </div>
 
-However, whether the morphs also differ in sperm traits has not been investigated. We thus use a captive-breeding population of ruffs to reveal how shorebird sperm propels and looks and whether the sperm velocity and morphology is morph specific.
+However, whether the morphs also differ in sperm traits has not been investigated. We thus use a captive-breeding population of ruffs to reveal how shorebird sperm propels and looks and whether the sperm velocity and morphology are morph specific.
