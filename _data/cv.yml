@@ -6,7 +6,7 @@
     - name: Date of Birth
       value: 31st August 1981
     - name: Languages
-      value: English, German, Czech <em>native<em>, Slovak, Russian <em>basic<em>
+      value: English, German, Czech <em>native</em>, Slovak, Russian <em>basic</em>
 
 - title: Experience
   type: time_table
