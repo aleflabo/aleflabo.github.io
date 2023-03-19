@@ -1,7 +1,7 @@
 ---
 layout: page
-permalink: /repositories/
-title: repositories
+permalink: /repos/
+title: repos
 description: selected
 nav: true
 nav_order: 3
