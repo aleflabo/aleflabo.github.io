@@ -1,7 +1,7 @@
 ---
 layout: page
-permalink: /bulla lab/
-title: bulla lab
+permalink: /bulla's lab/
+title:
 description: 
 nav: true
 nav_order: 6
@@ -9,11 +9,11 @@ nav_order: 6
 
 "It is amazing what you can accomplish if you do not care who gets the credit." - Harry Truman
 
-## beneral Info
+---
+
+## general info
 
 The lab is being established at Faculty of Environmental Sciences, Czech University of Life Sciencess Prague. 
-
----
 
 ## scientific approach
 
