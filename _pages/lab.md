@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /bulla's lab/
-title:
+title: bulla's lab
 description: 
 nav: true
 nav_order: 6
