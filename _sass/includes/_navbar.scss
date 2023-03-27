@@ -28,14 +28,14 @@
 
         &:hover {
             background-color: rgba($color: #fff, $alpha: 0.25);
-            color: #822433;
-            border: 1px solid #822433;
+            color: #40798c;
+            border: 1px solid #40798c;
         }
     }
 
 a.navbar-item.is-active {
     background-color: rgba($color: #fff, $alpha: 0.25) !important;
-    color: #822433 !important;
+    color: #40798c !important;
 
         &:hover {
             background-color: rgba($color: #fff, $alpha: 0.25) !important;

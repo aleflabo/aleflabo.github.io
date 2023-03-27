@@ -7,6 +7,38 @@
 </li>
 {% endif %}
 
+{% if social.linkedin %}
+<li>
+  <a href="{{ social.linkedin }}" target="_blank" title="Linkedin">
+    <i class="fab fa-linkedin"></i>
+  </a>
+</li>
+{% endif %}
+
+{% if social.twitter %}
+<li>
+  <a href="https://twitter.com/{{ social.twitter }}" target="_blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</li>
+{% endif %}
+
+{% if social.instagram %}
+<li>
+  <a href="http://instagram.com/{{ social.instagram }}" target="_blank" title="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+</li>
+{% endif %}
+
+{% if social.github %}
+<li>
+  <a href="https://github.com/{{ social.github }}" target="_blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</li>
+{% endif %}
+
 {% if social.orcid %}
 <li>
   <a href="https://orcid.org/{{ social.orcid }}" target="_blank" title="ORCID">
@@ -55,21 +87,6 @@
 </li>
 {% endif %}
 
-{% if social.linkedin %}
-<li>
-  <a href="{{ social.linkedin }}" target="_blank" title="Linkedin">
-    <i class="fab fa-linkedin"></i>
-  </a>
-</li>
-{% endif %}
-
-{% if social.github %}
-<li>
-  <a href="https://github.com/{{ social.github }}" target="_blank" title="Github">
-    <i class="fab fa-github"></i>
-  </a>
-</li>
-{% endif %}
 
 {% if social.gitlab %}
 <li>
@@ -103,13 +120,7 @@
 </li>
 {% endif %}
 
-{% if social.twitter %}
-<li>
-  <a href="https://twitter.com/{{ social.twitter }}" target="_blank" title="Twitter">
-    <i class="fab fa-twitter"></i>
-  </a>
-</li>
-{% endif %}
+
 
 {% if social.youtube %}
 <li>
@@ -127,10 +138,3 @@
 </li>
 {% endif %}
 
-{% if social.instagram %}
-<li>
-  <a href="http://instagram.com/{{ social.instagram }}" target="_blank" title="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-</li>
-{% endif %}

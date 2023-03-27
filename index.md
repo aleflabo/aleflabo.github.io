@@ -1,5 +1,5 @@
 ---
 layout: portfolio
-title : PINlab
+title : Alessandro Flaborea
 description: perception and intelligence lab
 ---

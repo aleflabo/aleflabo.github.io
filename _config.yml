@@ -6,26 +6,26 @@ baseurl:
 publications: True
 presentations: True
 blog: False
-people: True
+people: False
 
 # Language of the website
 lang: en
 
 # Search engine optimization settings
-title: Perception and Intelligence Laboratory (PINlab)
+title: Alessandro Flaborea
 tagline: Department of Computer Science, Sapienza University of Rome, Italy
 
-description: The PINlab focuses on fundamental research in computer vision and machine learning, with a focus on distributed and multi-agent systems, perception, and general intelligence. Our research is conducted within sustainable and interpretable frameworks.
-author: PINlab
+description: I am a PhD student in computer science at the Sapienza University of Rome, where I am also a member of the Perception and Intelligence lab (PINlab). My research focuses on artificial intelligence and computer vision, and I am particularly interested in topics such as pose forecasting, anomaly detection, few-shot learning, and geometric deep learning. I am excited to work in these cutting-edge areas of computer science, and I look forward to making significant contributions to the field through my research
+author: Alessandro Flaborea
 twitter:
-  username: SapienzaPINlab
-  card: Perception and Intelligence Laboratory (PINlab)
-logo: assets/img/icon.jpg
+  username: AleFlaborea
+  card: Alessandro Flaborea
+logo: assets/img/cv.jpg
 social:
-  name: PINlab
+  name: aleflabo
   links:
-    - https://twitter.com/SapienzaPINlab
-    - https://github.com/PINlabSapienza
+    - https://github.com/aleflabo
+    - https://www.instagram.com/aleflabo/
 locale: en_GB
 
 # Page Settings
@@ -38,8 +38,7 @@ theme_settings:
   awards_title: AWARDS
   projects_title: PROJECTS
   recentpubs_title: RECENT PUBLICATIONS
-  presentation_text: "Computer vision and machine learning have great potential to endow machines/robots with the (visual) perception of the environment and the intelligence to reason about it, and take decisions. The field has thrived in the past three decades, and it stands now as one of the key technological ingredients for autonomous driving, unmanned drones, and human-robot-collaboration, as well as the pervasive novel asset for other fields of science, including earthquake and weather forecasting."
-  presentation_text2: "Our lab is interested in fundamental research and innovation transfer on computer vision and machine learning. Our specific research interests include distributed and multi-agent intelligent systems, perception (detection, recognition, re-identification, forecasting), and general intelligence (reasoning, meta-learning, domain adaptation), within sustainable (low-power-consumption and constrained-computational-resource sensors and devices) and interpretable (interpretable and verifiable AI) frameworks."
+  presentation_text: "I am a PhD student in computer science at the Sapienza University of Rome, where I am also a member of the Perception and Intelligence lab (PINlab). My research focuses on artificial intelligence and computer vision, and I am particularly interested in topics such as pose forecasting, anomaly detection, few-shot learning, and geometric deep learning. I am excited to work in these cutting-edge areas of computer science, and I look forward to making significant contributions to the field through my research."
 
 
 # Pagination

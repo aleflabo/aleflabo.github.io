@@ -86,6 +86,22 @@ layout: page
                             </li>
                             {% endif %}
                             
+                            {% if social.twitter %}
+                            <li>
+                            <a href="https://twitter.com/{{ social.twitter }}" target="_blank" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            </li>
+                            {% endif %}
+
+                            {% if social.instagram %}
+                            <li>
+                            <a href="http://instagram.com/{{ social.instagram }}" target="_blank" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            </li>
+                            {% endif %}
+
                             {% if social.github %}
                             <li>
                             <a href="https://github.com/{{ social.github }}" target="_blank" title="Github">
@@ -126,13 +142,6 @@ layout: page
                             </li>
                             {% endif %}
                             
-                            {% if social.twitter %}
-                            <li>
-                            <a href="https://twitter.com/{{ social.twitter }}" target="_blank" title="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            </li>
-                            {% endif %}
                             
                             {% if social.youtube %}
                             <li>
@@ -150,13 +159,6 @@ layout: page
                             </li>
                             {% endif %}
                             
-                            {% if social.instagram %}
-                            <li>
-                            <a href="http://instagram.com/{{ social.instagram }}" target="_blank" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            </li>
-                            {% endif %}
                         </ul>    
 
 

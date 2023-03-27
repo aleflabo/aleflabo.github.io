@@ -1,9 +1,9 @@
 {% assign profile = site.data.profile %}
-{% assign urlstart = profile.image | split: '/' %}
+{% assign urlstart = profile.logo | split: '/' %}
 {% if urlstart == 'https:' %}
-  {% assign imgurl = profile.image %}
+  {% assign imgurl = profile.logo %}
 {% else %}
-  {% assign imgurl = profile.image | relative_url %}
+  {% assign imgurl = profile.logo | relative_url %}
 {% endif %}
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" id="navbar">
@@ -29,7 +29,6 @@
             <div class="navbar-end">
                 <a class="navbar-item {% if page.layout == 'default' %}is-active{% endif %}"
                     href="{% if page.layout == 'default' %}{{site.url}}{{site.baseurl}}/#{% else %}{{site.url}}{{site.baseurl}}/{% endif %}">Home</a>
-                <a class="navbar-item" href="{{site.url}}{{site.baseurl}}/people">People</a>
                 <a class="navbar-item" href="{{site.url}}{{site.baseurl}}/publications">Publications</a>
                 <a class="navbar-item" href="{{site.url}}{{site.baseurl}}/presentations">Presentations</a>
                 <!-- <a class="navbar-item" href="{{site.url}}{{site.baseurl}}/blog">Blog</a>

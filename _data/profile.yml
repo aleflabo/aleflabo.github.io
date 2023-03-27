@@ -1,8 +1,10 @@
-image: assets/img/icon.jpg
-username: Perception and Intelligence Laboratory (PINlab)
-description: Department of Computer Science 
+image: assets/img/cv.jpg
+logo: assets/img/logo.png
+
+username: Alessandro Flaborea
+description: PhD Student in Computer Science and member of the [Perception and Intelligence Laboratory (PINlab)](https://www.pinlab.org/)
 description2: Sapienza University of Rome, Italy
-webpage: https://github.com/PINlabSapienza
+webpage: https://github.com/aleflabo
 # experience: # Remove for hiding the experience section
 #   - start: 2017-05-03
 #     end: 2018-05-06
@@ -14,22 +16,22 @@ webpage: https://github.com/PINlabSapienza
 #   - skill: HTML5 & CSS
 #     value: 85  # Percent value
 social:
-  email: pinlab.sapienza@gmail.com # Full email address, e.g. "sample@google.com"
+  email: flaborea.alessandro@gmail.com # Full email address, e.g. "sample@google.com"
+  twitter: AlessandroFlabo
+  youtube:
+  facebook:
+  instagram: aleflabo
   orcid: 
-  scholar: 
+  scholar: HHDHIVoAAAAJ
   publons: 
   research_gate: 
   dblp:  # Full URL
   semantic_scholar:  # Full URL
-  linkedin:  # Full URL 
-  github: PINlabSapienza
+  linkedin: https://www.linkedin.com/in/alessandro-flaborea/ # Full URL 
+  github: aleflabo
   gitlab: 
   bitbucket: 
   google_plus:
   mastodon: 
-  twitter: SapienzaPINlab
-  youtube:
-  facebook:
-  instagram:
 # awards: # Remove for hiding the awards section
 #   - "This is an award I got"
