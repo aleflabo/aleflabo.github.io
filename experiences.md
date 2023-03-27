@@ -1,5 +1,5 @@
 ---
-title: Academic
+title: Experiences
 layout: page
 ---
 
