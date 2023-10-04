@@ -15,7 +15,7 @@ The lab is being established at Faculty of Environmental Sciences, Czech Univers
 
 ### scientific approach
 
-Our lab will have a flat hierarchical structure with uninimous decession, and genuin non-violent communicatiton. The scientific rigour is what matters to us.
+Our lab will have a flat hierarchical structure with uninimous decession making, and genuin non-violent communicatiton. The scientific rigour is what matters to us.
 
 ### teaching and mentoring approach
 
