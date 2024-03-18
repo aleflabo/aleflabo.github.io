@@ -2,11 +2,11 @@
   type: map
   contents:
     - name: Full Name
-      value: Martin Bulla
+      value: Alessandro Flaborea
     - name: Date of Birth
-      value: 31st August 1981
+      value: 25th September 1995
     - name: Languages
-      value: English, German, Czech <em>native</em>, Slovak, Russian <em>basic</em>
+      value: English, Italian <em>native</em>
 
 - title: Experience
   type: time_table

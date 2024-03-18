@@ -2,10 +2,10 @@
 layout: about
 title: about
 permalink: /
-subtitle:  <a href='https://www.nature.com/articles/nature20563'>Biorhythms</a>, <a href='https://onlinelibrary.wiley.com/doi/full/10.1111/ele.13662'>macroecology & evolution</a>, <a href='https://osf.io/profile/'>open science</a>, <a href='https://www.youtube.com/channel/UCP8ITIDaFZHW68z7KaTyDew'>shorebirds</a>.
+subtitle:  <a href='https://github.com/aleflabo/PREGO'>Procedural Learning</a>, <a href='https://onlinelibrary.wiley.com/doi/full/10.1111/ele.13662'>Video Anomaly Detection</a>, <a href='https://www.pinlab.org/'>PINlab</a>.
 profile:
   align: right
-  image: me_&_kohout_bw_kohout-pop_grey.jpg
+  image: cutted2.jpg
   image_circular: false # crops the image to make it circular
   address: >
 
@@ -14,7 +14,18 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
 
-I strive to understand the World within and around me. 
+I am a PhD student in computer science at the Sapienza University of Rome, where I am also a member of the <a href='https://www.pinlab.org'>Perception and Intelligence lab (PINlab)</a> . 
+
+My research focuses on artificial intelligence and computer vision, and I am particularly interested in topics such as 
+- Procedural Learning,
+- Egocentric Vision 
+- Video Anomaly Detection, 
+- Crowd Navigation, and 
+- Hyperbolic Neural Networks. 
+
+I am excited to work in these cutting-edge areas of computer science, and I look forward to making significant contributions to the field through my research
+
+<!-- I strive to understand the World within and around me. 
 
 As a **scientist**, I use birds, mainly shorebirds, to explore 
 - <a href='https://www.nature.com/articles/s41598-019-41223-z'>rhythms of parental care</a> and <a href='https://doi.org/10.3389/fevo.2019.00093'>how such rhythms emerge</a>, 
@@ -25,4 +36,4 @@ As a **scientist**, I use birds, mainly shorebirds, to explore
 
 I am a **postdoc** at the [Max Planck Institute for Biological Intelligence](https://www.bi.mpg.de/en) and [Czech University of Life Sciences Prague](https://www.czu.cz/en) and **collaborate** with [scientists and institutions across the globe](https://doi.org/10.1126/science.aaw8529). 
 
-I am a regular contributor to <a href='https://www.inaturalist.org/people/1583651'>iNaturalist</a>. 
+I am a regular contributor to <a href='https://www.inaturalist.org/people/1583651'>iNaturalist</a>.  -->

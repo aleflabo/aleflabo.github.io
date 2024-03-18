@@ -1,10 +1,9 @@
 github_users:
-  - martinbulla
+  - aleflabo
 
 github_repos:
-  - martinbulla/ruff_sperm_v2
-  - martinbulla/avian_FID_covid
-  - martinbulla/Exchange_behaviour_incubating_SESA
-  - martinbulla/RWLE_predation_timing
-  - martinbulla/Still_no_evidence
-  - martinbulla/many_analysts
+  - aleflabo/PREGO
+  - aleflabo/MoCoDAD
+  - aleflabo/HypAD
+  - aleflabo/BestPractices2Body
+  - aleflabo/find_duplicate_bibtex_ref
