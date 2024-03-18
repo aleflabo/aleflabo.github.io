@@ -5,7 +5,7 @@
 # Parse cmd arguments
 
 SRC_BRANCH="folio"
-DEPLOY_BRANCH="gh-pages"
+DEPLOY_BRANCH="gh-pages2"
 
 USAGE_MSG="usage: deploy [-h|--help] [-u|--user] [-s|--src SRC_BRANCH] [-d|--deploy DEPLOY_BRANCH] [--verbose] [--no-push]"
 
