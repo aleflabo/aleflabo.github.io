@@ -14,7 +14,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
 
-Ph.D. in Computer Science from the Sapienza University of Rome, member of the <a href='https://www.pinlab.org'>Perception and Intelligence lab (PINlab)</a>, working on something new with <a href='https://italailabs.com/'>ItalAi</a>
+Ph.D. in Computer Science from the Sapienza University of Rome, member of the <a href='https://www.pinlab.org'>Perception and Intelligence lab (PINlab)</a>, working on something new with <a href='https://italailabs.com/'>ItalAI</a>
 
 My research focuses on artificial intelligence and computer vision, and I am particularly interested in topics such as 
 - Procedural Learning,
