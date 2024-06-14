@@ -23,5 +23,4 @@ My research focuses on artificial intelligence and computer vision, and I am par
 - Crowd Navigation, 
 - Hyperbolic Neural Networks. 
 
-I am excited to work in these cutting-edge areas of computer science, and I look forward to making significant contributions to the field through my research
 
