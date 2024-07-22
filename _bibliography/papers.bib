@@ -13,19 +13,48 @@ References
 %website     = {https://www.google.com},
 %latex_src   = {https://www.google.com},
 
+
+@article{damely2024hip2nav,
+abbr={IROS},
+  title = {Hyp2Nav: Hyperbolic Planning and Curiosity for Crowd Navigation},
+  author = {D’Amely Di Melendugno, Guido Maria and Flaborea, Alessandro and Mettes, Pascal and Galasso, Fabio},
+  journal = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2024},
+  arxiv = {2407.13567},
+  bibtex_show = true,
+  abstract = {Autonomous robots are increasingly becoming a strong fixture in social environments. Effective crowd navigation requires not only safe yet fast planning, but should also enable interpretability and computational efficiency for working in real-time on embedded devices. In this work, we advocate for hyperbolic learning to enable crowd navigation and we introduce Hyp2Nav. Different from conventional reinforcement learning-based crowd navigation methods, Hyp2Nav leverages the intrinsic properties of hyperbolic geometry to better encode the hierarchical nature of decision-making processes in navigation tasks. We propose a hyperbolic policy model and a hyperbolic curiosity module that results in effective social navigation, best success rates, and returns across multiple simulation settings, using up to 6 times fewer parameters than competitor state-of-the-art models. With our approach, it becomes even possible to obtain policies that work in 2-dimensional embedding spaces, opening up new possibilities for low-resource crowd navigation and model interpretability. Insightfully, the internal hyperbolic representation of Hyp2Nav correlates with how much attention the robot pays to the surrounding crowds, e.g. due to multiple people occluding its pathway or to a few of them showing colliding plans, rather than to its own planned route.
+}
+}
+
 @article{flaborea2024prego,
 abbr={CVPR},
   title = {PREGO: online mistake detection in PRocedural EGOcentric Videos},
   author = {Flaborea, Alessandro and D’Amely Di Melendugno, Guido Maria and Plini, Leonardo and Scofano, Luca and De Matteis, Edoardo and Furnari, Antonino and Farinella, Giovanni Maria and Galasso, Fabio},
   journal = {Proceedings of the IEEE/CVF Computer Vision and Pattern Recognition (CVPR)},
   year = {2024},
-  html = {https://arxiv.org/abs/2404.01933},
+  arxiv = {2404.01933},
   bibtex_show = true,
   abstract = {Promptly identifying procedural errors from egocentric videos in an online setting is highly challenging and valuable for detecting mistakes as soon as they happen. This capability has a wide range of applications across various fields, such as manufacturing and healthcare. The nature of procedural mistakes is open-set since novel types of failures might occur, which calls for one-class classifiers trained on correctly executed procedures. However, no technique can currently detect open-set procedural mistakes online. We propose PREGO, the first online one-class classification model for mistake detection in PRocedural EGOcentric videos. PREGO is based on an online action recognition component to model the current action, and a symbolic reasoning module to predict the next actions. Mistake detection is performed by comparing the recognized current action with the expected future one. We evaluate PREGO on two procedural egocentric video datasets, Assembly101 and Epic-tent, which we adapt for online benchmarking of procedural mistake detection to establish suitable benchmarks, thus defining the Assembly101-O and Epic-tent-O datasets, respectively.
 }
 }
 
-
+@article{flaborea23,
+  abbr={PR journal},
+  doi = {10.48550/ARXIV.2301.09489},
+  
+  
+  author = {Flaborea, Alessandro and Di Melendugno, Guido Maria D'Amely and D'arrigo, Stefano and Sterpa, Marco Aurelio and Sampieri, Alessio and Galasso, Fabio},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Contracting Skeletal Kinematic Embeddings for Anomaly Detection},
+  journal={Pattern Recognition},
+ 
+  year = {2024},
+  arxiv = {2301.09489},
+  bibtex_show = true,
+  abstract = {Detecting the anomaly of human behavior is paramount to timely recognizing endangering situations, such as street fights or elderly falls. However, anomaly detection is complex, since anomalous events are rare and because it is an open set recognition task, i.e., what is anomalous at inference has not been observed at training. We propose COSKAD, a novel model which encodes skeletal human motion by an efficient graph convolutional network and learns to COntract SKeletal kinematic embeddings onto a latent hypersphere of minimum volume for Anomaly Detection. We propose and analyze three latent space designs for COSKAD: the commonly-adopted Euclidean, and the new spherical-radial and hyperbolic volumes. All three variants outperform the state-of-the-art, including video-based techniques, on the ShangaiTechCampus, the Avenue, and on the most recent UBnormal dataset, for which we contribute novel skeleton annotations and the selection of human-related videos. The source code and dataset will be released upon acceptance.}
+}
 
 @article{flaborea2023mocodad,
 abbr={ICCV},
@@ -78,23 +107,7 @@ performance improvement of 21.9% over the state-of-theart on the most recent ExP
 initialization accounts for 3.5%},
   bibtex_show = true
 }
-@article{flaborea23,
-  abbr={preprint},
-  doi = {10.48550/ARXIV.2301.09489},
-  
-  
-  author = {Flaborea, Alessandro and Di Melendugno, Guido Maria D'Amely and D'arrigo, Stefano and Sterpa, Marco Aurelio and Sampieri, Alessio and Galasso, Fabio},
-  
-  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  
-  title = {Contracting Skeletal Kinematic Embeddings for Anomaly Detection},
-  journal={arXiv preprint arXiv:2301.09489},
- 
-  year = {2023},
-  arxiv = {2301.09489},
-  bibtex_show = true,
-  abstract = {Detecting the anomaly of human behavior is paramount to timely recognizing endangering situations, such as street fights or elderly falls. However, anomaly detection is complex, since anomalous events are rare and because it is an open set recognition task, i.e., what is anomalous at inference has not been observed at training. We propose COSKAD, a novel model which encodes skeletal human motion by an efficient graph convolutional network and learns to COntract SKeletal kinematic embeddings onto a latent hypersphere of minimum volume for Anomaly Detection. We propose and analyze three latent space designs for COSKAD: the commonly-adopted Euclidean, and the new spherical-radial and hyperbolic volumes. All three variants outperform the state-of-the-art, including video-based techniques, on the ShangaiTechCampus, the Avenue, and on the most recent UBnormal dataset, for which we contribute novel skeleton annotations and the selection of human-related videos. The source code and dataset will be released upon acceptance.}
-}
+
 
 
 
