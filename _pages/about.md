@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle:  <a href='https://github.com/aleflabo/PREGO'>Procedural Learning</a>, <a href='https://github.com/aleflabo/MoCoDAD'>Video Anomaly Detection</a>, <a href='https://www.pinlab.org/'>Perception and Intelligence lab (PINlab)</a>.
+subtitle:  <a href='https://www.proceder.ai'>Proceder.ai</a>, <a href='https://github.com/aleflabo/PREGO'>Procedural Learning</a>, <a href='https://github.com/aleflabo/MoCoDAD'>Video Anomaly Detection</a>, <a href='https://www.pinlab.org/'>Perception and Intelligence lab (PINlab)</a>.
 profile:
   align: right
   image: cutted2.jpg
@@ -14,7 +14,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
 
-Ph.D. in Computer Science @ Sapienza University of Rome, member of the <a href='https://www.pinlab.org'>Perception and Intelligence lab (PINlab)</a>, working on something new with <a href='https://italailabs.com/'>ItalAI</a>
+Ph.D. in Computer Science @ Sapienza University of Rome, member of the <a href='https://www.pinlab.org'>Perception and Intelligence lab (PINlab)</a>, trying to be a startup-er working on the <a href='https://www.proceder.ai'>Proceder.ai</a> spinoff. 
 
 My research focuses on artificial intelligence and computer vision, and I am particularly interested in topics such as 
 - Procedural Learning,
