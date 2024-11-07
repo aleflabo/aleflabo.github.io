@@ -2,8 +2,9 @@ github_users:
   - aleflabo
 
 github_repos:
+  - GDam90/hyp2nav
   - aleflabo/PREGO
   - aleflabo/MoCoDAD
+  - aleflabo/COSKAD
   - aleflabo/HypAD
   - aleflabo/BestPractices2Body
-  - aleflabo/find_duplicate_bibtex_ref
