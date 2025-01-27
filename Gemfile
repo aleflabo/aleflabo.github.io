@@ -20,4 +20,6 @@ end
 group :other_plugins do
     gem 'httparty'
     gem 'feedjira'
+    gem "liquid", "~> 4.0.4"
+
 end
