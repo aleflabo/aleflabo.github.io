@@ -1,0 +1,127 @@
+---
+layout: portfolio
+---
+
+<section class="hero" id="about">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>{{ site.name }}</h1>
+                <p class="subtitle">{{ site.role }} at {{ site.company }}</p>
+                <p class="description">AI researcher and technology leader passionate about bridging state-of-the-art research with real-world applications. Exploring the intersection of computer vision, procedural learning, and enterprise automation through both academic research and industry innovation.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        Get in Touch
+                    </a>
+                    <a href="/blog" class="btn btn-secondary">
+                        Read My Thoughts
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/assets/img/cutted3.jpg" alt="{{ site.name }}" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Professional Journey</h2>
+        
+        <div class="experience-grid">
+            <div class="experience-card">
+                <h3>Chief Technology Officer</h3>
+                <div class="company">{{ site.company }}</div>
+                <div class="period">2024 - Present</div>
+                <p>Leading technical strategy and product development for AI-powered automation platforms. Building engineering teams while driving research initiatives that transform enterprise workflows through advanced video understanding and multimodal AI.</p>
+            </div>
+            
+            <div class="experience-card">
+                <h3>Ph.D. in Computer Science</h3>
+                <div class="company">Sapienza University of Rome</div>
+                <div class="period">2021 - 2024</div>
+                <p>Research on "Anomaly Detection Across Multiple Domains" with focus on generative models, self-supervised learning, and hyperbolic neural networks. Conducted research at the PINlab (Perception and Intelligence Lab). Published 10+ papers in top AI conferences.</p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Brief Procederai mention -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 0;">
+    <div class="container" style="text-align: center;">
+        <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin: 0;">
+            Currently building the future of enterprise automation as CTO at 
+            <a href="{{ site.company_url }}" target="_blank" style="color: #64ffda; text-decoration: none; font-weight: 600;">Procederai</a> — 
+            transforming complex procedures through AI-powered video understanding.
+        </p>
+    </div>
+</section>
+
+<section class="publications" id="publications">
+    <div class="container">
+        <h2 class="section-title">Research & Publications</h2>
+        <p style="text-align: center; font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Pioneering research in AI, computer vision, and anomaly detection with publications in top-tier venues including ICLR, CVPR, and ICCV. Focused on practical applications of machine learning in real-world scenarios.
+        </p>
+        
+        <div class="publications-list">
+            {% for pub in site.data.publications %}
+                {% if pub.selected %}
+                <div class="publication">
+                    <h3 class="pub-title">{{ pub.title }}</h3>
+                    <p class="pub-authors">{{ pub.authors }}</p>
+                    <p class="pub-venue">{{ pub.venue }} {{ pub.year }}</p>
+                    {% if pub.description %}
+                    <p class="pub-description">{{ pub.description }}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://scholar.google.com/citations?user={{ site.social.scholar }}" target="_blank" class="btn btn-primary">
+                View All Publications
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container" style="text-align: center;">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Interested in AI strategy, speaking engagements, or collaboration opportunities? Let's discuss how we can work together.
+        </p>
+        
+        <div class="social-links">
+            <a href="mailto:{{ site.social.email }}" class="social-link" title="Email">
+                📧
+            </a>
+            <a href="https://linkedin.com/in/{{ site.social.linkedin }}" target="_blank" class="social-link" title="LinkedIn">
+                💼
+            </a>
+            <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" class="social-link" title="Twitter">
+                🐦
+            </a>
+            <a href="https://github.com/{{ site.social.github }}" target="_blank" class="social-link" title="GitHub">
+                💻
+            </a>
+            <a href="https://scholar.google.com/citations?user={{ site.social.scholar }}" target="_blank" class="social-link" title="Google Scholar">
+                🎓
+            </a>
+            <a href="{{ site.company_url }}" target="_blank" class="social-link" title="{{ site.company }}">
+                🚀
+            </a>
+        </div>
+        
+        <div style="margin-top: 3rem;">
+            <a href="mailto:{{ site.social.email }}" class="btn btn-primary" style="font-size: 1.1rem;">
+                Send Email
+            </a>
+        </div>
+    </div>
+</section>

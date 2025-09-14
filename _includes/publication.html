@@ -1,0 +1,10 @@
+<div class="publication-item">
+    <div class="publication-title">{{ entry.title }}</div>
+    <div class="publication-authors">{{ entry.author }}</div>
+    <div class="publication-venue">{{ entry.journal }} {{ entry.year }}</div>
+    {% if entry.abstract %}
+        <div class="publication-abstract" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+            {{ entry.abstract | truncate: 300 }}
+        </div>
+    {% endif %}
+</div>

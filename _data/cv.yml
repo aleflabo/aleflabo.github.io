@@ -12,6 +12,16 @@
 - title: Experience
   type: time_table
   contents:
+    - title: Chief Technology Officer
+      institution: Procederai, Rome, IT
+      year: 2024-Present
+      description: 
+        - Leading technical strategy and product development for AI-powered procedure automation platform
+        - Building and managing cross-functional engineering teams
+        - Driving research and development initiatives in procedural AI and computer vision
+        - Establishing technical partnerships and research collaborations
+        - Overseeing architecture and scalability of enterprise AI solutions
+
     - title: PhD visiting researcher
       institution: University of Amsterdam, NL
       year: Dec. 2023-Mar 2024
