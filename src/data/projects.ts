@@ -64,8 +64,40 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "fanta-mundial",
+    slug: "agentic-toolkit",
     order: 2,
+    name: "Agentic Workflow Toolkit",
+    role: "Solo build",
+    year: "2026",
+    status: "case",
+    stack: ["Claude Code", "MCP", "Notion API", "GitHub API", "LLM agents"],
+    tags: ["Agentic tooling", "Automation"],
+    en: {
+      area: "Agentic tooling",
+      summary:
+        "A suite of AI-agent skills that automate my team's ops and engineering workflows, from daily standups to LLM-prompt review.",
+      problem:
+        "Recurring team and engineering chores, running standups, tracking sprints across Notion and GitHub, keeping platform docs current, and reviewing LLM prompts before they ship, quietly consumed time and drifted out of date.",
+      approach:
+        "I built a set of Claude Code skills, each a focused agent with the right tools wired in: a standup skill that cross-references GitHub activity with Notion tasks and drafts the daily update; a platform-map skill that scans the repo and regenerates the architecture docs; and a prompt-review skill that audits LLM prompts for efficacy and regressions across the extraction pipeline and the chat agents.",
+      result:
+        "Routine ops and documentation now run as one-command agent invocations instead of manual work, and every prompt change gets a consistent review before it ships.",
+    },
+    it: {
+      area: "Tooling agentico",
+      summary:
+        "Una suite di skill ad agenti AI che automatizzano le operazioni del team e i flussi ingegneristici, dagli standup quotidiani alla review dei prompt LLM.",
+      problem:
+        "Attività ricorrenti di team e ingegneria, condurre gli standup, tracciare gli sprint tra Notion e GitHub, tenere aggiornata la documentazione di piattaforma e revisionare i prompt LLM prima del rilascio, consumavano tempo in silenzio e si disallineavano.",
+      approach:
+        "Ho costruito un insieme di skill Claude Code, ognuna un agente focalizzato con gli strumenti giusti collegati: una skill di standup che incrocia l'attività GitHub con i task Notion e redige l'aggiornamento quotidiano; una skill platform-map che analizza il repo e rigenera la documentazione di architettura; e una skill di prompt-review che verifica i prompt LLM per efficacia e regressioni, sulla pipeline di estrazione e sugli agenti di chat.",
+      result:
+        "Le operazioni di routine e la documentazione ora girano come invocazioni di agenti a un comando invece che a mano, e ogni modifica ai prompt riceve una review coerente prima del rilascio.",
+    },
+  },
+  {
+    slug: "fanta-mundial",
+    order: 3,
     name: "Fanta Mundial",
     role: "Solo build",
     year: "2026",
@@ -98,7 +130,7 @@ export const projects: Project[] = [
   },
   {
     slug: "procedo-tracking-costs",
-    order: 3,
+    order: 4,
     name: "Cost Tracking",
     role: "Solo build",
     year: "2025",
@@ -138,7 +170,7 @@ export const projects: Project[] = [
   },
   {
     slug: "contrada-navigator",
-    order: 4,
+    order: 5,
     name: "Contrada Navigator",
     role: "Solo build",
     year: "2025",
@@ -178,7 +210,7 @@ export const projects: Project[] = [
   },
   {
     slug: "vault",
-    order: 5,
+    order: 6,
     name: "Personal Vault",
     role: "Solo build",
     year: "2024–Present",
@@ -210,7 +242,7 @@ export const projects: Project[] = [
   },
   {
     slug: "homesweathome",
-    order: 6,
+    order: 7,
     name: "HomeSweatHome",
     role: "Founding team",
     year: "2022",
