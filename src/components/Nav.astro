@@ -13,7 +13,7 @@ const nav = site[lang].nav;
 
 <nav class="nav">
   <div class="inner">
-    <a class="brand" href={localizedPath(lang, '/')}>AF</a>
+    <a class="brand" href={localizedPath(lang, '/')} aria-label="Alessandro Flaborea — home">AF</a>
     <div class="links">
       <a href="#work">{nav.work}</a>
       <a href="#research">{nav.research}</a>
@@ -66,10 +66,10 @@ const nav = site[lang].nav;
     padding: 0.4rem 0.9rem;
     border-radius: var(--radius);
     background: var(--accent);
-    color: #fff;
+    color: var(--surface);
   }
   .cta:hover {
-    color: #fff;
+    color: var(--surface);
     opacity: 0.9;
   }
 
