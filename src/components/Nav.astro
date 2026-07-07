@@ -1,9 +1,85 @@
 ---
+import { localizedPath, type Locale } from '../i18n/ui';
+import { site } from '../data/site';
+import LangSwitch from './LangSwitch.astro';
+
 interface Props {
-  lang: 'en' | 'it';
+  lang: Locale;
   path: string;
 }
 const { lang, path } = Astro.props;
+const nav = site[lang].nav;
 ---
 
-<nav></nav>
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href={localizedPath(lang, '/')}>AF</a>
+    <div class="links">
+      <a href="#work">{nav.work}</a>
+      <a href="#research">{nav.research}</a>
+      <a href="#about">{nav.about}</a>
+      <a href="#contact">{nav.contact}</a>
+      <a class="cta" href="#contact">{nav.cta}</a>
+      <LangSwitch lang={lang} path={path} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .links a {
+    color: var(--text-muted);
+  }
+  .links a:hover {
+    color: var(--text);
+  }
+  .cta {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+  }
+  .cta:hover {
+    color: #fff;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 640px) {
+    .links {
+      gap: 0.9rem;
+      font-size: 0.8rem;
+    }
+    .cta {
+      padding: 0.35rem 0.6rem;
+    }
+  }
+</style>
