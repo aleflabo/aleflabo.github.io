@@ -1,5 +1,3 @@
-import type { Locale } from "../i18n/ui";
-
 export interface CaseCopy {
   summary: string;
   problem: string;
@@ -233,7 +231,3 @@ export const projects: Project[] = [
 
 export const getProject = (slug: string): Project | undefined =>
   projects.find((p) => p.slug === slug);
-
-/** Pick the CaseCopy for a project in the given locale. */
-export const getCaseCopy = (project: Project, locale: Locale): CaseCopy =>
-  project[locale];

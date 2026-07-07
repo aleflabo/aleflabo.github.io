@@ -1,6 +1,6 @@
 import type { Locale } from "../i18n/ui";
 
-interface NavCopy {
+export interface NavCopy {
   work: string;
   research: string;
   about: string;
@@ -8,7 +8,7 @@ interface NavCopy {
   cta: string;
 }
 
-interface HeroCopy {
+export interface HeroCopy {
   label: string;
   name: string;
   tagline: string;
@@ -17,22 +17,22 @@ interface HeroCopy {
   credibility: string;
 }
 
-interface Service {
+export interface Service {
   title: string;
   body: string;
 }
 
-interface ResearchCopy {
+export interface ResearchCopy {
   title: string;
   intro: string;
 }
 
-interface AboutCopy {
+export interface AboutCopy {
   title: string;
   body: string[];
 }
 
-interface ContactCopy {
+export interface ContactCopy {
   title: string;
   body: string;
   email: string;
