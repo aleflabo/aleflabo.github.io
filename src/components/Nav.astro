@@ -15,11 +15,11 @@ const nav = site[lang].nav;
   <div class="inner">
     <a class="brand" href={localizedPath(lang, '/')} aria-label="Alessandro Flaborea — home">AF</a>
     <div class="links">
-      <a href="#work">{nav.work}</a>
-      <a href="#research">{nav.research}</a>
-      <a href="#about">{nav.about}</a>
-      <a href="#contact">{nav.contact}</a>
-      <a class="cta" href="#contact">{nav.cta}</a>
+      <a href={`${localizedPath(lang, '/')}#work`}>{nav.work}</a>
+      <a href={`${localizedPath(lang, '/')}#research`}>{nav.research}</a>
+      <a href={`${localizedPath(lang, '/')}#about`}>{nav.about}</a>
+      <a href={`${localizedPath(lang, '/')}#contact`}>{nav.contact}</a>
+      <a class="cta" href={`${localizedPath(lang, '/')}#contact`}>{nav.cta}</a>
       <LangSwitch lang={lang} path={path} />
     </div>
   </div>
