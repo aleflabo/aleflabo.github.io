@@ -42,6 +42,7 @@ interface SiteCopy {
   nav: NavCopy;
   hero: HeroCopy;
   servicesTitle: string;
+  servicesLabel: string;
   services: Service[];
   workTitle: string;
   research: ResearchCopy;
@@ -69,6 +70,7 @@ export const site: Record<Locale, SiteCopy> = {
         "PhD in Computer Vision · CVPR/ICCV/IROS · Co-Founder of Procedo",
     },
     servicesTitle: "How I can help",
+    servicesLabel: "Services",
     services: [
       {
         title: "Computer Vision systems",
@@ -127,6 +129,7 @@ export const site: Record<Locale, SiteCopy> = {
         "PhD in Computer Vision · CVPR/ICCV/IROS · Co-Founder di Procedo",
     },
     servicesTitle: "Come posso aiutarti",
+    servicesLabel: "Servizi",
     services: [
       {
         title: "Sistemi di Computer Vision",
