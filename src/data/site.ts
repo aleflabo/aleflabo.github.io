@@ -25,6 +25,8 @@ export interface Service {
 export interface ResearchCopy {
   title: string;
   intro: string;
+  openSource: string;
+  scholarLabel: string;
 }
 
 export interface AboutCopy {
@@ -114,6 +116,9 @@ export const site: Record<Locale, SiteCopy> = {
       title: "Research & recognition",
       intro:
         "PhD at the Perception and Intelligence Lab (PINlab), Sapienza University of Rome. Visiting researcher in Amsterdam. Invited speaker at Ferrari S.p.A.",
+      openSource:
+        "Every result below is fully open source: each paper ships with its complete implementation.",
+      scholarLabel: "Full list on Google Scholar",
     },
     about: {
       title: "About",
@@ -127,7 +132,7 @@ export const site: Record<Locale, SiteCopy> = {
     contact: {
       title: "Let’s talk",
       body: "Have an interesting problem or an idea to build? Drop me a line.",
-      email: "alessandro@alessandroflaborea.me",
+      email: "flaborea.alessandro@gmail.com",
     },
   },
   it: {
@@ -182,6 +187,9 @@ export const site: Record<Locale, SiteCopy> = {
       title: "Ricerca e riconoscimenti",
       intro:
         "PhD al Perception and Intelligence Lab (PINlab), Sapienza Università di Roma. Visiting researcher ad Amsterdam. Relatore invitato in Ferrari S.p.A.",
+      openSource:
+        "Tutto quello che vedi qui è completamente open source: ogni paper è accompagnato dall'implementazione completa.",
+      scholarLabel: "Elenco completo su Google Scholar",
     },
     about: {
       title: "Chi sono",
@@ -195,7 +203,7 @@ export const site: Record<Locale, SiteCopy> = {
     contact: {
       title: "Parliamone",
       body: "Hai un problema interessante o un'idea da costruire? Scrivimi.",
-      email: "alessandro@alessandroflaborea.me",
+      email: "flaborea.alessandro@gmail.com",
     },
   },
 };
