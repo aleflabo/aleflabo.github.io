@@ -4,7 +4,6 @@ export interface NavCopy {
   work: string;
   research: string;
   about: string;
-  contact: string;
   cta: string;
 }
 
@@ -69,7 +68,6 @@ export const site: Record<Locale, SiteCopy> = {
       work: "Work",
       research: "Research",
       about: "About",
-      contact: "Contact",
       cta: "Contact me",
     },
     hero: {
@@ -140,7 +138,6 @@ export const site: Record<Locale, SiteCopy> = {
       work: "Lavori",
       research: "Ricerca",
       about: "Chi sono",
-      contact: "Contatti",
       cta: "Contattami",
     },
     hero: {
