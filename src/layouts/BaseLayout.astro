@@ -16,7 +16,7 @@ interface Props {
 }
 const { title, description, lang, path, ogType = 'website' } = Astro.props;
 
-const site = Astro.site?.origin ? Astro.site.toString().replace(/\/$/, '') : '';
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://www.alessandroflaborea.me';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
 const enUrl = `${site}${localizedPath('en', path)}`;
 const itUrl = `${site}${localizedPath('it', path)}`;
