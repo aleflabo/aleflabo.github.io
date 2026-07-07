@@ -1,0 +1,59 @@
+---
+import { site } from '../data/site';
+import type { Locale } from '../i18n/ui';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const research = site[lang].research;
+
+// Repo names and venues are locale-invariant proper nouns, not translatable copy.
+const papers = [
+  { repo: 'MoCoDAD', venue: 'ICCV 2023' },
+  { repo: 'PREGO', venue: 'CVPR 2024' },
+  { repo: 'COSKAD', venue: 'Pattern Recognition' },
+  { repo: 'hycoclip', venue: 'ICLR 2025' },
+  { repo: 'hyp2nav', venue: 'IROS 2024' },
+  { repo: 'BestPractices2Body', venue: 'CVPR Workshop' },
+  { repo: 'hyper-vocabulary-free-classification', venue: '' },
+];
+---
+
+<section id="research" class="research">
+  <div class="container">
+    <p class="label">{research.title}</p>
+    <p class="intro muted">{research.intro}</p>
+    <ul class="papers">
+      {papers.map((paper) => (
+        <li>
+          <a href={`https://github.com/aleflabo/${paper.repo}`} target="_blank" rel="noopener noreferrer">
+            {paper.repo}{paper.venue ? ` — ${paper.venue}` : ''}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .intro {
+    margin-top: 1rem;
+    max-width: 65ch;
+    font-size: 1.05rem;
+  }
+  .papers {
+    list-style: none;
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .papers a {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .papers a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
