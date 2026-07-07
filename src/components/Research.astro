@@ -1,0 +1,150 @@
+---
+import { site } from '../data/site';
+import type { Locale } from '../i18n/ui';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const research = site[lang].research;
+
+const scholarUrl = 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ';
+
+// Repo names and venues are locale-invariant proper nouns; only `desc` is translatable.
+const papers = [
+  {
+    repo: 'MoCoDAD',
+    venue: 'ICCV 2023',
+    desc: {
+      en: 'Diffusion model over skeleton motion for video anomaly detection.',
+      it: 'Modello di diffusione sul moto scheletrico per l’anomaly detection nei video.',
+    },
+  },
+  {
+    repo: 'PREGO',
+    venue: 'CVPR 2024',
+    desc: {
+      en: 'Online mistake detection in procedural egocentric video.',
+      it: 'Rilevamento online degli errori in video egocentrici procedurali.',
+    },
+  },
+  {
+    repo: 'COSKAD',
+    venue: 'Pattern Recognition',
+    desc: {
+      en: 'Contracting skeletal kinematics for human-related anomaly detection.',
+      it: 'Cinematiche scheletriche contrattive per l’anomaly detection sulle persone.',
+    },
+  },
+  {
+    repo: 'hycoclip',
+    venue: 'ICLR 2025',
+    desc: {
+      en: 'Compositional entailment learning for hyperbolic vision-language models.',
+      it: 'Compositional entailment learning per modelli vision-language iperbolici.',
+    },
+  },
+  {
+    repo: 'hyp2nav',
+    venue: 'IROS 2024',
+    desc: {
+      en: 'Hyperbolic planning and curiosity for crowd navigation.',
+      it: 'Pianificazione iperbolica e curiosità per la navigazione tra la folla.',
+    },
+  },
+  {
+    repo: 'BestPractices2Body',
+    venue: 'CVPR Workshop',
+    desc: {
+      en: 'Best practices for two-body human pose forecasting.',
+      it: 'Best practice per il forecasting della posa di due persone.',
+    },
+  },
+];
+---
+
+<section id="research" class="research">
+  <div class="container">
+    <h2 class="label">{research.title}</h2>
+    <p class="intro muted">{research.intro}</p>
+    <p class="opensource">{research.openSource}</p>
+    <ul class="papers">
+      {papers.map((paper) => (
+        <li>
+          <a href={`https://github.com/aleflabo/${paper.repo}`} target="_blank" rel="noopener noreferrer">
+            <span class="paper-name">{paper.repo}</span>
+            <span class="paper-venue">{paper.venue}</span>
+          </a>
+          <p class="paper-desc muted">{paper.desc[lang]}</p>
+        </li>
+      ))}
+    </ul>
+    <a class="scholar" href={scholarUrl} target="_blank" rel="noopener noreferrer">{research.scholarLabel} &rarr;</a>
+  </div>
+</section>
+
+<style>
+  .intro {
+    margin-top: 1rem;
+    max-width: 65ch;
+    font-size: 1.05rem;
+  }
+  .opensource {
+    margin-top: 0.75rem;
+    max-width: 65ch;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .papers {
+    list-style: none;
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.4rem;
+  }
+  .papers a {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    color: var(--text);
+  }
+  .paper-name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .paper-venue {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 9px;
+    white-space: nowrap;
+  }
+  .papers a:hover .paper-name {
+    color: var(--accent);
+  }
+  .paper-desc {
+    margin-top: 0.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    max-width: 60ch;
+  }
+  .scholar {
+    display: block;
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .scholar:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

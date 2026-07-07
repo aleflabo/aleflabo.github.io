@@ -1,0 +1,98 @@
+---
+import { localizedPath, type Locale } from '../i18n/ui';
+import { site } from '../data/site';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  lang: Locale;
+  path: string;
+}
+const { lang, path } = Astro.props;
+const nav = site[lang].nav;
+---
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href={localizedPath(lang, '/')} aria-label="Alessandro Flaborea — home">AF</a>
+    <div class="links">
+      <a href={`${localizedPath(lang, '/')}#work`}>{nav.work}</a>
+      <a href={`${localizedPath(lang, '/')}#research`}>{nav.research}</a>
+      <a href={`${localizedPath(lang, '/')}#about`}>{nav.about}</a>
+      <a class="cta" href={`${localizedPath(lang, '/')}#contact`}>{nav.cta}</a>
+      <LangSwitch lang={lang} path={path} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .links a {
+    color: var(--text-muted);
+  }
+  .links a:hover {
+    color: var(--text);
+  }
+  .links a.cta {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--surface);
+  }
+  .links a.cta:hover {
+    color: var(--surface);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 640px) {
+    .links {
+      gap: 0.9rem;
+      font-size: 0.8rem;
+    }
+    .links a.cta {
+      padding: 0.35rem 0.6rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .inner {
+      flex-wrap: wrap;
+      padding: 0.85rem 1rem;
+    }
+    .links {
+      width: 100%;
+      row-gap: 0.5rem;
+      justify-content: center;
+    }
+  }
+</style>

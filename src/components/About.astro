@@ -1,0 +1,31 @@
+---
+import { site } from '../data/site';
+import type { Locale } from '../i18n/ui';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const about = site[lang].about;
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">{about.title}</h2>
+    <div class="prose">
+      {about.body.map((paragraph) => (
+        <p class="muted">{paragraph}</p>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .prose {
+    max-width: 65ch;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .prose p {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+</style>

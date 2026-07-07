@@ -1,0 +1,63 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { localizedPath } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: 'en' | 'it';
+  path: string;
+  ogType?: 'website' | 'article';
+  detectLocale?: boolean;
+}
+const { title, description, lang, path, ogType = 'website', detectLocale = false } = Astro.props;
+
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://www.alessandroflaborea.me';
+const canonicalUrl = `${site}${localizedPath(lang, path)}`;
+const enUrl = `${site}${localizedPath('en', path)}`;
+const itUrl = `${site}${localizedPath('it', path)}`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {detectLocale && (
+      <script is:inline>
+        (function () {
+          try {
+            if (localStorage.getItem('lang-chosen')) return;
+            var langs = navigator.languages || [navigator.language || ''];
+            var pref = null;
+            for (var i = 0; i < langs.length; i++) {
+              var l = (langs[i] || '').toLowerCase();
+              if (l.indexOf('it') === 0) { pref = 'it'; break; }
+              if (l.indexOf('en') === 0) { pref = 'en'; break; }
+            }
+            if (pref !== 'en') { location.replace('/it/'); }
+          } catch (e) {}
+        })();
+      </script>
+    )}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="it" href={itUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+  </head>
+  <body>
+    <Nav lang={lang} path={path} />
+    <main><slot /></main>
+    <Footer lang={lang} />
+  </body>
+</html>
