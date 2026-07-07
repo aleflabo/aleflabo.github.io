@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StackChip from '../../../components/StackChip.astro';
+import { projects, getProject } from '../../../data/projects';
+import { site } from '../../../data/site';
+import { localizedPath } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug } }));
+}
+const { slug } = Astro.params;
+const project = getProject(slug!)!;
+const c = project.it;
+const path = `/work/${project.slug}`;
+const t = site.it;
+---
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path}>
+  <article class="container case">
+    <a class="back" href={`${localizedPath('it', '/')}#work`}>← {t.caseStudy.back}</a>
+    <p class="label">{project.role} · {project.year}</p>
+    <h1>{project.name}</h1>
+    <p class="lead muted">{c.summary}</p>
+    <div class="chips">{project.stack.map((s) => <StackChip label={s} />)}</div>
+    <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>
+    <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>
+    <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>
+    {(project.url || project.repo) && (
+      <section class="links">
+        {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{t.workLiveLabel} ↗</a>}
+        {project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer">{t.workCodeLabel} ↗</a>}
+      </section>
+    )}
+    <!-- media placeholder for future screenshots/video per BRIEF §9 -->
+  </article>
+</BaseLayout>
+<style>
+  .case { max-width: 720px; padding-top: 6rem; padding-bottom: 4rem; }
+  .case h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0; }
+  .case .lead { font-size: 1.15rem; margin-bottom: 1rem; }
+  .case .chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .case section { padding: 1.25rem 0; border-top: 1px solid var(--border); }
+  .case h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .back { font-size: 0.85rem; color: var(--accent); }
+  .links { display: flex; gap: 1.25rem; }
+</style>

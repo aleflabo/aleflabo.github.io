@@ -38,6 +38,13 @@ export interface ContactCopy {
   email: string;
 }
 
+export interface CaseStudyCopy {
+  back: string;
+  problem: string;
+  approach: string;
+  result: string;
+}
+
 interface SiteCopy {
   nav: NavCopy;
   hero: HeroCopy;
@@ -46,7 +53,9 @@ interface SiteCopy {
   services: Service[];
   workTitle: string;
   workLiveLabel: string;
+  workCodeLabel: string;
   workCaseStudyLabel: string;
+  caseStudy: CaseStudyCopy;
   research: ResearchCopy;
   about: AboutCopy;
   contact: ContactCopy;
@@ -93,7 +102,14 @@ export const site: Record<Locale, SiteCopy> = {
     ],
     workTitle: "Selected Work",
     workLiveLabel: "Live",
+    workCodeLabel: "Code",
     workCaseStudyLabel: "Case study",
+    caseStudy: {
+      back: "Selected work",
+      problem: "Problem",
+      approach: "Approach",
+      result: "Result",
+    },
     research: {
       title: "Research & recognition",
       intro:
@@ -154,7 +170,14 @@ export const site: Record<Locale, SiteCopy> = {
     ],
     workTitle: "Progetti selezionati",
     workLiveLabel: "Live",
+    workCodeLabel: "Codice",
     workCaseStudyLabel: "Caso studio",
+    caseStudy: {
+      back: "Lavori selezionati",
+      problem: "Problema",
+      approach: "Approccio",
+      result: "Risultato",
+    },
     research: {
       title: "Ricerca e riconoscimenti",
       intro:
