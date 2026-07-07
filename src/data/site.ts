@@ -71,7 +71,7 @@ export const site: Record<Locale, SiteCopy> = {
       cta: "Contact me",
     },
     hero: {
-      label: "Computer Vision · LLM Systems · Freelance",
+      label: "Computer Vision · LLM Systems",
       name: "Alessandro Flaborea",
       tagline:
         "I turn real-world problems into working AI and data systems, end to end.",
@@ -125,8 +125,8 @@ export const site: Record<Locale, SiteCopy> = {
       ],
     },
     contact: {
-      title: "Let’s work together",
-      body: "Available for freelance and consulting in AI, computer vision, and full-stack product work.",
+      title: "Let’s talk",
+      body: "Have an interesting problem or an idea to build? Drop me a line.",
       email: "alessandro@alessandroflaborea.me",
     },
   },
@@ -139,7 +139,7 @@ export const site: Record<Locale, SiteCopy> = {
       cta: "Contattami",
     },
     hero: {
-      label: "Computer Vision · Sistemi LLM · Freelance",
+      label: "Computer Vision · Sistemi LLM",
       name: "Alessandro Flaborea",
       tagline:
         "Trasformo problemi reali in sistemi AI e dati funzionanti, end to end.",
@@ -193,8 +193,8 @@ export const site: Record<Locale, SiteCopy> = {
       ],
     },
     contact: {
-      title: "Lavoriamo insieme",
-      body: "Disponibile per collaborazioni freelance e di consulenza in AI, computer vision e sviluppo full-stack.",
+      title: "Parliamone",
+      body: "Hai un problema interessante o un'idea da costruire? Scrivimi.",
       email: "alessandro@alessandroflaborea.me",
     },
   },
