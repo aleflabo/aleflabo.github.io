@@ -1,0 +1,50 @@
+---
+import { site } from '../data/site';
+import type { Locale } from '../i18n/ui';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const { servicesTitle, services } = site[lang];
+
+// The data layer only defines `servicesTitle` (the serif heading) — there is
+// no separate eyebrow string for this section. The brief still calls for a
+// `.label` caption above the title (mirroring Hero's label -> heading
+// pattern), so we keep a tiny locale map here rather than reading a
+// non-existent field. Component stays locale-driven via `lang`, per the
+// task's guidance; revisit if a dedicated copy field is added later.
+const eyebrow: Record<Locale, string> = {
+  en: 'Services',
+  it: 'Servizi',
+};
+---
+
+<section class="services">
+  <div class="container">
+    <p class="label">{eyebrow[lang]}</p>
+    <h2 class="section-title">{servicesTitle}</h2>
+    <div class="grid">
+      {services.map((service) => (
+        <div class="card">
+          <h3>{service.title}</h3>
+          <p class="muted">{service.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+  .card {
+    border-top: 2px solid var(--accent);
+    padding-top: 1.25rem;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+  }
+</style>
