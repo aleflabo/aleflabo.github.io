@@ -2,6 +2,7 @@
 import StackChip from './StackChip.astro';
 import { localizedPath, type Locale } from '../i18n/ui';
 import type { Project } from '../data/projects';
+import { site } from '../data/site';
 
 interface Props { project: Project; lang: Locale; index: number }
 const { project, lang, index } = Astro.props;
@@ -12,8 +13,8 @@ const meta =
   project.status === 'case'
     ? `${project.role} · ${project.year}`
     : project.status === 'live'
-      ? 'LIVE ↗'
-      : 'CASE STUDY →';
+      ? `${site[lang].workLiveLabel} ↗`
+      : `${site[lang].workCaseStudyLabel} →`;
 const href = localizedPath(lang, '/work/' + project.slug);
 ---
 
