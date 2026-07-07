@@ -13,8 +13,9 @@ interface Props {
   lang: 'en' | 'it';
   path: string;
   ogType?: 'website' | 'article';
+  detectLocale?: boolean;
 }
-const { title, description, lang, path, ogType = 'website' } = Astro.props;
+const { title, description, lang, path, ogType = 'website', detectLocale = false } = Astro.props;
 
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://www.alessandroflaborea.me';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
@@ -26,6 +27,23 @@ const itUrl = `${site}${localizedPath('it', path)}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {detectLocale && (
+      <script is:inline>
+        (function () {
+          try {
+            if (localStorage.getItem('lang-chosen')) return;
+            var langs = navigator.languages || [navigator.language || ''];
+            var pref = null;
+            for (var i = 0; i < langs.length; i++) {
+              var l = (langs[i] || '').toLowerCase();
+              if (l.indexOf('it') === 0) { pref = 'it'; break; }
+              if (l.indexOf('en') === 0) { pref = 'en'; break; }
+            }
+            if (pref !== 'en') { location.replace('/it/'); }
+          } catch (e) {}
+        })();
+      </script>
+    )}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

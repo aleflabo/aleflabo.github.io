@@ -68,20 +68,20 @@ export const site: Record<Locale, SiteCopy> = {
       research: "Research",
       about: "About",
       contact: "Contact",
-      cta: "Work with me",
+      cta: "Contact me",
     },
     hero: {
       label: "Computer Vision · LLM Systems · Freelance",
       name: "Alessandro Flaborea",
       tagline:
         "I turn real-world problems into working AI and data systems, end to end.",
-      ctaPrimary: "Work with me",
+      ctaPrimary: "Contact me",
       ctaSecondary: "See selected work",
       credibility:
         "PhD in Computer Vision · CVPR/ICCV/IROS · Co-Founder of Procedo",
     },
-    servicesTitle: "How I can help",
-    servicesLabel: "Services",
+    servicesTitle: "What I build",
+    servicesLabel: "Capabilities",
     services: [
       {
         title: "Computer Vision systems",
@@ -136,20 +136,20 @@ export const site: Record<Locale, SiteCopy> = {
       research: "Ricerca",
       about: "Chi sono",
       contact: "Contatti",
-      cta: "Lavora con me",
+      cta: "Contattami",
     },
     hero: {
       label: "Computer Vision · Sistemi LLM · Freelance",
       name: "Alessandro Flaborea",
       tagline:
         "Trasformo problemi reali in sistemi AI e dati funzionanti, end to end.",
-      ctaPrimary: "Lavora con me",
+      ctaPrimary: "Contattami",
       ctaSecondary: "Guarda i progetti selezionati",
       credibility:
         "PhD in Computer Vision · CVPR/ICCV/IROS · Co-Founder di Procedo",
     },
-    servicesTitle: "Come posso aiutarti",
-    servicesLabel: "Servizi",
+    servicesTitle: "Cosa costruisco",
+    servicesLabel: "Competenze",
     services: [
       {
         title: "Sistemi di Computer Vision",
