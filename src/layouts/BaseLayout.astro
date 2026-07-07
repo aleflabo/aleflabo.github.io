@@ -14,13 +14,38 @@ interface Props {
   path: string;
   ogType?: 'website' | 'article';
   detectLocale?: boolean;
+  person?: boolean;
 }
-const { title, description, lang, path, ogType = 'website', detectLocale = false } = Astro.props;
+const { title, description, lang, path, ogType = 'website', detectLocale = false, person = false } = Astro.props;
 
-const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://www.alessandroflaborea.me';
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://flaborea.com';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
 const enUrl = `${site}${localizedPath('en', path)}`;
 const itUrl = `${site}${localizedPath('it', path)}`;
+const ogImage = `${site}/og.png`;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alessandro Flaborea',
+  url: 'https://flaborea.com',
+  jobTitle: 'Co-Founder & CTO',
+  worksFor: { '@type': 'Organization', name: 'Procedo', url: 'https://procederai.com' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sapienza University of Rome' },
+  knowsAbout: [
+    'Computer Vision',
+    'Large Language Models',
+    'Agentic AI',
+    'Retrieval-Augmented Generation',
+    'Machine Learning',
+    'Data Engineering',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/alessandro-flaborea',
+    'https://github.com/aleflabo',
+    'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
+  ],
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -54,6 +79,16 @@ const itUrl = `${site}${localizedPath('it', path)}`;
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {person && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
+    )}
   </head>
   <body>
     <Nav lang={lang} path={path} />
