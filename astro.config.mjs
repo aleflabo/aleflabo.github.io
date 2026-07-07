@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://www.alessandroflaborea.me',
+  site: 'https://flaborea.com',
   output: 'static',
   i18n: {
     defaultLocale: 'en',
