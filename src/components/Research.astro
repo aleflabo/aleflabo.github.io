@@ -103,9 +103,9 @@ const papers = [
   }
   .papers a {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.7rem;
     color: var(--text);
   }
   .paper-name {
@@ -115,9 +115,14 @@ const papers = [
   }
   .paper-venue {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
     color: var(--text-muted);
-    letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 9px;
+    white-space: nowrap;
   }
   .papers a:hover .paper-name {
     color: var(--accent);
@@ -129,8 +134,10 @@ const papers = [
     max-width: 60ch;
   }
   .scholar {
-    display: inline-block;
-    margin-top: 2rem;
+    display: block;
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
     font-family: var(--font-sans);
     font-size: 0.95rem;
     color: var(--accent);
