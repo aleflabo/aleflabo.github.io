@@ -9,25 +9,21 @@ const { project, lang, index } = Astro.props;
 
 const num = String(index).padStart(2, '0');
 const copy = project[lang];
-const meta =
-  project.status === 'case'
-    ? `${project.role} · ${project.year}`
-    : project.status === 'live'
-      ? `${site[lang].workLiveLabel} ↗`
-      : `${site[lang].workCaseStudyLabel} →`;
+const eyebrow = `${copy.area} · ${project.role} · ${project.year}`;
 const href = localizedPath(lang, '/work/' + project.slug);
 ---
 
 <a class="row" href={href}>
   <span class="num muted">{num}</span>
   <div class="content">
-    <div class="row-header">
-      <h3>{project.name}</h3>
-      <span class="meta muted">{meta}</span>
-    </div>
+    <span class="eyebrow accent">{eyebrow}</span>
+    <h3>{project.name}</h3>
     <p class="muted summary">{copy.summary}</p>
-    <div class="chips">
-      {project.stack.map((tech) => <StackChip label={tech} />)}
+    <div class="row-footer">
+      <div class="chips">
+        {project.stack.map((tech) => <StackChip label={tech} />)}
+      </div>
+      <span class="see-more accent">{site[lang].workSeeMore} →</span>
     </div>
   </div>
 </a>
@@ -49,31 +45,42 @@ const href = localizedPath(lang, '/work/' + project.slug);
     flex: 1;
     min-width: 0;
   }
-  .row-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+  .accent {
+    color: var(--accent);
   }
-  .row-header h3 {
+  .eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+  h3 {
+    margin-top: 0.4rem;
     font-size: 1.3rem;
     transition: color 0.15s ease;
-  }
-  .meta {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    white-space: nowrap;
   }
   .summary {
     margin-top: 0.6rem;
     max-width: 60ch;
   }
+  .row-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
   .chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1rem;
+  }
+  .see-more {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: opacity 0.15s ease;
   }
   .row:hover h3 {
     color: var(--accent);
@@ -84,7 +91,7 @@ const href = localizedPath(lang, '/work/' + project.slug);
       flex-direction: column;
       gap: 0.5rem;
     }
-    .row-header {
+    .row-footer {
       gap: 0.5rem;
     }
   }

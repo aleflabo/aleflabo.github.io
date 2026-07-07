@@ -54,7 +54,7 @@ interface SiteCopy {
   workTitle: string;
   workLiveLabel: string;
   workCodeLabel: string;
-  workCaseStudyLabel: string;
+  workSeeMore: string;
   caseStudy: CaseStudyCopy;
   research: ResearchCopy;
   about: AboutCopy;
@@ -103,7 +103,7 @@ export const site: Record<Locale, SiteCopy> = {
     workTitle: "Selected Work",
     workLiveLabel: "Live",
     workCodeLabel: "Code",
-    workCaseStudyLabel: "Case study",
+    workSeeMore: "See more",
     caseStudy: {
       back: "Selected work",
       problem: "Problem",
@@ -171,7 +171,7 @@ export const site: Record<Locale, SiteCopy> = {
     workTitle: "Progetti selezionati",
     workLiveLabel: "Live",
     workCodeLabel: "Codice",
-    workCaseStudyLabel: "Caso studio",
+    workSeeMore: "Scopri di più",
     caseStudy: {
       back: "Lavori selezionati",
       problem: "Problema",

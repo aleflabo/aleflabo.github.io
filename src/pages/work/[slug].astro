@@ -17,7 +17,7 @@ const t = site.en;
 <BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} ogType="article">
   <article class="container case">
     <a class="back" href={`${localizedPath('en', '/')}#work`}>← {t.caseStudy.back}</a>
-    <p class="label">{project.role} · {project.year}</p>
+    <p class="label">{c.area} · {project.role} · {project.year}</p>
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.stack.map((s) => <StackChip label={s} />)}</div>

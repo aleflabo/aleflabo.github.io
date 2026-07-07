@@ -1,4 +1,5 @@
 export interface CaseCopy {
+  area: string;
   summary: string;
   problem: string;
   approach: string;
@@ -40,6 +41,7 @@ export const projects: Project[] = [
     ],
     tags: ["Computer Vision", "LLM / RAG"],
     en: {
+      area: "Industrial AI",
       summary:
         "An AI platform that turns raw shop-floor video into structured manufacturing knowledge, in production with real industrial customers.",
       problem:
@@ -50,6 +52,7 @@ export const projects: Project[] = [
         "Procedo runs in production for industrial customers, was selected for Bocconi's B4i accelerator, and closed an angel round.",
     },
     it: {
+      area: "AI industriale",
       summary:
         "Una piattaforma AI che trasforma i video grezzi di reparto in conoscenza produttiva strutturata, in produzione presso clienti industriali reali.",
       problem:
@@ -71,6 +74,7 @@ export const projects: Project[] = [
     stack: ["Python", "Streamlit", "Supabase", "bcrypt"],
     tags: ["Full product", "API integration"],
     en: {
+      area: "Gamification",
       summary:
         "A full-stack prediction league with ~40 real users and automated result syncing.",
       problem:
@@ -81,6 +85,7 @@ export const projects: Project[] = [
         "Deployed on Streamlit Community Cloud with around 40 active players. Covered by pytest; result-syncing runs unattended.",
     },
     it: {
+      area: "Gamification",
       summary:
         "Una prediction league full-stack con ~40 utenti reali e sync automatico degli esiti.",
       problem:
@@ -94,7 +99,7 @@ export const projects: Project[] = [
   {
     slug: "procedo-tracking-costs",
     order: 3,
-    name: "Procedo Tracking Costs",
+    name: "Cost Tracking",
     role: "Solo build",
     year: "2025",
     status: "case",
@@ -109,22 +114,24 @@ export const projects: Project[] = [
     ],
     tags: ["Full-stack", "API integration"],
     en: {
+      area: "Monitoring",
       summary:
-        "An internal dashboard that tracks daily and monthly spend across AWS, GitHub, and Anthropic, with FX conversion and subscription amortization.",
+        "An internal cost dashboard that tracks daily and monthly cloud, GitHub, and LLM spend for a small team, with FX conversion and subscription amortization.",
       problem:
-        "Procedo's cloud and tooling costs were scattered across multiple providers with no single view, making it hard to spot spend spikes or forecast burn.",
+        "A small team's cloud and tooling costs were scattered across multiple providers with no single view, making it hard to spot spend spikes or forecast burn.",
       approach:
-        "Built a Next.js dashboard backed by Supabase, with scheduled Edge Functions syncing AWS Cost Explorer, GitHub billing, and FX rates daily via pg_cron, zod-validated data models, and magic-link auth restricted to the company domain.",
+        "Built a Next.js dashboard backed by Supabase, with scheduled Edge Functions syncing cloud cost data, GitHub billing, and FX rates daily via pg_cron, zod-validated data models, and magic-link auth restricted to the team's domain.",
       result:
         "Runs unattended in production with a sync_runs observability table, giving the team a single daily view of cross-provider spend.",
     },
     it: {
+      area: "Monitoraggio",
       summary:
-        "Una dashboard interna che traccia la spesa giornaliera e mensile su AWS, GitHub e Anthropic, con conversione FX e ammortamento degli abbonamenti.",
+        "Una dashboard interna che traccia la spesa giornaliera e mensile su cloud, GitHub e servizi LLM per un piccolo team, con conversione FX e ammortamento degli abbonamenti.",
       problem:
-        "I costi cloud e di tooling di Procedo erano sparsi su più provider senza una vista unica, rendendo difficile individuare picchi di spesa o prevedere il burn.",
+        "I costi cloud e di tooling di un piccolo team erano sparsi su più provider senza una vista unica, rendendo difficile individuare picchi di spesa o prevedere il burn.",
       approach:
-        "Ho costruito una dashboard Next.js su Supabase, con Edge Functions schedulate che sincronizzano ogni giorno AWS Cost Explorer, la fatturazione GitHub e i tassi FX via pg_cron, modelli dati validati con zod e autenticazione magic-link ristretta al dominio aziendale.",
+        "Ho costruito una dashboard Next.js su Supabase, con Edge Functions schedulate che sincronizzano ogni giorno i costi cloud, la fatturazione GitHub e i tassi FX via pg_cron, modelli dati validati con zod e autenticazione magic-link ristretta al dominio del team.",
       result:
         "Gira senza supervisione in produzione con una tabella di osservabilità sync_runs, offrendo al team una vista giornaliera unica della spesa multi-provider.",
     },
@@ -147,6 +154,7 @@ export const projects: Project[] = [
     ],
     tags: ["Data engineering", "Geospatial"],
     en: {
+      area: "Data analytics",
       summary:
         "A civic data project mapping an Italian town's historical neighborhoods, with participation forecasts through an interactive web map.",
       problem:
@@ -157,6 +165,7 @@ export const projects: Project[] = [
         "Produces forecasts of participation through 2034 and a public-facing interactive map of the town's neighborhoods.",
     },
     it: {
+      area: "Analisi dati",
       summary:
         "Un progetto di dati civici che mappa i quartieri storici (contrade) di un comune italiano, con previsioni di partecipazione tramite una mappa web interattiva.",
       problem:
@@ -177,6 +186,7 @@ export const projects: Project[] = [
     stack: ["Obsidian", "Claude Code agent", "LLM"],
     tags: ["Agent / prompt engineering", "Knowledge systems"],
     en: {
+      area: "Knowledge systems",
       summary:
         "A personal knowledge base that ingests notes and documents and interlinks them into a navigable wiki, following Karpathy's 'LLM wiki' pattern.",
       problem:
@@ -187,6 +197,7 @@ export const projects: Project[] = [
         "A living personal wiki with strict data-governance constraints, used daily to search, brief, and disambiguate across a growing base of notes.",
     },
     it: {
+      area: "Sistemi di conoscenza",
       summary:
         "Una knowledge base personale che ingerisce note e documenti e li interconnette in una wiki navigabile, seguendo il pattern 'LLM wiki' di Karpathy.",
       problem:
@@ -207,6 +218,7 @@ export const projects: Project[] = [
     stack: ["Python", "Computer Vision", "Pose estimation", "On-device"],
     tags: ["Computer Vision", "MVP"],
     en: {
+      area: "Computer Vision",
       summary:
         "An AI virtual trainer that reads posture and movement from a laptop webcam and coaches workouts in real time, entirely on-device.",
       problem:
@@ -217,6 +229,7 @@ export const projects: Project[] = [
         "Reached a working MVP presented at the demo day of Bocconi University's IdeaBoosterLab accelerator.",
     },
     it: {
+      area: "Computer Vision",
       summary:
         "Un personal trainer virtuale AI che legge postura e movimento dalla webcam di un laptop e guida l'allenamento in tempo reale, interamente on-device.",
       problem:
