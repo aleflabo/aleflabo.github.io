@@ -1,0 +1,22 @@
+---
+import WorkRow from './WorkRow.astro';
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+import type { Locale } from '../i18n/ui';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const sortedProjects = [...projects].sort((a, b) => a.order - b.order);
+---
+
+<section id="work" class="work">
+  <div class="container">
+    <p class="label">{site[lang].workTitle}</p>
+    <div class="rows">
+      {sortedProjects.map((project, i) => (
+        <WorkRow project={project} lang={lang} index={i + 1} />
+      ))}
+    </div>
+  </div>
+</section>

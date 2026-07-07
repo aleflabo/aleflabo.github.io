@@ -1,0 +1,80 @@
+---
+import StackChip from './StackChip.astro';
+import { localizedPath, type Locale } from '../i18n/ui';
+import type { Project } from '../data/projects';
+
+interface Props { project: Project; lang: Locale; index: number }
+const { project, lang, index } = Astro.props;
+
+const num = String(index).padStart(2, '0');
+const copy = project[lang];
+const meta =
+  project.status === 'case'
+    ? `${project.role} · ${project.year}`
+    : project.status === 'live'
+      ? 'LIVE ↗'
+      : 'CASE STUDY →';
+const href = localizedPath(lang, '/work/' + project.slug);
+---
+
+<a class="row" href={href}>
+  <span class="num muted">{num}</span>
+  <div class="content">
+    <div class="row-header">
+      <h3>{project.name}</h3>
+      <span class="meta muted">{meta}</span>
+    </div>
+    <p class="muted summary">{copy.summary}</p>
+    <div class="chips">
+      {project.stack.map((tech) => <StackChip label={tech} />)}
+    </div>
+  </div>
+</a>
+
+<style>
+  .row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .num {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+  .row-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .row-header h3 {
+    font-size: 1.3rem;
+    transition: color 0.15s ease;
+  }
+  .meta {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .summary {
+    margin-top: 0.6rem;
+    max-width: 60ch;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .row:hover h3 {
+    color: var(--accent);
+  }
+</style>
