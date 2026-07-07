@@ -31,15 +31,12 @@ export const projects: Project[] = [
     status: "case",
     url: "https://procederai.com",
     stack: [
-      "Python",
-      "Flask",
-      "Celery",
-      "PostgreSQL",
-      "Angular",
-      "Gemini",
-      "AWS",
+      "Computer Vision",
+      "Applied LLMs",
+      "Agentic AI",
+      "Cloud infrastructure",
     ],
-    tags: ["Computer Vision", "LLM / RAG"],
+    tags: ["Computer Vision", "Applied LLMs"],
     en: {
       area: "Industrial AI",
       summary:
@@ -47,7 +44,7 @@ export const projects: Project[] = [
       problem:
         "Manufacturing teams document, optimize, and train on physical procedures by hand, a slow process that rarely keeps pace with how work actually happens on the floor.",
       approach:
-        "As CTO and co-founder I led the architecture and productionization of three core pipelines: an agentic video-to-procedure extractor, multimodal RAG over each organization's procedures and documents, and an agentic chat assistant with access-control and injection-resistance guardrails, all running on a multi-tenant AWS stack.",
+        "As CTO and co-founder I led the architecture and productionization of the core AI: turning long operational video into clear, step-by-step procedures; letting teams get grounded answers from their own documentation; and an assistant that helps them work with those procedures safely. The platform runs in the cloud, isolated per customer.",
       result:
         "Procedo runs in production for industrial customers, was selected for Bocconi's B4i accelerator, and closed an angel round.",
     },
@@ -58,7 +55,7 @@ export const projects: Project[] = [
       problem:
         "I team industriali documentano, ottimizzano e formano sulle procedure fisiche a mano, un processo lento che raramente tiene il passo con il lavoro reale in reparto.",
       approach:
-        "Come CTO e co-founder ho guidato l'architettura e la messa in produzione di tre pipeline core: un estrattore agentico video-procedura, RAG multimodale su procedure e documenti di ciascuna organizzazione, e un assistente di chat agentica con protezioni di controllo accessi e resistenza al prompt injection, il tutto su uno stack AWS multi-tenant.",
+        "Come CTO e co-founder ho guidato l'architettura e la messa in produzione dell'AI core: trasformare lunghi video operativi in procedure chiare passo-passo; permettere ai team di ottenere risposte fondate dalla propria documentazione; e un assistente che li aiuta a lavorare su quelle procedure in sicurezza. La piattaforma gira nel cloud, isolata per ciascun cliente.",
       result:
         "Procedo gira in produzione presso clienti industriali, è stata selezionata dall'acceleratore B4i di Bocconi e ha chiuso un round angel.",
     },
