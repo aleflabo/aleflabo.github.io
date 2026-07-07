@@ -14,7 +14,7 @@ const c = project.it;
 const path = `/work/${project.slug}`;
 const t = site.it;
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path}>
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} ogType="article">
   <article class="container case">
     <a class="back" href={`${localizedPath('it', '/')}#work`}>← {t.caseStudy.back}</a>
     <p class="label">{project.role} · {project.year}</p>
@@ -30,7 +30,7 @@ const t = site.it;
         {project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer">{t.workCodeLabel} ↗</a>}
       </section>
     )}
-    <!-- media placeholder for future screenshots/video per BRIEF §9 -->
+    <!-- media (screenshots / video) goes here when available -->
   </article>
 </BaseLayout>
 <style>

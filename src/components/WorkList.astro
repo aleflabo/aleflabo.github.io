@@ -12,7 +12,7 @@ const sortedProjects = [...projects].sort((a, b) => a.order - b.order);
 
 <section id="work" class="work">
   <div class="container">
-    <p class="label">{site[lang].workTitle}</p>
+    <h2 class="label">{site[lang].workTitle}</h2>
     <div class="rows">
       {sortedProjects.map((project, i) => (
         <WorkRow project={project} lang={lang} index={i + 1} />

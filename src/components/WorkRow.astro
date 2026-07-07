@@ -78,4 +78,14 @@ const href = localizedPath(lang, '/work/' + project.slug);
   .row:hover h3 {
     color: var(--accent);
   }
+
+  @media (max-width: 480px) {
+    .row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .row-header {
+      gap: 0.5rem;
+    }
+  }
 </style>

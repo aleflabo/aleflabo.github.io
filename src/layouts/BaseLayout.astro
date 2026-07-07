@@ -5,9 +5,21 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { localizedPath } from '../i18n/ui';
 
-interface Props { title: string; description: string; lang: 'en' | 'it'; path: string; }
-const { title, description, lang, path } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  lang: 'en' | 'it';
+  path: string;
+  ogType?: 'website' | 'article';
+}
+const { title, description, lang, path, ogType = 'website' } = Astro.props;
+
+const site = Astro.site?.origin ? Astro.site.toString().replace(/\/$/, '') : '';
+const canonicalUrl = `${site}${localizedPath(lang, path)}`;
+const enUrl = `${site}${localizedPath('en', path)}`;
+const itUrl = `${site}${localizedPath('it', path)}`;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -17,6 +29,13 @@ const { title, description, lang, path } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="it" href={itUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
   </head>
   <body>
     <Nav lang={lang} path={path} />
