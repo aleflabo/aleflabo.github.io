@@ -1,0 +1,239 @@
+import type { Locale } from "../i18n/ui";
+
+export interface CaseCopy {
+  summary: string;
+  problem: string;
+  approach: string;
+  result: string;
+}
+
+export interface Project {
+  slug: string;
+  order: number;
+  name: string;
+  role: string;
+  year: string;
+  status: "live" | "case" | "code";
+  url?: string;
+  repo?: string;
+  stack: string[];
+  tags: string[];
+  en: CaseCopy;
+  it: CaseCopy;
+}
+
+export const projects: Project[] = [
+  {
+    slug: "procedo",
+    order: 1,
+    name: "Procedo",
+    role: "Co-Founder & CTO",
+    year: "2023–Present",
+    status: "case",
+    url: "https://procederai.com",
+    stack: [
+      "Python",
+      "Flask",
+      "Celery",
+      "PostgreSQL",
+      "Angular",
+      "Gemini",
+      "AWS",
+    ],
+    tags: ["Computer Vision", "LLM / RAG"],
+    en: {
+      summary:
+        "An AI platform that turns raw shop-floor video into structured manufacturing knowledge, in production with real industrial customers.",
+      problem:
+        "Manufacturing teams document, optimize, and train on physical procedures by hand, a slow process that rarely keeps pace with how work actually happens on the floor.",
+      approach:
+        "As CTO and co-founder I led the architecture and productionization of three core pipelines: an agentic video-to-procedure extractor, multimodal RAG over each organization's procedures and documents, and an agentic chat assistant with access-control and injection-resistance guardrails, all running on a multi-tenant AWS stack.",
+      result:
+        "Procedo runs in production for industrial customers, was selected for Bocconi's B4i accelerator, and closed an angel round.",
+    },
+    it: {
+      summary:
+        "Una piattaforma AI che trasforma i video grezzi di reparto in conoscenza produttiva strutturata, in produzione presso clienti industriali reali.",
+      problem:
+        "I team industriali documentano, ottimizzano e formano sulle procedure fisiche a mano, un processo lento che raramente tiene il passo con il lavoro reale in reparto.",
+      approach:
+        "Come CTO e co-founder ho guidato l'architettura e la messa in produzione di tre pipeline core: un estrattore agentico video-procedura, RAG multimodale su procedure e documenti di ciascuna organizzazione, e un assistente di chat agentica con protezioni di controllo accessi e resistenza al prompt injection, il tutto su uno stack AWS multi-tenant.",
+      result:
+        "Procedo gira in produzione presso clienti industriali, è stata selezionata dall'acceleratore B4i di Bocconi e ha chiuso un round angel.",
+    },
+  },
+  {
+    slug: "fanta-mundial",
+    order: 2,
+    name: "Fanta Mundial",
+    role: "Solo build",
+    year: "2026",
+    status: "live",
+    url: "https://fanta-mundial.streamlit.app",
+    stack: ["Python", "Streamlit", "Supabase", "bcrypt"],
+    tags: ["Full product", "API integration"],
+    en: {
+      summary:
+        "A full-stack prediction league with ~40 real users and automated result syncing.",
+      problem:
+        "A private World Cup prediction league needed real accounts, live standings, and scores that update themselves without manual entry.",
+      approach:
+        "Built a modular Streamlit app on Supabase: bcrypt auth, per-match predictions with lock windows, scoring, a live leaderboard, and a scheduled job that pulls match results from an external API and updates standings automatically.",
+      result:
+        "Deployed on Streamlit Community Cloud with around 40 active players. Covered by pytest; result-syncing runs unattended.",
+    },
+    it: {
+      summary:
+        "Una prediction league full-stack con ~40 utenti reali e sync automatico degli esiti.",
+      problem:
+        "Una lega privata di pronostici sul Mondiale serviva account reali, classifica in tempo reale ed esiti che si aggiornano da soli, senza inserimento manuale.",
+      approach:
+        "App Streamlit modulare su Supabase: auth con bcrypt, pronostici per partita con finestre di lock, scoring, classifica live e un job schedulato che recupera gli esiti da una API esterna e aggiorna la classifica in automatico.",
+      result:
+        "In produzione su Streamlit Community Cloud con circa 40 giocatori attivi. Coperta da pytest; il sync degli esiti gira senza supervisione.",
+    },
+  },
+  {
+    slug: "procedo-tracking-costs",
+    order: 3,
+    name: "Procedo Tracking Costs",
+    role: "Solo build",
+    year: "2025",
+    status: "case",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "Recharts",
+      "Supabase",
+      "pg_cron",
+      "zod",
+    ],
+    tags: ["Full-stack", "API integration"],
+    en: {
+      summary:
+        "An internal dashboard that tracks daily and monthly spend across AWS, GitHub, and Anthropic, with FX conversion and subscription amortization.",
+      problem:
+        "Procedo's cloud and tooling costs were scattered across multiple providers with no single view, making it hard to spot spend spikes or forecast burn.",
+      approach:
+        "Built a Next.js dashboard backed by Supabase, with scheduled Edge Functions syncing AWS Cost Explorer, GitHub billing, and FX rates daily via pg_cron, zod-validated data models, and magic-link auth restricted to the company domain.",
+      result:
+        "Runs unattended in production with a sync_runs observability table, giving the team a single daily view of cross-provider spend.",
+    },
+    it: {
+      summary:
+        "Una dashboard interna che traccia la spesa giornaliera e mensile su AWS, GitHub e Anthropic, con conversione FX e ammortamento degli abbonamenti.",
+      problem:
+        "I costi cloud e di tooling di Procedo erano sparsi su più provider senza una vista unica, rendendo difficile individuare picchi di spesa o prevedere il burn.",
+      approach:
+        "Ho costruito una dashboard Next.js su Supabase, con Edge Functions schedulate che sincronizzano ogni giorno AWS Cost Explorer, la fatturazione GitHub e i tassi FX via pg_cron, modelli dati validati con zod e autenticazione magic-link ristretta al dominio aziendale.",
+      result:
+        "Gira senza supervisione in produzione con una tabella di osservabilità sync_runs, offrendo al team una vista giornaliera unica della spesa multi-provider.",
+    },
+  },
+  {
+    slug: "contrada-navigator",
+    order: 4,
+    name: "Contrada Navigator",
+    role: "Solo build",
+    year: "2025",
+    status: "case",
+    stack: [
+      "Streamlit",
+      "pandas",
+      "plotly",
+      "React",
+      "Vite",
+      "TypeScript",
+      "Leaflet",
+    ],
+    tags: ["Data engineering", "Geospatial"],
+    en: {
+      summary:
+        "A civic data project mapping an Italian town's historical neighborhoods, with participation forecasts through an interactive web map.",
+      problem:
+        "A town's historic contrada (neighborhood) boundaries and participation trends lived in scattered records, with no way to explore them or project future turnout.",
+      approach:
+        "Built a Python analysis layer in Streamlit and pandas to model street-to-contrada mapping rules and 2012-2025 trends, then a separate React and TypeScript web app with an interactive Leaflet map for exploring the data.",
+      result:
+        "Produces forecasts of participation through 2034 and a public-facing interactive map of the town's neighborhoods.",
+    },
+    it: {
+      summary:
+        "Un progetto di dati civici che mappa i quartieri storici (contrade) di un comune italiano, con previsioni di partecipazione tramite una mappa web interattiva.",
+      problem:
+        "I confini storici delle contrade di un comune e i trend di partecipazione erano sparsi in registri non organizzati, senza modo di esplorarli o proiettare la partecipazione futura.",
+      approach:
+        "Ho costruito un livello di analisi Python in Streamlit e pandas per modellare le regole di mappatura via-contrada e i trend 2012-2025, poi una web app separata in React e TypeScript con una mappa interattiva Leaflet per esplorare i dati.",
+      result:
+        "Produce previsioni di partecipazione fino al 2034 e una mappa interattiva pubblica dei quartieri del comune.",
+    },
+  },
+  {
+    slug: "vault",
+    order: 5,
+    name: "Personal Vault",
+    role: "Solo build",
+    year: "2024–Present",
+    status: "case",
+    stack: ["Obsidian", "Claude Code agent", "LLM"],
+    tags: ["Agent / prompt engineering", "Knowledge systems"],
+    en: {
+      summary:
+        "A personal knowledge base that ingests notes and documents and interlinks them into a navigable wiki, following Karpathy's 'LLM wiki' pattern.",
+      problem:
+        "Personal notes, ideas, and documents accumulate faster than they can be organized, and manual note-taking rarely produces a system that stays useful over time.",
+      approach:
+        "Paired Obsidian with a Claude Code agent: an append-only raw inbox feeds an LLM-curated wiki with entity schemas for clients, projects, people, and concepts, wikilinks and a graph view, and slash commands for ingesting, querying, and linting the vault.",
+      result:
+        "A living personal wiki with strict data-governance constraints, used daily to search, brief, and disambiguate across a growing base of notes.",
+    },
+    it: {
+      summary:
+        "Una knowledge base personale che ingerisce note e documenti e li interconnette in una wiki navigabile, seguendo il pattern 'LLM wiki' di Karpathy.",
+      problem:
+        "Note personali, idee e documenti si accumulano più in fretta di quanto si riesca a organizzarli, e la presa di appunti manuale raramente produce un sistema che resta utile nel tempo.",
+      approach:
+        "Ho affiancato Obsidian a un agente Claude Code: un inbox raw append-only alimenta una wiki curata dall'LLM con schemi entità per clienti, progetti, persone e concetti, wikilink e vista a grafo, e slash-command per ingerire, interrogare e verificare il vault.",
+      result:
+        "Una wiki personale viva con vincoli rigidi di governance dei dati, usata ogni giorno per cercare, preparare brief e disambiguare all'interno di una base di note in crescita.",
+    },
+  },
+  {
+    slug: "homesweathome",
+    order: 6,
+    name: "HomeSweatHome",
+    role: "Founding team",
+    year: "2022",
+    status: "case",
+    stack: ["Python", "Computer Vision", "Pose estimation", "On-device"],
+    tags: ["Computer Vision", "MVP"],
+    en: {
+      summary:
+        "An AI virtual trainer that reads posture and movement from a laptop webcam and coaches workouts in real time, entirely on-device.",
+      problem:
+        "People training at home have no one watching their form, and cloud round-trips are too slow to give useful feedback mid-exercise.",
+      approach:
+        "As part of the founding team I designed the architecture and built the perception core: real-time posture and movement analysis and an on-device action recognition model, both light enough to run smoothly on consumer hardware.",
+      result:
+        "Reached a working MVP presented at the demo day of Bocconi University's IdeaBoosterLab accelerator.",
+    },
+    it: {
+      summary:
+        "Un personal trainer virtuale AI che legge postura e movimento dalla webcam di un laptop e guida l'allenamento in tempo reale, interamente on-device.",
+      problem:
+        "Chi si allena a casa non ha nessuno che ne osservi l'esecuzione, e l'andata e ritorno verso il cloud è troppo lento per un feedback utile durante l'esercizio.",
+      approach:
+        "Come parte del team fondatore ho progettato l'architettura e costruito il cuore di percezione: analisi di postura e movimento in tempo reale e un modello di action recognition on-device, entrambi abbastanza leggeri da girare fluidi su hardware consumer.",
+      result:
+        "Raggiunto un MVP funzionante, presentato al demo day dell'IdeaBoosterLab, l'acceleratore dell'Università Bocconi.",
+    },
+  },
+];
+
+export const getProject = (slug: string): Project | undefined =>
+  projects.find((p) => p.slug === slug);
+
+/** Pick the CaseCopy for a project in the given locale. */
+export const getCaseCopy = (project: Project, locale: Locale): CaseCopy =>
+  project[locale];
