@@ -93,8 +93,48 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "fanta-mundial",
+    slug: "spannum",
     order: 3,
+    name: "Spannum",
+    role: "Solo build",
+    year: "2026",
+    status: "live",
+    url: "https://spannum.com",
+    stack: [
+      "React",
+      "TypeScript",
+      "Supabase",
+      "Cloudflare Workers",
+      "PWA",
+      "Web Speech API",
+    ],
+    tags: ["Full product", "Research to product"],
+    en: {
+      area: "Applied psychometrics",
+      summary:
+        "A working-memory test and trainer that turns the digit-span protocol into a consumer web app, with age norms and a shareable report.",
+      problem:
+        "The digit-span task is a well-validated measure of working memory, but it lives in research papers and clinical settings. The consumer apps that borrow its name mostly drop the protocol and promise to make you smarter.",
+      approach:
+        "I built the test to the published protocol, forward and backward, digits and letters, with stimuli spoken by the browser's built-in speech synthesis rather than pre-recorded audio. Results are scored against age norms from the literature, and the site is explicit about what the evidence supports: training improves the task, not general intelligence. The public site is prerendered so crawlers and answer engines see the real content; the app itself is an installable PWA on a separate domain.",
+      result:
+        "Live and open to the public at spannum.com, with a shareable report, comparison against age norms, and the peer-reviewed sources cited on the site.",
+    },
+    it: {
+      area: "Psicometria applicata",
+      summary:
+        "Un test e un allenamento della memoria di lavoro che porta il protocollo digit-span in una web app consumer, con norme per età e un report condivisibile.",
+      problem:
+        "Il digit-span è una misura ben validata della memoria di lavoro, ma vive nei paper e in ambito clinico. Le app consumer che ne prendono il nome per lo più abbandonano il protocollo e promettono di renderti più intelligente.",
+      approach:
+        "Ho costruito il test seguendo il protocollo pubblicato, diretto e inverso, cifre e lettere, con gli stimoli pronunciati dalla sintesi vocale integrata nel browser invece che da audio preregistrato. I risultati sono confrontati con le norme per età della letteratura, e il sito è esplicito su ciò che le evidenze sostengono: l'allenamento migliora il compito, non l'intelligenza generale. Il sito pubblico è prerenderizzato perché crawler e answer engine vedano il contenuto reale; l'app è una PWA installabile su un dominio separato.",
+      result:
+        "Live e aperto al pubblico su spannum.com, con report condivisibile, confronto con le norme per età e le fonti peer-reviewed citate sul sito.",
+    },
+  },
+  {
+    slug: "fanta-mundial",
+    order: 4,
     name: "Fanta Mundial",
     role: "Solo build",
     year: "2026",
@@ -127,7 +167,7 @@ export const projects: Project[] = [
   },
   {
     slug: "procedo-tracking-costs",
-    order: 4,
+    order: 5,
     name: "Cost Tracking",
     role: "Solo build",
     year: "2025",
@@ -167,7 +207,7 @@ export const projects: Project[] = [
   },
   {
     slug: "contrada-navigator",
-    order: 5,
+    order: 6,
     name: "Contrada Navigator",
     role: "Solo build",
     year: "2025",
@@ -207,7 +247,7 @@ export const projects: Project[] = [
   },
   {
     slug: "vault",
-    order: 6,
+    order: 7,
     name: "Personal Vault",
     role: "Solo build",
     year: "2024–Present",
@@ -239,7 +279,7 @@ export const projects: Project[] = [
   },
   {
     slug: "homesweathome",
-    order: 7,
+    order: 8,
     name: "HomeSweatHome",
     role: "Founding team",
     year: "2022",
