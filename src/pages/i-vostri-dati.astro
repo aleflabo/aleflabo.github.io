@@ -7,10 +7,15 @@
 // src/data/dati.ts (task 6): non riscritti qui. L'intro della sezione
 // «Situazioni che vengono confuse spesso» e le etichette «Onestà» /
 // «Perché mi credete» non sono fra gli export di quel file e restano
-// scritte qui, alla lettera dalla tavola. Questa è la pagina più delicata
-// del sito: nessuna parola qui rafforza o ammorbidisce quanto scritto in
-// dati.ts. Non è nel menu (si raggiunge dal piè di pagina e dal FAQ), quindi
-// <BaseLayout> non riceve `attiva`.
+// scritte qui, alla lettera dalla tavola. Lo stesso vale per la fascia di
+// chiusura «Fatemi la domanda che qui non trova risposta» (testi.md, righe
+// 1041-1046): era assente dal giro 1 di questo task — il brief non la
+// nominava, ma la tavola e testi.md sono la fonte di verità su cosa
+// contiene la pagina, non il riassunto del brief — corretta nel giro di
+// correzioni 1. Questa è la pagina più delicata del sito: nessuna parola
+// qui rafforza o ammorbidisce quanto scritto in dati.ts. Non è nel menu (si
+// raggiunge dal piè di pagina e dal FAQ), quindi <BaseLayout> non riceve
+// `attiva`.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
   situazioniDati,
@@ -105,6 +110,14 @@ import { localizedPath } from '../i18n/ui';
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="domanda-aperta">
+    <div class="container">
+      <h2>Fatemi la domanda che qui non trova risposta</h2>
+      <p class="intro">Se è una buona domanda finisce su questa pagina, così la prossima azienda la trova già scritta.</p>
+      <a class="pulsante scrivimi" href="#">Scrivimi</a>
     </div>
   </section>
 </BaseLayout>
@@ -290,6 +303,38 @@ import { localizedPath } from '../i18n/ui';
     font-weight: 600;
   }
 
+  /* --- fatemi la domanda --- */
+  .domanda-aperta {
+    border-top: 1px solid var(--border);
+    background: var(--accent);
+    padding: 0;
+  }
+  .domanda-aperta .container {
+    padding: 56px 24px;
+  }
+  .domanda-aperta h2 {
+    font-size: 28px;
+    color: var(--surface);
+    max-width: 30ch;
+  }
+  .domanda-aperta .intro {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cdd9e6;
+    max-width: 58ch;
+  }
+  .domanda-aperta .scrivimi {
+    display: inline-block;
+    margin-top: 26px;
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: var(--radius);
+  }
+
   @media (max-width: 640px) {
     .intestazione .container {
       padding: 44px 20px 36px;
@@ -345,6 +390,16 @@ import { localizedPath } from '../i18n/ui';
       gap: 40px;
     }
     .colonne .section-title {
+      max-width: none;
+    }
+    .domanda-aperta .container {
+      padding: 44px 20px;
+    }
+    .domanda-aperta h2 {
+      font-size: 24px;
+      max-width: none;
+    }
+    .domanda-aperta .intro {
       max-width: none;
     }
   }
