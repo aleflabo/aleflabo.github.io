@@ -1,0 +1,269 @@
+---
+// src/pages/note.astro — l'elenco dei sei articoli e il riquadro di
+// raccolta email (rotta `/note`).
+// Testo alla lettera da tavole/Note.dc.html (testi.md, sezione «/note»).
+// I sei articoli (data, titolo, sommario, tag) vengono da src/data/note.ts
+// (task 6): non riscritti qui, dalla più recente. Le righe usano la classe
+// globale `.riga` (già in global.css, per l'effetto al passaggio del
+// mouse): non ridefinita qui, solo completata con l'impaginazione propria
+// di questa pagina. Gli articoli non hanno una pagina propria: il link di
+// ogni riga resta `href="#"`. Il riquadro «Te le mando per mail» resta
+// inerte — il `<form>` non ha `action`, nessun servizio è ancora scelto —
+// mentre «Oppure via RSS» punta al feed vero, generato da rss.xml.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { note } from '../data/note';
+import { localizedPath } from '../i18n/ui';
+---
+
+<BaseLayout
+  title="Note — Alessandro Flaborea"
+  description="Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana."
+  lang="it"
+  path="/note"
+  attiva="note"
+>
+  <section class="intestazione">
+    <div class="container">
+      <p class="label">Note</p>
+      <h1>Quello che sto imparando</h1>
+      <div class="divider"></div>
+      <p class="intro">Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana.</p>
+      <a class="chi-scrive" href={localizedPath('it', '/chi-sono')}>Chi scrive <span class="freccia">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="elenco-note">
+    <div class="container">
+      <div class="righe">
+        {note.map((n) => (
+          <a href="#" class="riga">
+            <span class="data">{n.data}</span>
+            <div class="testo-riga">
+              <h2>{n.titolo}</h2>
+              <p class="sommario">{n.sommario}</p>
+              <div class="tag">
+                {n.tag.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="raccolta-email">
+    <div class="container">
+      <div class="riquadro">
+        <div>
+          <h2>Te le mando per mail</h2>
+          <p class="corpo">Una mail quando esce qualcosa di nuovo, niente altro. Ci si cancella con un clic.</p>
+        </div>
+        <form class="iscrizione">
+          <input type="email" name="email" placeholder="la.tua@mail.it" aria-label="Il tuo indirizzo email" />
+          <button type="submit" class="pulsante">Iscrivimi</button>
+          <a class="rss" href="/rss.xml">Oppure via RSS</a>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 40px;
+  }
+  .intestazione h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 20ch;
+  }
+  .intestazione .divider {
+    margin: 30px 0;
+  }
+  .intestazione .intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .chi-scrive {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- l'elenco degli articoli --- */
+  .elenco-note {
+    padding: 0;
+  }
+  .elenco-note .container {
+    padding: 0 24px 60px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 32px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .riga:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .riga .data {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-top: 6px;
+  }
+  .riga h2 {
+    font-size: 25px;
+    color: var(--text);
+    max-width: 30ch;
+  }
+  .riga .sommario {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+  .riga .tag {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .riga .tag span {
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+  }
+
+  /* --- te le mando per mail --- */
+  .raccolta-email {
+    padding: 0;
+  }
+  .raccolta-email .container {
+    padding: 0 24px 72px;
+  }
+  .riquadro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 48px;
+    align-items: center;
+  }
+  .riquadro h2 {
+    font-size: 26px;
+    max-width: 22ch;
+  }
+  .riquadro .corpo {
+    margin-top: 14px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 50ch;
+  }
+  .iscrizione {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .iscrizione input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    font-size: 15px;
+    font-family: var(--font-sans);
+    color: var(--text);
+  }
+  .iscrizione input::placeholder {
+    color: #999999;
+  }
+  .iscrizione button {
+    background: var(--azione);
+    color: var(--surface);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 24px;
+    border: none;
+    border-radius: var(--radius);
+    text-align: center;
+    font-family: var(--font-sans);
+    cursor: pointer;
+  }
+  .iscrizione .rss {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .intestazione h1 {
+      margin-top: 16px;
+      font-size: 32px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intestazione .divider {
+      margin: 22px 0;
+    }
+    .intestazione .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+    .elenco-note .container {
+      padding: 0 20px 44px;
+    }
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 22px 0;
+    }
+    .riga .data {
+      padding-top: 0;
+    }
+    .riga h2 {
+      font-size: 21px;
+      max-width: none;
+    }
+    .riga .sommario {
+      max-width: none;
+    }
+    .raccolta-email .container {
+      padding: 0 20px 48px;
+    }
+    .riquadro {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 22px;
+    }
+  }
+</style>
