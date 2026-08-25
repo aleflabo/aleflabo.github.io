@@ -1,0 +1,351 @@
+---
+// src/pages/i-vostri-dati.astro — la pagina sulla riservatezza (rotta `/i-vostri-dati`).
+// Misure e struttura alla lettera da tavole/Dati.dc.html; testo alla
+// lettera da testi.md, sezione «/i-vostri-dati» (task-13-brief.md). La
+// risposta corta, le tre situazioni, «quello che non posso garantirvi» e
+// «su questo ho lavorato davvero» (link compresi) vengono da
+// src/data/dati.ts (task 6): non riscritti qui. L'intro della sezione
+// «Situazioni che vengono confuse spesso» e le etichette «Onestà» /
+// «Perché mi credete» non sono fra gli export di quel file e restano
+// scritte qui, alla lettera dalla tavola. Questa è la pagina più delicata
+// del sito: nessuna parola qui rafforza o ammorbidisce quanto scritto in
+// dati.ts. Non è nel menu (si raggiunge dal piè di pagina e dal FAQ), quindi
+// <BaseLayout> non riceve `attiva`.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  situazioniDati,
+  rispostaCorta,
+  quelloCheNonPossoGarantirvi,
+  suQuestoHoLavoratoDavvero,
+} from '../data/dati';
+import { localizedPath } from '../i18n/ui';
+---
+
+<BaseLayout
+  title="Che fine fanno i vostri dati — Alessandro Flaborea"
+  description={rispostaCorta.intro}
+  lang="it"
+  path="/i-vostri-dati"
+>
+  <section class="intestazione">
+    <div class="container">
+      <p class="label">I vostri dati</p>
+      <h1>Che fine fanno i vostri dati</h1>
+      <div class="divider"></div>
+      <p class="intro">{rispostaCorta.intro}</p>
+    </div>
+  </section>
+
+  <section class="risposta-corta">
+    <div class="container">
+      <div class="riquadro">
+        <p class="riquadro-label">{rispostaCorta.titolo}</p>
+        <p class="riquadro-testo">{rispostaCorta.testo}</p>
+        <p class="riquadro-nota">{rispostaCorta.nota}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="situazioni-intro">
+    <div class="container">
+      <h2 class="section-title">Situazioni che vengono confuse spesso</h2>
+      <p class="intro">Il rischio cambia moltissimo a seconda di cosa si sta facendo. Tenerle separate è già metà della risposta.</p>
+    </div>
+  </section>
+
+  <section class="situazioni">
+    <div class="container">
+      <div class="elenco">
+        {situazioniDati.map((s) => (
+          <div class="scheda situazione">
+            <span class="numero">{s.numero}</span>
+            <div>
+              <h3>{s.titolo}</h3>
+              {s.corpo.map((p) => (
+                <p class="corpo">{p}</p>
+              ))}
+              {s.punti && (
+                <div class="punti">
+                  {s.punti.map((punto) => (
+                    <p class="punto"><strong>{punto.titolo}</strong> {punto.testo}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="onesta">
+    <div class="container">
+      <div class="colonne">
+        <div>
+          <p class="label">Onestà</p>
+          <h2 class="section-title">{quelloCheNonPossoGarantirvi.titolo}</h2>
+          <div class="righe">
+            {quelloCheNonPossoGarantirvi.punti.map((p) => (
+              <p class="corpo">{p}</p>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p class="label">Perché mi credete</p>
+          <h2 class="section-title">{suQuestoHoLavoratoDavvero.titolo}</h2>
+          <div class="righe">
+            {suQuestoHoLavoratoDavvero.corpo.map((p) => (
+              <p class="corpo">{p}</p>
+            ))}
+          </div>
+          <div class="link-row">
+            {suQuestoHoLavoratoDavvero.link.map((l) => (
+              <a class="link-rimando" href={localizedPath('it', l.href)}>{l.testo} <span class="freccia">&rarr;</span></a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 44px;
+  }
+  .intestazione h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 20ch;
+  }
+  .intestazione .divider {
+    margin: 30px 0;
+  }
+  .intestazione .intro {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 64ch;
+    text-wrap: pretty;
+  }
+
+  /* --- risposta corta --- */
+  .risposta-corta {
+    padding: 0;
+  }
+  .risposta-corta .container {
+    padding: 0 24px 60px;
+  }
+  .riquadro {
+    background: var(--accent);
+    border-radius: var(--radius);
+    padding: 40px 44px;
+    max-width: 900px;
+  }
+  .riquadro-label {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8bdd2;
+    font-weight: 700;
+  }
+  .riquadro-testo {
+    margin-top: 16px;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--surface);
+    text-wrap: pretty;
+  }
+  .riquadro-nota {
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #cdd9e6;
+  }
+
+  /* --- intro situazioni --- */
+  .situazioni-intro {
+    padding: 0;
+  }
+  .situazioni-intro .container {
+    padding: 0 24px 20px;
+  }
+  .section-title {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .situazioni-intro .intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 64ch;
+    margin-bottom: 34px;
+  }
+
+  /* --- situazioni --- */
+  .situazioni {
+    padding: 0;
+  }
+  .situazioni .container {
+    padding: 0 24px 60px;
+  }
+  .elenco {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .situazione {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .situazione .numero {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .situazione h3 {
+    font-size: 23px;
+  }
+  .situazione .corpo {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .situazione .punti {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    border-left: 2px solid var(--border);
+    padding-left: 22px;
+  }
+  .situazione .punto {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .situazione .punto strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* --- onestà / perché mi credete --- */
+  .onesta {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0;
+  }
+  .onesta .container {
+    padding: 64px 24px;
+  }
+  .colonne {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+  }
+  .colonne .section-title {
+    font-size: 27px;
+    margin-top: 16px;
+    margin-bottom: 0;
+    max-width: 24ch;
+  }
+  .colonne .righe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .colonne .righe .corpo {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .link-row {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .link-rimando {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .intestazione h1 {
+      margin-top: 16px;
+      font-size: 30px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intestazione .divider {
+      margin: 22px 0;
+    }
+    .intestazione .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+    .risposta-corta .container {
+      padding: 0 20px 40px;
+    }
+    .riquadro {
+      padding: 26px 24px;
+    }
+    .riquadro-testo {
+      font-size: 18px;
+    }
+    .situazioni-intro .container {
+      padding: 0 20px 16px;
+    }
+    .section-title {
+      font-size: 24px;
+      max-width: none;
+    }
+    .situazioni-intro .intro {
+      margin-bottom: 24px;
+    }
+    .situazioni .container {
+      padding: 0 20px 44px;
+    }
+    .situazione {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 24px 20px;
+    }
+    .situazione h3 {
+      font-size: 20px;
+    }
+    .onesta .container {
+      padding: 44px 20px;
+    }
+    .colonne {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .colonne .section-title {
+      max-width: none;
+    }
+  }
+</style>
