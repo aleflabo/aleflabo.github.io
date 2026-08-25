@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, sans-serif; background: #faf8f4; color: #141414; }
+    a { color: #1b3a5b; text-decoration: none; transition: color .2s; }
+    a:hover { color: #a8531d; }
+    p, span, li, div, label, input, textarea { font-family: "Inter", -apple-system, sans-serif; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.015em; line-height: 1.05; }
+
+    @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+    x-dc > div > div { animation: sali .7s cubic-bezier(.22,.8,.3,1) both; }
+    x-dc > div > div:nth-child(1) { animation-delay: .02s }
+    x-dc > div > div:nth-child(2) { animation-delay: .1s }
+    x-dc > div > div:nth-child(3) { animation-delay: .18s }
+    x-dc > div > div:nth-child(4) { animation-delay: .26s }
+    x-dc > div > div:nth-child(n+5) { animation-delay: .32s }
+
+    div[style*="width: 88px"][style*="height: 3px"] { transform-origin: left; animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    div[style*="background: #ffffff"][style*="border: 1px solid"] { transition: transform .3s cubic-bezier(.22,.8,.3,1), box-shadow .3s; }
+    div[style*="background: #ffffff"][style*="border: 1px solid"]:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(40,24,10,.10); }
+
+    a[style*="display: grid"] { transition: background .25s, padding-left .25s; border-radius: 4px; }
+    a[style*="display: grid"]:hover { background: #f4efe7; padding-left: 14px; }
+
+    a[style*="border-radius: 4px"][style*="font-weight: 600"] { transition: transform .2s, box-shadow .2s; }
+    a[style*="border-radius: 4px"][style*="font-weight: 600"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168,83,29,.28); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px); background-size: 0% 100%; background-repeat: no-repeat; animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; min-height: 100%;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1120px; margin: 0 auto; padding: 22px 24px; border-bottom: 1px solid #e6ddd0;">
+    <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 600; letter-spacing: -0.01em;">Alessandro Flaborea</span>
+    <div style="display: flex; align-items: center; gap: 24px;">
+      <a href="#" style="font-size: 14px; color: #141414;">Servizi</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Formazione</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Lavori</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Ricerca</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Chi sono</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Note</a>
+      <a href="#" style="font-size: 14px; font-weight: 600; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 8px 16px;">Parliamone</a>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px 44px;">
+    <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">I vostri dati</p>
+    <h1 style="margin-top: 20px; font-size: 46px; max-width: 20ch;">Che fine fanno i vostri dati</h1>
+    <div style="width: 88px; height: 3px; background: #a8531d; margin: 30px 0;"></div>
+    <p style="font-size: 18px; line-height: 1.65; color: #55504a; max-width: 64ch; text-wrap: pretty;">È la domanda che quasi nessuno fa ad alta voce e che quasi tutti si fanno. Questa pagina risponde per esteso, senza rassicurazioni generiche, così potete decidere prima di firmare qualcosa.</p>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 60px;">
+    <div style="background: #1b3a5b; border-radius: 4px; padding: 40px 44px; max-width: 900px;">
+      <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8bdd2; font-weight: 700;">La risposta corta</p>
+      <p style="margin-top: 16px; font-size: 21px; line-height: 1.5; color: #ffffff; text-wrap: pretty;">I vostri file restano vostri e nessuno li usa per addestrare niente. Quello che costruisco vive su un'infrastruttura intestata a voi; i documenti che mi date per capire il problema restano sul mio computer e alla fine del lavoro li cancello.</p>
+      <p style="margin-top: 18px; font-size: 16px; line-height: 1.65; color: #cdd9e6;">Sotto c'è la versione lunga, che è quella che conta: le cose che avete appena letto vanno verificate, e qui trovate come.</p>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 20px;">
+    <h2 style="font-size: 30px; margin-bottom: 12px;">Situazioni che vengono confuse spesso</h2>
+    <p style="font-size: 16px; line-height: 1.6; color: #55504a; max-width: 64ch; margin-bottom: 34px;">Il rischio cambia moltissimo a seconda di cosa si sta facendo. Tenerle separate è già metà della risposta.</p>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 60px;">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px;">
+        <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 22px; align-items: start;">
+          <span style="font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; color: #1b3a5b;">1</span>
+          <div>
+            <h3 style="font-size: 23px;">Quando qualcuno in ufficio usa ChatGPT per conto suo</h3>
+            <p style="margin-top: 14px; font-size: 16px; line-height: 1.7; color: #55504a;">È la situazione più diffusa e la meno controllata. Quello che succede dipende quasi interamente da quale versione si sta usando: gli abbonamenti personali e quelli aziendali trattano i dati in modo diverso, e in alcuni casi il contenuto delle conversazioni può essere usato per migliorare il servizio, a meno che non si intervenga nelle impostazioni.</p>
+            <p style="margin-top: 14px; font-size: 16px; line-height: 1.7; color: #141414;">La cosa da fare non è vietare lo strumento, perché verrebbe usato lo stesso di nascosto. È guardare insieme quali versioni sono in uso, che cosa dicono le loro condizioni oggi, e scrivere due righe di regola interna che le persone possano davvero seguire.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px;">
+        <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 22px; align-items: start;">
+          <span style="font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; color: #1b3a5b;">2</span>
+          <div>
+            <h3 style="font-size: 23px;">Quando costruisco qualcosa per voi</h3>
+            <p style="margin-top: 14px; font-size: 16px; line-height: 1.7; color: #55504a;">Qui il controllo è totale, perché le scelte le facciamo noi. I dati stanno in un'infrastruttura intestata alla vostra azienda, in Europa, con le credenziali in mano a voi. Se domani finisce il rapporto, io esco e il sistema resta acceso.</p>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px; border-left: 2px solid #e6ddd0; padding-left: 22px;">
+              <p style="font-size: 15.5px; line-height: 1.6; color: #55504a;"><strong style="font-weight: 600; color: #141414;">Separazione per cliente.</strong> Ogni azienda ha i propri dati isolati dagli altri, e la separazione è imposta dal database, non dal programma che ci gira sopra. È la differenza fra una regola che si può aggirare per errore e una che non si può.</p>
+              <p style="font-size: 15.5px; line-height: 1.6; color: #55504a;"><strong style="font-weight: 600; color: #141414;">Il minimo indispensabile esce.</strong> Se serve un modello esterno, gli si manda il pezzo di informazione che serve a rispondere, non l'archivio. Nel portale ricambi, per esempio, il cliente finale vede la geometria che gli serve per riconoscere il pezzo e non il modello completo della macchina.</p>
+              <p style="font-size: 15.5px; line-height: 1.6; color: #55504a;"><strong style="font-weight: 600; color: #141414;">Registro degli accessi.</strong> Chi ha visto cosa e quando resta scritto. Serve il giorno in cui qualcuno lo chiede.</p>
+              <p style="font-size: 15.5px; line-height: 1.6; color: #55504a;"><strong style="font-weight: 600; color: #141414;">Cancellazione su richiesta.</strong> Quando il lavoro finisce, i dati che avete dato a me si cancellano e ve lo confermo per iscritto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px;">
+        <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 22px; align-items: start;">
+          <span style="font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; color: #1b3a5b;">3</span>
+          <div>
+            <h3 style="font-size: 23px;">Quando mi date dei documenti per capire il problema</h3>
+            <p style="margin-top: 14px; font-size: 16px; line-height: 1.7; color: #55504a;">Per la diagnosi servono file veri, non esempi ripuliti: un'estrazione dal gestionale, un elenco di articoli, qualche documento di lavoro. A seconda dell'azienda possono essere disegni, listini, schede di produzione, contratti o semplicemente mail. Restano sul mio computer, non finiscono in nessun servizio esterno, e alla fine del lavoro li cancello. Se preferite, si può firmare un accordo di riservatezza prima ancora del primo incontro: non me la prendo, è una richiesta ragionevole.</p>
+            <p style="margin-top: 14px; font-size: 16px; line-height: 1.7; color: #141414;">Quando bastano dati finti per capire se una cosa funziona, uso dati finti. Capita più spesso di quanto si creda.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #ffffff;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 64px 24px;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px;">
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Onestà</p>
+          <h2 style="font-size: 27px; margin-top: 16px; max-width: 24ch;">Quello che non posso garantirvi</h2>
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 18px;">
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Non controllo cosa fanno i fornitori esterni con i loro sistemi. Posso sceglierli, configurarli e leggervi le condizioni, ma le loro regole le scrivono loro e cambiano nel tempo.</p>
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Nessuna configurazione tiene se le credenziali girano nelle chat. La parte più fragile di qualsiasi sistema sono le abitudini delle persone, ed è anche il motivo per cui insisto sulla formazione.</p>
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Non sono un avvocato. Su contratti e adempimenti formali il vostro consulente ha l'ultima parola, e fa bene ad averla.</p>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Perché mi credete</p>
+          <h2 style="font-size: 27px; margin-top: 16px; max-width: 24ch;">Su questo ho lavorato davvero</h2>
+          <p style="margin-top: 18px; font-size: 16px; line-height: 1.65; color: #55504a;">In Procedo ogni cliente industriale aveva i propri dati isolati dagli altri, ed è un requisito che si progetta all'inizio o non si ottiene più. Nel portale ricambi la protezione della proprietà intellettuale è una sezione del progetto, decisa prima di scrivere il codice: per un costruttore, consegnare a un fornitore i disegni delle proprie macchine è la cosa più delicata che ci sia. Vale allo stesso modo per i listini di un distributore, per le schede clienti di uno studio o per le ricette di chi produce.</p>
+          <p style="margin-top: 16px; font-size: 16px; line-height: 1.65; color: #55504a;">Le stesse regole valgono per le cose che costruisco per me: la sicurezza sta nel database e il programma viene trattato come se fosse inaffidabile, perché prima o poi lo sarà.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 56px 24px;">
+      <div style="display: flex; gap: 20px; align-items: start; max-width: 74ch;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b3a5b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 4px;"><path d="M12 3 4 6v6c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5V6Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+        <div>
+          <p style="font-size: 17px; line-height: 1.65; color: #141414;">Se state guardando questa pagina perché qualcuno vi ha parlato dell'AI Act: la parte che riguarda la formazione del personale è in vigore dal febbraio 2025, e la trovate spiegata senza allarmismi nella pagina sulla formazione.</p>
+          <a href="#" style="display: inline-block; margin-top: 14px; font-size: 15px; font-weight: 600;">Vai alla formazione →</a>
+          <a href="#" style="display: inline-block; margin-top: 14px; margin-left: 26px; font-size: 15px; font-weight: 600;">I quattro modi di lavorare insieme →</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #1b3a5b;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 56px 24px;">
+      <h2 style="font-size: 28px; color: #ffffff; max-width: 30ch;">Fatemi la domanda che qui non trova risposta</h2>
+      <p style="margin-top: 14px; font-size: 16px; line-height: 1.6; color: #cdd9e6; max-width: 58ch;">Se è una buona domanda finisce su questa pagina, così la prossima azienda la trova già scritta.</p>
+      <a href="#" style="display: inline-block; margin-top: 26px; background: #ffffff; color: #1b3a5b; font-size: 15px; font-weight: 600; padding: 14px 30px; border-radius: 4px;">Scrivimi</a>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #f4efe7;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 52px 24px 24px; display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px;">
+      <div>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600;">Alessandro Flaborea</p>
+        <p style="margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: #55504a; max-width: 34ch;">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
+        <a href="#" style="display: inline-block; margin-top: 18px; background: #a8531d; color: #ffffff; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 4px;">Prenota mezz'ora</a>
+      </div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Cosa faccio</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Servizi</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Formazione</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Che fine fanno i vostri dati</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Le prove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Lavori</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Ricerca</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Chi sono</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Note</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Altrove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">LinkedIn</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">GitHub</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Google Scholar</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">English site</a></div>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 34px; border-top: 1px solid #e6ddd0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-size: 13px; color: #8a8177;">© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
+      <div style="display: flex; gap: 20px;"><a href="#" style="font-size: 13px; color: #8a8177;">Privacy</a><a href="#" style="font-size: 13px; color: #8a8177;">Cookie</a></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

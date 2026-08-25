@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, sans-serif; background: #faf8f4; color: #141414; }
+    a { color: #1b3a5b; text-decoration: none; transition: color .2s; }
+    a:hover { color: #a8531d; }
+    p, span, li, div, label, input, textarea { font-family: "Inter", -apple-system, sans-serif; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.015em; line-height: 1.05; }
+
+    @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+    x-dc > div > div { animation: sali .7s cubic-bezier(.22,.8,.3,1) both; }
+    x-dc > div > div:nth-child(1) { animation-delay: .02s }
+    x-dc > div > div:nth-child(2) { animation-delay: .1s }
+    x-dc > div > div:nth-child(3) { animation-delay: .18s }
+    x-dc > div > div:nth-child(4) { animation-delay: .26s }
+    x-dc > div > div:nth-child(n+5) { animation-delay: .32s }
+
+    div[style*="width: 88px"][style*="height: 3px"] { transform-origin: left; animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    div[style*="background: #ffffff"][style*="border: 1px solid"] { transition: transform .3s cubic-bezier(.22,.8,.3,1), box-shadow .3s; }
+    div[style*="background: #ffffff"][style*="border: 1px solid"]:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(40,24,10,.10); }
+
+    a[style*="display: grid"] { transition: background .25s, padding-left .25s; border-radius: 4px; }
+    a[style*="display: grid"]:hover { background: #f4efe7; padding-left: 14px; }
+
+    a[style*="border-radius: 4px"][style*="font-weight: 600"] { transition: transform .2s, box-shadow .2s; }
+    a[style*="border-radius: 4px"][style*="font-weight: 600"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168,83,29,.28); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px); background-size: 0% 100%; background-repeat: no-repeat; animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; min-height: 100%;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1120px; margin: 0 auto; padding: 22px 24px; border-bottom: 1px solid #e6ddd0;">
+    <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 600; letter-spacing: -0.01em;">Alessandro Flaborea</span>
+    <div style="display: flex; align-items: center; gap: 24px;">
+      <a href="#" style="font-size: 14px; color: #141414;">Servizi</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Formazione</a>
+      <a href="#" style="font-size: 14px; color: #141414; font-weight: 600; border-bottom: 2px solid #a8531d; padding-bottom: 2px;">Lavori</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Ricerca</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Chi sono</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Note</a>
+      <a href="#" style="font-size: 14px; font-weight: 600; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 8px 16px;">Parliamone</a>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px 44px;">
+    <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Lavori</p>
+    <h1 style="margin-top: 20px; font-size: 46px; max-width: 22ch;">Quello che ho costruito</h1>
+    <div style="width: 88px; height: 3px; background: #a8531d; margin: 30px 0;"></div>
+    <p style="font-size: 18px; line-height: 1.6; color: #55504a; max-width: 62ch; text-wrap: pretty;">Sopra il software pensato per il lavoro di un'azienda; sotto i prodotti, i giochi e le cose che ho costruito per conto mio. Ogni scheda dice com'è nato e a che punto è.</p>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 20px;">
+    <h2 style="font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: #1b3a5b; margin-bottom: 6px; font-family: Inter, sans-serif; font-weight: 700;">Software per le aziende</h2>
+    <div style="display: flex; flex-direction: column;">
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2024–2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Industria · in produzione</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Procedo</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una piattaforma che trasforma i video girati in reparto in procedure passo-passo, e permette a chi lavora di fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni: ho guidato l'architettura e portato in produzione la parte di AI. Oggi la seguo come advisor.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Computer vision</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">LLM applicati</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Dati isolati per cliente</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">B4i Bocconi</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Round angel</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Meccanica · commessa reale</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Portale ricambi 3D</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno del componente. Oggi quella stessa richiesta è una mail con una foto, e prima del preventivo qualcuno deve andare a caccia del codice. La pipeline di conversione dei CAD è finita e collaudata; il portale è in costruzione.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Pipeline CAD</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">80 test</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">IP protetta</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">In costruzione</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Automotive · gestionale</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Tire Hub</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una dashboard gestionale per il settore gomme: anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco. Nasce da un'iniziativa mia e non da una commessa: l'ho costruita partendo da uno strumento di generazione automatica, per poi rifare a mano le parti che contano e vedere quanto lontano si arriva.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Gestionale</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Statistiche per area</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Iniziativa mia</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2025</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Monitoraggio · uso interno</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Cost Tracking</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una dashboard che tiene insieme la spesa giornaliera su cloud, GitHub e servizi LLM di un piccolo team, con cambio valuta e ammortamento degli abbonamenti. Gira da sola con lavori schedulati e una tabella che registra ogni sincronizzazione, così quando qualcosa non torna si vede dove.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Più fornitori in una vista</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Sincronizzazione giornaliera</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Gira senza supervisione</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 46px 24px 20px;">
+    <h2 style="font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: #1b3a5b; margin-bottom: 6px; font-family: Inter, sans-serif; font-weight: 700;">Prodotti e strumenti miei</h2>
+    <p style="font-size: 15px; color: #55504a; margin-bottom: 10px;">Nati da una curiosità o da un bisogno mio. Alcuni hanno utenti veri e si possono aprire adesso; uno è un video.</p>
+    <div style="display: flex; flex-direction: column;">
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Psicometria applicata · online</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Spannum</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le norme per età e le fonti citate. Dichiara anche cosa le evidenze non sostengono: l'allenamento migliora il compito, non l'intelligenza. È aperto a tutti e si può provare adesso.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Online e pubblico</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Norme per età</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Si installa sul telefono</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Gamification · con utenti veri</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Fanta Mundial</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una lega di pronostici sul Mondiale con una quarantina di giocatori attivi: account, pronostici con finestre di chiusura, punteggi, classifica dal vivo e un lavoro schedulato che recupera gli esiti da una API esterna e aggiorna tutto senza che nessuno tocchi niente.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Una quarantina di giocatori</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Esiti aggiornati da soli</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">In produzione</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Tooling agentico · uso quotidiano</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Agentic Workflow Toolkit</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una serie di agenti che automatizzano le attività ripetitive di un team tecnico: lo standup che incrocia l'attività su GitHub con i task su Notion, la documentazione di architettura che si rigenera leggendo il codice, e la revisione dei prompt prima che vadano in produzione.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Standup automatico</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Documentazione rigenerata</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Revisione dei prompt</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2026</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Gioco sociale · online</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Paesello</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Il gioco dell'intruso, con la differenza che le parole le scrivono i giocatori e vengono dai posti del loro paese: il bar di Nino, il muretto davanti alla scuola. Il telefono mostra a tutti la stessa parola tranne a uno, il forestiero, che deve parlarne senza sapere di cosa si tratta. Sotto c'è un impianto in cui la sicurezza sta nel database e ogni riga appartiene a chi l'ha scritta, con i test automatici che girano prima di ogni pubblicazione.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Gioco da telefono</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Parole scritte dai giocatori</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">In produzione</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2025</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Video generativo</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Una storia in più scene</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Un video per un matrimonio, generato per intero, con una storia che attraversa diverse scene. Generare una scena è facile e lo fanno tutti; la parte difficile è generarne dieci in cui le stesse persone restano riconoscibili — stesso viso, stessi vestiti, stessa luce — e il racconto tiene dal principio alla fine. Da lì è nato anche il lavoro sulle immagini: mi interessa il punto in cui questi strumenti smettono di essere una dimostrazione e cominciano a reggere una consegna.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Video generativo</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Continuità fra le scene</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Immagini</span></div>
+          <div style="margin-top: 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 640px;">
+            <div style="aspect-ratio: 16/10; background: #efece7; border: 1px dashed #b9b1a4; border-radius: 4px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #8f8578; letter-spacing: 0.08em;">SCENA 1</span></div>
+            <div style="aspect-ratio: 16/10; background: #efece7; border: 1px dashed #b9b1a4; border-radius: 4px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #8f8578; letter-spacing: 0.08em;">SCENA 2</span></div>
+            <div style="aspect-ratio: 16/10; background: #efece7; border: 1px dashed #b9b1a4; border-radius: 4px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #8f8578; letter-spacing: 0.08em;">SCENA 3</span></div>
+            <div style="aspect-ratio: 16/10; background: #efece7; border: 1px dashed #b9b1a4; border-radius: 4px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #8f8578; letter-spacing: 0.08em;">SCENA 4</span></div>
+          </div>
+          <p style="margin-top: 10px; font-size: 12.5px; color: #8f8578;">[ Quattro fotogrammi dal video, scelti per far vedere che i protagonisti restano gli stessi. Meglio ancora: il video stesso ]</p>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2025</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Dati civici · geospaziale</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Contrada Navigator</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Le regole storiche che assegnano ogni via di un comune alla sua contrada, compresi i numeri civici pari e dispari, ricostruite dai registri e messe su una mappa navigabile. Con i trend di partecipazione dal 2012 e una proiezione fino al 2034.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Mappa interattiva</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Serie storica 2012-2025</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Proiezioni al 2034</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2024–oggi</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Sistemi di conoscenza</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">Personal Vault</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Una base di conoscenza personale in cui una casella d'ingresso in sola aggiunta alimenta una wiki curata da un agente, con schemi per clienti, progetti, persone e concetti, collegamenti fra le voci e comandi per ingerire, interrogare e verificare. La uso tutti i giorni.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Wiki curata da un agente</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Uso quotidiano</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Vincoli sui dati</span></div>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: #55504a; padding-top: 6px;">2021–2023</span>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Computer vision · MVP</p>
+          <h3 style="font-size: 25px; margin-top: 10px; color: #141414;">HomeSweatHome</h3>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 72ch;">Un personal trainer che dalla webcam di un portatile legge la postura e corregge l'esecuzione mentre ti alleni, senza mandare niente nel cloud perché il ritardo renderebbe il consiglio inutile. Ho progettato l'architettura e costruito la parte di percezione. Arrivato a MVP funzionante, presentato all'IdeaBoosterLab della Bocconi.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;"><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Lettura della postura</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Tempo reale</span><span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Senza cloud</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #ffffff; margin-top: 50px;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 60px 24px;">
+      <h2 style="font-size: 26px; max-width: 30ch;">E poi c'è la ricerca</h2>
+      <p style="margin-top: 16px; font-size: 16.5px; line-height: 1.65; color: #55504a; max-width: 60ch;">Dieci articoli pubblicati, oltre cinquecento citazioni e il codice di tutti quelli che si potevano aprire. È da lì che viene la parte di questi progetti che non si improvvisa.</p>
+      <a href="#" style="display: inline-block; margin-top: 24px; font-size: 15px; font-weight: 600;">Vai alla ricerca →</a>
+      <a href="#" style="display: inline-block; margin-top: 24px; margin-left: 26px; font-size: 15px; font-weight: 600;">Come lavoro →</a>
+
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #f4efe7;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 52px 24px 24px; display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px;">
+      <div>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600;">Alessandro Flaborea</p>
+        <p style="margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: #55504a; max-width: 34ch;">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
+        <a href="#" style="display: inline-block; margin-top: 18px; background: #a8531d; color: #ffffff; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 4px;">Prenota mezz'ora</a>
+      </div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Cosa faccio</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Servizi</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Formazione</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Che fine fanno i vostri dati</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Le prove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Lavori</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Ricerca</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Chi sono</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Note</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Altrove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">LinkedIn</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">GitHub</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Google Scholar</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">English site</a></div>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 34px; border-top: 1px solid #e6ddd0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-size: 13px; color: #8a8177;">© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
+      <div style="display: flex; gap: 20px;"><a href="#" style="font-size: 13px; color: #8a8177;">Privacy</a><a href="#" style="font-size: 13px; color: #8a8177;">Cookie</a></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

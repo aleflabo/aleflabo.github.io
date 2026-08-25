@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, sans-serif; background: #faf8f4; color: #141414; }
+    a { color: #1b3a5b; text-decoration: none; transition: color .2s; }
+    a:hover { color: #a8531d; }
+    p, span, li, div, label, input, textarea { font-family: "Inter", -apple-system, sans-serif; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.015em; line-height: 1.05; }
+
+    @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+    x-dc > div > div { animation: sali .7s cubic-bezier(.22,.8,.3,1) both; }
+    x-dc > div > div:nth-child(1) { animation-delay: .02s }
+    x-dc > div > div:nth-child(2) { animation-delay: .1s }
+    x-dc > div > div:nth-child(3) { animation-delay: .18s }
+    x-dc > div > div:nth-child(4) { animation-delay: .26s }
+    x-dc > div > div:nth-child(n+5) { animation-delay: .32s }
+
+    div[style*="width: 88px"][style*="height: 3px"] { transform-origin: left; animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    div[style*="background: #ffffff"][style*="border: 1px solid"] { transition: transform .3s cubic-bezier(.22,.8,.3,1), box-shadow .3s; }
+    div[style*="background: #ffffff"][style*="border: 1px solid"]:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(40,24,10,.10); }
+
+    a[style*="display: grid"] { transition: background .25s, padding-left .25s; border-radius: 4px; }
+    a[style*="display: grid"]:hover { background: #f4efe7; padding-left: 14px; }
+
+    a[style*="border-radius: 4px"][style*="font-weight: 600"] { transition: transform .2s, box-shadow .2s; }
+    a[style*="border-radius: 4px"][style*="font-weight: 600"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168,83,29,.28); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px); background-size: 0% 100%; background-repeat: no-repeat; animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; min-height: 100%;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #e6ddd0;">
+    <span style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600;">Alessandro Flaborea</span>
+    <div style="display: flex; flex-direction: column; gap: 5px; padding: 6px;">
+      <span style="display: block; width: 22px; height: 1.5px; background: #141414;"></span>
+      <span style="display: block; width: 22px; height: 1.5px; background: #141414;"></span>
+    </div>
+  </div>
+
+  <div style="padding: 44px 20px 40px;">
+    <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700; line-height: 1.5;">Consulenza e formazione<br>sull'intelligenza artificiale</p>
+    <h1 style="margin-top: 18px; font-size: 34px; text-wrap: pretty;">Aiuto le aziende a capire dove serve l'intelligenza artificiale e poi la costruisco.</h1>
+    <div style="width: 88px; height: 3px; background: #a8531d; margin: 26px 0;"></div>
+    <p style="font-size: 16.5px; line-height: 1.55; color: #55504a; text-wrap: pretty;">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
+    <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 30px;">
+      <a href="#" style="background: #a8531d; color: #ffffff; font-size: 16px; font-weight: 600; padding: 16px 24px; border-radius: 4px; text-align: center;">Prenota mezz'ora</a>
+      <a href="#" style="font-size: 15px; font-weight: 600; color: #141414; text-decoration: underline; text-underline-offset: 4px; text-align: center; padding: 12px;">Guarda cosa ho costruito</a>
+    </div>
+    <p style="margin-top: 32px; font-size: 13.5px; line-height: 1.6; color: #55504a;">Dottorato in computer vision alla Sapienza · CVPR, ICCV, IROS · Co-fondatore e CTO di Procedo dal 2024 al 2026</p>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; padding: 48px 20px;">
+    <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Il problema</p>
+    <h2 style="font-size: 26px; margin-top: 14px; margin-bottom: 28px; text-wrap: pretty;">Le tre cose che mi vengono raccontate più spesso</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 24px;">
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">«Mi serve questo pezzo.»</p>
+        <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.</p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 24px;">
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">«Lo sa fare solo Bruno.»</p>
+        <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.</p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 24px;">
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">«Abbiamo provato ChatGPT.»</p>
+        <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; padding: 44px 20px;">
+    <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Le prove</p>
+    <h2 style="font-size: 26px; margin-top: 14px; margin-bottom: 22px;">Alcune cose che ho costruito</h2>
+    <div style="border-top: 3px solid #a8531d; padding-top: 20px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Meccanica · commessa reale</p>
+      <h3 style="font-size: 22px; margin-top: 10px;">Portale ricambi 3D</h3>
+      <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno.</p>
+      <a href="#" style="display: inline-block; margin-top: 14px; font-size: 15px; font-weight: 600;">Come funziona →</a>
+    </div>
+    <a href="#" style="display: block; margin-top: 30px; font-size: 15px; font-weight: 600;">Tutti i lavori, compresa la ricerca →</a>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

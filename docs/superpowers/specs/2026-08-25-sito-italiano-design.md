@@ -1,8 +1,28 @@
 # Il sito italiano — documento di progetto
 
 **Data:** 25 agosto 2026 · **Repo:** `aleflabo/aleflabo.github.io` · **Ramo:** `sito-italiano`
-**Mockup navigabile:** canvas «Nuovo sito Flaborea», sorgenti in `~/portfolio-context/design/`
 **Contesto strategico:** `~/knowledge-vault/docs/2026-08-24-visione-partita-iva.md`
+
+## 0. Dove sta il progetto vero
+
+**Questo documento è il riassunto delle decisioni. Non è la fonte.** Il disegno vero, con
+ogni parola e ogni misura, sta in `2026-08-25-sito-italiano/`:
+
+| File | Cos'è | Come si usa |
+|---|---|---|
+| `tavole/*.dc.html` | Le tredici tavole del mockup, sorgente completo | La verità su misure, colori, spaziature, struttura. Si aprono in un browser |
+| `tavole/canvas.json` | Disposizione sulla tela, due pagine, note adesive | Contiene anche il ragionamento dietro ogni pagina |
+| `testi.md` | **813 blocchi di testo estratti alla lettera**, pagina per pagina | La fonte del copy. **Copiare, non riscrivere** |
+| `stile.md` | Token e foglio di stile condiviso, verbatim | Da portare in `tokens.css` e `global.css` |
+
+Regola per chi implementa: **se una frase del sito non compare in `testi.md`, è stata
+inventata.** Se una misura non compare nelle tavole, è stata indovinata. In entrambi i casi
+si torna qui invece di decidere da soli.
+
+Le dieci tavole delle pagine sono `Main` (home), `Servizi`, `Formazione`, `Lavori`,
+`Ricerca`, `ChiSono`, `Dati`, `Note`, più `HomeMobile` (la home a 390px) e `Rotte` (la mappa,
+tavola di lavoro e non una pagina del sito). `DirezioneA/B/C` sono le tre strade visive messe
+a confronto: **è stata scelta la B**, le altre due restano come documentazione della scelta.
 
 ---
 

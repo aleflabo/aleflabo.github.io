@@ -1,0 +1,241 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 5500,
+      "title": "Home italiana",
+      "page": "page-1"
+    },
+    {
+      "file": "Servizi.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 4450,
+      "title": "/servizi",
+      "page": "page-1"
+    },
+    {
+      "file": "Note.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 3000,
+      "title": "/note",
+      "page": "page-1"
+    },
+    {
+      "file": "HomeMobile.dc.html",
+      "x": 4680,
+      "y": 0,
+      "w": 390,
+      "h": 1900,
+      "title": "Home su telefono",
+      "page": "page-1"
+    },
+    {
+      "file": "Rotte.dc.html",
+      "x": 5190,
+      "y": 0,
+      "w": 1080,
+      "h": 1100,
+      "title": "Mappa delle rotte",
+      "page": "page-1"
+    },
+    {
+      "file": "Formazione.dc.html",
+      "x": 0,
+      "y": 5740,
+      "w": 1440,
+      "h": 3100,
+      "title": "/formazione",
+      "page": "page-1"
+    },
+    {
+      "file": "Ricerca.dc.html",
+      "x": 1560,
+      "y": 5740,
+      "w": 1440,
+      "h": 2950,
+      "title": "/ricerca",
+      "page": "page-1"
+    },
+    {
+      "file": "Lavori.dc.html",
+      "x": 3120,
+      "y": 5740,
+      "w": 1440,
+      "h": 4350,
+      "title": "/lavori",
+      "page": "page-1"
+    },
+    {
+      "file": "ChiSono.dc.html",
+      "x": 0,
+      "y": 10300,
+      "w": 1440,
+      "h": 2900,
+      "title": "/chi-sono",
+      "page": "page-1"
+    },
+    {
+      "file": "Dati.dc.html",
+      "x": 1560,
+      "y": 10300,
+      "w": 1440,
+      "h": 3600,
+      "title": "/i-vostri-dati",
+      "page": "page-1"
+    },
+    {
+      "file": "DirezioneA.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "A — Il blu occupa spazio",
+      "page": "page-2"
+    },
+    {
+      "file": "DirezioneB.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 1400,
+      "title": "B — Accento caldo",
+      "page": "page-2"
+    },
+    {
+      "file": "DirezioneC.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "C — Blu acceso",
+      "page": "page-2"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-home",
+      "x": 0,
+      "y": -210,
+      "w": 460,
+      "text": "HOME ITALIANA — sette blocchi\n\nOgni blocco risponde a una domanda che il titolare si fa, nell'ordine in cui se la fa: di cosa si occupa → ha capito la mia situazione → cosa succede se lo chiamo → l'ha già fatto per qualcuno → e se volessi solo capirci qualcosa → perché lui → come lo contatto.\n\nIl blocco sul territorio è stato tolto, e con lui ogni riferimento geografico. Sulla home non compare nessuno stack e nessuna sigla tecnica: quelli vivono su /lavori e /ricerca.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-tono",
+      "x": 500,
+      "y": -210,
+      "w": 460,
+      "text": "STILE — direzione B applicata\n\nCrema più calda (#faf8f4), il blu resta la struttura, il terracotta (#a8531d) è il colore dell'azione: pulsanti, occhielli, filetti.\n\nIl movimento c'è ovunque: le fasce entrano scaglionate, il filetto sotto il titolo si disegna, l'evidenziatore sotto «dove serve» si riempie, le schede si sollevano al passaggio del mouse e le righe degli elenchi si scaldano e rientrano. Ricarica una tavola per rivedere l'entrata.\n\nSotto l'occhiello c'è ora la fascia blu coi numeri della ricerca: 10 articoli, 533 citazioni, un Best Paper, due anni da CTO. Sopra la piega, dove serve.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-servizi",
+      "x": 1560,
+      "y": -210,
+      "w": 460,
+      "text": "/SERVIZI — senza prezzi, come hai chiesto\n\nIl lavoro che facevano i prezzi lo fanno tre cose: la forma dichiarata di ogni ingaggio (per chi, quanto dura, cosa ti resta), la sezione «per chi non sono», e il form che qualifica.\n\nResta la mia riserva: senza prezzi il filtro lo fai in chiamata, e le chiamate le paghi in ore. Se cambi idea basta una riga, e non diventa un listino.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-note",
+      "x": 3120,
+      "y": -210,
+      "w": 460,
+      "text": "/NOTE — il motore che oggi non hai\n\nI cinque articoli sono veri nel senso che potresti scriverli domani: escono tutti da cose che hai già fatto (la pipeline CAD affrontata per prima, i sei CV da due file, le domande che ti fanno le aziende).\n\nRSS più raccolta email: è l'unico modo perché quello che scrivi si accumuli su un dominio tuo invece di evaporare su LinkedIn.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-mobile",
+      "x": 4680,
+      "y": -210,
+      "w": 500,
+      "text": "TELEFONO E ROTTE\n\nMolti apriranno il sito dal telefono, in piedi, fra due cose. Nel mockup mobile il titolo tiene su tre righe e i bottoni stanno sopra i 44px.\n\nLa mappa a destra dice cosa nasce, cosa cambia indirizzo e cosa resta intatto — più il guaio del dominio, che è la cosa da fare per prima e non ha niente a che vedere con il design.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-formazione",
+      "x": 0,
+      "y": 5530,
+      "w": 460,
+      "text": "/FORMAZIONE\n\nLe ore dichiarate su ogni formato (4 · 8-12 · concordata), il riquadro sull'AI Act come contesto e non come minaccia, e le tre strade per organizzare un corso spiegate per chi paga.\n\nIn fondo la credenziale che era sepolta: quattro anni da assistente alla didattica alla Sapienza. E una sezione «cosa non troverete», perché dire cosa non fai è il modo più rapido di farsi credere su quello che fai.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-ricerca",
+      "x": 1560,
+      "y": 5530,
+      "w": 460,
+      "text": "/RICERCA — dieci articoli, non sei\n\nIl sito attuale ne mostra sei: sono quelli con il repository pubblico. Dal CV ne risultano dieci, con 533 citazioni complessive, 161 stelle su GitHub, tre da primo autore e un Best Paper Award che sul sito non compare da nessuna parte.\n\nIl riquadro «cosa c'entra con la tua azienda» è il pezzo più importante della pagina: traduce anomaly detection e procedural video in una frase che un capo reparto riconosce, e mostra la linea diretta fra il dottorato e Procedo.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-lavori",
+      "x": 3120,
+      "y": 5530,
+      "w": 460,
+      "text": "/LAVORI\n\nI due gruppi dividono per che cosa sono, non per chi ha pagato: «software per le aziende» (Procedo, portale ricambi, Tire Hub, Cost Tracking) e «prodotti e strumenti miei».\n\nDentro il secondo gruppo c'è ora anche la parte creativa. È messa lì di proposito e non fra i servizi: il testo non parla di video generati, parla del problema difficile — tenere le stesse persone riconoscibili attraverso dieci scene — così rafforza il posizionamento invece di diluirlo.\n\nDue date da correggere in projects.ts: Procedo è indicato 2023–oggi ma il ruolo di CTO va da luglio 2024 a luglio 2026; HomeSweatHome è indicato 2022 ma è 2021–2023.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-chisono",
+      "x": 0,
+      "y": 10090,
+      "w": 460,
+      "text": "/CHI-SONO\n\nIl riquadro tratteggiato è il posto della tua fotografia: è l'unica cosa in tutto il mockup che non posso fare io, ed è anche quella con il rapporto sforzo-risultato migliore.\n\nIl testo racconta l'arco per intero — Udine, Göteborg, Roma, Amsterdam, Procedo, in proprio — e si chiude sul motivo per cui sei uscito, che è la domanda che il lettore si fa e non ti farà mai.",
+      "page": "page-1"
+    },
+    {
+      "id": "nota-dati",
+      "x": 1560,
+      "y": 10090,
+      "w": 460,
+      "text": "«CHE FINE FANNO I VOSTRI DATI» — la pagina che il concorrente non può scrivere\n\nTre situazioni tenute separate perché il rischio è diversissimo: ChatGPT usato per conto proprio, il software che costruisco io, i file che mi consegnate per la diagnosi.\n\nRegge su cose vere: l'isolamento per cliente di Procedo, la sezione sulla proprietà intellettuale del portale ricambi, la sicurezza imposta dal database. E c'è «quello che non posso garantirvi», che è il pezzo che rende credibile tutto il resto.",
+      "page": "page-1"
+    },
+    {
+      "id": "dir-a",
+      "x": 0,
+      "y": -230,
+      "w": 460,
+      "page": "page-2",
+      "text": "A — IL BLU OCCUPA SPAZIO\n\nStesso blu di adesso, usato però su superfici grandi invece che su filetti da 44px. La presenza del colore si ottiene con l'area, non con la saturazione.\n\nPRO: nessuno nel settore in Italia apre con una fascia scura editoriale; ti distingue senza inseguire nessuno, e la crema sotto diventa un sollievo invece che uno sfondo.\nCONTRO: è il più severo dei tre. Un titolare di 60 anni potrebbe leggerlo come «costoso»."
+    },
+    {
+      "id": "dir-b",
+      "x": 1560,
+      "y": -230,
+      "w": 460,
+      "page": "page-2",
+      "text": "B — ACCENTO CALDO\n\nLa crema resta, il blu diventa struttura, e si aggiunge un terracotta come colore d'azione: pulsanti, occhielli, l'evidenziatore sotto «dove serve» che si disegna da solo. La fascia blu coi numeri della ricerca spezza la pagina a metà.\n\nPRO: caldo e umano, lontanissimo dal blu-tecnologia di tutti gli altri, e la tua ricerca compare sopra la piega.\nCONTRO: due colori vanno tenuti a bada; sbagliando le dosi diventa uno studio di grafica."
+    },
+    {
+      "id": "dir-c",
+      "x": 3120,
+      "y": -230,
+      "w": 460,
+      "page": "page-2",
+      "text": "C — BLU ACCESO\n\nQuello che hai chiesto: blu vivo, fondo bianco, angoli più morbidi, ombre, la pastiglia «disponibile per nuovi progetti», un alone che respira dietro il titolo.\n\nPRO: moderno al primo sguardo, e i pulsanti si vedono. È il linguaggio che il tuo compratore riconosce già.\nCONTRO: è anche il linguaggio di Lucchetta e di ogni altro consulente AI. Guadagni «moderno» e perdi «diverso» — e siccome il tuo vantaggio è la sostanza, sarebbe un cattivo cambio."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  },
+  "pages": [
+    {
+      "id": "page-2",
+      "name": "Direzioni visive"
+    },
+    {
+      "id": "page-1",
+      "name": "Pagine del sito"
+    }
+  ]
+}

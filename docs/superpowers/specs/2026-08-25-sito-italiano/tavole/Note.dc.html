@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, sans-serif; background: #faf8f4; color: #141414; }
+    a { color: #1b3a5b; text-decoration: none; transition: color .2s; }
+    a:hover { color: #a8531d; }
+    p, span, li, div, label, input, textarea { font-family: "Inter", -apple-system, sans-serif; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.015em; line-height: 1.05; }
+
+    @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+    x-dc > div > div { animation: sali .7s cubic-bezier(.22,.8,.3,1) both; }
+    x-dc > div > div:nth-child(1) { animation-delay: .02s }
+    x-dc > div > div:nth-child(2) { animation-delay: .1s }
+    x-dc > div > div:nth-child(3) { animation-delay: .18s }
+    x-dc > div > div:nth-child(4) { animation-delay: .26s }
+    x-dc > div > div:nth-child(n+5) { animation-delay: .32s }
+
+    div[style*="width: 88px"][style*="height: 3px"] { transform-origin: left; animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    div[style*="background: #ffffff"][style*="border: 1px solid"] { transition: transform .3s cubic-bezier(.22,.8,.3,1), box-shadow .3s; }
+    div[style*="background: #ffffff"][style*="border: 1px solid"]:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(40,24,10,.10); }
+
+    a[style*="display: grid"] { transition: background .25s, padding-left .25s; border-radius: 4px; }
+    a[style*="display: grid"]:hover { background: #f4efe7; padding-left: 14px; }
+
+    a[style*="border-radius: 4px"][style*="font-weight: 600"] { transition: transform .2s, box-shadow .2s; }
+    a[style*="border-radius: 4px"][style*="font-weight: 600"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168,83,29,.28); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px); background-size: 0% 100%; background-repeat: no-repeat; animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; min-height: 100%;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1120px; margin: 0 auto; padding: 22px 24px; border-bottom: 1px solid #e6ddd0;">
+    <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 600; letter-spacing: -0.01em;">Alessandro Flaborea</span>
+    <div style="display: flex; align-items: center; gap: 24px;">
+      <a href="#" style="font-size: 14px; color: #141414;">Servizi</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Formazione</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Lavori</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Ricerca</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Chi sono</a>
+      <a href="#" style="font-size: 14px; color: #141414; font-weight: 600; border-bottom: 2px solid #a8531d; padding-bottom: 2px;">Note</a>
+      <a href="#" style="font-size: 14px; font-weight: 600; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 8px 16px;">Parliamone</a>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px 40px;">
+    <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Note</p>
+    <h1 style="margin-top: 20px; font-size: 46px; max-width: 20ch;">Quello che sto imparando</h1>
+    <div style="width: 88px; height: 3px; background: #a8531d; margin: 30px 0;"></div>
+    <p style="font-size: 18px; line-height: 1.6; color: #55504a; max-width: 62ch; text-wrap: pretty;">Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana.</p>
+    <a href="#" style="display: inline-block; margin-top: 20px; font-size: 15px; font-weight: 600;">Chi scrive →</a>
+
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 60px;">
+    <div style="display: flex; flex-direction: column;">
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">25 ago 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Cosa chiede davvero l'AI Act alle piccole imprese</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">Dal 2 febbraio 2025 chi usa strumenti di intelligenza artificiale deve garantire una formazione minima al personale ed essere in grado di dimostrarlo. Buona parte di quello che si legge in giro è allarmismo di chi vende corsi: qui c'è il testo dell'articolo 4, cosa comporta per un'azienda di trenta persone e cosa si riesce a fare in mezza giornata.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Regole</span>
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Da leggere in 5 minuti</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">18 ago 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Perché ho costruito per primo il pezzo difficile</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">In un progetto per un costruttore di macchine la parte più incerta era la conversione dei modelli CAD. L'ho affrontata prima del resto, con ottanta test. Se non avesse funzionato lo avremmo saputo dopo tre settimane, quando cambiare strada era ancora semplice.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Come lavoro</span>
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Manifattura</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">11 ago 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Cosa succede ai tuoi dati quando incolli un preventivo in ChatGPT</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">La risposta dipende da quale versione si sta usando e da come è configurata, e in azienda quasi nessuno lo sa. Tre cose che si possono controllare in dieci minuti.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Rischi</span>
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Da leggere in 5 minuti</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">4 ago 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Metà delle richieste che ricevo si risolvono senza intelligenza artificiale</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">Spesso il problema è che un'informazione che l'azienda già possiede non si riesce a recuperare quando serve. Sistemare quello costa meno e andrebbe comunque fatto prima.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Opinioni</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">28 lug 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Sei curriculum da due file di testo</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">Quando i fatti sono scritti una volta sola, le varianti diventano sottrazioni da quel testo e smettono di essere copie da tenere allineate a mano. Un esempio piccolo di un principio che vale anche per le distinte base.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Officina</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 32px; padding: 30px 0; border-top: 1px solid #e6ddd0; border-bottom: 1px solid #e6ddd0; align-items: start;">
+        <span style="font-size: 13px; color: #55504a; padding-top: 6px;">21 lug 2026</span>
+        <div>
+          <h2 style="font-size: 25px; color: #141414; max-width: 30ch;">Tre cose che mi vengono chieste spesso e che di solito sconsiglio</h2>
+          <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 68ch;">Il chatbot sul sito, il modello «addestrato sui nostri dati» e la dashboard che poi nessuno apre. Perché vengono chiesti, dove si inceppano e cosa si può fare al posto loro.</p>
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 4px 10px;">Opinioni</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 72px;">
+    <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 40px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: center;">
+      <div>
+        <h2 style="font-size: 26px; max-width: 22ch;">Te le mando per mail</h2>
+        <p style="margin-top: 14px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 50ch;">Una mail quando esce qualcosa di nuovo, niente altro. Ci si cancella con un clic.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #faf8f4; border: 1px solid #e6ddd0; border-radius: 4px; padding: 13px 14px; font-size: 15px; color: #999999;">la.tua@mail.it</div>
+        <a href="#" style="background: #a8531d; color: #ffffff; font-size: 15px; font-weight: 600; padding: 13px 24px; border-radius: 4px; text-align: center;">Iscrivimi</a>
+        <a href="#" style="font-size: 13px; color: #55504a; text-align: center;">Oppure via RSS</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #f4efe7;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 52px 24px 24px; display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px;">
+      <div>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600;">Alessandro Flaborea</p>
+        <p style="margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: #55504a; max-width: 34ch;">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
+        <a href="#" style="display: inline-block; margin-top: 18px; background: #a8531d; color: #ffffff; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 4px;">Prenota mezz'ora</a>
+      </div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Cosa faccio</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Servizi</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Formazione</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Che fine fanno i vostri dati</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Le prove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Lavori</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Ricerca</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Chi sono</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Note</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Altrove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">LinkedIn</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">GitHub</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Google Scholar</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">English site</a></div>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 34px; border-top: 1px solid #e6ddd0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-size: 13px; color: #8a8177;">© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
+      <div style="display: flex; gap: 20px;"><a href="#" style="font-size: 13px; color: #8a8177;">Privacy</a><a href="#" style="font-size: 13px; color: #8a8177;">Cookie</a></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
