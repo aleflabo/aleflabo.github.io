@@ -9,6 +9,7 @@
 // scritti qui, alla lettera dalla tavola, come già fa ComeLavoro.astro
 // per il proprio testo nella home.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TestataPagina from '../components/TestataPagina.astro';
 import { formati, riquadroAiAct, strade } from '../data/formazione';
 import { localizedPath } from '../i18n/ui';
 import { site } from '../data/site';
@@ -24,12 +25,7 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
   attiva="formazione"
 >
   <section class="intestazione">
-    <div class="container">
-      <p class="label">Formazione</p>
-      <h1>Corsi che si usano il giorno dopo</h1>
-      <div class="divider"></div>
-      <p class="intro">In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito.</p>
-    </div>
+    <div class="container"> <TestataPagina occhiello="Formazione" titolo="Corsi che si usano il giorno dopo" introduzione="In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito." /> </div>
   </section>
 
   <section class="avviso-ai-act">
@@ -133,20 +129,10 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
   .intestazione .container {
     padding: 72px 24px 44px;
   }
-  .intestazione h1 {
-    margin-top: 20px;
-    font-size: 46px;
+  /* TestataPagina riproduce il caso maggioritario (22ch): qui la tavola
+     vuole 24ch, uno scarto minore, quindi resta come override. */
+  .intestazione :global(h1) {
     max-width: 24ch;
-  }
-  .intestazione .divider {
-    margin: 30px 0;
-  }
-  .intestazione .intro {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    max-width: 62ch;
-    text-wrap: pretty;
   }
 
   /* --- riquadro AI Act --- */
@@ -356,19 +342,6 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
   @media (max-width: 640px) {
     .intestazione .container {
       padding: 44px 20px 36px;
-    }
-    .intestazione h1 {
-      margin-top: 16px;
-      font-size: 32px;
-      max-width: none;
-      text-wrap: pretty;
-    }
-    .intestazione .divider {
-      margin: 22px 0;
-    }
-    .intestazione .intro {
-      font-size: 16px;
-      max-width: none;
     }
     .avviso-ai-act .container {
       padding: 0 20px 40px;

@@ -15,6 +15,7 @@
 // pulsante «Scarica il curriculum» resta inerte (`href="#"`): il PDF non è
 // ancora collegato.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TestataPagina from '../components/TestataPagina.astro';
 import { chiSono } from '../data/chiSono';
 import { localizedPath } from '../i18n/ui';
 ---
@@ -43,11 +44,7 @@ import { localizedPath } from '../i18n/ui';
           </div>
         </div>
 
-        <div class="colonna-bio">
-          <p class="label">Chi sono</p>
-          <h1>Alessandro Flaborea</h1>
-          <div class="divider"></div>
-          <div class="paragrafi">
+        <div class="colonna-bio"> <TestataPagina occhiello="Chi sono" titolo="Alessandro Flaborea" /><div class="paragrafi">
             {chiSono.paragrafi.map((p, i) => (
               <p class:list={['corpo', { primo: i === 0 }]}>{p}</p>
             ))}
@@ -146,13 +143,20 @@ import { localizedPath } from '../i18n/ui';
     color: var(--text-muted);
   }
 
-  /* --- colonna bio --- */
-  .colonna-bio h1 {
+  /* --- colonna bio ---
+     Qui TestataPagina porta solo occhiello/titolo/filetto: la
+     «introduzione» del componente presuppone una sola frase, mentre qui
+     la biografia sono cinque paragrafi con una gerarchia propria (il
+     primo più grande, gli altri no) — non la stessa cosa, non passata
+     come prop. Le misure di titolo e filetto restano quelle della tavola
+     (42px, non i 46px del caso maggioritario; 28px invece di 30px),
+     quindi restano come override sull'elemento reso dal componente. */
+  .colonna-bio :global(h1) {
     margin-top: 20px;
     font-size: 42px;
     max-width: 20ch;
   }
-  .colonna-bio .divider {
+  .colonna-bio :global(.divider) {
     margin: 28px 0;
   }
   .paragrafi {
@@ -253,14 +257,8 @@ import { localizedPath } from '../i18n/ui';
     .colonna-foto {
       max-width: 280px;
     }
-    .colonna-bio h1 {
-      margin-top: 16px;
+    .colonna-bio :global(h1) {
       font-size: 30px;
-      max-width: none;
-      text-wrap: pretty;
-    }
-    .colonna-bio .divider {
-      margin: 22px 0;
     }
     .paragrafi {
       max-width: none;

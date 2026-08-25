@@ -17,6 +17,7 @@
 // raggiunge dal piè di pagina e dal FAQ), quindi <BaseLayout> non riceve
 // `attiva`.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TestataPagina from '../components/TestataPagina.astro';
 import {
   situazioniDati,
   rispostaCorta,
@@ -33,12 +34,7 @@ import { localizedPath } from '../i18n/ui';
   path="/i-vostri-dati"
 >
   <section class="intestazione">
-    <div class="container">
-      <p class="label">I vostri dati</p>
-      <h1>Che fine fanno i vostri dati</h1>
-      <div class="divider"></div>
-      <p class="intro">{rispostaCorta.intro}</p>
-    </div>
+    <div class="container"> <TestataPagina occhiello="I vostri dati" titolo="Che fine fanno i vostri dati" introduzione={rispostaCorta.intro} /> </div>
   </section>
 
   <section class="risposta-corta">
@@ -136,20 +132,15 @@ import { localizedPath } from '../i18n/ui';
   .intestazione .container {
     padding: 72px 24px 44px;
   }
-  .intestazione h1 {
-    margin-top: 20px;
-    font-size: 46px;
+  /* TestataPagina riproduce il caso maggioritario: qui la tavola vuole
+     scarti su tre misure (max-width dell'h1, interlinea e max-width
+     dell'intro), quindi restano come override. */
+  .intestazione :global(h1) {
     max-width: 20ch;
   }
-  .intestazione .divider {
-    margin: 30px 0;
-  }
-  .intestazione .intro {
-    font-size: 18px;
+  .intestazione :global(.intro) {
     line-height: 1.65;
-    color: var(--text-muted);
     max-width: 64ch;
-    text-wrap: pretty;
   }
 
   /* --- risposta corta --- */
@@ -339,18 +330,9 @@ import { localizedPath } from '../i18n/ui';
     .intestazione .container {
       padding: 44px 20px 36px;
     }
-    .intestazione h1 {
-      margin-top: 16px;
+    /* qui la tavola vuole 30px invece del 32px maggioritario. */
+    .intestazione :global(h1) {
       font-size: 30px;
-      max-width: none;
-      text-wrap: pretty;
-    }
-    .intestazione .divider {
-      margin: 22px 0;
-    }
-    .intestazione .intro {
-      font-size: 16px;
-      max-width: none;
     }
     .risposta-corta .container {
       padding: 0 20px 40px;
