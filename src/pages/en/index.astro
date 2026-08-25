@@ -1,18 +1,47 @@
 ---
-// src/pages/en/index.astro
+// src/pages/en/index.astro — la home inglese (rotta `/en/`).
+//
+// Gemella della home italiana (src/pages/index.astro, task 2/9, ramo
+// sito-italiano): stessi otto componenti di src/components/sezioni/,
+// alimentati qui da src/data/en/home.ts invece che dalle costanti scritte
+// a mano lì. Nessuna stringa nuova: tutto il testo viene da quel file
+// (task 3, sito-inglese, verificato campo per campo contro le firme dei
+// componenti — task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import Services from '../../components/Services.astro';
-import WorkList from '../../components/WorkList.astro';
-import Research from '../../components/Research.astro';
-import About from '../../components/About.astro';
-import Contact from '../../components/Contact.astro';
+import Occhiello from '../../components/sezioni/Occhiello.astro';
+import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
+import IlProblema from '../../components/sezioni/IlProblema.astro';
+import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
+import LeProve from '../../components/sezioni/LeProve.astro';
+import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
+import DaDoveViene from '../../components/sezioni/DaDoveViene.astro';
+import Contatto from '../../components/sezioni/Contatto.astro';
+import {
+  occhiello,
+  numeri,
+  ilProblema,
+  comeLavoro,
+  leProve,
+  bloccoFormazione,
+  daDoveViene,
+  contatto,
+} from '../../data/en/home';
 ---
-<BaseLayout title="Alessandro Flaborea" description="AI & Computer Vision engineer, from research to product" lang="en" path="/" pathIt="/" person={true}>
-  <Hero lang="en" />
-  <Services lang="en" />
-  <WorkList lang="en" />
-  <Research lang="en" />
-  <About lang="en" />
-  <Contact lang="en" />
+
+<BaseLayout
+  title="Alessandro Flaborea"
+  description="AI & Computer Vision engineer, from research to product"
+  lang="en"
+  path="/"
+  pathIt="/"
+  person={true}
+>
+  <Occhiello {...occhiello} />
+  <FasciaNumeri numeri={numeri} />
+  <IlProblema {...ilProblema} />
+  <ComeLavoro {...comeLavoro} />
+  <LeProve {...leProve} />
+  <BloccoFormazione {...bloccoFormazione} />
+  <DaDoveViene {...daDoveViene} />
+  <Contatto {...contatto} />
 </BaseLayout>

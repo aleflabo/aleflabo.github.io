@@ -80,7 +80,7 @@ const {
       </fieldset>
       <div class="invia">
         <button type="submit" class="pulsante" disabled>{invia}</button>
-        <p class="nota-inerte">{notaInerte}</p>
+        {notaInerte && <p class="nota-inerte">{notaInerte}</p>}
       </div>
     </form>
 
