@@ -7,7 +7,14 @@ import type { Locale } from '../i18n/ui';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 
-const sortedProjects = [...projects].sort((a, b) => a.order - b.order);
+// Sul lato inglese, i progetti `soloItaliano` (Portale ricambi, Tire Hub)
+// non hanno un testo inglese approvato (§10 della spec): fuori dall'elenco
+// (decisione nella revisione finale del ramo sito-italiano). Questo
+// componente è usato solo con lang="en" (src/pages/en/index.astro), ma il
+// filtro resta condizionato a `lang` nel caso venga riusato.
+const sortedProjects = [...projects]
+  .filter((p) => lang !== 'en' || !p.soloItaliano)
+  .sort((a, b) => a.order - b.order);
 ---
 
 <section id="work" class="work">

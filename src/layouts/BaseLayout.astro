@@ -12,6 +12,17 @@ interface Props {
   description: string;
   lang: 'en' | 'it';
   path: string;
+  // Gemella nell'altra lingua, quando esiste (task 1/bloccante): senza
+  // prefisso di lingua, nello stesso formato di `path`. `pathEn` è il
+  // percorso della pagina inglese gemella (usato quando `lang` è 'it');
+  // `pathIt` è il percorso della pagina italiana gemella (quando `lang` è
+  // 'en'). Se assente, niente <link hreflang> verso l'altra lingua e
+  // niente interruttore in Nav: molte pagine italiane non hanno ancora un
+  // equivalente inglese (solo 17 rotte su altrettante non esistono in
+  // /en/), quindi l'alternato va dichiarato esplicitamente pagina per
+  // pagina, non calcolato sempre a partire da `path`.
+  pathEn?: string;
+  pathIt?: string;
   ogType?: 'website' | 'article';
   detectLocale?: boolean;
   person?: boolean;
@@ -22,6 +33,8 @@ const {
   description,
   lang,
   path,
+  pathEn,
+  pathIt,
   ogType = 'website',
   detectLocale = false,
   person = false,
@@ -30,8 +43,25 @@ const {
 
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://aleflabo.github.io';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
-const enUrl = `${site}${localizedPath('en', path)}`;
-const itUrl = `${site}${localizedPath('it', path)}`;
+// Percorso relativo (senza dominio) verso l'altra lingua: esplicito via
+// `pathEn`/`pathIt` quando fornito, altrimenti — solo per la lingua
+// corrente, cioè l'autoreferenza — ricavato da `path`.
+const relEnUrl = pathEn !== undefined
+  ? localizedPath('en', pathEn)
+  : lang === 'en'
+    ? localizedPath('en', path)
+    : undefined;
+const relItUrl = pathIt !== undefined
+  ? localizedPath('it', pathIt)
+  : lang === 'it'
+    ? localizedPath('it', path)
+    : undefined;
+const enUrl = relEnUrl !== undefined ? `${site}${relEnUrl}` : undefined;
+const itUrl = relItUrl !== undefined ? `${site}${relItUrl}` : undefined;
+// Il percorso da dare al selettore di lingua nel Nav: quello dell'ALTRA
+// lingua rispetto a quella corrente. Assente (niente interruttore) quando
+// quella pagina non ha una gemella nell'altra lingua.
+const hrefAltro = lang === 'it' ? relEnUrl : relItUrl;
 const ogImage = `${site}/og.png`;
 
 const personLd = {
@@ -82,8 +112,8 @@ const personLd = {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="it" href={itUrl} />
+    {enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {itUrl && <link rel="alternate" hreflang="it" href={itUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
@@ -100,7 +130,7 @@ const personLd = {
     )}
   </head>
   <body>
-    <Nav lang={lang} path={path} attiva={attiva} />
+    <Nav lang={lang} hrefAltro={hrefAltro} attiva={attiva} />
     <main><slot /></main>
     <Footer lang={lang} />
   </body>

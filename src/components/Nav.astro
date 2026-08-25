@@ -5,10 +5,14 @@ import LangSwitch from './LangSwitch.astro';
 
 interface Props {
   lang: Locale;
-  path: string;
+  // Percorso (relativo, senza dominio) verso la gemella di questa pagina
+  // nell'altra lingua, se esiste — passato a LangSwitch. Assente su una
+  // pagina senza equivalente nell'altra lingua: niente interruttore
+  // (task 1/bloccante).
+  hrefAltro?: string;
   attiva?: string;
 }
-const { lang, path, attiva } = Astro.props;
+const { lang, hrefAltro, attiva } = Astro.props;
 const nav = site[lang].nav;
 
 // Le sette voci del menu italiano: la `chiave` (per lo stato attivo) e la
@@ -42,7 +46,7 @@ const parliamoneIt = site.it.contact.title;
             </a>
           ))}
           <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{parliamoneIt}</a>
-          <LangSwitch lang={lang} path={path} />
+          <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
     ) : (
@@ -53,7 +57,7 @@ const parliamoneIt = site.it.contact.title;
           <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
           <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
           <a class="cta" href={`${localizedPath('en', '/')}#contact`}>{nav.cta}</a>
-          <LangSwitch lang={lang} path={path} />
+          <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
     )}

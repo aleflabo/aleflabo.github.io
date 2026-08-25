@@ -1,19 +1,27 @@
 ---
-import { localizedPath, type Locale } from '../i18n/ui';
-interface Props { lang: Locale; path: string; }
-const { lang, path } = Astro.props;
+import type { Locale } from '../i18n/ui';
+// `href` è già il percorso finale (relativo) verso la gemella nell'altra
+// lingua, calcolato da BaseLayout: assente quando quella pagina non ha una
+// gemella (task 1/bloccante) — in quel caso niente interruttore, invece di
+// un link che porta a un 404.
+interface Props { lang: Locale; href?: string; }
+const { lang, href } = Astro.props;
 const other: Locale = lang === 'en' ? 'it' : 'en';
 ---
-<a class="lang" href={localizedPath(other, path)} data-lang-switch aria-label={`Switch to ${other.toUpperCase()}`}>
-  <span class:list={[lang === 'en' && 'on']}>EN</span><span aria-hidden="true"> / </span><span class:list={[lang === 'it' && 'on']}>IT</span>
-</a>
-<script is:inline>
-  document.addEventListener('click', function (e) {
-    var el = e.target;
-    var a = el && el.closest ? el.closest('[data-lang-switch]') : null;
-    if (a) { try { localStorage.setItem('lang-chosen', '1'); } catch (_) {} }
-  }, true);
-</script>
+{href && (
+  <>
+    <a class="lang" href={href} data-lang-switch aria-label={`Switch to ${other.toUpperCase()}`}>
+      <span class:list={[lang === 'en' && 'on']}>EN</span><span aria-hidden="true"> / </span><span class:list={[lang === 'it' && 'on']}>IT</span>
+    </a>
+    <script is:inline>
+      document.addEventListener('click', function (e) {
+        var el = e.target;
+        var a = el && el.closest ? el.closest('[data-lang-switch]') : null;
+        if (a) { try { localStorage.setItem('lang-chosen', '1'); } catch (_) {} }
+      }, true);
+    </script>
+  </>
+)}
 <style>
   .lang { font-size: 0.8rem; letter-spacing: 0.05em; color: var(--text-muted); }
   .lang .on { color: var(--text); font-weight: 700; }

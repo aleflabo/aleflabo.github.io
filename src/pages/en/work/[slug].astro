@@ -6,15 +6,22 @@ import { site } from '../../../data/site';
 import { localizedPath } from '../../../i18n/ui';
 
 export function getStaticPaths() {
-  return projects.map((p) => ({ params: { slug: p.slug } }));
+  // I progetti `soloItaliano` (Portale ricambi, Tire Hub) non hanno un
+  // testo inglese approvato (§10 della spec): niente rotta /en/work/[slug]
+  // per loro (decisione nella revisione finale del ramo sito-italiano).
+  return projects.filter((p) => !p.soloItaliano).map((p) => ({ params: { slug: p.slug } }));
 }
 const { slug } = Astro.params;
 const project = getProject(slug!)!;
 const c = project.en;
 const path = `/work/${project.slug}`;
+// La gemella italiana vive sotto /lavori, non /work: passarla esplicita
+// evita che l'hreflang="it" punti a /work/[slug], che è solo un redirect
+// verso /lavori/[slug] (task 1/bloccante).
+const pathIt = `/lavori/${project.slug}`;
 const t = site.en;
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} ogType="article">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article">
   <article class="container case">
     <a class="back" href={`${localizedPath('en', '/')}#work`}>← {t.caseStudy.back}</a>
     <p class="label">{c.area} · {project.role} · {project.year}</p>
