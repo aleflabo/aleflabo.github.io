@@ -1,0 +1,162 @@
+---
+import { localizedPath } from '../../i18n/ui';
+
+// Titolo (h1) spezzato in uno <span class="w"> per parola, con ritardi
+// progressivi. «dove serve» resta un unico span (porta anche .marker),
+// esattamente come indicato nel brief del task 8. Testo alla lettera da
+// tavole/Main.dc.html (e testi.md, sezione «/ — home»).
+const titolo = "Aiuto le aziende a capire|dove serve|l'intelligenza artificiale e poi la costruisco.";
+const [prima, marcata, dopo] = titolo.split('|');
+const parole = [
+  ...prima.split(' ').map((testo) => ({ testo, marker: false })),
+  { testo: marcata, marker: true },
+  ...dopo.split(' ').map((testo) => ({ testo, marker: false })),
+];
+---
+
+<section class="occhiello">
+  <div class="alone" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow">Consulenza e formazione sull'intelligenza artificiale</p>
+    <h1>
+      {parole.map((p, i) => (
+        <>
+          <span class:list={['w', { marker: p.marker }]} style={`animation-delay: ${0.22 + i * 0.06}s`}>{p.testo}</span>{' '}
+        </>
+      ))}
+    </h1>
+    <div class="divider"></div>
+    <p class="intro">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
+    <div class="cta-row">
+      <a class="pulsante primaria" href="#">Prenota mezz'ora <span class="freccia">&rarr;</span></a>
+      <a class="secondaria" href="#le-prove">Guarda cosa ho costruito</a>
+    </div>
+    <p class="credibilita">Dottorato in computer vision alla Sapienza · Pubblicato a CVPR, ICCV, IROS · Co-fondatore e CTO di <a href={localizedPath('it', '/lavori')}>Procedo</a> dal 2024 al 2026</p>
+  </div>
+</section>
+
+<style>
+  .occhiello {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+  .alone {
+    position: absolute;
+    top: -260px;
+    right: -220px;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(168 83 29 / 9%), rgb(168 83 29 / 0%) 70%);
+    pointer-events: none;
+  }
+  .container {
+    position: relative;
+    padding: 92px 24px 64px;
+  }
+  .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  h1 {
+    margin-top: 26px;
+    font-size: 66px;
+    max-width: 19ch;
+    line-height: 1.04;
+  }
+  .divider {
+    margin: 38px 0;
+  }
+  .intro {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 54ch;
+  }
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-top: 40px;
+  }
+  .primaria {
+    background: var(--azione);
+    color: var(--surface);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: var(--radius);
+  }
+  .secondaria {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+  .credibilita {
+    margin-top: 46px;
+    font-size: 14px;
+    color: #7a736a;
+  }
+  .credibilita a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 44px 20px 40px;
+    }
+    .eyebrow {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      line-height: 1.5;
+      max-width: 22ch;
+    }
+    h1 {
+      margin-top: 18px;
+      font-size: 34px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .divider {
+      margin: 26px 0;
+    }
+    .intro {
+      font-size: 16.5px;
+      line-height: 1.55;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .cta-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .primaria {
+      font-size: 16px;
+      padding: 16px 24px;
+      text-align: center;
+    }
+    .secondaria {
+      font-size: 15px;
+      color: var(--text);
+      text-align: center;
+      padding: 12px;
+      text-underline-offset: 4px;
+    }
+    .credibilita {
+      margin-top: 32px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+  }
+</style>

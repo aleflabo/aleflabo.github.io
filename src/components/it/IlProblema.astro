@@ -1,0 +1,100 @@
+---
+// Le tre citazioni, testo alla lettera da tavole/Main.dc.html
+// (testi.md, sezione «/ — home»).
+const casi = [
+  {
+    frase: '«Mi serve questo pezzo.»',
+    corpo: 'Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.',
+  },
+  {
+    frase: '«Lo sa fare solo Bruno.»',
+    corpo: "Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.",
+  },
+  {
+    frase: '«Abbiamo provato ChatGPT.»',
+    corpo: "Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.",
+  },
+];
+---
+
+<section class="il-problema">
+  <div class="container">
+    <p class="label">Il problema</p>
+    <h2 class="section-title">Le tre cose che mi vengono raccontate più spesso</h2>
+    <div class="griglia">
+      {casi.map((c) => (
+        <div class="scheda">
+          <p class="frase">{c.frase}</p>
+          <p class="corpo">{c.corpo}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .il-problema {
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .container {
+    padding: 72px 24px;
+  }
+  .section-title {
+    font-size: 32px;
+    margin-top: 18px;
+    margin-bottom: 40px;
+    max-width: 30ch;
+  }
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .scheda {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px;
+  }
+  .frase {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  .corpo {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-top: 14px;
+      margin-bottom: 28px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .griglia {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .scheda {
+      padding: 24px;
+    }
+    .frase {
+      font-size: 19px;
+    }
+    .corpo {
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+  }
+</style>

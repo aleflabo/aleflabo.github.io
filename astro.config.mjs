@@ -5,6 +5,10 @@ export default defineConfig({
   // flaborea.com non è ancora registrato: finché non lo è, il canonico è questo.
   site: 'https://aleflabo.github.io',
   output: 'static',
+  redirects: {
+    '/it': '/',
+    '/it/': '/',
+  },
   integrations: [
     sitemap({
       i18n: {
