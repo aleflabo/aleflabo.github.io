@@ -146,6 +146,26 @@ export const site: Record<Locale, SiteCopy> = {
       body: "Have an interesting problem or an idea to build? Drop me a line.",
       email: "flaborea.alessandro@gmail.com",
     },
+    // Voci di menu, piè di pagina e richiamo ripetuto per le pagine nuove,
+    // resi dall'italiano approvato (task 3, sito-inglese). Fonte:
+    // docs/superpowers/specs/2026-08-25-sito-italiano/testi-en.md, sezione
+    // «1. /en/ — home» (barra di navigazione e piè di pagina).
+    menu: ["Services", "Training", "Work", "Research", "About", "Notes"],
+    prenotaMezzora: "Book half an hour",
+    piePagina: [
+      {
+        titolo: "What I do",
+        voci: ["Services", "Training", "Where your data ends up"],
+      },
+      {
+        titolo: "The evidence",
+        voci: ["Work", "Research", "About", "Notes"],
+      },
+      {
+        titolo: "Elsewhere",
+        voci: ["LinkedIn", "GitHub", "Google Scholar", "Italian site"],
+      },
+    ],
   },
   it: {
     nav: {
