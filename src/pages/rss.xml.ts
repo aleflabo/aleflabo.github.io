@@ -9,10 +9,26 @@
 // le 22:00 UTC del 24 — un giorno indietro nel feed, e solo perché i
 // runner di GitHub Actions girano in UTC il difetto non si vedrebbe in
 // produzione. Gli articoli non hanno una pagina propria (task 14), quindi
-// ogni `link` punta a `/note`.
+// ogni `link` punta a `/note` — ma @astrojs/rss ricava il <guid> proprio
+// dal `link`, quindi i sei elementi avrebbero lo stesso identificativo e
+// gli aggregatori ne mostrerebbero uno solo (bloccante 3, revisione finale
+// del ramo sito-italiano). `customData` viene applicato dopo e sovrascrive
+// il guid derivato dal link (vedi node_modules/@astrojs/rss/dist/index.js):
+// ogni voce porta quindi un <guid> esplicito e stabile, ricavato dal
+// titolo, con isPermaLink="false" perché non è un URL a sé.
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { note } from '../data/note';
+
+/** Slug ASCII da un titolo italiano, per un guid stabile e leggibile. */
+function slug(testo: string): string {
+  return testo
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 const MESI_IT: Record<string, number> = {
   gen: 0,
@@ -46,6 +62,7 @@ export function GET(context: APIContext) {
       description: n.sommario,
       pubDate: parseDataItaliana(n.data),
       link: '/note',
+      customData: `<guid isPermaLink="false">nota-${slug(n.titolo)}</guid>`,
     })),
   });
 }
