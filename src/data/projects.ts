@@ -89,16 +89,15 @@ export const projects: Project[] = [
     tags: ["CAD conversion", "Parts catalog"],
     tagIt: ["Pipeline CAD", "80 test", "IP protetta", "In costruzione"],
     soloItaliano: true,
+    // Blocco `en` vuoto: il testo precedente era inventato da un implementatore
+    // e mai approvato dal committente. Il progetto rientrerà nell'inglese quando
+    // verranno scritte le copy ufficiali (v. task-4-brief.md).
     en: {
-      area: "Mechanical engineering",
-      summary:
-        "A 3D parts portal for an industrial machine builder: the customer opens the 3D model of the machine they bought, clicks the part they need, and the request arrives at the company already matched to the part's internal code.",
-      problem:
-        "Today that same request is an email with a photo, and before quoting, someone has to track down the right part code by hand.",
-      approach:
-        "The CAD-to-web conversion pipeline is finished and tested with eighty automated tests. The customer only ever sees the geometry of the part they need to recognize it, not the machine's full model, protecting the manufacturer's intellectual property.",
-      result:
-        "The CAD conversion pipeline is finished and proven; the portal itself is still in development.",
+      area: "",
+      summary: "",
+      problem: "",
+      approach: "",
+      result: "",
     },
     it: {
       area: "Meccanica",
@@ -126,16 +125,15 @@ export const projects: Project[] = [
     tags: ["Business dashboard", "Personal initiative"],
     tagIt: ["Gestionale", "Statistiche per area", "Iniziativa mia"],
     soloItaliano: true,
+    // Blocco `en` vuoto: il testo precedente era inventato da un implementatore
+    // e mai approvato dal committente. Il progetto rientrerà nell'inglese quando
+    // verranno scritte le copy ufficiali (v. task-4-brief.md).
     en: {
-      area: "Automotive",
-      summary:
-        "A management dashboard for the tire trade: customer and stock records, area-by-area statistics, and the daily counter work of the people at the desk.",
-      problem:
-        "Started as a personal initiative rather than a client engagement.",
-      approach:
-        "Built it starting from an auto-generated scaffold, then hand-rebuilt the parts that matter, to see how far that starting point could be pushed.",
-      result:
-        "Customer and stock records, area statistics, and the daily counter workflow are already covered by the dashboard.",
+      area: "",
+      summary: "",
+      problem: "",
+      approach: "",
+      result: "",
     },
     it: {
       area: "Automotive",
