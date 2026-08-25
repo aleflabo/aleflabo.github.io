@@ -1,0 +1,332 @@
+---
+// src/pages/lavori/index.astro — l'elenco dei dodici lavori (rotta `/lavori`).
+// Misure e struttura alla lettera da tavole/Lavori.dc.html; testo alla
+// lettera da testi.md, sezione «/lavori» (task-11-brief.md).
+//
+// Due gruppi, per materia e non per chi ha pagato. Dieci righe sono sostenute
+// da `projects.ts` e linkano alla propria scheda in /lavori/[slug]; Paesello
+// e «Una storia in più scene» non hanno una scheda (mappa delle rotte:
+// "/lavori/[slug] · invariati, +2 nuovi", cioè solo Portale ricambi e Tire
+// Hub) e restano righe non cliccabili, con il testo scritto qui.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RigaLavoro from '../../components/it/RigaLavoro.astro';
+import { getProject } from '../../data/projects';
+import { localizedPath } from '../../i18n/ui';
+import { annoIt } from '../../lib/anno';
+
+const procedo = getProject('procedo')!;
+const portaleRicambi = getProject('portale-ricambi')!;
+const tireHub = getProject('tire-hub')!;
+const costTracking = getProject('procedo-tracking-costs')!;
+const spannum = getProject('spannum')!;
+const fantaMundial = getProject('fanta-mundial')!;
+const agenticToolkit = getProject('agentic-toolkit')!;
+const contradaNavigator = getProject('contrada-navigator')!;
+const vault = getProject('vault')!;
+const homeSweatHome = getProject('homesweathome')!;
+
+const link = (slug: string) => localizedPath('it', `/lavori/${slug}`);
+
+const scene = ['SCENA 1', 'SCENA 2', 'SCENA 3', 'SCENA 4'];
+---
+
+<BaseLayout
+  title="Lavori — Alessandro Flaborea"
+  description="Sopra il software pensato per il lavoro di un'azienda; sotto i prodotti, i giochi e le cose che ho costruito per conto mio. Ogni scheda dice com'è nato e a che punto è."
+  lang="it"
+  path="/lavori"
+  attiva="lavori"
+>
+  <section class="intestazione">
+    <div class="container">
+      <p class="label">Lavori</p>
+      <h1>Quello che ho costruito</h1>
+      <div class="divider"></div>
+      <p class="intro">Sopra il software pensato per il lavoro di un'azienda; sotto i prodotti, i giochi e le cose che ho costruito per conto mio. Ogni scheda dice com'è nato e a che punto è.</p>
+    </div>
+  </section>
+
+  <section class="gruppo">
+    <div class="container">
+      <h2 class="titolo-gruppo">Software per le aziende</h2>
+      <div class="righe">
+        <RigaLavoro
+          anno={annoIt(procedo.year)}
+          areaStato="Industria · in produzione"
+          nome={procedo.name}
+          corpo="Una piattaforma che trasforma i video girati in reparto in procedure passo-passo, e permette a chi lavora di fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni: ho guidato l'architettura e portato in produzione la parte di AI. Oggi la seguo come advisor."
+          tagIt={procedo.tagIt}
+          href={link(procedo.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(portaleRicambi.year)}
+          areaStato="Meccanica · commessa reale"
+          nome={portaleRicambi.name}
+          corpo="Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno del componente. Oggi quella stessa richiesta è una mail con una foto, e prima del preventivo qualcuno deve andare a caccia del codice. La pipeline di conversione dei CAD è finita e collaudata; il portale è in costruzione."
+          tagIt={portaleRicambi.tagIt}
+          href={link(portaleRicambi.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(tireHub.year)}
+          areaStato="Automotive · gestionale"
+          nome={tireHub.name}
+          corpo="Una dashboard gestionale per il settore gomme: anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco. Nasce da un'iniziativa mia e non da una commessa: l'ho costruita partendo da uno strumento di generazione automatica, per poi rifare a mano le parti che contano e vedere quanto lontano si arriva."
+          tagIt={tireHub.tagIt}
+          href={link(tireHub.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(costTracking.year)}
+          areaStato="Monitoraggio · uso interno"
+          nome={costTracking.name}
+          corpo="Una dashboard che tiene insieme la spesa giornaliera su cloud, GitHub e servizi LLM di un piccolo team, con cambio valuta e ammortamento degli abbonamenti. Gira da sola con lavori schedulati e una tabella che registra ogni sincronizzazione, così quando qualcosa non torna si vede dove."
+          tagIt={costTracking.tagIt}
+          href={link(costTracking.slug)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="gruppo">
+    <div class="container">
+      <h2 class="titolo-gruppo">Prodotti e strumenti miei</h2>
+      <p class="intro-gruppo">Nati da una curiosità o da un bisogno mio. Alcuni hanno utenti veri e si possono aprire adesso; uno è un video.</p>
+      <div class="righe">
+        <RigaLavoro
+          anno={annoIt(spannum.year)}
+          areaStato="Psicometria applicata · online"
+          nome={spannum.name}
+          corpo="Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le norme per età e le fonti citate. Dichiara anche cosa le evidenze non sostengono: l'allenamento migliora il compito, non l'intelligenza. È aperto a tutti e si può provare adesso."
+          tagIt={spannum.tagIt}
+          href={link(spannum.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(fantaMundial.year)}
+          areaStato="Gamification · con utenti veri"
+          nome={fantaMundial.name}
+          corpo="Una lega di pronostici sul Mondiale con una quarantina di giocatori attivi: account, pronostici con finestre di chiusura, punteggi, classifica dal vivo e un lavoro schedulato che recupera gli esiti da una API esterna e aggiorna tutto senza che nessuno tocchi niente."
+          tagIt={fantaMundial.tagIt}
+          href={link(fantaMundial.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(agenticToolkit.year)}
+          areaStato="Tooling agentico · uso quotidiano"
+          nome={agenticToolkit.name}
+          corpo="Una serie di agenti che automatizzano le attività ripetitive di un team tecnico: lo standup che incrocia l'attività su GitHub con i task su Notion, la documentazione di architettura che si rigenera leggendo il codice, e la revisione dei prompt prima che vadano in produzione."
+          tagIt={agenticToolkit.tagIt}
+          href={link(agenticToolkit.slug)}
+        />
+        <RigaLavoro
+          anno="2026"
+          areaStato="Gioco sociale · online"
+          nome="Paesello"
+          corpo="Il gioco dell'intruso, con la differenza che le parole le scrivono i giocatori e vengono dai posti del loro paese: il bar di Nino, il muretto davanti alla scuola. Il telefono mostra a tutti la stessa parola tranne a uno, il forestiero, che deve parlarne senza sapere di cosa si tratta. Sotto c'è un impianto in cui la sicurezza sta nel database e ogni riga appartiene a chi l'ha scritta, con i test automatici che girano prima di ogni pubblicazione."
+          tagIt={["Gioco da telefono", "Parole scritte dai giocatori", "In produzione"]}
+        />
+        <RigaLavoro
+          anno="2025"
+          areaStato="Video generativo"
+          nome="Una storia in più scene"
+          corpo="Un video per un matrimonio, generato per intero, con una storia che attraversa diverse scene. Generare una scena è facile e lo fanno tutti; la parte difficile è generarne dieci in cui le stesse persone restano riconoscibili — stesso viso, stessi vestiti, stessa luce — e il racconto tiene dal principio alla fine. Da lì è nato anche il lavoro sulle immagini: mi interessa il punto in cui questi strumenti smettono di essere una dimostrazione e cominciano a reggere una consegna."
+          tagIt={["Video generativo", "Continuità fra le scene", "Immagini"]}
+        >
+          <div class="scene">
+            {scene.map((s) => (
+              <div class="fotogramma"><span>{s}</span></div>
+            ))}
+          </div>
+          <p class="nota-scene">[ Quattro fotogrammi dal video, scelti per far vedere che i protagonisti restano gli stessi. Meglio ancora: il video stesso ]</p>
+        </RigaLavoro>
+        <RigaLavoro
+          anno={annoIt(contradaNavigator.year)}
+          areaStato="Dati civici · geospaziale"
+          nome={contradaNavigator.name}
+          corpo="Le regole storiche che assegnano ogni via di un comune alla sua contrada, compresi i numeri civici pari e dispari, ricostruite dai registri e messe su una mappa navigabile. Con i trend di partecipazione dal 2012 e una proiezione fino al 2034."
+          tagIt={contradaNavigator.tagIt}
+          href={link(contradaNavigator.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(vault.year)}
+          areaStato="Sistemi di conoscenza"
+          nome={vault.name}
+          corpo="Una base di conoscenza personale in cui una casella d'ingresso in sola aggiunta alimenta una wiki curata da un agente, con schemi per clienti, progetti, persone e concetti, collegamenti fra le voci e comandi per ingerire, interrogare e verificare. La uso tutti i giorni."
+          tagIt={vault.tagIt}
+          href={link(vault.slug)}
+        />
+        <RigaLavoro
+          anno={annoIt(homeSweatHome.year)}
+          areaStato="Computer vision · MVP"
+          nome={homeSweatHome.name}
+          corpo="Un personal trainer che dalla webcam di un portatile legge la postura e corregge l'esecuzione mentre ti alleni, senza mandare niente nel cloud perché il ritardo renderebbe il consiglio inutile. Ho progettato l'architettura e costruito la parte di percezione. Arrivato a MVP funzionante, presentato all'IdeaBoosterLab della Bocconi."
+          tagIt={homeSweatHome.tagIt}
+          href={link(homeSweatHome.slug)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="chiusura">
+    <div class="container">
+      <h2>E poi c'è la ricerca</h2>
+      <p class="intro">Dieci articoli pubblicati, oltre cinquecento citazioni e il codice di tutti quelli che si potevano aprire. È da lì che viene la parte di questi progetti che non si improvvisa.</p>
+      <div class="link-chiusura">
+        <a href={localizedPath('it', '/ricerca')}>Vai alla ricerca →</a>
+        <a href={localizedPath('it', '/chi-sono')}>Come lavoro →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 44px;
+  }
+  .intestazione h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 22ch;
+  }
+  .intestazione .divider {
+    margin: 30px 0;
+  }
+  .intestazione .intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+
+  /* --- i due gruppi --- */
+  .gruppo {
+    padding: 0;
+  }
+  .gruppo .container {
+    padding: 0 24px 20px;
+  }
+  .gruppo + .gruppo .container {
+    padding-top: 46px;
+  }
+  .titolo-gruppo {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .intro-gruppo {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- fotogrammi segnaposto, «Una storia in più scene» --- */
+  .scene {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 640px;
+  }
+  .fotogramma {
+    aspect-ratio: 16 / 10;
+    background: var(--surface-warm);
+    border: 1px dashed var(--text-faint);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fotogramma span {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+  .nota-scene {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+
+  /* --- chiusura: rimando alla ricerca --- */
+  .chiusura {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 50px;
+    padding: 0;
+  }
+  .chiusura .container {
+    padding: 60px 24px;
+  }
+  .chiusura h2 {
+    font-size: 26px;
+    max-width: 30ch;
+  }
+  .chiusura .intro {
+    margin-top: 16px;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+  .link-chiusura {
+    display: flex;
+    gap: 26px;
+    margin-top: 24px;
+  }
+  .link-chiusura a {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .intestazione h1 {
+      margin-top: 16px;
+      font-size: 32px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intestazione .divider {
+      margin: 22px 0;
+    }
+    .intestazione .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+    .gruppo .container {
+      padding: 0 20px 16px;
+    }
+    .gruppo + .gruppo .container {
+      padding-top: 36px;
+    }
+    .scene {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: none;
+    }
+    .chiusura .container {
+      padding: 44px 20px;
+    }
+    .link-chiusura {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

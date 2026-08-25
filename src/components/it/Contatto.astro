@@ -1,0 +1,274 @@
+---
+// Testo alla lettera da tavole/Main.dc.html (testi.md, sezione «/ — home»).
+// Il modulo resta inerte (nessun `action`) e i pulsanti di prenotazione,
+// WhatsApp e mail restano segnaposto (`href="#"`): non è stato scelto
+// nessun servizio esterno né inventato un numero, per istruzione esplicita
+// del task 8. Che sia inerte è deciso; che simuli l'invio no (bloccante 7,
+// revisione finale del ramo sito-italiano): senza `action` un submit fa
+// una GET sulla stessa pagina, che si ricarica con i campi in query
+// string, e sembra che il messaggio sia partito. `onsubmit="return
+// false"` blocca quella GET; il pulsante disabilitato e la nota sotto
+// dicono perché.
+---
+
+<section class="contatto" id="parliamone">
+  <div class="container">
+    <p class="eyebrow">Parliamone</p>
+    <h2 class="titolo">Mezz'ora per capire se possiamo lavorare insieme</h2>
+    <p class="intro">Se non è il lavoro giusto per me te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
+
+    <form class="modulo" onsubmit="return false">
+      <div class="campo">
+        <label for="azienda">Azienda</label>
+        <input type="text" id="azienda" name="azienda" placeholder="Ragione sociale" />
+      </div>
+      <div class="campo">
+        <label for="contatto-mail">Come ti scrivo</label>
+        <input type="text" id="contatto-mail" name="contatto" placeholder="Mail o telefono" />
+      </div>
+      <div class="campo largo">
+        <label for="richiesta">Cosa vorresti smettere di fare a mano</label>
+        <textarea id="richiesta" name="richiesta" rows="3" placeholder="Bastano due righe, anche buttate lì"></textarea>
+      </div>
+      <fieldset class="campo largo urgenza">
+        <legend>Quanto è urgente</legend>
+        <div class="pillole">
+          <label class="pillola">
+            <input type="radio" name="urgenza" value="sto-guardando" />
+            <span>Sto solo guardando</span>
+          </label>
+          <label class="pillola">
+            <input type="radio" name="urgenza" value="questanno" checked />
+            <span>Quest'anno</span>
+          </label>
+          <label class="pillola">
+            <input type="radio" name="urgenza" value="problema-adesso" />
+            <span>Ho un problema adesso</span>
+          </label>
+        </div>
+      </fieldset>
+      <div class="invia">
+        <button type="submit" class="pulsante" disabled>Manda</button>
+        <p class="nota-inerte">Modulo non ancora attivo.</p>
+      </div>
+    </form>
+
+    <div class="alternativa">
+      <p class="intro-alt">Oppure, se preferisci saltare il modulo:</p>
+      <div class="canali">
+        <a href="#" class="canale">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+          Scegli tu mezz'ora sul calendario
+        </a>
+        <a href="#" class="canale">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.4 8.4 0 0 1 8.4-9 8.5 8.5 0 0 1 8.6 8.4Z"></path></svg>
+          WhatsApp
+        </a>
+        <a href="#" class="canale">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+          Mail
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contatto {
+    border-top: 1px solid var(--border);
+    background: var(--accent);
+    padding: 0;
+  }
+  .container {
+    padding: 72px 24px;
+  }
+  .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a8bdd2;
+    font-weight: 700;
+  }
+  .titolo {
+    font-size: 32px;
+    margin-top: 18px;
+    color: var(--surface);
+    max-width: 28ch;
+  }
+  .intro {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cdd9e6;
+    max-width: 60ch;
+  }
+  .modulo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 38px;
+    max-width: 720px;
+  }
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .campo.largo {
+    grid-column: span 2;
+  }
+  .campo label,
+  .urgenza legend {
+    font-size: 13px;
+    color: #cdd9e6;
+  }
+  .campo input,
+  .campo textarea {
+    background: var(--surface);
+    border: none;
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    font-size: 15px;
+    color: var(--text);
+    font-family: inherit;
+  }
+  .campo input::placeholder,
+  .campo textarea::placeholder {
+    color: #999999;
+  }
+  .campo textarea {
+    resize: vertical;
+    min-height: 92px;
+  }
+  .urgenza {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pillole {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pillola {
+    position: relative;
+    cursor: pointer;
+  }
+  .pillola input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .pillola span {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--surface);
+    border: 1px solid #6d8aa8;
+    border-radius: var(--radius);
+    padding: 9px 16px;
+  }
+  .pillola input:checked + span {
+    color: var(--accent);
+    background: var(--surface);
+    border-color: var(--surface);
+    font-weight: 600;
+  }
+  .pillola input:focus-visible + span {
+    outline: 2px solid var(--surface);
+    outline-offset: 2px;
+  }
+  .invia {
+    grid-column: span 2;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .invia .pulsante {
+    display: inline-block;
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 30px;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .invia .pulsante:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .nota-inerte {
+    font-size: 13px;
+    color: #a8bdd2;
+  }
+  .alternativa {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid #3f5e7d;
+    max-width: 720px;
+  }
+  .intro-alt {
+    font-size: 13.5px;
+    color: #a8bdd2;
+    margin-bottom: 18px;
+  }
+  .canali {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .canale {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #6d8aa8;
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    font-size: 14.5px;
+    color: var(--surface);
+  }
+  .canale svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px;
+    }
+    .titolo {
+      font-size: 26px;
+      max-width: none;
+    }
+    .intro {
+      font-size: 15px;
+    }
+    .modulo {
+      grid-template-columns: 1fr;
+      margin-top: 30px;
+    }
+    .campo.largo {
+      grid-column: span 1;
+    }
+    .invia {
+      grid-column: span 1;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .invia .pulsante {
+      width: 100%;
+      text-align: center;
+    }
+    .canali {
+      flex-direction: column;
+    }
+  }
+</style>

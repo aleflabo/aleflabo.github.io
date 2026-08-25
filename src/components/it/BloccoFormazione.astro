@@ -1,0 +1,132 @@
+---
+import { localizedPath } from '../../i18n/ui';
+
+// Le tre schede, testo alla lettera da tavole/Main.dc.html (testi.md,
+// sezione «/ — home»). `ore` e `nome` coincidono con `formati` di
+// src/data/formazione.ts, ma il corpo di ogni scheda è un riassunto
+// proprio della home, diverso da `formati[].corpo` (la versione estesa è
+// per /formazione, task 10): restano quindi scritti qui, per intero.
+const formati = [
+  {
+    ore: '4 ore',
+    nome: 'Corso introduttivo',
+    corpo: "Per tutta l'azienda, dal titolare al reparto. Cosa è cambiato negli ultimi anni, cosa è rimasto uguale, e quali sono i rischi concreti per i vostri dati.",
+  },
+  {
+    ore: '8-12 ore',
+    nome: 'Laboratorio per funzione',
+    corpo: "Ufficio tecnico, acquisti, amministrazione, commerciale. Ogni gruppo lavora sui propri documenti, così quello che si impara si può usare il giorno dopo.",
+  },
+  {
+    ore: 'Durata concordata',
+    nome: 'Percorso finanziato',
+    corpo: "Attraverso enti accreditati e fondi interprofessionali, quando l'azienda vuole un percorso lungo senza impegnare cassa propria.",
+  },
+];
+---
+
+<section class="blocco-formazione">
+  <div class="container">
+    <p class="label">Formazione</p>
+    <h2 class="section-title">Si comincia dalle persone</h2>
+    <p class="intro">Quattro ore, in azienda o in aula, per mostrare alle persone cosa questi strumenti sanno fare e quali sono i loro limiti. Si lavora su casi concreti.</p>
+    <p class="intro">Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.</p>
+    <div class="griglia">
+      {formati.map((f) => (
+        <div class="scheda">
+          <p class="eyebrow">{f.ore}</p>
+          <h3>{f.nome}</h3>
+          <p class="corpo">{f.corpo}</p>
+        </div>
+      ))}
+    </div>
+    <p class="chiusura">Ho insegnato quattro anni alla Sapienza come assistente alla didattica, e sono stato relatore invitato al Data Science Hub di Ferrari S.p.A. I corsi si organizzano direttamente oppure attraverso enti accreditati e fondi interprofessionali. <a href={localizedPath('it', '/formazione')}>Come si organizza un corso <span class="freccia">&rarr;</span></a></p>
+  </div>
+</section>
+
+<style>
+  .blocco-formazione {
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .container {
+    padding: 72px 24px;
+  }
+  .section-title {
+    font-size: 32px;
+    margin-top: 18px;
+    margin-bottom: 14px;
+    max-width: 32ch;
+  }
+  .intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 64ch;
+    margin-bottom: 18px;
+  }
+  .intro:last-of-type {
+    margin-bottom: 40px;
+  }
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .scheda {
+    border-left: 1px solid var(--border);
+    padding-left: 22px;
+  }
+  .scheda .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .scheda h3 {
+    font-size: 19px;
+  }
+  .scheda .corpo {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .chiusura {
+    margin-top: 34px;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .chiusura a {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-top: 14px;
+      margin-bottom: 12px;
+      max-width: none;
+    }
+    .intro {
+      font-size: 15px;
+      max-width: none;
+    }
+    .intro:last-of-type {
+      margin-bottom: 28px;
+    }
+    .griglia {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .chiusura {
+      margin-top: 26px;
+    }
+  }
+</style>

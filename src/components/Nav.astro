@@ -5,22 +5,97 @@ import LangSwitch from './LangSwitch.astro';
 
 interface Props {
   lang: Locale;
-  path: string;
+  // Percorso (relativo, senza dominio) verso la gemella di questa pagina
+  // nell'altra lingua, se esiste — passato a LangSwitch. Assente su una
+  // pagina senza equivalente nell'altra lingua: niente interruttore
+  // (task 1/bloccante).
+  hrefAltro?: string;
+  attiva?: string;
 }
-const { lang, path } = Astro.props;
+const { lang, hrefAltro, attiva } = Astro.props;
 const nav = site[lang].nav;
+
+// Le sette voci del menu italiano: la `chiave` (per lo stato attivo) e la
+// rotta sono fisse qui; il testo viene da site.it.menu (task 6), nello
+// stesso ordine, così non si riscrive a mano in questo componente.
+const rotteMenuIt: Array<{ chiave: string; rotta: string }> = [
+  { chiave: 'servizi', rotta: '/servizi' },
+  { chiave: 'formazione', rotta: '/formazione' },
+  { chiave: 'lavori', rotta: '/lavori' },
+  { chiave: 'ricerca', rotta: '/ricerca' },
+  { chiave: 'chi-sono', rotta: '/chi-sono' },
+  { chiave: 'note', rotta: '/note' },
+];
+const etichetteMenuIt = site.it.menu ?? [];
+const menuIt = rotteMenuIt.map((voce, i) => ({ ...voce, etichetta: etichetteMenuIt[i] ?? '' }));
+const nomeIt = site.it.hero.name;
+// «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
+// letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
+const parliamoneIt = site.it.contact.title;
+
+// Menu a scomparsa sotto i 720px (task: tavole/HomeMobile.dc.html).
+// Le due etichette dell'aria-label — a riposo e ad aperto — sono nella
+// lingua della pagina; il piccolo script in fondo le scambia leggendo
+// questi due data-attribute, così resta lui stesso senza stringhe fisse.
+const etichetteToggle =
+  lang === 'it'
+    ? { chiuso: 'Apri il menu di navigazione', aperto: 'Chiudi il menu di navigazione' }
+    : { chiuso: 'Open navigation menu', aperto: 'Close navigation menu' };
 ---
 
 <nav class="nav">
-  <div class="inner">
-    <a class="brand" href={localizedPath(lang, '/')} aria-label="Alessandro Flaborea — home">AF</a>
-    <div class="links">
-      <a href={`${localizedPath(lang, '/')}#work`}>{nav.work}</a>
-      <a href={`${localizedPath(lang, '/')}#research`}>{nav.research}</a>
-      <a href={`${localizedPath(lang, '/')}#about`}>{nav.about}</a>
-      <a class="cta" href={`${localizedPath(lang, '/')}#contact`}>{nav.cta}</a>
-      <LangSwitch lang={lang} path={path} />
-    </div>
+  <div class:list={['inner', lang === 'it' && 'it']}>
+    {lang === 'it' ? (
+      <>
+        <a class="brand" href={localizedPath('it', '/')} aria-label={`${nomeIt} — home`}>{nomeIt}</a>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label={etichetteToggle.chiuso}
+          data-label-chiuso={etichetteToggle.chiuso}
+          data-label-aperto={etichetteToggle.aperto}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="links" id="nav-links">
+          {menuIt.map((voce) => (
+            <a href={localizedPath('it', voce.rotta)} class:list={[voce.chiave === attiva && 'attiva']}>
+              {voce.etichetta}
+            </a>
+          ))}
+          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{parliamoneIt}</a>
+          <LangSwitch lang={lang} href={hrefAltro} />
+        </div>
+      </>
+    ) : (
+      <>
+        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">AF</a>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label={etichetteToggle.chiuso}
+          data-label-chiuso={etichetteToggle.chiuso}
+          data-label-aperto={etichetteToggle.aperto}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="links" id="nav-links">
+          <a href={`${localizedPath('en', '/')}#work`}>{nav.work}</a>
+          <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
+          <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
+          <a class="cta" href={`${localizedPath('en', '/')}#contact`}>{nav.cta}</a>
+          <LangSwitch lang={lang} href={hrefAltro} />
+        </div>
+      </>
+    )}
   </div>
 </nav>
 
@@ -74,6 +149,107 @@ const nav = site[lang].nav;
     opacity: 0.9;
   }
 
+  /* --- pulsante a due trattini: misure alla lettera da tavole/HomeMobile.dc.html ---
+     Nascosto sopra i 720px: sopra quella soglia il menu non cambia (task).
+     Nascosto anche sotto, finché lo script in fondo non aggiunge `.js-ready`
+     al <nav> — senza JS il pulsante non farebbe nulla, quindi non compare:
+     resta il menu a righe che va a capo (comportamento di oggi, già
+     raggiungibile e senza scorrimento). */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text);
+  }
+
+  /* --- menu italiano: misure alla lettera da tavole/Main.dc.html --- */
+  .inner.it {
+    padding: 22px 24px;
+  }
+  .inner.it .brand {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .inner.it .links {
+    gap: 24px;
+    font-size: 14px;
+  }
+  .inner.it .links a {
+    color: var(--text);
+  }
+  .inner.it .links a:hover {
+    color: var(--azione);
+  }
+  .inner.it .links a.attiva {
+    border-bottom: 2px solid var(--azione);
+    font-weight: 600;
+    padding-bottom: 2px;
+  }
+  .inner.it .links a.cta {
+    background: transparent;
+    color: var(--azione);
+    border: 1px solid var(--azione);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+  }
+  .inner.it .links a.cta:hover {
+    color: var(--azione);
+    opacity: 1;
+  }
+
+  /* --- menu a scomparsa sotto i 720px: barra e pulsante da tavole/HomeMobile.dc.html --- */
+  @media (max-width: 720px) {
+    .inner.it {
+      padding: 18px 20px;
+    }
+    .inner.it .brand {
+      font-size: 16px;
+    }
+
+    .nav.js-ready .inner {
+      flex-wrap: wrap;
+    }
+    .nav.js-ready .menu-toggle {
+      display: inline-flex;
+    }
+    .nav.js-ready .links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      gap: 0;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .nav.js-ready.menu-open .links {
+      display: flex;
+    }
+    /* ogni voce, area toccabile: almeno 44px (si apre col pollice).
+       :global() sul tag perché LangSwitch è un componente a parte: il suo
+       <a class="lang"> porta lo scope-id di LangSwitch, non quello di
+       Nav, quindi un selettore scoped "normale" (`.links a`) non lo
+       raggiungerebbe — e resterebbe l'unica voce sotto i 44px. */
+    .nav.js-ready .links :global(a) {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      width: 100%;
+    }
+  }
+
   @media (max-width: 640px) {
     .links {
       gap: 0.9rem;
@@ -81,6 +257,10 @@ const nav = site[lang].nav;
     }
     .links a.cta {
       padding: 0.35rem 0.6rem;
+    }
+    .inner.it .links {
+      gap: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -95,4 +275,44 @@ const nav = site[lang].nav;
       justify-content: center;
     }
   }
+
+  @media print {
+    .menu-toggle {
+      display: none !important;
+    }
+    .nav.js-ready .links {
+      display: flex !important;
+    }
+  }
 </style>
+
+<script is:inline>
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = toggle ? toggle.closest('.nav') : null;
+    if (!toggle || !nav) return;
+
+    // Presente solo qui: se questo script non parte, `.js-ready` non
+    // compare mai e il CSS sopra non nasconde niente (vedi commento
+    // su .menu-toggle) — il menu resta quello di oggi, sempre raggiungibile.
+    nav.classList.add('js-ready');
+
+    function setOpen(open) {
+      nav.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      var label = toggle.getAttribute(open ? 'data-label-aperto' : 'data-label-chiuso');
+      if (label) toggle.setAttribute('aria-label', label);
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  })();
+</script>

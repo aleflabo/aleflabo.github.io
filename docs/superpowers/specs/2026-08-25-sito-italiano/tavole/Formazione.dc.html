@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, sans-serif; background: #faf8f4; color: #141414; }
+    a { color: #1b3a5b; text-decoration: none; transition: color .2s; }
+    a:hover { color: #a8531d; }
+    p, span, li, div, label, input, textarea { font-family: "Inter", -apple-system, sans-serif; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.015em; line-height: 1.05; }
+
+    @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+    x-dc > div > div { animation: sali .7s cubic-bezier(.22,.8,.3,1) both; }
+    x-dc > div > div:nth-child(1) { animation-delay: .02s }
+    x-dc > div > div:nth-child(2) { animation-delay: .1s }
+    x-dc > div > div:nth-child(3) { animation-delay: .18s }
+    x-dc > div > div:nth-child(4) { animation-delay: .26s }
+    x-dc > div > div:nth-child(n+5) { animation-delay: .32s }
+
+    div[style*="width: 88px"][style*="height: 3px"] { transform-origin: left; animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    div[style*="background: #ffffff"][style*="border: 1px solid"] { transition: transform .3s cubic-bezier(.22,.8,.3,1), box-shadow .3s; }
+    div[style*="background: #ffffff"][style*="border: 1px solid"]:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(40,24,10,.10); }
+
+    a[style*="display: grid"] { transition: background .25s, padding-left .25s; border-radius: 4px; }
+    a[style*="display: grid"]:hover { background: #f4efe7; padding-left: 14px; }
+
+    a[style*="border-radius: 4px"][style*="font-weight: 600"] { transition: transform .2s, box-shadow .2s; }
+    a[style*="border-radius: 4px"][style*="font-weight: 600"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168,83,29,.28); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px); background-size: 0% 100%; background-repeat: no-repeat; animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; min-height: 100%;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1120px; margin: 0 auto; padding: 22px 24px; border-bottom: 1px solid #e6ddd0;">
+    <span style="font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 600; letter-spacing: -0.01em;">Alessandro Flaborea</span>
+    <div style="display: flex; align-items: center; gap: 24px;">
+      <a href="#" style="font-size: 14px; color: #141414;">Servizi</a>
+      <a href="#" style="font-size: 14px; color: #141414; font-weight: 600; border-bottom: 2px solid #a8531d; padding-bottom: 2px;">Formazione</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Lavori</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Ricerca</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Chi sono</a>
+      <a href="#" style="font-size: 14px; color: #141414;">Note</a>
+      <a href="#" style="font-size: 14px; font-weight: 600; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 8px 16px;">Parliamone</a>
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px 44px;">
+    <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Formazione</p>
+    <h1 style="margin-top: 20px; font-size: 46px; max-width: 24ch;">Corsi che si usano il giorno dopo</h1>
+    <div style="width: 88px; height: 3px; background: #a8531d; margin: 30px 0;"></div>
+    <p style="font-size: 18px; line-height: 1.6; color: #55504a; max-width: 62ch; text-wrap: pretty;">In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito.</p>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 56px;">
+    <div style="background: #ffffff; border: 1px solid #e6ddd0; border-left: 3px solid #1b3a5b; border-radius: 4px; padding: 30px 34px; max-width: 860px;">
+      <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Una cosa che conviene sapere</p>
+      <p style="margin-top: 14px; font-size: 16.5px; line-height: 1.65; color: #141414;">Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di essere in grado di documentarla. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.</p>
+      <p style="margin-top: 14px; font-size: 16.5px; line-height: 1.65; color: #55504a;">Il corso di base che soddisfa quella richiesta è dell'ordine delle quattro ore. È una formazione che l'azienda farà comunque: vale la pena che serva anche a lavorare meglio.</p>
+      <a href="#" style="display: inline-block; margin-top: 18px; font-size: 15px; font-weight: 600;">Che fine fanno i vostri dati →</a>
+
+    </div>
+  </div>
+
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 72px;">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px;">
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">4 ore</p>
+          <h2 style="font-size: 26px; margin-top: 12px;">Corso introduttivo</h2>
+          <p style="margin-top: 14px; font-size: 15.5px; line-height: 1.65; color: #55504a;">Per tutta l'azienda insieme, dal titolare al reparto. Come funzionano questi strumenti, in che modo sbagliano e come ci si accorge che stanno sbagliando, che fine fanno i documenti che ci si incolla dentro, e quali sono i casi in cui conviene davvero usarli.</p>
+        </div>
+        <div style="border-left: 1px solid #e6ddd0; padding-left: 32px; display: flex; flex-direction: column; gap: 16px;">
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Per chi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Tutti, compreso chi non ha mai aperto ChatGPT</p></div>
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Serve da voi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Una sala e un proiettore</p></div>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px;">
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">8-12 ore</p>
+          <h2 style="font-size: 26px; margin-top: 12px;">Laboratorio per funzione</h2>
+          <p style="margin-top: 14px; font-size: 15.5px; line-height: 1.65; color: #55504a;">Ufficio tecnico, acquisti, amministrazione, commerciale: ogni gruppo lavora sui propri documenti e sui propri casi. Si parte da un'attività che oggi occupa ore e si prova a ridurla, insieme, durante la lezione.</p>
+        </div>
+        <div style="border-left: 1px solid #e6ddd0; padding-left: 32px; display: flex; flex-direction: column; gap: 16px;">
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Per chi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Un reparto alla volta, gruppi piccoli</p></div>
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Serve da voi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Documenti reali e il permesso di usarli</p></div>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 34px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px;">
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Durata concordata</p>
+          <h2 style="font-size: 26px; margin-top: 12px;">Percorso finanziato</h2>
+          <p style="margin-top: 14px; font-size: 15.5px; line-height: 1.65; color: #55504a;">Quando serve un percorso lungo senza impegnare cassa. Si costruisce insieme a un ente accreditato, che si occupa della parte amministrativa e della rendicontazione.</p>
+        </div>
+        <div style="border-left: 1px solid #e6ddd0; padding-left: 32px; display: flex; flex-direction: column; gap: 16px;">
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Per chi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Aziende con dipendenti già iscritte a un fondo</p></div>
+          <div><p style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Serve da voi</p><p style="margin-top: 6px; font-size: 14.5px; line-height: 1.6;">Sapere a quale fondo siete iscritti. Al resto si pensa insieme</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #ffffff;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px;">
+      <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Come si organizza</p>
+      <h2 style="font-size: 30px; margin-top: 18px; margin-bottom: 34px; max-width: 26ch;">Chi sostiene il costo del corso</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;">
+        <div>
+          <h3 style="font-size: 19px;">Direttamente</h3>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.65; color: #55504a;">Mi contattate, concordiamo data e contenuti, fatturo all'azienda. È la strada più rapida: si può partire in un paio di settimane.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px;">Tramite ente accreditato</h3>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.65; color: #55504a;">L'ente organizza e io insegno. È la strada da percorrere quando il corso deve rientrare in un catalogo regionale o avere un riconoscimento formale.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px;">Con i fondi interprofessionali</h3>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.65; color: #55504a;">Le aziende con dipendenti versano già lo 0,30% del monte salari a un fondo come Fondimpresa. Quel denaro può essere usato per formare le persone, e serve un ente che presenti il piano.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px;">
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Chi sale in cattedra</p>
+          <h2 style="font-size: 28px; margin-top: 18px; max-width: 22ch;">Vengo dall'aula</h2>
+          <p style="margin-top: 18px; font-size: 16px; line-height: 1.65; color: #55504a;">Quattro anni come assistente alla didattica alla Sapienza, dal 2019 al 2023, durante il dottorato. Poi due anni a costruire software che le persone usano ogni giorno. In aula servono entrambe: la prima per riuscire a farsi capire, la seconda per insegnare cose che in azienda reggono.</p>
+          <p style="margin-top: 16px; font-size: 16px; line-height: 1.65; color: #55504a;">Sono stato anche relatore invitato al Data Science Hub di Ferrari S.p.A.</p>
+        </div>
+        <div>
+          <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Onestà</p>
+          <h2 style="font-size: 28px; margin-top: 18px; max-width: 22ch;">Che cosa questo corso non è</h2>
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 18px;">
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Non è un corso di programmazione. Si lavora sugli strumenti che esistono già e su come portarli nel lavoro di tutti i giorni. Scrivere codice e addestrare modelli è un percorso a parte.</p>
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Non ci sono formule pronte da copiare. Le liste di trucchi smettono di funzionare al primo cambio di modello, mentre aver capito come ragiona lo strumento resta.</p>
+            <p style="font-size: 16px; line-height: 1.65; color: #55504a;">Non arrivo con una percentuale di risparmio già scritta sulle slide. Prima di aver visto come lavorate sarebbe un numero inventato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #1b3a5b;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 60px 24px;">
+      <h2 style="font-size: 30px; color: #ffffff; max-width: 26ch;">Raccontami che azienda siete</h2>
+      <p style="margin-top: 16px; font-size: 16px; line-height: 1.6; color: #cdd9e6; max-width: 56ch;">Quante persone siete, cosa fate e chi userebbe questi strumenti. Da lì si capisce quale delle tre strade conviene.</p>
+      <div style="display: flex; align-items: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
+        <a href="#" style="background: #ffffff; color: #1b3a5b; font-size: 15px; font-weight: 600; padding: 14px 30px; border-radius: 4px;">Prenota mezz'ora</a>
+        <a href="#" style="font-size: 15px; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px; padding: 13px 24px;">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid #e6ddd0; background: #f4efe7;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 52px 24px 24px; display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px;">
+      <div>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600;">Alessandro Flaborea</p>
+        <p style="margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: #55504a; max-width: 34ch;">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
+        <a href="#" style="display: inline-block; margin-top: 18px; background: #a8531d; color: #ffffff; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 4px;">Prenota mezz'ora</a>
+      </div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Cosa faccio</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Servizi</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Formazione</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Che fine fanno i vostri dati</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Le prove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Lavori</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Ricerca</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Chi sono</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Note</a></div>
+      <div style="display: flex; flex-direction: column;"><p style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8531d; font-weight: 700; margin-bottom: 10px;">Altrove</p><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">LinkedIn</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">GitHub</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">Google Scholar</a><a href="#" style="font-size: 14px; color: #55504a; line-height: 2;">English site</a></div>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 34px; border-top: 1px solid #e6ddd0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-size: 13px; color: #8a8177;">© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
+      <div style="display: flex; gap: 20px;"><a href="#" style="font-size: 13px; color: #8a8177;">Privacy</a><a href="#" style="font-size: 13px; color: #8a8177;">Cookie</a></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

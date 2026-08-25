@@ -1,0 +1,56 @@
+---
+// I quattro numeri della fascia blu, testo alla lettera da tavole/Main.dc.html
+// (testi.md, sezione «/ — home»). Non sono gli stessi di
+// `pubblicazioni.numeriFascia` (quell'array è per la fascia in cima a
+// /ricerca: ordine, terzo e quarto valore ed etichette differiscono — «2
+// anni da CTO» non esiste in quell'array, e «citazioni» qui non porta la
+// data). Restano quindi scritti qui, alla lettera dalla tavola.
+const numeri = [
+  { numero: '10', etichetta: 'articoli pubblicati' },
+  { numero: '533', etichetta: 'citazioni' },
+  { numero: '1', etichetta: 'Best Paper Award' },
+  { numero: '2', etichetta: 'anni da CTO' },
+];
+---
+
+<section class="fascia-numeri">
+  <div class="container">
+    {numeri.map((n) => (
+      <div class="numero">
+        <span class="valore">{n.numero}</span>
+        <span class="etichetta">{n.etichetta}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .fascia-numeri {
+    background: var(--accent);
+    padding: 0;
+  }
+  .container {
+    padding: 26px 24px;
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .valore {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--surface);
+  }
+  .etichetta {
+    font-size: 14px;
+    color: #a8c0d6;
+    margin-left: 10px;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 22px 20px;
+      gap: 28px 36px;
+    }
+  }
+</style>

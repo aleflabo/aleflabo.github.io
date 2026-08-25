@@ -1,0 +1,163 @@
+---
+import { localizedPath } from '../../i18n/ui';
+
+// I quattro passi, testo alla lettera da tavole/Main.dc.html (testi.md,
+// sezione «/ — home»). Sono un riassunto per la home, con nomi e testi
+// propri (Ascolto/Diagnosi/Costruisco/Resto): non coincidono con `ingaggi`
+// di src/data/servizi.ts (Capire/Decidere/Costruire/Mantenere), che è la
+// versione estesa per /servizi — quindi restano scritti qui.
+const passi = [
+  {
+    numero: '01',
+    nome: 'Ascolto',
+    corpo: "Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.",
+    neEsce: 'Una lista dei punti dove si perde tempo, ordinata per quanto costano.',
+  },
+  {
+    numero: '02',
+    nome: 'Diagnosi',
+    corpo: 'Due o tre settimane per guardare i dati che avete davvero, i gestionali già in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.',
+    neEsce: 'Un documento che resta tuo, e che puoi far leggere a chi vuoi.',
+  },
+  {
+    numero: '03',
+    nome: 'Costruisco',
+    corpo: 'Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.',
+    neEsce: 'Qualcosa che i tuoi aprono il lunedì mattina e usano davvero.',
+  },
+  {
+    numero: '04',
+    nome: 'Resto',
+    corpo: 'Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.',
+    neEsce: 'Una persona che conosce il sistema e che puoi chiamare quando serve.',
+  },
+];
+---
+
+<section class="come-lavoro">
+  <div class="container">
+    <p class="label">Come lavoro</p>
+    <h2 class="section-title">Come si svolge di solito un lavoro</h2>
+    <p class="intro">Quattro passi. Ci si può fermare dopo ognuno, e quello che è stato fatto fino a lì resta comunque tuo.</p>
+    <div class="passi">
+      {passi.map((p, i) => (
+        <div class:list={['riga', 'passo', { ultimo: i === passi.length - 1 }]}>
+          <span class="numero">{p.numero}</span>
+          <div class="testo">
+            <h3>{p.nome}</h3>
+            <p class="corpo">{p.corpo}</p>
+          </div>
+          <div class="ne-esce">
+            <p class="etichetta">Ne esce</p>
+            <p class="valore">{p.neEsce}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <a class="continua" href={localizedPath('it', '/servizi')}>I quattro modi di lavorare insieme, per esteso <span class="freccia">&rarr;</span></a>
+  </div>
+</section>
+
+<style>
+  .come-lavoro {
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .container {
+    padding: 72px 24px;
+  }
+  .section-title {
+    font-size: 32px;
+    margin-top: 18px;
+    margin-bottom: 14px;
+    max-width: 26ch;
+  }
+  .intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 66ch;
+    margin-bottom: 44px;
+  }
+  .passi {
+    display: flex;
+    flex-direction: column;
+  }
+  .passo {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) 230px;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .passo.ultimo {
+    border-bottom: 1px solid var(--border);
+  }
+  .passo .numero {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .testo h3 {
+    font-size: 22px;
+  }
+  .testo .corpo {
+    margin-top: 10px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 56ch;
+  }
+  .ne-esce .etichetta {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  .ne-esce .valore {
+    margin-top: 8px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .continua {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-top: 14px;
+      margin-bottom: 12px;
+      max-width: none;
+    }
+    .intro {
+      font-size: 15px;
+      margin-bottom: 30px;
+      max-width: none;
+    }
+    .passo {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 22px 0;
+    }
+    .passo .numero {
+      font-size: 24px;
+    }
+    .testo .corpo {
+      max-width: none;
+    }
+    .ne-esce {
+      margin-top: 4px;
+    }
+  }
+</style>

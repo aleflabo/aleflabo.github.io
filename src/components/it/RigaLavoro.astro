@@ -1,0 +1,98 @@
+---
+// Una riga di /lavori: anno a sinistra, poi occhiello (area · stato), nome,
+// corpo e tag. Misure alla lettera da tavole/Lavori.dc.html (testi.md,
+// sezione «/lavori»). Se `href` manca la riga non è cliccabile: è il caso di
+// Paesello e del video generativo, che non hanno una scheda propria
+// (task-11-brief.md, mappa delle rotte: +2 case study soli, non 4).
+interface Props {
+  anno: string;
+  areaStato: string;
+  nome: string;
+  corpo: string;
+  tagIt: string[];
+  href?: string;
+}
+const { anno, areaStato, nome, corpo, tagIt, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class="riga" {...(href ? { href } : {})}>
+  <span class="anno">{anno}</span>
+  <div class="corpo-riga">
+    <p class="occhiello">{areaStato}</p>
+    <h3>{nome}</h3>
+    <p class="testo">{corpo}</p>
+    <div class="tag">
+      {tagIt.map((t) => <span>{t}</span>)}
+    </div>
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  /* .riga: transizione e hover vengono da global.css, condivisi con le
+     altre liste del sito. Qui solo la griglia propria di questa riga. */
+  .riga {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 28px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .anno {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    color: var(--text-muted);
+    padding-top: 6px;
+  }
+  .occhiello {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  .testo {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 72ch;
+  }
+  .tag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tag span {
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 5px 10px;
+    background: var(--bg);
+  }
+
+  @media (max-width: 640px) {
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 24px 0;
+    }
+    .anno {
+      padding-top: 0;
+    }
+    h3 {
+      font-size: 22px;
+    }
+    .riga:hover {
+      padding-left: 0;
+    }
+  }
+</style>
