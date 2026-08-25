@@ -28,9 +28,8 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Alessandro Flaborea',
-  url: 'https://flaborea.com',
-  jobTitle: 'Co-Founder & CTO',
-  worksFor: { '@type': 'Organization', name: 'Procedo', url: 'https://procederai.com' },
+  url: 'https://aleflabo.github.io',
+  jobTitle: 'AI consultant and trainer',
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sapienza University of Rome' },
   knowsAbout: [
     'Computer Vision',
@@ -64,7 +63,7 @@ const personLd = {
               if (l.indexOf('it') === 0) { pref = 'it'; break; }
               if (l.indexOf('en') === 0) { pref = 'en'; break; }
             }
-            if (pref !== 'en') { location.replace('/it/'); }
+            if (pref === 'en') { location.replace('/en/'); }
           } catch (e) {}
         })();
       </script>
