@@ -1,47 +1,32 @@
 ---
-import { localizedPath } from '../../i18n/ui';
-
-// Le tre schede, testo alla lettera da tavole/Main.dc.html (testi.md,
-// sezione «/ — home»). `projects.ts` contiene ormai anche «Portale ricambi
-// 3D» (task 6/11), ma i testi restano scritti qui alla lettera dalla
-// tavola invece di essere riletti da lì: i tre corpi di questa sezione
-// sono più corti di quelli di /lavori. Gli `href` invece vengono risolti,
-// non più segnaposto (bloccante 4, revisione finale del ramo
-// sito-italiano): due portano alle schede vere in /lavori, Spannum al
-// prodotto esterno.
-const prove = [
-  {
-    eyebrow: 'Meccanica · commessa reale',
-    nome: 'Portale ricambi 3D',
-    corpo: 'Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente.',
-    tag: ['Pipeline CAD, 80 test', 'Proprietà intellettuale protetta'],
-    link: 'Come funziona',
-    href: localizedPath('it', '/lavori/portale-ricambi'),
-  },
-  {
-    eyebrow: 'Industria · in produzione',
-    nome: 'Procedo',
-    corpo: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.',
-    tag: ['Clienti industriali', 'B4i Bocconi', 'Round angel'],
-    link: 'Come funziona',
-    href: localizedPath('it', '/lavori/procedo'),
-  },
-  {
-    eyebrow: 'Prodotto vivo · aperto a tutti',
-    nome: 'Spannum',
-    corpo: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.',
-    tag: ['Online', 'Norme per età'],
-    link: 'Aprilo',
-    href: 'https://spannum.com',
-    esterno: true,
-  },
-];
+// Le tre schede e gli href (già risolti per la lingua) arrivano dalla
+// pagina (task 2, sito-inglese). `projects.ts` contiene ormai anche
+// «Portale ricambi 3D» (task 6/11), ma i testi restano scritti alla
+// lettera dalla tavola invece di essere riletti da lì: i tre corpi di
+// questa sezione sono più corti di quelli di /lavori.
+interface Prova {
+  eyebrow: string;
+  nome: string;
+  corpo: string;
+  tag: string[];
+  link: string;
+  href: string;
+  esterno?: boolean;
+}
+interface Props {
+  occhiello: string;
+  titolo: string;
+  prove: Prova[];
+  continua: string;
+  hrefContinua: string;
+}
+const { occhiello, titolo, prove, continua, hrefContinua } = Astro.props;
 ---
 
 <section class="le-prove" id="le-prove">
   <div class="container">
-    <p class="label">Le prove</p>
-    <h2 class="section-title">Alcune cose che ho costruito</h2>
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
     <div class="griglia">
       {prove.map((p) => (
         <div class="scheda">
@@ -59,7 +44,7 @@ const prove = [
         </div>
       ))}
     </div>
-    <a class="continua" href={localizedPath('it', '/lavori')}>Tutti i lavori, compresa la ricerca <span class="freccia">&rarr;</span></a>
+    <a class="continua" href={hrefContinua}>{continua} <span class="freccia">&rarr;</span></a>
   </div>
 </section>
 

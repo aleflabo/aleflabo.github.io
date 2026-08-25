@@ -1,31 +1,22 @@
 ---
-// Le tre citazioni, testo alla lettera da tavole/Main.dc.html
-// (testi.md, sezione «/ — home»).
-const casi = [
-  {
-    frase: '«Mi serve questo pezzo.»',
-    corpo: 'Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.',
-  },
-  {
-    frase: '«Lo sa fare solo Bruno.»',
-    corpo: "Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.",
-  },
-  {
-    frase: '«Abbiamo provato ChatGPT.»',
-    corpo: "Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.",
-  },
-];
+// I testi arrivano dalla pagina (task 2, sito-inglese).
+interface Props {
+  occhiello: string;
+  titolo: string;
+  riquadri: { citazione: string; corpo: string }[];
+}
+const { occhiello, titolo, riquadri } = Astro.props;
 ---
 
 <section class="il-problema">
   <div class="container">
-    <p class="label">Il problema</p>
-    <h2 class="section-title">Le tre cose che mi vengono raccontate più spesso</h2>
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
     <div class="griglia">
-      {casi.map((c) => (
+      {riquadri.map((r) => (
         <div class="scheda">
-          <p class="frase">{c.frase}</p>
-          <p class="corpo">{c.corpo}</p>
+          <p class="frase">{r.citazione}</p>
+          <p class="corpo">{r.corpo}</p>
         </div>
       ))}
     </div>

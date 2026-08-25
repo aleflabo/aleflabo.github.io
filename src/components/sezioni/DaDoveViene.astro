@@ -1,21 +1,26 @@
 ---
-import { localizedPath } from '../../i18n/ui';
-
-// I tre dati, testo alla lettera da tavole/Main.dc.html (testi.md, sezione
-// «/ — home»).
-const tappe = [
-  { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza — PINlab' },
-  { valore: 'CVPR · ICCV · IROS', etichetta: 'Le conferenze principali del settore' },
-  { valore: '2024–2026', etichetta: 'Co-fondatore e CTO di Procedo, startup industriale' },
-];
+// I testi (e gli href, già risolti per la lingua) arrivano dalla pagina
+// (task 2, sito-inglese).
+interface Props {
+  occhiello: string;
+  titolo: string;
+  intro: string;
+  corpo: string;
+  tappe: { valore: string; etichetta: string }[];
+  linkRicerca: string;
+  hrefRicerca: string;
+  linkChiSono: string;
+  hrefChiSono: string;
+}
+const { occhiello, titolo, intro, corpo, tappe, linkRicerca, hrefRicerca, linkChiSono, hrefChiSono } = Astro.props;
 ---
 
 <section class="da-dove-viene">
   <div class="container">
-    <p class="label">Da dove viene quello che so</p>
-    <h2 class="section-title">Dalla ricerca alla produzione</h2>
-    <p class="intro">Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.</p>
-    <p class="corpo">Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.</p>
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
+    <p class="intro">{intro}</p>
+    <p class="corpo">{corpo}</p>
     <div class="tappe">
       {tappe.map((t) => (
         <div>
@@ -25,8 +30,8 @@ const tappe = [
       ))}
     </div>
     <div class="link-row">
-      <a href={localizedPath('it', '/ricerca')}>La ricerca, per intero <span class="freccia">&rarr;</span></a>
-      <a href={localizedPath('it', '/chi-sono')}>Chi sono <span class="freccia">&rarr;</span></a>
+      <a href={hrefRicerca}>{linkRicerca} <span class="freccia">&rarr;</span></a>
+      <a href={hrefChiSono}>{linkChiSono} <span class="freccia">&rarr;</span></a>
     </div>
   </div>
 </section>

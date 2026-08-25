@@ -1,8 +1,20 @@
 ---
-import { localizedPath } from '../../i18n/ui';
-import { site } from '../../data/site';
-
-const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
+// I testi (e gli href, già risolti per la lingua) arrivano dalla pagina:
+// nessun import da src/data/ qui dentro (task 2, sito-inglese).
+interface Props {
+  eyebrow: string;
+  // Titolo con "|" a separare le tre parti: prima|parola-evidenziata|dopo.
+  titolo: string;
+  intro: string;
+  ctaPrimaria: string;
+  hrefPrimaria: string;
+  ctaSecondaria: string;
+  // Contiene la parola "Procedo" (o "Procedo" stesso in inglese): quella
+  // parola diventa il link a hrefProcedo, il resto resta testo piano.
+  credibilita: string;
+  hrefProcedo: string;
+}
+const { eyebrow, titolo, intro, ctaPrimaria, hrefPrimaria, ctaSecondaria, credibilita, hrefProcedo } = Astro.props;
 
 // Titolo (h1) spezzato in uno <span class="w"> per parola, con ritardi
 // progressivi. «dove serve» resta un'unica «parola» del titolo, ma .marker
@@ -15,19 +27,25 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 // parola sullo span esterno, riempimento dell'evidenziatore su quello
 // interno. Testo alla lettera da tavole/Main.dc.html (e testi.md, sezione
 // «/ — home»).
-const titolo = "Aiuto le aziende a capire|dove serve|l'intelligenza artificiale e poi la costruisco.";
 const [prima, marcata, dopo] = titolo.split('|');
 const parole = [
   ...prima.split(' ').map((testo) => ({ testo, marker: false })),
   { testo: marcata, marker: true },
   ...dopo.split(' ').map((testo) => ({ testo, marker: false })),
 ];
+
+// Stessa tecnica di Hero.astro: si isola la parola "Procedo" dal resto
+// della frase per farne un link, invece di spezzare la frase a mano.
+const brandIndex = credibilita.indexOf('Procedo');
+const hasBrand = brandIndex >= 0;
+const credibilitaPrima = hasBrand ? credibilita.slice(0, brandIndex) : credibilita;
+const credibilitaDopo = hasBrand ? credibilita.slice(brandIndex + 'Procedo'.length) : '';
 ---
 
 <section class="occhiello">
   <div class="alone" aria-hidden="true"></div>
   <div class="container">
-    <p class="eyebrow">Consulenza e formazione sull'intelligenza artificiale</p>
+    <p class="eyebrow">{eyebrow}</p>
     <h1>
       {parole.map((p, i) => (
         <>
@@ -36,16 +54,18 @@ const parole = [
       ))}
     </h1>
     <div class="divider"></div>
-    <p class="intro">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
+    <p class="intro">{intro}</p>
     <div class="cta-row">
       {/* href="#" era morto come le tre schede di LeProve (bloccante 4):
           la sezione #parliamone è su questa stessa pagina, come già fanno
           Footer e formazione.astro per lo stesso pulsante (trovato durante
           la centralizzazione del testo, task 9). */}
-      <a class="pulsante primaria" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt} <span class="freccia">&rarr;</span></a>
-      <a class="secondaria" href="#le-prove">Guarda cosa ho costruito</a>
+      <a class="pulsante primaria" href={hrefPrimaria}>{ctaPrimaria} <span class="freccia">&rarr;</span></a>
+      <a class="secondaria" href="#le-prove">{ctaSecondaria}</a>
     </div>
-    <p class="credibilita">Dottorato in computer vision alla Sapienza · Pubblicato a CVPR, ICCV, IROS · Co-fondatore e CTO di <a href={localizedPath('it', '/lavori')}>Procedo</a> dal 2024 al 2026</p>
+    <p class="credibilita">{hasBrand ? (
+      <>{credibilitaPrima}<a href={hrefProcedo}>Procedo</a>{credibilitaDopo}</>
+    ) : credibilita}</p>
   </div>
 </section>
 

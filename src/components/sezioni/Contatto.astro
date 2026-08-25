@@ -1,72 +1,103 @@
 ---
-// Testo alla lettera da tavole/Main.dc.html (testi.md, sezione «/ — home»).
-// Il modulo resta inerte (nessun `action`) e i pulsanti di prenotazione,
-// WhatsApp e mail restano segnaposto (`href="#"`): non è stato scelto
-// nessun servizio esterno né inventato un numero, per istruzione esplicita
-// del task 8. Che sia inerte è deciso; che simuli l'invio no (bloccante 7,
-// revisione finale del ramo sito-italiano): senza `action` un submit fa
-// una GET sulla stessa pagina, che si ricarica con i campi in query
-// string, e sembra che il messaggio sia partito. `onsubmit="return
-// false"` blocca quella GET; il pulsante disabilitato e la nota sotto
-// dicono perché.
+// I testi arrivano dalla pagina (task 2, sito-inglese). Il modulo resta
+// inerte (nessun `action`) e i pulsanti di prenotazione, WhatsApp e mail
+// restano segnaposto (`href="#"`): non è stato scelto nessun servizio
+// esterno né inventato un numero, per istruzione esplicita del task 8.
+// Che sia inerte è deciso; che simuli l'invio no (bloccante 7, revisione
+// finale del ramo sito-italiano): senza `action` un submit fa una GET
+// sulla stessa pagina, che si ricarica con i campi in query string, e
+// sembra che il messaggio sia partito. `onsubmit="return false"` blocca
+// quella GET; il pulsante disabilitato e la nota sotto dicono perché.
+interface CampoTesto {
+  etichetta: string;
+  placeholder: string;
+}
+interface OpzioneUrgenza {
+  valore: string;
+  etichetta: string;
+  checked?: boolean;
+}
+interface Props {
+  eyebrow: string;
+  titolo: string;
+  intro: string;
+  campoAzienda: CampoTesto;
+  campoContatto: CampoTesto;
+  campoRichiesta: CampoTesto;
+  legendaUrgenza: string;
+  opzioniUrgenza: OpzioneUrgenza[];
+  invia: string;
+  notaInerte: string;
+  introAlternativa: string;
+  // Tre canali, ordine fisso: calendario, WhatsApp, mail (le icone restano qui).
+  canali: { etichetta: string }[];
+}
+const {
+  eyebrow,
+  titolo,
+  intro,
+  campoAzienda,
+  campoContatto,
+  campoRichiesta,
+  legendaUrgenza,
+  opzioniUrgenza,
+  invia,
+  notaInerte,
+  introAlternativa,
+  canali,
+} = Astro.props;
 ---
 
 <section class="contatto" id="parliamone">
   <div class="container">
-    <p class="eyebrow">Parliamone</p>
-    <h2 class="titolo">Mezz'ora per capire se possiamo lavorare insieme</h2>
-    <p class="intro">Se non è il lavoro giusto per me te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="titolo">{titolo}</h2>
+    <p class="intro">{intro}</p>
 
     <form class="modulo" onsubmit="return false">
       <div class="campo">
-        <label for="azienda">Azienda</label>
-        <input type="text" id="azienda" name="azienda" placeholder="Ragione sociale" />
+        <label for="azienda">{campoAzienda.etichetta}</label>
+        <input type="text" id="azienda" name="azienda" placeholder={campoAzienda.placeholder} />
       </div>
       <div class="campo">
-        <label for="contatto-mail">Come ti scrivo</label>
-        <input type="text" id="contatto-mail" name="contatto" placeholder="Mail o telefono" />
+        <label for="contatto-mail">{campoContatto.etichetta}</label>
+        <input type="text" id="contatto-mail" name="contatto" placeholder={campoContatto.placeholder} />
       </div>
       <div class="campo largo">
-        <label for="richiesta">Cosa vorresti smettere di fare a mano</label>
-        <textarea id="richiesta" name="richiesta" rows="3" placeholder="Bastano due righe, anche buttate lì"></textarea>
+        <label for="richiesta">{campoRichiesta.etichetta}</label>
+        <textarea id="richiesta" name="richiesta" rows="3" placeholder={campoRichiesta.placeholder}></textarea>
       </div>
       <fieldset class="campo largo urgenza">
-        <legend>Quanto è urgente</legend>
+        <legend>{legendaUrgenza}</legend>
         <div class="pillole">
-          <label class="pillola">
-            <input type="radio" name="urgenza" value="sto-guardando" />
-            <span>Sto solo guardando</span>
-          </label>
-          <label class="pillola">
-            <input type="radio" name="urgenza" value="questanno" checked />
-            <span>Quest'anno</span>
-          </label>
-          <label class="pillola">
-            <input type="radio" name="urgenza" value="problema-adesso" />
-            <span>Ho un problema adesso</span>
-          </label>
+          {opzioniUrgenza.map((opzione) => (
+            <label class="pillola">
+              <input type="radio" name="urgenza" value={opzione.valore} checked={opzione.checked} />
+              <span>{opzione.etichetta}</span>
+            </label>
+          ))}
         </div>
       </fieldset>
       <div class="invia">
-        <button type="submit" class="pulsante" disabled>Manda</button>
-        <p class="nota-inerte">Modulo non ancora attivo.</p>
+        <button type="submit" class="pulsante" disabled>{invia}</button>
+        <p class="nota-inerte">{notaInerte}</p>
       </div>
     </form>
 
     <div class="alternativa">
-      <p class="intro-alt">Oppure, se preferisci saltare il modulo:</p>
+      <p class="intro-alt">{introAlternativa}</p>
       <div class="canali">
         <a href="#" class="canale">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
-          Scegli tu mezz'ora sul calendario
+          {canali[0].etichetta}
         </a>
         <a href="#" class="canale">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.4 8.4 0 0 1 8.4-9 8.5 8.5 0 0 1 8.6 8.4Z"></path></svg>
-          WhatsApp
+          {canali[1].etichetta}
         </a>
         <a href="#" class="canale">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
-          Mail
+          {canali[2].etichetta}
         </a>
       </div>
     </div>

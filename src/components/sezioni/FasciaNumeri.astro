@@ -1,16 +1,13 @@
 ---
-// I quattro numeri della fascia blu, testo alla lettera da tavole/Main.dc.html
-// (testi.md, sezione «/ — home»). Non sono gli stessi di
-// `pubblicazioni.numeriFascia` (quell'array è per la fascia in cima a
-// /ricerca: ordine, terzo e quarto valore ed etichette differiscono — «2
-// anni da CTO» non esiste in quell'array, e «citazioni» qui non porta la
-// data). Restano quindi scritti qui, alla lettera dalla tavola.
-const numeri = [
-  { numero: '10', etichetta: 'articoli pubblicati' },
-  { numero: '533', etichetta: 'citazioni' },
-  { numero: '1', etichetta: 'Best Paper Award' },
-  { numero: '2', etichetta: 'anni da CTO' },
-];
+// I quattro numeri arrivano dalla pagina (task 2, sito-inglese): non sono
+// gli stessi di `pubblicazioni.numeriFascia` (quell'array è per la fascia
+// in cima a /ricerca: ordine, terzo e quarto valore ed etichette
+// differiscono — «2 anni da CTO» non esiste in quell'array, e «citazioni»
+// qui non porta la data).
+interface Props {
+  numeri: { numero: string; etichetta: string }[];
+}
+const { numeri } = Astro.props;
 ---
 
 <section class="fascia-numeri">
