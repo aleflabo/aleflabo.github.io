@@ -713,6 +713,17 @@ Sorgente: `tavole/Lavori.dc.html`
 
 ## /ricerca
 
+> **Attenzione — anni delle pubblicazioni resi in posizione ambigua.** Nello
+> script di estrazione, lo `<span>` dell'anno precede l'`<h3>` del titolo nel
+> DOM sorgente: nel blocco «Le pubblicazioni» qui sotto, ogni etichetta anno
+> compare quindi **dopo le metriche della pubblicazione precedente**, non
+> prima della propria. Chi legge la lista in ordine visivo sfalsa tutti gli
+> anni di uno. Non fidarti di questo file per le date delle pubblicazioni:
+> la fonte autorevole è `/home/aleflabo/cv/content/en.yaml` (sezione
+> `publications`), che va sempre riverificato prima di scrivere o correggere
+> `src/data/pubblicazioni.ts`. Vedi `task-6-report.md`, giro di correzioni 1,
+> per il caso concreto (Hyp2Nav letto come 2023, in realtà 2024).
+
 Sorgente: `tavole/Ricerca.dc.html`
 
 - `etichetta` Alessandro Flaborea

@@ -8,10 +8,13 @@ export interface Pubblicazione {
 
 // Dalla più recente, sezione /ricerca → «Le pubblicazioni».
 //
-// NB sulla decima voce (Query-Guided Networks): testi.md non riporta un
-// anno per questa pubblicazione — è l'unica del blocco senza l'etichetta
-// che precede il titolo nelle altre nove. Segnalato nel report, non
-// inventato qui: il campo resta un placeholder esplicito da sostituire.
+// Gli anni in testi.md sono resi in posizione ambigua (lo <span> dell'anno
+// precede l'<h3> del titolo nel DOM sorgente, quindi nel file estratto ogni
+// anno compare dopo le metriche della pubblicazione PRECEDENTE, sfalsando
+// di uno la lettura in ordine visivo). Gli anni qui sotto sono stati
+// verificati e corretti contro /home/aleflabo/cv/content/en.yaml, la fonte
+// autorevole per date e metriche delle pubblicazioni. Vedi task-6-report.md
+// per il dettaglio della correzione.
 export const pubblicazioni: Pubblicazione[] = [
   {
     anno: "2026",
@@ -42,7 +45,7 @@ export const pubblicazioni: Pubblicazione[] = [
     metriche: "50 citazioni · 34 stelle",
   },
   {
-    anno: "2023",
+    anno: "2024",
     titolo: "Hyp2Nav: Hyperbolic Planning and Curiosity for Crowd Navigation",
     descrizione: "Far muovere un robot in mezzo alla gente senza urtare nessuno.",
     sede: "IROS",
@@ -77,7 +80,7 @@ export const pubblicazioni: Pubblicazione[] = [
     metriche: "29 citazioni",
   },
   {
-    anno: "[ANNO MANCANTE IN testi.md]",
+    anno: "2023",
     titolo: "Query-Guided Networks for Few-Shot Fine-Grained Classification and Person Search",
     descrizione: "Ritrovare una persona o distinguere categorie molto simili con pochissimi esempi.",
     sede: "Pattern Recognition",

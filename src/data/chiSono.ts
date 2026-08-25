@@ -4,9 +4,11 @@ export interface ChiSonoCopy {
   abitudini: { titolo: string; testo: string }[];
 }
 
-// Sezione /chi-sono. NB: i paragrafi 1 e 4 contengono riferimenti geografici
-// (Udine, Svezia, Roma, Amsterdam) presenti alla lettera in testi.md — vedi
-// segnalazione nel report, il vincolo del task li vorrebbe assenti.
+// Sezione /chi-sono. I paragrafi 1 e 2 contengono riferimenti geografici
+// (Udine, Svezia, Roma, Amsterdam) presenti alla lettera in testi.md. Restano
+// di proposito: il vincolo «nessun riferimento geografico» del piano riguarda
+// il posizionamento (dove opera l'attività), non la biografia — vedi
+// task-6-report.md, giro di correzioni 1.
 export const chiSono: ChiSonoCopy = {
   paragrafi: [
     "Ho cominciato a Udine, con una laurea in informatica e sei mesi in Svezia che mi hanno tolto l'idea di restare fermo. Poi Roma: una magistrale in data science e un dottorato al Perception and Intelligence Lab della Sapienza, dove ho passato tre anni su un problema che si può riassumere così — insegnare a un computer a guardare qualcuno che lavora e capire cosa sta facendo.",
