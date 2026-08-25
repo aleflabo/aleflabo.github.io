@@ -32,6 +32,15 @@ const nomeIt = site.it.hero.name;
 // «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
 // letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
 const parliamoneIt = site.it.contact.title;
+
+// Menu a scomparsa sotto i 720px (task: tavole/HomeMobile.dc.html).
+// Le due etichette dell'aria-label — a riposo e ad aperto — sono nella
+// lingua della pagina; il piccolo script in fondo le scambia leggendo
+// questi due data-attribute, così resta lui stesso senza stringhe fisse.
+const etichetteToggle =
+  lang === 'it'
+    ? { chiuso: 'Apri il menu di navigazione', aperto: 'Chiudi il menu di navigazione' }
+    : { chiuso: 'Open navigation menu', aperto: 'Close navigation menu' };
 ---
 
 <nav class="nav">
@@ -39,7 +48,20 @@ const parliamoneIt = site.it.contact.title;
     {lang === 'it' ? (
       <>
         <a class="brand" href={localizedPath('it', '/')} aria-label={`${nomeIt} — home`}>{nomeIt}</a>
-        <div class="links">
+        <button
+          type="button"
+          class="menu-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label={etichetteToggle.chiuso}
+          data-label-chiuso={etichetteToggle.chiuso}
+          data-label-aperto={etichetteToggle.aperto}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="links" id="nav-links">
           {menuIt.map((voce) => (
             <a href={localizedPath('it', voce.rotta)} class:list={[voce.chiave === attiva && 'attiva']}>
               {voce.etichetta}
@@ -52,7 +74,20 @@ const parliamoneIt = site.it.contact.title;
     ) : (
       <>
         <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">AF</a>
-        <div class="links">
+        <button
+          type="button"
+          class="menu-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label={etichetteToggle.chiuso}
+          data-label-chiuso={etichetteToggle.chiuso}
+          data-label-aperto={etichetteToggle.aperto}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="links" id="nav-links">
           <a href={`${localizedPath('en', '/')}#work`}>{nav.work}</a>
           <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
           <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
@@ -114,6 +149,29 @@ const parliamoneIt = site.it.contact.title;
     opacity: 0.9;
   }
 
+  /* --- pulsante a due trattini: misure alla lettera da tavole/HomeMobile.dc.html ---
+     Nascosto sopra i 720px: sopra quella soglia il menu non cambia (task).
+     Nascosto anche sotto, finché lo script in fondo non aggiunge `.js-ready`
+     al <nav> — senza JS il pulsante non farebbe nulla, quindi non compare:
+     resta il menu a righe che va a capo (comportamento di oggi, già
+     raggiungibile e senza scorrimento). */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text);
+  }
+
   /* --- menu italiano: misure alla lettera da tavole/Main.dc.html --- */
   .inner.it {
     padding: 22px 24px;
@@ -150,6 +208,48 @@ const parliamoneIt = site.it.contact.title;
     opacity: 1;
   }
 
+  /* --- menu a scomparsa sotto i 720px: barra e pulsante da tavole/HomeMobile.dc.html --- */
+  @media (max-width: 720px) {
+    .inner.it {
+      padding: 18px 20px;
+    }
+    .inner.it .brand {
+      font-size: 16px;
+    }
+
+    .nav.js-ready .inner {
+      flex-wrap: wrap;
+    }
+    .nav.js-ready .menu-toggle {
+      display: inline-flex;
+    }
+    .nav.js-ready .links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      gap: 0;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .nav.js-ready.menu-open .links {
+      display: flex;
+    }
+    /* ogni voce, area toccabile: almeno 44px (si apre col pollice).
+       :global() sul tag perché LangSwitch è un componente a parte: il suo
+       <a class="lang"> porta lo scope-id di LangSwitch, non quello di
+       Nav, quindi un selettore scoped "normale" (`.links a`) non lo
+       raggiungerebbe — e resterebbe l'unica voce sotto i 44px. */
+    .nav.js-ready .links :global(a) {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      width: 100%;
+    }
+  }
+
   @media (max-width: 640px) {
     .links {
       gap: 0.9rem;
@@ -175,4 +275,44 @@ const parliamoneIt = site.it.contact.title;
       justify-content: center;
     }
   }
+
+  @media print {
+    .menu-toggle {
+      display: none !important;
+    }
+    .nav.js-ready .links {
+      display: flex !important;
+    }
+  }
 </style>
+
+<script is:inline>
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = toggle ? toggle.closest('.nav') : null;
+    if (!toggle || !nav) return;
+
+    // Presente solo qui: se questo script non parte, `.js-ready` non
+    // compare mai e il CSS sopra non nasconde niente (vedi commento
+    // su .menu-toggle) — il menu resta quello di oggi, sempre raggiungibile.
+    nav.classList.add('js-ready');
+
+    function setOpen(open) {
+      nav.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      var label = toggle.getAttribute(open ? 'data-label-aperto' : 'data-label-chiuso');
+      if (label) toggle.setAttribute('aria-label', label);
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  })();
+</script>
