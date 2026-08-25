@@ -7,7 +7,6 @@ export default defineConfig({
   output: 'static',
   redirects: {
     '/it': '/',
-    '/it/': '/',
     '/work/[slug]': '/lavori/[slug]',
   },
   integrations: [
