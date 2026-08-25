@@ -17,6 +17,8 @@ export interface Project {
   repo?: string;
   stack: string[];
   tags: string[];
+  /** Etichette italiane per /lavori: cosa fa la cosa e a che punto è. Mai nomi di tecnologie. */
+  tagIt: string[];
   en: CaseCopy;
   it: CaseCopy;
 }
@@ -27,7 +29,7 @@ export const projects: Project[] = [
     order: 1,
     name: "Procedo",
     role: "Co-Founder & CTO",
-    year: "2023–Present",
+    year: "2024–2026",
     status: "case",
     url: "https://procederai.com",
     stack: [
@@ -37,6 +39,13 @@ export const projects: Project[] = [
       "Cloud infrastructure",
     ],
     tags: ["Computer Vision", "Applied LLMs"],
+    tagIt: [
+      "Computer vision",
+      "LLM applicati",
+      "Dati isolati per cliente",
+      "B4i Bocconi",
+      "Round angel",
+    ],
     en: {
       area: "Industrial AI",
       summary:
@@ -51,7 +60,7 @@ export const projects: Project[] = [
     it: {
       area: "AI industriale",
       summary:
-        "Una piattaforma AI che trasforma i video grezzi di reparto in conoscenza produttiva strutturata, in produzione presso clienti industriali reali.",
+        "Una piattaforma che trasforma i video girati in reparto in procedure passo-passo, e permette a chi lavora di fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni: ho guidato l'architettura e portato in produzione la parte di AI. Oggi la seguo come advisor.",
       problem:
         "I team industriali documentano, ottimizzano e formano sulle procedure fisiche a mano, un processo lento che raramente tiene il passo con il lavoro reale in reparto.",
       approach:
@@ -61,14 +70,80 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "agentic-toolkit",
+    slug: "portale-ricambi",
     order: 2,
+    name: "Portale ricambi 3D",
+    role: "Solo build",
+    year: "2026",
+    status: "case",
+    stack: ["3D web rendering", "CAD conversion pipeline", "Automated testing"],
+    tags: ["CAD conversion", "Parts catalog"],
+    tagIt: ["Pipeline CAD", "80 test", "IP protetta", "In costruzione"],
+    en: {
+      area: "Mechanical engineering",
+      summary:
+        "A 3D parts portal for an industrial machine builder: the customer opens the 3D model of the machine they bought, clicks the part they need, and the request arrives at the company already matched to the part's internal code.",
+      problem:
+        "Today that same request is an email with a photo, and before quoting, someone has to track down the right part code by hand.",
+      approach:
+        "The CAD-to-web conversion pipeline is finished and tested with eighty automated tests. The customer only ever sees the geometry of the part they need to recognize it, not the machine's full model, protecting the manufacturer's intellectual property.",
+      result:
+        "The CAD conversion pipeline is finished and proven; the portal itself is still in development.",
+    },
+    it: {
+      area: "Meccanica",
+      summary:
+        "Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno del componente.",
+      problem:
+        "Oggi quella stessa richiesta è una mail con una foto, e prima del preventivo qualcuno deve andare a caccia del codice.",
+      approach:
+        "La pipeline di conversione dei CAD è finita e collaudata, con ottanta test automatici. Il cliente finale vede solo la geometria del pezzo che gli serve per riconoscerlo, non il modello completo della macchina: la proprietà intellettuale del costruttore resta protetta.",
+      result:
+        "La pipeline di conversione dei CAD è finita e collaudata; il portale è in costruzione.",
+    },
+  },
+  {
+    slug: "tire-hub",
+    order: 3,
+    name: "Tire Hub",
+    role: "Solo build",
+    year: "2026",
+    status: "case",
+    stack: ["Web dashboard", "Auto-generated scaffold", "Custom data layer"],
+    tags: ["Business dashboard", "Personal initiative"],
+    tagIt: ["Gestionale", "Statistiche per area", "Iniziativa mia"],
+    en: {
+      area: "Automotive",
+      summary:
+        "A management dashboard for the tire trade: customer and stock records, area-by-area statistics, and the daily counter work of the people at the desk.",
+      problem:
+        "Started as a personal initiative rather than a client engagement.",
+      approach:
+        "Built it starting from an auto-generated scaffold, then hand-rebuilt the parts that matter, to see how far that starting point could be pushed.",
+      result:
+        "Customer and stock records, area statistics, and the daily counter workflow are already covered by the dashboard.",
+    },
+    it: {
+      area: "Automotive",
+      summary:
+        "Una dashboard gestionale per il settore gomme: anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco.",
+      problem: "Nasce da un'iniziativa mia e non da una commessa.",
+      approach:
+        "L'ho costruita partendo da uno strumento di generazione automatica, per poi rifare a mano le parti che contano e vedere quanto lontano si arriva.",
+      result:
+        "Anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco sono già coperti dalla dashboard.",
+    },
+  },
+  {
+    slug: "agentic-toolkit",
+    order: 4,
     name: "Agentic Workflow Toolkit",
     role: "Solo build",
     year: "2026",
     status: "case",
     stack: ["Claude Code", "MCP", "Notion API", "GitHub API", "LLM agents"],
     tags: ["Agentic tooling", "Automation"],
+    tagIt: ["Standup automatico", "Documentazione rigenerata", "Revisione dei prompt"],
     en: {
       area: "Agentic tooling",
       summary:
@@ -94,7 +169,7 @@ export const projects: Project[] = [
   },
   {
     slug: "spannum",
-    order: 3,
+    order: 5,
     name: "Spannum",
     role: "Solo build",
     year: "2026",
@@ -109,6 +184,7 @@ export const projects: Project[] = [
       "Web Speech API",
     ],
     tags: ["Full product", "Research to product"],
+    tagIt: ["Online e pubblico", "Norme per età", "Si installa sul telefono"],
     en: {
       area: "Applied psychometrics",
       summary:
@@ -134,7 +210,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fanta-mundial",
-    order: 4,
+    order: 6,
     name: "Fanta Mundial",
     role: "Solo build",
     year: "2026",
@@ -142,6 +218,7 @@ export const projects: Project[] = [
     url: "https://fanta-mundial.streamlit.app",
     stack: ["Python", "Streamlit", "Supabase", "bcrypt"],
     tags: ["Full product", "API integration"],
+    tagIt: ["Una quarantina di giocatori", "Esiti aggiornati da soli", "In produzione"],
     en: {
       area: "Gamification",
       summary:
@@ -167,7 +244,7 @@ export const projects: Project[] = [
   },
   {
     slug: "procedo-tracking-costs",
-    order: 5,
+    order: 7,
     name: "Cost Tracking",
     role: "Solo build",
     year: "2025",
@@ -182,6 +259,7 @@ export const projects: Project[] = [
       "zod",
     ],
     tags: ["Full-stack", "API integration"],
+    tagIt: ["Più fornitori in una vista", "Sincronizzazione giornaliera", "Gira senza supervisione"],
     en: {
       area: "Monitoring",
       summary:
@@ -207,7 +285,7 @@ export const projects: Project[] = [
   },
   {
     slug: "contrada-navigator",
-    order: 6,
+    order: 8,
     name: "Contrada Navigator",
     role: "Solo build",
     year: "2025",
@@ -222,6 +300,7 @@ export const projects: Project[] = [
       "Leaflet",
     ],
     tags: ["Data engineering", "Geospatial"],
+    tagIt: ["Mappa interattiva", "Serie storica 2012-2025", "Proiezioni al 2034"],
     en: {
       area: "Data analytics",
       summary:
@@ -247,13 +326,14 @@ export const projects: Project[] = [
   },
   {
     slug: "vault",
-    order: 7,
+    order: 9,
     name: "Personal Vault",
     role: "Solo build",
     year: "2024–Present",
     status: "case",
     stack: ["Obsidian", "Claude Code agent", "LLM"],
     tags: ["Agent / prompt engineering", "Knowledge systems"],
+    tagIt: ["Wiki curata da un agente", "Uso quotidiano", "Vincoli sui dati"],
     en: {
       area: "Knowledge systems",
       summary:
@@ -279,13 +359,14 @@ export const projects: Project[] = [
   },
   {
     slug: "homesweathome",
-    order: 8,
+    order: 10,
     name: "HomeSweatHome",
     role: "Founding team",
-    year: "2022",
+    year: "2021–2023",
     status: "case",
     stack: ["Python", "Computer Vision", "Pose estimation", "On-device"],
     tags: ["Computer Vision", "MVP"],
+    tagIt: ["Lettura della postura", "Tempo reale", "Senza cloud"],
     en: {
       area: "Computer Vision",
       summary:

@@ -8,6 +8,7 @@ export default defineConfig({
   redirects: {
     '/it': '/',
     '/it/': '/',
+    '/work/[slug]': '/lavori/[slug]',
   },
   integrations: [
     sitemap({
