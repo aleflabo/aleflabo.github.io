@@ -1,0 +1,244 @@
+---
+// src/pages/servizi.astro — i quattro ingaggi e il FAQ (rotta `/servizi`).
+// Testo alla lettera da tavole/Servizi.dc.html (testi.md, sezione
+// «/servizi»). I dati dei quattro ingaggi, del FAQ e di «per chi non sono»
+// vengono da src/data/servizi.ts (task 6): non riscritti qui. Il testo
+// della fascia «Come si comincia» non è fra gli export di quel file (solo
+// `ingaggi`, `faq`, `perChiNonSono`), quindi resta scritto qui, alla
+// lettera dalla tavola — come già fa ComeLavoro.astro per il proprio testo.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SchedaIngaggio from '../components/it/SchedaIngaggio.astro';
+import Faq from '../components/it/Faq.astro';
+import { ingaggi, faq, perChiNonSono } from '../data/servizi';
+import { localizedPath } from '../i18n/ui';
+---
+
+<BaseLayout
+  title="Servizi — Alessandro Flaborea"
+  description="Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro."
+  lang="it"
+  path="/servizi"
+  attiva="servizi"
+>
+  <section class="intestazione">
+    <div class="container">
+      <p class="label">Servizi</p>
+      <h1>Quattro modi di lavorare insieme</h1>
+      <div class="divider"></div>
+      <p class="intro">Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro.</p>
+    </div>
+  </section>
+
+  <section class="elenco-ingaggi">
+    <div class="container">
+      <div class="schede">
+        {ingaggi.map((ingaggio) => (
+          <SchedaIngaggio ingaggio={ingaggio} />
+        ))}
+      </div>
+      <a class="continua" href={localizedPath('it', '/lavori')}>Le prove: quello che ho costruito <span class="freccia">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="per-chi-non-sono">
+    <div class="container">
+      <p class="label">Onestà</p>
+      <h2 class="section-title">Per chi non sono</h2>
+      <div class="griglia">
+        {perChiNonSono.map((riga) => (
+          <p class="riga-testo">{riga}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="domande">
+    <div class="container">
+      <p class="label">Domande</p>
+      <h2 class="section-title">Quelle che mi vengono fatte quasi sempre</h2>
+      <Faq domande={faq} />
+    </div>
+  </section>
+
+  <section class="come-si-comincia">
+    <div class="container">
+      <h2>Come si comincia</h2>
+      <p class="intro">Mi scrivi due righe su cosa vorreste smettere di fare a mano e ci sentiamo mezz'ora. Se c'è margine per lavorare insieme ci vediamo di persona; altrimenti te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
+      <a class="pulsante cta" href={`${localizedPath('it', '/')}#parliamone`}>Parliamone, mezz'ora</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 44px;
+  }
+  .intestazione h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 22ch;
+  }
+  .intestazione .divider {
+    margin: 30px 0;
+  }
+  .intestazione .intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+
+  /* --- schede degli ingaggi --- */
+  .elenco-ingaggi {
+    padding: 0;
+  }
+  .elenco-ingaggi .container {
+    padding: 0 24px 72px;
+  }
+  .schede {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .continua {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- per chi non sono --- */
+  .per-chi-non-sono {
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .per-chi-non-sono .container {
+    padding: 72px 24px;
+  }
+  .section-title {
+    font-size: 32px;
+    margin-top: 18px;
+    margin-bottom: 30px;
+    max-width: 24ch;
+  }
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 44px;
+    max-width: 900px;
+  }
+  .riga-testo {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* --- domande --- */
+  .domande {
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .domande .container {
+    padding: 72px 24px;
+  }
+  .domande .section-title {
+    max-width: 30ch;
+  }
+
+  /* --- come si comincia --- */
+  .come-si-comincia {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0;
+  }
+  .come-si-comincia .container {
+    padding: 64px 24px;
+  }
+  .come-si-comincia h2 {
+    font-size: 28px;
+    max-width: 24ch;
+  }
+  .come-si-comincia .intro {
+    margin-top: 18px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+  .come-si-comincia .cta {
+    display: inline-block;
+    margin-top: 30px;
+    background: var(--azione);
+    color: var(--surface);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .intestazione h1 {
+      margin-top: 16px;
+      font-size: 32px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intestazione .divider {
+      margin: 22px 0;
+    }
+    .intestazione .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+    .elenco-ingaggi .container {
+      padding: 0 20px 48px;
+    }
+    .schede {
+      gap: 18px;
+    }
+    .per-chi-non-sono .container,
+    .domande .container {
+      padding: 48px 20px;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-bottom: 20px;
+      max-width: none;
+    }
+    .griglia {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      max-width: none;
+    }
+    .come-si-comincia .container {
+      padding: 44px 20px;
+    }
+    .come-si-comincia h2 {
+      font-size: 24px;
+      max-width: none;
+    }
+    .come-si-comincia .intro {
+      font-size: 15.5px;
+      max-width: none;
+    }
+    .come-si-comincia .cta {
+      display: block;
+      text-align: center;
+    }
+  }
+</style>

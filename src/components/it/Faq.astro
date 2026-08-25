@@ -1,0 +1,75 @@
+---
+import type { Domanda } from '../../data/servizi';
+
+// Le cinque righe del FAQ di /servizi. Testo alla lettera da
+// tavole/Servizi.dc.html (testi.md, sezione «/servizi»); i dati vengono da
+// src/data/servizi.ts (task 6). La prima domanda porta a `/i-vostri-dati`,
+// rotta che nasce al task 13: il link in avanti è atteso (task-9-brief.md).
+interface Props {
+  domande: Domanda[];
+}
+const { domande } = Astro.props;
+---
+
+<div class="faq">
+  {domande.map((d) => (
+    <div class="riga">
+      <h3>{d.domanda}</h3>
+      <div class="risposta">
+        <p>{d.risposta}</p>
+        {d.link && (
+          <a class="link" href={d.link.href}>{d.link.testo} <span class="freccia">&rarr;</span></a>
+        )}
+      </div>
+    </div>
+  ))}
+  <div class="chiusura"></div>
+</div>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 40px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .riga h3 {
+    font-size: 21px;
+    max-width: 22ch;
+  }
+  .risposta p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .risposta .link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .chiusura {
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 24px 0;
+    }
+    .riga h3 {
+      font-size: 19px;
+      max-width: none;
+    }
+    .risposta p {
+      font-size: 15px;
+    }
+  }
+</style>
