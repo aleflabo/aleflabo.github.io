@@ -10,13 +10,13 @@ export function getStaticPaths() {
 }
 const { slug } = Astro.params;
 const project = getProject(slug!)!;
-const c = project.it;
+const c = project.en;
 const path = `/work/${project.slug}`;
-const t = site.it;
+const t = site.en;
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} ogType="article">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} ogType="article">
   <article class="container case">
-    <a class="back" href={`${localizedPath('it', '/')}#work`}>← {t.caseStudy.back}</a>
+    <a class="back" href={`${localizedPath('en', '/')}#work`}>← {t.caseStudy.back}</a>
     <p class="label">{c.area} · {project.role} · {project.year}</p>
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
