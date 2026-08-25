@@ -1,0 +1,361 @@
+---
+// src/pages/ricerca.astro — le dieci pubblicazioni, i numeri e il riquadro
+// che le traduce per un lettore non accademico (rotta `/ricerca`).
+// Testo alla lettera da tavole/Ricerca.dc.html (testi.md, sezione
+// «/ricerca»). Le dieci pubblicazioni e i quattro numeri della fascia
+// vengono da src/data/pubblicazioni.ts (task 6): non riscritti qui — quel
+// file porta anche la nota sugli anni verificati contro il CV, da non
+// toccare. Il resto del testo di pagina (intestazione, riquadro «Cosa
+// c'entra con la tua azienda», intro all'elenco, chiusura sul codice) non è
+// fra gli export di quel file e resta scritto qui, alla lettera dalla
+// tavola — come già fa ComeLavoro.astro per il proprio testo nella home.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pubblicazioni, numeriFascia } from '../data/pubblicazioni';
+import { localizedPath } from '../i18n/ui';
+
+const scholarUrl = 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ';
+const githubUrl = 'https://github.com/aleflabo';
+---
+
+<BaseLayout
+  title="Ricerca — Alessandro Flaborea"
+  description="Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola."
+  lang="it"
+  path="/ricerca"
+  attiva="ricerca"
+>
+  <section class="intestazione">
+    <div class="container">
+      <p class="label">Ricerca</p>
+      <h1>La ricerca da cui viene il resto</h1>
+      <div class="divider"></div>
+      <p class="intro">Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola.</p>
+    </div>
+  </section>
+
+  <section class="fascia-numeri">
+    <div class="container">
+      <div class="griglia-numeri">
+        {numeriFascia.map((n) => (
+          <div>
+            <p class="valore">{n.numero}</p>
+            <p class="etichetta">{n.etichetta}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cosa-centra">
+    <div class="container">
+      <div class="riquadro">
+        <p class="riquadro-label">Cosa c'entra con la tua azienda</p>
+        <p class="riquadro-corpo">Senza gergo: ho passato anni a insegnare a un computer a guardare una persona che lavora e ad accorgersi che sta sbagliando un passaggio, mentre lo sta facendo.</p>
+        <p class="riquadro-corpo muto">È la stessa domanda che si fa un capo reparto quando gira fra le postazioni. Da lì è nato Procedo, e da lì viene il modo in cui affronto i problemi che mi portano: prima si guarda come il lavoro viene fatto davvero, poi si decide cosa automatizzare.</p>
+        <a class="riquadro-link" href={localizedPath('it', '/lavori/procedo')}>Dove quella ricerca è diventata un prodotto &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="elenco-pubblicazioni">
+    <div class="container">
+      <h2>Le pubblicazioni</h2>
+      <p class="intro-elenco">Dalla più recente. Dove esiste il repository pubblico sono indicate le stelle su GitHub.</p>
+      <div class="righe">
+        {pubblicazioni.map((p) => (
+          <div class="riga">
+            <span class="anno">{p.anno}</span>
+            <div class="testo-riga">
+              <h3>{p.titolo}</h3>
+              <p class="descrizione">{p.descrizione}</p>
+            </div>
+            <div class="metadati">
+              <span class="sede">{p.sede}</span>
+              <span class="metriche">{p.metriche}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="link-esterni">
+        <a href={scholarUrl} target="_blank" rel="noopener noreferrer">Elenco completo su Google Scholar &rarr;</a>
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer">Il codice su GitHub &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="perche-il-codice">
+    <div class="container">
+      <h2>Perché ogni articolo esce con il codice</h2>
+      <p class="corpo">Un articolo che esce con il codice si può rifare da capo: chiunque scarica il repository, lancia gli esperimenti e ottiene gli stessi numeri. È il modo in cui ho lavorato per ogni pubblicazione, ed è lo stesso che porto nei progetti: quello che consegno si apre, si legge e si esegue.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 40px;
+  }
+  .intestazione h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 22ch;
+  }
+  .intestazione .divider {
+    margin: 30px 0;
+  }
+  .intestazione .intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 64ch;
+    text-wrap: pretty;
+  }
+
+  /* --- fascia numeri --- */
+  .fascia-numeri {
+    padding: 0;
+  }
+  .fascia-numeri .container {
+    padding: 0 24px 56px;
+  }
+  .griglia-numeri {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 30px 0;
+  }
+  .valore {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    font-weight: 600;
+  }
+  .etichetta {
+    margin-top: 4px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  /* --- cosa c'entra con la tua azienda --- */
+  .cosa-centra {
+    padding: 0;
+  }
+  .cosa-centra .container {
+    padding: 0 24px 60px;
+  }
+  .riquadro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    max-width: 860px;
+  }
+  .riquadro-label {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  .riquadro-corpo {
+    margin-top: 14px;
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .riquadro-corpo.muto {
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+  .riquadro-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- le pubblicazioni --- */
+  .elenco-pubblicazioni {
+    padding: 0;
+  }
+  .elenco-pubblicazioni .container {
+    padding: 0 24px 24px;
+  }
+  .elenco-pubblicazioni h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .intro-elenco {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) 260px;
+    gap: 28px;
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .anno {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .testo-riga h3 {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+  .descrizione {
+    margin-top: 8px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .metadati {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .sede {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  .metriche {
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .link-esterni {
+    display: flex;
+    gap: 28px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .link-esterni a {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- perché ogni articolo esce con il codice --- */
+  .perche-il-codice {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 60px;
+    padding: 0;
+  }
+  .perche-il-codice .container {
+    padding: 60px 24px;
+  }
+  .perche-il-codice h2 {
+    font-size: 26px;
+    max-width: 26ch;
+  }
+  .perche-il-codice .corpo {
+    margin-top: 16px;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .intestazione h1 {
+      margin-top: 16px;
+      font-size: 32px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intestazione .divider {
+      margin: 22px 0;
+    }
+    .intestazione .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+    .fascia-numeri .container {
+      padding: 0 20px 40px;
+    }
+    .griglia-numeri {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      padding: 24px 0;
+    }
+    .valore {
+      font-size: 28px;
+    }
+    .cosa-centra .container {
+      padding: 0 20px 44px;
+    }
+    .riquadro {
+      padding: 24px 22px;
+    }
+    .riquadro-corpo {
+      font-size: 16.5px;
+    }
+    .riquadro-corpo.muto {
+      font-size: 15px;
+    }
+    .elenco-pubblicazioni .container {
+      padding: 0 20px 20px;
+    }
+    .elenco-pubblicazioni h2 {
+      font-size: 24px;
+    }
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 22px 0;
+    }
+    .metadati {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+    }
+    .link-esterni {
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .perche-il-codice {
+      margin-top: 44px;
+    }
+    .perche-il-codice .container {
+      padding: 44px 20px;
+    }
+    .perche-il-codice h2 {
+      font-size: 22px;
+      max-width: none;
+    }
+    .perche-il-codice .corpo {
+      font-size: 15.5px;
+      max-width: none;
+    }
+  }
+</style>
