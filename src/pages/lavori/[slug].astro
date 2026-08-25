@@ -10,6 +10,7 @@ import StackChip from '../../components/StackChip.astro';
 import { projects, getProject } from '../../data/projects';
 import { site } from '../../data/site';
 import { localizedPath } from '../../i18n/ui';
+import { annoIt } from '../../lib/anno';
 
 export function getStaticPaths() {
   return projects.map((p) => ({ params: { slug: p.slug } }));
@@ -18,12 +19,20 @@ const { slug } = Astro.params;
 const project = getProject(slug!)!;
 const c = project.it;
 const path = `/lavori/${project.slug}`;
+// I progetti `soloItaliano` (Portale ricambi, Tire Hub) non hanno una rotta
+// /en/work/[slug] (§10 della spec, fix in projects.ts): niente alternato
+// inglese per le loro schede (task 1/bloccante).
+const pathEn = project.soloItaliano ? undefined : `/work/${project.slug}`;
 const t = site.it;
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} ogType="article">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} pathEn={pathEn} ogType="article" attiva="lavori">
   <article class="container case">
-    <a class="back" href={localizedPath('it', '/lavori')}>← {t.caseStudy.back}</a>
-    <p class="label">{c.area} · {project.role} · {project.year}</p>
+    {/* «Lavori selezionati» (t.caseStudy.back) è condiviso con la pagina
+        inglese; qui la destinazione è /lavori, il cui h1 dice «Quello che
+        ho costruito» — testo alla lettera da lì, non da t.caseStudy.back
+        (task 8, revisione finale del ramo sito-italiano). */}
+    <a class="back" href={localizedPath('it', '/lavori')}>← Quello che ho costruito</a>
+    <p class="label">{c.area} · {project.role} · {annoIt(project.year)}</p>
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.tagIt.map((s) => <StackChip label={s} />)}</div>

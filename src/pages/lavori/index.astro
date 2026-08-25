@@ -12,6 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import RigaLavoro from '../../components/it/RigaLavoro.astro';
 import { getProject } from '../../data/projects';
 import { localizedPath } from '../../i18n/ui';
+import { annoIt } from '../../lib/anno';
 
 const procedo = getProject('procedo')!;
 const portaleRicambi = getProject('portale-ricambi')!;
@@ -23,11 +24,6 @@ const agenticToolkit = getProject('agentic-toolkit')!;
 const contradaNavigator = getProject('contrada-navigator')!;
 const vault = getProject('vault')!;
 const homeSweatHome = getProject('homesweathome')!;
-
-// L'inglese scrive "Present"; l'italiano di questa pagina dice "oggi"
-// (tavole/Lavori.dc.html: Personal Vault → "2024–oggi"). Solo per la resa,
-// il campo `year` in projects.ts resta invariato.
-const annoIt = (anno: string) => anno.replace('Present', 'oggi');
 
 const link = (slug: string) => localizedPath('it', `/lavori/${slug}`);
 
