@@ -25,6 +25,9 @@ const rotteMenuIt: Array<{ chiave: string; rotta: string }> = [
 const etichetteMenuIt = site.it.menu ?? [];
 const menuIt = rotteMenuIt.map((voce, i) => ({ ...voce, etichetta: etichetteMenuIt[i] ?? '' }));
 const nomeIt = site.it.hero.name;
+// «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
+// letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
+const parliamoneIt = site.it.contact.title;
 ---
 
 <nav class="nav">
@@ -38,7 +41,7 @@ const nomeIt = site.it.hero.name;
               {voce.etichetta}
             </a>
           ))}
-          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>Parliamone</a>
+          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{parliamoneIt}</a>
           <LangSwitch lang={lang} path={path} />
         </div>
       </>
