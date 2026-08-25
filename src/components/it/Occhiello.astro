@@ -2,9 +2,16 @@
 import { localizedPath } from '../../i18n/ui';
 
 // Titolo (h1) spezzato in uno <span class="w"> per parola, con ritardi
-// progressivi. «dove serve» resta un unico span (porta anche .marker),
-// esattamente come indicato nel brief del task 8. Testo alla lettera da
-// tavole/Main.dc.html (e testi.md, sezione «/ — home»).
+// progressivi. «dove serve» resta un'unica «parola» del titolo, ma .marker
+// va su uno <span> ANNIDATO dentro il .w esterno, non sullo stesso
+// elemento: .w e .marker dichiarano entrambe `animation` con la stessa
+// specificità, e in global.css .w è definita dopo .marker, quindi sullo
+// stesso nodo vincerebbe sempre .w e l'evidenziatore non partirebbe mai
+// (difetto trovato in revisione, correzione 1 del task 8 — vedi
+// task-8-report.md). Annidare separa le due animazioni: entrata della
+// parola sullo span esterno, riempimento dell'evidenziatore su quello
+// interno. Testo alla lettera da tavole/Main.dc.html (e testi.md, sezione
+// «/ — home»).
 const titolo = "Aiuto le aziende a capire|dove serve|l'intelligenza artificiale e poi la costruisco.";
 const [prima, marcata, dopo] = titolo.split('|');
 const parole = [
@@ -21,7 +28,7 @@ const parole = [
     <h1>
       {parole.map((p, i) => (
         <>
-          <span class:list={['w', { marker: p.marker }]} style={`animation-delay: ${0.22 + i * 0.06}s`}>{p.testo}</span>{' '}
+          <span class="w" style={`animation-delay: ${0.22 + i * 0.06}s`}>{p.marker ? <span class="marker">{p.testo}</span> : p.testo}</span>{' '}
         </>
       ))}
     </h1>
