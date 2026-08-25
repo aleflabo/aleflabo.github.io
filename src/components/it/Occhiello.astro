@@ -1,5 +1,8 @@
 ---
 import { localizedPath } from '../../i18n/ui';
+import { site } from '../../data/site';
+
+const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 
 // Titolo (h1) spezzato in uno <span class="w"> per parola, con ritardi
 // progressivi. «dove serve» resta un'unica «parola» del titolo, ma .marker
@@ -35,7 +38,11 @@ const parole = [
     <div class="divider"></div>
     <p class="intro">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
     <div class="cta-row">
-      <a class="pulsante primaria" href="#">Prenota mezz'ora <span class="freccia">&rarr;</span></a>
+      {/* href="#" era morto come le tre schede di LeProve (bloccante 4):
+          la sezione #parliamone è su questa stessa pagina, come già fanno
+          Footer e formazione.astro per lo stesso pulsante (trovato durante
+          la centralizzazione del testo, task 9). */}
+      <a class="pulsante primaria" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt} <span class="freccia">&rarr;</span></a>
       <a class="secondaria" href="#le-prove">Guarda cosa ho costruito</a>
     </div>
     <p class="credibilita">Dottorato in computer vision alla Sapienza · Pubblicato a CVPR, ICCV, IROS · Co-fondatore e CTO di <a href={localizedPath('it', '/lavori')}>Procedo</a> dal 2024 al 2026</p>

@@ -28,6 +28,7 @@ const rottePiePaginaIt: Record<string, string> = {
 const vociEsterne = new Set(['LinkedIn', 'GitHub', 'Google Scholar']);
 const piePaginaIt = site.it.piePagina ?? [];
 const nomeIt = site.it.hero.name;
+const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 ---
 
 {lang === 'it' ? (
@@ -36,7 +37,7 @@ const nomeIt = site.it.hero.name;
       <div class="presentazione">
         <p class="nome">{nomeIt}</p>
         <p class="frase">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
-        <a class="pulsante prenota" href={`${localizedPath('it', '/')}#parliamone`}>Prenota mezz'ora</a>
+        <a class="pulsante prenota" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt}</a>
       </div>
       {piePaginaIt.map((colonna) => (
         <div class="colonna">

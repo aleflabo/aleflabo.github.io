@@ -11,6 +11,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { formati, riquadroAiAct, strade } from '../data/formazione';
 import { localizedPath } from '../i18n/ui';
+import { site } from '../data/site';
+
+const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 ---
 
 <BaseLayout
@@ -109,7 +112,7 @@ import { localizedPath } from '../i18n/ui';
       <h2>Raccontami che azienda siete</h2>
       <p class="intro">Quante persone siete, cosa fate e chi userebbe questi strumenti. Da lì si capisce quale delle tre strade conviene.</p>
       <div class="pulsanti">
-        <a class="pulsante primario" href={`${localizedPath('it', '/')}#parliamone`}>Prenota mezz'ora</a>
+        <a class="pulsante primario" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt}</a>
         <a class="pulsante secondario" href="#">WhatsApp</a>
       </div>
     </div>

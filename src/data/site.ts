@@ -69,6 +69,10 @@ interface SiteCopy {
   // vedi task-6-brief.md). Opzionali: la sezione `en` non è ancora toccata.
   menu?: string[];
   piePagina?: ColonnaPiePagina[];
+  // Il richiamo più ripetuto del sito italiano: scritto a mano in Occhiello,
+  // Footer e formazione, ora letto da qui (task 9, revisione finale del
+  // ramo sito-italiano). Solo `it`, come `menu` sopra.
+  prenotaMezzora?: string;
 }
 
 export const site: Record<Locale, SiteCopy> = {
@@ -214,6 +218,7 @@ export const site: Record<Locale, SiteCopy> = {
       email: "flaborea.alessandro@gmail.com",
     },
     menu: ["Servizi", "Formazione", "Lavori", "Ricerca", "Chi sono", "Note"],
+    prenotaMezzora: "Prenota mezz'ora",
     piePagina: [
       {
         titolo: "Cosa faccio",
