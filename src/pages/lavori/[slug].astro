@@ -27,9 +27,13 @@ const t = site.it;
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.tagIt.map((s) => <StackChip label={s} />)}</div>
-    <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>
-    <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>
-    <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>
+    {/* Le due schede nuove (Portale ricambi, Tire Hub) hanno un solo
+        paragrafo di copy in testi.md: un campo lasciato vuoto in
+        projects.ts salta la sua sezione invece di renderizzare
+        un'intestazione senza corpo (correzione giro 1, task-11-report.md). */}
+    {c.problem && <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>}
+    {c.approach && <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>}
+    {c.result && <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>}
     {(project.url || project.repo) && (
       <section class="links">
         {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{t.workLiveLabel} ↗</a>}

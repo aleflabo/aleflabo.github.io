@@ -96,8 +96,11 @@ export const projects: Project[] = [
         "Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno del componente.",
       problem:
         "Oggi quella stessa richiesta è una mail con una foto, e prima del preventivo qualcuno deve andare a caccia del codice.",
-      approach:
-        "La pipeline di conversione dei CAD è finita e collaudata, con ottanta test automatici. Il cliente finale vede solo la geometria del pezzo che gli serve per riconoscerlo, non il modello completo della macchina: la proprietà intellettuale del costruttore resta protetta.",
+      // `approach` vuoto: testi.md dedica un solo paragrafo (tre frasi) a
+      // questo progetto, già consumato da summary/problem/result. Niente da
+      // spezzare qui senza aggiungere parole non presenti in testi.md
+      // (correzione giro 1, task-11-report.md).
+      approach: "",
       result:
         "La pipeline di conversione dei CAD è finita e collaudata; il portale è in costruzione.",
     },
@@ -130,8 +133,11 @@ export const projects: Project[] = [
       problem: "Nasce da un'iniziativa mia e non da una commessa.",
       approach:
         "L'ho costruita partendo da uno strumento di generazione automatica, per poi rifare a mano le parti che contano e vedere quanto lontano si arriva.",
-      result:
-        "Anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco sono già coperti dalla dashboard.",
+      // `result` vuoto: testi.md dedica due frasi a questo progetto, già
+      // consumate da summary/problem/approach. Nessuna terza frase da cui
+      // ricavarlo senza inventare un predicato (correzione giro 1,
+      // task-11-report.md).
+      result: "",
     },
   },
   {
