@@ -15,8 +15,18 @@ interface Props {
   ogType?: 'website' | 'article';
   detectLocale?: boolean;
   person?: boolean;
+  attiva?: string;
 }
-const { title, description, lang, path, ogType = 'website', detectLocale = false, person = false } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  path,
+  ogType = 'website',
+  detectLocale = false,
+  person = false,
+  attiva,
+} = Astro.props;
 
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://aleflabo.github.io';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
@@ -90,7 +100,7 @@ const personLd = {
     )}
   </head>
   <body>
-    <Nav lang={lang} path={path} />
+    <Nav lang={lang} path={path} attiva={attiva} />
     <main><slot /></main>
     <Footer lang={lang} />
   </body>

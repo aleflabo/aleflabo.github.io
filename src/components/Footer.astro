@@ -1,6 +1,6 @@
 ---
+import { localizedPath, type Locale } from '../i18n/ui';
 import { site } from '../data/site';
-import type { Locale } from '../i18n/ui';
 
 interface Props {
   lang: Locale;
@@ -8,18 +8,72 @@ interface Props {
 const { lang } = Astro.props;
 const contact = site[lang].contact;
 const name = site[lang].hero.name;
+
+// Colonne del piè di pagina italiano: il testo (titoli e voci) viene da
+// site.it.piePagina (task 6); qui viviamo solo la rotta o l'URL a cui ogni
+// voce punta, così le stringhe non si riscrivono a mano.
+const rottePiePaginaIt: Record<string, string> = {
+  Servizi: localizedPath('it', '/servizi'),
+  Formazione: localizedPath('it', '/formazione'),
+  'Che fine fanno i vostri dati': localizedPath('it', '/i-vostri-dati'),
+  Lavori: localizedPath('it', '/lavori'),
+  Ricerca: localizedPath('it', '/ricerca'),
+  'Chi sono': localizedPath('it', '/chi-sono'),
+  Note: localizedPath('it', '/note'),
+  LinkedIn: 'https://www.linkedin.com/in/alessandro-flaborea',
+  GitHub: 'https://github.com/aleflabo',
+  'Google Scholar': 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
+  'English site': localizedPath('en', '/'),
+};
+const vociEsterne = new Set(['LinkedIn', 'GitHub', 'Google Scholar']);
+const piePaginaIt = site.it.piePagina ?? [];
+const nomeIt = site.it.hero.name;
 ---
 
-<footer class="footer">
-  <div class="inner">
-    <p class="name">{name} &copy; 2026</p>
-    <div class="links">
-      <a href={`mailto:${contact.email}`}>Email</a>
-      <a href="https://www.linkedin.com/in/alessandro-flaborea" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://github.com/aleflabo" target="_blank" rel="noopener noreferrer">GitHub</a>
+{lang === 'it' ? (
+  <footer class="footer-it">
+    <div class="colonne">
+      <div class="presentazione">
+        <p class="nome">{nomeIt}</p>
+        <p class="frase">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
+        <a class="pulsante prenota" href={`${localizedPath('it', '/')}#parliamone`}>Prenota mezz'ora</a>
+      </div>
+      {piePaginaIt.map((colonna) => (
+        <div class="colonna">
+          <p class="titolo-colonna">{colonna.titolo}</p>
+          {colonna.voci.map((voce) => {
+            const href = rottePiePaginaIt[voce] ?? '#';
+            const esterno = vociEsterne.has(voce);
+            return esterno ? (
+              <a href={href} target="_blank" rel="noopener noreferrer">{voce}</a>
+            ) : (
+              <a href={href}>{voce}</a>
+            );
+          })}
+        </div>
+      ))}
     </div>
-  </div>
-</footer>
+    <div class="barra">
+      <span>&copy; 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
+      <div class="legale">
+        {/* Privacy e Cookie non sono fra le rotte previste dai task 8-14: restano segnaposto. */}
+        <a href="#">Privacy</a>
+        <a href="#">Cookie</a>
+      </div>
+    </div>
+  </footer>
+) : (
+  <footer class="footer">
+    <div class="inner">
+      <p class="name">{name} &copy; 2026</p>
+      <div class="links">
+        <a href={`mailto:${contact.email}`}>Email</a>
+        <a href="https://www.linkedin.com/in/alessandro-flaborea" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/aleflabo" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+)}
 
 <style>
   .footer {
@@ -45,5 +99,97 @@ const name = site[lang].hero.name;
   }
   .links a:hover {
     color: var(--text);
+  }
+
+  /* --- piè di pagina italiano: misure alla lettera da tavole/Servizi.dc.html --- */
+  .footer-it {
+    border-top: 1px solid var(--border);
+    background: var(--surface-warm);
+  }
+  .colonne {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 52px 24px 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+  .presentazione .nome {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .presentazione .frase {
+    margin-top: 12px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 34ch;
+  }
+  .presentazione .prenota {
+    display: inline-block;
+    margin-top: 18px;
+    background: var(--azione);
+    color: var(--surface);
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: var(--radius);
+  }
+  .colonna {
+    display: flex;
+    flex-direction: column;
+  }
+  .titolo-colonna {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .colonna a {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .colonna a:hover {
+    color: var(--text);
+  }
+  .barra {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 20px 24px 34px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .barra span {
+    font-size: 13px;
+    color: #8a8177;
+  }
+  .legale {
+    display: flex;
+    gap: 20px;
+  }
+  .legale a {
+    font-size: 13px;
+    color: #8a8177;
+  }
+  .legale a:hover {
+    color: var(--text);
+  }
+
+  @media (max-width: 800px) {
+    .colonne {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 480px) {
+    .colonne {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

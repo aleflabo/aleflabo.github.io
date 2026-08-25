@@ -6,21 +6,54 @@ import LangSwitch from './LangSwitch.astro';
 interface Props {
   lang: Locale;
   path: string;
+  attiva?: string;
 }
-const { lang, path } = Astro.props;
+const { lang, path, attiva } = Astro.props;
 const nav = site[lang].nav;
+
+// Le sette voci del menu italiano: la `chiave` (per lo stato attivo) e la
+// rotta sono fisse qui; il testo viene da site.it.menu (task 6), nello
+// stesso ordine, così non si riscrive a mano in questo componente.
+const rotteMenuIt: Array<{ chiave: string; rotta: string }> = [
+  { chiave: 'servizi', rotta: '/servizi' },
+  { chiave: 'formazione', rotta: '/formazione' },
+  { chiave: 'lavori', rotta: '/lavori' },
+  { chiave: 'ricerca', rotta: '/ricerca' },
+  { chiave: 'chi-sono', rotta: '/chi-sono' },
+  { chiave: 'note', rotta: '/note' },
+];
+const etichetteMenuIt = site.it.menu ?? [];
+const menuIt = rotteMenuIt.map((voce, i) => ({ ...voce, etichetta: etichetteMenuIt[i] ?? '' }));
+const nomeIt = site.it.hero.name;
 ---
 
 <nav class="nav">
-  <div class="inner">
-    <a class="brand" href={localizedPath(lang, '/')} aria-label="Alessandro Flaborea — home">AF</a>
-    <div class="links">
-      <a href={`${localizedPath(lang, '/')}#work`}>{nav.work}</a>
-      <a href={`${localizedPath(lang, '/')}#research`}>{nav.research}</a>
-      <a href={`${localizedPath(lang, '/')}#about`}>{nav.about}</a>
-      <a class="cta" href={`${localizedPath(lang, '/')}#contact`}>{nav.cta}</a>
-      <LangSwitch lang={lang} path={path} />
-    </div>
+  <div class:list={['inner', lang === 'it' && 'it']}>
+    {lang === 'it' ? (
+      <>
+        <a class="brand" href={localizedPath('it', '/')} aria-label={`${nomeIt} — home`}>{nomeIt}</a>
+        <div class="links">
+          {menuIt.map((voce) => (
+            <a href={localizedPath('it', voce.rotta)} class:list={[voce.chiave === attiva && 'attiva']}>
+              {voce.etichetta}
+            </a>
+          ))}
+          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>Parliamone</a>
+          <LangSwitch lang={lang} path={path} />
+        </div>
+      </>
+    ) : (
+      <>
+        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">AF</a>
+        <div class="links">
+          <a href={`${localizedPath('en', '/')}#work`}>{nav.work}</a>
+          <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
+          <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
+          <a class="cta" href={`${localizedPath('en', '/')}#contact`}>{nav.cta}</a>
+          <LangSwitch lang={lang} path={path} />
+        </div>
+      </>
+    )}
   </div>
 </nav>
 
@@ -74,6 +107,42 @@ const nav = site[lang].nav;
     opacity: 0.9;
   }
 
+  /* --- menu italiano: misure alla lettera da tavole/Main.dc.html --- */
+  .inner.it {
+    padding: 22px 24px;
+  }
+  .inner.it .brand {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .inner.it .links {
+    gap: 24px;
+    font-size: 14px;
+  }
+  .inner.it .links a {
+    color: var(--text);
+  }
+  .inner.it .links a:hover {
+    color: var(--azione);
+  }
+  .inner.it .links a.attiva {
+    border-bottom: 2px solid var(--azione);
+    font-weight: 600;
+    padding-bottom: 2px;
+  }
+  .inner.it .links a.cta {
+    background: transparent;
+    color: var(--azione);
+    border: 1px solid var(--azione);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+  }
+  .inner.it .links a.cta:hover {
+    color: var(--azione);
+    opacity: 1;
+  }
+
   @media (max-width: 640px) {
     .links {
       gap: 0.9rem;
@@ -81,6 +150,10 @@ const nav = site[lang].nav;
     }
     .links a.cta {
       padding: 0.35rem 0.6rem;
+    }
+    .inner.it .links {
+      gap: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
