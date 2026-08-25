@@ -19,6 +19,15 @@ export interface Project {
   tags: string[];
   /** Etichette italiane per /lavori: cosa fa la cosa e a che punto è. Mai nomi di tecnologie. */
   tagIt: string[];
+  /**
+   * true = niente rotta inglese per questo progetto (né /en/work/[slug], né
+   * riga in WorkList): il campo `en` sotto è stato scritto da un
+   * implementatore e non approvato da nessuno (§10 della spec), quindi non
+   * si pubblica. Resta comunque compilato, pronto per il giorno in cui il
+   * committente scriverà quel testo (decisione nella revisione finale del
+   * ramo sito-italiano). L'italiano mostra il progetto in entrambi i casi.
+   */
+  soloItaliano?: boolean;
   en: CaseCopy;
   it: CaseCopy;
 }
@@ -79,6 +88,7 @@ export const projects: Project[] = [
     stack: ["3D web rendering", "CAD conversion pipeline", "Automated testing"],
     tags: ["CAD conversion", "Parts catalog"],
     tagIt: ["Pipeline CAD", "80 test", "IP protetta", "In costruzione"],
+    soloItaliano: true,
     en: {
       area: "Mechanical engineering",
       summary:
@@ -115,6 +125,7 @@ export const projects: Project[] = [
     stack: ["Web dashboard", "Auto-generated scaffold", "Custom data layer"],
     tags: ["Business dashboard", "Personal initiative"],
     tagIt: ["Gestionale", "Statistiche per area", "Iniziativa mia"],
+    soloItaliano: true,
     en: {
       area: "Automotive",
       summary:
