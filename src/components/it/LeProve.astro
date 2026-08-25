@@ -2,9 +2,13 @@
 import { localizedPath } from '../../i18n/ui';
 
 // Le tre schede, testo alla lettera da tavole/Main.dc.html (testi.md,
-// sezione «/ — home»). `projects.ts` non contiene ancora «Portale ricambi
-// 3D» e non è corretto per queste tre voci (task 11): per la home i testi
-// vengono da qui, non da quel file.
+// sezione «/ — home»). `projects.ts` contiene ormai anche «Portale ricambi
+// 3D» (task 6/11), ma i testi restano scritti qui alla lettera dalla
+// tavola invece di essere riletti da lì: i tre corpi di questa sezione
+// sono più corti di quelli di /lavori. Gli `href` invece vengono risolti,
+// non più segnaposto (bloccante 4, revisione finale del ramo
+// sito-italiano): due portano alle schede vere in /lavori, Spannum al
+// prodotto esterno.
 const prove = [
   {
     eyebrow: 'Meccanica · commessa reale',
@@ -12,6 +16,7 @@ const prove = [
     corpo: 'Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente.',
     tag: ['Pipeline CAD, 80 test', 'Proprietà intellettuale protetta'],
     link: 'Come funziona',
+    href: localizedPath('it', '/lavori/portale-ricambi'),
   },
   {
     eyebrow: 'Industria · in produzione',
@@ -19,6 +24,7 @@ const prove = [
     corpo: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.',
     tag: ['Clienti industriali', 'B4i Bocconi', 'Round angel'],
     link: 'Come funziona',
+    href: localizedPath('it', '/lavori/procedo'),
   },
   {
     eyebrow: 'Prodotto vivo · aperto a tutti',
@@ -26,6 +32,8 @@ const prove = [
     corpo: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.',
     tag: ['Online', 'Norme per età'],
     link: 'Aprilo',
+    href: 'https://spannum.com',
+    esterno: true,
   },
 ];
 ---
@@ -43,7 +51,11 @@ const prove = [
           <div class="tag">
             {p.tag.map((t) => <span>{t}</span>)}
           </div>
-          <a class="link" href="#">{p.link} <span class="freccia">&rarr;</span></a>
+          {p.esterno ? (
+            <a class="link" href={p.href} target="_blank" rel="noopener noreferrer">{p.link} <span class="freccia">&rarr;</span></a>
+          ) : (
+            <a class="link" href={p.href}>{p.link} <span class="freccia">&rarr;</span></a>
+          )}
         </div>
       ))}
     </div>
