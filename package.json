@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "verifica": "npm run build && node scripts/verifica-rotte.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
