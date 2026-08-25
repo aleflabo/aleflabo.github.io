@@ -46,6 +46,11 @@ export interface CaseStudyCopy {
   result: string;
 }
 
+export interface ColonnaPiePagina {
+  titolo: string;
+  voci: string[];
+}
+
 interface SiteCopy {
   nav: NavCopy;
   hero: HeroCopy;
@@ -60,6 +65,10 @@ interface SiteCopy {
   research: ResearchCopy;
   about: AboutCopy;
   contact: ContactCopy;
+  // Voci di menu e piè di pagina delle pagine nuove (solo `it` per ora,
+  // vedi task-6-brief.md). Opzionali: la sezione `en` non è ancora toccata.
+  menu?: string[];
+  piePagina?: ColonnaPiePagina[];
 }
 
 export const site: Record<Locale, SiteCopy> = {
@@ -204,5 +213,20 @@ export const site: Record<Locale, SiteCopy> = {
       body: "Hai un problema interessante o un'idea da costruire? Scrivimi.",
       email: "flaborea.alessandro@gmail.com",
     },
+    menu: ["Servizi", "Formazione", "Lavori", "Ricerca", "Chi sono", "Note"],
+    piePagina: [
+      {
+        titolo: "Cosa faccio",
+        voci: ["Servizi", "Formazione", "Che fine fanno i vostri dati"],
+      },
+      {
+        titolo: "Le prove",
+        voci: ["Lavori", "Ricerca", "Chi sono", "Note"],
+      },
+      {
+        titolo: "Altrove",
+        voci: ["LinkedIn", "GitHub", "Google Scholar", "English site"],
+      },
+    ],
   },
 };
