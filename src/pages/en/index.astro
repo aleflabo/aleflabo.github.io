@@ -26,11 +26,31 @@ import {
   daDoveViene,
   contatto,
 } from '../../data/en/home';
+
+// Titolo e descrizione della pagina: composti dai dati già approvati in
+// home.ts, con la stessa regola della home italiana (src/pages/index.astro),
+// non riscritti a mano. Nessuna parola nuova: solo composizione.
+//
+// - titolo  = "Alessandro Flaborea — " + occhiello.eyebrow
+// - descrizione = occhiello.titolo, senza le barre verticali che lo spezzano
+//   in tre parti per l'evidenziatore. La sostituzione va oltre un semplice
+//   `replaceAll('|', '')`: quel titolo ha segmenti che si toccano senza
+//   spazio da un lato (qui: una virgola subito dopo la seconda barra), quindi
+//   togliere solo il carattere unirebbe le parole ("...is needed , and...").
+//   Si sostituisce ogni barra con uno spazio, poi si toglie lo spazio
+//   indesiderato prima della punteggiatura e si collassano eventuali spazi
+//   doppi, per ottenere una frase leggibile.
+const titoloPagina = `Alessandro Flaborea — ${occhiello.eyebrow}`;
+const descrizionePagina = occhiello.titolo
+  .replaceAll('|', ' ')
+  .replace(/\s+([,.;:!?])/g, '$1')
+  .replace(/\s+/g, ' ')
+  .trim();
 ---
 
 <BaseLayout
-  title="Alessandro Flaborea"
-  description="AI & Computer Vision engineer, from research to product"
+  title={titoloPagina}
+  description={descrizionePagina}
   lang="en"
   path="/"
   pathIt="/"
