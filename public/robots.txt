@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flaborea.com/sitemap-index.xml
+Sitemap: https://aleflabo.github.io/sitemap-index.xml

@@ -2,19 +2,20 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://flaborea.com',
+  // flaborea.com non è ancora registrato: finché non lo è, il canonico è questo.
+  site: 'https://aleflabo.github.io',
   output: 'static',
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'en',
-        locales: { en: 'en', it: 'it' },
+        defaultLocale: 'it',
+        locales: { it: 'it', en: 'en' },
       },
     }),
   ],
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'it'],
+    defaultLocale: 'it',
+    locales: ['it', 'en'],
     routing: { prefixDefaultLocale: false },
   },
 });
