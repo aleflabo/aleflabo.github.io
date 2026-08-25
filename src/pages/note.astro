@@ -9,7 +9,12 @@
 // di questa pagina. Gli articoli non hanno una pagina propria: il link di
 // ogni riga resta `href="#"`. Il riquadro «Te le mando per mail» resta
 // inerte — il `<form>` non ha `action`, nessun servizio è ancora scelto —
-// mentre «Oppure via RSS» punta al feed vero, generato da rss.xml.ts.
+// mentre «Oppure via RSS» punta al feed vero, generato da rss.xml.ts. Che
+// sia inerte è deciso; che simuli l'iscrizione no (bloccante 7, revisione
+// finale del ramo sito-italiano): `onsubmit="return false"` blocca la GET
+// che altrimenti ricaricherebbe la pagina con l'email in query string, e
+// il pulsante disabilitato più la nota sotto dicono che non è ancora
+// attivo.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { note } from '../data/note';
 import { localizedPath } from '../i18n/ui';
@@ -60,9 +65,10 @@ import { localizedPath } from '../i18n/ui';
           <h2>Te le mando per mail</h2>
           <p class="corpo">Una mail quando esce qualcosa di nuovo, niente altro. Ci si cancella con un clic.</p>
         </div>
-        <form class="iscrizione">
+        <form class="iscrizione" onsubmit="return false">
           <input type="email" name="email" placeholder="la.tua@mail.it" aria-label="Il tuo indirizzo email" />
-          <button type="submit" class="pulsante">Iscrivimi</button>
+          <button type="submit" class="pulsante" disabled>Iscrivimi</button>
+          <p class="nota-inerte">Iscrizione non ancora attiva.</p>
           <a class="rss" href="/rss.xml">Oppure via RSS</a>
         </form>
       </div>
@@ -215,6 +221,15 @@ import { localizedPath } from '../i18n/ui';
     text-align: center;
     font-family: var(--font-sans);
     cursor: pointer;
+  }
+  .iscrizione button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .iscrizione .nota-inerte {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    text-align: center;
   }
   .iscrizione .rss {
     font-size: 13px;

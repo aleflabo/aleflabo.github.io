@@ -3,7 +3,12 @@
 // Il modulo resta inerte (nessun `action`) e i pulsanti di prenotazione,
 // WhatsApp e mail restano segnaposto (`href="#"`): non è stato scelto
 // nessun servizio esterno né inventato un numero, per istruzione esplicita
-// del task 8.
+// del task 8. Che sia inerte è deciso; che simuli l'invio no (bloccante 7,
+// revisione finale del ramo sito-italiano): senza `action` un submit fa
+// una GET sulla stessa pagina, che si ricarica con i campi in query
+// string, e sembra che il messaggio sia partito. `onsubmit="return
+// false"` blocca quella GET; il pulsante disabilitato e la nota sotto
+// dicono perché.
 ---
 
 <section class="contatto" id="parliamone">
@@ -12,7 +17,7 @@
     <h2 class="titolo">Mezz'ora per capire se possiamo lavorare insieme</h2>
     <p class="intro">Se non è il lavoro giusto per me te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
 
-    <form class="modulo">
+    <form class="modulo" onsubmit="return false">
       <div class="campo">
         <label for="azienda">Azienda</label>
         <input type="text" id="azienda" name="azienda" placeholder="Ragione sociale" />
@@ -43,7 +48,8 @@
         </div>
       </fieldset>
       <div class="invia">
-        <button type="submit" class="pulsante">Manda</button>
+        <button type="submit" class="pulsante" disabled>Manda</button>
+        <p class="nota-inerte">Modulo non ancora attivo.</p>
       </div>
     </form>
 
@@ -178,6 +184,10 @@
   .invia {
     grid-column: span 2;
     margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
   }
   .invia .pulsante {
     display: inline-block;
@@ -190,6 +200,14 @@
     border-radius: var(--radius);
     font-family: inherit;
     cursor: pointer;
+  }
+  .invia .pulsante:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .nota-inerte {
+    font-size: 13px;
+    color: #a8bdd2;
   }
   .alternativa {
     margin-top: 40px;
@@ -241,6 +259,9 @@
     }
     .invia {
       grid-column: span 1;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
     }
     .invia .pulsante {
       width: 100%;
