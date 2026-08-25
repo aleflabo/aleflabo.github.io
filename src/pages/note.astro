@@ -29,7 +29,13 @@ import { localizedPath } from '../i18n/ui';
   attiva="note"
 >
   <section class="intestazione">
-    <div class="container"> <TestataPagina occhiello="Note" titolo="Quello che sto imparando" introduzione="Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana." /> <a class="chi-scrive" href={localizedPath('it', '/chi-sono')}>Chi scrive <span class="freccia">&rarr;</span></a>
+    <div class="container">
+      <TestataPagina
+        occhiello="Note"
+        titolo="Quello che sto imparando"
+        introduzione="Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana."
+      />
+      <a class="chi-scrive" href={localizedPath('it', '/chi-sono')}>Chi scrive <span class="freccia">&rarr;</span></a>
     </div>
   </section>
 
@@ -87,9 +93,13 @@ import { localizedPath } from '../i18n/ui';
     padding: 72px 24px 40px;
   }
   /* TestataPagina riproduce il caso maggioritario (22ch): qui la tavola
-     vuole 20ch, uno scarto minore, quindi resta come override. */
-  .intestazione :global(h1) {
-    max-width: 20ch;
+     vuole 20ch, uno scarto minore, quindi resta come override — solo da
+     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     ci pensa già il componente ad azzerare max-width). */
+  @media (min-width: 641px) {
+    .intestazione :global(h1) {
+      max-width: 20ch;
+    }
   }
   .chi-scrive {
     display: inline-block;

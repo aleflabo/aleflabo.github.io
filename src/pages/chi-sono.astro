@@ -44,7 +44,9 @@ import { localizedPath } from '../i18n/ui';
           </div>
         </div>
 
-        <div class="colonna-bio"> <TestataPagina occhiello="Chi sono" titolo="Alessandro Flaborea" /><div class="paragrafi">
+        <div class="colonna-bio">
+          <TestataPagina occhiello="Chi sono" titolo="Alessandro Flaborea" />
+          <div class="paragrafi">
             {chiSono.paragrafi.map((p, i) => (
               <p class:list={['corpo', { primo: i === 0 }]}>{p}</p>
             ))}
@@ -148,16 +150,26 @@ import { localizedPath } from '../i18n/ui';
      «introduzione» del componente presuppone una sola frase, mentre qui
      la biografia sono cinque paragrafi con una gerarchia propria (il
      primo più grande, gli altri no) — non la stessa cosa, non passata
-     come prop. Le misure di titolo e filetto restano quelle della tavola
-     (42px, non i 46px del caso maggioritario; 28px invece di 30px),
-     quindi restano come override sull'elemento reso dal componente. */
-  .colonna-bio :global(h1) {
-    margin-top: 20px;
-    font-size: 42px;
-    max-width: 20ch;
-  }
-  .colonna-bio :global(.divider) {
-    margin: 28px 0;
+     come prop. Le misure di titolo e filetto della tavola, in desktop,
+     non coincidono col caso maggioritario delle altre sei pagine (h1
+     42px non 46px, max-width 20ch, filetto 28px non 30px) e restano
+     come override — solo da 641px in su: sotto i 640px il componente
+     azzera già margin-top/max-width dell'h1 e il margine del filetto
+     ai suoi valori mobile, che qui coincidono con quelli della tavola
+     (16px, none, 22px), quindi non serve toccarli di nuovo. Un override
+     senza @media qui vincerebbe per specificità anche sotto i 640px,
+     rompendo il mobile (bug trovato e corretto nel giro di correzioni
+     1, vedi task-1-report.md). Il font-size dell'h1 in mobile (30px
+     invece di 32px) resta invece un override mirato, più sotto. */
+  @media (min-width: 641px) {
+    .colonna-bio :global(h1) {
+      margin-top: 20px;
+      font-size: 42px;
+      max-width: 20ch;
+    }
+    .colonna-bio :global(.divider) {
+      margin: 28px 0;
+    }
   }
   .paragrafi {
     display: flex;

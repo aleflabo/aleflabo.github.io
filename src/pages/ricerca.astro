@@ -26,7 +26,13 @@ const githubUrl = 'https://github.com/aleflabo';
   attiva="ricerca"
 >
   <section class="intestazione">
-    <div class="container"> <TestataPagina occhiello="Ricerca" titolo="La ricerca da cui viene il resto" introduzione="Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola." /> </div>
+    <div class="container">
+      <TestataPagina
+        occhiello="Ricerca"
+        titolo="La ricerca da cui viene il resto"
+        introduzione="Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola."
+      />
+    </div>
   </section>
 
   <section class="fascia-numeri">
@@ -102,9 +108,13 @@ const githubUrl = 'https://github.com/aleflabo';
     padding: 72px 24px 40px;
   }
   /* TestataPagina riproduce il caso maggioritario (62ch): qui la tavola
-     vuole 64ch, uno scarto minore, quindi resta come override. */
-  .intestazione :global(.intro) {
-    max-width: 64ch;
+     vuole 64ch, uno scarto minore, quindi resta come override — solo da
+     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     ci pensa già il componente ad azzerare max-width). */
+  @media (min-width: 641px) {
+    .intestazione :global(.intro) {
+      max-width: 64ch;
+    }
   }
 
   /* --- fascia numeri --- */

@@ -34,7 +34,13 @@ import { localizedPath } from '../i18n/ui';
   path="/i-vostri-dati"
 >
   <section class="intestazione">
-    <div class="container"> <TestataPagina occhiello="I vostri dati" titolo="Che fine fanno i vostri dati" introduzione={rispostaCorta.intro} /> </div>
+    <div class="container">
+      <TestataPagina
+        occhiello="I vostri dati"
+        titolo="Che fine fanno i vostri dati"
+        introduzione={rispostaCorta.intro}
+      />
+    </div>
   </section>
 
   <section class="risposta-corta">
@@ -134,13 +140,22 @@ import { localizedPath } from '../i18n/ui';
   }
   /* TestataPagina riproduce il caso maggioritario: qui la tavola vuole
      scarti su tre misure (max-width dell'h1, interlinea e max-width
-     dell'intro), quindi restano come override. */
-  .intestazione :global(h1) {
-    max-width: 20ch;
-  }
+     dell'intro), quindi restano come override. L'interlinea si applica
+     a ogni larghezza (l'originale non la toccava in mobile); i due
+     max-width solo da 641px in su, perché sotto i 640px il componente
+     stesso li azzera già a "none" — un override senza @media qui
+     vincerebbe anche lì per specificità (vedi la nota gemella in
+     servizi.astro). */
   .intestazione :global(.intro) {
     line-height: 1.65;
-    max-width: 64ch;
+  }
+  @media (min-width: 641px) {
+    .intestazione :global(h1) {
+      max-width: 20ch;
+    }
+    .intestazione :global(.intro) {
+      max-width: 64ch;
+    }
   }
 
   /* --- risposta corta --- */

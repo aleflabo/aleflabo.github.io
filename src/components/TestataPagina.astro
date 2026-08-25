@@ -26,15 +26,13 @@ interface Props {
 }
 const { occhiello, titolo, introduzione } = Astro.props;
 ---
-{/* Una riga sola, spazi inclusi, di proposito: Astro non ricompatta lo
-    spazio bianco fra ciò che rende un componente e ciò che lo circonda
-    nella pagina chiamante allo stesso modo di un unico template piatto —
-    un a-capo o una riga vuota qui produce uno spazio in più (o in meno)
-    nell'HTML finale rispetto alle sette pagine prima del refactor. Non è
-    un capriccio di stile: è quello che tiene il confronto HTML
-    «identico» nel task-1-report.md. Non ri-formattare senza rifare
-    quel confronto. */}
-<p class="label">{occhiello}</p> <h1>{titolo}</h1> <div class="divider"></div> {introduzione && <p class="intro">{introduzione}</p>}<style>
+
+<p class="label">{occhiello}</p>
+<h1>{titolo}</h1>
+<div class="divider"></div>
+{introduzione && <p class="intro">{introduzione}</p>}
+
+<style>
   h1 {
     margin-top: 20px;
     font-size: 46px;

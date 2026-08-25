@@ -25,7 +25,13 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
   attiva="formazione"
 >
   <section class="intestazione">
-    <div class="container"> <TestataPagina occhiello="Formazione" titolo="Corsi che si usano il giorno dopo" introduzione="In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito." /> </div>
+    <div class="container">
+      <TestataPagina
+        occhiello="Formazione"
+        titolo="Corsi che si usano il giorno dopo"
+        introduzione="In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito."
+      />
+    </div>
   </section>
 
   <section class="avviso-ai-act">
@@ -130,9 +136,13 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
     padding: 72px 24px 44px;
   }
   /* TestataPagina riproduce il caso maggioritario (22ch): qui la tavola
-     vuole 24ch, uno scarto minore, quindi resta come override. */
-  .intestazione :global(h1) {
-    max-width: 24ch;
+     vuole 24ch, uno scarto minore, quindi resta come override — solo da
+     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     ci pensa già il componente ad azzerare max-width). */
+  @media (min-width: 641px) {
+    .intestazione :global(h1) {
+      max-width: 24ch;
+    }
   }
 
   /* --- riquadro AI Act --- */

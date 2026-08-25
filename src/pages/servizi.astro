@@ -22,7 +22,13 @@ import { localizedPath } from '../i18n/ui';
   attiva="servizi"
 >
   <section class="intestazione">
-    <div class="container"> <TestataPagina occhiello="Servizi" titolo="Quattro modi di lavorare insieme" introduzione="Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro." /> </div>
+    <div class="container">
+      <TestataPagina
+        occhiello="Servizi"
+        titolo="Quattro modi di lavorare insieme"
+        introduzione="Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro."
+      />
+    </div>
   </section>
 
   <section class="elenco-ingaggi">
@@ -80,9 +86,16 @@ import { localizedPath } from '../i18n/ui';
     padding: 72px 24px 44px;
   }
   /* TestataPagina riproduce il caso maggioritario (62ch): qui la tavola
-     vuole 60ch, uno scarto minore, quindi resta come override. */
-  .intestazione :global(.intro) {
-    max-width: 60ch;
+     vuole 60ch, uno scarto minore, quindi resta come override — solo da
+     641px in su, perché sotto i 640px il componente stesso azzera già
+     max-width a "none" (@media nel componente): un override senza
+     @media qui vincerebbe anche lì per specificità, sovrascrivendo
+     quell'azzeramento e rompendo il mobile (bug trovato e corretto nel
+     giro di correzioni 1, vedi task-1-report.md). */
+  @media (min-width: 641px) {
+    .intestazione :global(.intro) {
+      max-width: 60ch;
+    }
   }
 
   /* --- schede degli ingaggi --- */
