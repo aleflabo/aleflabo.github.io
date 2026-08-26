@@ -1,113 +1,59 @@
-# Istruzioni per Claude — sito di Alessandro Flaborea
+# Alessandro Flaborea's site — how work is done here
 
-Il README descrive **com'è fatto** il sito. Questo file dice **come si lavora**:
-le regole che non si deducono leggendo il codice, e gli errori già commessi qui.
+<!-- README says how the site is built. This file says how work is done: the rules
+     you cannot derive from the code, and the mistakes already made here.
+     Copy/tone rules and the Sanity notes live in .claude/rules/ and load only
+     when a matching file is opened. Keep this under 200 lines. -->
 
-## Regole che non si negoziano
+## Non-negotiable
 
-1. **Mai un commit diretto su `main`.** Ogni modifica passa da un ramo e una PR,
-   anche una riga sola. Le PR di questo repo vanno su `main` — non c'è `staging`,
-   quindi la regola globale «PR verso staging» qui non si applica.
-2. **Il copy non si inventa mai.** Nemmeno una congiunzione, nemmeno per far
-   quadrare una struttura. Le fonti approvate sono
-   `docs/superpowers/specs/2026-08-25-sito-italiano/testi.md` (italiano) e
-   `testi-en.md` (inglese). Se il testo non c'è, **si accorcia la struttura, non
-   si allunga il testo**: un campo vuoto salta la sua sezione. Se serve davvero
-   una frase nuova, la si chiede.
-   *Perché:* sei incidenti di testo inventato in questo progetto, di cui uno mio.
-3. **Non si modifica il prodotto per far passare una verifica.** Se un controllo
-   fallisce, o il codice è sbagliato o il controllo è sbagliato: si sistema
-   quello, non si allarga la maglia.
-4. **Non si indebolisce `verifica-rotte.mjs`.** In particolare il controllo che
-   vieta testo italiano sulle pagine inglesi: ha già trovato tre difetti veri che
-   nessuna revisione aveva visto. L'italiano voluto su una pagina inglese si
-   marca `lang="it"` sull'elemento (il controllo salta quei sottoalberi); la
-   marcatura su `<html>` è rifiutata di proposito, perché spegnerebbe il
-   controllo lasciandolo verde.
+1. **Never commit directly to `main`.** Every change goes through a branch and a PR,
+   a single line included. PRs here target **`main`** — this repo has no `staging`.
+2. **Copy is never invented.** Not a conjunction, not to make a structure balance.
+   The approved sources are `docs/superpowers/specs/2026-08-25-sito-italiano/testi.md`
+   (Italian) and `testi-en.md` (English). If the text is not there, **shorten the
+   structure, do not lengthen the text**: an empty field skips its section. If a new
+   sentence is genuinely needed, ask for it.
+   *Why:* six incidents of invented copy in this project, one of them mine.
+3. **Never change the product to make a check pass.** If a check fails, either the code
+   is wrong or the check is wrong — fix that one, don't widen the mesh.
+4. **Never weaken `verifica-rotte.mjs`**, in particular the check that forbids Italian
+   text on English pages: it has already found three real defects no review had caught.
+   Deliberate Italian on an English page is marked `lang="it"` on the element (the check
+   skips those subtrees); marking it on `<html>` is refused on purpose, because that
+   would switch the check off while leaving it green.
 
-## Prima di aprire una PR
+## Before opening a PR
 
 ```bash
-npm run check     # 0 errori
-npm test          # tutti verdi
-npm run verifica  # build + rotte, feed, link interni, hreflang, italiano
+npm run check     # astro check — 0 errors
+npm test          # vitest — all green
+npm run verifica  # build + routes, feed, internal links, hreflang, Italian-on-English
 ```
 
-Tutti e tre. `npm run verifica` ricostruisce il sito, quindi copre anche `build`.
+All three. `npm run verifica` rebuilds the site, so it covers `build` too.
 
-**Se tocchi un componente condiviso** (`BaseLayout`, `Nav`, `Footer`,
-`TestataPagina`, qualsiasi cosa in `components/`), il sito italiano è **in
-produzione**: estrai il testo visibile delle pagine italiane prima e dopo e
-confrontalo. Non fidarti di un confronto di byte o di hash — su questo repo un
-confronto byte-a-byte ha dichiarato «identico» un diff che aggiungeva 16px di
-scorrimento orizzontale su `/chi-sono`. Guarda le pagine.
+**If you touch a shared component** (`BaseLayout`, `Nav`, `Footer`, `TestataPagina`,
+anything in `components/`): the Italian site is **in production**. Extract the visible
+text of the Italian pages before and after and compare. Do not trust a byte or hash
+comparison — in this repo a byte-for-byte comparison declared "identical" a diff that
+added 16px of horizontal scroll on `/chi-sono`. Look at the pages.
 
-Chromium per gli screenshot si installa senza permessi di root:
-`npx playwright install chromium`.
+Chromium for screenshots installs without root: `npx playwright install chromium`.
 
-`tsconfig.json` esclude `studio/`: è un progetto a sé, con le proprie
-dipendenze, e includerlo faceva morire `astro check` per esaurimento di
-memoria. Se il controllo esce con «heap out of memory», il primo sospetto è
-che qualcosa abbia rimesso quella cartella nel programma TypeScript.
+## Two traps
 
-## Le note
+**`tsconfig.json` excludes `studio/`** — it is a project of its own with its own
+dependencies, and including it killed `astro check` with an out-of-memory. If the check
+dies with "heap out of memory", the first suspect is something putting that folder back
+into the TypeScript program.
 
-**Le note non stanno nel repo.** Vengono da Sanity (progetto `sn6gk82y`, dataset
-`production`), lette in fase di costruzione.
+**The site is static: publishing a note changes nothing until the site is rebuilt.**
+The Sanity webhook does that, calling the `repository_dispatch` of type
+`nota-pubblicata` in the deploy workflow. If a published note does not appear, suspect
+the webhook before the code.
 
-Per scrivere o correggere una nota: si usa lo Studio, non un file. Se l'utente
-chiede di aggiungere una nota, la risposta è «aprila nello Studio» — non creare
-file di contenuto né reintrodurre `src/data/note.ts`.
+## Still open
 
-**Il sito è statico: pubblicare una nota non cambia niente finché il sito non
-viene ricostruito.** Ci pensa il webhook di Sanity, che chiama il
-`repository_dispatch` di tipo `nota-pubblicata` nel workflow di deploy. Se una
-nota pubblicata non compare, il sospetto numero uno è il webhook, non il codice.
-
-Una nota è **italiana**. I campi inglesi (`titoloEn`, `sommarioEn`, `corpoEn`)
-sono facoltativi e contano solo se ci sono **tutti e tre**: con meno di così la
-nota resta italiana anche su `/en/notes`, marcata `lang="it"`. Non allentare
-questa condizione — mezza traduzione produce una pagina che annuncia una lingua
-e ne parla un'altra.
-
-Lo schema sta in `studio/schemaTypes/nota.ts`. Cambiarlo richiede di aggiornare
-anche `src/lib/note.ts` e le pagine che leggono quei campi: sono due copie della
-stessa forma, e divergono in silenzio.
-
-## Fatti da non sbagliare
-
-Su questi si è già sbagliato, e sono verificabili nel CV (`~/cv/content/en.yaml`,
-che per date e numeri **vince su qualsiasi altra fonte**, deck compresi).
-
-- **Non è più operativo in Procedo**: co-fondatore e CTO dal 2024 al 2026, uscito
-  a metà 2026. Tutti i verbi al passato. Non «dieci anni di ricerca»: dottorato
-  di tre anni, poi due da CTO, prima una magistrale in data science.
-- **Dieci articoli pubblicati, 533 citazioni.**
-- **Il progetto si chiama Grip**, non «Tire Hub»: quello era il nome con cui era
-  uscito. `/lavori/tire-hub` resta come rimando permanente.
-- **`flaborea.com` non è ancora registrato.** `astro.config.mjs` punta a
-  `aleflabo.github.io` e non c'è `public/CNAME`. Non reintrodurre quel dominio
-  finché non è comprato: il sitemap punterebbe a un dominio che non risolve.
-
-## Registro del tono
-
-L'utente ha corretto il testo del sito molte volte. Le regole ricavate da quelle
-correzioni:
-
-- **Niente «non X, ma Y».** Ne erano state contate nove in una sola versione.
-- **Niente titoli tutti uguali**: virgola e seconda proposizione, o apertura con
-  un numero. Erano undici e undici.
-- **Niente registro difensivo.** Non deve giustificarsi né dimostrare il proprio
-  valore: è un professionista, il valore è nei fatti che elenca.
-- **Niente sospetto verso chi legge.** Le richieste si formulano in positivo, non
-  come cose che il cliente potrebbe sbagliare.
-- **Niente critiche implicite a Procedo**, che nella stessa pagina è una
-  credenziale.
-- **Nessun riferimento geografico nel posizionamento** (Veneto orientale, «local»).
-  Nella biografia i luoghi restano: sono biografia, non posizionamento.
-- Registro **«voi»** con le aziende, non «tu».
-
-## Cose ancora aperte
-
-Vedi la issue #5. Le due visibili in produzione: la partita IVA nel piè di pagina
-è `[DA INSERIRE]`, e la fotografia di `/chi-sono` è un riquadro segnaposto.
+See issue #5. The one visible in production: the photograph on `/chi-sono` is a
+placeholder box.

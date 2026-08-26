@@ -10,7 +10,16 @@ export interface Project {
   slug: string;
   order: number;
   name: string;
+  /** Ruolo, in inglese: lo rende /en/work/<slug>. */
   role: string;
+  /**
+   * Ruolo in italiano, per /lavori/<slug>. Campo a sé e non una traduzione
+   * fatta al volo: «Solo build» in italiano può essere «Sviluppo», «Fatto da
+   * solo» o «Costruzione», e sono tre posizionamenti diversi. Finché manca,
+   * la pagina italiana ripiega su `role` — che è come si è arrivati a
+   * mostrare «Co-Founder & CTO» su una pagina in italiano.
+   */
+  roleIt?: string;
   year: string;
   status: "live" | "case" | "code";
   url?: string;
@@ -38,6 +47,7 @@ export const projects: Project[] = [
     order: 1,
     name: "Procedo",
     role: "Co-Founder & CTO",
+    roleIt: "Co-fondatore e CTO",
     year: "2024–2026",
     status: "case",
     url: "https://procederai.com",
@@ -83,6 +93,7 @@ export const projects: Project[] = [
     order: 2,
     name: "Portale ricambi 3D",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2026",
     status: "case",
     stack: ["3D web rendering", "CAD conversion pipeline", "Automated testing"],
@@ -119,6 +130,7 @@ export const projects: Project[] = [
     order: 3,
     name: "Grip",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2026",
     status: "case",
     stack: ["Web dashboard", "Auto-generated scaffold", "Custom data layer"],
@@ -154,6 +166,7 @@ export const projects: Project[] = [
     order: 4,
     name: "Agentic Workflow Toolkit",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2026",
     status: "case",
     stack: ["Claude Code", "MCP", "Notion API", "GitHub API", "LLM agents"],
@@ -187,6 +200,7 @@ export const projects: Project[] = [
     order: 5,
     name: "Spannum",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2026",
     status: "live",
     url: "https://spannum.com",
@@ -228,6 +242,7 @@ export const projects: Project[] = [
     order: 6,
     name: "Fanta Mundial",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2026",
     status: "live",
     url: "https://fanta-mundial.streamlit.app",
@@ -262,6 +277,7 @@ export const projects: Project[] = [
     order: 7,
     name: "Cost Tracking",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2025",
     status: "case",
     stack: [
@@ -303,6 +319,7 @@ export const projects: Project[] = [
     order: 8,
     name: "Contrada Navigator",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2025",
     status: "case",
     stack: [
@@ -344,6 +361,7 @@ export const projects: Project[] = [
     order: 9,
     name: "Personal Vault",
     role: "Solo build",
+    roleIt: "Costruito da solo",
     year: "2024–Present",
     status: "case",
     stack: ["Obsidian", "Claude Code agent", "LLM"],
@@ -377,6 +395,7 @@ export const projects: Project[] = [
     order: 10,
     name: "HomeSweatHome",
     role: "Founding team",
+    roleIt: "Nel gruppo fondatore",
     year: "2021–2023",
     status: "case",
     stack: ["Python", "Computer Vision", "Pose estimation", "On-device"],
