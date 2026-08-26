@@ -1,0 +1,279 @@
+---
+// src/pages/en/notes.astro — gemella inglese di src/pages/note.astro
+// (rotta `/en/notes`).
+// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
+// testi-en.md, sezione «8. /en/notes». I sei articoli (data, titolo,
+// sommario, tag) vengono da src/data/en/note.ts (task 6, sito-inglese):
+// non riscritti qui, dalla più recente.
+//
+// La tavola segnala che l'apertura si contraddice da sola su questa
+// pagina: «In Italian» dichiara che le note sono in un'altra lingua
+// rispetto a quella della pagina che le elenca. È voluto (task-8-brief.md,
+// punto 6): il materiale in inglese non esiste ancora, e la pagina lo dice
+// invece di fingere. Gli articoli non hanno una pagina propria: il link
+// di ogni riga resta `href="#"`, come in italiano.
+//
+// Il riquadro «I'll send them to you by email» resta inerte — il `<form>`
+// non ha `action`, nessun servizio è ancora scelto — mentre «Or via RSS»
+// punta al feed unico generato da rss.xml.ts: non un secondo feed
+// inglese. `onsubmit="return false"` blocca la GET che altrimenti
+// ricaricherebbe la pagina con l'email in query string; il pulsante
+// disabilitato dice che non è ancora attivo. La nota sotto il pulsante
+// («Iscrizione non ancora attiva.» in italiano) non ha una traduzione in
+// testi-en.md — non è fra i blocchi marcati della sezione «Iscrizione» —
+// quindi resta un campo volutamente vuoto invece di un testo inventato:
+// `notaInerte` è stringa vuota e non si rende un elemento vuoto, come già
+// fa Contatto.astro con lo stesso campo su `data/en/home.ts`.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestataPagina from '../../components/TestataPagina.astro';
+import { note } from '../../data/en/note';
+import { localizedPath } from '../../i18n/ui';
+
+const notaInerte = '';
+---
+
+<BaseLayout
+  title="Notes — Alessandro Flaborea"
+  description="I write about what works inside companies and about what hasn't worked. In Italian, short, roughly once a week."
+  lang="en"
+  path="/notes"
+  pathIt="/note"
+  attiva="notes"
+>
+  <section class="intestazione">
+    <div class="container">
+      <TestataPagina
+        occhiello="Notes"
+        titolo="What I'm learning"
+        introduzione="I write about what works inside companies and about what hasn't worked. In Italian, short, roughly once a week."
+      />
+      <a class="chi-scrive" href={localizedPath('en', '/about')}>Who writes this <span class="freccia">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="elenco-note">
+    <div class="container">
+      <div class="righe">
+        {note.map((n) => (
+          <a href="#" class="riga">
+            <span class="data">{n.data}</span>
+            <div class="testo-riga">
+              <h2>{n.titolo}</h2>
+              <p class="sommario">{n.sommario}</p>
+              <div class="tag">
+                {n.tag.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="raccolta-email">
+    <div class="container">
+      <div class="riquadro">
+        <div>
+          <h2>I'll send them to you by email</h2>
+          <p class="corpo">One email when something new comes out, nothing else. You unsubscribe with one click.</p>
+        </div>
+        <form class="iscrizione" onsubmit="return false">
+          <input type="email" name="email" placeholder="your@email.com" aria-label="Your email address" />
+          <button type="submit" class="pulsante" disabled>Sign me up</button>
+          {notaInerte && <p class="nota-inerte">{notaInerte}</p>}
+          <a class="rss" href="/rss.xml">Or via RSS</a>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 40px;
+  }
+  /* TestataPagina riproduce il caso maggioritario (22ch): qui la tavola
+     vuole 20ch, uno scarto minore, quindi resta come override — solo da
+     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     ci pensa già il componente ad azzerare max-width). */
+  @media (min-width: 641px) {
+    .intestazione :global(h1) {
+      max-width: 20ch;
+    }
+  }
+  .chi-scrive {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- l'elenco degli articoli --- */
+  .elenco-note {
+    padding: 0;
+  }
+  .elenco-note .container {
+    padding: 0 24px 60px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 32px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .riga:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .riga .data {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-top: 6px;
+  }
+  .riga h2 {
+    font-size: 25px;
+    color: var(--text);
+    max-width: 30ch;
+  }
+  .riga .sommario {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+  .riga .tag {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .riga .tag span {
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+  }
+
+  /* --- te le mando per mail --- */
+  .raccolta-email {
+    padding: 0;
+  }
+  .raccolta-email .container {
+    padding: 0 24px 72px;
+  }
+  .riquadro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 48px;
+    align-items: center;
+  }
+  .riquadro h2 {
+    font-size: 26px;
+    max-width: 22ch;
+  }
+  .riquadro .corpo {
+    margin-top: 14px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 50ch;
+  }
+  .iscrizione {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .iscrizione input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    font-size: 15px;
+    font-family: var(--font-sans);
+    color: var(--text);
+  }
+  .iscrizione input::placeholder {
+    color: #999999;
+  }
+  .iscrizione button {
+    background: var(--azione);
+    color: var(--surface);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 24px;
+    border: none;
+    border-radius: var(--radius);
+    text-align: center;
+    font-family: var(--font-sans);
+    cursor: pointer;
+  }
+  .iscrizione button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .iscrizione .nota-inerte {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    text-align: center;
+  }
+  .iscrizione .rss {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .elenco-note .container {
+      padding: 0 20px 44px;
+    }
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 22px 0;
+    }
+    .riga .data {
+      padding-top: 0;
+    }
+    .riga h2 {
+      font-size: 21px;
+      max-width: none;
+    }
+    .riga .sommario {
+      max-width: none;
+    }
+    .raccolta-email .container {
+      padding: 0 20px 48px;
+    }
+    .riquadro {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 22px;
+    }
+  }
+</style>

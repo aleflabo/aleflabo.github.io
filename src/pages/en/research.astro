@@ -1,0 +1,352 @@
+---
+// src/pages/en/research.astro — gemella inglese di src/pages/ricerca.astro
+// (rotta `/en/research`).
+// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
+// testi-en.md, sezione «5. /en/research». Le dieci pubblicazioni e i
+// quattro numeri della fascia vengono da src/data/en/pubblicazioni.ts
+// (task 6, sito-inglese): non riscritti qui — quel file porta anche la
+// nota sulla data di aggiornamento delle citazioni (agosto 2026), da non
+// toccare. Il resto del testo di pagina (intestazione, riquadro «What
+// this has to do with your company», intro all'elenco, chiusura sul
+// codice) non è fra gli export di quel file e resta scritto qui, alla
+// lettera dalla tavola — come già fa la gemella italiana.
+//
+// Il blocco riusabile dei sei repository (`site.ts` → `en.research.*` e
+// `Research.astro`) resta fuori: la gemella italiana `/ricerca` non ha un
+// elenco di repository, ha solo il link «Il codice su GitHub», e
+// `Research.astro` — il vecchio componente del lato inglese, fermo a sei
+// pubblicazioni per decisione presa — non va toccato (task-8-brief.md).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestataPagina from '../../components/TestataPagina.astro';
+import { pubblicazioni, numeriFascia } from '../../data/en/pubblicazioni';
+import { localizedPath } from '../../i18n/ui';
+
+const scholarUrl = 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ';
+const githubUrl = 'https://github.com/aleflabo';
+---
+
+<BaseLayout
+  title="Research — Alessandro Flaborea"
+  description="A PhD at Sapienza's Perception and Intelligence Lab, from 2021 to 2024, and a research period at the University of Amsterdam. Anomaly detection, action recognition and procedural learning: understanding what a person is doing by watching them."
+  lang="en"
+  path="/research"
+  pathIt="/ricerca"
+  attiva="research"
+>
+  <section class="intestazione">
+    <div class="container">
+      <TestataPagina
+        occhiello="Research"
+        titolo="The research the rest comes from"
+        introduzione="A PhD at Sapienza's Perception and Intelligence Lab, from 2021 to 2024, and a research period at the University of Amsterdam. Anomaly detection, action recognition and procedural learning: understanding what a person is doing by watching them."
+      />
+    </div>
+  </section>
+
+  <section class="fascia-numeri">
+    <div class="container">
+      <div class="griglia-numeri">
+        {numeriFascia.map((n) => (
+          <div>
+            <p class="valore">{n.numero}</p>
+            <p class="etichetta">{n.etichetta}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cosa-centra">
+    <div class="container">
+      <div class="riquadro">
+        <p class="riquadro-label">What this has to do with your company</p>
+        <p class="riquadro-corpo">No jargon: I spent years teaching a computer to watch a person at work and notice that they're getting a step wrong, while they're doing it.</p>
+        <p class="riquadro-corpo muto">It's the same question a shop-floor supervisor asks walking between the stations. Procedo came out of that, and so does the way I approach the problems people bring me: first you look at how the work is really done, then you decide what to automate.</p>
+        <a class="riquadro-link" href={localizedPath('en', '/work/procedo')}>Where that research became a product &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="elenco-pubblicazioni">
+    <div class="container">
+      <h2>Publications</h2>
+      <p class="intro-elenco">Most recent first. Where a public repository exists, the GitHub stars are shown.</p>
+      <div class="righe">
+        {pubblicazioni.map((p) => (
+          <div class="riga">
+            <span class="anno">{p.anno}</span>
+            <div class="testo-riga">
+              <h3>{p.titolo}</h3>
+              <p class="descrizione">{p.descrizione}</p>
+            </div>
+            <div class="metadati">
+              <span class="sede">{p.sede}</span>
+              <span class="metriche">{p.metriche}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="link-esterni">
+        <a href={scholarUrl} target="_blank" rel="noopener noreferrer">Full list on Google Scholar &rarr;</a>
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer">The code on GitHub &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="perche-il-codice">
+    <div class="container">
+      <h2>Why every paper comes out with the code</h2>
+      <p class="corpo">A paper that comes out with the code can be redone from scratch: anyone downloads the repository, runs the experiments and gets the same numbers. It's how I worked for every publication, and it's the same thing I bring to projects: what I hand over opens, reads and runs.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 40px;
+  }
+  /* TestataPagina riproduce il caso maggioritario (62ch): qui la tavola
+     vuole 64ch, uno scarto minore, quindi resta come override — solo da
+     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     ci pensa già il componente ad azzerare max-width). */
+  @media (min-width: 641px) {
+    .intestazione :global(.intro) {
+      max-width: 64ch;
+    }
+  }
+
+  /* --- fascia numeri --- */
+  .fascia-numeri {
+    padding: 0;
+  }
+  .fascia-numeri .container {
+    padding: 0 24px 56px;
+  }
+  .griglia-numeri {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 30px 0;
+  }
+  .valore {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    font-weight: 600;
+  }
+  .etichetta {
+    margin-top: 4px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  /* --- cosa c'entra con la tua azienda --- */
+  .cosa-centra {
+    padding: 0;
+  }
+  .cosa-centra .container {
+    padding: 0 24px 60px;
+  }
+  .riquadro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    max-width: 860px;
+  }
+  .riquadro-label {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  .riquadro-corpo {
+    margin-top: 14px;
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .riquadro-corpo.muto {
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+  .riquadro-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- le pubblicazioni --- */
+  .elenco-pubblicazioni {
+    padding: 0;
+  }
+  .elenco-pubblicazioni .container {
+    padding: 0 24px 24px;
+  }
+  .elenco-pubblicazioni h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .intro-elenco {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) 260px;
+    gap: 28px;
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .anno {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .testo-riga h3 {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+  .descrizione {
+    margin-top: 8px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .metadati {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .sede {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--azione);
+    font-weight: 700;
+  }
+  .metriche {
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .link-esterni {
+    display: flex;
+    gap: 28px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .link-esterni a {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- perché ogni articolo esce con il codice --- */
+  .perche-il-codice {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 60px;
+    padding: 0;
+  }
+  .perche-il-codice .container {
+    padding: 60px 24px;
+  }
+  .perche-il-codice h2 {
+    font-size: 26px;
+    max-width: 26ch;
+  }
+  .perche-il-codice .corpo {
+    margin-top: 16px;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .fascia-numeri .container {
+      padding: 0 20px 40px;
+    }
+    .griglia-numeri {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      padding: 24px 0;
+    }
+    .valore {
+      font-size: 28px;
+    }
+    .cosa-centra .container {
+      padding: 0 20px 44px;
+    }
+    .riquadro {
+      padding: 24px 22px;
+    }
+    .riquadro-corpo {
+      font-size: 16.5px;
+    }
+    .riquadro-corpo.muto {
+      font-size: 15px;
+    }
+    .elenco-pubblicazioni .container {
+      padding: 0 20px 20px;
+    }
+    .elenco-pubblicazioni h2 {
+      font-size: 24px;
+    }
+    .riga {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 22px 0;
+    }
+    .metadati {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+    }
+    .link-esterni {
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .perche-il-codice {
+      margin-top: 44px;
+    }
+    .perche-il-codice .container {
+      padding: 44px 20px;
+    }
+    .perche-il-codice h2 {
+      font-size: 22px;
+      max-width: none;
+    }
+    .perche-il-codice .corpo {
+      font-size: 15.5px;
+      max-width: none;
+    }
+  }
+</style>
