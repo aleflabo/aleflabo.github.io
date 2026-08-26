@@ -112,18 +112,35 @@ function testoVisibile(html) {
     .replace(/<[^>]+>/g, " ");
 }
 
-for (const r of ROTTE) {
-  if (r !== "en" && !r.startsWith("en/")) continue;
-  const f = `dist/${r}/index.html`;
-  if (!existsSync(f)) continue; // già segnalato sopra come rotta mancante
-  const html = readFileSync(f, "utf8");
-  const parole = testoVisibile(html)
+// Gli attributi testuali (task finale, blocco 6): il controllo sopra guardava
+// solo il testo visibile, ma titolo e descrizione inglesi sbagliati (task 5)
+// vivono in `content` di un <meta>, non fra i tag — lo stesso punto cieco per
+// `aria-label`, `placeholder` e `alt`.
+function testoAttributi(html) {
+  const valori = [...html.matchAll(/\b(?:content|aria-label|placeholder|alt)="([^"]*)"/gi)];
+  return valori.map((m) => m[1]).join(" ");
+}
+
+function trovaParoleItaliane(html) {
+  const testo = `${testoVisibile(html)} ${testoAttributi(html)}`;
+  const parole = testo
     .toLowerCase()
     .split(/[^a-zàèéìòù]+/)
     .filter(Boolean);
-  const trovate = [...new Set(parole.filter((p) => PAROLE_ITALIANE_SET.has(p)))];
-  if (trovate.length > 0) {
-    dice(`${f} ha testo italiano rimasto: ${trovate.join(", ")}`);
+  return [...new Set(parole.filter((p) => PAROLE_ITALIANE_SET.has(p)))];
+}
+
+// Non solo le rotte elencate in ROTTE (che finora lasciava fuori le otto
+// pagine /en/work/<slug>, proprio quelle alimentate dai campi condivisi di
+// projects.ts — l'unico posto dove l'italiano può passare inosservato):
+// tutti i file sotto dist/en/.
+if (existsSync("dist/en")) {
+  for (const f of trovaHtml("dist/en")) {
+    const html = readFileSync(f, "utf8");
+    const trovate = trovaParoleItaliane(html);
+    if (trovate.length > 0) {
+      dice(`${f} ha testo italiano rimasto: ${trovate.join(", ")}`);
+    }
   }
 }
 
