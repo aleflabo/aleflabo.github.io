@@ -1,18 +1,67 @@
 ---
-// src/pages/en/index.astro
+// src/pages/en/index.astro — la home inglese (rotta `/en/`).
+//
+// Gemella della home italiana (src/pages/index.astro, task 2/9, ramo
+// sito-italiano): stessi otto componenti di src/components/sezioni/,
+// alimentati qui da src/data/en/home.ts invece che dalle costanti scritte
+// a mano lì. Nessuna stringa nuova: tutto il testo viene da quel file
+// (task 3, sito-inglese, verificato campo per campo contro le firme dei
+// componenti — task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import Services from '../../components/Services.astro';
-import WorkList from '../../components/WorkList.astro';
-import Research from '../../components/Research.astro';
-import About from '../../components/About.astro';
-import Contact from '../../components/Contact.astro';
+import Occhiello from '../../components/sezioni/Occhiello.astro';
+import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
+import IlProblema from '../../components/sezioni/IlProblema.astro';
+import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
+import LeProve from '../../components/sezioni/LeProve.astro';
+import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
+import DaDoveViene from '../../components/sezioni/DaDoveViene.astro';
+import Contatto from '../../components/sezioni/Contatto.astro';
+import {
+  occhiello,
+  numeri,
+  ilProblema,
+  comeLavoro,
+  leProve,
+  bloccoFormazione,
+  daDoveViene,
+  contatto,
+} from '../../data/en/home';
+
+// Titolo e descrizione della pagina: composti dai dati già approvati in
+// home.ts, con la stessa regola della home italiana (src/pages/index.astro),
+// non riscritti a mano. Nessuna parola nuova: solo composizione.
+//
+// - titolo  = "Alessandro Flaborea — " + occhiello.eyebrow
+// - descrizione = occhiello.titolo, senza le barre verticali che lo spezzano
+//   in tre parti per l'evidenziatore. La sostituzione va oltre un semplice
+//   `replaceAll('|', '')`: quel titolo ha segmenti che si toccano senza
+//   spazio da un lato (qui: una virgola subito dopo la seconda barra), quindi
+//   togliere solo il carattere unirebbe le parole ("...is needed , and...").
+//   Si sostituisce ogni barra con uno spazio, poi si toglie lo spazio
+//   indesiderato prima della punteggiatura e si collassano eventuali spazi
+//   doppi, per ottenere una frase leggibile.
+const titoloPagina = `Alessandro Flaborea — ${occhiello.eyebrow}`;
+const descrizionePagina = occhiello.titolo
+  .replaceAll('|', ' ')
+  .replace(/\s+([,.;:!?])/g, '$1')
+  .replace(/\s+/g, ' ')
+  .trim();
 ---
-<BaseLayout title="Alessandro Flaborea" description="AI & Computer Vision engineer, from research to product" lang="en" path="/" pathIt="/" person={true}>
-  <Hero lang="en" />
-  <Services lang="en" />
-  <WorkList lang="en" />
-  <Research lang="en" />
-  <About lang="en" />
-  <Contact lang="en" />
+
+<BaseLayout
+  title={titoloPagina}
+  description={descrizionePagina}
+  lang="en"
+  path="/"
+  pathIt="/"
+  person={true}
+>
+  <Occhiello {...occhiello} />
+  <FasciaNumeri numeri={numeri} />
+  <IlProblema {...ilProblema} />
+  <ComeLavoro {...comeLavoro} />
+  <LeProve {...leProve} />
+  <BloccoFormazione {...bloccoFormazione} />
+  <DaDoveViene {...daDoveViene} />
+  <Contatto {...contatto} />
 </BaseLayout>

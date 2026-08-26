@@ -1,8 +1,16 @@
 ---
+// src/pages/en/work/[slug].astro — case study inglese, gemello di
+// src/pages/lavori/[slug].astro ma con project.en e project.stack al posto
+// di project.it e project.tagIt (lo stack RESTA sul lato inglese, vedi
+// task-7-brief.md §2). Allineato alla gemella italiana in task 7,
+// sito-inglese: `attiva="work"`, anno reso da `annoEn`, collegamento di
+// ritorno che dice il titolo della pagina di destinazione (/en/work, il cui
+// h1 è «What I've built»), come fa l'italiano con «Quello che ho costruito».
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import StackChip from '../../../components/StackChip.astro';
 import { projects, getProject } from '../../../data/projects';
 import { site } from '../../../data/site';
+import { annoEn } from '../../../lib/anno';
 import { localizedPath } from '../../../i18n/ui';
 
 export function getStaticPaths() {
@@ -21,16 +29,19 @@ const path = `/work/${project.slug}`;
 const pathIt = `/lavori/${project.slug}`;
 const t = site.en;
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article" attiva="work">
   <article class="container case">
-    <a class="back" href={`${localizedPath('en', '/')}#work`}>← {t.caseStudy.back}</a>
-    <p class="label">{c.area} · {project.role} · {project.year}</p>
+    <a class="back" href={localizedPath('en', '/work')}>← What I've built</a>
+    <p class="label">{c.area} · {project.role} · {annoEn(project.year)}</p>
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.stack.map((s) => <StackChip label={s} />)}</div>
-    <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>
-    <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>
-    <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>
+    {/* Campo vuoto in projects.ts → sezione saltata invece di
+        un'intestazione senza corpo, come la gemella italiana
+        (correzione giro 1, task-11-report.md). */}
+    {c.problem && <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>}
+    {c.approach && <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>}
+    {c.result && <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>}
     {(project.url || project.repo) && (
       <section class="links">
         {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{t.workLiveLabel} ↗</a>}

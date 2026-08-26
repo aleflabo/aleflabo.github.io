@@ -1,44 +1,49 @@
 ---
-// src/pages/i-vostri-dati.astro — la pagina sulla riservatezza (rotta `/i-vostri-dati`).
-// Misure e struttura alla lettera da tavole/Dati.dc.html; testo alla
-// lettera da testi.md, sezione «/i-vostri-dati» (task-13-brief.md). La
-// risposta corta, le tre situazioni, «quello che non posso garantirvi» e
-// «su questo ho lavorato davvero» (link compresi) vengono da
-// src/data/dati.ts (task 6): non riscritti qui. L'intro della sezione
-// «Situazioni che vengono confuse spesso» e le etichette «Onestà» /
-// «Perché mi credete» non sono fra gli export di quel file e restano
-// scritte qui, alla lettera dalla tavola. Lo stesso vale per la fascia di
-// chiusura «Fatemi la domanda che qui non trova risposta» (testi.md, righe
-// 1041-1046): era assente dal giro 1 di questo task — il brief non la
-// nominava, ma la tavola e testi.md sono la fonte di verità su cosa
-// contiene la pagina, non il riassunto del brief — corretta nel giro di
-// correzioni 1. Questa è la pagina più delicata del sito: nessuna parola
-// qui rafforza o ammorbidisce quanto scritto in dati.ts. Non è nel menu (si
-// raggiunge dal piè di pagina e dal FAQ), quindi <BaseLayout> non riceve
-// `attiva`.
-import BaseLayout from '../layouts/BaseLayout.astro';
-import TestataPagina from '../components/TestataPagina.astro';
+// src/pages/en/your-data.astro — gemella inglese di src/pages/i-vostri-dati.astro
+// (rotta `/en/your-data`).
+// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
+// testi-en.md, sezione «7. /en/your-data». La risposta corta, le tre
+// situazioni, «What I can't guarantee you» e «I've actually worked on
+// this» (link compresi) vengono da src/data/en/dati.ts (task 6,
+// sito-inglese): non riscritti qui. L'intro della sezione «Situations that
+// often get confused» e le etichette «Honesty» / «Why you'd believe me»
+// non sono fra gli export di quel file e restano scritte qui, alla lettera
+// dalla tavola. Lo stesso vale per la fascia di chiusura «Ask me the
+// question this page doesn't answer».
+//
+// Questa è la pagina più delicata del sito (task-8-brief.md, punto 5):
+// nessuna parola qui rafforza o ammorbidisce quanto scritto in
+// `data/en/dati.ts`, «What I can't guarantee you» compresa, intera e non
+// attenuata. `dati.ts` → `suQuestoHoLavoratoDavvero.link[].href` è già il
+// percorso risolto verso l'inglese (`/en/training`, `/en/services`), come
+// in `formazione.ts`: niente `localizedPath` su quei link, altrimenti
+// raddoppierebbe il prefisso `/en`.
+//
+// Non è nel menu (si raggiunge dal piè di pagina e dal FAQ), quindi
+// <BaseLayout> non riceve `attiva` — come la gemella italiana.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestataPagina from '../../components/TestataPagina.astro';
 import {
   situazioniDati,
   rispostaCorta,
   quelloCheNonPossoGarantirvi,
   suQuestoHoLavoratoDavvero,
-} from '../data/dati';
-import { localizedPath } from '../i18n/ui';
+} from '../../data/en/dati';
+import { localizedPath } from '../../i18n/ui';
 ---
 
 <BaseLayout
-  title="Che fine fanno i vostri dati — Alessandro Flaborea"
+  title="Where your data ends up — Alessandro Flaborea"
   description={rispostaCorta.intro}
-  lang="it"
-  path="/i-vostri-dati"
-  pathEn="/your-data"
+  lang="en"
+  path="/your-data"
+  pathIt="/i-vostri-dati"
 >
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello="I vostri dati"
-        titolo="Che fine fanno i vostri dati"
+        occhiello="Your data"
+        titolo="Where your data ends up"
         introduzione={rispostaCorta.intro}
       />
     </div>
@@ -56,8 +61,8 @@ import { localizedPath } from '../i18n/ui';
 
   <section class="situazioni-intro">
     <div class="container">
-      <h2 class="section-title">Situazioni che vengono confuse spesso</h2>
-      <p class="intro">Il rischio cambia moltissimo a seconda di cosa si sta facendo. Tenerle separate è già metà della risposta.</p>
+      <h2 class="section-title">Situations that often get confused</h2>
+      <p class="intro">The risk changes enormously depending on what you're doing. Keeping them apart is already half the answer.</p>
     </div>
   </section>
 
@@ -90,7 +95,7 @@ import { localizedPath } from '../i18n/ui';
     <div class="container">
       <div class="colonne">
         <div>
-          <p class="label">Onestà</p>
+          <p class="label">Honesty</p>
           <h2 class="section-title">{quelloCheNonPossoGarantirvi.titolo}</h2>
           <div class="righe">
             {quelloCheNonPossoGarantirvi.punti.map((p) => (
@@ -99,7 +104,7 @@ import { localizedPath } from '../i18n/ui';
           </div>
         </div>
         <div>
-          <p class="label">Perché mi credete</p>
+          <p class="label">Why you'd believe me</p>
           <h2 class="section-title">{suQuestoHoLavoratoDavvero.titolo}</h2>
           <div class="righe">
             {suQuestoHoLavoratoDavvero.corpo.map((p) => (
@@ -108,7 +113,7 @@ import { localizedPath } from '../i18n/ui';
           </div>
           <div class="link-row">
             {suQuestoHoLavoratoDavvero.link.map((l) => (
-              <a class="link-rimando" href={localizedPath('it', l.href)}>{l.testo} <span class="freccia">&rarr;</span></a>
+              <a class="link-rimando" href={l.href}>{l.testo} <span class="freccia">&rarr;</span></a>
             ))}
           </div>
         </div>
@@ -118,9 +123,9 @@ import { localizedPath } from '../i18n/ui';
 
   <section class="domanda-aperta">
     <div class="container">
-      <h2>Fatemi la domanda che qui non trova risposta</h2>
-      <p class="intro">Se è una buona domanda finisce su questa pagina, così la prossima azienda la trova già scritta.</p>
-      <a class="pulsante scrivimi" href={`${localizedPath('it', '/')}#parliamone`}>Scrivimi</a>
+      <h2>Ask me the question this page doesn't answer</h2>
+      <p class="intro">If it's a good question it ends up on this page, so the next company finds it already written.</p>
+      <a class="pulsante scrivimi" href={`${localizedPath('en', '/')}#parliamone`}>Write to me</a>
     </div>
   </section>
 </BaseLayout>

@@ -6,103 +6,104 @@ interface Props {
   lang: Locale;
 }
 const { lang } = Astro.props;
-const contact = site[lang].contact;
-const name = site[lang].hero.name;
+const copy = site[lang];
+const nome = copy.hero.name;
+const piePagina = copy.piePagina ?? [];
+const prenotaMezzora = copy.prenotaMezzora ?? '';
 
-// Colonne del piè di pagina italiano: il testo (titoli e voci) viene da
-// site.it.piePagina (task 6); qui viviamo solo la rotta o l'URL a cui ogni
-// voce punta, così le stringhe non si riscrivono a mano.
-const rottePiePaginaIt: Record<string, string> = {
-  Servizi: localizedPath('it', '/servizi'),
-  Formazione: localizedPath('it', '/formazione'),
-  'Che fine fanno i vostri dati': localizedPath('it', '/i-vostri-dati'),
-  Lavori: localizedPath('it', '/lavori'),
-  Ricerca: localizedPath('it', '/ricerca'),
-  'Chi sono': localizedPath('it', '/chi-sono'),
-  Note: localizedPath('it', '/note'),
-  LinkedIn: 'https://www.linkedin.com/in/alessandro-flaborea',
-  GitHub: 'https://github.com/aleflabo',
-  'Google Scholar': 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
-  'English site': localizedPath('en', '/'),
+// Frase di presentazione: l'italiano è quello scritto a mano nelle tavole
+// (Servizi.dc.html e affini), l'inglese è quello approvato nel deck
+// (testi-en.md, § «Piè di pagina» — «AI consulting and training. From
+// research to software that people use.»).
+const frasePresentazione: Record<Locale, string> = {
+  it: "Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.",
+  en: 'AI consulting and training. From research to software that people use.',
+};
+
+// Riga finale: stessa forma, etichetta della partita IVA diversa per lingua
+// (testi-en.md: «al massimo si etichetta VAT no.»).
+const rigaFinale: Record<Locale, string> = {
+  it: '© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]',
+  en: '© 2026 Alessandro Flaborea · VAT no. [DA INSERIRE]',
+};
+
+// Privacy e Cookie non sono fra le rotte previste (nessuna delle due pagine
+// esiste in nessuna lingua): restano segnaposto. testi-en.md le scrive
+// «Privacy · Cookies» (plurale), testi.md «Privacy · Cookie» (singolare).
+const legale: Record<Locale, { privacy: string; cookie: string }> = {
+  it: { privacy: 'Privacy', cookie: 'Cookie' },
+  en: { privacy: 'Privacy', cookie: 'Cookies' },
+};
+
+// Colonne del piè di pagina: il testo (titoli e voci) viene da
+// site[lang].piePagina; qui viviamo solo la rotta o l'URL a cui ogni voce
+// punta. Sdoppiata per lingua perché le etichette inglesi sono chiavi
+// diverse dalle italiane, e le rotte di destinazione pure.
+const rottePiePagina: Record<Locale, Record<string, string>> = {
+  it: {
+    Servizi: localizedPath('it', '/servizi'),
+    Formazione: localizedPath('it', '/formazione'),
+    'Che fine fanno i vostri dati': localizedPath('it', '/i-vostri-dati'),
+    Lavori: localizedPath('it', '/lavori'),
+    Ricerca: localizedPath('it', '/ricerca'),
+    'Chi sono': localizedPath('it', '/chi-sono'),
+    Note: localizedPath('it', '/note'),
+    LinkedIn: 'https://www.linkedin.com/in/alessandro-flaborea',
+    GitHub: 'https://github.com/aleflabo',
+    'Google Scholar': 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
+    'English site': localizedPath('en', '/'),
+  },
+  en: {
+    Services: localizedPath('en', '/services'),
+    Training: localizedPath('en', '/training'),
+    'Where your data ends up': localizedPath('en', '/your-data'),
+    Work: localizedPath('en', '/work'),
+    Research: localizedPath('en', '/research'),
+    About: localizedPath('en', '/about'),
+    Notes: localizedPath('en', '/notes'),
+    LinkedIn: 'https://www.linkedin.com/in/alessandro-flaborea',
+    GitHub: 'https://github.com/aleflabo',
+    'Google Scholar': 'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
+    'Italian site': localizedPath('it', '/'),
+  },
 };
 const vociEsterne = new Set(['LinkedIn', 'GitHub', 'Google Scholar']);
-const piePaginaIt = site.it.piePagina ?? [];
-const nomeIt = site.it.hero.name;
-const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
+const rotte = rottePiePagina[lang];
 ---
 
-{lang === 'it' ? (
-  <footer class="footer-it">
-    <div class="colonne">
-      <div class="presentazione">
-        <p class="nome">{nomeIt}</p>
-        <p class="frase">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p>
-        <a class="pulsante prenota" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt}</a>
-      </div>
-      {piePaginaIt.map((colonna) => (
-        <div class="colonna">
-          <p class="titolo-colonna">{colonna.titolo}</p>
-          {colonna.voci.map((voce) => {
-            const href = rottePiePaginaIt[voce] ?? '#';
-            const esterno = vociEsterne.has(voce);
-            return esterno ? (
-              <a href={href} target="_blank" rel="noopener noreferrer">{voce}</a>
-            ) : (
-              <a href={href}>{voce}</a>
-            );
-          })}
-        </div>
-      ))}
+<footer class="footer-it">
+  <div class="colonne">
+    <div class="presentazione">
+      <p class="nome">{nome}</p>
+      <p class="frase">{frasePresentazione[lang]}</p>
+      <a class="pulsante prenota" href={`${localizedPath(lang, '/')}#parliamone`}>{prenotaMezzora}</a>
     </div>
-    <div class="barra">
-      <span>&copy; 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]</span>
-      <div class="legale">
-        {/* Privacy e Cookie non sono fra le rotte previste dai task 8-14: restano segnaposto. */}
-        <a href="#">Privacy</a>
-        <a href="#">Cookie</a>
+    {piePagina.map((colonna) => (
+      <div class="colonna">
+        <p class="titolo-colonna">{colonna.titolo}</p>
+        {colonna.voci.map((voce) => {
+          const href = rotte[voce] ?? '#';
+          const esterno = vociEsterne.has(voce);
+          return esterno ? (
+            <a href={href} target="_blank" rel="noopener noreferrer">{voce}</a>
+          ) : (
+            <a href={href}>{voce}</a>
+          );
+        })}
       </div>
+    ))}
+  </div>
+  <div class="barra">
+    <span>{rigaFinale[lang]}</span>
+    <div class="legale">
+      <a href="#">{legale[lang].privacy}</a>
+      <a href="#">{legale[lang].cookie}</a>
     </div>
-  </footer>
-) : (
-  <footer class="footer">
-    <div class="inner">
-      <p class="name">{name} &copy; 2026</p>
-      <div class="links">
-        <a href={`mailto:${contact.email}`}>Email</a>
-        <a href="https://www.linkedin.com/in/alessandro-flaborea" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/aleflabo" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </div>
-  </footer>
-)}
+  </div>
+</footer>
 
 <style>
-  .footer {
-    border-top: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .inner {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-  .links {
-    display: flex;
-    gap: 1.25rem;
-  }
-  .links a:hover {
-    color: var(--text);
-  }
-
-  /* --- piè di pagina italiano: misure alla lettera da tavole/Servizi.dc.html --- */
+  /* --- piè di pagina: misure alla lettera da tavole/Servizi.dc.html --- */
   .footer-it {
     border-top: 1px solid var(--border);
     background: var(--surface-warm);

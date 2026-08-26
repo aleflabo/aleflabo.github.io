@@ -1,33 +1,35 @@
 ---
-// src/pages/servizi.astro — i quattro ingaggi e il FAQ (rotta `/servizi`).
-// Testo alla lettera da tavole/Servizi.dc.html (testi.md, sezione
-// «/servizi»). I dati dei quattro ingaggi, del FAQ e di «per chi non sono»
-// vengono da src/data/servizi.ts (task 6): non riscritti qui. Il testo
-// della fascia «Come si comincia» non è fra gli export di quel file (solo
-// `ingaggi`, `faq`, `perChiNonSono`), quindi resta scritto qui, alla
-// lettera dalla tavola — come già fa ComeLavoro.astro per il proprio testo.
-import BaseLayout from '../layouts/BaseLayout.astro';
-import TestataPagina from '../components/TestataPagina.astro';
-import SchedaIngaggio from '../components/sezioni/SchedaIngaggio.astro';
-import Faq from '../components/sezioni/Faq.astro';
-import { ingaggi, faq, perChiNonSono } from '../data/servizi';
-import { localizedPath } from '../i18n/ui';
+// src/pages/en/services.astro — gemella inglese di src/pages/servizi.astro
+// (rotta `/en/services`).
+// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
+// testi-en.md, sezione «2. /en/services». I dati dei quattro ingaggi, del
+// FAQ e di «Who I'm not for» vengono da src/data/en/servizi.ts (task 6,
+// sito-inglese): non riscritti qui. Il testo della fascia «How it starts»
+// non è fra gli export di quel file (solo `ingaggi`, `faq`,
+// `perChiNonSono`), quindi resta scritto qui, alla lettera dalla tavola —
+// come già fa la gemella italiana in servizi.astro.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestataPagina from '../../components/TestataPagina.astro';
+import SchedaIngaggio from '../../components/sezioni/SchedaIngaggio.astro';
+import Faq from '../../components/sezioni/Faq.astro';
+import { ingaggi, faq, perChiNonSono } from '../../data/en/servizi';
+import { localizedPath } from '../../i18n/ui';
 ---
 
 <BaseLayout
-  title="Servizi — Alessandro Flaborea"
-  description="Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro."
-  lang="it"
-  path="/servizi"
-  pathEn="/services"
-  attiva="servizi"
+  title="Services — Alessandro Flaborea"
+  description="You start with the first one. Each step stands on its own: you go on when the work calls for it, you can stop at any moment, and what has been done stays yours anyway."
+  lang="en"
+  path="/services"
+  pathIt="/servizi"
+  attiva="services"
 >
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello="Servizi"
-        titolo="Quattro modi di lavorare insieme"
-        introduzione="Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro."
+        occhiello="Services"
+        titolo="Four ways of working together"
+        introduzione="You start with the first one. Each step stands on its own: you go on when the work calls for it, you can stop at any moment, and what has been done stays yours anyway."
       />
     </div>
   </section>
@@ -38,20 +40,20 @@ import { localizedPath } from '../i18n/ui';
         {ingaggi.map((ingaggio) => (
           <SchedaIngaggio
             ingaggio={ingaggio}
-            etichettaPerChi="Per chi"
-            etichettaQuantoDura="Quanto dura"
-            etichettaCosaResta="Cosa resta"
+            etichettaPerChi="Who it's for"
+            etichettaQuantoDura="How long"
+            etichettaCosaResta="What you keep"
           />
         ))}
       </div>
-      <a class="continua" href={localizedPath('it', '/lavori')}>Le prove: quello che ho costruito <span class="freccia">&rarr;</span></a>
+      <a class="continua" href={localizedPath('en', '/work')}>The evidence: what I've built <span class="freccia">&rarr;</span></a>
     </div>
   </section>
 
   <section class="per-chi-non-sono">
     <div class="container">
-      <p class="label">Onestà</p>
-      <h2 class="section-title">Per chi non sono</h2>
+      <p class="label">Honesty</p>
+      <h2 class="section-title">Who I'm not for</h2>
       <div class="griglia">
         {perChiNonSono.map((riga) => (
           <p class="riga-testo">{riga}</p>
@@ -62,17 +64,17 @@ import { localizedPath } from '../i18n/ui';
 
   <section class="domande">
     <div class="container">
-      <p class="label">Domande</p>
-      <h2 class="section-title">Quelle che mi vengono fatte quasi sempre</h2>
+      <p class="label">Questions</p>
+      <h2 class="section-title">The ones I get asked almost every time</h2>
       <Faq domande={faq} />
     </div>
   </section>
 
   <section class="come-si-comincia">
     <div class="container">
-      <h2>Come si comincia</h2>
-      <p class="intro">Mi scrivi due righe su cosa vorreste smettere di fare a mano e ci sentiamo mezz'ora. Se c'è margine per lavorare insieme ci vediamo di persona; altrimenti te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
-      <a class="pulsante cta" href={`${localizedPath('it', '/')}#parliamone`}>Parliamone, mezz'ora</a>
+      <h2>How it starts</h2>
+      <p class="intro">You write me two lines about what you'd like to stop doing by hand and we talk for half an hour. If there's room to work together we meet in person; otherwise I tell you straight away, and if I know someone better suited I put you in touch.</p>
+      <a class="pulsante cta" href={`${localizedPath('en', '/')}#parliamone`}>Let's talk, half an hour</a>
     </div>
   </section>
 </BaseLayout>
@@ -97,7 +99,7 @@ import { localizedPath } from '../i18n/ui';
      max-width a "none" (@media nel componente): un override senza
      @media qui vincerebbe anche lì per specificità, sovrascrivendo
      quell'azzeramento e rompendo il mobile (bug trovato e corretto nel
-     giro di correzioni 1, vedi task-1-report.md). */
+     giro di correzioni 1, vedi task-1-report.md, ramo sito-italiano). */
   @media (min-width: 641px) {
     .intestazione :global(.intro) {
       max-width: 60ch;

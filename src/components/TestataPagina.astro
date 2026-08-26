@@ -1,0 +1,67 @@
+---
+// src/components/TestataPagina.astro — il blocco d'apertura (occhiello,
+// titolo, filetto, introduzione) ripetuto uguale in sei pagine e, per soli
+// occhiello/titolo/filetto, anche in chi-sono.astro (task-1, sito-inglese).
+//
+// Le misure di default qui sotto sono il caso maggioritario fra le sei
+// pagine che condividono il blocco intero (servizi, formazione, ricerca,
+// i-vostri-dati, note, lavori/index): dove una pagina si scosta, resta
+// com'era tramite un override scoped nella pagina stessa (selettore
+// `:global()` sull'elemento reso da questo componente) — non qui, per non
+// perdere quella misura per le altre sei. Dettagli nel rapporto del task.
+//
+// `.label` e `.divider` (colore, animazione «tira» che si disegna da
+// sinistra) sono già globali in src/styles/global.css: qui non si
+// ridefiniscono, si aggiungono solo gli scarti di misura che oggi stanno
+// nelle pagine.
+//
+// `introduzione` è opzionale: chi-sono.astro usa questo componente solo per
+// occhiello/titolo/filetto (la sua «introduzione» in realtà sono cinque
+// paragrafi di biografia con una gerarchia propria, non una singola frase —
+// non è la stessa cosa e non va infilata qui).
+interface Props {
+  occhiello: string;
+  titolo: string;
+  introduzione?: string;
+}
+const { occhiello, titolo, introduzione } = Astro.props;
+---
+
+<p class="label">{occhiello}</p>
+<h1>{titolo}</h1>
+<div class="divider"></div>
+{introduzione && <p class="intro">{introduzione}</p>}
+
+<style>
+  h1 {
+    margin-top: 20px;
+    font-size: 46px;
+    max-width: 22ch;
+  }
+  .divider {
+    margin: 30px 0;
+  }
+  .intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      margin-top: 16px;
+      font-size: 32px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .divider {
+      margin: 22px 0;
+    }
+    .intro {
+      font-size: 16px;
+      max-width: none;
+    }
+  }
+</style>

@@ -1,36 +1,26 @@
 ---
-import { localizedPath } from '../../i18n/ui';
-
-// Le tre schede, testo alla lettera da tavole/Main.dc.html (testi.md,
-// sezione «/ — home»). `ore` e `nome` coincidono con `formati` di
+// I testi (e l'href, già risolto per la lingua) arrivano dalla pagina
+// (task 2, sito-inglese). `ore` e `nome` coincidono con `formati` di
 // src/data/formazione.ts, ma il corpo di ogni scheda è un riassunto
 // proprio della home, diverso da `formati[].corpo` (la versione estesa è
-// per /formazione, task 10): restano quindi scritti qui, per intero.
-const formati = [
-  {
-    ore: '4 ore',
-    nome: 'Corso introduttivo',
-    corpo: "Per tutta l'azienda, dal titolare al reparto. Cosa è cambiato negli ultimi anni, cosa è rimasto uguale, e quali sono i rischi concreti per i vostri dati.",
-  },
-  {
-    ore: '8-12 ore',
-    nome: 'Laboratorio per funzione',
-    corpo: "Ufficio tecnico, acquisti, amministrazione, commerciale. Ogni gruppo lavora sui propri documenti, così quello che si impara si può usare il giorno dopo.",
-  },
-  {
-    ore: 'Durata concordata',
-    nome: 'Percorso finanziato',
-    corpo: "Attraverso enti accreditati e fondi interprofessionali, quando l'azienda vuole un percorso lungo senza impegnare cassa propria.",
-  },
-];
+// per /formazione, task 10).
+interface Props {
+  occhiello: string;
+  titolo: string;
+  introduzioni: string[];
+  formati: { ore: string; nome: string; corpo: string }[];
+  chiusura: string;
+  linkChiusura: string;
+  hrefChiusura: string;
+}
+const { occhiello, titolo, introduzioni, formati, chiusura, linkChiusura, hrefChiusura } = Astro.props;
 ---
 
 <section class="blocco-formazione">
   <div class="container">
-    <p class="label">Formazione</p>
-    <h2 class="section-title">Si comincia dalle persone</h2>
-    <p class="intro">Quattro ore, in azienda o in aula, per mostrare alle persone cosa questi strumenti sanno fare e quali sono i loro limiti. Si lavora su casi concreti.</p>
-    <p class="intro">Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.</p>
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
+    {introduzioni.map((intro) => <p class="intro">{intro}</p>)}
     <div class="griglia">
       {formati.map((f) => (
         <div class="scheda">
@@ -40,7 +30,7 @@ const formati = [
         </div>
       ))}
     </div>
-    <p class="chiusura">Ho insegnato quattro anni alla Sapienza come assistente alla didattica, e sono stato relatore invitato al Data Science Hub di Ferrari S.p.A. I corsi si organizzano direttamente oppure attraverso enti accreditati e fondi interprofessionali. <a href={localizedPath('it', '/formazione')}>Come si organizza un corso <span class="freccia">&rarr;</span></a></p>
+    <p class="chiusura">{chiusura} <a href={hrefChiusura}>{linkChiusura} <span class="freccia">&rarr;</span></a></p>
   </div>
 </section>
 

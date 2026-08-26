@@ -1,9 +1,15 @@
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 
+// Le sette rotte inglesi (task 8/9, ramo sito-inglese) mancavano qui: senza
+// di loro questo script non si accorgeva se una di esse spariva, esattamente
+// come per le rotte italiane sopra.
 const ROTTE = [
   "index", "servizi", "formazione", "lavori", "ricerca",
   "chi-sono", "i-vostri-dati", "note", "en",
+  "en/services", "en/training", "en/work", "en/research",
+  "en/about", "en/your-data", "en/notes",
 ];
 
 let errori = 0;
@@ -76,6 +82,84 @@ if (existsSync("dist")) {
 }
 
 if (existsSync("dist/CNAME")) dice("il CNAME è tornato: il dominio non è ancora comprato");
+
+// Verifica che non resti testo italiano su una pagina inglese (ramo
+// sito-inglese): è successo — tre etichette dentro un componente
+// condiviso, trovate solo da un umano che guardava uno screenshot, non da
+// un controllo. Si guarda solo il testo visibile (si tolgono <script> e
+// <style>, poi i tag), perché nomi di classe e attributi CSS sono in
+// italiano ovunque nel sito, anche nelle pagine inglesi, e non sono un
+// difetto: cercare nell'HTML grezzo produrrebbe solo falsi positivi
+// (es. class="scrivimi", data-astro-cid-*).
+//
+// L'elenco è di parole/parole-etichetta che non hanno una lettura inglese
+// plausibile (niente "come", "note", "dove", "chi": sono anche parole o
+// pezzi di parole inglesi legittimi).
+const PAROLE_ITALIANE = [
+  "è", "perché", "però", "questo", "questa", "questi", "queste", "cosa",
+  "già", "ancora", "sono", "siamo", "vostro", "vostri", "nostro", "nostri",
+  "delle", "degli", "nella", "dell",
+  "scrivimi", "prenota", "grazie", "iscriviti", "contattami",
+  "chiudi", "apri", "cerca", "leggi", "torna", "invia",
+  "servizi", "formazione", "ricerca", "lavori",
+];
+const PAROLE_ITALIANE_SET = new Set(PAROLE_ITALIANE);
+
+function testoVisibile(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ");
+}
+
+// Gli attributi testuali (task finale, blocco 6): il controllo sopra guardava
+// solo il testo visibile, ma titolo e descrizione inglesi sbagliati (task 5)
+// vivono in `content` di un <meta>, non fra i tag — lo stesso punto cieco per
+// `aria-label`, `placeholder` e `alt`.
+function testoAttributi(html) {
+  const valori = [...html.matchAll(/\b(?:content|aria-label|placeholder|alt)="([^"]*)"/gi)];
+  return valori.map((m) => m[1]).join(" ");
+}
+
+function trovaParoleItaliane(html) {
+  const testo = `${testoVisibile(html)} ${testoAttributi(html)}`;
+  const parole = testo
+    .toLowerCase()
+    .split(/[^a-zàèéìòù]+/)
+    .filter(Boolean);
+  return [...new Set(parole.filter((p) => PAROLE_ITALIANE_SET.has(p)))];
+}
+
+// Non solo le rotte elencate in ROTTE (che finora lasciava fuori le otto
+// pagine /en/work/<slug>, proprio quelle alimentate dai campi condivisi di
+// projects.ts — l'unico posto dove l'italiano può passare inosservato):
+// tutti i file sotto dist/en/.
+if (existsSync("dist/en")) {
+  for (const f of trovaHtml("dist/en")) {
+    const html = readFileSync(f, "utf8");
+    const trovate = trovaParoleItaliane(html);
+    if (trovate.length > 0) {
+      dice(`${f} ha testo italiano rimasto: ${trovate.join(", ")}`);
+    }
+  }
+}
+
+// Richiama scripts/verifica-hreflang.mjs (task 9, sito-inglese): è il
+// controllo che «gli hreflang devono puntare a un file che esiste» — lo
+// stesso che il task 10 chiedeva di scrivere qui, già fatto lì contro il
+// difetto delle diciassette pagine. Non lo si riscrive: lo si richiama, così
+// un solo comando (`npm run verifica`, che lancia questo script) dice se il
+// sito è a posto, non due script che qualcuno può dimenticare di lanciare.
+try {
+  const output = execFileSync("node", ["scripts/verifica-hreflang.mjs"], {
+    encoding: "utf8",
+  });
+  process.stdout.write(output);
+} catch (e) {
+  if (e.stdout) process.stdout.write(e.stdout);
+  if (e.stderr) process.stderr.write(e.stderr);
+  dice("gli hreflang non sono tutti a posto (dettagli sopra)");
+}
 
 console.log(errori === 0 ? "✓ tutte le rotte a posto" : `${errori} problemi`);
 process.exit(errori === 0 ? 0 : 1);

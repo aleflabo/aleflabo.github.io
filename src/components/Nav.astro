@@ -13,7 +13,6 @@ interface Props {
   attiva?: string;
 }
 const { lang, hrefAltro, attiva } = Astro.props;
-const nav = site[lang].nav;
 
 // Le sette voci del menu italiano: la `chiave` (per lo stato attivo) e la
 // rotta sono fisse qui; il testo viene da site.it.menu (task 6), nello
@@ -29,9 +28,35 @@ const rotteMenuIt: Array<{ chiave: string; rotta: string }> = [
 const etichetteMenuIt = site.it.menu ?? [];
 const menuIt = rotteMenuIt.map((voce, i) => ({ ...voce, etichetta: etichetteMenuIt[i] ?? '' }));
 const nomeIt = site.it.hero.name;
-// «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
-// letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
-const parliamoneIt = site.it.contact.title;
+
+// Le sei voci del menu inglese, stesso schema di rotteMenuIt: la `chiave`
+// (per lo stato attivo, uguale al valore di `attiva` passato da ogni
+// pagina inglese) e la rotta sono fisse qui, nello stesso ordine di
+// site.en.menu (task 9, sito-inglese) — prima il menu inglese portava a
+// frammenti della home (`#work`, `#research`, `#about`) rimasti dal
+// vecchio sito a una pagina sola: le sezioni con quegli id non esistono
+// più da quando /en/ ha preso la struttura della home italiana.
+const rotteMenuEn: Array<{ chiave: string; rotta: string }> = [
+  { chiave: 'services', rotta: '/services' },
+  { chiave: 'training', rotta: '/training' },
+  { chiave: 'work', rotta: '/work' },
+  { chiave: 'research', rotta: '/research' },
+  { chiave: 'about', rotta: '/about' },
+  { chiave: 'notes', rotta: '/notes' },
+];
+const etichetteMenuEn = site.en.menu ?? [];
+const menuEn = rotteMenuEn.map((voce, i) => ({ ...voce, etichetta: etichetteMenuEn[i] ?? '' }));
+// Il nome intero, non più «AF»: l'àncora ha già aria-label="Alessandro
+// Flaborea — home", il testo visibile deve dire lo stesso nome (task
+// finale, blocco 4).
+const nomeEn = site.en.hero.name;
+
+// Testo del pulsante di testata: `nav.cta` quando esiste (inglese, «Contact
+// me»), altrimenti il titolo della sezione di contatto (italiano,
+// «Parliamone» da `contact.title`) — un'unica espressione per entrambe le
+// lingue, così ciascuna smette di tenere un valore morto nel campo che
+// legge l'altra (task finale, blocco 5).
+const ctaTesto = site[lang].nav.cta ?? site[lang].contact.title;
 
 // Menu a scomparsa sotto i 720px (task: tavole/HomeMobile.dc.html).
 // Le due etichette dell'aria-label — a riposo e ad aperto — sono nella
@@ -67,13 +92,13 @@ const etichetteToggle =
               {voce.etichetta}
             </a>
           ))}
-          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{parliamoneIt}</a>
+          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{ctaTesto}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
     ) : (
       <>
-        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">AF</a>
+        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">{nomeEn}</a>
         <button
           type="button"
           class="menu-toggle"
@@ -88,10 +113,12 @@ const etichetteToggle =
           <span aria-hidden="true"></span>
         </button>
         <div class="links" id="nav-links">
-          <a href={`${localizedPath('en', '/')}#work`}>{nav.work}</a>
-          <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
-          <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
-          <a class="cta" href={`${localizedPath('en', '/')}#contact`}>{nav.cta}</a>
+          {menuEn.map((voce) => (
+            <a href={localizedPath('en', voce.rotta)} class:list={[voce.chiave === attiva && 'attiva']}>
+              {voce.etichetta}
+            </a>
+          ))}
+          <a class="cta pulsante" href={`${localizedPath('en', '/')}#parliamone`}>{ctaTesto}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
@@ -148,6 +175,12 @@ const etichetteToggle =
     color: var(--surface);
     opacity: 0.9;
   }
+  .links a.attiva {
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+    font-weight: 600;
+    padding-bottom: 2px;
+  }
 
   /* --- pulsante a due trattini: misure alla lettera da tavole/HomeMobile.dc.html ---
      Nascosto sopra i 720px: sopra quella soglia il menu non cambia (task).
@@ -196,14 +229,17 @@ const etichetteToggle =
     font-weight: 600;
     padding-bottom: 2px;
   }
-  .inner.it .links a.cta {
+  /* Il contorno terracotta è dato dalla classe .pulsante (l'animazione
+     viene da .pulsante in global.css), non dalla lingua: stessa identità
+     su entrambe le testate (task finale, blocco 4). */
+  .links a.cta.pulsante {
     background: transparent;
     color: var(--azione);
     border: 1px solid var(--azione);
     border-radius: var(--radius);
     padding: 8px 16px;
   }
-  .inner.it .links a.cta:hover {
+  .links a.cta.pulsante:hover {
     color: var(--azione);
     opacity: 1;
   }

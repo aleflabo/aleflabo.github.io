@@ -1,14 +1,228 @@
 ---
 // src/pages/index.astro — la home italiana (rotta `/`).
+//
+// I componenti in src/components/sezioni/ non importano più i propri
+// testi: li ricevono come props da qui (task 2, sito-inglese), così la
+// home inglese (task 5) può alimentarli con src/data/en/home.ts senza
+// toccare i componenti. Le stringhe restano quelle di sempre, alla
+// lettera da tavole/Main.dc.html (testi.md, sezione «/ — home»).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Occhiello from '../components/it/Occhiello.astro';
-import FasciaNumeri from '../components/it/FasciaNumeri.astro';
-import IlProblema from '../components/it/IlProblema.astro';
-import ComeLavoro from '../components/it/ComeLavoro.astro';
-import LeProve from '../components/it/LeProve.astro';
-import BloccoFormazione from '../components/it/BloccoFormazione.astro';
-import DaDoveViene from '../components/it/DaDoveViene.astro';
-import Contatto from '../components/it/Contatto.astro';
+import Occhiello from '../components/sezioni/Occhiello.astro';
+import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
+import IlProblema from '../components/sezioni/IlProblema.astro';
+import ComeLavoro from '../components/sezioni/ComeLavoro.astro';
+import LeProve from '../components/sezioni/LeProve.astro';
+import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
+import DaDoveViene from '../components/sezioni/DaDoveViene.astro';
+import Contatto from '../components/sezioni/Contatto.astro';
+import { localizedPath } from '../i18n/ui';
+import { site } from '../data/site';
+
+const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
+
+// --- Occhiello ---
+const occhiello = {
+  eyebrow: "Consulenza e formazione sull'intelligenza artificiale",
+  titolo: "Aiuto le aziende a capire|dove serve|l'intelligenza artificiale e poi la costruisco.",
+  intro: "Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.",
+  ctaPrimaria: prenotaMezzoraIt,
+  hrefPrimaria: `${localizedPath('it', '/')}#parliamone`,
+  ctaSecondaria: 'Guarda cosa ho costruito',
+  credibilita: "Dottorato in computer vision alla Sapienza · Pubblicato a CVPR, ICCV, IROS · Co-fondatore e CTO di Procedo dal 2024 al 2026",
+  hrefProcedo: localizedPath('it', '/lavori'),
+};
+
+// --- FasciaNumeri ---
+// Non sono gli stessi di `pubblicazioni.numeriFascia` (quell'array è per
+// la fascia in cima a /ricerca: ordine, terzo e quarto valore ed
+// etichette differiscono — «2 anni da CTO» non esiste in quell'array, e
+// «citazioni» qui non porta la data).
+const numeri = [
+  { numero: '10', etichetta: 'articoli pubblicati' },
+  { numero: '533', etichetta: 'citazioni' },
+  { numero: '1', etichetta: 'Best Paper Award' },
+  { numero: '2', etichetta: 'anni da CTO' },
+];
+
+// --- IlProblema ---
+const ilProblema = {
+  occhiello: 'Il problema',
+  titolo: 'Le tre cose che mi vengono raccontate più spesso',
+  riquadri: [
+    {
+      citazione: '«Mi serve questo pezzo.»',
+      corpo: 'Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.',
+    },
+    {
+      citazione: '«Lo sa fare solo Bruno.»',
+      corpo: "Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.",
+    },
+    {
+      citazione: '«Abbiamo provato ChatGPT.»',
+      corpo: "Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.",
+    },
+  ],
+};
+
+// --- ComeLavoro ---
+// I quattro passi sono un riassunto per la home, con nomi e testi propri
+// (Ascolto/Diagnosi/Costruisco/Resto): non coincidono con `ingaggi` di
+// src/data/servizi.ts (Capire/Decidere/Costruire/Mantenere), che è la
+// versione estesa per /servizi.
+const comeLavoro = {
+  occhiello: 'Come lavoro',
+  titolo: 'Come si svolge di solito un lavoro',
+  intro: 'Quattro passi. Ci si può fermare dopo ognuno, e quello che è stato fatto fino a lì resta comunque tuo.',
+  passi: [
+    {
+      numero: '01',
+      nome: 'Ascolto',
+      corpo: "Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.",
+      neEsce: 'Una lista dei punti dove si perde tempo, ordinata per quanto costano.',
+    },
+    {
+      numero: '02',
+      nome: 'Diagnosi',
+      corpo: 'Due o tre settimane per guardare i dati che avete davvero, i gestionali già in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.',
+      neEsce: 'Un documento che resta tuo, e che puoi far leggere a chi vuoi.',
+    },
+    {
+      numero: '03',
+      nome: 'Costruisco',
+      corpo: 'Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.',
+      neEsce: 'Qualcosa che i tuoi aprono il lunedì mattina e usano davvero.',
+    },
+    {
+      numero: '04',
+      nome: 'Resto',
+      corpo: 'Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.',
+      neEsce: 'Una persona che conosce il sistema e che puoi chiamare quando serve.',
+    },
+  ],
+  etichettaNeEsce: 'Ne esce',
+  continua: 'I quattro modi di lavorare insieme, per esteso',
+  hrefContinua: localizedPath('it', '/servizi'),
+};
+
+// --- LeProve ---
+// `projects.ts` contiene ormai anche «Portale ricambi 3D» (task 6/11), ma
+// i testi restano scritti qui alla lettera dalla tavola invece di essere
+// riletti da lì: i tre corpi di questa sezione sono più corti di quelli
+// di /lavori. Gli `href` vengono risolti qui, non più segnaposto
+// (bloccante 4, revisione finale del ramo sito-italiano): due portano
+// alle schede vere in /lavori, Spannum al prodotto esterno.
+const leProve = {
+  occhiello: 'Le prove',
+  titolo: 'Alcune cose che ho costruito',
+  prove: [
+    {
+      eyebrow: 'Meccanica · commessa reale',
+      nome: 'Portale ricambi 3D',
+      corpo: 'Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente.',
+      tag: ['Pipeline CAD, 80 test', 'Proprietà intellettuale protetta'],
+      link: 'Come funziona',
+      href: localizedPath('it', '/lavori/portale-ricambi'),
+    },
+    {
+      eyebrow: 'Industria · in produzione',
+      nome: 'Procedo',
+      corpo: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.',
+      tag: ['Clienti industriali', 'B4i Bocconi', 'Round angel'],
+      link: 'Come funziona',
+      href: localizedPath('it', '/lavori/procedo'),
+    },
+    {
+      eyebrow: 'Prodotto vivo · aperto a tutti',
+      nome: 'Spannum',
+      corpo: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.',
+      tag: ['Online', 'Norme per età'],
+      link: 'Aprilo',
+      href: 'https://spannum.com',
+      esterno: true,
+    },
+  ],
+  continua: 'Tutti i lavori, compresa la ricerca',
+  hrefContinua: localizedPath('it', '/lavori'),
+};
+
+// --- BloccoFormazione ---
+// `ore` e `nome` coincidono con `formati` di src/data/formazione.ts, ma il
+// corpo di ogni scheda è un riassunto proprio della home, diverso da
+// `formati[].corpo` (la versione estesa è per /formazione, task 10):
+// restano quindi scritti qui, per intero.
+const bloccoFormazione = {
+  occhiello: 'Formazione',
+  titolo: 'Si comincia dalle persone',
+  introduzioni: [
+    'Quattro ore, in azienda o in aula, per mostrare alle persone cosa questi strumenti sanno fare e quali sono i loro limiti. Si lavora su casi concreti.',
+    "Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.",
+  ],
+  formati: [
+    {
+      ore: '4 ore',
+      nome: 'Corso introduttivo',
+      corpo: "Per tutta l'azienda, dal titolare al reparto. Cosa è cambiato negli ultimi anni, cosa è rimasto uguale, e quali sono i rischi concreti per i vostri dati.",
+    },
+    {
+      ore: '8-12 ore',
+      nome: 'Laboratorio per funzione',
+      corpo: "Ufficio tecnico, acquisti, amministrazione, commerciale. Ogni gruppo lavora sui propri documenti, così quello che si impara si può usare il giorno dopo.",
+    },
+    {
+      ore: 'Durata concordata',
+      nome: 'Percorso finanziato',
+      corpo: "Attraverso enti accreditati e fondi interprofessionali, quando l'azienda vuole un percorso lungo senza impegnare cassa propria.",
+    },
+  ],
+  chiusura: 'Ho insegnato quattro anni alla Sapienza come assistente alla didattica, e sono stato relatore invitato al Data Science Hub di Ferrari S.p.A. I corsi si organizzano direttamente oppure attraverso enti accreditati e fondi interprofessionali.',
+  linkChiusura: 'Come si organizza un corso',
+  hrefChiusura: localizedPath('it', '/formazione'),
+};
+
+// --- DaDoveViene ---
+const daDoveViene = {
+  occhiello: 'Da dove viene quello che so',
+  titolo: 'Dalla ricerca alla produzione',
+  intro: "Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.",
+  corpo: "Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.",
+  tappe: [
+    { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza — PINlab' },
+    { valore: 'CVPR · ICCV · IROS', etichetta: 'Le conferenze principali del settore' },
+    { valore: '2024–2026', etichetta: 'Co-fondatore e CTO di Procedo, startup industriale' },
+  ],
+  linkRicerca: 'La ricerca, per intero',
+  hrefRicerca: localizedPath('it', '/ricerca'),
+  linkChiSono: 'Chi sono',
+  hrefChiSono: localizedPath('it', '/chi-sono'),
+};
+
+// --- Contatto ---
+// Il modulo resta inerte (nessun `action`) e i pulsanti di prenotazione,
+// WhatsApp e mail restano segnaposto (`href="#"`): non è stato scelto
+// nessun servizio esterno né inventato un numero, per istruzione esplicita
+// del task 8.
+const contatto = {
+  eyebrow: 'Parliamone',
+  titolo: "Mezz'ora per capire se possiamo lavorare insieme",
+  intro: 'Se non è il lavoro giusto per me te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.',
+  campoAzienda: { etichetta: 'Azienda', placeholder: 'Ragione sociale' },
+  campoContatto: { etichetta: 'Come ti scrivo', placeholder: 'Mail o telefono' },
+  campoRichiesta: { etichetta: 'Cosa vorresti smettere di fare a mano', placeholder: 'Bastano due righe, anche buttate lì' },
+  legendaUrgenza: 'Quanto è urgente',
+  opzioniUrgenza: [
+    { valore: 'sto-guardando', etichetta: 'Sto solo guardando' },
+    { valore: 'questanno', etichetta: "Quest'anno", checked: true },
+    { valore: 'problema-adesso', etichetta: 'Ho un problema adesso' },
+  ],
+  invia: 'Manda',
+  notaInerte: 'Modulo non ancora attivo.',
+  introAlternativa: 'Oppure, se preferisci saltare il modulo:',
+  canali: [
+    { etichetta: 'Scegli tu mezz\'ora sul calendario' },
+    { etichetta: 'WhatsApp' },
+    { etichetta: 'Mail' },
+  ],
+};
 ---
 
 <BaseLayout
@@ -20,12 +234,12 @@ import Contatto from '../components/it/Contatto.astro';
   detectLocale={true}
   person={true}
 >
-  <Occhiello />
-  <FasciaNumeri />
-  <IlProblema />
-  <ComeLavoro />
-  <LeProve />
-  <BloccoFormazione />
-  <DaDoveViene />
-  <Contatto />
+  <Occhiello {...occhiello} />
+  <FasciaNumeri numeri={numeri} />
+  <IlProblema {...ilProblema} />
+  <ComeLavoro {...comeLavoro} />
+  <LeProve {...leProve} />
+  <BloccoFormazione {...bloccoFormazione} />
+  <DaDoveViene {...daDoveViene} />
+  <Contatto {...contatto} />
 </BaseLayout>

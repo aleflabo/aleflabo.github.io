@@ -1,15 +1,26 @@
 ---
 import type { Ingaggio } from '../../data/servizi';
 
-// Una scheda per uno dei quattro ingaggi di /servizi. Testo alla lettera
-// da tavole/Servizi.dc.html (testi.md, sezione «/servizi»); i dati vengono
-// da src/data/servizi.ts (task 6), non riscritti qui. `etichetta` è la
-// parola di percorso (Capire · Decidere · Costruire · Mantenere), `nome`
-// è il nome proprio dell'ingaggio (es. «Audit AI»).
+// Una scheda per uno dei quattro ingaggi di /servizi (o /en/services).
+// Testo alla lettera da tavole/Servizi.dc.html (testi.md, sezione
+// «/servizi»); i dati vengono da src/data/servizi.ts o src/data/en/servizi.ts
+// (task 6), non riscritti qui. `etichetta` è la parola di percorso
+// (Capire · Decidere · Costruire · Mantenere), `nome` è il nome proprio
+// dell'ingaggio (es. «Audit AI»).
+//
+// Le tre etichette dei dettagli («Per chi» / «Quanto dura» / «Cosa resta»
+// in italiano) erano scritte a mano qui, quindi restavano in italiano anche
+// su /en/services (task 6, sito-inglese, giro di correzioni 1). Ora sono
+// proprietà obbligatorie, senza valore di riferimento: un default in
+// italiano farebbe passare in silenzio la stessa dimenticanza la prossima
+// volta che qualcuno riusa questo componente in una lingua nuova.
 interface Props {
   ingaggio: Ingaggio;
+  etichettaPerChi: string;
+  etichettaQuantoDura: string;
+  etichettaCosaResta: string;
 }
-const { ingaggio } = Astro.props;
+const { ingaggio, etichettaPerChi, etichettaQuantoDura, etichettaCosaResta } = Astro.props;
 ---
 
 <div class="scheda ingaggio">
@@ -22,15 +33,15 @@ const { ingaggio } = Astro.props;
   </div>
   <div class="dettagli">
     <div>
-      <p class="dettaglio-etichetta">Per chi</p>
+      <p class="dettaglio-etichetta">{etichettaPerChi}</p>
       <p class="dettaglio-valore">{ingaggio.perChi}</p>
     </div>
     <div>
-      <p class="dettaglio-etichetta">Quanto dura</p>
+      <p class="dettaglio-etichetta">{etichettaQuantoDura}</p>
       <p class="dettaglio-valore">{ingaggio.durata}</p>
     </div>
     <div>
-      <p class="dettaglio-etichetta">Cosa resta</p>
+      <p class="dettaglio-etichetta">{etichettaCosaResta}</p>
       <p class="dettaglio-valore">{ingaggio.cosaResta}</p>
     </div>
   </div>

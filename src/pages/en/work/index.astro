@@ -1,0 +1,299 @@
+---
+// src/pages/en/work/index.astro — l'elenco dei lavori in inglese
+// (rotta `/en/work`), gemella di src/pages/lavori/index.astro.
+// Misure e struttura alla lettera dalla gemella italiana; testo alla
+// lettera da docs/superpowers/specs/2026-08-25-sito-italiano/testi-en.md,
+// sezione «4. /en/work» (task-7-brief.md).
+//
+// Due differenze volute rispetto all'italiano, non difetti:
+// - i tag delle righe sono `project.stack` (nomi di tecnologie), non
+//   `tagIt`: sul lato inglese il lettore cerca proprio quelle parole
+//   (decisione del committente, task-7-brief.md §2);
+// - dieci voci, non dodici: `portale-ricambi` e `tire-hub` hanno
+//   `soloItaliano: true` (il loro inglese non è mai stato approvato) e
+//   restano fuori da questa pagina.
+//
+// La chiusura «And then there's the research» non è fra i passi elencati
+// in task-7-brief.md, ma è nella sezione «/en/work» di testi-en.md ed è
+// presente nella gemella italiana: la stessa lacuna nei passi del brief
+// aveva già fatto saltare una fascia intera lato italiano in un giro
+// precedente, qui non si ripete.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TestataPagina from '../../../components/TestataPagina.astro';
+import RigaLavoro from '../../../components/sezioni/RigaLavoro.astro';
+import { getProject } from '../../../data/projects';
+import { localizedPath } from '../../../i18n/ui';
+import { annoEn } from '../../../lib/anno';
+
+const procedo = getProject('procedo')!;
+const costTracking = getProject('procedo-tracking-costs')!;
+const spannum = getProject('spannum')!;
+const fantaMundial = getProject('fanta-mundial')!;
+const agenticToolkit = getProject('agentic-toolkit')!;
+const contradaNavigator = getProject('contrada-navigator')!;
+const vault = getProject('vault')!;
+const homeSweatHome = getProject('homesweathome')!;
+
+const link = (slug: string) => localizedPath('en', `/work/${slug}`);
+
+const scene = ['SCENE 1', 'SCENE 2', 'SCENE 3', 'SCENE 4'];
+---
+
+<BaseLayout
+  title="Work — Alessandro Flaborea"
+  description="Above, the software made for a company's work; below, the products, the games and the things I built on my own. Each card says how it came about and where it stands."
+  lang="en"
+  path="/work"
+  pathIt="/lavori"
+  attiva="work"
+>
+  <section class="intestazione">
+    <div class="container">
+      <TestataPagina
+        occhiello="Work"
+        titolo="What I've built"
+        introduzione="Above, the software made for a company's work; below, the products, the games and the things I built on my own. Each card says how it came about and where it stands."
+      />
+    </div>
+  </section>
+
+  <section class="gruppo">
+    <div class="container">
+      <h2 class="titolo-gruppo">Software for companies</h2>
+      <div class="righe">
+        <RigaLavoro
+          anno={annoEn(procedo.year)}
+          areaStato="Industry · in production"
+          nome={procedo.name}
+          corpo="A platform that turns video shot on the shop floor into step-by-step procedures, and lets the people doing the work ask questions of their own company's documentation. I was co-founder and CTO for two years: I led the architecture and took the AI part into production. Today I follow it as an advisor."
+          tagIt={procedo.stack}
+          href={link(procedo.slug)}
+        />
+        <RigaLavoro
+          anno={annoEn(costTracking.year)}
+          areaStato="Monitoring · internal use"
+          nome={costTracking.name}
+          corpo="A dashboard that holds together the daily spend on cloud, GitHub and LLM services for a small team, with currency conversion and amortisation of subscriptions. It runs on its own with scheduled jobs and a table that records every sync, so when something doesn't add up you can see where."
+          tagIt={costTracking.stack}
+          href={link(costTracking.slug)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="gruppo">
+    <div class="container">
+      <h2 class="titolo-gruppo">My own products and tools</h2>
+      <p class="intro-gruppo">Born out of curiosity or a need of my own. Some have real users and can be opened right now; one is a video.</p>
+      <div class="righe">
+        <RigaLavoro
+          anno={annoEn(spannum.year)}
+          areaStato="Applied psychometrics · online"
+          nome={spannum.name}
+          corpo="A working-memory test built to the protocol published in the literature, with age norms and the sources cited. It also states what the evidence doesn't support: training improves the task, not intelligence. It's open to everyone and you can try it right now."
+          tagIt={spannum.stack}
+          href={link(spannum.slug)}
+        />
+        <RigaLavoro
+          anno={annoEn(fantaMundial.year)}
+          areaStato="Gamification · with real users"
+          nome={fantaMundial.name}
+          corpo="A World Cup prediction league with around forty active players: accounts, predictions with closing windows, scoring, a live leaderboard and a scheduled job that fetches the results from an external API and updates everything without anyone touching anything."
+          tagIt={fantaMundial.stack}
+          href={link(fantaMundial.slug)}
+        />
+        <RigaLavoro
+          anno={annoEn(agenticToolkit.year)}
+          areaStato="Agentic tooling · daily use"
+          nome={agenticToolkit.name}
+          corpo="A set of agents that automate the repetitive work of a technical team: the standup that cross-references GitHub activity with Notion tasks, the architecture documentation that regenerates itself by reading the code, and the review of prompts before they go into production."
+          tagIt={agenticToolkit.stack}
+          href={link(agenticToolkit.slug)}
+        />
+        <RigaLavoro
+          anno="2026"
+          areaStato="Social game · online"
+          nome="Paesello"
+          corpo="The odd-one-out game, with the difference that the words are written by the players and come from the places in their own town: Nino's bar, the low wall in front of the school. Everyone's phone shows the same word except one, the outsider, who has to talk about it without knowing what it is. Underneath there's a build where the security sits in the database and every row belongs to whoever wrote it, with automated tests that run before every release."
+          tagIt={["Phone game", "Words written by the players", "In production"]}
+        />
+        <RigaLavoro
+          anno="2025"
+          areaStato="Generative video"
+          nome="A story across several scenes"
+          corpo="A wedding video, generated end to end, with a story that runs across several scenes. Generating one scene is easy and everybody does it; the hard part is generating ten in which the same people stay recognisable — same face, same clothes, same light — and the story holds from beginning to end. The work on images came out of that too: what interests me is the point where these tools stop being a demo and start holding up a delivery."
+          tagIt={["Generative video", "Continuity across scenes", "Images"]}
+        >
+          <div class="scene">
+            {scene.map((s) => (
+              <div class="fotogramma"><span>{s}</span></div>
+            ))}
+          </div>
+          <p class="nota-scene">[ Four frames from the video, chosen to show that the characters stay the same. Better still: the video itself ]</p>
+        </RigaLavoro>
+        <RigaLavoro
+          anno={annoEn(contradaNavigator.year)}
+          areaStato="Civic data · geospatial"
+          nome={contradaNavigator.name}
+          corpo="The historical rules that assign each street of a town to its contrada, odd and even house numbers included, reconstructed from the registers and put on a navigable map. With participation trends from 2012 and a projection out to 2034."
+          tagIt={contradaNavigator.stack}
+          href={link(contradaNavigator.slug)}
+        />
+        <RigaLavoro
+          anno={annoEn(vault.year)}
+          areaStato="Knowledge systems"
+          nome={vault.name}
+          corpo="A personal knowledge base in which an append-only inbox feeds a wiki curated by an agent, with schemas for clients, projects, people and concepts, links between the entries and commands to ingest, query and check them. I use it every day."
+          tagIt={vault.stack}
+          href={link(vault.slug)}
+        />
+        <RigaLavoro
+          anno={annoEn(homeSweatHome.year)}
+          areaStato="Computer vision · MVP"
+          nome={homeSweatHome.name}
+          corpo="A personal trainer that reads your posture from a laptop webcam and corrects your execution while you train, without sending anything to the cloud because the delay would make the advice useless. I designed the architecture and built the perception part. Reached a working MVP, presented at Bocconi's IdeaBoosterLab."
+          tagIt={homeSweatHome.stack}
+          href={link(homeSweatHome.slug)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="chiusura">
+    <div class="container">
+      <h2>And then there's the research</h2>
+      <p class="intro">Ten published papers, more than five hundred citations and the code of every one that could be opened. That's where the part of these projects that can't be improvised comes from.</p>
+      <div class="link-chiusura">
+        <a href={localizedPath('en', '/research')}>Go to the research →</a>
+        <a href={localizedPath('en', '/about')}>How I work →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 44px;
+  }
+
+  /* --- i due gruppi --- */
+  .gruppo {
+    padding: 0;
+  }
+  .gruppo .container {
+    padding: 0 24px 20px;
+  }
+  .gruppo + .gruppo .container {
+    padding-top: 46px;
+  }
+  .titolo-gruppo {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .intro-gruppo {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .righe {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- fotogrammi segnaposto, «A story across several scenes» --- */
+  .scene {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 640px;
+  }
+  .fotogramma {
+    aspect-ratio: 16 / 10;
+    background: var(--surface-warm);
+    border: 1px dashed var(--text-faint);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fotogramma span {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+  .nota-scene {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+
+  /* --- chiusura: rimando alla ricerca --- */
+  .chiusura {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 50px;
+    padding: 0;
+  }
+  .chiusura .container {
+    padding: 60px 24px;
+  }
+  .chiusura h2 {
+    font-size: 26px;
+    max-width: 30ch;
+  }
+  .chiusura .intro {
+    margin-top: 16px;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+  .link-chiusura {
+    display: flex;
+    gap: 26px;
+    margin-top: 24px;
+  }
+  .link-chiusura a {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    .gruppo .container {
+      padding: 0 20px 16px;
+    }
+    .gruppo + .gruppo .container {
+      padding-top: 36px;
+    }
+    .scene {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: none;
+    }
+    .chiusura .container {
+      padding: 44px 20px;
+    }
+    .link-chiusura {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

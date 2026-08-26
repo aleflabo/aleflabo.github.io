@@ -1,44 +1,27 @@
 ---
-import { localizedPath } from '../../i18n/ui';
-
-// I quattro passi, testo alla lettera da tavole/Main.dc.html (testi.md,
-// sezione «/ — home»). Sono un riassunto per la home, con nomi e testi
-// propri (Ascolto/Diagnosi/Costruisco/Resto): non coincidono con `ingaggi`
-// di src/data/servizi.ts (Capire/Decidere/Costruire/Mantenere), che è la
-// versione estesa per /servizi — quindi restano scritti qui.
-const passi = [
-  {
-    numero: '01',
-    nome: 'Ascolto',
-    corpo: "Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.",
-    neEsce: 'Una lista dei punti dove si perde tempo, ordinata per quanto costano.',
-  },
-  {
-    numero: '02',
-    nome: 'Diagnosi',
-    corpo: 'Due o tre settimane per guardare i dati che avete davvero, i gestionali già in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.',
-    neEsce: 'Un documento che resta tuo, e che puoi far leggere a chi vuoi.',
-  },
-  {
-    numero: '03',
-    nome: 'Costruisco',
-    corpo: 'Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.',
-    neEsce: 'Qualcosa che i tuoi aprono il lunedì mattina e usano davvero.',
-  },
-  {
-    numero: '04',
-    nome: 'Resto',
-    corpo: 'Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.',
-    neEsce: 'Una persona che conosce il sistema e che puoi chiamare quando serve.',
-  },
-];
+// I testi (e l'href, già risolto per la lingua) arrivano dalla pagina
+// (task 2, sito-inglese). I quattro passi sono un riassunto per la home,
+// con nomi e testi propri (Ascolto/Diagnosi/Costruisco/Resto): non
+// coincidono con `ingaggi` di src/data/servizi.ts
+// (Capire/Decidere/Costruire/Mantenere), che è la versione estesa per
+// /servizi.
+interface Props {
+  occhiello: string;
+  titolo: string;
+  intro: string;
+  passi: { numero: string; nome: string; corpo: string; neEsce: string }[];
+  etichettaNeEsce: string;
+  continua: string;
+  hrefContinua: string;
+}
+const { occhiello, titolo, intro, passi, etichettaNeEsce, continua, hrefContinua } = Astro.props;
 ---
 
 <section class="come-lavoro">
   <div class="container">
-    <p class="label">Come lavoro</p>
-    <h2 class="section-title">Come si svolge di solito un lavoro</h2>
-    <p class="intro">Quattro passi. Ci si può fermare dopo ognuno, e quello che è stato fatto fino a lì resta comunque tuo.</p>
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
+    <p class="intro">{intro}</p>
     <div class="passi">
       {passi.map((p, i) => (
         <div class:list={['riga', 'passo', { ultimo: i === passi.length - 1 }]}>
@@ -48,13 +31,13 @@ const passi = [
             <p class="corpo">{p.corpo}</p>
           </div>
           <div class="ne-esce">
-            <p class="etichetta">Ne esce</p>
+            <p class="etichetta">{etichettaNeEsce}</p>
             <p class="valore">{p.neEsce}</p>
           </div>
         </div>
       ))}
     </div>
-    <a class="continua" href={localizedPath('it', '/servizi')}>I quattro modi di lavorare insieme, per esteso <span class="freccia">&rarr;</span></a>
+    <a class="continua" href={hrefContinua}>{continua} <span class="freccia">&rarr;</span></a>
   </div>
 </section>
 

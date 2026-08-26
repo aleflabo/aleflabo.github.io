@@ -1,36 +1,47 @@
 ---
-// src/pages/formazione.astro — i tre formati, il riquadro sull'AI Act e le
-// tre strade (rotta `/formazione`).
-// Testo alla lettera da tavole/Formazione.dc.html (testi.md, sezione
-// «/formazione»). `formati`, `riquadroAiAct` e `strade` vengono da
-// src/data/formazione.ts (task 6): non riscritti qui. I blocchi «Vengo
-// dall'aula», «Che cosa questo corso non è» e «Chi sostiene il costo del
-// corso» (titolo ed etichetta) non hanno un campo in quel file — restano
-// scritti qui, alla lettera dalla tavola, come già fa ComeLavoro.astro
-// per il proprio testo nella home.
-import BaseLayout from '../layouts/BaseLayout.astro';
-import TestataPagina from '../components/TestataPagina.astro';
-import { formati, riquadroAiAct, strade } from '../data/formazione';
-import { localizedPath } from '../i18n/ui';
-import { site } from '../data/site';
+// src/pages/en/training.astro — gemella inglese di src/pages/formazione.astro
+// (rotta `/en/training`).
+// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
+// testi-en.md, sezione «3. /en/training». `formati`, `riquadroAiAct` e
+// `strade` vengono da src/data/en/formazione.ts (task 6, sito-inglese): non
+// riscritti qui. I blocchi «Who's teaching», «What this course is not» e il
+// titolo/etichetta di «Who pays for the course» non hanno un campo in
+// quel file — restano scritti qui, alla lettera dalla tavola, come già fa
+// la gemella italiana in formazione.astro.
+//
+// Il riquadro sull'AI Act mantiene lo stesso tono di fatto dell'italiano:
+// si cita l'obbligo con la data, niente sanzioni, niente allarmismo — è
+// una scelta esplicita del committente (task-6-brief.md) e il testo di
+// riquadroAiAct.corpo già la rispetta.
+//
+// `riquadroAiAct.link.href` qui è già il percorso risolto verso l'inglese
+// (`/en/your-data`, vedi il commento in data/en/formazione.ts), a
+// differenza dell'italiano dove `formazione.ts` tiene l'href nudo e la
+// pagina lo passa per `localizedPath('it', ...)`: qui niente
+// `localizedPath`, altrimenti raddoppierebbe il prefisso `/en`.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestataPagina from '../../components/TestataPagina.astro';
+import { formati, riquadroAiAct, strade } from '../../data/en/formazione';
+import { localizedPath } from '../../i18n/ui';
+import { site } from '../../data/site';
 
-const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
+const prenotaMezzoraEn = site.en.prenotaMezzora ?? '';
 ---
 
 <BaseLayout
-  title="Formazione — Alessandro Flaborea"
-  description="In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito."
-  lang="it"
-  path="/formazione"
-  pathEn="/training"
-  attiva="formazione"
+  title="Training — Alessandro Flaborea"
+  description="In the classroom we work on the company's own documents and on the cases that actually come up. The aim is that everyone leaves with something they can put into practice straight away."
+  lang="en"
+  path="/training"
+  pathIt="/formazione"
+  attiva="training"
 >
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello="Formazione"
-        titolo="Corsi che si usano il giorno dopo"
-        introduzione="In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito."
+        occhiello="Training"
+        titolo="Courses you use the next day"
+        introduzione="In the classroom we work on the company's own documents and on the cases that actually come up. The aim is that everyone leaves with something they can put into practice straight away."
       />
     </div>
   </section>
@@ -42,7 +53,7 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
         {riquadroAiAct.corpo.map((p, i) => (
           <p class:list={['riquadro-corpo', { muto: i > 0 }]}>{p}</p>
         ))}
-        <a class="riquadro-link" href={localizedPath('it', riquadroAiAct.link.href)}>{riquadroAiAct.link.testo} <span class="freccia">&rarr;</span></a>
+        <a class="riquadro-link" href={riquadroAiAct.link.href}>{riquadroAiAct.link.testo} <span class="freccia">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -59,11 +70,11 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
             </div>
             <div class="dettagli">
               <div>
-                <p class="dettaglio-etichetta">Per chi</p>
+                <p class="dettaglio-etichetta">Who it's for</p>
                 <p class="dettaglio-valore">{f.perChi}</p>
               </div>
               <div>
-                <p class="dettaglio-etichetta">Serve da voi</p>
+                <p class="dettaglio-etichetta">What you need to provide</p>
                 <p class="dettaglio-valore">{f.serveDaVoi}</p>
               </div>
             </div>
@@ -75,8 +86,8 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 
   <section class="come-si-organizza">
     <div class="container">
-      <p class="label">Come si organizza</p>
-      <h2 class="section-title">Chi sostiene il costo del corso</h2>
+      <p class="label">How it gets organised</p>
+      <h2 class="section-title">Who pays for the course</h2>
       <div class="griglia-strade">
         {strade.map((s) => (
           <div>
@@ -92,18 +103,18 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
     <div class="container">
       <div class="colonne">
         <div>
-          <p class="label">Chi sale in cattedra</p>
-          <h2 class="section-title">Vengo dall'aula</h2>
-          <p class="corpo">Quattro anni come assistente alla didattica alla Sapienza, dal 2019 al 2023, durante il dottorato. Poi due anni a costruire software che le persone usano ogni giorno. In aula servono entrambe: la prima per riuscire a farsi capire, la seconda per insegnare cose che in azienda reggono.</p>
-          <p class="corpo">Sono stato anche relatore invitato al Data Science Hub di Ferrari S.p.A.</p>
+          <p class="label">Who's teaching</p>
+          <h2 class="section-title">I come from the classroom</h2>
+          <p class="corpo">Four years as a teaching assistant at Sapienza, from 2019 to 2023, during the PhD. Then two years building software people use every day. In a classroom you need both: the first to manage to make yourself understood, the second to teach things that hold up inside a company.</p>
+          <p class="corpo">I was also an invited speaker at Ferrari S.p.A.'s Data Science Hub.</p>
         </div>
         <div>
-          <p class="label">Onestà</p>
-          <h2 class="section-title">Che cosa questo corso non è</h2>
+          <p class="label">Honesty</p>
+          <h2 class="section-title">What this course is not</h2>
           <div class="righe">
-            <p class="corpo">Non è un corso di programmazione. Si lavora sugli strumenti che esistono già e su come portarli nel lavoro di tutti i giorni. Scrivere codice e addestrare modelli è un percorso a parte.</p>
-            <p class="corpo">Non ci sono formule pronte da copiare. Le liste di trucchi smettono di funzionare al primo cambio di modello, mentre aver capito come ragiona lo strumento resta.</p>
-            <p class="corpo">Non arrivo con una percentuale di risparmio già scritta sulle slide. Prima di aver visto come lavorate sarebbe un numero inventato.</p>
+            <p class="corpo">It isn't a programming course. We work on the tools that already exist and on how to bring them into everyday work. Writing code and training models is a separate path.</p>
+            <p class="corpo">There are no ready-made formulas to copy. Lists of tricks stop working at the first change of model, while having understood how the tool reasons stays with you.</p>
+            <p class="corpo">I don't turn up with a saving percentage already written on the slides. Before having seen how you work it would be a made-up number.</p>
           </div>
         </div>
       </div>
@@ -112,10 +123,10 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 
   <section class="cta-azienda">
     <div class="container">
-      <h2>Raccontami che azienda siete</h2>
-      <p class="intro">Quante persone siete, cosa fate e chi userebbe questi strumenti. Da lì si capisce quale delle tre strade conviene.</p>
+      <h2>Tell me what kind of company you are</h2>
+      <p class="intro">How many of you there are, what you do and who would use these tools. From there we work out which of the three routes suits you.</p>
       <div class="pulsanti">
-        <a class="pulsante primario" href={`${localizedPath('it', '/')}#parliamone`}>{prenotaMezzoraIt}</a>
+        <a class="pulsante primario" href={`${localizedPath('en', '/')}#parliamone`}>{prenotaMezzoraEn}</a>
         <a class="pulsante secondario" href="#">WhatsApp</a>
       </div>
     </div>
@@ -138,7 +149,7 @@ const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
   }
   /* TestataPagina riproduce il caso maggioritario (22ch): qui la tavola
      vuole 24ch, uno scarto minore, quindi resta come override — solo da
-     641px in su (vedi la nota gemella in servizi.astro: sotto i 640px
+     641px in su (vedi la nota gemella in services.astro: sotto i 640px
      ci pensa già il componente ad azzerare max-width). */
   @media (min-width: 641px) {
     .intestazione :global(h1) {
