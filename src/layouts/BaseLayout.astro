@@ -24,6 +24,12 @@ interface Props {
   pathEn?: string;
   pathIt?: string;
   ogType?: 'website' | 'article';
+  // Pagina d'errore: sopprime `<link rel="canonical">` e gli `hreflang`.
+  // La 404 di GitHub Pages viene servita a ogni indirizzo inesistente, quindi
+  // un canonico la dichiarerebbe versione ufficiale di se stessa e un
+  // alternato prometterebbe una gemella in un'altra lingua che non esiste —
+  // per una pagina che, di sua natura, non ha né l'una né l'altra.
+  paginaErrore?: boolean;
   detectLocale?: boolean;
   person?: boolean;
   attiva?: string;
@@ -38,6 +44,7 @@ const {
   ogType = 'website',
   detectLocale = false,
   person = false,
+  paginaErrore = false,
   attiva,
 } = Astro.props;
 
@@ -111,9 +118,9 @@ const personLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={canonicalUrl} />
-    {enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
-    {itUrl && <link rel="alternate" hreflang="it" href={itUrl} />}
+    {!paginaErrore && <link rel="canonical" href={canonicalUrl} />}
+    {!paginaErrore && enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {!paginaErrore && itUrl && <link rel="alternate" hreflang="it" href={itUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
