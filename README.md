@@ -7,6 +7,7 @@ Personal portfolio site for Alessandro Flaborea — built with [Astro](https://a
 - [Astro](https://astro.build) 5 (static output)
 - Plain CSS (design tokens in `src/styles/tokens.css`, shared rules in `src/styles/global.css`)
 - Bilingual routing: Italian at `/` (default locale, no prefix), English mirrored under `/en/` (see `src/i18n/ui.ts`)
+- [Sanity](https://www.sanity.io) for the notes (project `sn6gk82y`, dataset `production`), read at build time — see *Notes* below
 
 ## Project structure
 
@@ -17,16 +18,18 @@ src/
                         # DaDoveViene, FasciaNumeri, SchedaIngaggio, BloccoFormazione,
                         # RigaLavoro, Contatto, Faq
   data/         # site copy (site.ts) and per-page content (servizi.ts, formazione.ts,
-                # dati.ts, note.ts, pubblicazioni.ts, chiSono.ts, projects.ts), Italian
+                # dati.ts, pubblicazioni.ts, chiSono.ts, projects.ts), Italian
                 # by default with an `en/` mirror for the English copy
   i18n/         # locale list + path helpers (src/i18n/ui.ts)
   layouts/      # BaseLayout (head, meta, hreflang, Nav/Footer wrapper)
-  lib/          # pure logic shared across pages (e.g. src/lib/anno.ts)
+  lib/          # pure logic shared across pages (anno.ts, dataNota.ts) and the
+                # Sanity client + note queries (sanity.ts, note.ts, immagine.ts)
   pages/        # Italian pages at the root (index.astro, servizi.astro, lavori/[slug].astro, …)
                 # and their English mirror under pages/en/ (index.astro, services.astro,
                 # work/[slug].astro, …)
 scripts/        # verifica-rotte.mjs, verifica-hreflang.mjs — the build's own safety net
 public/         # static assets served as-is (favicon, robots.txt, og image)
+studio/         # Sanity Studio — its own package.json, not installed by the site build
 ```
 
 Each Italian page has an English twin (e.g. `/servizi` ↔ `/en/services`, `/lavori/[slug]`
@@ -38,7 +41,8 @@ Each Italian page has an English twin (e.g. `/servizi` ↔ `/en/services`, `/lav
 npm install
 npm run dev       # local dev server
 npm run check     # type-check with astro check
-npm test          # unit tests (Vitest) for the pure-logic helpers (src/i18n/ui.ts)
+npm test          # unit tests (Vitest) for the pure-logic helpers (src/i18n/ui.ts,
+                  # src/lib/dataNota.ts)
 npm run build     # production build to dist/
 npm run preview   # preview the production build locally
 npm run verifica  # build + scripts/verifica-rotte.mjs: routes, RSS, internal
@@ -49,11 +53,38 @@ npm run verifica  # build + scripts/verifica-rotte.mjs: routes, RSS, internal
 all three before opening a pull request, and `npm run verifica` again right before
 deploying (see *Deployment* below).
 
+## Notes
+
+The notes come from Sanity, queried at build time — nothing is fetched in the
+reader's browser and no API key is needed, because the `production` dataset is
+public for reads. A note is Italian; the English fields are optional and only
+count when all three are present (title, summary and body). Untranslated notes
+still appear on `/en/notes`, in Italian, marked `lang="it"` and linking to the
+Italian page — `verifica-rotte.mjs` skips subtrees marked that way, but rejects
+the marking on `<html>`, which would silence the check while staying green.
+
+To edit the schema:
+
+```bash
+cd studio
+npm install
+npx sanity dev      # Studio on localhost:3333
+npx sanity deploy   # publish the hosted Studio
+```
+
+Because the site is static, publishing a note doesn't change anything until the
+site is rebuilt. A Sanity webhook POSTs to
+`https://api.github.com/repos/aleflabo/aleflabo.github.io/dispatches` with
+`{"event_type": "nota-pubblicata"}`, which the deploy workflow listens for. The
+webhook's filter must exclude drafts — otherwise every keystroke saved in the
+Studio triggers a deploy.
+
 ## Deployment
 
 The site doesn't have its own domain yet (`astro.config.mjs` points at
 `aleflabo.github.io`, and there's no `public/CNAME`). Deployment is triggered
-by a push to `main` (`.github/workflows/deploy.yml`): the action builds the
+by a push to `main`, or by the Sanity webhook described above
+(`.github/workflows/deploy.yml`): the action builds the
 site and publishes `dist/` to GitHub Pages. Run `npm run verifica` before
 pushing to `main` — it exits 1 if the built site has a missing route, a
 broken internal link, an `hreflang` pointing at a file that doesn't exist, or
