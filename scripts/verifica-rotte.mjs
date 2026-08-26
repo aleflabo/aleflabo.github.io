@@ -129,8 +129,45 @@ function testoAttributi(html) {
   return valori.map((m) => m[1]).join(" ");
 }
 
-function trovaParoleItaliane(html) {
-  const testo = `${testoVisibile(html)} ${testoAttributi(html)}`;
+// Un blocco marcato `lang="it"` su una pagina inglese è italiano dichiarato,
+// non italiano dimenticato: è il caso delle note non ancora tradotte, che
+// l'elenco di /en/notes mostra in italiano per scelta del committente. Si
+// toglie dal testo esaminato, insieme a tutto il suo sottoalbero, così il
+// resto della pagina resta sorvegliato come prima.
+//
+// La marcatura vale come esenzione solo dentro la pagina. Se a portarla
+// fosse <html>, l'intera pagina inglese sarebbe dichiarata italiana e il
+// controllo si spegnerebbe da solo restando verde: quello è un difetto, e
+// viene segnalato invece che assecondato.
+function rimuoviSottoalberiItaliani(html, file) {
+  const apertura = /<([a-z][a-z0-9]*)\b[^>]*\blang="it"[^>]*>/i;
+  let out = html;
+  for (let giri = 0; giri < 500; giri++) {
+    const m = apertura.exec(out);
+    if (!m) break;
+    const tag = m[1].toLowerCase();
+    if (tag === "html") {
+      dice(`${file} dichiara <html lang="it"> ma sta sotto dist/en/`);
+      return out;
+    }
+    const inizio = m.index;
+    const chiusura = new RegExp(`<(/?)${tag}\\b`, "gi");
+    chiusura.lastIndex = inizio + m[0].length;
+    let profondita = 1;
+    let mm;
+    while ((mm = chiusura.exec(out))) {
+      profondita += mm[1] ? -1 : 1;
+      if (profondita === 0) break;
+    }
+    const fine = mm ? out.indexOf(">", mm.index) + 1 : out.length;
+    out = `${out.slice(0, inizio)} ${out.slice(fine)}`;
+  }
+  return out;
+}
+
+function trovaParoleItaliane(html, file) {
+  const sorvegliato = rimuoviSottoalberiItaliani(html, file);
+  const testo = `${testoVisibile(sorvegliato)} ${testoAttributi(sorvegliato)}`;
   const parole = testo
     .toLowerCase()
     .split(/[^a-zàèéìòù]+/)
@@ -145,7 +182,7 @@ function trovaParoleItaliane(html) {
 if (existsSync("dist/en")) {
   for (const f of trovaHtml("dist/en")) {
     const html = readFileSync(f, "utf8");
-    const trovate = trovaParoleItaliane(html);
+    const trovate = trovaParoleItaliane(html, f);
     if (trovate.length > 0) {
       dice(`${f} ha testo italiano rimasto: ${trovate.join(", ")}`);
     }
