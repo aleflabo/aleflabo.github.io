@@ -1,5 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  // `studio/` è un progetto a sé, con il proprio tsconfig e le proprie
+  // dipendenze (Sanity, React): lasciarlo qui dentro faceva caricare quei tipi
+  // al controllo del sito, che finiva la memoria e moriva con «heap out of
+  // memory». `node_modules` è nell'elenco perché indicare `exclude`
+  // sovrascrive il valore predefinito di TypeScript, che lo escluderebbe da sé.
+  "exclude": ["dist", "node_modules", "studio"]
 }
