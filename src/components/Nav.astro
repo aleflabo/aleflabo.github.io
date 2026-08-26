@@ -13,7 +13,6 @@ interface Props {
   attiva?: string;
 }
 const { lang, hrefAltro, attiva } = Astro.props;
-const nav = site[lang].nav;
 
 // Le sette voci del menu italiano: la `chiave` (per lo stato attivo) e la
 // rotta sono fisse qui; il testo viene da site.it.menu (task 6), nello
@@ -51,9 +50,13 @@ const menuEn = rotteMenuEn.map((voce, i) => ({ ...voce, etichetta: etichetteMenu
 // Flaborea — home", il testo visibile deve dire lo stesso nome (task
 // finale, blocco 4).
 const nomeEn = site.en.hero.name;
-// «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
-// letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
-const parliamoneIt = site.it.contact.title;
+
+// Testo del pulsante di testata: `nav.cta` quando esiste (inglese, «Contact
+// me»), altrimenti il titolo della sezione di contatto (italiano,
+// «Parliamone» da `contact.title`) — un'unica espressione per entrambe le
+// lingue, così ciascuna smette di tenere un valore morto nel campo che
+// legge l'altra (task finale, blocco 5).
+const ctaTesto = site[lang].nav.cta ?? site[lang].contact.title;
 
 // Menu a scomparsa sotto i 720px (task: tavole/HomeMobile.dc.html).
 // Le due etichette dell'aria-label — a riposo e ad aperto — sono nella
@@ -89,7 +92,7 @@ const etichetteToggle =
               {voce.etichetta}
             </a>
           ))}
-          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{parliamoneIt}</a>
+          <a class="cta pulsante" href={`${localizedPath('it', '/')}#parliamone`}>{ctaTesto}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
@@ -115,7 +118,7 @@ const etichetteToggle =
               {voce.etichetta}
             </a>
           ))}
-          <a class="cta pulsante" href={`${localizedPath('en', '/')}#parliamone`}>{nav.cta}</a>
+          <a class="cta pulsante" href={`${localizedPath('en', '/')}#parliamone`}>{ctaTesto}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>

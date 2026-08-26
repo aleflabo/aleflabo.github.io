@@ -1,11 +1,11 @@
 import type { Locale } from "../i18n/ui";
 
 export interface NavCopy {
-  // Usato solo dal CTA della barra di navigazione inglese (Nav.astro,
-  // ramo `en`): quello italiano legge il suo testo da `contact.title`
-  // invece («Parliamone», task 9). `it.nav.cta` resta valorizzato per
-  // rispettare il tipo, ma non è mai reso — vedi task-11-report.md.
-  cta: string;
+  // Testo del pulsante di testata quando non coincide col titolo della
+  // sezione di contatto (inglese: «Contact me»). Opzionale: quando manca,
+  // Nav.astro cade su `contact.title` (italiano, «Parliamone» — task
+  // finale, blocco 5).
+  cta?: string;
 }
 
 export interface HeroCopy {
@@ -19,7 +19,10 @@ export interface CaseStudyCopy {
 }
 
 export interface ContactCopy {
-  title: string;
+  // Titolo della sezione di contatto. Opzionale: quando manca (inglese —
+  // il pulsante di testata legge il proprio `nav.cta` invece), Nav.astro
+  // non ne ha bisogno (task finale, blocco 5).
+  title?: string;
   email: string;
 }
 
@@ -61,7 +64,6 @@ export const site: Record<Locale, SiteCopy> = {
       result: "Result",
     },
     contact: {
-      title: "Let’s talk",
       email: "flaborea.alessandro@gmail.com",
     },
     // Voci di menu, piè di pagina e richiamo ripetuto per le pagine nuove,
@@ -86,9 +88,7 @@ export const site: Record<Locale, SiteCopy> = {
     ],
   },
   it: {
-    nav: {
-      cta: "Contattami",
-    },
+    nav: {},
     hero: {
       name: "Alessandro Flaborea",
     },
