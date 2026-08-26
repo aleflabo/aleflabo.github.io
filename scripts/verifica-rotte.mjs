@@ -30,10 +30,18 @@ if (!existsSync("dist/rss.xml")) {
 } else {
   const rss = readFileSync("dist/rss.xml", "utf8");
 
-  // Conta elementi
+  // Il feed deve avere tanti elementi quante sono le note in pagina. Prima
+  // qui c'era il numero fisso 6: si è rotto nel momento in cui le note del
+  // mockup sono state tolte, e un numero fisso non avrebbe comunque colto il
+  // difetto vero — un feed che smette di seguire la pagina. Il confronto è
+  // fra due cose costruite, quindi resta valido a zero note come a trenta.
   const items = rss.match(/<item>/g) || [];
-  if (items.length !== 6) {
-    dice(`il feed ha ${items.length} elementi, ne aspetto 6`);
+  const paginaNote = readFileSync("dist/note/index.html", "utf8");
+  const righe = paginaNote.match(/class="riga"/g) || [];
+  if (items.length !== righe.length) {
+    dice(
+      `il feed ha ${items.length} elementi ma /note ne mostra ${righe.length}`,
+    );
   }
 
   // Verifica date a mezzanotte UTC
