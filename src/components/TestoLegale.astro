@@ -1,0 +1,97 @@
+---
+// src/components/TestoLegale.astro — il corpo di una pagina legale, uguale
+// per privacy e cookie e per entrambe le lingue: quattro pagine con la stessa
+// forma, un componente solo.
+//
+// I paragrafi possono contenere nomi tecnici fra apici inversi (`lang-chosen`,
+// `localStorage`): vengono resi in carattere a spaziatura fissa. È l'unica
+// formattazione ammessa, e viene applicata spezzando il testo — mai con
+// `set:html`, così nessuna stringa di questi file può iniettare markup.
+import type { SezioneLegale } from '../data/legale';
+
+interface Props {
+  sezioni: SezioneLegale[];
+  aggiornamento: string;
+}
+const { sezioni, aggiornamento } = Astro.props;
+
+/** Spezza un paragrafo sui tratti fra apici inversi, senza interpretare HTML. */
+function pezzi(testo: string): { testo: string; codice: boolean }[] {
+  return testo
+    .split(/(`[^`]+`)/g)
+    .filter(Boolean)
+    .map((p) =>
+      p.startsWith('`') && p.endsWith('`')
+        ? { testo: p.slice(1, -1), codice: true }
+        : { testo: p, codice: false },
+    );
+}
+---
+
+<div class="testo-legale">
+  {sezioni.map((s) => (
+    <section class="sezione">
+      <h2>{s.titolo}</h2>
+      {s.paragrafi.map((p) => (
+        <p>{pezzi(p).map((x) => (x.codice ? <code>{x.testo}</code> : x.testo))}</p>
+      ))}
+      {s.elenco && (
+        <ul>
+          {s.elenco.map((v) => <li>{v}</li>)}
+        </ul>
+      )}
+    </section>
+  ))}
+  <p class="aggiornamento">{aggiornamento}</p>
+</div>
+
+<style>
+  .testo-legale {
+    max-width: 68ch;
+    margin-top: 8px;
+  }
+
+  .sezione {
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0 0 16px;
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  ul {
+    margin: 0 0 16px;
+    padding-left: 22px;
+  }
+
+  li {
+    margin-bottom: 8px;
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  code {
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: var(--surface-warm);
+    font-size: 14.5px;
+  }
+
+  .aggiornamento {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-faint);
+  }
+</style>
