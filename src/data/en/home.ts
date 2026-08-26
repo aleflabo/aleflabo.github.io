@@ -120,13 +120,18 @@ export const comeLavoro: ComeLavoroProps = {
 };
 
 // --- LeProve ---
+// `link`/`href` sono opzionali: «3D Parts Portal» non ha una pagina di
+// destinazione (il case study è `soloItaliano`, task 9/sito-inglese — il
+// suo `href` puntava a `/en/work/portale-ricambi`, una rotta che non
+// esisterà mai), quindi la scheda resta senza collegamento invece di
+// puntare a un 404 o saltare in italiano.
 interface Prova {
   eyebrow: string;
   nome: string;
   corpo: string;
   tag: string[];
-  link: string;
-  href: string;
+  link?: string;
+  href?: string;
   esterno?: boolean;
 }
 interface LeProveProps {
@@ -146,8 +151,6 @@ export const leProve: LeProveProps = {
       nome: "3D Parts Portal",
       corpo: "The customer opens the 3D model of the machine they bought, clicks the part they need, and the request reaches the company already matched to that component's internal code.",
       tag: ["CAD pipeline, 80 tests", "Intellectual property protected"],
-      link: "How it works",
-      href: "/en/work/portale-ricambi",
     },
     {
       eyebrow: "Industry · in production",

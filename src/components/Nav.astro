@@ -29,6 +29,24 @@ const rotteMenuIt: Array<{ chiave: string; rotta: string }> = [
 const etichetteMenuIt = site.it.menu ?? [];
 const menuIt = rotteMenuIt.map((voce, i) => ({ ...voce, etichetta: etichetteMenuIt[i] ?? '' }));
 const nomeIt = site.it.hero.name;
+
+// Le sei voci del menu inglese, stesso schema di rotteMenuIt: la `chiave`
+// (per lo stato attivo, uguale al valore di `attiva` passato da ogni
+// pagina inglese) e la rotta sono fisse qui, nello stesso ordine di
+// site.en.menu (task 9, sito-inglese) — prima il menu inglese portava a
+// frammenti della home (`#work`, `#research`, `#about`) rimasti dal
+// vecchio sito a una pagina sola: le sezioni con quegli id non esistono
+// più da quando /en/ ha preso la struttura della home italiana.
+const rotteMenuEn: Array<{ chiave: string; rotta: string }> = [
+  { chiave: 'services', rotta: '/services' },
+  { chiave: 'training', rotta: '/training' },
+  { chiave: 'work', rotta: '/work' },
+  { chiave: 'research', rotta: '/research' },
+  { chiave: 'about', rotta: '/about' },
+  { chiave: 'notes', rotta: '/notes' },
+];
+const etichetteMenuEn = site.en.menu ?? [];
+const menuEn = rotteMenuEn.map((voce, i) => ({ ...voce, etichetta: etichetteMenuEn[i] ?? '' }));
 // «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
 // letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
 const parliamoneIt = site.it.contact.title;
@@ -88,10 +106,12 @@ const etichetteToggle =
           <span aria-hidden="true"></span>
         </button>
         <div class="links" id="nav-links">
-          <a href={`${localizedPath('en', '/')}#work`}>{nav.work}</a>
-          <a href={`${localizedPath('en', '/')}#research`}>{nav.research}</a>
-          <a href={`${localizedPath('en', '/')}#about`}>{nav.about}</a>
-          <a class="cta" href={`${localizedPath('en', '/')}#contact`}>{nav.cta}</a>
+          {menuEn.map((voce) => (
+            <a href={localizedPath('en', voce.rotta)} class:list={[voce.chiave === attiva && 'attiva']}>
+              {voce.etichetta}
+            </a>
+          ))}
+          <a class="cta" href={`${localizedPath('en', '/')}#parliamone`}>{nav.cta}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
@@ -147,6 +167,12 @@ const etichetteToggle =
   .links a.cta:hover {
     color: var(--surface);
     opacity: 0.9;
+  }
+  .links a.attiva {
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+    font-weight: 600;
+    padding-bottom: 2px;
   }
 
   /* --- pulsante a due trattini: misure alla lettera da tavole/HomeMobile.dc.html ---

@@ -4,13 +4,19 @@
 // «Portale ricambi 3D» (task 6/11), ma i testi restano scritti alla
 // lettera dalla tavola invece di essere riletti da lì: i tre corpi di
 // questa sezione sono più corti di quelli di /lavori.
+//
+// `link`/`href` sono opzionali: la scheda di «Portale ricambi 3D» lato
+// inglese non ha una pagina di destinazione (quel case study è
+// `soloItaliano`, task 9/sito-inglese), quindi resta senza collegamento —
+// come già fanno Paesello e il video generativo in RigaLavoro.astro, righe
+// di /lavori e /en/work senza `href`.
 interface Prova {
   eyebrow: string;
   nome: string;
   corpo: string;
   tag: string[];
-  link: string;
-  href: string;
+  link?: string;
+  href?: string;
   esterno?: boolean;
 }
 interface Props {
@@ -36,10 +42,12 @@ const { occhiello, titolo, prove, continua, hrefContinua } = Astro.props;
           <div class="tag">
             {p.tag.map((t) => <span>{t}</span>)}
           </div>
-          {p.esterno ? (
-            <a class="link" href={p.href} target="_blank" rel="noopener noreferrer">{p.link} <span class="freccia">&rarr;</span></a>
-          ) : (
-            <a class="link" href={p.href}>{p.link} <span class="freccia">&rarr;</span></a>
+          {p.href && (
+            p.esterno ? (
+              <a class="link" href={p.href} target="_blank" rel="noopener noreferrer">{p.link} <span class="freccia">&rarr;</span></a>
+            ) : (
+              <a class="link" href={p.href}>{p.link} <span class="freccia">&rarr;</span></a>
+            )
           )}
         </div>
       ))}
