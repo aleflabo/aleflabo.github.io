@@ -1,0 +1,403 @@
+---
+// src/components/pagine/CorpoDati.astro — il corpo di /i-vostri-dati e della
+// gemella /en/your-data.
+//
+// Le due pagine portavano **277 righe di stile identiche riga per riga**,
+// più lo stesso markup. Ora il corpo sta qui; il contenuto vero (risposta
+// corta, situazioni, impegni) resta in src/data/dati.ts, e i testi che erano
+// scritti dentro il markup in src/data/datiPagina.ts.
+import TestataPagina from '../TestataPagina.astro';
+import { localizedPath, type Locale } from '../../i18n/ui';
+import type { TestiDatiPagina } from '../../data/datiPagina';
+import type {
+  QuelloCheNonPossoGarantirvi,
+  RispostaCorta,
+  Situazione,
+  SuQuestoHoLavoratoDavvero,
+} from '../../data/dati';
+
+interface Props {
+  lang: Locale;
+  t: TestiDatiPagina;
+  situazioniDati: Situazione[];
+  rispostaCorta: RispostaCorta;
+  quelloCheNonPossoGarantirvi: QuelloCheNonPossoGarantirvi;
+  suQuestoHoLavoratoDavvero: SuQuestoHoLavoratoDavvero;
+}
+const {
+  lang,
+  t,
+  situazioniDati,
+  rispostaCorta,
+  quelloCheNonPossoGarantirvi,
+  suQuestoHoLavoratoDavvero,
+} = Astro.props;
+---
+
+  <section class="intestazione">
+    <div class="container">
+      <TestataPagina
+        occhiello={t.occhiello}
+        titolo={t.titolo}
+        introduzione={rispostaCorta.intro}
+      />
+    </div>
+  </section>
+
+  <section class="risposta-corta">
+    <div class="container">
+      <div class="riquadro">
+        <p class="riquadro-label">{rispostaCorta.titolo}</p>
+        <p class="riquadro-testo">{rispostaCorta.testo}</p>
+        <p class="riquadro-nota">{rispostaCorta.nota}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="situazioni-intro">
+    <div class="container">
+      <h2 class="section-title">{t.titoloSituazioni}</h2>
+      <p class="intro">{t.introSituazioni}</p>
+    </div>
+  </section>
+
+  <section class="situazioni">
+    <div class="container">
+      <div class="elenco">
+        {situazioniDati.map((s) => (
+          <div class="scheda situazione">
+            <span class="numero">{s.numero}</span>
+            <div>
+              <h3>{s.titolo}</h3>
+              {s.corpo.map((p) => (
+                <p class="corpo">{p}</p>
+              ))}
+              {s.punti && (
+                <div class="punti">
+                  {s.punti.map((punto) => (
+                    <p class="punto"><strong>{punto.titolo}</strong> {punto.testo}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="onesta">
+    <div class="container">
+      <div class="colonne">
+        <div>
+          <p class="label">{t.labelOnesta}</p>
+          <h2 class="section-title">{quelloCheNonPossoGarantirvi.titolo}</h2>
+          <div class="righe">
+            {quelloCheNonPossoGarantirvi.punti.map((p) => (
+              <p class="corpo">{p}</p>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p class="label">{t.labelCredete}</p>
+          <h2 class="section-title">{suQuestoHoLavoratoDavvero.titolo}</h2>
+          <div class="righe">
+            {suQuestoHoLavoratoDavvero.corpo.map((p) => (
+              <p class="corpo">{p}</p>
+            ))}
+          </div>
+          <div class="link-row">
+            {suQuestoHoLavoratoDavvero.link.map((l) => (
+              <a class="link-rimando" href={localizedPath('it', l.href)}>{l.testo} <span class="freccia">&rarr;</span></a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="domanda-aperta">
+    <div class="container">
+      <h2>{t.titoloDomanda}</h2>
+      <p class="intro">{t.introDomanda}</p>
+      <a class="pulsante scrivimi" href={`${localizedPath(lang, "/")}#parliamone`}>{t.etichettaScrivimi}</a>
+    </div>
+  </section>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- intestazione --- */
+  .intestazione {
+    padding: 0;
+  }
+  .intestazione .container {
+    padding: 72px 24px 44px;
+  }
+  /* TestataPagina riproduce il caso maggioritario: qui la tavola vuole
+     scarti su tre misure (max-width dell'h1, interlinea e max-width
+     dell'intro), quindi restano come override. L'interlinea si applica
+     a ogni larghezza (l'originale non la toccava in mobile); i due
+     max-width solo da 641px in su, perché sotto i 640px il componente
+     stesso li azzera già a "none" — un override senza @media qui
+     vincerebbe anche lì per specificità (vedi la nota gemella in
+     servizi.astro). */
+  .intestazione :global(.intro) {
+    line-height: 1.65;
+  }
+  @media (min-width: 641px) {
+    .intestazione :global(h1) {
+      max-width: 20ch;
+    }
+    .intestazione :global(.intro) {
+      max-width: 64ch;
+    }
+  }
+
+  /* --- risposta corta --- */
+  .risposta-corta {
+    padding: 0;
+  }
+  .risposta-corta .container {
+    padding: 0 24px 60px;
+  }
+  .riquadro {
+    background: var(--accent);
+    border-radius: var(--radius);
+    padding: 40px 44px;
+    max-width: 900px;
+  }
+  .riquadro-label {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8bdd2;
+    font-weight: 700;
+  }
+  .riquadro-testo {
+    margin-top: 16px;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--surface);
+    text-wrap: pretty;
+  }
+  .riquadro-nota {
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #cdd9e6;
+  }
+
+  /* --- intro situazioni --- */
+  .situazioni-intro {
+    padding: 0;
+  }
+  .situazioni-intro .container {
+    padding: 0 24px 20px;
+  }
+  .section-title {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .situazioni-intro .intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 64ch;
+    margin-bottom: 34px;
+  }
+
+  /* --- situazioni --- */
+  .situazioni {
+    padding: 0;
+  }
+  .situazioni .container {
+    padding: 0 24px 60px;
+  }
+  .elenco {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .situazione {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .situazione .numero {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .situazione h3 {
+    font-size: 23px;
+  }
+  .situazione .corpo {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .situazione .punti {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    border-left: 2px solid var(--border);
+    padding-left: 22px;
+  }
+  .situazione .punto {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .situazione .punto strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* --- onestà / perché mi credete --- */
+  .onesta {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0;
+  }
+  .onesta .container {
+    padding: 64px 24px;
+  }
+  .colonne {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+  }
+  .colonne .section-title {
+    font-size: 27px;
+    margin-top: 16px;
+    margin-bottom: 0;
+    max-width: 24ch;
+  }
+  .colonne .righe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .colonne .righe .corpo {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .link-row {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .link-rimando {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* --- fatemi la domanda --- */
+  .domanda-aperta {
+    border-top: 1px solid var(--border);
+    background: var(--accent);
+    padding: 0;
+  }
+  .domanda-aperta .container {
+    padding: 56px 24px;
+  }
+  .domanda-aperta h2 {
+    font-size: 28px;
+    color: var(--surface);
+    max-width: 30ch;
+  }
+  .domanda-aperta .intro {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cdd9e6;
+    max-width: 58ch;
+  }
+  .domanda-aperta .scrivimi {
+    display: inline-block;
+    margin-top: 26px;
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 640px) {
+    .intestazione .container {
+      padding: 44px 20px 36px;
+    }
+    /* qui la tavola vuole 30px invece del 32px maggioritario. */
+    .intestazione :global(h1) {
+      font-size: 30px;
+    }
+    .risposta-corta .container {
+      padding: 0 20px 40px;
+    }
+    .riquadro {
+      padding: 26px 24px;
+    }
+    .riquadro-testo {
+      font-size: 18px;
+    }
+    .situazioni-intro .container {
+      padding: 0 20px 16px;
+    }
+    .section-title {
+      font-size: 24px;
+      max-width: none;
+    }
+    .situazioni-intro .intro {
+      margin-bottom: 24px;
+    }
+    .situazioni .container {
+      padding: 0 20px 44px;
+    }
+    .situazione {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 24px 20px;
+    }
+    .situazione h3 {
+      font-size: 20px;
+    }
+    .onesta .container {
+      padding: 44px 20px;
+    }
+    .colonne {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .colonne .section-title {
+      max-width: none;
+    }
+    .domanda-aperta .container {
+      padding: 44px 20px;
+    }
+    .domanda-aperta h2 {
+      font-size: 24px;
+      max-width: none;
+    }
+    .domanda-aperta .intro {
+      max-width: none;
+    }
+  }
+</style>
