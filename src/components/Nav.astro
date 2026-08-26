@@ -47,6 +47,10 @@ const rotteMenuEn: Array<{ chiave: string; rotta: string }> = [
 ];
 const etichetteMenuEn = site.en.menu ?? [];
 const menuEn = rotteMenuEn.map((voce, i) => ({ ...voce, etichetta: etichetteMenuEn[i] ?? '' }));
+// Il nome intero, non più «AF»: l'àncora ha già aria-label="Alessandro
+// Flaborea — home", il testo visibile deve dire lo stesso nome (task
+// finale, blocco 4).
+const nomeEn = site.en.hero.name;
 // «Parliamone» è anche il titolo della sezione di contatto (site.it.contact.title):
 // letto da lì invece di riscritto a mano, per non andare in deriva se cambia.
 const parliamoneIt = site.it.contact.title;
@@ -91,7 +95,7 @@ const etichetteToggle =
       </>
     ) : (
       <>
-        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">AF</a>
+        <a class="brand" href={localizedPath('en', '/')} aria-label="Alessandro Flaborea — home">{nomeEn}</a>
         <button
           type="button"
           class="menu-toggle"
@@ -111,7 +115,7 @@ const etichetteToggle =
               {voce.etichetta}
             </a>
           ))}
-          <a class="cta" href={`${localizedPath('en', '/')}#parliamone`}>{nav.cta}</a>
+          <a class="cta pulsante" href={`${localizedPath('en', '/')}#parliamone`}>{nav.cta}</a>
           <LangSwitch lang={lang} href={hrefAltro} />
         </div>
       </>
@@ -222,14 +226,17 @@ const etichetteToggle =
     font-weight: 600;
     padding-bottom: 2px;
   }
-  .inner.it .links a.cta {
+  /* Il contorno terracotta è dato dalla classe .pulsante (l'animazione
+     viene da .pulsante in global.css), non dalla lingua: stessa identità
+     su entrambe le testate (task finale, blocco 4). */
+  .links a.cta.pulsante {
     background: transparent;
     color: var(--azione);
     border: 1px solid var(--azione);
     border-radius: var(--radius);
     padding: 8px 16px;
   }
-  .inner.it .links a.cta:hover {
+  .links a.cta.pulsante:hover {
     color: var(--azione);
     opacity: 1;
   }
