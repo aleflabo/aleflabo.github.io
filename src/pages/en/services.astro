@@ -38,7 +38,12 @@ import { localizedPath } from '../../i18n/ui';
     <div class="container">
       <div class="schede">
         {ingaggi.map((ingaggio) => (
-          <SchedaIngaggio ingaggio={ingaggio} />
+          <SchedaIngaggio
+            ingaggio={ingaggio}
+            etichettaPerChi="Who it's for"
+            etichettaQuantoDura="How long"
+            etichettaCosaResta="What you keep"
+          />
         ))}
       </div>
       <a class="continua" href={localizedPath('en', '/work')}>The evidence: what I've built <span class="freccia">&rarr;</span></a>
