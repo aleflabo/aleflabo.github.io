@@ -8,6 +8,8 @@ export default defineConfig({
   redirects: {
     '/it': '/',
     '/work/[slug]': '/lavori/[slug]',
+    // Il progetto si chiama Grip; «Tire Hub» era il nome con cui era uscito.
+    '/lavori/tire-hub': '/lavori/grip',
   },
   integrations: [
     sitemap({

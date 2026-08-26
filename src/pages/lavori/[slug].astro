@@ -19,7 +19,7 @@ const { slug } = Astro.params;
 const project = getProject(slug!)!;
 const c = project.it;
 const path = `/lavori/${project.slug}`;
-// I progetti `soloItaliano` (Portale ricambi, Tire Hub) non hanno una rotta
+// I progetti `soloItaliano` (Portale ricambi, Grip) non hanno una rotta
 // /en/work/[slug] (§10 della spec, fix in projects.ts): niente alternato
 // inglese per le loro schede (task 1/bloccante).
 const pathEn = project.soloItaliano ? undefined : `/work/${project.slug}`;
@@ -36,7 +36,7 @@ const t = site.it;
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.tagIt.map((s) => <StackChip label={s} />)}</div>
-    {/* Le due schede nuove (Portale ricambi, Tire Hub) hanno un solo
+    {/* Le due schede nuove (Portale ricambi, Grip) hanno un solo
         paragrafo di copy in testi.md: un campo lasciato vuoto in
         projects.ts salta la sua sezione invece di renderizzare
         un'intestazione senza corpo (correzione giro 1, task-11-report.md). */}

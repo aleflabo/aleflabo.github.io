@@ -84,7 +84,7 @@ export const faq: Domanda[] = [
   {
     domanda: "Cosa serve da voi?",
     risposta:
-      "Poco, ma quel poco è indispensabile: mezza giornata delle persone che fanno il lavoro davvero, non solo di chi lo racconta; qualche file vero invece che un esempio ripulito; e una persona interna che possa rispondere alle domande quando ne nascono. Senza quest'ultima i progetti si fermano, sempre.",
+      "Mezza giornata delle persone che usano il processo tutti i giorni, qualche file preso così com'è, e una persona interna a cui poter chiedere quando serve un chiarimento. Non serve preparare niente in anticipo.",
   },
   {
     domanda: "E se poi non funziona?",

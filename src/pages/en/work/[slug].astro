@@ -14,7 +14,7 @@ import { annoEn } from '../../../lib/anno';
 import { localizedPath } from '../../../i18n/ui';
 
 export function getStaticPaths() {
-  // I progetti `soloItaliano` (Portale ricambi, Tire Hub) non hanno un
+  // I progetti `soloItaliano` (Portale ricambi, Grip) non hanno un
   // testo inglese approvato (§10 della spec): niente rotta /en/work/[slug]
   // per loro (decisione nella revisione finale del ramo sito-italiano).
   return projects.filter((p) => !p.soloItaliano).map((p) => ({ params: { slug: p.slug } }));

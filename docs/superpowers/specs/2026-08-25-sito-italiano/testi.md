@@ -345,7 +345,14 @@ Sorgente: `tavole/Servizi.dc.html`
 
 *SOTTOTITOLO (h3)*
 
-- `testo` Poco, ma quel poco è indispensabile: mezza giornata delle persone che fanno il lavoro davvero, non solo di chi lo racconta; qualche file vero invece che un esempio ripulito; e una persona interna che possa rispondere alle domande quando ne nascono. Senza quest'ultima i progetti si fermano, sempre.
+- `testo` Mezza giornata delle persone che usano il processo tutti i giorni, qualche file preso così com'è, e una persona interna a cui poter chiedere quando serve un chiarimento. Non serve preparare niente in anticipo.
+
+  > **Rivisto dopo la pubblicazione.** Il testo di questa tavola era: «Poco, ma quel poco
+  > è indispensabile: mezza giornata delle persone che fanno il lavoro davvero, non solo
+  > di chi lo racconta; qualche file vero invece che un esempio ripulito; e una persona
+  > interna che possa rispondere alle domande quando ne nascono. Senza quest'ultima i
+  > progetti si fermano, sempre.» Tre elementi su tre erano formulati come un sospetto
+  > verso il lettore, e la chiusura era un avvertimento.
 
 ### E se poi non funziona?
 
@@ -562,7 +569,7 @@ Sorgente: `tavole/Lavori.dc.html`
 - `etichetta` 2026
 - `testo` Automotive · gestionale
 
-### Tire Hub
+### Grip (era «Tire Hub»)
 
 *SOTTOTITOLO (h3)*
 
@@ -687,7 +694,8 @@ Sorgente: `tavole/Lavori.dc.html`
 
 - `testo` Dieci articoli pubblicati, oltre cinquecento citazioni e il codice di tutti quelli che si potevano aprire. È da lì che viene la parte di questi progetti che non si improvvisa.
 - `LINK` Vai alla ricerca →
-- `LINK` Come lavoro →
+- ~~`LINK` Come lavoro →~~ — **rimosso dopo la pubblicazione**: la fascia si intitola
+  «E poi c'è la ricerca» e questo secondo invito portava altrove, diluendo il primo.
 - `testo` Alessandro Flaborea
 - `testo` Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.
 - `LINK` Prenota mezz'ora
@@ -908,7 +916,11 @@ Sorgente: `tavole/ChiSono.dc.html`
 - `testo` Ho cominciato a Udine, con una laurea in informatica e sei mesi in Svezia che mi hanno tolto l'idea di restare fermo. Poi Roma: una magistrale in data science e un dottorato al Perception and Intelligence Lab della Sapienza, dove ho passato tre anni su un problema che si può riassumere così — insegnare a un computer a guardare qualcuno che lavora e capire cosa sta facendo.
 - `testo` Nel mezzo un inverno ad Amsterdam a lavorare su una geometria diversa da quella a cui siamo abituati, e quattro anni in aula come assistente alla didattica, che è dove ho scoperto che spiegare una cosa difficile a chi non la conosce è un mestiere a parte.
 - `testo` Quella ricerca poi è diventata un prodotto. Ho co-fondato Procedo e ne sono stato CTO per due anni: video girati in reparto che diventano procedure scritte, dentro aziende vere, con clienti che pagavano e si lamentavano quando qualcosa non funzionava. È lì che ho imparato la parte che all'università non si impara, cioè quanto di quello che scrivi in un articolo sopravvive al contatto con un capannone.
-- `testo` Ho lasciato il ruolo operativo a metà 2026 e oggi lavoro per conto mio. Il motivo è semplice: mi piace la parte in cui si entra in un'azienda che non conosco, si guarda come lavora e si capisce dove si perde tempo. In una società che cresce quella parte diventa sempre più piccola.
+- `testo` Ho lasciato il ruolo operativo a metà 2026 e oggi lavoro per conto mio. Mi interessa la parte in cui si entra in un'azienda che non si conosce, si guarda come lavora e si capisce dove si perde tempo: da solo posso farla più spesso, e in aziende diverse.
+
+  > **Rivisto dopo la pubblicazione.** Chiudeva con «In una società che cresce
+  > quella parte diventa sempre più piccola»: spiegava l'uscita da Procedo
+  > togliendo qualcosa a Procedo, che nella stessa pagina è una credenziale.
 - `testo` Continuo a scrivere codice tutti i giorni e a pubblicare quello che imparo. Se mi chiami, la persona che viene in azienda e la persona che poi costruisce sono la stessa.
 - `LINK` Prenota la mezza giornata diagnostica
 - `LINK` Scarica il curriculum
@@ -1278,5 +1290,5 @@ Sorgente: `tavole/Rotte.dc.html`
 - `testo` I due case study da aggiungere
 - `testo` Portale ricambi 3D
 - `testo` Va in prima posizione sulla home italiana: è quello in cui un'azienda che produce si riconosce più in fretta.
-- `testo` Tire Hub
+- `testo` Grip
 - `testo` Sta fra i gestionali per materia, e la sua scheda dichiara che nasce da un'iniziativa e non da una commessa.

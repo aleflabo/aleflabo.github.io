@@ -40,26 +40,31 @@ import { localizedPath } from '../i18n/ui';
     </div>
   </section>
 
-  <section class="elenco-note">
-    <div class="container">
-      <div class="righe">
-        {note.map((n) => (
-          <a href="#" class="riga">
-            <span class="data">{n.data}</span>
-            <div class="testo-riga">
-              <h2>{n.titolo}</h2>
-              <p class="sommario">{n.sommario}</p>
-              <div class="tag">
-                {n.tag.map((t) => (
-                  <span>{t}</span>
-                ))}
+  {/* L'elenco compare solo quando esiste almeno una nota: oggi l'array è
+     vuoto (v. src/data/note.ts), e una fascia vuota fra l'intestazione e il
+     riquadro dell'iscrizione lascerebbe un buco senza spiegarlo. */}
+  {note.length > 0 && (
+    <section class="elenco-note">
+      <div class="container">
+        <div class="righe">
+          {note.map((n) => (
+            <a href="#" class="riga">
+              <span class="data">{n.data}</span>
+              <div class="testo-riga">
+                <h2>{n.titolo}</h2>
+                <p class="sommario">{n.sommario}</p>
+                <div class="tag">
+                  {n.tag.map((t) => (
+                    <span>{t}</span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <section class="raccolta-email">
     <div class="container">

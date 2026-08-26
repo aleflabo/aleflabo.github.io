@@ -743,7 +743,7 @@ Fonti: `testi.md` §`/lavori` per il testo delle schede, `src/data/projects.ts`
 per i case study. Le schede della pagina indice sono **tradotte**: l'italiano di
 `testi.md` dice cose che i `summary` inglesi del portfolio non dicono (il ruolo
 di advisor in Procedo, lo stato «in costruzione» del portale, la provenienza di
-Tire Hub). I campi dei case study sono **riusati** dove l'inglese è tuo.
+Grip). I campi dei case study sono **riusati** dove l'inglese è tuo.
 
 ## Apertura
 
@@ -842,13 +842,13 @@ summary, problem e result: non c'è una quarta frase da cui ricavare
 l'approccio, in italiano né in inglese. Il campo `en.approach` in `projects.ts`
 esiste ma è testo non approvato e l'ho ignorato, come da istruzione.
 
-### Tire Hub — 2026
+### Grip (era «Tire Hub») — 2026
 
 **[TRADOTTO]** — `testi.md`, scheda
 
 > Automotive · business management
 >
-> ### Tire Hub
+> ### Grip
 >
 > A management dashboard for the tyre trade: customer and stock records,
 > area-by-area statistics and the daily work of the people at the counter. It
@@ -1193,7 +1193,9 @@ mia resa dell'italiano, non un nome che hai scelto.
 > one that could be opened. That's where the part of these projects that can't
 > be improvised comes from.
 >
-> Go to the research → · How I work →
+> Go to the research →
+>
+> *(«How I work →» rimosso dopo la pubblicazione, come nella gemella italiana.)*
 
 ## Etichette della pagina case study
 
@@ -1436,10 +1438,14 @@ approvati
 > which is how much of what you write in a paper survives contact with a
 > factory floor.
 >
-> I left the operational role in mid-2026 and today I work on my own. The
-> reason is simple: I like the part where you walk into a company you don't
-> know, look at how it works and see where the time goes. In a company that's
-> growing, that part keeps getting smaller.
+> I left the operational role in mid-2026 and today I work on my own. What
+> interests me is the part where you walk into a company you don't know, look
+> at how it works and see where the time goes: on my own I get to do it more
+> often, and in different companies.
+>
+> *(Rivisto dopo la pubblicazione, come la gemella italiana: la frase
+> precedente chiudeva con «In a company that's growing, that part keeps
+> getting smaller», che leggeva come una critica a Procedo.)*
 >
 > I still write code every day and publish what I learn. If you call me, the
 > person who comes to your company and the person who then builds it are the

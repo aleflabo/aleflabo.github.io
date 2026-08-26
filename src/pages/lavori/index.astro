@@ -17,7 +17,7 @@ import { annoIt } from '../../lib/anno';
 
 const procedo = getProject('procedo')!;
 const portaleRicambi = getProject('portale-ricambi')!;
-const tireHub = getProject('tire-hub')!;
+const grip = getProject('grip')!;
 const costTracking = getProject('procedo-tracking-costs')!;
 const spannum = getProject('spannum')!;
 const fantaMundial = getProject('fanta-mundial')!;
@@ -70,12 +70,12 @@ const scene = ['SCENA 1', 'SCENA 2', 'SCENA 3', 'SCENA 4'];
           href={link(portaleRicambi.slug)}
         />
         <RigaLavoro
-          anno={annoIt(tireHub.year)}
+          anno={annoIt(grip.year)}
           areaStato="Automotive · gestionale"
-          nome={tireHub.name}
+          nome={grip.name}
           corpo="Una dashboard gestionale per il settore gomme: anagrafiche, statistiche per area e il lavoro quotidiano di chi sta al banco. Nasce da un'iniziativa mia e non da una commessa: l'ho costruita partendo da uno strumento di generazione automatica, per poi rifare a mano le parti che contano e vedere quanto lontano si arriva."
-          tagIt={tireHub.tagIt}
-          href={link(tireHub.slug)}
+          tagIt={grip.tagIt}
+          href={link(grip.slug)}
         />
         <RigaLavoro
           anno={annoIt(costTracking.year)}
@@ -173,7 +173,6 @@ const scene = ['SCENA 1', 'SCENA 2', 'SCENA 3', 'SCENA 4'];
       <p class="intro">Dieci articoli pubblicati, oltre cinquecento citazioni e il codice di tutti quelli che si potevano aprire. È da lì che viene la parte di questi progetti che non si improvvisa.</p>
       <div class="link-chiusura">
         <a href={localizedPath('it', '/ricerca')}>Vai alla ricerca →</a>
-        <a href={localizedPath('it', '/chi-sono')}>Come lavoro →</a>
       </div>
     </div>
   </section>
