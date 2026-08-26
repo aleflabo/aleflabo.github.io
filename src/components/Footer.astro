@@ -20,19 +20,30 @@ const frasePresentazione: Record<Locale, string> = {
   en: 'AI consulting and training. From research to software that people use.',
 };
 
-// Riga finale: stessa forma, etichetta della partita IVA diversa per lingua
-// (testi-en.md: «al massimo si etichetta VAT no.»).
+// Riga finale. La partita IVA non c'è ancora: finché non è aperta, la voce
+// resta fuori invece di stare in pagina come «[DA INSERIRE]», che si leggeva
+// su tutte e trentacinque le pagine. Quando arriva, si rimette qui —
+// `testi-en.md` dice che in inglese si etichetta «VAT no.».
 const rigaFinale: Record<Locale, string> = {
-  it: '© 2026 Alessandro Flaborea · P. IVA [DA INSERIRE]',
-  en: '© 2026 Alessandro Flaborea · VAT no. [DA INSERIRE]',
+  it: '© 2026 Alessandro Flaborea',
+  en: '© 2026 Alessandro Flaborea',
 };
 
-// Privacy e Cookie non sono fra le rotte previste (nessuna delle due pagine
-// esiste in nessuna lingua): restano segnaposto. testi-en.md le scrive
-// «Privacy · Cookies» (plurale), testi.md «Privacy · Cookie» (singolare).
-const legale: Record<Locale, { privacy: string; cookie: string }> = {
-  it: { privacy: 'Privacy', cookie: 'Cookie' },
-  en: { privacy: 'Privacy', cookie: 'Cookies' },
+// Privacy e Cookie: testi-en.md le scrive «Privacy · Cookies» (plurale),
+// testi.md «Privacy · Cookie» (singolare).
+const legale: Record<Locale, { privacy: string; cookie: string; hrefPrivacy: string; hrefCookie: string }> = {
+  it: {
+    privacy: 'Privacy',
+    cookie: 'Cookie',
+    hrefPrivacy: localizedPath('it', '/privacy'),
+    hrefCookie: localizedPath('it', '/cookie'),
+  },
+  en: {
+    privacy: 'Privacy',
+    cookie: 'Cookies',
+    hrefPrivacy: localizedPath('en', '/privacy'),
+    hrefCookie: localizedPath('en', '/cookies'),
+  },
 };
 
 // Colonne del piè di pagina: il testo (titoli e voci) viene da
@@ -96,8 +107,8 @@ const rotte = rottePiePagina[lang];
   <div class="barra">
     <span>{rigaFinale[lang]}</span>
     <div class="legale">
-      <a href="#">{legale[lang].privacy}</a>
-      <a href="#">{legale[lang].cookie}</a>
+      <a href={legale[lang].hrefPrivacy}>{legale[lang].privacy}</a>
+      <a href={legale[lang].hrefCookie}>{legale[lang].cookie}</a>
     </div>
   </div>
 </footer>

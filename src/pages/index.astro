@@ -197,10 +197,10 @@ const daDoveViene = {
 };
 
 // --- Contatto ---
-// Il modulo resta inerte (nessun `action`) e i pulsanti di prenotazione,
-// WhatsApp e mail restano segnaposto (`href="#"`): non è stato scelto
-// nessun servizio esterno né inventato un numero, per istruzione esplicita
-// del task 8.
+// Il modulo resta inerte (nessun `action`): il servizio non è ancora
+// collegato. Dei tre canali alternativi solo WhatsApp ha un recapito vero;
+// calendario e mail non hanno `href` e per questo non vengono resi affatto —
+// v. il commento in Contatto.astro.
 const contatto = {
   eyebrow: 'Parliamone',
   titolo: "Mezz'ora per capire se possiamo lavorare insieme",
@@ -219,7 +219,7 @@ const contatto = {
   introAlternativa: 'Oppure, se preferisci saltare il modulo:',
   canali: [
     { etichetta: 'Scegli tu mezz\'ora sul calendario' },
-    { etichetta: 'WhatsApp' },
+    { etichetta: 'WhatsApp', href: 'https://wa.me/393467202432' },
     { etichetta: 'Mail' },
   ],
 };

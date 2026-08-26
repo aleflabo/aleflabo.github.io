@@ -290,7 +290,7 @@ export const contatto: ContattoProps = {
   introAlternativa: "Or, if you'd rather skip the form:",
   canali: [
     { etichetta: "Pick half an hour in the calendar" },
-    { etichetta: "WhatsApp" },
+    { etichetta: "WhatsApp", href: "https://wa.me/393467202432" },
     { etichetta: "Email" },
   ],
 };

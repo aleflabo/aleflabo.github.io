@@ -24,6 +24,21 @@ for (const r of ROTTE) {
   if (r !== "en" && /hreflang="it" href="[^"]*\/it\//.test(html)) dice(`${f} punta ancora a /it/`);
 }
 
+// I segnaposto non devono finire in pagina. `[EMAIL]` nelle informative è il
+// caso vivo: un'informativa che non dice a chi scrivere non permette di
+// esercitare i diritti che elenca, e il difetto si legge solo aprendo la
+// pagina. Stesso trattamento per «[DA INSERIRE]», che è stato pubblicato per
+// giorni nel piè di pagina di tutte e trentacinque le pagine senza che niente
+// lo segnalasse.
+for (const f of trovaHtml("dist")) {
+  const html = readFileSync(f, "utf8");
+  for (const segnaposto of ["[EMAIL]", "[DA INSERIRE]", "[TODO]"]) {
+    if (html.includes(segnaposto)) {
+      dice(`${f} contiene il segnaposto ${segnaposto}`);
+    }
+  }
+}
+
 // La pagina 404 deve stare esattamente in dist/404.html: GitHub Pages serve
 // quel file, e solo quello, per ogni indirizzo che non esiste. Se finisse in
 // una sottocartella — come succede a tutte le altre rotte — il sito

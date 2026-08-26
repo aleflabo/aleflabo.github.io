@@ -1,0 +1,42 @@
+---
+// src/pages/cookie.astro — pagina cookie (rotta `/cookie`).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TestataPagina from '../components/TestataPagina.astro';
+import TestoLegale from '../components/TestoLegale.astro';
+import { cookie as testo } from '../data/legale';
+
+const p = testo;
+---
+
+<BaseLayout
+  title="Cookie — Alessandro Flaborea"
+  description={p.introduzione}
+  lang="it"
+  path="/cookie"
+  pathEn="/cookies"
+>
+  <section class="pagina">
+    <div class="container">
+      <TestataPagina occhiello={p.occhiello} titolo={p.titolo} introduzione={p.introduzione} />
+      <TestoLegale sezioni={p.sezioni} aggiornamento={p.aggiornamento} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .pagina {
+    padding: 72px 0 96px;
+  }
+
+  @media (max-width: 640px) {
+    .pagina {
+      padding: 48px 0 72px;
+    }
+  }
+</style>
