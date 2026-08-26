@@ -8,6 +8,7 @@
 // non calcolati da `localizedPath`: nessuna pagina consuma ancora questo
 // file.
 import { site } from "../site";
+import { emailContatto } from "../legale";
 
 const prenotaMezzoraEn = site.en.prenotaMezzora ?? "";
 
@@ -269,7 +270,7 @@ interface ContattoProps {
   invia: string;
   notaInerte: string;
   introAlternativa: string;
-  canali: { etichetta: string }[];
+  canali: { etichetta: string; href?: string }[];
 }
 
 export const contatto: ContattoProps = {
@@ -291,6 +292,6 @@ export const contatto: ContattoProps = {
   canali: [
     { etichetta: "Pick half an hour in the calendar" },
     { etichetta: "WhatsApp", href: "https://wa.me/393467202432" },
-    { etichetta: "Email" },
+    { etichetta: "Email", href: `mailto:${emailContatto}` },
   ],
 };

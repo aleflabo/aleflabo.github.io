@@ -4,11 +4,11 @@
  * arriva quello vero si cambia questa riga e cambiano tutte e quattro le
  * pagine.
  *
- * Finché vale `[EMAIL]` la pagina è **incompleta**: un'informativa che non
- * dice a chi scrivere non permette di esercitare i diritti che elenca.
- * `verifica-rotte.mjs` esce con 1 se questo segnaposto finisce nel costruito.
+ * `verifica-rotte.mjs` esce con 1 se un segnaposto tipo `[EMAIL]` finisce nel
+ * costruito: un'informativa che non dice a chi scrivere non permette di
+ * esercitare i diritti che elenca.
  */
-export const emailContatto = '[EMAIL]';
+export const emailContatto = 'flaborea.alessandro@gmail.com';
 
 export interface SezioneLegale {
   titolo: string;

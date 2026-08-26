@@ -16,6 +16,7 @@ import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
 import DaDoveViene from '../components/sezioni/DaDoveViene.astro';
 import Contatto from '../components/sezioni/Contatto.astro';
 import { localizedPath } from '../i18n/ui';
+import { emailContatto } from '../data/legale';
 import { site } from '../data/site';
 
 const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
@@ -198,9 +199,10 @@ const daDoveViene = {
 
 // --- Contatto ---
 // Il modulo resta inerte (nessun `action`): il servizio non è ancora
-// collegato. Dei tre canali alternativi solo WhatsApp ha un recapito vero;
-// calendario e mail non hanno `href` e per questo non vengono resi affatto —
-// v. il commento in Contatto.astro.
+// collegato. Dei tre canali alternativi WhatsApp e mail hanno un recapito
+// vero; il calendario non ha `href` e per questo non viene reso affatto —
+// v. il commento in Contatto.astro. L'indirizzo è lo stesso delle
+// informative e vive in `emailContatto`, un punto solo per tutto il sito.
 const contatto = {
   eyebrow: 'Parliamone',
   titolo: "Mezz'ora per capire se possiamo lavorare insieme",
@@ -220,7 +222,7 @@ const contatto = {
   canali: [
     { etichetta: 'Scegli tu mezz\'ora sul calendario' },
     { etichetta: 'WhatsApp', href: 'https://wa.me/393467202432' },
-    { etichetta: 'Mail' },
+    { etichetta: 'Mail', href: `mailto:${emailContatto}` },
   ],
 };
 ---
