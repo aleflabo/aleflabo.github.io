@@ -1,4 +1,4 @@
-# alessandroflaborea.me
+# aleflabo.github.io
 
 Personal portfolio site for Alessandro Flaborea — built with [Astro](https://astro.build), bilingual (Italian / English), deployed to GitHub Pages.
 
@@ -79,13 +79,25 @@ site is rebuilt. A Sanity webhook POSTs to
 webhook's filter must exclude drafts — otherwise every keystroke saved in the
 Studio triggers a deploy.
 
+## How work is done here
+
+Branch → PR → merge into **`main`**; this repo has no `staging`, and nothing is
+committed to `main` directly, a one-line change included. Run `npm run check`,
+`npm test` and `npm run verifica` before opening the PR and put their output in the
+PR body under `## Test plan`.
+
+The rules that don't follow from reading the code — and the mistakes already made
+here — are in [`CLAUDE.md`](./CLAUDE.md). Copy and tone rules are in
+`.claude/rules/copy-e-tono.md`, the Sanity notes in `.claude/rules/note-sanity.md`;
+both load only when a matching file is opened.
+
 ## Deployment
 
 The site doesn't have its own domain yet (`astro.config.mjs` points at
-`aleflabo.github.io`, and there's no `public/CNAME`). Deployment is triggered
-by a push to `main`, or by the Sanity webhook described above
-(`.github/workflows/deploy.yml`): the action builds the
-site and publishes `dist/` to GitHub Pages. Run `npm run verifica` before
-pushing to `main` — it exits 1 if the built site has a missing route, a
-broken internal link, an `hreflang` pointing at a file that doesn't exist, or
-leftover Italian text on an English page.
+`aleflabo.github.io`, and there's no `public/CNAME`). Deployment runs on every merge
+into `main`, and on the Sanity webhook described above
+(`.github/workflows/deploy.yml`): the action builds the site and publishes `dist/` to
+GitHub Pages. Because merging publishes, `npm run verifica` has to be green on the PR
+first — it exits 1 if the built site has a missing route, a broken internal link, an
+`hreflang` pointing at a file that doesn't exist, or leftover Italian text on an
+English page.

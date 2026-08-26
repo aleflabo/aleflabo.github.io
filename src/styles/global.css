@@ -36,6 +36,29 @@ h3 {
 .muted {
   color: var(--text-muted);
 }
+
+/* «Salta al contenuto»: primo elemento del body, invisibile finché non
+   riceve il focus da tastiera. Senza, chi naviga con Tab riattraversa le
+   sette voci della barra a ogni pagina prima di arrivare al testo.
+   Si nasconde spostandolo fuori schermo e non con `display: none`, che lo
+   toglierebbe anche dall'ordine di tabulazione — cioè lo renderebbe
+   irraggiungibile proprio a chi serve. */
+.salta-al-contenuto {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) 0;
+}
+.salta-al-contenuto:focus {
+  left: 0;
+}
 .divider { width: 88px; height: 3px; background: var(--azione); }
 a:focus-visible,
 button:focus-visible,
@@ -86,6 +109,28 @@ a:hover .freccia { transform: translateX(5px); }
 
 .pulsante { transition: transform .2s, box-shadow .2s; }
 .pulsante:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(168 83 29 / 28%); }
+
+/* Riscontro alla pressione. C'erano :hover e :focus-visible ma niente
+   :active, quindi premendo non succedeva nulla finché non si rilasciava. Su
+   touch, dove :hover non esiste, questo è l'unico riscontro possibile — ed è
+   da lì che arriva più di metà di chi legge. Il movimento è di un pixel:
+   basta a far sentire il tasto, non abbastanza da spostare il testo sotto le
+   dita. Sta dopo :hover perché su desktop la pressione avviene mentre il
+   puntatore è sopra, e a parità di specificità vince l'ultima regola. */
+.pulsante:active { transform: translateY(1px); box-shadow: none; }
+.riga:active { background: var(--surface-warm); }
+.canale:active,
+.scheda:active { transform: translateY(1px); }
+
+/* Cifre a larghezza fissa dove i numeri stanno in colonna o cambiano: la
+   fascia «10 · 533 · 1 · 2» e le date dell'elenco note. Con le cifre
+   proporzionali un 1 è più stretto di un 5, quindi le colonne non si
+   allineano e i numeri ballano quando il contenuto cambia. */
+.valore,
+.data,
+.numero .valore {
+  font-variant-numeric: tabular-nums;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

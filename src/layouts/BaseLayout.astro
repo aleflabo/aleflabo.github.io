@@ -137,8 +137,9 @@ const personLd = {
     )}
   </head>
   <body>
+    <a class="salta-al-contenuto" href="#contenuto">{lang === 'it' ? 'Salta al contenuto' : 'Skip to content'}</a>
     <Nav lang={lang} hrefAltro={hrefAltro} attiva={attiva} />
-    <main><slot /></main>
+    <main id="contenuto"><slot /></main>
     <Footer lang={lang} />
   </body>
 </html>
