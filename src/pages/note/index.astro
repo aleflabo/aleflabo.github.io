@@ -1,66 +1,58 @@
 ---
-// src/pages/en/notes.astro — gemella inglese di src/pages/note.astro
-// (rotta `/en/notes`).
-// Testo alla lettera da docs/superpowers/specs/2026-08-25-sito-italiano/
-// testi-en.md, sezione «8. /en/notes». I sei articoli (data, titolo,
-// sommario, tag) vengono da src/data/en/note.ts (task 6, sito-inglese):
-// non riscritti qui, dalla più recente.
-//
-// La tavola segnala che l'apertura si contraddice da sola su questa
-// pagina: «In Italian» dichiara che le note sono in un'altra lingua
-// rispetto a quella della pagina che le elenca. È voluto (task-8-brief.md,
-// punto 6): il materiale in inglese non esiste ancora, e la pagina lo dice
-// invece di fingere. Gli articoli non hanno una pagina propria: il link
-// di ogni riga resta `href="#"`, come in italiano.
-//
-// Il riquadro «I'll send them to you by email» resta inerte — il `<form>`
-// non ha `action`, nessun servizio è ancora scelto — mentre «Or via RSS»
-// punta al feed unico generato da rss.xml.ts: non un secondo feed
-// inglese. `onsubmit="return false"` blocca la GET che altrimenti
-// ricaricherebbe la pagina con l'email in query string; il pulsante
-// disabilitato dice che non è ancora attivo. La nota sotto il pulsante
-// («Iscrizione non ancora attiva.» in italiano) non ha una traduzione in
-// testi-en.md — non è fra i blocchi marcati della sezione «Iscrizione» —
-// quindi resta un campo volutamente vuoto invece di un testo inventato:
-// `notaInerte` è stringa vuota e non si rende un elemento vuoto, come già
-// fa Contatto.astro con lo stesso campo su `data/en/home.ts`.
+// src/pages/note.astro — l'elenco dei sei articoli e il riquadro di
+// raccolta email (rotta `/note`).
+// Testo alla lettera da tavole/Note.dc.html (testi.md, sezione «/note»).
+// Le note vengono da Sanity (src/lib/note.ts), lette in fase di costruzione
+// (task 6): non riscritti qui, dalla più recente. Le righe usano la classe
+// globale `.riga` (già in global.css, per l'effetto al passaggio del
+// mouse): non ridefinita qui, solo completata con l'impaginazione propria
+// di questa pagina. Gli articoli non hanno una pagina propria: il link di
+// ogni riga resta `href="#"`. Il riquadro «Te le mando per mail» resta
+// inerte — il `<form>` non ha `action`, nessun servizio è ancora scelto —
+// mentre «Oppure via RSS» punta al feed vero, generato da rss.xml.ts. Che
+// sia inerte è deciso; che simuli l'iscrizione no (bloccante 7, revisione
+// finale del ramo sito-italiano): `onsubmit="return false"` blocca la GET
+// che altrimenti ricaricherebbe la pagina con l'email in query string, e
+// il pulsante disabilitato più la nota sotto dicono che non è ancora
+// attivo.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TestataPagina from '../../components/TestataPagina.astro';
-import { note } from '../../data/en/note';
 import { localizedPath } from '../../i18n/ui';
+import { dataIt } from '../../lib/dataNota';
+import { tutteLeNote } from '../../lib/note';
 
-const notaInerte = '';
+const note = await tutteLeNote();
 ---
 
 <BaseLayout
-  title="Notes — Alessandro Flaborea"
-  description="I write about what works inside companies and about what hasn't worked. In Italian, short, roughly once a week."
-  lang="en"
-  path="/notes"
-  pathIt="/note"
-  attiva="notes"
+  title="Note — Alessandro Flaborea"
+  description="Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana."
+  lang="it"
+  path="/note"
+  pathEn="/notes"
+  attiva="note"
 >
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello="Notes"
-        titolo="What I'm learning"
-        introduzione="I write about what works inside companies and about what hasn't worked. In Italian, short, roughly once a week."
+        occhiello="Note"
+        titolo="Quello che sto imparando"
+        introduzione="Scrivo di quello che funziona dentro le aziende e di quello che non ha funzionato. In italiano, corto, più o meno una volta a settimana."
       />
-      <a class="chi-scrive" href={localizedPath('en', '/about')}>Who writes this <span class="freccia">&rarr;</span></a>
+      <a class="chi-scrive" href={localizedPath('it', '/chi-sono')}>Chi scrive <span class="freccia">&rarr;</span></a>
     </div>
   </section>
 
-  {/* L'elenco compare solo quando esiste almeno una nota: oggi l'array è
-     vuoto (v. src/data/note.ts), e una fascia vuota fra l'intestazione e il
-     riquadro dell'iscrizione lascerebbe un buco senza spiegarlo. */}
+  {/* L'elenco compare solo quando c'è almeno una nota pubblicata su Sanity:
+     una fascia vuota fra l'intestazione e il riquadro dell'iscrizione
+     lascerebbe un buco senza spiegarlo. */}
   {note.length > 0 && (
     <section class="elenco-note">
       <div class="container">
         <div class="righe">
           {note.map((n) => (
-            <a href="#" class="riga">
-              <span class="data">{n.data}</span>
+            <a href={localizedPath('it', `/note/${n.slug}`)} class="riga">
+              <span class="data">{dataIt(n.data)}</span>
               <div class="testo-riga">
                 <h2>{n.titolo}</h2>
                 <p class="sommario">{n.sommario}</p>
@@ -81,14 +73,14 @@ const notaInerte = '';
     <div class="container">
       <div class="riquadro">
         <div>
-          <h2>I'll send them to you by email</h2>
-          <p class="corpo">One email when something new comes out, nothing else. You unsubscribe with one click.</p>
+          <h2>Te le mando per mail</h2>
+          <p class="corpo">Una mail quando esce qualcosa di nuovo, niente altro. Ci si cancella con un clic.</p>
         </div>
         <form class="iscrizione" onsubmit="return false">
-          <input type="email" name="email" placeholder="your@email.com" aria-label="Your email address" />
-          <button type="submit" class="pulsante" disabled>Sign me up</button>
-          {notaInerte && <p class="nota-inerte">{notaInerte}</p>}
-          <a class="rss" href="/rss.xml">Or via RSS</a>
+          <input type="email" name="email" placeholder="la.tua@mail.it" aria-label="Il tuo indirizzo email" />
+          <button type="submit" class="pulsante" disabled>Iscrivimi</button>
+          <p class="nota-inerte">Iscrizione non ancora attiva.</p>
+          <a class="rss" href="/rss.xml">Oppure via RSS</a>
         </form>
       </div>
     </div>

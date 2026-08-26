@@ -3,6 +3,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Sanity chiama qui quando una nota viene pubblicata o modificata: il sito
+  # è statico e non saprebbe altrimenti che il contenuto è cambiato. Il
+  # webhook si configura nello Studio (API → Webhooks) come POST a
+  # https://api.github.com/repos/aleflabo/aleflabo.github.io/dispatches con
+  # {"event_type":"nota-pubblicata"} e un token con permesso sui workflow.
+  repository_dispatch:
+    types: [nota-pubblicata]
 permissions:
   contents: read
   pages: write

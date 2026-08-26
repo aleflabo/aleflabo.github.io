@@ -1,0 +1,39 @@
+---
+// src/components/ImmagineNota.astro — un'immagine dentro il corpo di una
+// nota. Riceve il nodo Portable Text di tipo `image` così come arriva da
+// Sanity.
+//
+// `alt` è un campo dello schema e non ha un valore di riserva: un testo
+// alternativo inventato dal codice sarebbe peggio della sua assenza, perché
+// chi legge con la sintesi vocale sentirebbe una descrizione che nessuno ha
+// scritto. Vuoto significa immagine decorativa, ed è il comportamento
+// corretto per gli screen reader.
+import { urlImmagine } from '../lib/immagine';
+
+const { node } = Astro.props;
+const src = urlImmagine(node);
+---
+
+<figure>
+  <img src={src} alt={node.alt ?? ''} loading="lazy" decoding="async" />
+  {node.didascalia && <figcaption>{node.didascalia}</figcaption>}
+</figure>
+
+<style>
+  figure {
+    margin: 32px 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+
+  figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
