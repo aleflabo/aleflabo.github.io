@@ -115,9 +115,9 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "tire-hub",
+    slug: "grip",
     order: 3,
-    name: "Tire Hub",
+    name: "Grip",
     role: "Solo build",
     year: "2026",
     status: "case",

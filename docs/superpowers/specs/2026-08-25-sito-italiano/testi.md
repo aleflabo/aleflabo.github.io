@@ -345,7 +345,14 @@ Sorgente: `tavole/Servizi.dc.html`
 
 *SOTTOTITOLO (h3)*
 
-- `testo` Poco, ma quel poco è indispensabile: mezza giornata delle persone che fanno il lavoro davvero, non solo di chi lo racconta; qualche file vero invece che un esempio ripulito; e una persona interna che possa rispondere alle domande quando ne nascono. Senza quest'ultima i progetti si fermano, sempre.
+- `testo` Mezza giornata delle persone che usano il processo tutti i giorni, qualche file preso così com'è, e una persona interna a cui poter chiedere quando serve un chiarimento. Non serve preparare niente in anticipo.
+
+  > **Rivisto dopo la pubblicazione.** Il testo di questa tavola era: «Poco, ma quel poco
+  > è indispensabile: mezza giornata delle persone che fanno il lavoro davvero, non solo
+  > di chi lo racconta; qualche file vero invece che un esempio ripulito; e una persona
+  > interna che possa rispondere alle domande quando ne nascono. Senza quest'ultima i
+  > progetti si fermano, sempre.» Tre elementi su tre erano formulati come un sospetto
+  > verso il lettore, e la chiusura era un avvertimento.
 
 ### E se poi non funziona?
 
@@ -562,7 +569,7 @@ Sorgente: `tavole/Lavori.dc.html`
 - `etichetta` 2026
 - `testo` Automotive · gestionale
 
-### Tire Hub
+### Grip (era «Tire Hub»)
 
 *SOTTOTITOLO (h3)*
 
@@ -687,7 +694,8 @@ Sorgente: `tavole/Lavori.dc.html`
 
 - `testo` Dieci articoli pubblicati, oltre cinquecento citazioni e il codice di tutti quelli che si potevano aprire. È da lì che viene la parte di questi progetti che non si improvvisa.
 - `LINK` Vai alla ricerca →
-- `LINK` Come lavoro →
+- ~~`LINK` Come lavoro →~~ — **rimosso dopo la pubblicazione**: la fascia si intitola
+  «E poi c'è la ricerca» e questo secondo invito portava altrove, diluendo il primo.
 - `testo` Alessandro Flaborea
 - `testo` Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.
 - `LINK` Prenota mezz'ora
@@ -1278,5 +1286,5 @@ Sorgente: `tavole/Rotte.dc.html`
 - `testo` I due case study da aggiungere
 - `testo` Portale ricambi 3D
 - `testo` Va in prima posizione sulla home italiana: è quello in cui un'azienda che produce si riconosce più in fretta.
-- `testo` Tire Hub
+- `testo` Grip
 - `testo` Sta fra i gestionali per materia, e la sua scheda dichiara che nasce da un'iniziativa e non da una commessa.
