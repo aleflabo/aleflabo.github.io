@@ -24,6 +24,15 @@ for (const r of ROTTE) {
   if (r !== "en" && /hreflang="it" href="[^"]*\/it\//.test(html)) dice(`${f} punta ancora a /it/`);
 }
 
+// La pagina 404 deve stare esattamente in dist/404.html: GitHub Pages serve
+// quel file, e solo quello, per ogni indirizzo che non esiste. Se finisse in
+// una sottocartella — come succede a tutte le altre rotte — il sito
+// continuerebbe a costruire senza errori e chi sbaglia un indirizzo tornerebbe
+// a vedere la pagina di errore di GitHub, senza che niente lo segnali.
+if (!existsSync("dist/404.html")) {
+  dice("manca dist/404.html");
+}
+
 // Verifica RSS
 if (!existsSync("dist/rss.xml")) {
   dice("manca il feed RSS");

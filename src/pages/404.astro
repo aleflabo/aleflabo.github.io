@@ -1,0 +1,137 @@
+---
+// src/pages/404.astro — la pagina che GitHub Pages serve per qualsiasi
+// indirizzo che non esiste.
+//
+// **È una sola per tutto il sito.** GitHub Pages restituisce `/404.html` con
+// stato 404 a prescindere dal percorso richiesto, quindi non può essercene una
+// italiana e una inglese: questa parla italiano, che è la lingua canonica, e
+// chiude con una riga in inglese per chi arrivava da `/en/`.
+//
+// Niente `detectLocale`: sulle altre pagine quello script rimbalza i browser
+// inglesi su `/en/`, ma qui manderebbe altrove chi ha appena sbagliato
+// indirizzo, senza dirgli che cosa è successo. Meglio restare e spiegare.
+//
+// Niente `<meta name="robots" content="noindex">`: GitHub Pages serve questo
+// file con stato HTTP 404, ed è quello che i motori di ricerca guardano. Il
+// meta servirebbe solo se la pagina rispondesse 200, e aggiungerlo avrebbe
+// richiesto di toccare BaseLayout, che è condiviso con le altre trentaquattro.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { localizedPath } from '../i18n/ui';
+
+const scorciatoie = [
+  { testo: 'La home', href: localizedPath('it', '/') },
+  { testo: 'I servizi', href: localizedPath('it', '/servizi') },
+  { testo: 'I lavori', href: localizedPath('it', '/lavori') },
+  { testo: 'Le note', href: localizedPath('it', '/note') },
+];
+---
+
+<BaseLayout
+  title="Pagina non trovata — Alessandro Flaborea"
+  description="L'indirizzo cercato non esiste, o è cambiato."
+  lang="it"
+  path="/404"
+  paginaErrore={true}
+>
+  <section class="quattroquattro">
+    <div class="container">
+      <p class="codice">404</p>
+      <h1>Questa pagina non c'è</h1>
+      <div class="divider"></div>
+      <p class="intro">L'indirizzo potrebbe essere cambiato, oppure non è mai esistito. Da qui si riparte:</p>
+
+      <ul class="scorciatoie">
+        {scorciatoie.map((s) => (
+          <li><a href={s.href}>{s.testo} <span class="freccia">&rarr;</span></a></li>
+        ))}
+      </ul>
+
+      <p class="inglese" lang="en">
+        This page doesn't exist. <a href={localizedPath('en', '/')}>Go to the English site &rarr;</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .quattroquattro {
+    padding: 96px 0 120px;
+  }
+
+  .codice {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--azione);
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1 {
+    margin-top: 18px;
+    font-size: 46px;
+    max-width: 18ch;
+  }
+
+  .intro {
+    max-width: 52ch;
+    margin-top: 22px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .scorciatoie {
+    margin-top: 32px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2px;
+    max-width: 420px;
+  }
+
+  .scorciatoie a {
+    display: block;
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 17px;
+    font-weight: 600;
+    transition: padding-left .25s, background .25s;
+  }
+
+  .scorciatoie a:hover {
+    padding-left: 12px;
+    background: var(--surface-warm);
+  }
+
+  .scorciatoie a:active {
+    transform: translateY(1px);
+  }
+
+  .inglese {
+    margin-top: 48px;
+    font-size: 15px;
+    color: var(--text-faint);
+  }
+
+  .inglese a {
+    color: var(--azione);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .quattroquattro {
+      padding: 56px 0 80px;
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+  }
+</style>
