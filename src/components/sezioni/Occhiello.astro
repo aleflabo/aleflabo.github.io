@@ -34,8 +34,8 @@ const parole = [
   ...dopo.split(' ').map((testo) => ({ testo, marker: false })),
 ];
 
-// Stessa tecnica di Hero.astro: si isola la parola "Procedo" dal resto
-// della frase per farne un link, invece di spezzare la frase a mano.
+// Si isola la parola "Procedo" dal resto della frase per farne un link,
+// invece di spezzare la frase a mano.
 const brandIndex = credibilita.indexOf('Procedo');
 const hasBrand = brandIndex >= 0;
 const credibilitaPrima = hasBrand ? credibilita.slice(0, brandIndex) : credibilita;

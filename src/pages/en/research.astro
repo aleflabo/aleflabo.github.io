@@ -9,13 +9,9 @@
 // toccare. Il resto del testo di pagina (intestazione, riquadro «What
 // this has to do with your company», intro all'elenco, chiusura sul
 // codice) non è fra gli export di quel file e resta scritto qui, alla
-// lettera dalla tavola — come già fa la gemella italiana.
-//
-// Il blocco riusabile dei sei repository (`site.ts` → `en.research.*` e
-// `Research.astro`) resta fuori: la gemella italiana `/ricerca` non ha un
-// elenco di repository, ha solo il link «Il codice su GitHub», e
-// `Research.astro` — il vecchio componente del lato inglese, fermo a sei
-// pubblicazioni per decisione presa — non va toccato (task-8-brief.md).
+// lettera dalla tavola — come già fa la gemella italiana `/ricerca`, che
+// non ha un elenco di repository, solo il link «Il codice su GitHub»
+// (task-8-brief.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TestataPagina from '../../components/TestataPagina.astro';
 import { pubblicazioni, numeriFascia } from '../../data/en/pubblicazioni';
