@@ -1438,10 +1438,14 @@ approvati
 > which is how much of what you write in a paper survives contact with a
 > factory floor.
 >
-> I left the operational role in mid-2026 and today I work on my own. The
-> reason is simple: I like the part where you walk into a company you don't
-> know, look at how it works and see where the time goes. In a company that's
-> growing, that part keeps getting smaller.
+> I left the operational role in mid-2026 and today I work on my own. What
+> interests me is the part where you walk into a company you don't know, look
+> at how it works and see where the time goes: on my own I get to do it more
+> often, and in different companies.
+>
+> *(Rivisto dopo la pubblicazione, come la gemella italiana: la frase
+> precedente chiudeva con «In a company that's growing, that part keeps
+> getting smaller», che leggeva come una critica a Procedo.)*
 >
 > I still write code every day and publish what I learn. If you call me, the
 > person who comes to your company and the person who then builds it are the
