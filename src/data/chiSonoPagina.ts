@@ -2,14 +2,15 @@
 // per lingua — insieme a 223 righe di stile. La biografia, «In breve» e le
 // abitudini restano in src/data/chiSono.ts.
 //
-// `segnapostoNota` esiste solo in italiano: è l'istruzione al committente su
-// che fotografia scattare, e la tavola dice esplicitamente che non ha una
-// versione inglese. Per questo il campo è facoltativo e il componente non
-// rende il paragrafo quando manca.
+// Il riquadro segnaposto è stato sostituito dalla fotografia vera: i due
+// campi che lo descrivevano — il titolo «[ LA TUA FOTO ]» e la nota su come
+// scattarla — erano istruzioni al committente, non testo pubblicato, e sono
+// spariti con lui. Al loro posto c'è il testo alternativo dell'immagine.
 export interface TestiChiSonoPagina {
   occhiello: string;
   titolo: string;
-  segnaportiolo: string;
+  /** Testo alternativo della fotografia. */
+  altRitratto: string;
   labelInBreve: string;
   ctaPrimaria: string;
   ctaCurriculum: string;
@@ -18,7 +19,6 @@ export interface TestiChiSonoPagina {
   titoloAbitudini: string;
   labelFuori: string;
   corpoFuori: string;
-  segnapostoNota?: string;
   hrefCv: string;
 }
 
@@ -26,7 +26,7 @@ export interface TestiChiSonoPagina {
 export const testiChiSonoPagina: TestiChiSonoPagina = {
   occhiello: "Chi sono",
   titolo: "Alessandro Flaborea",
-  segnaportiolo: "[ LA TUA FOTO ]",
+  altRitratto: "Alessandro Flaborea, a braccia conserte, su fondo bianco",
   labelInBreve: "In breve",
   ctaPrimaria: "Prenota la mezza giornata diagnostica",
   ctaCurriculum: "Scarica il curriculum",
@@ -35,6 +35,5 @@ export const testiChiSonoPagina: TestiChiSonoPagina = {
   titoloAbitudini: "Abitudini che vale la pena sapere prima",
   labelFuori: "Fuori dal lavoro",
   corpoFuori: "Il filo che tiene insieme tutto è la curiosità, per problemi nuovi, posti nuovi e persone nuove. Mi ha portato da Udine a Roma e da Göteborg ad Amsterdam, e continua a decidere cosa costruisco nei fine settimana.",
-  segnapostoNota: "Sguardo in camera, luce naturale, sfondo neutro. Niente giacca se non la porti mai: chi ti incontra poi deve riconoscerti.",
   hrefCv: "/cv/Alessandro_Flaborea_Resume_it.pdf",
 };
