@@ -14,6 +14,22 @@ import { formati } from '../data/formazione';
 import { pubblicazioni, arxivDi, numeriFascia } from '../data/pubblicazioni';
 import { territorio } from '../data/territorio';
 import { emailContatto } from '../data/legale';
+import { faq } from '../data/servizi';
+import { projects } from '../data/projects';
+import { frasePresentazione } from '../data/site';
+
+/**
+ * Unisce dei frammenti in una frase, con un punto solo fra l'uno e l'altro e
+ * uno in fondo. Senza, un titolo che finisce per «?» — «Are We Certain It's
+ * Anomalous?» — usciva come «…Anomalous?.».
+ */
+function frase(...pezzi: string[]): string {
+  const unita = pezzi
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .reduce((acc, x) => (!acc ? x : /[.!?]$/.test(acc) ? `${acc} ${x}` : `${acc}. ${x}`), "");
+  return /[.!?]$/.test(unita) ? unita : `${unita}.`;
+}
 
 const ROTTE: { percorso: string; nome: string; cosa: string }[] = [
   { percorso: '/servizi/', nome: 'Servizi', cosa: 'I quattro modi di lavorare insieme, con durata e cosa resta al cliente.' },
@@ -33,7 +49,10 @@ export async function GET(context: APIContext) {
   const righe = [
     '# Alessandro Flaborea',
     '',
-    "> Consulenza e formazione sull'intelligenza artificiale per le aziende. Dottorato in computer vision alla Sapienza, poi due anni da co-fondatore e CTO di Procedo, startup industriale. Oggi lavoro in proprio.",
+    // La frase approvata, letta da site.ts. Qui c'era una parafrasi scritta da
+    // me: copy inventato, che la regola 2 del CLAUDE.md vieta — e in un file
+    // pensato proprio per essere citato da terzi era il posto peggiore.
+    `> ${frasePresentazione.it}`,
     '',
     `Sito in italiano su ${site}/ e in inglese su ${site}/en/. L'italiano è la versione principale.`,
     '',
@@ -57,8 +76,21 @@ export async function GET(context: APIContext) {
     '',
     ...pubblicazioni.map((p) => {
       const arxiv = arxivDi(p.titolo);
-      return `- ${p.anno} — ${p.titolo}. ${p.sede}. ${p.metriche}.${arxiv ? ` ${arxiv}` : ''}`;
+      return `- ${p.anno} — ${frase(p.titolo, p.sede, p.metriche)}${arxiv ? ` ${arxiv}` : ''}`;
     }),
+    '',
+    // Le cinque domande di /servizi. Sono la parte del sito scritta nel
+    // formato che un motore generativo cita più volentieri — domanda breve,
+    // risposta autonoma — e lasciarle fuori da un file fatto apposta per
+    // quello era una contraddizione.
+    '## Domande che mi vengono fatte',
+    '',
+    ...faq.flatMap((d) => [`**${d.domanda}** ${d.risposta}`, '']),
+    '## I lavori, uno per uno',
+    '',
+    ...projects
+      .filter((p) => p.it.summary)
+      .map((p) => `- [${p.name}](${site}/lavori/${p.slug}/): ${p.it.summary}`),
     '',
     '## Pagine',
     '',

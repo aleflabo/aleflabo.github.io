@@ -54,6 +54,20 @@ interface SiteCopy {
   prenotaMezzora?: string;
 }
 
+/**
+ * La frase che presenta il sito in una riga. Stava scritta a mano dentro
+ * Footer.astro; è salita qui quando `llms.txt` ne ha avuto bisogno, perché la
+ * seconda copia che avevo scritto per quel file era una parafrasi — cioè copy
+ * inventato, che la regola 2 del CLAUDE.md vieta.
+ *
+ * L'italiano viene dalle tavole (Servizi.dc.html e affini), l'inglese dal deck
+ * approvato (testi-en.md, § «Piè di pagina»).
+ */
+export const frasePresentazione: Record<Locale, string> = {
+  it: "Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.",
+  en: "AI consulting and training. From research to software that people use.",
+};
+
 export const site: Record<Locale, SiteCopy> = {
   en: {
     nav: {
