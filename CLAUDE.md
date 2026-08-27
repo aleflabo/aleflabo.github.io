@@ -76,11 +76,13 @@ decision rather than on code:
   («Modulo non ancora attivo», «Iscrizione non ancora attiva»). Every visit the site
   earns lands on a button that declares it does not work. WhatsApp and mail below it
   do work.
-- **Four of the ten publications have no arXiv** among the sources consulted, so
-  their titles are not links and their `ScholarlyArticle` carries no `sameAs`.
-  Inventing an identifier would be worse than omitting it. The map is
-  `arxivPerTitolo` in `src/data/pubblicazioni.ts` — and note that the CV had one
-  entry misattributed, so verify against the arXiv page before adding one.
+- **One publication of ten has no arXiv** — «A Self-Supervised Algorithm to Detect
+  Signs of Social Isolation in the Elderly», which came out only in *Artificial
+  Intelligence in Medicine*. Its title is not a link and its `ScholarlyArticle`
+  carries no `sameAs`, and that is the honest state. The other nine are in
+  `arxivPerTitolo` (`src/data/pubblicazioni.ts`), each verified by reading
+  `citation_title` on its arXiv page — **not deduced from the order**, which is
+  exactly how the CV came to attribute `2301.09489` to the wrong paper.
 
 The «placeholder box» that used to be listed here is gone: `/chi-sono` shows the real
 portrait, with `alt`, `srcset` and dimensions, and it also feeds `Person.image`.

@@ -23,9 +23,12 @@ export interface Pubblicazione {
  * gli anni (vedi il commento sotto). Da qui in avanti si verifica prima di
  * scrivere.
  *
- * Le quattro pubblicazioni che mancano non hanno un arXiv fra le fonti
- * consultate: restano senza link, e senza `sameAs` nei dati strutturati.
- * Inventare un identificatore sarebbe peggio che ometterlo.
+ * L'elenco è nove su dieci, e i nove sono l'elenco completo: vengono da una
+ * query `au:"Flaborea"` sull'API di arXiv, che restituisce esattamente questi.
+ * La decima — «A Self-Supervised Algorithm to Detect Signs of Social Isolation
+ * in the Elderly» — su arXiv non c'è: è uscita solo su Artificial Intelligence
+ * in Medicine, e la ricerca per titolo non dà risultati. Resta senza link e
+ * senza `sameAs`, che è l'unica cosa onesta.
  */
 export const arxivPerTitolo: Record<string, string> = {
   "TI-PREGO: Chain of Thought and In-Context Learning for Online Mistake Detection in Procedural Egocentric Videos":
@@ -40,6 +43,10 @@ export const arxivPerTitolo: Record<string, string> = {
     "https://arxiv.org/abs/2407.13567",
   "Multimodal Motion Conditioned Diffusion Model for Skeleton-Based Video Anomaly Detection":
     "https://arxiv.org/abs/2307.07205",
+  "Are We Certain It's Anomalous?": "https://arxiv.org/abs/2211.09224",
+  "Best Practices for 2-Body Pose Forecasting": "https://arxiv.org/abs/2304.05758",
+  "Query-Guided Networks for Few-Shot Fine-Grained Classification and Person Search":
+    "https://arxiv.org/abs/2209.10250",
 };
 
 /** L'arXiv di una pubblicazione, se ce l'ha. */
