@@ -144,16 +144,94 @@ done
 
 ---
 
-## 6. La casella di posta
+## 6. La casella di posta, letta e scritta da Gmail
 
-- [ ] Crea `alessandro@flaborea.com` nel pannello Aruba
-- [ ] Configurala dove leggi la posta (IMAP), o inoltrala alla Gmail
-- [ ] Mandati una mail di prova da un altro indirizzo e verifica che arrivi
+L'obiettivo: ricevere e **inviare** come `alessandro@flaborea.com` restando
+dentro Gmail, senza aprire una seconda webmail.
 
-- [ ] **Sostituisci l'indirizzo nel sito.** Vive in un punto solo:
-      `emailContatto` in `src/data/legale.ts`. Cambiare quella riga cambia
-      tutte e sei le occorrenze — le due informative nelle due lingue e il
-      canale «Mail» della home.
+### 6a. Crea la casella su Aruba
+
+- [ ] Pannello Aruba → **Gestione Email** → crea `alessandro@flaborea.com`
+- [ ] Segnati la password: serve a Gmail, e Aruba non la rimostra
+
+I parametri, per quando servono:
+
+| | server | porta | |
+|---|---|---|---|
+| **SMTP** (uscita) | `smtps.aruba.it` | 465 | SSL |
+| **IMAP** (entrata) | `imaps.aruba.it` | 993 | SSL |
+| **POP3** (entrata) | `pop3s.aruba.it` | 995 | SSL |
+
+Nome utente: **sempre l'indirizzo completo**, non la parte prima della
+chiocciola.
+
+### 6b. Ricezione — prima l'inoltro
+
+Va fatto **prima** dell'invio: al passo dopo Gmail manda un codice di verifica
+a `alessandro@flaborea.com`, e senza inoltro dovresti andare a leggerlo nella
+webmail di Aruba.
+
+- [ ] Pannello Aruba → la casella → **inoltro** verso la tua Gmail
+- [ ] Attiva anche **conserva una copia** sul server: se un domani cambi
+      client, la posta è ancora lì
+- [ ] Mandati una prova da un altro indirizzo e verifica che arrivi in Gmail
+
+> L'alternativa è far scaricare la posta a Gmail via POP3
+> (*Impostazioni → Account → Controlla la posta da altri account*), ma Gmail
+> ci passa a intervalli suoi, anche di un'ora: per un recapito di lavoro
+> pubblicato sul sito, l'inoltro è meglio.
+
+### 6c. Invio — e qui si gioca tutto
+
+Gmail → **Impostazioni** → **Account e importazione** → *Invia messaggi come*
+→ **Aggiungi un altro indirizzo email**.
+
+- [ ] Nome: `Alessandro Flaborea` · Indirizzo: `alessandro@flaborea.com`
+- [ ] **Tratta come alias: sì** — così rispondendo a una mail arrivata lì,
+      Gmail risponde da quell'indirizzo invece che dalla tua Gmail
+- [ ] Alla schermata dopo, Gmail chiede il server SMTP:
+
+  ```
+  Server SMTP: smtps.aruba.it
+  Porta:       465
+  Nome utente: alessandro@flaborea.com
+  Password:    quella della casella
+  Connessione: SSL
+  ```
+
+> **Non scegliere «Invia tramite Gmail»**, se te lo propone. Le email
+> partirebbero dai server di Google, che il record SPF di `flaborea.com`
+> **non autorizza**: finirebbero in spam o verrebbero rifiutate, e te ne
+> accorgeresti dai destinatari che non rispondono. Passando dall'SMTP di
+> Aruba, l'SPF che Aruba ha già scritto le copre.
+
+- [ ] Gmail manda un codice a `alessandro@flaborea.com`: arriva nella tua
+      Gmail grazie all'inoltro del passo 6b. Incollalo per confermare
+
+### 6d. Le impostazioni che evitano figure
+
+- [ ] *Rispondi dallo stesso indirizzo a cui è stato inviato il messaggio* —
+      così le risposte al lavoro partono da `@flaborea.com` e quelle personali
+      dalla Gmail, senza doverci pensare
+- [ ] Decidi se rendere `alessandro@flaborea.com` **predefinito** per i nuovi
+      messaggi. Se il sito è il tuo biglietto da visita, conviene
+
+### 6e. La prova che conta
+
+- [ ] Scrivi da Gmail a un indirizzo esterno **scegliendo come mittente**
+      `alessandro@flaborea.com`
+- [ ] Aprilo dalla parte del destinatario e guarda l'intestazione completa:
+      **SPF deve risultare `pass`**. Su Gmail: i tre puntini → *Mostra
+      originale*
+
+> Se SPF dice `fail` o `softfail`, quasi sempre è perché l'invio sta passando
+> da Google e non dall'SMTP di Aruba: torna al passo 6c.
+
+### 6f. Il sito
+
+- [ ] Sostituisci l'indirizzo: vive in `emailContatto` dentro
+      `src/data/legale.ts`, **un punto solo per sei occorrenze** — le due
+      informative nelle due lingue e il canale «Mail» della home
 
 > Non è cosmetica: oggi il sito pubblica la Gmail personale su pagine che
 > `robots.txt` invita esplicitamente a indicizzare.
