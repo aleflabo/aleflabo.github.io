@@ -6,8 +6,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TestataPagina from '../components/TestataPagina.astro';
 import TestoLegale from '../components/TestoLegale.astro';
 import { privacy as testo } from '../data/legale';
+import { statistiche } from '../data/analytics';
+import { conStatistiche } from '../lib/informativa';
 
-const p = testo;
+// L'informativa segue l'interruttore in src/data/analytics.ts: se un
+// giorno il sito conta le visite, questa pagina lo dice dallo stesso
+// posto da cui lo script viene reso, non da una modifica a mano.
+const p = conStatistiche(testo, 'it', statistiche);
 ---
 
 <BaseLayout

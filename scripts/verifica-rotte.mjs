@@ -365,6 +365,81 @@ for (const file of existsSync("dist") ? trovaHtml("dist") : []) {
   }
 }
 
+// 5. Quello che la pagina CARICA e quello che la pagina DICHIARA devono
+// coincidere. Le informative affermano, in una forma che invita a
+// verificarla, che il sito non usa strumenti di statistica e non carica
+// niente da server di terzi. Se un domani `statistiche` in
+// src/data/analytics.ts smette di essere `null`, quelle frasi diventano false
+// il giorno stesso — ed è successo l'opposto per mesi, con una pagina che
+// descriveva una voce di `localStorage` tolta da tempo.
+//
+// Il controllo non guarda la configurazione: guarda il costruito. Se in una
+// pagina compare uno `<script src>` verso un dominio diverso da questo, allora
+// le frasi che promettono il contrario devono essere sparite, e la sezione che
+// descrive lo strumento deve esserci.
+const PROMESSE_SENZA_TERZI = [
+  "Non ci sono strumenti di statistica",
+  "nessuna risorsa viene caricata da server di terzi",
+  "Le uniche richieste che il vostro browser fa quando legge questa pagina vanno al dominio di questo sito",
+  "There are no analytics",
+  "nothing is loaded from third-party servers",
+  "The only requests your browser makes while reading this page go to this site",
+];
+const PAGINE_LEGALI = /^dist[\\/](en[\\/])?(privacy|cookie|cookies)[\\/]index\.html$/;
+
+{
+  const conScriptEsterni = [];
+  for (const file of existsSync("dist") ? trovaHtml("dist") : []) {
+    const html = readFileSync(file, "utf8");
+    if (eUnRimbalzo(html)) continue;
+    for (const [, src] of html.matchAll(/<script[^>]+\bsrc="(https?:\/\/[^"]+)"/g)) {
+      if (!src.startsWith(SITE)) conScriptEsterni.push([file, src]);
+    }
+  }
+
+  const legali = (existsSync("dist") ? trovaHtml("dist") : []).filter((f) =>
+    PAGINE_LEGALI.test(f.replace(/\\/g, "/")),
+  );
+
+  if (conScriptEsterni.length > 0) {
+    for (const [file, src] of conScriptEsterni) {
+      console.log(`  risorsa esterna: ${file} → ${src}`);
+    }
+    for (const file of legali) {
+      const html = readFileSync(file, "utf8");
+      for (const promessa of PROMESSE_SENZA_TERZI) {
+        if (html.includes(promessa)) {
+          dice(
+            `${file}: promette «${promessa.slice(0, 48)}…» mentre il sito carica uno script da fuori`,
+          );
+        }
+      }
+      // La pagina deve nominare il fornitore dello script, non limitarsi a
+      // parlare di statistiche in generale. Cercare «banner» o «consent» non
+      // bastava: la pagina cookie contiene già la parola «banner» in una
+      // sezione che non c'entra, quindi il controllo sarebbe passato anche su
+      // un'informativa che non dice niente di nuovo.
+      const fornitori = new Set(
+        conScriptEsterni.map(([, src]) => new URL(src).hostname.split(".").slice(-2).join(".")),
+      );
+      for (const fornitore of fornitori) {
+        if (!html.includes(fornitore)) {
+          dice(`${file}: il sito carica uno script da ${fornitore} e questa pagina non lo nomina`);
+        }
+      }
+    }
+  } else {
+    // Nessuno script esterno: le promesse devono esserci ancora, altrimenti
+    // qualcuno le ha tolte senza motivo e il sito si racconta peggio di com'è.
+    for (const file of legali) {
+      const html = readFileSync(file, "utf8");
+      if (!PROMESSE_SENZA_TERZI.some((p) => html.includes(p))) {
+        dice(`${file}: non dichiara più l'assenza di statistiche, ma il sito non carica niente da fuori`);
+      }
+    }
+  }
+}
+
 // Richiama scripts/verifica-hreflang.mjs (task 9, sito-inglese): è il
 // controllo che «gli hreflang devono puntare a un file che esiste» — lo
 // stesso che il task 10 chiedeva di scrivere qui, già fatto lì contro il

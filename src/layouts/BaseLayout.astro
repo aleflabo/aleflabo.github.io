@@ -10,6 +10,7 @@ import { localizedPath } from '../i18n/ui';
 import { emailContatto } from '../data/legale';
 import { persona, sitoWeb } from '../lib/datiStrutturati';
 import { descrizioneMeta } from '../lib/descrizione';
+import { statistiche, verificaBing, verificaGoogle } from '../data/analytics';
 
 interface Props {
   title: string;
@@ -107,6 +108,13 @@ const blocchiLd = [...comuni, ...datiStrutturati];
     <title>{title}</title>
     <meta name="description" content={descrizioneBreve} />
     <meta name="author" content="Alessandro Flaborea" />
+    {/* Verifica di proprietà per Search Console e Webmaster Tools. Non
+        raccolgono niente e non toccano chi legge: sono il modo di aprire gli
+        strumenti che dicono con quali parole la gente arriva qui — le query,
+        che nessuno strumento di statistica riporta perché Google le toglie.
+        Stringa vuota in src/data/analytics.ts = nessun meta reso. */}
+    {verificaGoogle && <meta name="google-site-verification" content={verificaGoogle} />}
+    {verificaBing && <meta name="msvalidate.01" content={verificaBing} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {!paginaErrore && <link rel="canonical" href={canonicalUrl} />}
     {!paginaErrore && enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
@@ -132,6 +140,14 @@ const blocchiLd = [...comuni, ...datiStrutturati];
     {blocchiLd.map((blocco) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(blocco)} />
     ))}
+    {/* L'unica risorsa che il sito carichi da fuori, e solo se accesa. Va in
+        fondo alla testa con `defer`: conta le visite, non deve rallentare la
+        prima resa. Lo stesso interruttore aggiunge la sezione che la descrive
+        alle quattro pagine legali (src/lib/informativa.ts), così il sito non
+        può contare qualcosa senza dirlo. */}
+    {statistiche && (
+      <script is:inline defer src={statistiche.script} {...statistiche.attributi}></script>
+    )}
   </head>
   <body>
     <a class="salta-al-contenuto" href="#contenuto">{lang === 'it' ? 'Salta al contenuto' : 'Skip to content'}</a>
