@@ -8,7 +8,7 @@
  * costruito: un'informativa che non dice a chi scrivere non permette di
  * esercitare i diritti che elenca.
  */
-export const emailContatto = 'flaborea.alessandro@gmail.com';
+export const emailContatto = 'alessandro@flaborea.com';
 
 export interface SezioneLegale {
   titolo: string;

@@ -23,7 +23,13 @@ export interface ContactCopy {
   // il pulsante di testata legge il proprio `nav.cta` invece), Nav.astro
   // non ne ha bisogno (task finale, blocco 5).
   title?: string;
-  email: string;
+  /**
+   * Non c'è un campo `email` qui. L'indirizzo vive in `emailContatto`
+   * (src/data/legale.ts), che è quello reso dalle informative e dal canale
+   * «Mail» della home: una seconda copia in questo file non veniva usata da
+   * nessuna pagina e, il giorno del passaggio a flaborea.com, sarebbe rimasta
+   * indietro senza che niente lo segnalasse.
+   */
 }
 
 export interface ColonnaPiePagina {
@@ -63,9 +69,7 @@ export const site: Record<Locale, SiteCopy> = {
       approach: "Approach",
       result: "Result",
     },
-    contact: {
-      email: "flaborea.alessandro@gmail.com",
-    },
+    contact: {},
     // Voci di menu, piè di pagina e richiamo ripetuto per le pagine nuove,
     // resi dall'italiano approvato (task 3, sito-inglese). Fonte:
     // docs/superpowers/specs/2026-08-25-sito-italiano/testi-en.md, sezione
@@ -101,7 +105,6 @@ export const site: Record<Locale, SiteCopy> = {
     },
     contact: {
       title: "Parliamone",
-      email: "flaborea.alessandro@gmail.com",
     },
     menu: ["Servizi", "Formazione", "Lavori", "Ricerca", "Chi sono", "Note"],
     prenotaMezzora: "Prenota mezz'ora",

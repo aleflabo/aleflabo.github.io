@@ -5,13 +5,17 @@ offline o pubblicano 74 collegamenti rotti.
 
 Riferimento: issue #15.
 
-> **Fatto il 27 agosto 2026: sezioni 1–5.** Il sito risponde su
+> **Fatto il 27 agosto 2026: sezioni 1–6.** Il sito risponde su
 > `https://flaborea.com` con il certificato attivo, `www` e
-> `aleflabo.github.io` reindirizzano. Restano la casella di posta (6), la
-> partita IVA (7) e Brevo (8).
+> `aleflabo.github.io` reindirizzano, e `alessandro@flaborea.com` riceve e
+> invia da Gmail con **SPF, DKIM e DMARC tutti e tre `PASS`**.
 >
-> Il certificato è stato emesso in pochi minuti, non nelle 24 ore che GitHub
-> dichiara come tetto.
+> Restano la partita IVA (7) e Brevo (8).
+>
+> Due cose sono andate diversamente da come erano scritte: il certificato è
+> stato emesso in pochi minuti invece che nelle 24 ore dichiarate da GitHub,
+> e la prima mail di prova è finita in spam **con l'autenticazione tutta a
+> posto** — vedi la nota in fondo al passo 6.
 
 ---
 
@@ -151,8 +155,8 @@ dentro Gmail, senza aprire una seconda webmail.
 
 ### 6a. Crea la casella su Aruba
 
-- [ ] Pannello Aruba → **Gestione Email** → crea `alessandro@flaborea.com`
-- [ ] Segnati la password: serve a Gmail, e Aruba non la rimostra
+- [x] Pannello Aruba → **Gestione Email** → crea `alessandro@flaborea.com`
+- [x] Segnati la password: serve a Gmail, e Aruba non la rimostra
 
 I parametri, per quando servono:
 
@@ -171,10 +175,10 @@ Va fatto **prima** dell'invio: al passo dopo Gmail manda un codice di verifica
 a `alessandro@flaborea.com`, e senza inoltro dovresti andare a leggerlo nella
 webmail di Aruba.
 
-- [ ] Pannello Aruba → la casella → **inoltro** verso la tua Gmail
-- [ ] Attiva anche **conserva una copia** sul server: se un domani cambi
+- [x] Pannello Aruba → la casella → **inoltro** verso la tua Gmail
+- [x] Attiva anche **conserva una copia** sul server: se un domani cambi
       client, la posta è ancora lì
-- [ ] Mandati una prova da un altro indirizzo e verifica che arrivi in Gmail
+- [x] Mandati una prova da un altro indirizzo e verifica che arrivi in Gmail
 
 > L'alternativa è far scaricare la posta a Gmail via POP3
 > (*Impostazioni → Account → Controlla la posta da altri account*), ma Gmail
@@ -186,10 +190,10 @@ webmail di Aruba.
 Gmail → **Impostazioni** → **Account e importazione** → *Invia messaggi come*
 → **Aggiungi un altro indirizzo email**.
 
-- [ ] Nome: `Alessandro Flaborea` · Indirizzo: `alessandro@flaborea.com`
-- [ ] **Tratta come alias: sì** — così rispondendo a una mail arrivata lì,
+- [x] Nome: `Alessandro Flaborea` · Indirizzo: `alessandro@flaborea.com`
+- [x] **Tratta come alias: sì** — così rispondendo a una mail arrivata lì,
       Gmail risponde da quell'indirizzo invece che dalla tua Gmail
-- [ ] Alla schermata dopo, Gmail chiede il server SMTP:
+- [x] Alla schermata dopo, Gmail chiede il server SMTP:
 
   ```
   Server SMTP: smtps.aruba.it
@@ -205,31 +209,45 @@ Gmail → **Impostazioni** → **Account e importazione** → *Invia messaggi co
 > accorgeresti dai destinatari che non rispondono. Passando dall'SMTP di
 > Aruba, l'SPF che Aruba ha già scritto le copre.
 
-- [ ] Gmail manda un codice a `alessandro@flaborea.com`: arriva nella tua
+- [x] Gmail manda un codice a `alessandro@flaborea.com`: arriva nella tua
       Gmail grazie all'inoltro del passo 6b. Incollalo per confermare
 
 ### 6d. Le impostazioni che evitano figure
 
-- [ ] *Rispondi dallo stesso indirizzo a cui è stato inviato il messaggio* —
+- [x] *Rispondi dallo stesso indirizzo a cui è stato inviato il messaggio* —
       così le risposte al lavoro partono da `@flaborea.com` e quelle personali
       dalla Gmail, senza doverci pensare
-- [ ] Decidi se rendere `alessandro@flaborea.com` **predefinito** per i nuovi
+- [x] Decidi se rendere `alessandro@flaborea.com` **predefinito** per i nuovi
       messaggi. Se il sito è il tuo biglietto da visita, conviene
 
 ### 6e. La prova che conta
 
-- [ ] Scrivi da Gmail a un indirizzo esterno **scegliendo come mittente**
+- [x] Scrivi da Gmail a un indirizzo esterno **scegliendo come mittente**
       `alessandro@flaborea.com`
-- [ ] Aprilo dalla parte del destinatario e guarda l'intestazione completa:
+- [x] Aprilo dalla parte del destinatario e guarda l'intestazione completa:
       **SPF deve risultare `pass`**. Su Gmail: i tre puntini → *Mostra
       originale*
 
 > Se SPF dice `fail` o `softfail`, quasi sempre è perché l'invio sta passando
 > da Google e non dall'SMTP di Aruba: torna al passo 6c.
 
+> **Se i tre risultano `PASS` ma la mail finisce lo stesso in spam, non c'è
+> niente da configurare.** È successo alla prima prova, ed è normale per due
+> motivi che non riguardano l'autenticazione:
+>
+> - **l'oggetto era «test» e il corpo una riga.** Per un filtro, una mail
+>   fatta così è il profilo dello spam: nessun'altra posta ha quella forma;
+> - **il dominio è appena nato.** La reputazione si costruisce mandando posta
+>   vera che le persone aprono, e finché quella storia non esiste i filtri
+>   stanno sulla difensiva a prescindere.
+>
+> Rimedio: segna «Non è spam», aggiungi il mittente ai contatti, e rifai la
+> prova con un oggetto sensato e due frasi di senso compiuto. Le prime
+> settimane di posta reale sistemano il resto.
+
 ### 6f. Il sito
 
-- [ ] Sostituisci l'indirizzo: vive in `emailContatto` dentro
+- [x] Sostituisci l'indirizzo: vive in `emailContatto` dentro
       `src/data/legale.ts`, **un punto solo per sei occorrenze** — le due
       informative nelle due lingue e il canale «Mail» della home
 
@@ -278,9 +296,10 @@ due**.
 - [ ] **DKIM**: i record `TXT` che Brevo fornisce si aggiungono normalmente,
       sono nomi distinti (tipo `mail._domainkey`) e non danno conflitto con
       quelli di Aruba
-- [ ] **DMARC**, se Brevo lo propone: parti in sola osservazione
-      (`p=none`) e stringi dopo qualche settimana, quando sei sicuro che tutti
-      i mittenti legittimi passino
+- [x] **DMARC**: già attivo in sola osservazione — `v=DMARC1; p=none`.
+      Stringilo a `p=quarantine` dopo qualche settimana di posta vera, quando
+      sei sicuro che tutti i mittenti legittimi passino, **e comunque non
+      prima di aver aggiunto Brevo**
 - [ ] Aspetta che Brevo dichiari il dominio **verificato**: finché non lo è, le
       email partono dal loro dominio condiviso e arrivano peggio
 - [ ] Manda una prova a un indirizzo Gmail e guarda l'intestazione: SPF e DKIM
