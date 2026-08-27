@@ -1,6 +1,6 @@
 ---
 import { localizedPath, type Locale } from '../i18n/ui';
-import { site } from '../data/site';
+import { frasePresentazione, site } from '../data/site';
 
 interface Props {
   lang: Locale;
@@ -10,15 +10,6 @@ const copy = site[lang];
 const nome = copy.hero.name;
 const piePagina = copy.piePagina ?? [];
 const prenotaMezzora = copy.prenotaMezzora ?? '';
-
-// Frase di presentazione: l'italiano è quello scritto a mano nelle tavole
-// (Servizi.dc.html e affini), l'inglese è quello approvato nel deck
-// (testi-en.md, § «Piè di pagina» — «AI consulting and training. From
-// research to software that people use.»).
-const frasePresentazione: Record<Locale, string> = {
-  it: "Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.",
-  en: 'AI consulting and training. From research to software that people use.',
-};
 
 // Riga finale. La partita IVA non c'è ancora: finché non è aperta, la voce
 // resta fuori invece di stare in pagina come «[DA INSERIRE]», che si leggeva
