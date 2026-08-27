@@ -29,8 +29,17 @@ export interface Statistiche {
   titolare: string;
   /** L'URL dello script. Deve essere l'unica risorsa esterna del sito. */
   script: string;
-  /** Il dominio dichiarato allo strumento. */
-  dominio: string;
+  /**
+   * Gli attributi che lo script vuole sul proprio tag, così come li documenta
+   * il fornitore.
+   *
+   * Qui c'era un `data-website-id` scritto a mano, riempito con il dominio
+   * del sito: sbagliato per tutti e tre gli strumenti candidati. Umami vuole
+   * in quel campo un UUID, non un dominio; Plausible non usa quel nome ma
+   * `data-domain`; GoatCounter un altro ancora. Una configurazione che si
+   * dichiara agnostica e poi fissa il nome di un attributo non lo è.
+   */
+  attributi: Record<string, string>;
   /** L'informativa dello strumento, per chi vuole leggerla. */
   informativa: string;
 }
@@ -49,9 +58,16 @@ export interface Statistiche {
  *   nome: "Umami",
  *   titolare: "Umami Software, Inc., con i dati ospitati nell'Unione Europea",
  *   script: "https://eu.umami.is/script.js",
- *   dominio: "flaborea.com",
+ *   attributi: { "data-website-id": "<l'UUID che Umami assegna al sito>" },
  *   informativa: "https://umami.is/privacy",
  * };
+ * ```
+ *
+ * Con Plausible cambia solo l'ultima riga degli attributi:
+ *
+ * ```ts
+ *   script: "https://plausible.io/js/script.js",
+ *   attributi: { "data-domain": "flaborea.com" },
  * ```
  */
 export const statistiche: Statistiche | null = null;

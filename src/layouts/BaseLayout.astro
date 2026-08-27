@@ -146,7 +146,7 @@ const blocchiLd = [...comuni, ...datiStrutturati];
         alle quattro pagine legali (src/lib/informativa.ts), così il sito non
         può contare qualcosa senza dirlo. */}
     {statistiche && (
-      <script is:inline defer src={statistiche.script} data-website-id={statistiche.dominio}></script>
+      <script is:inline defer src={statistiche.script} {...statistiche.attributi}></script>
     )}
   </head>
   <body>

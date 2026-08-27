@@ -19,7 +19,7 @@ const umami: Statistiche = {
   nome: "Umami",
   titolare: "Umami Software, Inc.",
   script: "https://eu.umami.is/script.js",
-  dominio: "flaborea.com",
+  attributi: { "data-website-id": "0000-0000" },
   informativa: "https://umami.is/privacy",
 };
 
