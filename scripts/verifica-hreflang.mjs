@@ -6,7 +6,7 @@
 //
 // `scripts/verifica-rotte.mjs` già controlla i collegamenti interni, ma
 // solo quelli con `href="/…"` relativo: gli `hreflang` di BaseLayout sono
-// URL assoluti (`href="https://aleflabo.github.io/en/…"`), quindi quel
+// URL assoluti (`href="<SITE>/en/…"`), quindi quel
 // controllo li salta silenziosamente — lo stesso motivo per cui il
 // progetto italiano non si era accorto delle diciassette rotte morte.
 //
@@ -15,9 +15,9 @@
 // verifica che il file di destinazione esista davvero sul disco.
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+import { SITE } from "./sito.mjs";
 
 const DIST = "dist";
-const SITE = "https://aleflabo.github.io";
 
 function trovaHtml(dir) {
   let file = [];
@@ -30,8 +30,8 @@ function trovaHtml(dir) {
 }
 
 // Da un URL assoluto dichiarato in hreflang al file dist/ atteso.
-// "https://aleflabo.github.io/en/services" -> "dist/en/services/index.html"
-// "https://aleflabo.github.io/" -> "dist/index.html"
+// "<SITE>/en/services" -> "dist/en/services/index.html"
+// "<SITE>/" -> "dist/index.html"
 function fileAtteso(hrefAssoluto) {
   if (!hrefAssoluto.startsWith(SITE)) return { fuoriSito: true, percorso: hrefAssoluto };
   let percorso = hrefAssoluto.slice(SITE.length);
