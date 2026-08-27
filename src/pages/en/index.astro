@@ -15,6 +15,7 @@ import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
 import LeProve from '../../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
 import DaDoveViene from '../../components/sezioni/DaDoveViene.astro';
+import Territorio from '../../components/sezioni/Territorio.astro';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
   occhiello,
@@ -26,6 +27,9 @@ import {
   daDoveViene,
   contatto,
 } from '../../data/en/home';
+import { territorio } from '../../data/territorio';
+import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
+import { attivita } from '../../lib/datiStrutturati';
 
 // Titolo e descrizione della pagina: composti dai dati già approvati in
 // home.ts, con la stessa regola della home italiana (src/pages/index.astro),
@@ -41,11 +45,26 @@ import {
 //   indesiderato prima della punteggiatura e si collassano eventuali spazi
 //   doppi, per ottenere una frase leggibile.
 const titoloPagina = `Alessandro Flaborea — ${occhiello.eyebrow}`;
-const descrizionePagina = occhiello.titolo
+// La sola composizione dava 66 caratteri, meno di metà della finestra utile
+// in SERP, e non diceva da dove si lavora. La coda sul territorio è la stessa
+// che dice la sezione Territorio, resa in inglese.
+const descrizionePagina = `${occhiello.titolo
   .replaceAll('|', ' ')
   .replace(/\s+([,.;:!?])/g, '$1')
   .replace(/\s+/g, ' ')
-  .trim();
+  .trim()} Based in Venice: on site across Veneto and Friuli, remotely everywhere else.`;
+
+// --- Dati strutturati ---
+// Gemello di quello della home italiana: `ProfessionalService` con i quattro
+// modi di lavorare insieme e le aree servite, in inglese.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  attivita({
+    site: dominio,
+    lang: 'en',
+    servizi: ingaggiInglesi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
+  }),
+];
 ---
 
 <BaseLayout
@@ -54,7 +73,7 @@ const descrizionePagina = occhiello.titolo
   lang="en"
   path="/"
   pathIt="/"
-  person={true}
+  datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
   <FasciaNumeri numeri={numeri} />
@@ -63,5 +82,6 @@ const descrizionePagina = occhiello.titolo
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} />
   <DaDoveViene {...daDoveViene} />
+  <Territorio {...territorio.en} />
   <Contatto {...contatto} />
 </BaseLayout>

@@ -5,6 +5,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoServizi from '../components/pagine/CorpoServizi.astro';
 import { ingaggi, faq, perChiNonSono } from '../data/servizi';
 import { testiServiziPagina } from '../data/serviziPagina';
+import { briciole, faq as faqLd } from '../lib/datiStrutturati';
+import { localizedPath } from '../i18n/ui';
+
+// Le cinque domande erano già in pagina, in `<h3>` con la risposta sotto:
+// il formato che i motori generativi preferiscono, e non dichiarato. Il
+// FAQPage nasce dallo stesso array che alimenta il componente, così la
+// risposta letta e quella dichiarata non possono divergere.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  faqLd(faq.map((d) => ({ domanda: d.domanda, risposta: d.risposta }))),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('it', '/') },
+    { nome: 'Servizi', percorso: localizedPath('it', '/servizi') },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -14,6 +29,7 @@ import { testiServiziPagina } from '../data/serviziPagina';
   path="/servizi"
   pathEn="/services"
   attiva="servizi"
+  datiStrutturati={datiStrutturati}
 >
   <CorpoServizi
     lang="it"

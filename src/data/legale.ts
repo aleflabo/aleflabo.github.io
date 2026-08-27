@@ -41,7 +41,7 @@ export const privacy: PaginaLegale = {
   titolo: 'Che cosa succede ai vostri dati su questo sito',
   introduzione:
     'In breve: questo sito non vi osserva. Non ci sono strumenti di statistica, non ci sono cookie, e nessuna risorsa viene caricata da server di terzi. Sotto c\'è la versione lunga, con i nomi delle cose.',
-  aggiornamento: 'Ultimo aggiornamento: 26 agosto 2026.',
+  aggiornamento: 'Ultimo aggiornamento: 27 agosto 2026.',
   sezioni: [
     {
       titolo: 'Chi tratta i dati',
@@ -59,8 +59,8 @@ export const privacy: PaginaLegale = {
     {
       titolo: 'Che cosa il vostro browser tiene da parte',
       paragrafi: [
-        'Una cosa sola: se scegliete la lingua con l\'interruttore in alto, il sito se lo ricorda in una voce di `localStorage` chiamata `lang-chosen`. Serve a non rimandarvi ogni volta alla lingua del vostro browser dopo che avete scelto l\'altra.',
-        'Resta nel vostro browser, non viene mandata da nessuna parte e non identifica nessuno. Si cancella svuotando i dati del sito dalle impostazioni del browser.',
+        'Niente. Il sito non scrive nulla nel vostro browser: né cookie, né voci di `localStorage`, né altro che sopravviva alla pagina che state leggendo.',
+        'Anche questa si può verificare: aprite gli strumenti per sviluppatori, andate alla scheda dell\'archiviazione, e la troverete vuota.',
       ],
     },
     {
@@ -97,7 +97,7 @@ export const cookie: PaginaLegale = {
   titolo: 'Questo sito non usa cookie',
   introduzione:
     'Non è una formula di cortesia: è una cosa verificabile. Aprite gli strumenti per sviluppatori del vostro browser, guardate la scheda dei cookie, e la troverete vuota.',
-  aggiornamento: 'Ultimo aggiornamento: 26 agosto 2026.',
+  aggiornamento: 'Ultimo aggiornamento: 27 agosto 2026.',
   sezioni: [
     {
       titolo: 'Perché non c\'è il banner',
@@ -106,10 +106,10 @@ export const cookie: PaginaLegale = {
       ],
     },
     {
-      titolo: 'L\'unica cosa che resta nel browser',
+      titolo: 'Nemmeno fuori dai cookie',
       paragrafi: [
-        'Se scegliete la lingua con l\'interruttore in alto, il sito se lo ricorda in `localStorage` sotto la voce `lang-chosen`. Non è un cookie: non viaggia con le richieste al server e non arriva a nessuno. È una preferenza vostra, custodita dal vostro browser, e serve solo a non rimandarvi alla lingua di sistema dopo che avete scelto l\'altra.',
-        'Per le regole europee ricade fra gli strumenti tecnici necessari a fornire un servizio che avete chiesto, e non richiede consenso. Si cancella svuotando i dati del sito dalle impostazioni del browser.',
+        'Non c\'è niente neanche in `localStorage`, in `sessionStorage` o in una base di dati del browser. Fino ad agosto 2026 restava una voce che ricordava la lingua scelta: serviva a un rimbalzo automatico verso la versione inglese, e se n\'è andata insieme a quello.',
+        'Quindi non c\'è niente da cancellare, e niente per cui chiedervi un consenso.',
       ],
     },
     {

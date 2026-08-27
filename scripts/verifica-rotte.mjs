@@ -1,7 +1,8 @@
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 import { execFileSync } from "node:child_process";
 import { SITE } from "./sito.mjs";
+import { COPPIE } from "../src/data/coppie.mjs";
 
 // Le sette rotte inglesi (task 8/9, ramo sito-inglese) mancavano qui: senza
 // di loro questo script non si accorgeva se una di esse spariva, esattamente
@@ -234,6 +235,133 @@ if (existsSync("dist/en")) {
     if (trovate.length > 0) {
       dice(`${f} ha testo italiano rimasto: ${trovate.join(", ")}`);
     }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Controlli nati dall'audit SEO/GEO del 27 agosto 2026. Tutti e quattro
+// riguardano difetti che il sito ha avuto davvero in produzione e che nessuna
+// revisione aveva colto, perché non si vedono aprendo una pagina.
+// ---------------------------------------------------------------------------
+
+// 1. La barra finale. GitHub Pages serve `/servizi/` e risponde 301 a
+// `/servizi`. Finché `localizedPath` la ometteva, il sito dichiarava tre
+// indirizzi diversi per la stessa pagina — quello servito, il canonico e
+// quello della sitemap — e tutti e 712 i collegamenti interni passavano da un
+// redirect. Qui si controlla che nessun href interno e nessun canonico la
+// perda di nuovo.
+const ESTENSIONI_FILE = /\.(css|js|mjs|svg|png|jpe?g|webp|avif|ico|xml|pdf|txt|json|woff2?)$/i;
+
+// Le pagine di rimbalzo che Astro genera per `redirects` non sono pagine: un
+// `<meta http-equiv="refresh">`, un `noindex` e un canonico che punta ALTROVE
+// per definizione. Vanno saltate da tutti i controlli che seguono, altrimenti
+// ognuna produce tre segnalazioni per un comportamento corretto.
+function eUnRimbalzo(html) {
+  return /http-equiv="refresh"/i.test(html) && /name="robots" content="noindex"/i.test(html);
+}
+function rottaSenzaBarra(href) {
+  const [percorso] = href.split("#");
+  if (percorso === "" || percorso === "/") return false;
+  if (ESTENSIONI_FILE.test(percorso)) return false; // è un file, non una rotta
+  return !percorso.endsWith("/");
+}
+
+if (existsSync("dist")) {
+  for (const file of trovaHtml("dist")) {
+    const html = readFileSync(file, "utf8");
+    if (eUnRimbalzo(html)) continue;
+
+    for (const [, href] of html.matchAll(/href="(\/[^"]*)"/g)) {
+      if (href.startsWith("//")) continue; // esterno senza schema
+      if (rottaSenzaBarra(href)) {
+        dice(`${file}: collegamento interno senza barra finale verso ${href} (risponde 301)`);
+      }
+    }
+
+    const canonico = html.match(/<link rel="canonical" href="([^"]+)"/);
+    if (canonico) {
+      const percorso = canonico[1].slice(SITE.length);
+      if (rottaSenzaBarra(percorso)) {
+        dice(`${file}: il canonico ${canonico[1]} risponde 301 (manca la barra finale)`);
+      }
+      // Il canonico deve dire l'indirizzo di QUESTA pagina, non di un'altra:
+      // dist/servizi/index.html → /servizi/.
+      const atteso = "/" + relative("dist", file).replace(/index\.html$/, "").replace(/\\/g, "/");
+      const attesoPulito = atteso === "/404.html" ? null : atteso;
+      if (attesoPulito && percorso !== attesoPulito) {
+        dice(`${file}: il canonico dice ${percorso} ma la pagina sta in ${attesoPulito}`);
+      }
+    }
+  }
+}
+
+// 2. Il `robots.txt` deve indicare la sitemap sul dominio configurato. Per due
+// settimane, dopo il passaggio a flaborea.com, ha continuato a indicarla su
+// aleflabo.github.io: alcuni crawler scartano una direttiva `Sitemap` che
+// punta fuori dal dominio del `robots.txt` che stanno leggendo.
+if (!existsSync("dist/robots.txt")) {
+  dice("manca dist/robots.txt");
+} else {
+  const robots = readFileSync("dist/robots.txt", "utf8");
+  const riga = robots.match(/^Sitemap:\s*(\S+)/m);
+  if (!riga) dice("dist/robots.txt non dichiara nessuna Sitemap");
+  else if (!riga[1].startsWith(SITE)) {
+    dice(`dist/robots.txt indica la sitemap su ${riga[1]}, ma il sito è ${SITE}`);
+  }
+}
+
+// 3. Gli `hreflang` del costruito e le coppie di src/data/coppie.mjs devono
+// dire la stessa cosa. La sitemap legge quel file, le pagine leggono le props
+// `pathEn`/`pathIt`: senza questo confronto le due verità possono divergere
+// senza che niente lo segnali — ed è esattamente com'è nato il difetto per cui
+// la sitemap dichiarava alternati su quattro URL su trentotto.
+{
+  const attese = new Set(COPPIE.map(([it, en]) => `${it} ${en}`));
+  const trovate = new Set();
+  for (const file of existsSync("dist") ? trovaHtml("dist") : []) {
+    const html = readFileSync(file, "utf8");
+    if (eUnRimbalzo(html)) continue;
+    const link = [...html.matchAll(/hreflang="(it|en)" href="([^"]+)"/g)];
+    const it = link.find(([, l]) => l === "it")?.[2];
+    const en = link.find(([, l]) => l === "en")?.[2];
+    if (!it || !en) continue;
+    const coppia = `${it.slice(SITE.length)} ${en.slice(SITE.length)}`;
+    trovate.add(coppia);
+    if (!attese.has(coppia)) {
+      dice(`${file}: dichiara la coppia ${coppia}, che non sta in src/data/coppie.mjs`);
+    }
+  }
+  for (const attesa of attese) {
+    if (!trovate.has(attesa)) {
+      dice(`src/data/coppie.mjs dichiara la coppia ${attesa}, che nessuna pagina costruita conferma`);
+    }
+  }
+}
+
+// 4. La `meta description`. Google ne mostra circa 160 caratteri: /chi-sono ne
+// dichiarava 375 (il primo paragrafo della biografia copiato di peso) e
+// /lavori/procedo 305, tagliata prima di «co-fondatore e CTO», che è il pezzo
+// che conta. `descrizioneMeta` in src/lib/ le riporta dentro tagliando per
+// frasi intere; questo controlla che il risultato ci sia davvero.
+const MAX_DESCRIZIONE = 175;
+const MIN_DESCRIZIONE = 50;
+for (const file of existsSync("dist") ? trovaHtml("dist") : []) {
+  const html = readFileSync(file, "utf8");
+  if (eUnRimbalzo(html)) continue;
+  const d = html.match(/<meta name="description" content="([^"]*)"/);
+  if (!d) {
+    dice(`${file}: nessuna meta description`);
+    continue;
+  }
+  const lunghezza = d[1].length;
+  if (lunghezza > MAX_DESCRIZIONE) {
+    dice(`${file}: meta description di ${lunghezza} caratteri (massimo ${MAX_DESCRIZIONE})`);
+  }
+  // La 404 risponde 404 e non finisce in nessun indice: il pavimento non la
+  // riguarda. Il tetto sì, perché costa nulla e la tiene in riga.
+  if (file.endsWith("404.html")) continue;
+  if (lunghezza < MIN_DESCRIZIONE) {
+    dice(`${file}: meta description di soli ${lunghezza} caratteri (minimo ${MIN_DESCRIZIONE})`);
   }
 }
 

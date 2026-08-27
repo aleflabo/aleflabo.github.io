@@ -23,6 +23,20 @@
    skips those subtrees); marking it on `<html>` is refused on purpose, because that
    would switch the check off while leaving it green.
 
+5. **Never drop the trailing slash from an internal path.** GitHub Pages serves
+   `/servizi/` and answers 301 to `/servizi`. `localizedPath` (src/i18n/ui.ts) is the
+   one place that adds it, and canonical, hreflang, `og:url` and every menu follow
+   from there. Until August 2026 it did not: the site declared three different
+   addresses for the same page — the one served, the canonical, and the one in the
+   sitemap — and all 712 internal links went through a redirect.
+   `verifica-rotte.mjs` now fails on an internal href or a canonical without it.
+   Files (`/rss.xml`, `/favicon.svg`) are not routes and must not get one.
+6. **The domain is never written by hand.** `astro.config.mjs` holds it,
+   `scripts/sito.mjs` reads it from there, and `robots.txt`, `llms.txt`, the sitemap
+   and the structured data all build their URLs from `Astro.site`. The one file that
+   repeated it — `public/robots.txt` — pointed at the old domain for two weeks after
+   the move without anything noticing; it is now a route, `src/pages/robots.txt.ts`.
+
 ## Before opening a PR
 
 ```bash
@@ -55,5 +69,18 @@ the webhook before the code.
 
 ## Still open
 
-See issue #5. The one visible in production: the photograph on `/chi-sono` is a
-placeholder box.
+See issue #5. Two things an SEO/GEO audit left open on purpose, both waiting on a
+decision rather than on code:
+
+- **The contact form and the newsletter sign-up are inert** and say so in the page
+  («Modulo non ancora attivo», «Iscrizione non ancora attiva»). Every visit the site
+  earns lands on a button that declares it does not work. WhatsApp and mail below it
+  do work.
+- **Four of the ten publications have no arXiv** among the sources consulted, so
+  their titles are not links and their `ScholarlyArticle` carries no `sameAs`.
+  Inventing an identifier would be worse than omitting it. The map is
+  `arxivPerTitolo` in `src/data/pubblicazioni.ts` — and note that the CV had one
+  entry misattributed, so verify against the arXiv page before adding one.
+
+The «placeholder box» that used to be listed here is gone: `/chi-sono` shows the real
+portrait, with `alt`, `srcset` and dimensions, and it also feeds `Person.image`.

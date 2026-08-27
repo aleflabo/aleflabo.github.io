@@ -4,9 +4,11 @@
 // componenti»): ogni oggetto qui sotto è pensato per essere passato con lo
 // spread (`<Componente {...oggetto} />`), come già fa `src/pages/index.astro`
 // per l'italiano. Gli href sono valori già risolti verso le rotte inglesi
-// (`/en/services`, `/en/training`, `/en/work`, `/en/research`, `/en/about`),
-// non calcolati da `localizedPath`: nessuna pagina consuma ancora questo
-// file.
+// (`/en/services/`, `/en/training/`, `/en/work/`, `/en/research/`,
+// `/en/about/`), non calcolati da `localizedPath`. Da agosto 2026 li consuma
+// `src/pages/en/index.astro`: la barra finale è quindi obbligatoria, perché
+// GitHub Pages risponde 301 a un percorso che ne è privo. Ci pensa
+// `verifica-rotte.mjs`, che boccia un href interno senza barra.
 import { site } from "../site";
 import { emailContatto } from "../legale";
 
@@ -29,10 +31,10 @@ export const occhiello: OcchielloProps = {
   titolo: "I help companies work out|where AI is needed|, and then I build it.",
   intro: "Three years of a PhD in computer vision, then two as CTO of a startup that took that research inside companies that manufacture things. Now I work on my own.",
   ctaPrimaria: prenotaMezzoraEn,
-  hrefPrimaria: "/en#parliamone",
+  hrefPrimaria: "/en/#parliamone",
   ctaSecondaria: "See what I've built",
   credibilita: "PhD in computer vision at Sapienza · Published at CVPR, ICCV, IROS · Co-founder and CTO of Procedo from 2024 to 2026",
-  hrefProcedo: "/en/work",
+  hrefProcedo: "/en/work/",
 };
 
 // --- FasciaNumeri ---
@@ -117,7 +119,7 @@ export const comeLavoro: ComeLavoroProps = {
   ],
   etichettaNeEsce: "What comes out of it",
   continua: "The four ways of working together, in full",
-  hrefContinua: "/en/services",
+  hrefContinua: "/en/services/",
 };
 
 // --- LeProve ---
@@ -159,7 +161,7 @@ export const leProve: LeProveProps = {
       corpo: "Video shot on the shop floor becomes step-by-step procedures, and the people doing the work can ask questions of their own company's documentation. I was co-founder and CTO for two years; today I follow it as an advisor.",
       tag: ["Industrial customers", "B4i Bocconi", "Angel round"],
       link: "How it works",
-      href: "/en/work/procedo",
+      href: "/en/work/procedo/",
     },
     {
       eyebrow: "Live product · open to everyone",
@@ -172,7 +174,7 @@ export const leProve: LeProveProps = {
     },
   ],
   continua: "All the work, research included",
-  hrefContinua: "/en/work",
+  hrefContinua: "/en/work/",
 };
 
 // --- BloccoFormazione ---
@@ -212,7 +214,7 @@ export const bloccoFormazione: BloccoFormazioneProps = {
   ],
   chiusura: "I taught for four years at Sapienza as a teaching assistant, and I was an invited speaker at Ferrari S.p.A.'s Data Science Hub. Courses are organised directly, or through accredited training bodies and interprofessional funds.",
   linkChiusura: "How a course gets organised",
-  hrefChiusura: "/en/training",
+  hrefChiusura: "/en/training/",
 };
 
 // --- DaDoveViene ---
@@ -239,9 +241,9 @@ export const daDoveViene: DaDoveVieneProps = {
     { valore: "2024–2026", etichetta: "Co-founder and CTO of Procedo, an industrial startup" },
   ],
   linkRicerca: "The research, in full",
-  hrefRicerca: "/en/research",
+  hrefRicerca: "/en/research/",
   linkChiSono: "About me",
-  hrefChiSono: "/en/about",
+  hrefChiSono: "/en/about/",
 };
 
 // --- Contatto ---

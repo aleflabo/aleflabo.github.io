@@ -4,8 +4,26 @@
 // dati e ciò che riguarda la testa del documento.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoRicerca from '../components/pagine/CorpoRicerca.astro';
-import { pubblicazioni, numeriFascia } from '../data/pubblicazioni';
+import { arxivDi, pubblicazioni, numeriFascia } from '../data/pubblicazioni';
 import { ricerca } from '../data/ricerca';
+import { briciole, pubblicazioniLd } from '../lib/datiStrutturati';
+import { localizedPath } from '../i18n/ui';
+
+// Le dieci pubblicazioni come `ScholarlyArticle`, con l'arXiv in `sameAs`
+// dove c'è. Prima la pagina le elencava e basta: un motore che deve dire
+// «chi lavora su anomaly detection nei video egocentrici» non aveva niente
+// da verificare.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  pubblicazioniLd(
+    dominio,
+    pubblicazioni.map((p) => ({ titolo: p.titolo, anno: p.anno, sede: p.sede, url: arxivDi(p.titolo) })),
+  ),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('it', '/') },
+    { nome: 'Ricerca', percorso: localizedPath('it', '/ricerca') },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -15,6 +33,7 @@ import { ricerca } from '../data/ricerca';
   path="/ricerca"
   pathEn="/research"
   attiva="ricerca"
+  datiStrutturati={datiStrutturati}
 >
   <CorpoRicerca lang="it" t={ricerca} pubblicazioni={pubblicazioni} numeriFascia={numeriFascia} />
 </BaseLayout>

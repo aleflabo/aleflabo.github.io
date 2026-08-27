@@ -22,13 +22,16 @@ src/
                 # by default with an `en/` mirror for the English copy
   i18n/         # locale list + path helpers (src/i18n/ui.ts)
   layouts/      # BaseLayout (head, meta, hreflang, Nav/Footer wrapper)
-  lib/          # pure logic shared across pages (anno.ts, dataNota.ts) and the
-                # Sanity client + note queries (sanity.ts, note.ts, immagine.ts)
+  lib/          # pure logic shared across pages (anno.ts, dataNota.ts,
+                # descrizione.ts, datiStrutturati.ts) and the Sanity client + note
+                # queries (sanity.ts, note.ts, immagine.ts)
   pages/        # Italian pages at the root (index.astro, servizi.astro, lavori/[slug].astro, …)
                 # and their English mirror under pages/en/ (index.astro, services.astro,
                 # work/[slug].astro, …)
 scripts/        # verifica-rotte.mjs, verifica-hreflang.mjs — the build's own safety net
-public/         # static assets served as-is (favicon, robots.txt, og image)
+public/         # static assets served as-is (favicon, og image, CNAME).
+                # robots.txt and llms.txt are NOT here: they are routes
+                # (src/pages/*.ts), so their URLs follow `site`
 studio/         # Sanity Studio — its own package.json, not installed by the site build
 ```
 
@@ -93,11 +96,13 @@ both load only when a matching file is opened.
 
 ## Deployment
 
-The site doesn't have its own domain yet (`astro.config.mjs` points at
-`aleflabo.github.io`, and there's no `public/CNAME`). Deployment runs on every merge
-into `main`, and on the Sanity webhook described above
+The site is at **https://flaborea.com** (`astro.config.mjs` holds the domain,
+`public/CNAME` repeats it for the Action, and `aleflabo.github.io` 301s there).
+Deployment runs on every merge into `main`, and on the Sanity webhook described above
 (`.github/workflows/deploy.yml`): the action builds the site and publishes `dist/` to
 GitHub Pages. Because merging publishes, `npm run verifica` has to be green on the PR
 first — it exits 1 if the built site has a missing route, a broken internal link, an
-`hreflang` pointing at a file that doesn't exist, or leftover Italian text on an
-English page.
+`hreflang` pointing at a file that doesn't exist, leftover Italian text on an English
+page, an internal link or canonical without its trailing slash, a `robots.txt` naming
+another domain, a route pair that disagrees with `src/data/coppie.mjs`, or a meta
+description outside 50-175 characters.

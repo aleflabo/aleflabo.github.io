@@ -58,7 +58,7 @@ export const faq: Domanda[] = [
     domanda: "Where does our data end up?",
     risposta:
       "It's the right question and it deserves more than one paragraph: there's a whole page that explains it, including the things I can't guarantee you. In short: the files stay yours and nobody uses them to train anything; what I build lives on infrastructure registered to you.",
-    link: { testo: "Read the page about data", href: "/en/your-data" },
+    link: { testo: "Read the page about data", href: "/en/your-data/" },
   },
   {
     domanda: "How much does it cost?",

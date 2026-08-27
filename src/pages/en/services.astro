@@ -5,6 +5,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoServizi from '../../components/pagine/CorpoServizi.astro';
 import { ingaggi, faq, perChiNonSono } from '../../data/en/servizi';
 import { testiServiziPagina } from '../../data/en/serviziPagina';
+import { briciole, faq as faqLd } from '../../lib/datiStrutturati';
+import { localizedPath } from '../../i18n/ui';
+
+// Gemello di src/pages/servizi.astro: stesse cinque domande, tradotte.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  faqLd(faq.map((d) => ({ domanda: d.domanda, risposta: d.risposta }))),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('en', '/') },
+    { nome: 'Services', percorso: localizedPath('en', '/services') },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -14,6 +26,7 @@ import { testiServiziPagina } from '../../data/en/serviziPagina';
   path="/services"
   pathIt="/servizi"
   attiva="services"
+  datiStrutturati={datiStrutturati}
 >
   <CorpoServizi
     lang="en"

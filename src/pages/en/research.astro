@@ -5,6 +5,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoRicerca from '../../components/pagine/CorpoRicerca.astro';
 import { pubblicazioni, numeriFascia } from '../../data/en/pubblicazioni';
 import { ricerca } from '../../data/en/ricerca';
+import { arxivDi } from '../../data/pubblicazioni';
+import { briciole, pubblicazioniLd } from '../../lib/datiStrutturati';
+import { localizedPath } from '../../i18n/ui';
+
+// Gemello di src/pages/ricerca.astro. I titoli sono identici nelle due
+// lingue, quindi la mappa degli arXiv è una sola (src/data/pubblicazioni.ts).
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  pubblicazioniLd(
+    dominio,
+    pubblicazioni.map((p) => ({ titolo: p.titolo, anno: p.anno, sede: p.sede, url: arxivDi(p.titolo) })),
+  ),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('en', '/') },
+    { nome: 'Research', percorso: localizedPath('en', '/research') },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -14,6 +31,7 @@ import { ricerca } from '../../data/en/ricerca';
   path="/research"
   pathIt="/ricerca"
   attiva="research"
+  datiStrutturati={datiStrutturati}
 >
   <CorpoRicerca lang="en" t={ricerca} pubblicazioni={pubblicazioni} numeriFascia={numeriFascia} />
 </BaseLayout>

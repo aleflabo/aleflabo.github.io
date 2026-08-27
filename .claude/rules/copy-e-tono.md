@@ -23,8 +23,14 @@ are quoted in Italian because they are rules **about Italian copy**.
 - **Niente sospetto verso chi legge.** Requests are phrased positively, not as things
   the client might get wrong.
 - **Niente critiche implicite a Procedo**, which on the same page is a credential.
-- **Nessun riferimento geografico nel posizionamento** (Veneto orientale, "local").
-  In the biography places stay — that is biography, not positioning.
+- **The territory is named, and it is Venice.** This rule used to say the opposite —
+  no geography in the positioning. It was reversed on 2026-08-27 by the user, after an
+  audit found the site named no place at all: no local query could reach it, and an
+  assistant asked for «un consulente AI dalle mie parti» had nothing to work out whose
+  *parti*. The words live in `src/data/territorio.ts`, which also feeds `areaServed` in
+  the structured data, and they say two things together: Veneto and Friuli in person,
+  everywhere else remotely. Do not let the second half drop — the door to remote work
+  stays open on purpose. In the biography places stay as biography, as before.
 - Address companies with **«voi»**, never «tu».
 
 ## Facts not to get wrong
@@ -39,6 +45,8 @@ and numbers, decks included. Read it rather than reconstructing from memory.
 - **Ten published papers, 533 citations.**
 - **The project is called Grip**, not "Tire Hub" — that was the name it shipped under.
   `/lavori/tire-hub` stays as a permanent redirect.
-- **`flaborea.com` is not registered yet.** `astro.config.mjs` points at
-  `aleflabo.github.io` and there is no `public/CNAME`. Do not reintroduce that domain
-  until it is bought: the sitemap would point at a domain that does not resolve.
+- **`flaborea.com` is the live domain** since August 2026. `astro.config.mjs` points
+  at it, `public/CNAME` says it, and `aleflabo.github.io` 301s there. This bullet used
+  to say the opposite and stayed stale for two weeks after the move — a live trap,
+  because following it would have reverted the domain. Nothing repeats the domain by
+  hand: `scripts/sito.mjs` reads it from `astro.config.mjs`, everything else from there.

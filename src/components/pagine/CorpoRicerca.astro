@@ -12,6 +12,7 @@
 // tutto il resto arriva dai testi.
 import TestataPagina from '../TestataPagina.astro';
 import { localizedPath, type Locale } from '../../i18n/ui';
+import { arxivDi } from '../../data/pubblicazioni';
 import type { TestiRicerca } from '../../data/ricerca';
 import type { Pubblicazione } from '../../data/pubblicazioni';
 
@@ -70,7 +71,21 @@ const GITHUB = 'https://github.com/aleflabo';
           <div class="riga">
             <span class="anno">{p.anno}</span>
             <div class="testo-riga">
-              <h3>{p.titolo}</h3>
+              {/* Il titolo diventa un link quando la pubblicazione ha un
+                  arXiv (src/data/pubblicazioni.ts). Prima le dieci voci non
+                  ne avevano nessuno: la pagina che regge la credibilità
+                  tecnica del sito citava dieci articoli senza dare modo di
+                  verificarne uno. «arXiv» si scrive uguale nelle due lingue,
+                  quindi non serve un'etichetta tradotta. */}
+              <h3>
+                {arxivDi(p.titolo) ? (
+                  <a class="verso-arxiv" href={arxivDi(p.titolo)} target="_blank" rel="noopener noreferrer">
+                    {p.titolo} <span class="arxiv">arXiv &#8599;</span>
+                  </a>
+                ) : (
+                  p.titolo
+                )}
+              </h3>
               <p class="descrizione">{p.descrizione}</p>
             </div>
             <div class="metadati">
@@ -95,6 +110,22 @@ const GITHUB = 'https://github.com/aleflabo';
   </section>
 
 <style>
+  /* Titolo che porta all'arXiv: resta un titolo, non diventa un bottone.
+     La sigla accanto è più piccola e nel colore d'azione, così si vede che
+     è cliccabile senza sottolineare tutta la riga. */
+  .verso-arxiv { color: inherit; }
+  .verso-arxiv:hover { color: var(--azione); }
+  .arxiv {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.62em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--azione);
+    vertical-align: 0.28em;
+    white-space: nowrap;
+  }
   .container {
     max-width: var(--maxw);
     margin: 0 auto;

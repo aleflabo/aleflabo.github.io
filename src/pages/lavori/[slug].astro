@@ -11,6 +11,7 @@ import { projects, getProject } from '../../data/projects';
 import { site } from '../../data/site';
 import { localizedPath } from '../../i18n/ui';
 import { annoIt } from '../../lib/anno';
+import { briciole, lavoro as lavoroLd } from '../../lib/datiStrutturati';
 
 export function getStaticPaths() {
   return projects.map((p) => ({ params: { slug: p.slug } }));
@@ -24,8 +25,21 @@ const path = `/lavori/${project.slug}`;
 // inglese per le loro schede (task 1/bloccante).
 const pathEn = project.soloItaliano ? undefined : `/work/${project.slug}`;
 const t = site.it;
+
+// `CreativeWork` più le briciole: dieci schede che finora non dichiaravano
+// niente.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const percorso = localizedPath('it', path);
+const datiStrutturati = [
+  lavoroLd(dominio, { nome: project.name, descrizione: c.summary, percorso }),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('it', '/') },
+    { nome: 'Lavori', percorso: localizedPath('it', '/lavori') },
+    { nome: project.name, percorso },
+  ]),
+];
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} pathEn={pathEn} ogType="article" attiva="lavori">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="it" path={path} pathEn={pathEn} ogType="article" attiva="lavori" datiStrutturati={datiStrutturati}>
   <article class="container case">
     {/* «Lavori selezionati» (t.caseStudy.back) è condiviso con la pagina
         inglese; qui la destinazione è /lavori, il cui h1 dice «Quello che

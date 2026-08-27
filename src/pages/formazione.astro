@@ -6,6 +6,28 @@ import CorpoFormazione from '../components/pagine/CorpoFormazione.astro';
 import { formati, riquadroAiAct, strade } from '../data/formazione';
 import { testiFormazionePagina } from '../data/formazionePagina';
 import { site } from '../data/site';
+import { briciole, corso } from '../lib/datiStrutturati';
+import { localizedPath } from '../i18n/ui';
+
+// I tre formati come `Course`. L'AI Act di febbraio 2025 rende la formazione
+// un obbligo documentabile, quindi «corso AI obbligatorio» è una domanda che
+// viene fatta davvero: dichiararli aiuta a farsi trovare da quella.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: formati.map((f, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: corso(dominio, { nome: f.nome, descrizione: f.corpo }),
+    })),
+  },
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('it', '/') },
+    { nome: 'Formazione', percorso: localizedPath('it', '/formazione') },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -15,6 +37,7 @@ import { site } from '../data/site';
   path="/formazione"
   pathEn="/training"
   attiva="formazione"
+  datiStrutturati={datiStrutturati}
 >
   <CorpoFormazione
     lang="it"

@@ -69,7 +69,7 @@ export const faq: Domanda[] = [
     domanda: "Dove finiscono i nostri dati?",
     risposta:
       "È la domanda giusta e merita più di un paragrafo: c'è una pagina intera che la spiega, comprese le cose che non posso garantirvi. In breve: i file restano vostri e nessuno li usa per addestrare niente; quello che costruisco vive su un'infrastruttura intestata a voi.",
-    link: { testo: "Leggi la pagina sui dati", href: "/i-vostri-dati" },
+    link: { testo: "Leggi la pagina sui dati", href: "/i-vostri-dati/" },
   },
   {
     domanda: "Quanto costa?",
