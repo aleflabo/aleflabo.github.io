@@ -112,6 +112,22 @@ describe("pubblicazioniLd", () => {
   // Metà delle dieci pubblicazioni non ha un arXiv nel CV, che è la fonte
   // autorevole. Restano dichiarate lo stesso: inventare un identificatore
   // sarebbe peggio che ometterlo.
+  // Sei sedi su dieci sono conferenze. Dichiararle `Periodical` — cioè
+  // rivista — era falso, sulla pagina che regge la credibilità scientifica.
+  it("dichiara Periodical solo per le riviste", () => {
+    const [conf, riv] = pubblicazioniLd(SITE, [
+      { titolo: "A", anno: "2024", sede: "CVPR", rivista: false },
+      { titolo: "B", anno: "2024", sede: "Pattern Recognition", rivista: true },
+    ]).itemListElement;
+    expect(conf.item.isPartOf["@type"]).toBe("CreativeWork");
+    expect(riv.item.isPartOf["@type"]).toBe("Periodical");
+  });
+
+  it("tiene il nome della sede in tutti e due i casi", () => {
+    const l = pubblicazioniLd(SITE, [{ titolo: "A", anno: "2024", sede: "ICCV", rivista: false }]);
+    expect(l.itemListElement[0].item.isPartOf.name).toBe("ICCV");
+  });
+
   it("dichiara anche le voci senza URL", () => {
     const secondo = pubblicazioniLd(SITE, elenco).itemListElement[1].item;
     expect(secondo).not.toHaveProperty("sameAs");

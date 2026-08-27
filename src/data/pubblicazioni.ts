@@ -23,9 +23,12 @@ export interface Pubblicazione {
  * gli anni (vedi il commento sotto). Da qui in avanti si verifica prima di
  * scrivere.
  *
- * Le quattro pubblicazioni che mancano non hanno un arXiv fra le fonti
- * consultate: restano senza link, e senza `sameAs` nei dati strutturati.
- * Inventare un identificatore sarebbe peggio che ometterlo.
+ * L'elenco è nove su dieci, e i nove sono l'elenco completo: vengono da una
+ * query `au:"Flaborea"` sull'API di arXiv, che restituisce esattamente questi.
+ * La decima — «A Self-Supervised Algorithm to Detect Signs of Social Isolation
+ * in the Elderly» — su arXiv non c'è: è uscita solo su Artificial Intelligence
+ * in Medicine, e la ricerca per titolo non dà risultati. Resta senza link e
+ * senza `sameAs`, che è l'unica cosa onesta.
  */
 export const arxivPerTitolo: Record<string, string> = {
   "TI-PREGO: Chain of Thought and In-Context Learning for Online Mistake Detection in Procedural Egocentric Videos":
@@ -40,11 +43,41 @@ export const arxivPerTitolo: Record<string, string> = {
     "https://arxiv.org/abs/2407.13567",
   "Multimodal Motion Conditioned Diffusion Model for Skeleton-Based Video Anomaly Detection":
     "https://arxiv.org/abs/2307.07205",
+  "Are We Certain It's Anomalous?": "https://arxiv.org/abs/2211.09224",
+  "Best Practices for 2-Body Pose Forecasting": "https://arxiv.org/abs/2304.05758",
+  "Query-Guided Networks for Few-Shot Fine-Grained Classification and Person Search":
+    "https://arxiv.org/abs/2209.10250",
 };
 
 /** L'arXiv di una pubblicazione, se ce l'ha. */
 export function arxivDi(titolo: string): string | undefined {
   return arxivPerTitolo[titolo];
+}
+
+/**
+ * Le sedi che sono riviste. Tutto il resto è una conferenza.
+ *
+ * Serve ai dati strutturati: `ScholarlyArticle.isPartOf` con `@type:
+ * "Periodical"` dice «questo è uscito su una rivista», e su sei delle dieci
+ * voci era falso — ICLR, CVPR, ICCV, IROS e i due workshop sono conferenze.
+ * Dichiarare una conferenza come rivista, sulla pagina che regge la
+ * credibilità scientifica del sito, è il genere di errore che chi legge
+ * quei dati riconosce.
+ *
+ * L'elenco è esplicito e non dedotto dal nome: nel CV le riviste sono
+ * riconoscibili perché portano un volume («Pattern Recognition, vol. 156»),
+ * le conferenze perché dicono «Conference». Indovinare dalla stringa sarebbe
+ * la stessa classe di errore degli URL sfalsati.
+ */
+const RIVISTE = new Set([
+  "Computer Vision and Image Understanding",
+  "Pattern Recognition",
+  "Artificial Intelligence in Medicine",
+]);
+
+/** Se una sede è una rivista (`true`) o una conferenza (`false`). */
+export function eUnaRivista(sede: string): boolean {
+  return RIVISTE.has(sede);
 }
 
 // Dalla più recente, sezione /ricerca → «Le pubblicazioni».

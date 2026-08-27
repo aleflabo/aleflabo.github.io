@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoRicerca from '../../components/pagine/CorpoRicerca.astro';
 import { pubblicazioni, numeriFascia } from '../../data/en/pubblicazioni';
 import { ricerca } from '../../data/en/ricerca';
-import { arxivDi } from '../../data/pubblicazioni';
+import { arxivDi, eUnaRivista } from '../../data/pubblicazioni';
 import { briciole, pubblicazioniLd } from '../../lib/datiStrutturati';
 import { localizedPath } from '../../i18n/ui';
 
@@ -15,7 +15,13 @@ const dominio = Astro.site!.toString().replace(/\/$/, '');
 const datiStrutturati = [
   pubblicazioniLd(
     dominio,
-    pubblicazioni.map((p) => ({ titolo: p.titolo, anno: p.anno, sede: p.sede, url: arxivDi(p.titolo) })),
+    pubblicazioni.map((p) => ({
+      titolo: p.titolo,
+      anno: p.anno,
+      sede: p.sede,
+      url: arxivDi(p.titolo),
+      rivista: eUnaRivista(p.sede),
+    })),
   ),
   briciole(dominio, [
     { nome: 'Home', percorso: localizedPath('en', '/') },
