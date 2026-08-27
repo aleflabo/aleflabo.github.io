@@ -48,7 +48,7 @@ const {
   attiva,
 } = Astro.props;
 
-const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://aleflabo.github.io';
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://flaborea.com';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
 // Percorso relativo (senza dominio) verso l'altra lingua: esplicito via
 // `pathEn`/`pathIt` quando fornito, altrimenti — solo per la lingua
@@ -75,7 +75,10 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Alessandro Flaborea',
-  url: 'https://aleflabo.github.io',
+  // Il dominio arriva da `site` di astro.config.mjs, come il canonico: qui
+  // era scritto a mano, quindi al cambio di dominio i dati strutturati
+  // avrebbero continuato a dichiarare il vecchio indirizzo a Google.
+  url: site,
   jobTitle: 'AI consultant and trainer',
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sapienza University of Rome' },
   knowsAbout: [

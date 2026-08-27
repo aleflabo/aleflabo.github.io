@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
+import { SITE } from "./sito.mjs";
 
 // Le sette rotte inglesi (task 8/9, ramo sito-inglese) mancavano qui: senza
 // di loro questo script non si accorgeva se una di esse spariva, esattamente
@@ -15,12 +16,23 @@ const ROTTE = [
 let errori = 0;
 const dice = (m) => { console.error("✗ " + m); errori++; };
 
+// Nessuna pagina deve nominare un dominio del sito diverso da quello
+// configurato. Prima qui c'era il nome «flaborea.com» scritto a mano, perché
+// il dominio non esisteva ancora e comparire in pagina era un difetto: dal
+// giorno dell'acquisto quella regola si è capovolta. Ora il confronto è con
+// `site` di astro.config.mjs, così la verifica segue il sito invece di
+// ripeterne il valore.
+const DOMINI_DEL_SITO = ["flaborea.com", "aleflabo.github.io"];
+function dominioEstraneo(html) {
+  return DOMINI_DEL_SITO.some((d) => !SITE.includes(d) && html.includes(`//${d}`));
+}
+
 // Verifica rotte
 for (const r of ROTTE) {
   const f = r === "index" ? "dist/index.html" : `dist/${r}/index.html`;
   if (!existsSync(f)) { dice(`manca la rotta /${r === "index" ? "" : r}`); continue; }
   const html = readFileSync(f, "utf8");
-  if (html.includes("flaborea.com")) dice(`${f} nomina un dominio che non esiste`);
+  if (dominioEstraneo(html)) dice(`${f} nomina un dominio diverso da ${SITE}`);
   if (r !== "en" && /hreflang="it" href="[^"]*\/it\//.test(html)) dice(`${f} punta ancora a /it/`);
 }
 
@@ -113,7 +125,19 @@ if (existsSync("dist")) {
   }
 }
 
-if (existsSync("dist/CNAME")) dice("il CNAME è tornato: il dominio non è ancora comprato");
+// Il file CNAME deve esserci e dire il dominio configurato. Finché il
+// dominio non era comprato questo controllo diceva l'opposto — segnalava il
+// CNAME come un errore. Adesso è il contrario che è un errore: senza quel
+// file la GitHub Action ripubblica dist/ da zero e il dominio impostato nelle
+// impostazioni del repository sparisce al primo deploy, riportando il sito su
+// aleflabo.github.io senza che niente lo segnali.
+const atteso = SITE.replace(/^https?:\/\//, "");
+if (!existsSync("dist/CNAME")) {
+  dice(`manca dist/CNAME: senza, il prossimo deploy perde ${atteso}`);
+} else {
+  const cname = readFileSync("dist/CNAME", "utf8").trim();
+  if (cname !== atteso) dice(`dist/CNAME dice «${cname}», ma il sito è ${atteso}`);
+}
 
 // Verifica che non resti testo italiano su una pagina inglese (ramo
 // sito-inglese): è successo — tre etichette dentro un componente

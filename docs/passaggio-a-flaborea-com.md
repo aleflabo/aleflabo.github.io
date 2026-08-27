@@ -9,7 +9,7 @@ Riferimento: issue #15.
 
 ## Prima di cominciare
 
-- [ ] Aspetta che il dominio risulti **attivo** nel pannello Aruba, non solo
+- [x] Aspetta che il dominio risulti **attivo** nel pannello Aruba, non solo
       pagato. La registrazione di un `.com` è di solito questione di minuti, ma
       finché è «in registrazione» i record DNS non si possono salvare.
 
@@ -24,12 +24,12 @@ Riferimento: issue #15.
 Serve a impedire che qualcun altro rivendichi `flaborea.com` su GitHub Pages
 puntandolo al proprio repository. Va fatto **prima** di puntare il DNS.
 
-- [ ] GitHub → **Settings** dell'account (non del repository) → **Pages** →
+- [x] GitHub → **Settings** dell'account (non del repository) → **Pages** →
       **Add a domain** → `flaborea.com`
-- [ ] GitHub mostra un record `TXT` da creare, del tipo
+- [x] GitHub mostra un record `TXT` da creare, del tipo
       `_github-pages-challenge-aleflabo` con un valore
-- [ ] Crea quel `TXT` nel pannello DNS di Aruba
-- [ ] Torna su GitHub e premi **Verify** — se dice che non trova il record,
+- [x] Crea quel `TXT` nel pannello DNS di Aruba
+- [x] Torna su GitHub e premi **Verify** — se dice che non trova il record,
       aspetta dieci minuti e riprova: è propagazione, non un errore
 
 ---
@@ -41,7 +41,7 @@ Pannello Aruba → il dominio → **Gestione DNS**.
 **Non toccare i record `MX`**: sono quelli delle caselle di posta. Ricevere
 posta e servire il sito sono cose separate e convivono senza problemi.
 
-- [ ] Quattro record **A** per il dominio nudo (host vuoto o `@`):
+- [x] Quattro record **A** per il dominio nudo (host vuoto o `@`):
 
   ```
   185.199.108.153
@@ -50,13 +50,13 @@ posta e servire il sito sono cose separate e convivono senza problemi.
   185.199.111.153
   ```
 
-- [ ] Un record **CNAME** per `www` che punta a `aleflabo.github.io.`
+- [x] Un record **CNAME** per `www` che punta a `aleflabo.github.io.`
       (con il punto finale, se Aruba lo richiede)
-- [ ] Se esiste già un record `A` che punta al parcheggio di Aruba, **va
+- [x] Se esiste già un record `A` che punta al parcheggio di Aruba, **va
       rimosso**: due destinazioni diverse per lo stesso nome danno un sito che
       funziona a intermittenza, a seconda di quale risposta arriva prima
 
-- [ ] Aspetta e controlla che risolva. Da terminale:
+- [x] Aspetta e controlla che risolva. Da terminale:
 
   ```bash
   dig +short flaborea.com
