@@ -54,6 +54,32 @@ export function arxivDi(titolo: string): string | undefined {
   return arxivPerTitolo[titolo];
 }
 
+/**
+ * Le sedi che sono riviste. Tutto il resto è una conferenza.
+ *
+ * Serve ai dati strutturati: `ScholarlyArticle.isPartOf` con `@type:
+ * "Periodical"` dice «questo è uscito su una rivista», e su sei delle dieci
+ * voci era falso — ICLR, CVPR, ICCV, IROS e i due workshop sono conferenze.
+ * Dichiarare una conferenza come rivista, sulla pagina che regge la
+ * credibilità scientifica del sito, è il genere di errore che chi legge
+ * quei dati riconosce.
+ *
+ * L'elenco è esplicito e non dedotto dal nome: nel CV le riviste sono
+ * riconoscibili perché portano un volume («Pattern Recognition, vol. 156»),
+ * le conferenze perché dicono «Conference». Indovinare dalla stringa sarebbe
+ * la stessa classe di errore degli URL sfalsati.
+ */
+const RIVISTE = new Set([
+  "Computer Vision and Image Understanding",
+  "Pattern Recognition",
+  "Artificial Intelligence in Medicine",
+]);
+
+/** Se una sede è una rivista (`true`) o una conferenza (`false`). */
+export function eUnaRivista(sede: string): boolean {
+  return RIVISTE.has(sede);
+}
+
 // Dalla più recente, sezione /ricerca → «Le pubblicazioni».
 //
 // Gli anni in testi.md sono resi in posizione ambigua (lo <span> dell'anno

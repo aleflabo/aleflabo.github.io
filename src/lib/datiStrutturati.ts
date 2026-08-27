@@ -154,6 +154,8 @@ export interface PubblicazioneLd {
   anno: string;
   sede: string;
   url?: string;
+  /** `true` per una rivista, `false` per una conferenza. Vedi `eUnaRivista`. */
+  rivista?: boolean;
 }
 
 /**
@@ -174,7 +176,11 @@ export function pubblicazioniLd(site: string, elenco: PubblicazioneLd[]) {
         headline: p.titolo,
         name: p.titolo,
         datePublished: p.anno,
-        isPartOf: { "@type": "Periodical", name: p.sede },
+        // `Periodical` solo per le riviste. Sei sedi su dieci sono
+        // conferenze, e dichiararle riviste era falso: per quelle si usa
+        // `CreativeWork`, che è il tipo generale degli atti e non afferma
+        // niente che non sia vero.
+        isPartOf: { "@type": p.rivista ? "Periodical" : "CreativeWork", name: p.sede },
         author: { "@id": idPersona(site) },
         ...(p.url ? { url: p.url, sameAs: p.url } : {}),
       },
