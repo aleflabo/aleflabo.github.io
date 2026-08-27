@@ -1,12 +1,11 @@
 import type { TestiChiSonoPagina } from "../chiSonoPagina";
 
-// Testi in linea di /en/about. Vedi src/data/chiSonoPagina.ts — la nota
-// sulla fotografia non c'è, ed è voluto.
+// Testi in linea di /en/about. Vedi src/data/chiSonoPagina.ts.
 
 export const testiChiSonoPagina: TestiChiSonoPagina = {
   occhiello: "About",
   titolo: "Alessandro Flaborea",
-  segnaportiolo: "[ YOUR PHOTO ]",
+  altRitratto: "Alessandro Flaborea, arms folded, on a white background",
   labelInBreve: "In brief",
   ctaPrimaria: "Book the diagnostic half-day",
   ctaCurriculum: "Download my CV",
