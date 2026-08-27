@@ -5,6 +5,14 @@ offline o pubblicano 74 collegamenti rotti.
 
 Riferimento: issue #15.
 
+> **Fatto il 27 agosto 2026: sezioni 1–5.** Il sito risponde su
+> `https://flaborea.com` con il certificato attivo, `www` e
+> `aleflabo.github.io` reindirizzano. Restano la casella di posta (6), la
+> partita IVA (7) e Resend con MailerLite (8).
+>
+> Il certificato è stato emesso in pochi minuti, non nelle 24 ore che GitHub
+> dichiara come tetto.
+
 ---
 
 ## Prima di cominciare
@@ -52,6 +60,11 @@ posta e servire il sito sono cose separate e convivono senza problemi.
 
 - [x] Un record **CNAME** per `www` che punta a `aleflabo.github.io.`
       (con il punto finale, se Aruba lo richiede)
+
+  > Lasciato invece com'era, `www` → `flaborea.com`, e **funziona**: la
+  > richiesta segue l'apex e arriva agli indirizzi di GitHub. Puntarlo
+  > direttamente a `aleflabo.github.io` toglie un salto di risoluzione ed è la
+  > forma documentata, ma non è urgente.
 - [x] Se esiste già un record `A` che punta al parcheggio di Aruba, **va
       rimosso**: due destinazioni diverse per lo stesso nome danno un sito che
       funziona a intermittenza, a seconda di quale risposta arriva prima
@@ -71,16 +84,16 @@ posta e servire il sito sono cose separate e convivono senza problemi.
 
 ## 3. Collega il dominio al repository
 
-- [ ] Repository `aleflabo.github.io` → **Settings** → **Pages** → **Custom
+- [x] Repository `aleflabo.github.io` → **Settings** → **Pages** → **Custom
       domain** → `flaborea.com` → **Save**
 
 > Da questo momento `aleflabo.github.io` **reindirizza** al dominio nuovo. È il
 > motivo per cui il DNS va fatto prima: se il dominio non risolvesse ancora, il
 > sito sarebbe irraggiungibile da entrambi gli indirizzi.
 
-- [ ] Aspetta che GitHub emetta il certificato — compare **Enforce HTTPS**
+- [x] Aspetta che GitHub emetta il certificato — compare **Enforce HTTPS**
       sotto il campo del dominio. Può volerci fino a **24 ore**
-- [ ] Quando compare, **spunta Enforce HTTPS**
+- [x] Quando compare, **spunta Enforce HTTPS**
 
 ---
 
@@ -88,9 +101,9 @@ posta e servire il sito sono cose separate e convivono senza problemi.
 
 Un solo ramo, una sola PR, un solo deploy.
 
-- [ ] `astro.config.mjs`: `site: 'https://aleflabo.github.io'` diventa
+- [x] `astro.config.mjs`: `site: 'https://aleflabo.github.io'` diventa
       `site: 'https://flaborea.com'`
-- [ ] Crea `public/CNAME` con dentro una riga sola:
+- [x] Crea `public/CNAME` con dentro una riga sola:
 
   ```
   flaborea.com
@@ -100,27 +113,27 @@ Un solo ramo, una sola PR, un solo deploy.
   passo 3: la GitHub Action ripubblica `dist/` da zero, e ciò che non è in
   `public/` non arriva.
 
-- [ ] `npm run verifica` → deve uscire 0
-- [ ] Controlla che il costruito dica il dominio nuovo:
+- [x] `npm run verifica` → deve uscire 0
+- [x] Controlla che il costruito dica il dominio nuovo:
 
   ```bash
   grep -o 'flaborea.com' dist/sitemap-0.xml | head -1
   grep -o 'rel="canonical" href="[^"]*"' dist/index.html
   ```
 
-- [ ] PR verso `main`, merge, e aspetta il deploy
+- [x] PR verso `main`, merge, e aspetta il deploy
 
 ---
 
 ## 5. Verifica che sia andata
 
-- [ ] `https://flaborea.com` risponde **200** e mostra il sito
-- [ ] `https://www.flaborea.com` porta allo stesso sito
-- [ ] `https://aleflabo.github.io` **reindirizza** a `flaborea.com` invece di
+- [x] `https://flaborea.com` risponde **200** e mostra il sito
+- [x] `https://www.flaborea.com` porta allo stesso sito
+- [x] `https://aleflabo.github.io` **reindirizza** a `flaborea.com` invece di
       servire una seconda copia — due domini che servono lo stesso contenuto
       sono contenuto duplicato per Google
-- [ ] Il lucchetto c'è: nessun avviso di certificato
-- [ ] Un indirizzo inventato dà la 404 del sito, non quella di GitHub:
+- [x] Il lucchetto c'è: nessun avviso di certificato
+- [x] Un indirizzo inventato dà la 404 del sito, non quella di GitHub:
       `https://flaborea.com/questa-non-esiste`
 
 ```bash
