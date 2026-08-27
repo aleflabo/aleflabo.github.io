@@ -8,7 +8,7 @@ Riferimento: issue #15.
 > **Fatto il 27 agosto 2026: sezioni 1–5.** Il sito risponde su
 > `https://flaborea.com` con il certificato attivo, `www` e
 > `aleflabo.github.io` reindirizzano. Restano la casella di posta (6), la
-> partita IVA (7) e Resend con MailerLite (8).
+> partita IVA (7) e Brevo (8).
 >
 > Il certificato è stato emesso in pochi minuti, non nelle 24 ore che GitHub
 > dichiara come tetto.
@@ -171,35 +171,65 @@ done
 
 ---
 
-## 8. Solo dopo: Resend e MailerLite (issue #14)
+## 8. Solo dopo: Brevo (issue #14)
 
-Vengono per ultimi perché **Resend richiede un dominio verificato**, e farlo
-prima significherebbe rifarlo dopo.
+Viene per ultimo perché **richiede un dominio verificato**, e farlo prima
+significherebbe rifarlo dopo.
 
-- [ ] Resend: crea l'account e aggiungi `flaborea.com` come dominio di invio
-- [ ] **Attenzione al record SPF.** Aruba ne ha già creato uno per le sue
-      caselle. Due record `SPF` sullo stesso dominio **fanno fallire
-      l'autenticazione di entrambi**: il mittente di Resend va aggiunto dentro
-      quello che c'è già, non in un record nuovo. Il risultato deve essere una
-      riga sola, tipo:
+Un fornitore solo per entrambe le cose — la newsletter delle note e le email
+transazionali delle altre app. La scelta e il confronto con MailerLite+Resend
+stanno nella issue #14; in breve: 100.000 contatti contro 250, un account
+invece di due, e **un solo mittente da aggiungere al record SPF invece di
+due**.
+
+- [ ] Crea l'account su brevo.com e aggiungi `flaborea.com` come dominio
+      mittente
+- [ ] **Il record SPF va unito, non aggiunto.** Aruba ne ha già creato uno per
+      le caselle di posta, e **due record SPF sullo stesso dominio fanno
+      fallire l'autenticazione di entrambi**: le email finiscono in spam o
+      vengono rifiutate. Il mittente di Brevo va messo *dentro* il record che
+      c'è già. Il risultato deve essere una riga sola:
 
   ```
-  v=spf1 include:_spf.aruba.it include:amazonses.com ~all
+  v=spf1 include:_spf.aruba.it include:spf.brevo.com ~all
   ```
 
-  (il secondo `include` è quello che ti indicherà Resend)
+  Prima di scrivere, guarda il valore esatto che ti indica il pannello Brevo:
+  `spf.brevo.com` è quello standard, ma conferma.
 
-- [ ] DKIM: i record che Resend fornisce si aggiungono normalmente, sono `TXT`
-      distinti e non danno conflitto
-- [ ] MailerLite: account e modulo di iscrizione
+- [ ] **DKIM**: i record `TXT` che Brevo fornisce si aggiungono normalmente,
+      sono nomi distinti (tipo `mail._domainkey`) e non danno conflitto con
+      quelli di Aruba
+- [ ] **DMARC**, se Brevo lo propone: parti in sola osservazione
+      (`p=none`) e stringi dopo qualche settimana, quando sei sicuro che tutti
+      i mittenti legittimi passino
+- [ ] Aspetta che Brevo dichiari il dominio **verificato**: finché non lo è, le
+      email partono dal loro dominio condiviso e arrivano peggio
+- [ ] Manda una prova a un indirizzo Gmail e guarda l'intestazione: SPF e DKIM
+      devono risultare entrambi `pass`
+
+### Poi, nel sito
+
+- [ ] Il modulo di iscrizione di `/note` che scrive nella lista Brevo, con la
+      **doppia conferma** attiva
+- [ ] Il modulo di contatto della home, con validazione lato client e
+      **messaggio di errore in linea, non un `alert()`**
+- [ ] Togli le due frasi segnaposto: «Modulo non ancora attivo.» in
+      `src/pages/index.astro` e «Iscrizione non ancora attiva.» in
+      `src/pages/note/index.astro`
+- [ ] Il canale «calendario» della home, se scegli un servizio di prenotazione
+      (oggi non ha `href` e per questo non viene reso affatto)
+
 - [ ] **Aggiorna `/privacy` nello stesso commit che collega il modulo.** Oggi
       la pagina dice: *«Il modulo di contatto non è ancora collegato a nessun
       servizio: al momento non parte nulla e non arriva nulla. Quando lo
       collegherò, questa pagina lo dirà prima che il modulo funzioni, non
-      dopo.»* È una promessa scritta in un'informativa privacy
-- [ ] Togli le due frasi segnaposto: «Modulo non ancora attivo.» in
-      `src/pages/index.astro` e «Iscrizione non ancora attiva.» in
-      `src/pages/note/index.astro`
+      dopo.»* È una promessa scritta in un'informativa privacy, e va mantenuta
+      nell'ordine in cui è scritta.
+
+- [ ] Controlla `/cookie`: oggi afferma che il sito non usa **nessun** cookie,
+      ed è verificabile aprendo gli strumenti per sviluppatori. Se il modulo
+      Brevo ne introducesse uno, quella pagina diventa falsa il giorno stesso.
 
 ---
 
