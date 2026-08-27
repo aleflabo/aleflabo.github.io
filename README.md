@@ -23,8 +23,8 @@ src/
   i18n/         # locale list + path helpers (src/i18n/ui.ts)
   layouts/      # BaseLayout (head, meta, hreflang, Nav/Footer wrapper)
   lib/          # pure logic shared across pages (anno.ts, dataNota.ts,
-                # descrizione.ts, datiStrutturati.ts) and the Sanity client + note
-                # queries (sanity.ts, note.ts, immagine.ts)
+                # descrizione.ts, datiStrutturati.ts, informativa.ts) and the
+                # Sanity client + note queries (sanity.ts, note.ts, immagine.ts)
   pages/        # Italian pages at the root (index.astro, servizi.astro, lavori/[slug].astro, …)
                 # and their English mirror under pages/en/ (index.astro, services.astro,
                 # work/[slug].astro, …)
@@ -105,4 +105,5 @@ first — it exits 1 if the built site has a missing route, a broken internal li
 `hreflang` pointing at a file that doesn't exist, leftover Italian text on an English
 page, an internal link or canonical without its trailing slash, a `robots.txt` naming
 another domain, a route pair that disagrees with `src/data/coppie.mjs`, or a meta
-description outside 50-175 characters.
+description outside 50-175 characters, or a page that loads a third-party script while
+its privacy notice still promises it doesn't.

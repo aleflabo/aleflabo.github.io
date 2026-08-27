@@ -37,6 +37,16 @@
    repeated it — `public/robots.txt` — pointed at the old domain for two weeks after
    the move without anything noticing; it is now a route, `src/pages/robots.txt.ts`.
 
+7. **Statistics are one switch, and the privacy notice follows it.**
+   `statistiche` in `src/data/analytics.ts` is `null` today: nothing is loaded from
+   any third party, and the four legal sections say so in a form that invites the
+   reader to check. Filling that object renders the script *and* adds the section
+   that describes it to all four legal pages, from `src/lib/informativa.ts`. It does
+   not rewrite the sentences that would become false — `verifica-rotte.mjs` fails on
+   those instead, because their wording is a judgement call. Never add a third-party
+   script outside this switch. Google Analytics is ruled out on purpose: it writes
+   cookies, and `/cookie` tells the reader to open devtools and find none.
+
 ## Before opening a PR
 
 ```bash
