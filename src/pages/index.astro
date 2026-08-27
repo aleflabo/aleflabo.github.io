@@ -14,10 +14,14 @@ import ComeLavoro from '../components/sezioni/ComeLavoro.astro';
 import LeProve from '../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
 import DaDoveViene from '../components/sezioni/DaDoveViene.astro';
+import Territorio from '../components/sezioni/Territorio.astro';
 import Contatto from '../components/sezioni/Contatto.astro';
 import { localizedPath } from '../i18n/ui';
 import { emailContatto } from '../data/legale';
 import { site } from '../data/site';
+import { territorio } from '../data/territorio';
+import { ingaggi } from '../data/servizi';
+import { attivita } from '../lib/datiStrutturati';
 
 const prenotaMezzoraIt = site.it.prenotaMezzora ?? '';
 
@@ -225,16 +229,27 @@ const contatto = {
     { etichetta: 'Mail', href: `mailto:${emailContatto}` },
   ],
 };
+// --- Dati strutturati ---
+// `ProfessionalService` con i quattro modi di lavorare insieme e le aree
+// servite. `Person` e `WebSite` non stanno qui: li mette BaseLayout su ogni
+// pagina. Il dominio arriva da `Astro.site`, come il canonico.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const datiStrutturati = [
+  attivita({
+    site: dominio,
+    lang: 'it',
+    servizi: ingaggi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
+  }),
+];
 ---
 
 <BaseLayout
-  title="Alessandro Flaborea — consulenza e formazione sull'intelligenza artificiale"
-  description="Aiuto le aziende a capire dove serve l'intelligenza artificiale e poi la costruisco."
+  title="Consulenza e formazione AI — Alessandro Flaborea"
+  description="Aiuto le aziende a capire dove serve l'intelligenza artificiale e poi la costruisco. Da Venezia, in Veneto e Friuli di persona, altrove da remoto."
   lang="it"
   path="/"
   pathEn="/"
-  detectLocale={true}
-  person={true}
+  datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
   <FasciaNumeri numeri={numeri} />
@@ -243,5 +258,6 @@ const contatto = {
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} />
   <DaDoveViene {...daDoveViene} />
+  <Territorio {...territorio.it} />
   <Contatto {...contatto} />
 </BaseLayout>

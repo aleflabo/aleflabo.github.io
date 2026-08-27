@@ -12,6 +12,7 @@ import { projects, getProject } from '../../../data/projects';
 import { site } from '../../../data/site';
 import { annoEn } from '../../../lib/anno';
 import { localizedPath } from '../../../i18n/ui';
+import { briciole, lavoro as lavoroLd } from '../../../lib/datiStrutturati';
 
 export function getStaticPaths() {
   // I progetti `soloItaliano` (Portale ricambi, Grip) non hanno un
@@ -28,8 +29,20 @@ const path = `/work/${project.slug}`;
 // verso /lavori/[slug] (task 1/bloccante).
 const pathIt = `/lavori/${project.slug}`;
 const t = site.en;
+
+// Gemello della scheda italiana: `CreativeWork` più le briciole.
+const dominio = Astro.site!.toString().replace(/\/$/, '');
+const percorso = localizedPath('en', path);
+const datiStrutturati = [
+  lavoroLd(dominio, { nome: project.name, descrizione: c.summary, percorso }),
+  briciole(dominio, [
+    { nome: 'Home', percorso: localizedPath('en', '/') },
+    { nome: 'Work', percorso: localizedPath('en', '/work') },
+    { nome: project.name, percorso },
+  ]),
+];
 ---
-<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article" attiva="work">
+<BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article" attiva="work" datiStrutturati={datiStrutturati}>
   <article class="container case">
     <a class="back" href={localizedPath('en', '/work')}>← What I've built</a>
     <p class="label">{c.area} · {project.role} · {annoEn(project.year)}</p>

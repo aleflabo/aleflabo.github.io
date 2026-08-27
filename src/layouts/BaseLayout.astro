@@ -5,7 +5,11 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ritratto from '../assets/alessandro-flaborea.jpg';
 import { localizedPath } from '../i18n/ui';
+import { emailContatto } from '../data/legale';
+import { persona, sitoWeb } from '../lib/datiStrutturati';
+import { descrizioneMeta } from '../lib/descrizione';
 
 interface Props {
   title: string;
@@ -30,8 +34,11 @@ interface Props {
   // alternato prometterebbe una gemella in un'altra lingua che non esiste —
   // per una pagina che, di sua natura, non ha né l'una né l'altra.
   paginaErrore?: boolean;
-  detectLocale?: boolean;
-  person?: boolean;
+  // Dati strutturati propri di questa pagina (FAQPage, ItemList delle
+  // pubblicazioni, BreadcrumbList, CreativeWork…), già costruiti dalle
+  // funzioni di src/lib/datiStrutturati.ts. `Person` e `WebSite` non stanno
+  // qui: li mette il layout su ogni pagina, vedi sotto.
+  datiStrutturati?: unknown[];
   attiva?: string;
 }
 const {
@@ -42,11 +49,16 @@ const {
   pathEn,
   pathIt,
   ogType = 'website',
-  detectLocale = false,
-  person = false,
   paginaErrore = false,
+  datiStrutturati = [],
   attiva,
 } = Astro.props;
+
+// La descrizione passa da `descrizioneMeta`, in un punto solo per tutte le
+// pagine: quattro dichiaravano più di 240 caratteri — /chi-sono ne dichiarava
+// 375 — e Google le tagliava a metà frase. Il taglio avviene per frasi
+// intere, quindi quello che resta è testo approvato, solo più corto.
+const descrizioneBreve = descrizioneMeta(description);
 
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://flaborea.com';
 const canonicalUrl = `${site}${localizedPath(lang, path)}`;
@@ -70,74 +82,56 @@ const itUrl = relItUrl !== undefined ? `${site}${relItUrl}` : undefined;
 // quella pagina non ha una gemella nell'altra lingua.
 const hrefAltro = lang === 'it' ? relEnUrl : relItUrl;
 const ogImage = `${site}/og.png`;
+// L'italiano è la versione da servire a chi non corrisponde a nessun
+// `hreflang`: è la lingua predefinita del sito e la sola che copre tutte le
+// rotte. Senza `x-default` quella scelta la fa Google per conto suo.
+const xDefaultUrl = itUrl ?? canonicalUrl;
+const ogLocale = lang === 'it' ? 'it_IT' : 'en_GB';
+const ogLocaleAlt = lang === 'it' ? 'en_GB' : 'it_IT';
 
-const personLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Alessandro Flaborea',
-  // Il dominio arriva da `site` di astro.config.mjs, come il canonico: qui
-  // era scritto a mano, quindi al cambio di dominio i dati strutturati
-  // avrebbero continuato a dichiarare il vecchio indirizzo a Google.
-  url: site,
-  jobTitle: 'AI consultant and trainer',
-  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sapienza University of Rome' },
-  knowsAbout: [
-    'Computer Vision',
-    'Large Language Models',
-    'Agentic AI',
-    'Retrieval-Augmented Generation',
-    'Machine Learning',
-    'Data Engineering',
-  ],
-  sameAs: [
-    'https://www.linkedin.com/in/alessandro-flaborea',
-    'https://github.com/aleflabo',
-    'https://scholar.google.com/citations?user=HHDHIVoAAAAJ',
-  ],
-};
+// `Person` e `WebSite` su ogni pagina, non solo sulle due home. Un motore
+// generativo che incontra una scheda di lavoro senza mai passare dalla home
+// non ha altrimenti modo di sapere di chi sta leggendo: l'`@id` è l'ancora,
+// e ripeterlo costa meno di un kilobyte per pagina.
+const comuni = [
+  persona({ site, lang, immagine: `${site}${ritratto.src}`, email: emailContatto }),
+  sitoWeb({ site, lang }),
+];
+const blocchiLd = [...comuni, ...datiStrutturati];
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {detectLocale && (
-      <script is:inline>
-        (function () {
-          try {
-            if (localStorage.getItem('lang-chosen')) return;
-            var langs = navigator.languages || [navigator.language || ''];
-            var pref = null;
-            for (var i = 0; i < langs.length; i++) {
-              var l = (langs[i] || '').toLowerCase();
-              if (l.indexOf('it') === 0) { pref = 'it'; break; }
-              if (l.indexOf('en') === 0) { pref = 'en'; break; }
-            }
-            if (pref === 'en') { location.replace('/en/'); }
-          } catch (e) {}
-        })();
-      </script>
-    )}
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={descrizioneBreve} />
+    <meta name="author" content="Alessandro Flaborea" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {!paginaErrore && <link rel="canonical" href={canonicalUrl} />}
     {!paginaErrore && enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
     {!paginaErrore && itUrl && <link rel="alternate" hreflang="it" href={itUrl} />}
+    {!paginaErrore && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
+    {/* Il feed esisteva e non era dichiarato da nessuna parte: era
+        raggiungibile solo da chi ne conosceva l'indirizzo a memoria. */}
+    <link rel="alternate" type="application/rss+xml" title="Alessandro Flaborea" href="/rss.xml" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={descrizioneBreve} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Alessandro Flaborea" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={descrizioneBreve} />
     <meta name="twitter:image" content={ogImage} />
-    {person && (
-      <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
-    )}
+    {blocchiLd.map((blocco) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(blocco)} />
+    ))}
   </head>
   <body>
     <a class="salta-al-contenuto" href="#contenuto">{lang === 'it' ? 'Salta al contenuto' : 'Skip to content'}</a>

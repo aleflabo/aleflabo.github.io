@@ -7,9 +7,10 @@
 // italiana e una inglese: questa parla italiano, che è la lingua canonica, e
 // chiude con una riga in inglese per chi arrivava da `/en/`.
 //
-// Niente `detectLocale`: sulle altre pagine quello script rimbalza i browser
-// inglesi su `/en/`, ma qui manderebbe altrove chi ha appena sbagliato
-// indirizzo, senza dirgli che cosa è successo. Meglio restare e spiegare.
+// La home aveva uno script che leggeva la lingua del browser e rimbalzava su
+// `/en/` chi non aveva l'italiano davanti. Qui non c'era, perché avrebbe
+// mandato altrove chi ha appena sbagliato indirizzo; dal 27 agosto 2026 non
+// c'è più nemmeno lì — vedi il commento in LangSwitch.astro.
 //
 // Niente `<meta name="robots" content="noindex">`: GitHub Pages serve questo
 // file con stato HTTP 404, ed è quello che i motori di ricerca guardano. Il

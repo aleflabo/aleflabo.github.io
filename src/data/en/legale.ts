@@ -9,7 +9,7 @@ export const privacy: PaginaLegale = {
   titolo: 'What happens to your data on this site',
   introduzione:
     "The short version: this site doesn't watch you. There are no analytics, no cookies, and nothing is loaded from third-party servers. Below is the long version, with the names of things.",
-  aggiornamento: 'Last updated: 26 August 2026.',
+  aggiornamento: 'Last updated: 27 August 2026.',
   sezioni: [
     {
       titolo: 'Who processes the data',
@@ -27,8 +27,8 @@ export const privacy: PaginaLegale = {
     {
       titolo: 'What your browser keeps',
       paragrafi: [
-        "One thing. If you pick a language with the switch at the top, the site remembers it in a `localStorage` entry called `lang-chosen`. It exists so you aren't sent back to your browser's language every time after choosing the other one.",
-        'It stays in your browser, is never sent anywhere and identifies no one. Clearing the site data in your browser settings removes it.',
+        'Nothing. The site writes nothing into your browser: no cookies, no `localStorage` entries, nothing that outlives the page you are reading.',
+        'That too you can check: open your developer tools, go to the storage tab, and you will find it empty.',
       ],
     },
     {
@@ -65,7 +65,7 @@ export const cookie: PaginaLegale = {
   titolo: 'This site uses no cookies',
   introduzione:
     "That isn't a polite formula, it's something you can check. Open your browser's developer tools, look at the cookies tab, and you'll find it empty.",
-  aggiornamento: 'Last updated: 26 August 2026.',
+  aggiornamento: 'Last updated: 27 August 2026.',
   sezioni: [
     {
       titolo: "Why there's no banner",
@@ -74,10 +74,10 @@ export const cookie: PaginaLegale = {
       ],
     },
     {
-      titolo: 'The one thing your browser keeps',
+      titolo: 'Not even outside cookies',
       paragrafi: [
-        "If you pick a language with the switch at the top, the site remembers it in `localStorage` under `lang-chosen`. It isn't a cookie: it doesn't travel with requests to the server and reaches no one. It's your preference, held by your browser, and it only stops the site from sending you back to your system language after you chose the other one.",
-        'Under European rules it falls among the technical means necessary to provide a service you asked for, and needs no consent. Clearing the site data in your browser settings removes it.',
+        'There is nothing in `localStorage`, in `sessionStorage` or in a browser database either. Until August 2026 one entry remembered the language you picked: it served an automatic bounce to the English version, and it left along with it.',
+        'So there is nothing to clear, and nothing to ask your consent for.',
       ],
     },
     {

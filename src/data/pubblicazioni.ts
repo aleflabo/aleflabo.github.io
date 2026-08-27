@@ -6,6 +6,47 @@ export interface Pubblicazione {
   metriche: string;
 }
 
+/**
+ * L'arXiv di ogni pubblicazione che ne ha uno, per titolo.
+ *
+ * Sta qui e non dentro `pubblicazioni` perché i titoli sono identici nelle
+ * due lingue: una mappa sola vale per /ricerca e per /en/research, e le due
+ * pagine non possono divergere. La pagina linka i titoli e i dati
+ * strutturati mettono lo stesso indirizzo in `sameAs` — che è il modo più
+ * diretto per agganciare questa persona a un corpus già indicizzato altrove.
+ *
+ * Ogni voce è stata verificata il 27 agosto 2026 leggendo `citation_title`
+ * sulla pagina arXiv corrispondente. **Il CV ne aveva una sbagliata**:
+ * attribuiva `2301.09489` a «Multimodal Motion Conditioned Diffusion Model»,
+ * mentre quell'identificatore è di «Contracting Skeletal Kinematics» — gli
+ * URL erano sfalsati di una posizione, lo stesso difetto già capitato con
+ * gli anni (vedi il commento sotto). Da qui in avanti si verifica prima di
+ * scrivere.
+ *
+ * Le quattro pubblicazioni che mancano non hanno un arXiv fra le fonti
+ * consultate: restano senza link, e senza `sameAs` nei dati strutturati.
+ * Inventare un identificatore sarebbe peggio che ometterlo.
+ */
+export const arxivPerTitolo: Record<string, string> = {
+  "TI-PREGO: Chain of Thought and In-Context Learning for Online Mistake Detection in Procedural Egocentric Videos":
+    "https://arxiv.org/abs/2411.02570",
+  "Compositional Entailment Learning for Hyperbolic Vision-Language Models":
+    "https://arxiv.org/abs/2410.06912",
+  "Contracting Skeletal Kinematics for Human-Related Video Anomaly Detection":
+    "https://arxiv.org/abs/2301.09489",
+  "PREGO: Online Mistake Detection in Procedural Egocentric Videos":
+    "https://arxiv.org/abs/2404.01933",
+  "Hyp2Nav: Hyperbolic Planning and Curiosity for Crowd Navigation":
+    "https://arxiv.org/abs/2407.13567",
+  "Multimodal Motion Conditioned Diffusion Model for Skeleton-Based Video Anomaly Detection":
+    "https://arxiv.org/abs/2307.07205",
+};
+
+/** L'arXiv di una pubblicazione, se ce l'ha. */
+export function arxivDi(titolo: string): string | undefined {
+  return arxivPerTitolo[titolo];
+}
+
 // Dalla più recente, sezione /ricerca → «Le pubblicazioni».
 //
 // Gli anni in testi.md sono resi in posizione ambigua (lo <span> dell'anno
