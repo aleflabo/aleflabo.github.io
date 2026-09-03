@@ -14,7 +14,6 @@ import IlProblema from '../../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
 import LeProve from '../../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
-import DaDoveViene from '../../components/sezioni/DaDoveViene.astro';
 import Territorio from '../../components/sezioni/Territorio.astro';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
@@ -76,12 +75,11 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
-  <FasciaNumeri numeri={numeri} />
+  <FasciaNumeri numeri={numeri} daDoveViene={daDoveViene} />
   <IlProblema {...ilProblema} />
   <ComeLavoro {...comeLavoro} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} />
-  <DaDoveViene {...daDoveViene} />
   <Territorio {...territorio.en} />
   <Contatto {...contatto} />
 </BaseLayout>
