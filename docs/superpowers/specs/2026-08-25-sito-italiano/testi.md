@@ -56,6 +56,19 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.
 - `testo` «Abbiamo provato ChatGPT.»
 - `testo` Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.
+- `testo` Cosa costruisco
+
+### Metto insieme quello che avete già
+
+*TITOLO DI SEZIONE (h2)*
+
+- `testo` I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.
+- `testo` Legge e collega
+- `etichetta` ogni giorno, da solo
+- `etichetta` da dove viene
+- `etichetta` Cartelle, fogli, caselle di posta, gestionali.
+- `etichetta` Un posto solo dove cercare.
+
 - `testo` Come lavoro
 
 ### Come si svolge di solito un lavoro

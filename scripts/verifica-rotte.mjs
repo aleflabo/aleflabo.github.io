@@ -59,13 +59,12 @@ for (const f of trovaHtml("dist")) {
 // frasi che sembrano finite e non lo sono.
 const DA_APPROVARE = [
   "Cosa costruisco",
-  "Quello che avete già, in una forma che si può interrogare",
+  "Metto insieme quello che avete già",
   "Legge e collega",
   "ogni giorno, da solo",
   "da dove viene",
-  "Da venti posti a uno solo",
-  "Si aggiorna senza che nessuno lo tocchi",
-  "Collegato a quello che usate già",
+  "Cartelle, fogli, caselle di posta, gestionali.",
+  "Un posto solo dove cercare.",
 ];
 // Solo la fonte italiana. Guardare anche testi-en.md sembrava piu' sicuro ed
 // era il contrario: la legenda di una sua tabella contiene «da dove viene», e
