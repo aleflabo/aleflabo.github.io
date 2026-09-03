@@ -48,6 +48,9 @@ const numeri = [
 ];
 
 // --- IlProblema ---
+// I tre `vignetta` sono letterali di un tipo unione lato componente
+// (task 8): senza `as const` TypeScript li allargherebbe a `string` e
+// `astro check` li rifiuterebbe allo spread sulle props.
 const ilProblema = {
   occhiello: 'Il problema',
   titolo: 'Le tre cose che mi vengono raccontate più spesso',
@@ -55,14 +58,17 @@ const ilProblema = {
     {
       citazione: '«Mi serve questo pezzo.»',
       corpo: 'Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.',
+      vignetta: 'richiesta' as const,
     },
     {
       citazione: '«Lo sa fare solo Bruno.»',
       corpo: "Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.",
+      vignetta: 'unaTestaSola' as const,
     },
     {
       citazione: '«Abbiamo provato ChatGPT.»',
       corpo: "Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.",
+      vignetta: 'fuoriDaCasa' as const,
     },
   ],
 };

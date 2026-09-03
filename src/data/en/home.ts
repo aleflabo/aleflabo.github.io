@@ -54,7 +54,10 @@ export const numeri: NumeroFasciaHome[] = [
 interface IlProblemaProps {
   occhiello: string;
   titolo: string;
-  riquadri: { citazione: string; corpo: string }[];
+  // Le tre chiavi scelgono una vignetta disegnata (task 8, home-visuale):
+  // sono immagini, non testo, quindi valgono identiche per l'inglese e
+  // per l'italiano — vedi src/components/sezioni/IlProblema.astro.
+  riquadri: { citazione: string; corpo: string; vignetta?: "richiesta" | "unaTestaSola" | "fuoriDaCasa" }[];
 }
 
 export const ilProblema: IlProblemaProps = {
@@ -64,14 +67,17 @@ export const ilProblema: IlProblemaProps = {
     {
       citazione: '"I need this part."',
       corpo: "An email arrives with a crooked photo. Before anyone can quote a price, someone has to work out which component it is, and it can take two people a couple of days.",
+      vignetta: "richiesta",
     },
     {
       citazione: '"Only Bruno knows how to do it."',
       corpo: "Forty years of the trade sitting in one person's head. Nobody has ever had the time to write it down, and in two years Bruno retires.",
+      vignetta: "unaTestaSola",
     },
     {
       citazione: '"We tried ChatGPT."',
       corpo: "Someone in the office started using it on their own. It isn't clear with which documents, or whether the company agrees, and so far nobody has had the chance to talk about it.",
+      vignetta: "fuoriDaCasa",
     },
   ],
 };
