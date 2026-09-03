@@ -17,7 +17,7 @@
       "x": 0,
       "y": 0,
       "w": 1440,
-      "h": 6000
+      "h": 5760
     },
     {
       "file": "HomeMobile.dc.html",
@@ -26,7 +26,7 @@
       "x": 1560,
       "y": 1080,
       "w": 390,
-      "h": 5760
+      "h": 7900
     },
     {
       "file": "NodoAgente.dc.html",
@@ -63,7 +63,7 @@
       "x": -460,
       "y": 0,
       "w": 380,
-      "text": "TERZA PASSATA\n\n1. La testata torna a una colonna, senza diagramma: valori identici a Occhiello.astro di adesso.\n\n2. «Cosa costruisco» è rifatta da capo sulla tesi giusta — dai dati e dagli strumenti sparsi si tira fuori conoscenza. Il diagramma la dimostra con un cambio di forma: disordine a sinistra, struttura connessa a destra, e la riga tratteggiata che dal risultato torna indietro fino al frammento da cui viene. Quella riga è tutto l'argomento.\n\n3. «Le prove»: il portale ricambi si ripiglia il tag «In costruzione», e Spannum lascia il posto all'Agentic Workflow Toolkit."
+      "text": "QUARTA PASSATA — I TAGLI\n\nMisurato: la terza passata era piu' LUNGA di oggi sul telefono. Il ritmo era risolto, la lunghezza no.\n\nQuattro tagli:\n\n1. «Cosa costruisco» perde i tre pilastri. Citavano tre progetti mentre «Le prove», due schermate sotto, ne mostra tre: l'Agentic Workflow Toolkit compariva due volte nella stessa pagina. La dichiarazione «strumenti miei, per il mio team» e' scesa sulla sua scheda.\n\n2. «Come lavoro» tiene i nomi e il «Ne esce». I corpi stanno su /servizi, piu' per esteso.\n\n3. Le vignette del telefono da 80 a 64px.\n\n4. Il pie' di pagina: guardato, non ancora toccato — vale 843px su ogni pagina del sito, e i suoi 14 link sono alti 28px.\n\nDesktop 6355 → 5667. Telefono 9357 → 8605 col pie' di pagina di oggi."
     },
     {
       "id": "integrazione",
@@ -103,7 +103,7 @@
       "x": 2060,
       "y": 1080,
       "w": 400,
-      "text": "IL MOBILE NON È UN RIPIEGO\n\nÈ da qui che arriva la maggior parte del traffico, quindi questa tavola vale quanto quella a 1440.\n\nIl diagramma gira di 90°: il disordine sopra, il nodo in mezzo, la struttura sotto. La riga «da dove viene» scende lungo il margine destro, passa sotto e risale a sinistra fino al frammento — è l'unico percorso che non le fa attraversare i riquadri.\n\nMisurato sul rendering: 5699px di altezza, e nessuno scorrimento orizzontale. Quest'ultimo è un requisito, non un risultato: in questo repo una versione ne aveva aggiunti 16 su /chi-sono e un confronto byte a byte l'aveva dichiarata identica."
+      "text": "IL MOBILE NON È UN RIPIEGO\n\nÈ da qui che arriva la maggior parte del traffico, quindi questa tavola vale quanto quella a 1440 — e adesso e' completa, cosi' i numeri sono misurati e non stimati.\n\nIl diagramma gira di 90°: il disordine sopra, il nodo in mezzo, la struttura sotto. La riga «da dove viene» scende lungo il margine destro, passa sotto e risale a sinistra fino al frammento.\n\n7762px disegnati, piu' 843 di pie' di pagina che non abbiamo ancora toccato. Nessuno scorrimento orizzontale — che qui e' un requisito, non un risultato: in questo repo una versione ne aveva aggiunti 16 su /chi-sono e un confronto byte a byte l'aveva dichiarata identica."
     }
   ],
   "launch": {

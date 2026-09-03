@@ -80,9 +80,39 @@ Toolkit**.
 
 ## La home, misurata
 
-Altezze reali della tavola a 1440px di larghezza, misurate sul rendering
-(`immagini/00-home-intera.png`). Non sono un obiettivo da centrare al pixel:
-sono il metro per accorgersi se in implementazione qualcosa è scappato.
+Il metro di questo lavoro non è l'estetica: è la lunghezza. Misurata sul
+rendering, a 1440×900 e a 390×844.
+
+| | Oggi | Proposta | |
+|---|---:|---:|---|
+| Desktop | 6355px · 7,1 schermate | **5667px · 6,3 schermate** | −11% |
+| Telefono | 9357px · 11,1 schermate | **8605px · 10,2 schermate** | −8% |
+
+Il numero del telefono comprende gli 843px del piè di pagina, che **non è
+ancora stato toccato**: senza di lui la pagina disegnata è 7762px.
+
+Una versione intermedia di questo progetto era, sul telefono, **più lunga di
+oggi**: il ritmo era risolto e la lunghezza no, perché i due tagli veri
+(formazione a striscia, fascia fusa) se li mangiava la sezione nuova. I quattro
+tagli che seguono nascono da lì, non da un'intuizione.
+
+### Dove va lo spazio, sul telefono
+
+| Sezione | Oggi | Proposta | |
+|---|---:|---:|---|
+| Barra | 64 | 63 | |
+| Testata | 745 | 748 | |
+| Fascia scura (numeri + ricerca, fusi) | 1081 | **736** | −345 |
+| Il problema (con le vignette) | 840 | 1091 | +251 |
+| **Come lavoro** (compressa) | **1647** | **947** | **−700** |
+| **Cosa costruisco** (nuova) | — | 1050 | +1050 |
+| Le prove (con le miniature) | 1183 | 1345 | +162 |
+| Formazione (a striscia) | 1115 | **503** | −612 |
+| Territorio + Parliamone (fusi) | 1839 | **1281** | −558 |
+| Piè di pagina | 843 | 843 | *da guardare* |
+| **Totale** | **9357** | **8605** | **−752** |
+
+### Le fasce a 1440px
 
 | # | Sezione | Fondo | Padding fascia | Alt. | Immagine |
 |---|---------|-------|----------------|-----:|----------|
@@ -90,18 +120,69 @@ sono il metro per accorgersi se in implementazione qualcosa è scappato.
 | 1 | Testata | `--bg` | `92px 24px 64px` | 813 | `01-testata.png` |
 | 2 | Fascia scura | `--accent` | `40px 24px 46px` | 445 | `02-fascia-scura.png` |
 | 3 | Il problema | `--surface-warm` | `76px 24px` | 685 | `03-il-problema.png` |
-| 4 | Cosa costruisco | `--bg` | `80px 24px 84px` | 1108 | `04-cosa-costruisco.png` |
-| 5 | Come lavoro | `--bg` | `72px 24px` | 1048 | `05-come-lavoro.png` |
-| 6 | Le prove | `--surface` | `72px 24px` | 748 | `06-le-prove.png` |
+| 4 | Cosa costruisco | `--bg` | `80px 24px 84px` | 874 | `04-cosa-costruisco.png` |
+| 5 | Come lavoro | `--bg` | `72px 24px` | 945 | `05-come-lavoro.png` |
+| 6 | Le prove | `--surface` | `72px 24px` | 787 | `06-le-prove.png` |
 | 7 | Formazione | `--surface-warm` | `52px 24px` | 294 | `07-formazione.png` |
 | 8 | Parliamone | `--accent` | `40px 24px 68px` | 734 | `08-parliamone.png` |
 
-Contenitore ovunque: `max-width: 1120px; margin: 0 auto` — cioè 1072px di
-contenuto dentro i 24px di padding. Invariato rispetto a oggi.
+Contenitore ovunque: `max-width: 1120px; margin: 0 auto` — 1072px di contenuto
+dentro i 24px di padding. Invariato rispetto a oggi.
 
-Il ritmo che risolve il «troppo pieno» sta nella colonna delle altezze: due
-fasce sotto i 450px (2 e 7) fanno da pausa fra tre blocchi lunghi, e i fondi si
-alternano invece di essere tutti carta.
+Il ritmo sta nella colonna delle altezze: due fasce sotto i 450px (2 e 7) fanno
+da pausa fra i blocchi lunghi, e i fondi si alternano invece di essere tutti
+carta.
+
+### I quattro tagli
+
+1. **«Cosa costruisco» perde i tre pilastri.** Citavano tre progetti mentre «Le
+   prove», due schermate sotto, ne mostra tre — e l'**Agentic Workflow Toolkit
+   compariva due volte nella stessa pagina**. Erano due sezioni che facevano lo
+   stesso mestiere. La sezione tiene la tesi e il diagramma; le prove le dà «Le
+   prove». La dichiarazione «strumenti miei, per il mio team» non si perde:
+   scende sulla scheda del toolkit, che è l'unico posto dove ora quel progetto
+   vive.
+2. **«Come lavoro» tiene i nomi e il «Ne esce»**, e lascia andare i quattro
+   corpi: su `/servizi` ci sono già, più per esteso. Sul telefono era il blocco
+   più grande della pagina, 1647px. Sul desktop il risparmio è minore (1048 →
+   945) perché l'altezza della riga la detta la colonna «Ne esce», larga 230px:
+   è un dato utile per non aspettarsi troppo dalla stessa mossa altrove.
+3. **Le vignette del telefono da 80 a 64px.** Vale poco, ma è gratis.
+4. **Il piè di pagina**, guardato e non ancora toccato: sotto.
+
+### Il piè di pagina
+
+843px sul telefono, il quinto blocco della pagina per dimensione — e sta su
+**ogni pagina del sito**, non solo sulla home.
+
+| Parte | Alt. |
+|---|---:|
+| Presentazione, frase e pulsante | 179 |
+| «Cosa faccio», 3 voci | 112 |
+| «Le prove», 4 voci | 140 |
+| «Altrove», 4 voci | 140 |
+| Distanze fra i quattro blocchi (`gap: 40px` × 3) | 120 |
+| Padding della griglia | 76 |
+| Barra finale | 76 |
+
+Due cose, e tirano in direzioni opposte:
+
+- **I quattordici link sono alti 28px** (`font-size: 14px; line-height: 2`),
+  sotto il minimo di 44 per il tocco. È lo stesso difetto dei link di sezione, e
+  **correggerlo allunga il piè di pagina**, non lo accorcia: quattordici voci a
+  44px sono 224px in più.
+- I 120px di distanze fra blocchi impilati sono il solo spazio davvero
+  sprecato.
+
+Quindi: la lunghezza del piè di pagina **è il suo contenuto**. Accorciarlo
+sul serio vuol dire decidere quali dei quattordici link smettono di stare lì —
+una decisione di struttura, non di CSS. La via che risolve tutte e due le cose è
+mettere i tre gruppi di link su **due colonne** sotto i 640px: le voci possono
+salire a 44px senza che il blocco cresca.
+
+> **Aperto.** Il piè di pagina sta su ogni pagina del sito: cambiarlo ha un
+> raggio molto più largo di questo lavoro. Va fatto **dopo**, in una PR sua,
+> quando la home è in produzione e si può confrontare una cosa alla volta.
 
 ### Cosa cambia, sezione per sezione
 
@@ -123,7 +204,8 @@ alternano invece di essere tutti carta.
    arancione compare solo dove qualcosa funziona, ed è il contrasto con la
    sezione 4 a fare il lavoro.
 4. **Cosa costruisco** — sezione nuova, vedi sotto.
-5. **Come lavoro** — niente.
+5. **Come lavoro** — tiene i quattro nomi e il «Ne esce»; i corpi lasciano la
+   home e restano su `/servizi`.
 6. **Le prove** — ogni scheda prende una miniatura 338×86px sopra l'occhiello.
    Il portale ricambi si ripiglia il tag «In costruzione». **Spannum lascia il
    posto all'Agentic Workflow Toolkit** (aperto, punto 2 in fondo).
@@ -192,11 +274,13 @@ nomina: **«da dove viene»**. È questa riga a dire la cosa che il resto del
 diagramma non dice — che la conoscenza resta attaccata alla sua fonte — e va
 trattata come il pezzo più importante del disegno, non come una decorazione.
 
-**Sotto**, tre prove in griglia da tre, `border-top: 3px solid var(--azione)`,
-ognuna con il frammento di `projects.ts` da cui viene e la provenienza in
-`--text-faint` 12px. La terza dichiara in `--azione` **«strumenti miei, per il
-mio team»**, perché è vero: l'integrazione con sistemi esistenti Alessandro
-l'ha fatta per sé, mai per un cliente. La home **non può scrivere «collego i
+**Sotto il diagramma non c'è altro.** I tre pilastri che stavano qui sono
+usciti: citavano gli stessi progetti che «Le prove» mostra due schermate dopo.
+La sezione dice la tesi e la disegna; le prove le dà chi di dovere.
+
+La dichiarazione che l'integrazione è vera solo per lui vive ora sulla scheda
+del toolkit fra «Le prove», come pastiglia in `--azione` su `#fdf3e9`:
+**«Strumenti miei, per il mio team»**. La home **non può scrivere «collego i
 sistemi che avete già»** finché resta così.
 
 ## Il mobile, che non è un ripiego
@@ -205,8 +289,9 @@ sistemi che avete già»** finché resta così.
 (`tavole/HomeMobile.dc.html`, immagini `10-` e `11-`) vale quanto quella a 1440,
 e va guardata prima di considerare finita qualunque sezione.
 
-Misurato sul rendering a 390×844, `deviceScaleFactor: 2`: **5699px di altezza**
-per le sei sezioni disegnate, e **nessuno scorrimento orizzontale**.
+Misurato sul rendering a 390×844, `deviceScaleFactor: 2`: **7762px** per la
+pagina intera meno il piè di pagina, e **nessuno scorrimento orizzontale**. La
+tavola disegna tutte le sezioni: nessun numero del mobile è stimato.
 
 > Quest'ultimo è un **requisito, non un risultato**. In questo repo una versione
 > ha già aggiunto 16px di scorrimento orizzontale su `/chi-sono`, e un confronto
@@ -223,8 +308,8 @@ barra va a capo).
 | Testata | `44px 20px 40px`; occhiello 10.5px su 22ch; `h1` **34px**, `line-height: 1.08`, `text-wrap: pretty`; divisore 72×3; intro 16.5px; i due CTA in colonna, `gap: 14px`, il primo a tutta larghezza. |
 | Fascia scura | `26px 20px 32px`; i quattro numeri in griglia **2×2**, `gap: 18px 24px`, valore 24px ed etichetta 13px **abbreviata** («articoli», «Best Paper»): a 390px le etichette lunghe mandano a capo il numero. Le tre tappe in colonna. |
 | Il problema | `48px 20px`; una colonna, `gap: 16px`; scheda `22px 24px 24px`; la vignetta resta `viewBox="0 0 286 104"` e si scala a 302px di larghezza — **non si ridisegna**. |
-| Cosa costruisco | `48px 20px 52px`; titolo 26px; il diagramma diventa **350×592 verticale**; i tre pilastri in colonna, `gap: 24px`. Le due didascalie laterali si fondono in un unico paragrafo sotto il disegno. |
-| Come lavoro | Invariata: il suo blocco `@media` esiste già e funziona. |
+| Cosa costruisco | `48px 20px 52px`; titolo 26px; il diagramma diventa **350×592 verticale**. Le due didascalie laterali si fondono in un unico paragrafo sotto il disegno, e la sezione finisce lì. |
+| Come lavoro | Ogni passo è numero + nome in linea, poi «Ne esce». 947px contro i 1647 di oggi. |
 | Le prove | `44px 20px`; colonna, `gap: 28px`; miniatura 330px; `h3` 22px. |
 | Formazione | `40px 20px 44px`; le tre pastiglie in colonna, `padding: 11px 14px`. |
 | Parliamone | Invariata, più la riga del territorio che va in colonna. |
@@ -339,9 +424,9 @@ ed è un requisito, non una cortesia.
 | `sezioni/Contatto.astro` | Props nuove: `territorio?`. **Deve restare opzionale**: il componente è usato anche da `BaseLayout` e da `en/notes/index.astro`. |
 | `sezioni/IlProblema.astro` | Ogni riquadro guadagna una vignetta, scelta per indice o per chiave. |
 | `sezioni/BloccoFormazione.astro` | Diventa striscia. Perde `formati[].corpo` e `chiusura` dalla home; restano su `/formazione`. |
-| `sezioni/LeProve.astro` | Ogni scheda guadagna una miniatura. |
-| `sezioni/CosaCostruisco.astro` | **Nuovo.** Due disposizioni del diagramma, orizzontale e verticale, con la soglia a 640px e il numero di frammenti come dato. |
-| `sezioni/ComeLavoro.astro` | Invariato. **Props non modificabili**: lo usa anche `CorpoChiSono.astro`. |
+| `sezioni/LeProve.astro` | Ogni scheda guadagna una miniatura, e i tag possono portarne uno in evidenza («In costruzione», «Strumenti miei, per il mio team»). |
+| `sezioni/CosaCostruisco.astro` | **Nuovo.** Tesi, diagramma, e basta. Due disposizioni, orizzontale e verticale, con la soglia a 640px e il numero di frammenti come dato. |
+| `sezioni/ComeLavoro.astro` | Il corpo di ogni passo diventa opzionale: la home non lo passa, `/chi-sono` sì. **Le props esistenti non cambiano**: lo usa anche `CorpoChiSono.astro`. |
 | `sezioni/Occhiello.astro` | Invariato. Contiene l'ancora `#le-prove`: se la sezione cambia nome, l'ancora resta. |
 | `styles/tokens.css` | Sei token nuovi. |
 | `styles/global.css` | `.base`, `.fascio`, `.interrotto`, `@keyframes fascio`; `sali` passa all'innesco per visibilità. |
@@ -352,9 +437,10 @@ importano niente da `src/data/`.**
 
 ## I testi che mancano
 
-Undici stringhe. Non esistono in `testi.md`, in `index.astro` né in
-`projects.ts`: le ho scritte io e vanno **approvate o riscritte dal
-committente**. Nelle tavole hanno il fondo arancione chiaro.
+Otto stringhe — erano undici prima che i tre pilastri uscissero. Non esistono
+in `testi.md`, in `index.astro` né in `projects.ts`: le ho scritte io e vanno
+**approvate o riscritte dal committente**. Nelle tavole hanno il fondo
+arancione chiaro.
 
 | # | Dove | Proposta |
 |---|------|----------|
@@ -366,9 +452,6 @@ committente**. Nelle tavole hanno il fondo arancione chiaro.
 | 6 | Riga di ritorno | da dove viene |
 | 7 | Didascalia sinistra | Venti posti diversi: cartelle, fogli, mail, ticket, gestionali. |
 | 8 | Didascalia destra | Una cosa sola da interrogare, dove ogni risposta resta attaccata al documento da cui viene. |
-| 9 | Prova 1 | Da venti posti a uno solo |
-| 10 | Prova 2 | Si aggiorna senza che nessuno lo tocchi |
-| 11 | Prova 3 | Collegato a quello che usate già |
 
 Vanno scritte in `2026-08-25-sito-italiano/testi.md`, che resta la fonte
 approvata, **prima** che finiscano in `src/data/`.
