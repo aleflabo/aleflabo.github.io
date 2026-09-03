@@ -1,15 +1,21 @@
 ---
 // I testi (e l'href, già risolto per la lingua) arrivano dalla pagina
-// (task 2, sito-inglese). I quattro passi sono un riassunto per la home,
-// con nomi e testi propri (Ascolto/Diagnosi/Costruisco/Resto): non
-// coincidono con `ingaggi` di src/data/servizi.ts
-// (Capire/Decidere/Costruire/Mantenere), che è la versione estesa per
-// /servizi.
+// (task 2, sito-inglese). Fino a settembre 2026 questo commento diceva
+// apposta che i quattro passi non dovevano coincidere con `ingaggi` di
+// src/data/servizi.ts: avevano nomi e testi propri
+// (Ascolto/Diagnosi/Costruisco/Resto), diversi da Capire/Decidere/Costruire/
+// Mantenere. Da task 10 (home-visuale) il corpo di ogni passo è caduto e i
+// nomi sono diventati quelli degli ingaggi — la ragione del disaccordo è
+// spiegata in src/pages/index.astro, sopra l'oggetto `comeLavoro`. `corpo`
+// è quindi facoltativo qui, nel tipo e nel markup: non perché un altro
+// componente lo ometta (`grep -rl "import ComeLavoro from" src/` mostra che
+// lo importano solo le due home, mai `CorpoChiSono.astro`), ma perché un
+// campo vuoto che salta la sua parte è la forma giusta in questo repo.
 interface Props {
   occhiello: string;
   titolo: string;
   intro: string;
-  passi: { numero: string; nome: string; corpo: string; neEsce: string }[];
+  passi: { numero: string; nome: string; corpo?: string; neEsce: string }[];
   etichettaNeEsce: string;
   continua: string;
   hrefContinua: string;
@@ -24,11 +30,11 @@ const { occhiello, titolo, intro, passi, etichettaNeEsce, continua, hrefContinua
     <p class="intro">{intro}</p>
     <div class="passi">
       {passi.map((p, i) => (
-        <div class:list={['riga', 'passo', { ultimo: i === passi.length - 1 }]}>
+        <div class:list={['riga', 'passo', { ultimo: i === passi.length - 1, 'senza-corpo': !p.corpo }]}>
           <span class="numero">{p.numero}</span>
           <div class="testo">
             <h3>{p.nome}</h3>
-            <p class="corpo">{p.corpo}</p>
+            {p.corpo && <p class="corpo">{p.corpo}</p>}
           </div>
           <div class="ne-esce">
             <p class="etichetta">{etichettaNeEsce}</p>
@@ -141,6 +147,38 @@ const { occhiello, titolo, intro, passi, etichettaNeEsce, continua, hrefContinua
     }
     .ne-esce {
       margin-top: 4px;
+    }
+    .ne-esce .valore {
+      margin-top: 6px;
+    }
+    /* Senza corpo (i quattro passi della home, da task 10) numero e nome
+       stanno in linea invece che impilati: la riga si accorcia e la sezione
+       scende da 1647px a ~947px sul telefono, come in HomeMobile.dc.html.
+       `.ne-esce` resta un blocco a parte — non un item del flex — quindi va
+       a capo da solo, sotto: `flex-basis: 100%` lo forza a una nuova riga
+       del flex-wrap, e il suo `margin-top` torna a zero perché lo spazio
+       sopra è già il `gap` del flex. Il padding verticale della riga scende
+       da 22px a 18px, come nella tavola, perché senza corpo il ritmo di
+       22px lasciava troppo vuoto fra righe corte. */
+    .passo.senza-corpo {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 18px 0;
+    }
+    /* `.numero` è uno <span>, non un h1-h3: eredita da body line-height:1.6
+       (src/styles/global.css), molto più alto dell'1.1 che quel foglio dà
+       agli h1-h3. In una riga flex allineata a baseline è l'altezza di riga
+       più alta a decidere quella della riga intera, quindi lo scarto non è
+       cosmetico: senza questa riga il numero da solo aggiungeva più px di
+       riquadro vuoto di quanti la cifra ne occupi davvero. */
+    .passo.senza-corpo .numero {
+      line-height: 1.1;
+    }
+    .passo.senza-corpo .ne-esce {
+      flex-basis: 100%;
+      margin-top: 0;
     }
   }
 </style>

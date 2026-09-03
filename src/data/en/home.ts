@@ -11,6 +11,7 @@
 // `verifica-rotte.mjs`, che boccia un href interno senza barra.
 import { site } from "../site";
 import { emailContatto } from "../legale";
+import { ingaggi } from "./servizi";
 
 const prenotaMezzoraEn = site.en.prenotaMezzora ?? "";
 
@@ -83,11 +84,22 @@ export const ilProblema: IlProblemaProps = {
 };
 
 // --- ComeLavoro ---
+// I quattro passi prendono i nomi degli `ingaggi` di ./servizi.ts (stessa
+// decisione dell'italiano, task 10 home-visuale — vedi il commento sopra
+// `comeLavoro` in src/pages/index.astro per il perché). `corpo` è caduto
+// insieme al suo equivalente italiano: senza testo accanto «I listen» e «I
+// stay» erano perfino peggio dei nomi italiani, e il tipo lo segna
+// facoltativo per restare in sincrono con `ComeLavoro.astro`.
+// `nomeIngaggio` cerca per `chiave`, non per indice: stesso principio del
+// file italiano, per non ripetere l'errore già fatto una volta con l'arXiv
+// del CV (dedurre dall'ordine invece di leggere il campo).
+const nomeIngaggio = (chiave: string) => ingaggi.find((i) => i.chiave === chiave)!.nome;
+
 interface ComeLavoroProps {
   occhiello: string;
   titolo: string;
   intro: string;
-  passi: { numero: string; nome: string; corpo: string; neEsce: string }[];
+  passi: { numero: string; nome: string; corpo?: string; neEsce: string }[];
   etichettaNeEsce: string;
   continua: string;
   hrefContinua: string;
@@ -100,26 +112,22 @@ export const comeLavoro: ComeLavoroProps = {
   passi: [
     {
       numero: "01",
-      nome: "I listen",
-      corpo: "I spend half a day at your company, together with the people who do the work every day. It's how I understand how you work, and how you get an idea of the way I think.",
+      nome: nomeIngaggio("understand"),
       neEsce: "A list of the places where time is lost, ordered by what they cost.",
     },
     {
       numero: "02",
-      nome: "Diagnosis",
-      corpo: "Two or three weeks to look at the data you actually have, the systems already in use and who takes care of what. At the end I write what would be worth doing, in what order, and which roads I'd leave alone.",
+      nome: nomeIngaggio("decide"),
       neEsce: "A document that stays yours, and that you can show to whoever you like.",
     },
     {
       numero: "03",
-      nome: "I build",
-      corpo: "I always start with the part that might not work, so that if something turns out to be impossible we find out early, while changing course still costs little.",
+      nome: nomeIngaggio("build"),
       neEsce: "Something your people open on Monday morning and actually use.",
     },
     {
       numero: "04",
-      nome: "I stay",
-      corpo: "Software nobody looks after stops being useful within a few months. If it's needed we stay in touch: maintenance, servers and the changes that come up along the way.",
+      nome: nomeIngaggio("maintain"),
       neEsce: "A person who knows the system and who you can call when you need to.",
     },
   ],
@@ -146,13 +154,15 @@ export const comeLavoro: ComeLavoroProps = {
 // coppia con «· daily use» di testi-en.md: così l'ha voluto il committente
 // per questa scheda (vedi task-9-brief.md).
 //
-// `3D Parts Portal` non prende `tagInEvidenza`: «In costruzione» esiste
-// solo in italiano (è `tagIt` in projects.ts, non `tags`), e non c'è un
-// equivalente inglese approvato — vedi commento sopra `link`/`href`, stesso
-// principio. Il toolkit inglese resta senza `tagInEvidenza` per lo stesso
-// motivo: la dichiarazione italiana «Strumenti miei, per il mio team» non
-// ha una traduzione approvata in testi-en.md né altrove, e inventarla è
-// vietato quanto tradurre «In costruzione».
+// `3D Parts Portal` riprende `tagInEvidenza: "Under construction"` (task 10,
+// home-visuale): questo commento diceva che l'equivalente inglese di «In
+// costruzione» non esisteva, ma era un errore di ricerca, non un vuoto nei
+// testi approvati — sta in testi-en.md:826, dentro un blocco marcato
+// `[TRADOTTO]` (reso dall'italiano approvato, non tradotto qui al volo).
+// Il toolkit inglese resta invece senza `tagInEvidenza`, e qui il vuoto è
+// reale: la dichiarazione italiana «Strumenti miei, per il mio team» non ha
+// una traduzione approvata in testi-en.md né altrove, e inventarla è vietato
+// quanto lo sarebbe stato tradurre «In costruzione» da soli.
 interface Prova {
   eyebrow: string;
   nome: string;
@@ -181,6 +191,7 @@ export const leProve: LeProveProps = {
       nome: "3D Parts Portal",
       corpo: "The customer opens the 3D model of the machine they bought, clicks the part they need, and the request reaches the company already matched to that component's internal code.",
       tag: ["CAD pipeline, 80 tests", "Intellectual property protected"],
+      tagInEvidenza: "Under construction",
       miniatura: "ricambi",
     },
     {

@@ -74,10 +74,21 @@ const ilProblema = {
 };
 
 // --- ComeLavoro ---
-// I quattro passi sono un riassunto per la home, con nomi e testi propri
-// (Ascolto/Diagnosi/Costruisco/Resto): non coincidono con `ingaggi` di
-// src/data/servizi.ts (Capire/Decidere/Costruire/Mantenere), che è la
-// versione estesa per /servizi.
+// I quattro passi prendono ora i nomi degli `ingaggi` di src/data/servizi.ts.
+// Fino a settembre 2026 avevano nomi propri — Ascolto, Diagnosi, Costruisco,
+// Resto — e questo commento diceva apposta che i due elenchi non dovevano
+// coincidere. La ragione è caduta quando i corpi hanno lasciato la home: senza
+// il loro testo accanto, «Ascolto» e «Resto» smettono di parlare del lavoro e
+// parlano della persona, e la sezione suona come una terapia invece che come
+// un mestiere. I nomi degli ingaggi sono già approvati, esistono in inglese, e
+// a 390px stanno comunque su una riga: costano zero. Quello che si paga è che
+// la home comincia a nominare quello che si compra, e da qui in poi i due
+// elenchi vanno tenuti allineati a mano.
+// `nomeIngaggio` cerca per `chiave` invece di indicizzare l'array: è lo
+// stesso errore già commesso una volta con l'arXiv del CV (dedurre dall'ordine
+// invece di leggere il campo) e qui costa una riga in più per evitarlo del
+// tutto.
+const nomeIngaggio = (chiave: string) => ingaggi.find((i) => i.chiave === chiave)!.nome;
 const comeLavoro = {
   occhiello: 'Come lavoro',
   titolo: 'Come si svolge di solito un lavoro',
@@ -85,26 +96,22 @@ const comeLavoro = {
   passi: [
     {
       numero: '01',
-      nome: 'Ascolto',
-      corpo: "Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.",
+      nome: nomeIngaggio('capire'),
       neEsce: 'Una lista dei punti dove si perde tempo, ordinata per quanto costano.',
     },
     {
       numero: '02',
-      nome: 'Diagnosi',
-      corpo: 'Due o tre settimane per guardare i dati che avete davvero, i gestionali già in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.',
+      nome: nomeIngaggio('decidere'),
       neEsce: 'Un documento che resta tuo, e che puoi far leggere a chi vuoi.',
     },
     {
       numero: '03',
-      nome: 'Costruisco',
-      corpo: 'Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.',
+      nome: nomeIngaggio('costruire'),
       neEsce: 'Qualcosa che i tuoi aprono il lunedì mattina e usano davvero.',
     },
     {
       numero: '04',
-      nome: 'Resto',
-      corpo: 'Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.',
+      nome: nomeIngaggio('mantenere'),
       neEsce: 'Una persona che conosce il sistema e che puoi chiamare quando serve.',
     },
   ],
