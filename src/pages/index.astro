@@ -152,7 +152,12 @@ const leProve = {
 // `ore` e `nome` coincidono con `formati` di src/data/formazione.ts, ma il
 // corpo di ogni scheda è un riassunto proprio della home, diverso da
 // `formati[].corpo` (la versione estesa è per /formazione, task 10):
-// restano quindi scritti qui, per intero.
+// restano quindi scritti qui, per intero, anche se la striscia (task 7,
+// home-visuale) non li rende più: `formati[].corpo` e `chiusura` sono
+// facoltative nel componente, e qui restano nell'oggetto solo perché non
+// c'è motivo di toglierle. La striscia mostra una sola introduzione, non
+// `introduzioni[0]` ma `introduzioni[1]` — quella sull'AI Act, la seconda
+// in quest'array — passata così più sotto, dov'è la <BloccoFormazione>.
 const bloccoFormazione = {
   occhiello: 'Formazione',
   titolo: 'Si comincia dalle persone',
@@ -254,6 +259,6 @@ const datiStrutturati = [
   <IlProblema {...ilProblema} />
   <ComeLavoro {...comeLavoro} />
   <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} />
+  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} />
   <Contatto {...contatto} territorio={territorio.it} />
 </BaseLayout>

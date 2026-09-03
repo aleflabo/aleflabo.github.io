@@ -178,6 +178,11 @@ export const leProve: LeProveProps = {
 };
 
 // --- BloccoFormazione ---
+// `formati[].corpo` e `chiusura` sono facoltative nel componente da task 7
+// (home-visuale, la sezione è ridotta a striscia) e restano non usate: qui
+// restano richieste perché questo oggetto è comunque il testo completo, e
+// `en/index.astro` passa `introduzioni[1]` — non `[0]` — alla striscia:
+// è la seconda voce di quest'array, quella sull'AI Act, non la prima.
 interface BloccoFormazioneProps {
   occhiello: string;
   titolo: string;
