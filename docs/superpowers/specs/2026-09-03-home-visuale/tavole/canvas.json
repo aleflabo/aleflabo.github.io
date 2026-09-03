@@ -1,0 +1,96 @@
+{
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "La home"
+    },
+    {
+      "id": "page-2",
+      "name": "Direzioni scartate"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "title": "La home — disegno tecnico",
+      "page": "page-1",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 6000
+    },
+    {
+      "file": "NodoAgente.dc.html",
+      "title": "Il diagramma, a grandezza reale",
+      "page": "page-1",
+      "x": 1560,
+      "y": 0,
+      "w": 1200,
+      "h": 960
+    },
+    {
+      "file": "DirezioneB.dc.html",
+      "title": "Direzione B — colore e scala",
+      "page": "page-2",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3200
+    },
+    {
+      "file": "DirezioneC.dc.html",
+      "title": "Direzione C — scroll narrativo",
+      "page": "page-2",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 3050
+    }
+  ],
+  "annotations": [
+    {
+      "id": "come-guardarla",
+      "page": "page-1",
+      "x": -460,
+      "y": 0,
+      "w": 380,
+      "text": "TERZA PASSATA\n\n1. La testata torna a una colonna, senza diagramma: valori identici a Occhiello.astro di adesso.\n\n2. «Cosa costruisco» è rifatta da capo sulla tesi giusta — dai dati e dagli strumenti sparsi si tira fuori conoscenza. Il diagramma la dimostra con un cambio di forma: disordine a sinistra, struttura connessa a destra, e la riga tratteggiata che dal risultato torna indietro fino al frammento da cui viene. Quella riga è tutto l'argomento.\n\n3. «Le prove»: il portale ricambi si ripiglia il tag «In costruzione», e Spannum lascia il posto all'Agentic Workflow Toolkit."
+    },
+    {
+      "id": "integrazione",
+      "page": "page-1",
+      "x": -460,
+      "y": 620,
+      "w": 380,
+      "text": "IL CONFINE CON PROCEDO\n\nIl patto di non concorrenza è scritto e in vigore, quindi la sezione «Cosa costruisco» non può descrivere l'offerta di Procedo — video in reparto, procedure passo-passo, assistente sulle procedure. Nella passata precedente lo faceva: era un errore mio, ed è stato tolto.\n\nLe tre prove citate qui sotto sono Vault, Tracking costi e Agentic Workflow Toolkit. Nessuna delle tre è Procedo.\n\nProcedo resta in pagina dove è giusto: nella riga di credibilità in testata e fra «Le prove», al passato, come credenziale.\n\nDa fare: mettere il perimetro del patto in .claude/rules/, altrimenti fra sei mesi qualcuno ce lo rimette dentro."
+    },
+    {
+      "id": "cosa-non-e-fedele",
+      "page": "page-1",
+      "x": -460,
+      "y": 1300,
+      "w": 380,
+      "text": "COSA IN QUESTA TAVOLA NON È FEDELE\n\n1. Non ci sono foto: i punti dove andranno reggono anche vuoti.\n\n2. Le animazioni girano in loop. Sulla pagina vera partono quando la sezione entra in vista, una volta sola, e sotto prefers-reduced-motion non partono affatto.\n\n3. Il footer non c'è.\n\n4. È una tavola desktop a 1440px. Il mobile va guardato a parte.\n\n5. I colori del testo su fondo blu (#a8c0d6, #c7d8e6, #7f9ab3) non hanno un token in tokens.css. Vanno aggiunti lì, non sparsi nei componenti."
+    },
+    {
+      "id": "copy-da-approvare",
+      "page": "page-1",
+      "x": -460,
+      "y": 1960,
+      "w": 380,
+      "text": "TESTI\n\nTutto quello che leggi viene da testi.md, da index.astro o da projects.ts, tranne le parole su fondo arancione chiaro. Quelle le ho scritte io e vanno approvate o riscritte da te.\n\nOra sono in un punto solo: la sezione «Cosa costruisco» — occhiello, titolo, frase d'apertura, le otto etichette del diagramma e i tre titoletti in fondo.\n\nSotto ogni titoletto c'è il frammento di projects.ts da cui l'ho ricavato. I puntini segnano dove la frase originale continua: non sono citazioni intere."
+    },
+    {
+      "id": "scartate",
+      "page": "page-2",
+      "x": -460,
+      "y": 0,
+      "w": 380,
+      "text": "Tenute per memoria, non aggiornate con le decisioni successive.\n\nB — colore e scala: fasce a fondo pieno, tipografia al doppio, una sola animazione.\n\nC — scroll narrativo: la testata resta agganciata per tre schermate. Chiedeva JavaScript vero dove il sito ne spedisce zero, e su mobile l'aggancio è la prima cosa che si rompe."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
+}

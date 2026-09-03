@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #faf8f4; color: #141414; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+    a { color: #141414; text-decoration: none; }
+    a:hover { color: #a8531d; }
+
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+    @keyframes fascio { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
+
+    /* Il ciclo che, sulla pagina vera, sarebbe pilotato dallo scorrimento.
+       Qui gira da solo, cos&igrave; la tavola mostra il movimento senza
+       richiedere che si scorra dentro un riquadro. */
+    @keyframes tappa {
+      0%, 6%   { opacity: 0; transform: translateY(14px); }
+      16%, 86% { opacity: 1; transform: none; }
+      96%, 100%{ opacity: 0; transform: translateY(-8px); }
+    }
+    @keyframes barra { 0% { top: 0; } 100% { top: calc(100% - 46px); } }
+
+    .base { stroke: #e6ddd0; stroke-width: 1.5; fill: none; }
+    .fascio { stroke: #a8531d; stroke-width: 2.5; fill: none; stroke-linecap: round;
+              stroke-dasharray: 11 89; animation: fascio 3.4s linear infinite;
+              filter: drop-shadow(0 0 4px rgba(168,83,29,.55)); }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 16px, transparent 16px);
+              background-size: 0% 100%; background-repeat: no-repeat;
+              animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+
+    .tappa { animation: tappa 8.4s cubic-bezier(.22,.8,.3,1) infinite; }
+
+    .nodo { position: absolute; display: flex; align-items: center; gap: 12px;
+            padding: 0 16px; background: #ffffff; border: 1px solid #e6ddd0;
+            border-radius: 4px; font-size: 13.5px; font-weight: 500; color: #141414;
+            line-height: 1.3; box-shadow: 0 1px 2px rgba(40,24,10,.05); }
+
+    .daScrivere { background: rgba(240,201,164,.45); box-shadow: 0 0 0 2px rgba(240,201,164,.45); border-radius: 2px; }
+    .chip-copy { display: inline-flex; align-items: center; gap: 6px; font-size: 10px;
+                 letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+                 color: #a8531d; border: 1px dashed #a8531d; border-radius: 4px;
+                 padding: 3px 8px; vertical-align: middle; line-height: 1.4; white-space: nowrap; flex: none; }
+    .etichetta-meta { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+                      color: #8a8177; font-weight: 700; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; width: 1440px;">
+
+  <div style="background: #faf8f4; border-bottom: 1px solid #e6ddd0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+      <a href="#" style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: #141414;">Alessandro Flaborea</a>
+      <div style="display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 24px; font-size: 14px;">
+        <a href="#" style="color: #141414;">Servizi</a>
+        <a href="#" style="color: #141414;">Formazione</a>
+        <a href="#" style="color: #141414;">Lavori</a>
+        <a href="#" style="color: #141414;">Ricerca</a>
+        <a href="#" style="color: #141414;">Chi sono</a>
+        <a href="#" style="color: #141414;">Note</a>
+        <a href="#" style="color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 8px 16px;">Parliamone</a>
+        <span style="font-size: 13px; color: #8a8177;">EN / <span style="color: #141414; font-weight: 600;">IT</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ IL PALCO AGGANCIATO ============
+       Sulla pagina vera questa fascia resta ferma mentre si scorre, e
+       quello che cambia dentro e' pilotato da quanto si e' sceso.
+       Qui il ciclo gira da solo per far vedere il movimento. -->
+  <div style="position: relative; background: #faf8f4; border-bottom: 1px solid #e6ddd0;">
+    <div style="position: absolute; top: 26px; right: 34px; display: flex; align-items: center; gap: 10px;">
+      <span class="etichetta-meta">Fascia agganciata</span>
+      <div style="position: relative; width: 5px; height: 150px; background: #e6ddd0; border-radius: 3px;">
+        <div style="position: absolute; left: 0; width: 5px; height: 46px; background: #a8531d; border-radius: 3px; animation: barra 8.4s cubic-bezier(.4,0,.6,1) infinite alternate;"></div>
+      </div>
+    </div>
+
+    <div style="max-width: 1120px; margin: 0 auto; padding: 76px 24px 84px; display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 64px; align-items: center; min-height: 560px;">
+      <div>
+        <p style="font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #a8531d; font-weight: 700; line-height: 1.5;">Consulenza e formazione sull'intelligenza artificiale</p>
+        <h1 style="margin-top: 24px; font-size: 50px; line-height: 1.06; max-width: 16ch;">Aiuto le aziende a capire <span class="marker">dove serve</span> l'intelligenza artificiale e poi la costruisco.</h1>
+        <p style="margin-top: 30px; font-size: 18px; line-height: 1.6; color: #55504a; max-width: 46ch;">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
+        <div style="display: flex; align-items: center; gap: 26px; margin-top: 34px;">
+          <a href="#" style="background: #a8531d; color: #ffffff; font-size: 15px; font-weight: 600; padding: 15px 30px; border-radius: 4px;">Prenota mezz'ora &nbsp;&rarr;</a>
+          <a href="#" style="font-size: 15px; font-weight: 600; color: #1b3a5b; text-decoration: underline; text-underline-offset: 5px;">Guarda cosa ho costruito</a>
+        </div>
+      </div>
+
+      <div style="position: relative; width: 440px; height: 330px;">
+        <svg width="440" height="330" viewBox="0 0 440 330" style="position: absolute; inset: 0;" aria-hidden="true">
+          <path class="base" pathLength="100" d="M 220 76 L 220 128"></path>
+          <path class="fascio" pathLength="100" d="M 220 76 L 220 128"></path>
+          <path class="base" pathLength="100" d="M 220 196 L 220 248"></path>
+          <path class="fascio" pathLength="100" d="M 220 196 L 220 248" style="animation-delay: .9s;"></path>
+        </svg>
+        <div class="nodo tappa" style="left: 0; top: 10px; width: 440px; height: 66px; animation-delay: 0s;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8531d" stroke-width="1.5" style="flex: none;" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5" transform="rotate(-7 12 12)"></rect><path d="M5 16.5 L9.5 11.5 L12.5 14.5 L15 12 L19 16.5" transform="rotate(-7 12 12)"></path></svg>
+          <span class="daScrivere">Una foto storta, arrivata per mail</span>
+        </div>
+        <div class="nodo tappa" style="left: 0; top: 128px; width: 440px; height: 68px; animation-delay: .9s;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8531d" stroke-width="1.5" style="flex: none;" aria-hidden="true"><circle cx="12" cy="12" r="6.5"></circle><path d="M12 2.5 V6 M12 18 V21.5 M2.5 12 H6 M18 12 H21.5"></path></svg>
+          <span class="daScrivere">Il pezzo riconosciuto sul modello 3D della macchina</span>
+        </div>
+        <div class="nodo tappa" style="left: 0; top: 248px; width: 440px; height: 66px; background: #fdf3e9; border-color: #a8531d; animation-delay: 1.8s;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8531d" stroke-width="1.5" style="flex: none;" aria-hidden="true"><path d="M11.2 3.5 H19 a1.5 1.5 0 0 1 1.5 1.5 v7.8 a1.5 1.5 0 0 1-.45 1.06 l-7 7 a1.5 1.5 0 0 1-2.12 0 l-6.3-6.3 a1.5 1.5 0 0 1 0-2.12 l7-7 A1.5 1.5 0 0 1 11.2 3.5 Z"></path></svg>
+          <span class="daScrivere" style="font-weight: 600;">La richiesta arriva col codice interno gi&agrave; attaccato</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COSA VEDE CHI SCORRE ============ -->
+  <div style="background: #f4efe7; border-bottom: 1px solid #e6ddd0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 56px 24px 60px;">
+      <p class="etichetta-meta" style="color: #a8531d;">Le tre posizioni della stessa fascia</p>
+      <p style="margin-top: 12px; font-size: 15.5px; line-height: 1.65; color: #55504a; max-width: 70ch;">La testata resta ferma per tre schermate. A muoversi &egrave; solo quello che c'&egrave; dentro: il titolo si rimpicciolisce, il diagramma si costruisce un pezzo alla volta.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px;">
+
+        <div>
+          <div style="background: #faf8f4; border: 1px solid #e6ddd0; border-radius: 4px; height: 214px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 12px;">
+            <p style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.12;">Aiuto le aziende a capire dove serve&hellip;</p>
+            <div style="height: 3px; width: 54px; background: #a8531d;"></div>
+            <div style="height: 30px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 3px;"></div>
+          </div>
+          <p style="margin-top: 12px; font-size: 13.5px; color: #55504a;"><strong style="color: #141414;">0%</strong> &mdash; il titolo a piena scala, il primo riquadro compare.</p>
+        </div>
+
+        <div>
+          <div style="background: #faf8f4; border: 1px solid #e6ddd0; border-radius: 4px; height: 214px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 10px;">
+            <p style="font-family: 'Fraunces', Georgia, serif; font-size: 15px; font-weight: 600; line-height: 1.2; color: #55504a;">Aiuto le aziende a capire dove serve&hellip;</p>
+            <div style="height: 26px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 3px;"></div>
+            <div style="height: 12px; width: 2px; background: #a8531d; margin-left: 50%;"></div>
+            <div style="height: 26px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 3px;"></div>
+          </div>
+          <p style="margin-top: 12px; font-size: 13.5px; color: #55504a;"><strong style="color: #141414;">45%</strong> &mdash; il titolo si ritira, il secondo riquadro si aggancia.</p>
+        </div>
+
+        <div>
+          <div style="background: #faf8f4; border: 1px solid #e6ddd0; border-radius: 4px; height: 214px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+            <p style="font-family: 'Fraunces', Georgia, serif; font-size: 13px; font-weight: 600; line-height: 1.2; color: #8a8177;">Aiuto le aziende a capire&hellip;</p>
+            <div style="height: 24px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 3px;"></div>
+            <div style="height: 24px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 3px;"></div>
+            <div style="height: 24px; background: #fdf3e9; border: 1px solid #a8531d; border-radius: 3px;"></div>
+          </div>
+          <p style="margin-top: 12px; font-size: 13.5px; color: #55504a;"><strong style="color: #141414;">90%</strong> &mdash; il diagramma &egrave; completo, poi la fascia si sgancia.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ IL PROBLEMA, IMPILATO ============ -->
+  <div style="background: #faf8f4;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 76px 24px 84px;">
+      <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Il problema</p>
+      <h2 style="font-size: 34px; margin-top: 16px; margin-bottom: 20px; max-width: 30ch;">Le tre cose che mi vengono raccontate pi&ugrave; spesso</h2>
+      <p style="font-size: 15px; color: #8a8177; margin-bottom: 40px;">Le tre schede si impilano una sull'altra mentre si scende, e ognuna copre in parte quella prima.</p>
+
+      <div style="position: relative; height: 420px; max-width: 760px;">
+        <div style="position: absolute; left: 0; top: 0; width: 700px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 26px 30px; box-shadow: 0 6px 20px rgba(40,24,10,.05);">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 600; color: #8a8177;">&laquo;Mi serve questo pezzo.&raquo;</p>
+        </div>
+        <div style="position: absolute; left: 30px; top: 62px; width: 700px; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 26px 30px; box-shadow: 0 10px 26px rgba(40,24,10,.07);">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 600; color: #8a8177;">&laquo;Lo sa fare solo Bruno.&raquo;</p>
+        </div>
+        <div style="position: absolute; left: 60px; top: 124px; width: 700px; background: #ffffff; border: 1px solid #a8531d; border-radius: 4px; padding: 30px 34px 34px; box-shadow: 0 18px 44px rgba(40,24,10,.13);">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #141414;">&laquo;Abbiamo provato ChatGPT.&raquo;</p>
+          <p style="margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: #55504a;">Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non &egrave; chiaro con quali documenti, n&eacute; se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COSA COSTRUISCO ============ -->
+  <div style="background: #ffffff; border-top: 1px solid #e6ddd0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 76px 24px 84px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;"><span class="daScrivere">Cosa costruisco</span></p>
+        <span class="chip-copy">Testi da approvare</span>
+      </div>
+      <h2 style="font-size: 34px; margin-top: 16px; max-width: 26ch;"><span class="daScrivere">Cosa c'&egrave; dentro le cose che costruisco</span></h2>
+      <p style="margin-top: 18px; font-size: 15px; color: #8a8177; max-width: 70ch;">Anche qui i riquadri entrano uno alla volta mentre si scorre, e i fasci partono solo quando il riquadro a cui arrivano &egrave; comparso.</p>
+
+      <div style="position: relative; width: 1072px; height: 400px; margin-top: 40px;">
+        <svg width="1072" height="400" viewBox="0 0 1072 400" style="position: absolute; inset: 0;" aria-hidden="true">
+          <path class="base" pathLength="100" d="M 268 59 C 348 59 354 200 434 200"></path>
+          <path class="base" pathLength="100" d="M 268 200 L 434 200"></path>
+          <path class="base" pathLength="100" d="M 268 341 C 348 341 354 200 434 200"></path>
+          <path class="base" pathLength="100" d="M 638 200 C 718 200 724 59 804 59"></path>
+          <path class="base" pathLength="100" d="M 638 200 L 804 200"></path>
+          <path class="base" pathLength="100" d="M 638 200 C 718 200 724 341 804 341"></path>
+          <path class="fascio" pathLength="100" d="M 268 59 C 348 59 354 200 434 200"></path>
+          <path class="fascio" pathLength="100" d="M 268 200 L 434 200" style="animation-delay: .45s;"></path>
+          <path class="fascio" pathLength="100" d="M 268 341 C 348 341 354 200 434 200" style="animation-delay: .9s;"></path>
+          <path class="fascio" pathLength="100" d="M 638 200 C 718 200 724 59 804 59" style="animation-delay: 1.7s;"></path>
+          <path class="fascio" pathLength="100" d="M 638 200 L 804 200" style="animation-delay: 2.15s;"></path>
+          <path class="fascio" pathLength="100" d="M 638 200 C 718 200 724 341 804 341" style="animation-delay: 2.6s;"></path>
+        </svg>
+        <div class="nodo tappa" style="left: 0; top: 30px; width: 268px; height: 58px; animation-delay: 0s;"><span class="daScrivere">I documenti della vostra azienda</span></div>
+        <div class="nodo tappa" style="left: 0; top: 171px; width: 268px; height: 58px; animation-delay: .5s;"><span class="daScrivere">I gestionali gi&agrave; in uso</span></div>
+        <div class="nodo tappa" style="left: 0; top: 312px; width: 268px; height: 58px; animation-delay: 1s;"><span class="daScrivere">Le procedure, scritte una volta</span></div>
+        <div class="tappa" style="position: absolute; left: 434px; top: 162px; width: 204px; height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: #ffffff; border: 1.5px solid #a8531d; border-radius: 4px; box-shadow: 0 0 0 7px rgba(240,201,164,.32), 0 12px 34px rgba(168,83,29,.14); animation-delay: 1.5s;">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 21px; font-weight: 600; line-height: 1.2;"><span class="daScrivere">L'assistente</span></p>
+          <p style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8a8177; font-weight: 700;"><span class="daScrivere">nel vostro cloud</span></p>
+        </div>
+        <div class="nodo tappa" style="left: 804px; top: 30px; width: 268px; height: 58px; animation-delay: 2s;"><span class="daScrivere">Risposte con la fonte citata</span></div>
+        <div class="nodo tappa" style="left: 804px; top: 171px; width: 268px; height: 58px; animation-delay: 2.5s;"><span class="daScrivere">Azioni sui sistemi che avete</span></div>
+        <div class="nodo tappa" style="left: 804px; top: 312px; width: 268px; height: 58px; animation-delay: 3s;"><span class="daScrivere">Procedure che restano aggiornate</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
