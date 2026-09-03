@@ -11,6 +11,8 @@
 // src/lib/diagramma.ts (task 3) — il disordine e i collegamenti sono
 // calcolati, non ricopiati a mano dalla tavola.
 import { fascio, frammenti } from "../../lib/diagramma";
+import Frammento from "../Frammento.astro";
+import GruppoFasci from "../GruppoFasci.astro";
 
 interface Props {
   occhiello: string;
@@ -29,13 +31,6 @@ const { occhiello, titolo, intro, nodo, ritorno, didascaliaSinistra, didascaliaD
 // la tavola).
 const larghi = frammenti(11, { larghezza: 312, altezza: 370 });
 const stretti = frammenti(8, { larghezza: 350, altezza: 200 });
-
-// Le barrette dentro ogni frammento simulano del testo. Il passo (9px fra
-// una riga e l'altra, 12px dal bordo superiore) e l'alternanza di larghezza
-// (piena, poi ridotta di 14px, poi piena di nuovo) sono quelli della tavola:
-// non un dato di `frammenti()`, che genera solo forma e numero di righe.
-const RIENTRO = 9;
-const larghezzaBarra = (f: { w: number }, i: number) => f.w - RIENTRO * 2 - (i % 2 === 1 ? 14 : 0);
 
 // I fasci in entrata e in uscita dal nodo, disposizione larga: dal bordo
 // destro dell'area disordinata (x 312, larghezza dichiarata sopra) al bordo
@@ -107,22 +102,13 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
         aria-hidden="true"
       >
         <!-- sinistra: quello che c'è, com'è -->
-        {larghi.map((f) => (
-          <g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
-            <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
-            {Array.from({ length: f.righe }).map((_, i) => (
-              <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(f, i)} height="4" rx="2" fill="var(--border)" />
-            ))}
-          </g>
-        ))}
+        {larghi.map((f) => <Frammento f={f} />)}
 
         <!-- i fasci che entrano -->
-        {entranoL.map((f) => <path class="base" pathLength="100" d={f.d} />)}
-        {entranoL.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+        <GruppoFasci collegamenti={entranoL} />
 
         <!-- i fasci che escono -->
-        {esconoL.map((f) => <path class="base" pathLength="100" d={f.d} />)}
-        {esconoL.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+        <GruppoFasci collegamenti={esconoL} />
 
         <!-- destra: la stessa roba, ma connessa -->
         <path d="M 872 112 L 916 155 M 872 200 L 916 173 M 872 200 L 916 245 M 872 288 L 916 263 M 940 191 L 940 227" stroke="var(--tratto-tenue)" stroke-width="1.5" />
@@ -171,22 +157,13 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
         aria-hidden="true"
       >
         <!-- sopra: il disordine -->
-        {stretti.map((f) => (
-          <g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
-            <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
-            {Array.from({ length: f.righe }).map((_, i) => (
-              <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(f, i)} height="4" rx="2" fill="var(--border)" />
-            ))}
-          </g>
-        ))}
+        {stretti.map((f) => <Frammento f={f} />)}
 
         <!-- i fasci scendono nel nodo -->
-        {entranoS.map((f) => <path class="base" pathLength="100" d={f.d} />)}
-        {entranoS.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+        <GruppoFasci collegamenti={entranoS} />
 
         <!-- e ne escono -->
-        {esconoS.map((f) => <path class="base" pathLength="100" d={f.d} />)}
-        {esconoS.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+        <GruppoFasci collegamenti={esconoS} />
 
         <!-- sotto: la struttura, con i suoi collegamenti -->
         <path d="M 42 388 L 42 522 M 42 404 L 58 404 M 42 460 L 58 460 M 42 516 L 58 516" stroke="var(--tratto-tenue)" stroke-width="1.5" />
@@ -273,6 +250,15 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     align-items: center;
     justify-content: center;
     gap: 3px;
+    /* L'altezza «vera» è la percentuale passata inline (76/456 sul largo,
+       80/592 sullo stretto): a piena larghezza è già più alta di questo
+       minimo, quindi qui sotto non cambia niente di visibile. Ma fra 641px
+       e la soglia stretta il canvas si restringe parecchio mentre il testo
+       dentro resta a dimensione fissa — a quel punto la percentuale scende
+       sotto quello che titolo (fino a due righe) e sottotitolo (una riga,
+       vedi sotto) chiedono, e senza un pavimento il riquadro si stringe
+       sotto il proprio contenuto invece di contenerlo (revisione task 4). */
+    min-height: 70px;
     background: var(--surface);
     border: 1.5px solid var(--azione);
     border-radius: var(--radius);
@@ -291,6 +277,12 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     text-transform: uppercase;
     color: var(--text-faint);
     font-weight: 700;
+    /* Resta su una riga anche quando il riquadro si stringe: è la seconda
+       riga corta sotto il titolo, non un paragrafo che ha senso spezzato.
+       Andando a capo raddoppierebbe l'altezza richiesta dal nodo proprio
+       nella fascia (641-1120px) dove il riquadro è già più stretto della
+       sua taglia naturale, vanificando il pavimento sopra. */
+    white-space: nowrap;
   }
 
   /* L'etichetta della riga di ritorno: interrompe il tratteggio invece di

@@ -1,0 +1,22 @@
+---
+// Un gruppo di collegamenti fra due punti del diagramma — «i fasci che
+// entrano», «i fasci che escono» — reso due volte identico da
+// `CosaCostruisco.astro` (largo e stretto, entrata e uscita: quattro punti
+// di chiamata prima di questo componente, tutti con lo stesso markup).
+//
+// Ogni collegamento è una coppia di `<path>`: `.base` (il tratto, sempre
+// visibile per intero) e `.fascio` (il segmento animato che lo percorre).
+// Le due mappe restano separate — prima tutte le `.base`, poi tutti i
+// `.fascio` — perché è l'ordine con cui la tavola le disegna: dove più
+// collegamenti convergono nello stesso punto (il bordo del nodo), il
+// `.fascio` deve dipingersi sopra ogni `.base`, non solo sopra il proprio.
+// Un'unica mappa che intercalasse base/fascio per singolo collegamento
+// romperebbe silenziosamente questo sopra/sotto.
+interface Props {
+  collegamenti: { d: string; ritardo: string }[];
+}
+const { collegamenti } = Astro.props;
+---
+
+{collegamenti.map((c) => <path class="base" pathLength="100" d={c.d} />)}
+{collegamenti.map((c) => <path class="fascio" pathLength="100" d={c.d} style={`animation-delay: ${c.ritardo};`} />)}
