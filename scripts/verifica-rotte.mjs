@@ -52,6 +52,39 @@ for (const f of trovaHtml("dist")) {
   }
 }
 
+// Le frasi che il committente non ha ancora approvato non devono uscire.
+// Questa lista è il ponte fra la spec e la pagina: finché una di queste frasi
+// non compare in testi.md — la fonte approvata — non può comparire nemmeno in
+// dist. È il seguito del blocco qui sopra: là i segnaposti evidenti, qui le
+// frasi che sembrano finite e non lo sono.
+const DA_APPROVARE = [
+  "Cosa costruisco",
+  "Quello che avete già, in una forma che si può interrogare",
+  "Legge e collega",
+  "ogni giorno, da solo",
+  "da dove viene",
+  "Da venti posti a uno solo",
+  "Si aggiorna senza che nessuno lo tocchi",
+  "Collegato a quello che usate già",
+];
+// Solo la fonte italiana. Guardare anche testi-en.md sembrava piu' sicuro ed
+// era il contrario: la legenda di una sua tabella contiene «da dove viene», e
+// bastava a rendere il controllo cieco su quella frase per sempre. Le stringhe
+// inglesi avranno la loro lista quando la copy inglese arrivera'.
+const FONTI_APPROVATE = readFileSync(
+  "docs/superpowers/specs/2026-08-25-sito-italiano/testi.md",
+  "utf8",
+);
+
+for (const f of trovaHtml("dist")) {
+  const html = readFileSync(f, "utf8");
+  for (const frase of DA_APPROVARE) {
+    if (html.includes(frase) && !FONTI_APPROVATE.includes(frase)) {
+      dice(`${f} pubblica «${frase}», che non sta in testi.md`);
+    }
+  }
+}
+
 // La pagina 404 deve stare esattamente in dist/404.html: GitHub Pages serve
 // quel file, e solo quello, per ogni indirizzo che non esiste. Se finisse in
 // una sottocartella — come succede a tutte le altre rotte — il sito
