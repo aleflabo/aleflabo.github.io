@@ -23,13 +23,16 @@ interface Props {
   intro: string;
   // Il territorio (task 6, home-visuale): la sezione «Dove lavoro» smette di
   // essere una sezione a sé e entra qui sopra, perché chi sta per scrivere
-  // è esattamente chi si chiede se si è raggiungibili. **Facoltativa**:
-  // `Contatto` la riceve dalla home, ma la usano anche `BaseLayout.astro` e
-  // `src/pages/en/notes/index.astro`, che non passano nessun territorio —
-  // renderla obbligatoria romperebbe quelle due strade. I testi vengono da
-  // `src/data/territorio.ts` (occhiello, titolo, intro, modi): il campo
-  // `corpo` di quel file esiste ma la tavola non lo rende qui, quindi non
-  // è fra le proprietà che questo componente accetta.
+  // è esattamente chi si chiede se si è raggiungibili. Facoltativa: senza
+  // `territorio` la sezione rende solo il modulo. Non perché qualcun altro
+  // ometta la prop — questo componente lo usano soltanto le due home,
+  // `src/pages/index.astro` e `src/pages/en/index.astro` — ma perché è la
+  // forma che il repo usa dappertutto: un campo vuoto salta la sua sezione
+  // invece di far comparire un'intestazione senza contenuto sotto (regola 2
+  // del CLAUDE.md). I testi vengono da `src/data/territorio.ts` (occhiello,
+  // titolo, intro, modi): il campo `corpo` di quel file esiste ma la tavola
+  // non lo rende qui, quindi non è fra le proprietà che questo componente
+  // accetta.
   territorio?: {
     occhiello: string;
     titolo: string;
@@ -153,13 +156,16 @@ const {
   }
 
   /* Il territorio (task 6): stessa etichetta e stesso ritmo tipografico
-     dell'ex sezione a sé, ma con la palette del fondo scuro — i tre token
-     nati col task 2 (--su-accent, --su-accent-forte, --su-accent-debole)
-     più --evidenziatore, già in tokens.css, che è lo stesso colore usato
-     per l'eyebrow «Parliamone» qui sotto: la tavola le vuole uguali. Chiude
-     con un separatore e uno spazio prima del modulo di contatto, che è
-     esattamente quanto la tavola (blocco 8) mette fra il divisorio e
-     l'eyebrow successivo. */
+     dell'ex sezione a sé, ma con la palette del fondo scuro. I colori sono
+     token già esistenti in tokens.css — --evidenziatore da prima di questo
+     ramo, --su-accent e --su-accent-forte introdotti dal task 2 apposta per
+     il testo su fondo scuro — non esadecimali nuovi. Il resto della sezione
+     qui sotto (eyebrow, intro, pillole…) resta con lo stile di produzione,
+     colori scritti a mano: i due linguaggi convivono nello stesso blocco
+     perché rispondono a scelte diverse, non sono uguali fra loro. Chiude
+     con un separatore e uno spazio prima dell'eyebrow «Parliamone»:
+     34px di padding-bottom e 44px di margin-bottom, la stessa misura che il
+     blocco 8 della tavola mette fra il divisorio e l'eyebrow successivo. */
   .territorio {
     padding-bottom: 34px;
     margin-bottom: 44px;
