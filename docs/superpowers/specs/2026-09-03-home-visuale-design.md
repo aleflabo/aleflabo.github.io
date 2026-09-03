@@ -104,7 +104,7 @@ tagli che seguono nascono da lì, non da un'intuizione.
 | Testata | 745 | 748 | |
 | Fascia scura (numeri + ricerca, fusi) | 1081 | **736** | −345 |
 | Il problema (con le vignette) | 840 | 1091 | +251 |
-| **Come lavoro** (compressa) | **1647** | **947** | **−700** |
+| **Come lavoro** (nomi di /servizi + «Ne esce») | **1647** | **947** | **−700** |
 | **Cosa costruisco** (nuova) | — | 1050 | +1050 |
 | Le prove (con le miniature) | 1183 | 1345 | +162 |
 | Formazione (a striscia) | 1115 | **503** | −612 |
@@ -144,9 +144,32 @@ carta.
    vive.
 2. **«Come lavoro» tiene i nomi e il «Ne esce»**, e lascia andare i quattro
    corpi: su `/servizi` ci sono già, più per esteso. Sul telefono era il blocco
-   più grande della pagina, 1647px. Sul desktop il risparmio è minore (1048 →
-   945) perché l'altezza della riga la detta la colonna «Ne esce», larga 230px:
-   è un dato utile per non aspettarsi troppo dalla stessa mossa altrove.
+   più grande della pagina, 1647px → 947. Sul desktop il risparmio è minore
+   (1048 → 945) perché l'altezza della riga la detta la colonna «Ne esce», larga
+   230px: è un dato utile per non aspettarsi troppo dalla stessa mossa altrove.
+
+   **E i nomi cambiano.** Tolti i corpi, «Ascolto» e «Resto» restano soli e
+   smettono di parlare del lavoro per parlare della persona: la sezione suona
+   come una terapia invece che come un mestiere. I quattro passi prendono i nomi
+   degli ingaggi di `servizi.ts` — **Mezza giornata diagnostica, Audit AI,
+   Software su misura, Canone di servizio** — che sono già approvati, esistono
+   in inglese (`A diagnostic half-day`, `AI audit`, `Custom software`,
+   `Service retainer`, dove il problema era identico: «I listen», «I stay») e
+   **costano zero**: a 390px stanno comunque su una riga, quindi la sezione
+   resta 947px.
+
+   Due alternative sono state misurate e scartate. Tenere la prima frase di ogni
+   corpo legge bene ma recupera **110px in tutto** — tre corpi su quattro erano
+   già corti e «Costruisco» è un periodo unico che non si spezza senza
+   riscriverlo. Tornare alla sezione intera costa 700px sul telefono.
+   Il confronto fra le quattro versioni sta in `tavole/ComeLavoro.dc.html` e in
+   `immagini/12-come-lavoro-varianti.png`.
+
+   > **Conseguenza da non lasciare implicita.** `index.astro` porta oggi un
+   > commento che dice apposta che i quattro passi della home **non** devono
+   > coincidere con gli `ingaggi` di `/servizi`: uno racconta come si svolge un
+   > lavoro, l'altro elenca cosa si compra. Questa decisione lo rovescia, e il
+   > commento va riscritto con la ragione nuova — non cancellato.
 3. **Le vignette del telefono da 80 a 64px.** Vale poco, ma è gratis.
 4. **Il piè di pagina**, guardato e non ancora toccato: sotto.
 
@@ -204,8 +227,8 @@ salire a 44px senza che il blocco cresca.
    arancione compare solo dove qualcosa funziona, ed è il contrasto con la
    sezione 4 a fare il lavoro.
 4. **Cosa costruisco** — sezione nuova, vedi sotto.
-5. **Come lavoro** — tiene i quattro nomi e il «Ne esce»; i corpi lasciano la
-   home e restano su `/servizi`.
+5. **Come lavoro** — prende i nomi degli ingaggi di `/servizi` e tiene il «Ne
+   esce»; i corpi lasciano la home e restano su `/servizi`.
 6. **Le prove** — ogni scheda prende una miniatura 338×86px sopra l'occhiello.
    Il portale ricambi si ripiglia il tag «In costruzione». **Spannum lascia il
    posto all'Agentic Workflow Toolkit** (aperto, punto 2 in fondo).
@@ -309,7 +332,7 @@ barra va a capo).
 | Fascia scura | `26px 20px 32px`; i quattro numeri in griglia **2×2**, `gap: 18px 24px`, valore 24px ed etichetta 13px **abbreviata** («articoli», «Best Paper»): a 390px le etichette lunghe mandano a capo il numero. Le tre tappe in colonna. |
 | Il problema | `48px 20px`; una colonna, `gap: 16px`; scheda `22px 24px 24px`; la vignetta resta `viewBox="0 0 286 104"` e si scala a 302px di larghezza — **non si ridisegna**. |
 | Cosa costruisco | `48px 20px 52px`; titolo 26px; il diagramma diventa **350×592 verticale**. Le due didascalie laterali si fondono in un unico paragrafo sotto il disegno, e la sezione finisce lì. |
-| Come lavoro | Ogni passo è numero + nome in linea, poi «Ne esce». 947px contro i 1647 di oggi. |
+| Come lavoro | Ogni passo è numero + nome in linea, poi «Ne esce». 947px contro i 1647 di oggi, e i nomi sono quelli di `/servizi`. |
 | Le prove | `44px 20px`; colonna, `gap: 28px`; miniatura 330px; `h3` 22px. |
 | Formazione | `40px 20px 44px`; le tre pastiglie in colonna, `padding: 11px 14px`. |
 | Parliamone | Invariata, più la riga del territorio che va in colonna. |
@@ -426,7 +449,7 @@ ed è un requisito, non una cortesia.
 | `sezioni/BloccoFormazione.astro` | Diventa striscia. Perde `formati[].corpo` e `chiusura` dalla home; restano su `/formazione`. |
 | `sezioni/LeProve.astro` | Ogni scheda guadagna una miniatura, e i tag possono portarne uno in evidenza («In costruzione», «Strumenti miei, per il mio team»). |
 | `sezioni/CosaCostruisco.astro` | **Nuovo.** Tesi, diagramma, e basta. Due disposizioni, orizzontale e verticale, con la soglia a 640px e il numero di frammenti come dato. |
-| `sezioni/ComeLavoro.astro` | Il corpo di ogni passo diventa opzionale: la home non lo passa, `/chi-sono` sì. **Le props esistenti non cambiano**: lo usa anche `CorpoChiSono.astro`. |
+| `sezioni/ComeLavoro.astro` | Il corpo di ogni passo diventa opzionale: la home non lo passa, `/chi-sono` sì. **Le props esistenti non cambiano**: lo usa anche `CorpoChiSono.astro`. I nomi dei passi arrivano da `ingaggi` di `servizi.ts` invece che da stringhe proprie della home. |
 | `sezioni/Occhiello.astro` | Invariato. Contiene l'ancora `#le-prove`: se la sezione cambia nome, l'ancora resta. |
 | `styles/tokens.css` | Sei token nuovi. |
 | `styles/global.css` | `.base`, `.fascio`, `.interrotto`, `@keyframes fascio`; `sali` passa all'innesco per visibilità. |

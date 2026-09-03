@@ -54,6 +54,15 @@
       "y": 0,
       "w": 1440,
       "h": 3050
+    },
+    {
+      "file": "ComeLavoro.dc.html",
+      "title": "«Come lavoro» — quattro versioni",
+      "page": "page-1",
+      "x": 0,
+      "y": 9200,
+      "w": 1800,
+      "h": 1820
     }
   ],
   "annotations": [
@@ -104,6 +113,14 @@
       "y": 1080,
       "w": 400,
       "text": "IL MOBILE NON È UN RIPIEGO\n\nÈ da qui che arriva la maggior parte del traffico, quindi questa tavola vale quanto quella a 1440 — e adesso e' completa, cosi' i numeri sono misurati e non stimati.\n\nIl diagramma gira di 90°: il disordine sopra, il nodo in mezzo, la struttura sotto. La riga «da dove viene» scende lungo il margine destro, passa sotto e risale a sinistra fino al frammento.\n\n7762px disegnati, piu' 843 di pie' di pagina che non abbiamo ancora toccato. Nessuno scorrimento orizzontale — che qui e' un requisito, non un risultato: in questo repo una versione ne aveva aggiunti 16 su /chi-sono e un confronto byte a byte l'aveva dichiarata identica."
+    },
+    {
+      "id": "come-lavoro",
+      "page": "page-1",
+      "x": -460,
+      "y": 9200,
+      "w": 380,
+      "text": "«ASCOLTO, DIAGNOSI, COSTRUISCO, RESTO»\n\nTolti i corpi restano quattro verbi soli, e due di quelli parlano di me invece che del lavoro. L'errore e' del taglio, non della copy: quei nomi erano scritti per essere letti insieme al loro corpo.\n\nQuattro versioni, nessuna delle quali inventa una parola.\n\nIl verdetto e' scomodo: A legge bene ma recupera 110px, cioe' niente. B recupera 400px ma trasforma la sezione in un listino.\n\nQuindi la lunghezza va presa altrove — e c'e' un posto dove costa zero: il modulo di contatto inerte, 556px sul telefono, sette controlli che dichiarano di non funzionare."
     }
   ],
   "launch": {
