@@ -14,7 +14,6 @@ import IlProblema from '../../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
 import LeProve from '../../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
-import Territorio from '../../components/sezioni/Territorio.astro';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
   occhiello,
@@ -46,7 +45,8 @@ import { attivita } from '../../lib/datiStrutturati';
 const titoloPagina = `Alessandro Flaborea — ${occhiello.eyebrow}`;
 // La sola composizione dava 66 caratteri, meno di metà della finestra utile
 // in SERP, e non diceva da dove si lavora. La coda sul territorio è la stessa
-// che dice la sezione Territorio, resa in inglese.
+// cosa che dice il blocco territorio dentro Contatto (task 6, home-visuale),
+// resa in inglese.
 const descrizionePagina = `${occhiello.titolo
   .replaceAll('|', ' ')
   .replace(/\s+([,.;:!?])/g, '$1')
@@ -80,6 +80,5 @@ const datiStrutturati = [
   <ComeLavoro {...comeLavoro} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} />
-  <Territorio {...territorio.en} />
-  <Contatto {...contatto} />
+  <Contatto {...contatto} territorio={territorio.en} />
 </BaseLayout>

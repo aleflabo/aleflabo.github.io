@@ -13,7 +13,6 @@ import IlProblema from '../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../components/sezioni/ComeLavoro.astro';
 import LeProve from '../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
-import Territorio from '../components/sezioni/Territorio.astro';
 import Contatto from '../components/sezioni/Contatto.astro';
 import { localizedPath } from '../i18n/ui';
 import { emailContatto } from '../data/legale';
@@ -256,6 +255,5 @@ const datiStrutturati = [
   <ComeLavoro {...comeLavoro} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} />
-  <Territorio {...territorio.it} />
-  <Contatto {...contatto} />
+  <Contatto {...contatto} territorio={territorio.it} />
 </BaseLayout>

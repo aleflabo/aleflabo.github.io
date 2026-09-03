@@ -21,6 +21,21 @@ interface Props {
   eyebrow: string;
   titolo: string;
   intro: string;
+  // Il territorio (task 6, home-visuale): la sezione «Dove lavoro» smette di
+  // essere una sezione a sé e entra qui sopra, perché chi sta per scrivere
+  // è esattamente chi si chiede se si è raggiungibili. **Facoltativa**:
+  // `Contatto` la riceve dalla home, ma la usano anche `BaseLayout.astro` e
+  // `src/pages/en/notes/index.astro`, che non passano nessun territorio —
+  // renderla obbligatoria romperebbe quelle due strade. I testi vengono da
+  // `src/data/territorio.ts` (occhiello, titolo, intro, modi): il campo
+  // `corpo` di quel file esiste ma la tavola non lo rende qui, quindi non
+  // è fra le proprietà che questo componente accetta.
+  territorio?: {
+    occhiello: string;
+    titolo: string;
+    intro: string;
+    modi: { etichetta: string; dettaglio: string }[];
+  };
   campoAzienda: CampoTesto;
   campoContatto: CampoTesto;
   campoRichiesta: CampoTesto;
@@ -40,6 +55,7 @@ const {
   eyebrow,
   titolo,
   intro,
+  territorio,
   campoAzienda,
   campoContatto,
   campoRichiesta,
@@ -54,6 +70,18 @@ const {
 
 <section class="contatto" id="parliamone">
   <div class="container">
+    {territorio && (
+      <div class="territorio">
+        <p class="occhiello">{territorio.occhiello}</p>
+        <h2 class="luogo">{territorio.titolo}</h2>
+        <p class="intro-luogo">{territorio.intro}</p>
+        <div class="modi">
+          {territorio.modi.map((m) => (
+            <p><strong>{m.etichetta}</strong> {m.dettaglio}</p>
+          ))}
+        </div>
+      </div>
+    )}
     <p class="eyebrow">{eyebrow}</p>
     <h2 class="titolo">{titolo}</h2>
     <p class="intro">{intro}</p>
@@ -122,6 +150,53 @@ const {
   }
   .container {
     padding: 72px 24px;
+  }
+
+  /* Il territorio (task 6): stessa etichetta e stesso ritmo tipografico
+     dell'ex sezione a sé, ma con la palette del fondo scuro — i tre token
+     nati col task 2 (--su-accent, --su-accent-forte, --su-accent-debole)
+     più --evidenziatore, già in tokens.css, che è lo stesso colore usato
+     per l'eyebrow «Parliamone» qui sotto: la tavola le vuole uguali. Chiude
+     con un separatore e uno spazio prima del modulo di contatto, che è
+     esattamente quanto la tavola (blocco 8) mette fra il divisorio e
+     l'eyebrow successivo. */
+  .territorio {
+    padding-bottom: 34px;
+    margin-bottom: 44px;
+    border-bottom: 1px solid rgb(255 255 255 / 16%);
+  }
+  .territorio .occhiello {
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--evidenziatore);
+    font-weight: 700;
+  }
+  .territorio .luogo {
+    font-size: 26px;
+    margin-top: 14px;
+    color: var(--surface);
+  }
+  .territorio .intro-luogo {
+    margin-top: 14px;
+    margin-bottom: 26px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--su-accent-forte);
+    max-width: 66ch;
+  }
+  .territorio .modi {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .territorio .modi p {
+    font-size: 14px;
+    color: var(--su-accent);
+  }
+  .territorio .modi strong {
+    color: var(--surface);
+    font-weight: 600;
   }
   .eyebrow {
     font-size: 11.5px;
@@ -283,6 +358,21 @@ const {
   @media (max-width: 640px) {
     .container {
       padding: 48px 20px;
+    }
+    .territorio {
+      padding-bottom: 30px;
+      margin-bottom: 34px;
+    }
+    .territorio .luogo {
+      font-size: 24px;
+    }
+    .territorio .intro-luogo {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .territorio .modi {
+      flex-direction: column;
+      gap: 8px;
     }
     .titolo {
       font-size: 26px;
