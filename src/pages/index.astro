@@ -114,12 +114,23 @@ const comeLavoro = {
 };
 
 // --- LeProve ---
-// `projects.ts` contiene ormai anche «Portale ricambi 3D» (task 6/11), ma
-// i testi restano scritti qui alla lettera dalla tavola invece di essere
-// riletti da lì: i tre corpi di questa sezione sono più corti di quelli
-// di /lavori. Gli `href` vengono risolti qui, non più segnaposto
-// (bloccante 4, revisione finale del ramo sito-italiano): due portano
-// alle schede vere in /lavori, Spannum al prodotto esterno.
+// `projects.ts` contiene ormai anche «Portale ricambi 3D» e «Agentic
+// Workflow Toolkit» (task 6/9/11), ma i testi restano scritti qui alla
+// lettera dalla tavola invece di essere riletti da lì: i tre corpi di
+// questa sezione sono più corti di quelli di /lavori. Gli `href` vengono
+// risolti qui, non più segnaposto (bloccante 4, revisione finale del ramo
+// sito-italiano): due portano alle schede vere in /lavori.
+//
+// Lo scambio (task 9, home-visuale, decisione del committente): Spannum
+// esce dalla home — resta raggiungibile su /lavori — ed entra l'Agentic
+// Workflow Toolkit, l'unica prova pubblicata in cui Alessandro collega
+// sistemi esistenti (MCP, Notion, GitHub). Il portale ricambi riprende
+// `tagInEvidenza: 'In costruzione'`: quel tag sta già in `projects.ts`
+// (`tagIt`), e questa sezione lo aveva lasciato cadere mettendoci sopra
+// «commessa reale» — la pagina più visitata del sito raccontava il
+// progetto meglio di quanto fosse. Corpo e tag del toolkit sono presi
+// alla lettera da `agentic-toolkit.it.summary` e `.tagIt` in
+// projects.ts; l'occhiello da testi.md («Le prove», scheda toolkit).
 const leProve = {
   occhiello: 'Le prove',
   titolo: 'Alcune cose che ho costruito',
@@ -129,6 +140,8 @@ const leProve = {
       nome: 'Portale ricambi 3D',
       corpo: 'Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente.',
       tag: ['Pipeline CAD, 80 test', 'Proprietà intellettuale protetta'],
+      tagInEvidenza: 'In costruzione',
+      miniatura: 'ricambi' as const,
       link: 'Come funziona',
       href: localizedPath('it', '/lavori/portale-ricambi'),
     },
@@ -137,17 +150,19 @@ const leProve = {
       nome: 'Procedo',
       corpo: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.',
       tag: ['Clienti industriali', 'B4i Bocconi', 'Round angel'],
+      miniatura: 'procedo' as const,
       link: 'Come funziona',
       href: localizedPath('it', '/lavori/procedo'),
     },
     {
-      eyebrow: 'Prodotto vivo · aperto a tutti',
-      nome: 'Spannum',
-      corpo: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.',
-      tag: ['Online', 'Norme per età'],
-      link: 'Aprilo',
-      href: 'https://spannum.com',
-      esterno: true,
+      eyebrow: 'Tooling agentico · uso quotidiano',
+      nome: 'Agentic Workflow Toolkit',
+      corpo: 'Una suite di skill ad agenti AI che automatizzano le operazioni del team e i flussi ingegneristici, dagli standup quotidiani alla review dei prompt LLM.',
+      tag: ['Standup automatico', 'Documentazione rigenerata', 'Revisione dei prompt'],
+      tagInEvidenza: 'Strumenti miei, per il mio team',
+      miniatura: 'toolkit' as const,
+      link: 'Come funziona',
+      href: localizedPath('it', '/lavori/agentic-toolkit'),
     },
   ],
   continua: 'Tutti i lavori, compresa la ricerca',

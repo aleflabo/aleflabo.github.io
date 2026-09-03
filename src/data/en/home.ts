@@ -134,11 +134,32 @@ export const comeLavoro: ComeLavoroProps = {
 // suo `href` puntava a `/en/work/portale-ricambi`, una rotta che non
 // esisterà mai), quindi la scheda resta senza collegamento invece di
 // puntare a un 404 o saltare in italiano.
+//
+// Lo scambio (task 9, home-visuale): Spannum esce dalla home — resta
+// raggiungibile su /en/work — ed entra l'Agentic Workflow Toolkit, con
+// `miniatura` (le tre chiavi valgono identiche in italiano e in inglese:
+// sono disegni, non testo) e il suo tag: `tagIt` diventa qui la traduzione
+// approvata in testi-en.md (sezione «Agentic Workflow Toolkit», scheda
+// `[TRADOTTO]`) — «Automated standup», «Regenerated documentation»,
+// «Prompt review» — non una mia traduzione al volo. `eyebrow` è
+// `agentic-toolkit.en.area` in projects.ts («Agentic tooling»), non la
+// coppia con «· daily use» di testi-en.md: così l'ha voluto il committente
+// per questa scheda (vedi task-9-brief.md).
+//
+// `3D Parts Portal` non prende `tagInEvidenza`: «In costruzione» esiste
+// solo in italiano (è `tagIt` in projects.ts, non `tags`), e non c'è un
+// equivalente inglese approvato — vedi commento sopra `link`/`href`, stesso
+// principio. Il toolkit inglese resta senza `tagInEvidenza` per lo stesso
+// motivo: la dichiarazione italiana «Strumenti miei, per il mio team» non
+// ha una traduzione approvata in testi-en.md né altrove, e inventarla è
+// vietato quanto tradurre «In costruzione».
 interface Prova {
   eyebrow: string;
   nome: string;
   corpo: string;
   tag: string[];
+  tagInEvidenza?: string;
+  miniatura?: "ricambi" | "procedo" | "toolkit";
   link?: string;
   href?: string;
   esterno?: boolean;
@@ -160,23 +181,25 @@ export const leProve: LeProveProps = {
       nome: "3D Parts Portal",
       corpo: "The customer opens the 3D model of the machine they bought, clicks the part they need, and the request reaches the company already matched to that component's internal code.",
       tag: ["CAD pipeline, 80 tests", "Intellectual property protected"],
+      miniatura: "ricambi",
     },
     {
       eyebrow: "Industry · in production",
       nome: "Procedo",
       corpo: "Video shot on the shop floor becomes step-by-step procedures, and the people doing the work can ask questions of their own company's documentation. I was co-founder and CTO for two years; today I follow it as an advisor.",
       tag: ["Industrial customers", "B4i Bocconi", "Angel round"],
+      miniatura: "procedo",
       link: "How it works",
       href: "/en/work/procedo/",
     },
     {
-      eyebrow: "Live product · open to everyone",
-      nome: "Spannum",
-      corpo: "A working-memory test built to the protocol published in the literature, with the sources cited and the limits stated. It's online and you can try it.",
-      tag: ["Online", "Age norms"],
-      link: "Open it",
-      href: "https://spannum.com",
-      esterno: true,
+      eyebrow: "Agentic tooling",
+      nome: "Agentic Workflow Toolkit",
+      corpo: "A suite of AI-agent skills that automate my team's ops and engineering workflows, from daily standups to LLM-prompt review.",
+      tag: ["Automated standup", "Regenerated documentation", "Prompt review"],
+      miniatura: "toolkit",
+      link: "How it works",
+      href: "/en/work/agentic-toolkit/",
     },
   ],
   continua: "All the work, research included",

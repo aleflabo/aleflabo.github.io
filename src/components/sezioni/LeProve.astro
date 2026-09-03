@@ -10,11 +10,34 @@
 // `soloItaliano`, task 9/sito-inglese), quindi resta senza collegamento —
 // come già fanno Paesello e il video generativo in RigaLavoro.astro, righe
 // di /lavori e /en/work senza `href`.
+//
+// `miniatura` (task 9, home-visuale): tre disegni fissi sopra l'occhiello,
+// scelti per chiave — stesso trucco di `IlProblema.astro`/`vignetta`, così
+// le due home passano la stessa stringa invece di ricopiare l'SVG due
+// volte. A differenza delle vignette de «Il problema», queste **hanno**
+// il fascio animato (classi `.base`/`.fascio` di src/styles/global.css,
+// non ridichiarate qui): la sezione mostra cose che funzionano, la
+// precedente il prima. Ricopiate alla lettera da tavole/Main.dc.html,
+// blocco «6 · LE PROVE» — gli unici colori letterali cambiati sono quelli
+// già presenti come token in tokens.css (stesso hex, nessuna scelta mia):
+// #c2b6a2 → --tratto-inerte, #e0b98f → --tratto-tenue, #a8531d → --azione,
+// #fdf3e9 → --evidenziatore-tenue, #e6ddd0 → --border.
+//
+// `tagInEvidenza` (task 9): un tag in più, reso dopo gli altri in
+// `--azione` su `--evidenziatore-tenue` invece del grigio neutro degli
+// altri. È una prop e non un tag come gli altri perché la scelta di quale
+// tag mettere in evidenza — e se metterne uno — è del committente, non un
+// fatto che si deduce dai tag stessi: la home lo usa per correggere
+// «Portale ricambi 3D» (che raccontava una commessa reale mentre il
+// portale è ancora in costruzione) e per dichiarare che il toolkit
+// agentico non l'ha mai costruito per un cliente.
 interface Prova {
   eyebrow: string;
   nome: string;
   corpo: string;
   tag: string[];
+  tagInEvidenza?: string;
+  miniatura?: "ricambi" | "procedo" | "toolkit";
   link?: string;
   href?: string;
   esterno?: boolean;
@@ -36,11 +59,66 @@ const { occhiello, titolo, prove, continua, hrefContinua } = Astro.props;
     <div class="griglia">
       {prove.map((p) => (
         <div class="scheda">
+          {p.miniatura === "ricambi" && (
+            // Il modello 3D (l'esagono) che diventa una richiesta già
+            // associata al codice del pezzo (il riquadro col codice a
+            // due righe): il fascio percorre il collegamento fra i due.
+            <svg class="miniatura" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+              <path d="M30 20 L58 8 L86 20 L86 52 L58 64 L30 52 Z" stroke="var(--tratto-inerte)" stroke-width="1.5"></path>
+              <path d="M30 20 L58 32 L86 20 M58 32 V64" stroke="var(--tratto-inerte)" stroke-width="1.5"></path>
+              <circle cx="72" cy="26" r="5" fill="var(--azione)"></circle>
+              <path class="base" pathLength="100" d="M104 36 L196 36"></path>
+              <path class="fascio" pathLength="100" d="M104 36 L196 36"></path>
+              <rect x="208" y="20" width="106" height="32" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5"></rect>
+              <rect x="222" y="32" width="58" height="4" rx="2" fill="var(--azione)"></rect>
+              <rect x="222" y="41" width="34" height="4" rx="2" fill="var(--tratto-tenue)"></rect>
+            </svg>
+          )}
+          {p.miniatura === "procedo" && (
+            // Il video girato in reparto (il riquadro col triangolo di
+            // play) che diventa tre righe di procedura: il fascio
+            // percorre il passaggio dall'uno alle altre.
+            <svg class="miniatura" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+              <rect x="20" y="14" width="80" height="44" rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5"></rect>
+              <path d="M20 24h10M20 34h10M20 44h10M90 24h10M90 34h10M90 44h10" stroke="var(--tratto-inerte)" stroke-width="1.5"></path>
+              <path d="M50 26 L68 36 L50 46 Z" fill="var(--azione)"></path>
+              <path class="base" pathLength="100" d="M116 36 L196 36"></path>
+              <path class="fascio" pathLength="100" d="M116 36 L196 36"></path>
+              <circle cx="216" cy="18" r="4" fill="var(--azione)"></circle><rect x="228" y="15" width="86" height="6" rx="3" fill="var(--border)"></rect>
+              <circle cx="216" cy="36" r="4" fill="var(--azione)"></circle><rect x="228" y="33" width="72" height="6" rx="3" fill="var(--border)"></rect>
+              <circle cx="216" cy="54" r="4" fill="var(--azione)"></circle><rect x="228" y="51" width="60" height="6" rx="3" fill="var(--border)"></rect>
+            </svg>
+          )}
+          {p.miniatura === "toolkit" && (
+            // Due task (le due caselle di spunta) che confluiscono in un
+            // agente (il riquadro con le tre righe), che esce con un
+            // segno di spunta: due fasci in entrata, sfalsati, uno in
+            // uscita — lo stesso schema a imbuto usato in CosaCostruisco.
+            <svg class="miniatura" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+              <rect x="14" y="10" width="72" height="28" rx="4" stroke="var(--tratto-inerte)" stroke-width="1.5"></rect>
+              <circle cx="32" cy="24" r="6" stroke="var(--azione)" stroke-width="1.5"></circle>
+              <rect x="44" y="21" width="30" height="5" rx="2.5" fill="var(--border)"></rect>
+              <rect x="14" y="48" width="72" height="28" rx="4" stroke="var(--tratto-inerte)" stroke-width="1.5"></rect>
+              <rect x="26" y="59" width="10" height="5" rx="2.5" fill="var(--azione)"></rect>
+              <rect x="44" y="59" width="30" height="5" rx="2.5" fill="var(--border)"></rect>
+              <path class="base" pathLength="100" d="M92 24 C132 24 128 43 168 43"></path>
+              <path class="fascio" pathLength="100" d="M92 24 C132 24 128 43 168 43"></path>
+              <path class="base" pathLength="100" d="M92 62 C132 62 128 43 168 43"></path>
+              <path class="fascio" pathLength="100" d="M92 62 C132 62 128 43 168 43" style="animation-delay: .7s;"></path>
+              <rect x="180" y="18" width="52" height="50" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5"></rect>
+              <path d="M190 32h32M190 43h32M190 54h20" stroke="var(--azione)" stroke-width="1.5"></path>
+              <path class="base" pathLength="100" d="M240 43 L282 43"></path>
+              <path class="fascio" pathLength="100" d="M240 43 L282 43" style="animation-delay: 1.4s;"></path>
+              <circle cx="298" cy="43" r="8" stroke="var(--tratto-inerte)" stroke-width="1.5"></circle>
+              <path d="M294 43l3 3 6-6" stroke="var(--azione)" stroke-width="1.5"></path>
+            </svg>
+          )}
           <p class="eyebrow">{p.eyebrow}</p>
           <h3>{p.nome}</h3>
           <p class="corpo">{p.corpo}</p>
           <div class="tag">
             {p.tag.map((t) => <span>{t}</span>)}
+            {p.tagInEvidenza && <span class="tag-evidenza">{p.tagInEvidenza}</span>}
           </div>
           {p.href && (
             p.esterno ? (
@@ -83,6 +161,16 @@ const { occhiello, titolo, prove, continua, hrefContinua } = Astro.props;
     border-top: 3px solid var(--azione);
     padding-top: 22px;
   }
+  /* Il viewBox (338×86) fissa il rapporto: nessun'altezza dichiarata qui,
+     così la miniatura segue la larghezza della scheda invece di uno dei
+     due formati fissi della tavola (338px sul largo, 330 sullo stretto —
+     la differenza è solo lo scarto del margine della tavola, non un
+     ridisegno: qui basta `width: 100%`). */
+  .miniatura {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   .scheda .eyebrow {
     font-size: 11.5px;
     letter-spacing: 0.16em;
@@ -111,6 +199,20 @@ const { occhiello, titolo, prove, continua, hrefContinua } = Astro.props;
     border-radius: var(--radius);
     padding: 5px 10px;
     background: var(--bg);
+  }
+  /* Il tag in evidenza è anche uno `span` dentro `.tag`, quindi la regola
+     sopra lo riguarderebbe già — e vincerebbe, perché `.tag span` (una
+     classe più un tipo) è più specifica di `.tag-evidenza` da sola. Per
+     questo qui il selettore resta annidato sotto `.tag`, non staccato: a
+     parità di forma (dimensione, spaziatura, angoli, peso, già dati da
+     `.tag span`) cambiano solo i tre valori che dicono «questo è diverso
+     dagli altri» — colore, bordo e fondo, in `--azione` su
+     `--evidenziatore-tenue`. */
+  .tag .tag-evidenza {
+    color: var(--azione);
+    border-color: var(--azione);
+    background: var(--evidenziatore-tenue);
+    font-weight: 600;
   }
   .scheda .link {
     font-size: 14px;
