@@ -218,17 +218,18 @@ export const leProve: LeProveProps = {
 };
 
 // --- BloccoFormazione ---
-// `formati[].corpo` e `chiusura` sono facoltative nel componente da task 7
-// (home-visuale, la sezione è ridotta a striscia) e restano non usate: qui
-// restano richieste perché questo oggetto è comunque il testo completo, e
-// `en/index.astro` passa `introduzioni[1]` — non `[0]` — alla striscia:
-// è la seconda voce di quest'array, quella sull'AI Act, non la prima.
+// `formati[].corpo` e `chiusura` sono caduti (task 11, home-visuale): la
+// striscia (task 7) non li ha mai resi — sono facoltativi in
+// BloccoFormazione.astro — e nessun altro componente della home li legge,
+// a differenza dei testi estesi di /en/training, che vivono in un file
+// dati proprio. `en/index.astro` passa `introduzioni[1]` — non `[0]` —
+// alla striscia: è la seconda voce di quest'array, quella sull'AI Act, non
+// la prima.
 interface BloccoFormazioneProps {
   occhiello: string;
   titolo: string;
   introduzioni: string[];
-  formati: { ore: string; nome: string; corpo: string }[];
-  chiusura: string;
+  formati: { ore: string; nome: string }[];
   linkChiusura: string;
   hrefChiusura: string;
 }
@@ -241,33 +242,22 @@ export const bloccoFormazione: BloccoFormazioneProps = {
     "Since February 2025 the AI Act requires companies that use artificial intelligence tools to ensure a minimum level of training for their staff, and to be able to document it. You'll do that course anyway: it may as well be good for something.",
   ],
   formati: [
-    {
-      ore: "4 hours",
-      nome: "Introductory course",
-      corpo: "For the whole company, from the owner to the shop floor. What has changed in the last few years, what has stayed the same, and the concrete risks to your data.",
-    },
-    {
-      ore: "8–12 hours",
-      nome: "Workshop by function",
-      corpo: "Engineering office, purchasing, administration, sales. Each group works on its own documents, so what they learn can be used the next day.",
-    },
-    {
-      ore: "Length agreed",
-      nome: "Funded programme",
-      corpo: "Through accredited training bodies and interprofessional funds, when the company wants a long programme without committing its own cash.",
-    },
+    { ore: "4 hours", nome: "Introductory course" },
+    { ore: "8–12 hours", nome: "Workshop by function" },
+    { ore: "Length agreed", nome: "Funded programme" },
   ],
-  chiusura: "I taught for four years at Sapienza as a teaching assistant, and I was an invited speaker at Ferrari S.p.A.'s Data Science Hub. Courses are organised directly, or through accredited training bodies and interprofessional funds.",
   linkChiusura: "How a course gets organised",
   hrefChiusura: "/en/training/",
 };
 
 // --- DaDoveViene ---
+// `corpo` è caduto (task 11, home-visuale): la fascia scura non lo rende
+// più da quando FasciaNumeri.astro l'ha reso facoltativo e ha smesso di
+// leggerlo (task 5).
 interface DaDoveVieneProps {
   occhiello: string;
   titolo: string;
   intro: string;
-  corpo: string;
   tappe: { valore: string; etichetta: string }[];
   linkRicerca: string;
   hrefRicerca: string;
@@ -279,7 +269,6 @@ export const daDoveViene: DaDoveVieneProps = {
   occhiello: "Where what I know comes from",
   titolo: "From research to production",
   intro: "A master's in data science, then a PhD in computer vision at Sapienza, with the work published at conferences where it gets examined thoroughly before it comes out. I was then CTO of an industrial startup for two years, which is the job where you find out how much of that research survives contact with a real company.",
-  corpo: "Every paper I published came out together with the code. It's the habit I still work with: technical decisions stay written down, and the software I hand over opens and reads.",
   tappe: [
     { valore: "2021–2024", etichetta: "PhD in computer vision, Sapienza — PINlab" },
     { valore: "CVPR · ICCV · IROS", etichetta: "The main conferences in the field" },

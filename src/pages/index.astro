@@ -10,6 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Occhiello from '../components/sezioni/Occhiello.astro';
 import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../components/sezioni/IlProblema.astro';
+import CosaCostruisco from '../components/sezioni/CosaCostruisco.astro';
 import ComeLavoro from '../components/sezioni/ComeLavoro.astro';
 import LeProve from '../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
@@ -71,6 +72,20 @@ const ilProblema = {
       vignetta: 'fuoriDaCasa' as const,
     },
   ],
+};
+
+// --- CosaCostruisco ---
+// Le otto stringhe sono alla lettera da testi.md, sezione «Cosa
+// costruisco»: `verifica-rotte.mjs` fa fallire la build se una di queste
+// finisce in pagina senza stare lì (task 11, home-visuale).
+const cosaCostruisco = {
+  occhiello: 'Cosa costruisco',
+  titolo: 'Metto insieme quello che avete già',
+  intro: "I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.",
+  nodo: { titolo: 'Legge e collega', sottotitolo: 'ogni giorno, da solo' },
+  ritorno: 'da dove viene',
+  didascaliaSinistra: 'Cartelle, fogli, caselle di posta, gestionali.',
+  didascaliaDestra: 'Un posto solo dove cercare.',
 };
 
 // --- ComeLavoro ---
@@ -177,15 +192,16 @@ const leProve = {
 };
 
 // --- BloccoFormazione ---
-// `ore` e `nome` coincidono con `formati` di src/data/formazione.ts, ma il
-// corpo di ogni scheda è un riassunto proprio della home, diverso da
-// `formati[].corpo` (la versione estesa è per /formazione, task 10):
-// restano quindi scritti qui, per intero, anche se la striscia (task 7,
-// home-visuale) non li rende più: `formati[].corpo` e `chiusura` sono
-// facoltative nel componente, e qui restano nell'oggetto solo perché non
-// c'è motivo di toglierle. La striscia mostra una sola introduzione, non
-// `introduzioni[0]` ma `introduzioni[1]` — quella sull'AI Act, la seconda
-// in quest'array — passata così più sotto, dov'è la <BloccoFormazione>.
+// `ore` e `nome` coincidono con `formati` di src/data/formazione.ts. Il
+// corpo di ogni scheda e la `chiusura` sono caduti (task 11, home-visuale):
+// la striscia (task 7) non li ha mai resi — sono facoltativi nel
+// componente — e a differenza di `daDoveViene.corpo` sotto, qui non
+// servivano nemmeno prima: erano un riassunto proprio della home, mai letto
+// da nessun altro componente. `formati[].corpo` esteso resta invece su
+// /formazione, nel suo file dati. La striscia mostra una sola introduzione,
+// non `introduzioni[0]` ma `introduzioni[1]` — quella sull'AI Act, la
+// seconda in quest'array — passata così più sotto, dov'è la
+// <BloccoFormazione>.
 const bloccoFormazione = {
   occhiello: 'Formazione',
   titolo: 'Si comincia dalle persone',
@@ -194,33 +210,22 @@ const bloccoFormazione = {
     "Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.",
   ],
   formati: [
-    {
-      ore: '4 ore',
-      nome: 'Corso introduttivo',
-      corpo: "Per tutta l'azienda, dal titolare al reparto. Cosa è cambiato negli ultimi anni, cosa è rimasto uguale, e quali sono i rischi concreti per i vostri dati.",
-    },
-    {
-      ore: '8-12 ore',
-      nome: 'Laboratorio per funzione',
-      corpo: "Ufficio tecnico, acquisti, amministrazione, commerciale. Ogni gruppo lavora sui propri documenti, così quello che si impara si può usare il giorno dopo.",
-    },
-    {
-      ore: 'Durata concordata',
-      nome: 'Percorso finanziato',
-      corpo: "Attraverso enti accreditati e fondi interprofessionali, quando l'azienda vuole un percorso lungo senza impegnare cassa propria.",
-    },
+    { ore: '4 ore', nome: 'Corso introduttivo' },
+    { ore: '8-12 ore', nome: 'Laboratorio per funzione' },
+    { ore: 'Durata concordata', nome: 'Percorso finanziato' },
   ],
-  chiusura: 'Ho insegnato quattro anni alla Sapienza come assistente alla didattica, e sono stato relatore invitato al Data Science Hub di Ferrari S.p.A. I corsi si organizzano direttamente oppure attraverso enti accreditati e fondi interprofessionali.',
   linkChiusura: 'Come si organizza un corso',
   hrefChiusura: localizedPath('it', '/formazione'),
 };
 
 // --- DaDoveViene ---
+// `corpo` è caduto (task 11, home-visuale): la fascia scura non lo rende
+// più da quando FasciaNumeri.astro l'ha reso facoltativo e ha smesso di
+// leggerlo (task 5).
 const daDoveViene = {
   occhiello: 'Da dove viene quello che so',
   titolo: 'Dalla ricerca alla produzione',
   intro: "Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.",
-  corpo: "Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.",
   tappe: [
     { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza — PINlab' },
     { valore: 'CVPR · ICCV · IROS', etichetta: 'Le conferenze principali del settore' },
@@ -285,6 +290,7 @@ const datiStrutturati = [
   <Occhiello {...occhiello} />
   <FasciaNumeri numeri={numeri} daDoveViene={daDoveViene} />
   <IlProblema {...ilProblema} />
+  <CosaCostruisco {...cosaCostruisco} />
   <ComeLavoro {...comeLavoro} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} />

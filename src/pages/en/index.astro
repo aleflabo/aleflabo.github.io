@@ -1,12 +1,14 @@
 ---
 // src/pages/en/index.astro — la home inglese (rotta `/en/`).
 //
-// Gemella della home italiana (src/pages/index.astro, task 2/9, ramo
-// sito-italiano): stessi otto componenti di src/components/sezioni/,
-// alimentati qui da src/data/en/home.ts invece che dalle costanti scritte
-// a mano lì. Nessuna stringa nuova: tutto il testo viene da quel file
-// (task 3, sito-inglese, verificato campo per campo contro le firme dei
-// componenti — task-2-report.md).
+// Gemella della home italiana (src/pages/index.astro), ma a sette sezioni
+// invece di otto: manca <CosaCostruisco /> (task 11, home-visuale — vedi
+// il commento più sotto, prima del montaggio). Gli altri sette componenti
+// vengono da src/components/sezioni/, alimentati qui da src/data/en/home.ts
+// invece che dalle costanti scritte a mano nella home italiana. Nessuna
+// stringa nuova: tutto il testo viene da quel file (task 3, sito-inglese,
+// verificato campo per campo contro le firme dei componenti —
+// task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Occhiello from '../../components/sezioni/Occhiello.astro';
 import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
@@ -28,6 +30,17 @@ import {
 import { territorio } from '../../data/territorio';
 import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
 import { attivita } from '../../lib/datiStrutturati';
+
+// Niente <CosaCostruisco /> qui (task 11, home-visuale): le otto stringhe
+// della sezione italiana omonima (occhiello, titolo, intro, nodo.titolo,
+// nodo.sottotitolo, ritorno, le due didascalie — vedi il commento sopra
+// `cosaCostruisco` in src/pages/index.astro) non hanno un equivalente
+// approvato in testi-en.md. Non è una dimenticanza: è la regola 2 del
+// CLAUDE.md — un campo vuoto salta la sua sezione, non si allunga il
+// testo per riempirla. Per aggiungerla servirebbe che il committente
+// scrivesse (non traducesse) le otto frasi inglesi in testi-en.md, poi
+// bastano import di CosaCostruisco, l'oggetto in src/data/en/home.ts e il
+// montaggio qui sotto, sullo stesso modello dell'italiana.
 
 // Titolo e descrizione della pagina: composti dai dati già approvati in
 // home.ts, con la stessa regola della home italiana (src/pages/index.astro),
