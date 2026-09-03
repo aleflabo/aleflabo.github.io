@@ -1,0 +1,376 @@
+---
+// La tesi della home: dai dati e dagli strumenti che un'azienda ha già
+// sparsi in giro si tira fuori conoscenza. Il diagramma non la illustra,
+// la dimostra — stesso contenuto, disordine a sinistra (sopra, sullo
+// stretto) e struttura connessa a destra (sotto) — e la riga tratteggiata
+// che dal risultato evidenziato torna indietro fino alla fonte da cui
+// viene è l'argomento vero della sezione, non una rifinitura.
+//
+// I testi arrivano tutti come props (task 2, sito-inglese): il componente
+// non scrive nessuna parola propria. `frammenti`/`fascio` vengono da
+// src/lib/diagramma.ts (task 3) — il disordine e i collegamenti sono
+// calcolati, non ricopiati a mano dalla tavola.
+import { fascio, frammenti } from "../../lib/diagramma";
+
+interface Props {
+  occhiello: string;
+  titolo: string;
+  intro: string;
+  nodo: { titolo: string; sottotitolo: string };
+  ritorno: string; // l'etichetta sulla riga che torna alla fonte
+  didascaliaSinistra: string;
+  didascaliaDestra: string;
+}
+const { occhiello, titolo, intro, nodo, ritorno, didascaliaSinistra, didascaliaDestra } = Astro.props;
+
+// Il disordine. Undici pezzi sul largo, otto sullo stretto: a 350px undici
+// diventano illeggibili, e il numero è un dato del componente invece che
+// una cifra scritta due volte (una nel markup, una nella testa di chi legge
+// la tavola).
+const larghi = frammenti(11, { larghezza: 312, altezza: 370 });
+const stretti = frammenti(8, { larghezza: 350, altezza: 200 });
+
+// Le barrette dentro ogni frammento simulano del testo. Il passo (9px fra
+// una riga e l'altra, 12px dal bordo superiore) e l'alternanza di larghezza
+// (piena, poi ridotta di 14px, poi piena di nuovo) sono quelli della tavola:
+// non un dato di `frammenti()`, che genera solo forma e numero di righe.
+const RIENTRO = 9;
+const larghezzaBarra = (f: { w: number }, i: number) => f.w - RIENTRO * 2 - (i % 2 === 1 ? 14 : 0);
+
+// I fasci in entrata e in uscita dal nodo, disposizione larga: dal bordo
+// destro dell'area disordinata (x 312, larghezza dichiarata sopra) al bordo
+// sinistro del nodo (x 434), e simmetricamente in uscita. Punti fissi del
+// disegno, non derivati dai singoli frammenti: rappresentano «più fonti
+// convergono», non un collegamento a un riquadro preciso.
+const entranoL = [
+  { d: fascio([312, 92], [434, 200], "orizzontale"), ritardo: "0s" },
+  { d: fascio([312, 200], [434, 200], "orizzontale"), ritardo: ".4s" },
+  { d: fascio([312, 308], [434, 200], "orizzontale"), ritardo: ".8s" },
+];
+const esconoL = [
+  { d: fascio([624, 200], [752, 112], "orizzontale"), ritardo: "1.6s" },
+  { d: fascio([624, 200], [752, 200], "orizzontale"), ritardo: "2s" },
+  { d: fascio([624, 200], [752, 288], "orizzontale"), ritardo: "2.4s" },
+];
+
+// Gli stessi, disposizione stretta: qui il flusso è verticale, dal disordine
+// sopra al nodo, e dal nodo alla struttura sotto.
+const entranoS = [
+  { d: fascio([96, 194], [175, 246], "verticale"), ritardo: "0s" },
+  { d: fascio([175, 200], [175, 246], "verticale"), ritardo: ".4s" },
+  { d: fascio([232, 198], [175, 246], "verticale"), ritardo: ".8s" },
+];
+const esconoS = [{ d: fascio([175, 326], [175, 366], "verticale"), ritardo: "1.8s" }];
+
+// Il nodo e le etichette sono HTML sopra l'SVG, posizionati in percentuale
+// del canvas invece che in px fissi: così l'intero diagramma si restringe
+// insieme quando il contenitore è più stretto del disegno, invece che il
+// testo restare a dimensione intera dentro un riquadro già rimpicciolito.
+// I numeri di partenza sono quelli della tavola (Main.dc.html/HomeMobile.dc.html).
+const pct = (valore: number, totale: number) => `${((valore / totale) * 100).toFixed(4)}%`;
+
+const CANVAS_L = { larghezza: 1072, altezza: 456 };
+const nodoL = {
+  left: pct(434, CANVAS_L.larghezza),
+  top: pct(162, CANVAS_L.altezza),
+  width: pct(190, CANVAS_L.larghezza),
+  height: pct(76, CANVAS_L.altezza),
+};
+const ritornoL = { left: pct(452, CANVAS_L.larghezza), top: pct(412, CANVAS_L.altezza) };
+const didascaliaSinistraL = { left: pct(0, CANVAS_L.larghezza), top: pct(356, CANVAS_L.altezza), width: pct(300, CANVAS_L.larghezza) };
+const didascaliaDestraL = { left: pct(690, CANVAS_L.larghezza), top: pct(320, CANVAS_L.altezza), width: pct(262, CANVAS_L.larghezza) };
+
+const CANVAS_S = { larghezza: 350, altezza: 592 };
+const nodoS = {
+  left: pct(75, CANVAS_S.larghezza),
+  top: pct(246, CANVAS_S.altezza),
+  width: pct(200, CANVAS_S.larghezza),
+  height: pct(80, CANVAS_S.altezza),
+};
+const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.altezza) };
+---
+
+<section class="cosa-costruisco">
+  <div class="container">
+    <p class="label">{occhiello}</p>
+    <h2 class="section-title">{titolo}</h2>
+    <p class="intro">{intro}</p>
+
+    <!-- ============ disposizione larga (≥641px): sinistra→nodo→destra ============ -->
+    <div class="diagramma diagramma-larga" style={`aspect-ratio: ${CANVAS_L.larghezza} / ${CANVAS_L.altezza};`}>
+      <svg
+        width={CANVAS_L.larghezza}
+        height={CANVAS_L.altezza}
+        viewBox={`0 0 ${CANVAS_L.larghezza} ${CANVAS_L.altezza}`}
+        fill="none"
+        style="position: absolute; inset: 0; width: 100%; height: 100%;"
+        aria-hidden="true"
+      >
+        <!-- sinistra: quello che c'è, com'è -->
+        {larghi.map((f) => (
+          <g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
+            <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
+            {Array.from({ length: f.righe }).map((_, i) => (
+              <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(f, i)} height="4" rx="2" fill="var(--border)" />
+            ))}
+          </g>
+        ))}
+
+        <!-- i fasci che entrano -->
+        {entranoL.map((f) => <path class="base" pathLength="100" d={f.d} />)}
+        {entranoL.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+
+        <!-- i fasci che escono -->
+        {esconoL.map((f) => <path class="base" pathLength="100" d={f.d} />)}
+        {esconoL.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+
+        <!-- destra: la stessa roba, ma connessa -->
+        <path d="M 872 112 L 916 155 M 872 200 L 916 173 M 872 200 L 916 245 M 872 288 L 916 263 M 940 191 L 940 227" stroke="var(--tratto-tenue)" stroke-width="1.5" />
+        <rect x="752" y="94" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="764" y="106" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="764" y="115" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="752" y="182" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="764" y="194" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="764" y="203" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="752" y="270" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="764" y="282" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="764" y="291" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="916" y="137" width="130" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="928" y="149" width="90" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="928" y="158" width="68" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="916" y="227" width="130" height="36" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5" />
+        <rect x="928" y="239" width="90" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="928" y="248" width="68" height="4" rx="2" fill="var(--tratto-tenue)" />
+
+        <!-- e la riga che dal risultato torna alla sua fonte -->
+        <path class="interrotto" d="M 981 263 L 981 424 L 150 424 L 150 332" />
+        <path d="M 144 340 L 150 330 L 156 340" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-linejoin="round" />
+      </svg>
+
+      <div class="nodo" style={`left: ${nodoL.left}; top: ${nodoL.top}; width: ${nodoL.width}; height: ${nodoL.height};`}>
+        <p class="nodo-titolo">{nodo.titolo}</p>
+        <p class="nodo-sottotitolo">{nodo.sottotitolo}</p>
+      </div>
+
+      <span class="ritorno" style={`left: ${ritornoL.left}; top: ${ritornoL.top};`}>{ritorno}</span>
+      <p class="didascalia" style={`left: ${didascaliaSinistraL.left}; top: ${didascaliaSinistraL.top}; width: ${didascaliaSinistraL.width};`}>{didascaliaSinistra}</p>
+      <p class="didascalia" style={`left: ${didascaliaDestraL.left}; top: ${didascaliaDestraL.top}; width: ${didascaliaDestraL.width};`}>{didascaliaDestra}</p>
+    </div>
+
+    <!-- ============ disposizione stretta (≤640px): il diagramma gira di 90° ============
+         Sopra il disordine, sotto la struttura, e la riga che torna alla fonte
+         scende lungo il margine destro e risale a sinistra: è l'unico modo di
+         tenerla visibile senza farla passare sopra i riquadri. -->
+    <div class="diagramma diagramma-stretta" style={`aspect-ratio: ${CANVAS_S.larghezza} / ${CANVAS_S.altezza};`}>
+      <svg
+        width={CANVAS_S.larghezza}
+        height={CANVAS_S.altezza}
+        viewBox={`0 0 ${CANVAS_S.larghezza} ${CANVAS_S.altezza}`}
+        fill="none"
+        style="position: absolute; inset: 0; width: 100%; height: 100%;"
+        aria-hidden="true"
+      >
+        <!-- sopra: il disordine -->
+        {stretti.map((f) => (
+          <g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
+            <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
+            {Array.from({ length: f.righe }).map((_, i) => (
+              <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(f, i)} height="4" rx="2" fill="var(--border)" />
+            ))}
+          </g>
+        ))}
+
+        <!-- i fasci scendono nel nodo -->
+        {entranoS.map((f) => <path class="base" pathLength="100" d={f.d} />)}
+        {entranoS.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+
+        <!-- e ne escono -->
+        {esconoS.map((f) => <path class="base" pathLength="100" d={f.d} />)}
+        {esconoS.map((f) => <path class="fascio" pathLength="100" d={f.d} style={`animation-delay: ${f.ritardo};`} />)}
+
+        <!-- sotto: la struttura, con i suoi collegamenti -->
+        <path d="M 42 388 L 42 522 M 42 404 L 58 404 M 42 460 L 58 460 M 42 516 L 58 516" stroke="var(--tratto-tenue)" stroke-width="1.5" />
+        <rect x="58" y="366" width="252" height="38" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="72" y="378" width="150" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="72" y="387" width="104" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="58" y="422" width="252" height="38" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+        <rect x="72" y="434" width="132" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="72" y="443" width="88" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <rect x="58" y="478" width="252" height="38" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5" />
+        <rect x="72" y="490" width="146" height="4" rx="2" fill="var(--azione)" opacity=".55" />
+        <rect x="72" y="499" width="96" height="4" rx="2" fill="var(--tratto-tenue)" />
+
+        <!-- la riga che torna alla fonte: giù a destra, poi su a sinistra -->
+        <path class="interrotto" d="M 310 497 L 332 497 L 332 560 L 18 560 L 18 118 L 24 118" />
+        <path d="M 22 112 L 32 118 L 22 124" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-linejoin="round" />
+      </svg>
+
+      <div class="nodo" style={`left: ${nodoS.left}; top: ${nodoS.top}; width: ${nodoS.width}; height: ${nodoS.height};`}>
+        <p class="nodo-titolo">{nodo.titolo}</p>
+        <p class="nodo-sottotitolo">{nodo.sottotitolo}</p>
+      </div>
+
+      <span class="ritorno" style={`left: ${ritornoS.left}; top: ${ritornoS.top};`}>{ritorno}</span>
+    </div>
+
+    <!-- Sullo stretto le due didascalie stanno sotto il diagramma, non dentro:
+         nella tavola qui c'è un'unica frase che le fonde con «Sopra,»/«Sotto,»,
+         ma quelle due parole non arrivano come prop — e la copy non si inventa
+         nemmeno per una congiunzione. Restano due frasi, quelle vere. -->
+    <div class="didascalie-sotto">
+      <p class="didascalia-sotto">{didascaliaSinistra}</p>
+      <p class="didascalia-sotto">{didascaliaDestra}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cosa-costruisco {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+  .container {
+    padding: 80px 24px 84px;
+  }
+  .section-title {
+    font-size: 34px;
+    margin-top: 16px;
+    max-width: 28ch;
+  }
+  .intro {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+
+  /* Il canvas: larghezza fluida fino al suo formato naturale, mai oltre —
+     è il riquadro dentro cui SVG e overlay HTML condividono le stesse
+     coordinate percentuali, quindi si restringono insieme. */
+  .diagramma {
+    position: relative;
+    width: 100%;
+    margin-top: 46px;
+  }
+  .diagramma-larga {
+    max-width: 1072px;
+  }
+  .diagramma-stretta {
+    display: none;
+    max-width: 350px;
+    margin-top: 30px;
+  }
+
+  /* Il nodo centrale: HTML, non SVG, perché porta testo vero e un'ombra a
+     doppio strato che lo fa sembrare sollevato dal disegno — l'unico
+     riquadro di tutta la scena che non è un dato, ma la tesi stessa. */
+  .nodo {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: var(--surface);
+    border: 1.5px solid var(--azione);
+    border-radius: var(--radius);
+    box-shadow: 0 0 0 7px rgb(240 201 164 / 32%), 0 12px 34px rgb(168 83 29 / 14%);
+    text-align: center;
+  }
+  .nodo-titolo {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .nodo-sottotitolo {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 700;
+  }
+
+  /* L'etichetta della riga di ritorno: interrompe il tratteggio invece di
+     starci sopra, per questo porta lo sfondo della pagina. */
+  .ritorno {
+    position: absolute;
+    background: var(--bg);
+    padding: 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--azione);
+    white-space: nowrap;
+  }
+
+  .didascalia {
+    position: absolute;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--text-faint);
+  }
+
+  .didascalie-sotto {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px 52px;
+    }
+    .label {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-top: 14px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intro {
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: none;
+      text-wrap: pretty;
+    }
+
+    .diagramma-larga {
+      display: none;
+    }
+    .diagramma-stretta {
+      display: block;
+    }
+    .diagramma-stretta .nodo {
+      box-shadow: 0 0 0 6px rgb(240 201 164 / 32%), 0 10px 28px rgb(168 83 29 / 14%);
+    }
+    .diagramma-stretta .nodo-titolo {
+      font-size: 18px;
+    }
+    .diagramma-stretta .nodo-sottotitolo {
+      font-size: 10px;
+    }
+    .diagramma-stretta .ritorno {
+      font-size: 10px;
+      padding: 0 10px;
+    }
+
+    .didascalie-sotto {
+      display: block;
+      margin-top: 22px;
+    }
+    .didascalia-sotto {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-faint);
+    }
+    .didascalia-sotto + .didascalia-sotto {
+      margin-top: 6px;
+    }
+  }
+</style>
