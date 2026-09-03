@@ -105,7 +105,14 @@ main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both;
 }
 
 /* Chi ha chiesto meno movimento non ne riceve nessuno. Il disegno resta
-   leggibile fermo: nessuna informazione vive solo nell'animazione. */
+   leggibile fermo: nessuna informazione vive solo nell'animazione.
+   `scroll-behavior: auto` c'è perché tokens.css accende lo scorrimento
+   morbido (`html { scroll-behavior: smooth }`), che è movimento quanto
+   un'animazione. Un secondo blocco, quasi identico ma senza questa riga,
+   viveva in fondo al file da prima di questo task: due `@media
+   (prefers-reduced-motion: reduce)` distinti sulla stessa condizione sono
+   duplicazione verbatim, non due regole diverse, quindi questo li assorbe
+   entrambi. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -160,12 +167,4 @@ a:hover .freccia { transform: translateX(5px); }
 .data,
 .numero .valore {
   font-variant-numeric: tabular-nums;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
 }
