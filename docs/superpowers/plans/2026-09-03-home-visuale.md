@@ -63,11 +63,13 @@ Valgono per ogni task. Sono copiate dal `CLAUDE.md` del repo e dalla spec.
   l'aveva dichiarata identica.
 - **Ogni cosa che si preme è alta almeno 44px**, link di sezione compresi.
 - **I componenti non importano da `src/data/`**: ricevono i testi come props.
-- **Tre componenti hanno consumatori fuori dalla home e le loro props esistenti
-  non possono diventare obbligatorie**: `ComeLavoro` (lo usa
-  `CorpoChiSono.astro`), `Contatto` (`BaseLayout.astro` e
-  `src/pages/en/notes/index.astro`), `DaDoveViene` (citato in
-  `Territorio.astro`).
+- **Nessuno dei componenti toccati ha consumatori fuori dalle due home.**
+  Verificato con `grep -rl "import <Nome> from"`: `Occhiello`, `FasciaNumeri`,
+  `IlProblema`, `ComeLavoro`, `LeProve`, `BloccoFormazione`, `Contatto` sono
+  importati solo da `src/pages/index.astro` e `src/pages/en/index.astro`.
+  Le props restano comunque **facoltative** dove il piano lo dice, perché è la
+  forma giusta — un campo vuoto salta la sua sezione, ed è la regola 2 del
+  `CLAUDE.md` — non perché qualcun altro le ometta.
 - **Prima di ogni PR:** `npm run check` (0 errori), `npm test` (tutti verdi),
   `npm run verifica` (che ricostruisce e quindi copre anche `build`).
 

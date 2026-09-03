@@ -444,12 +444,12 @@ ed è un requisito, non una cortesia.
 | `sezioni/FasciaNumeri.astro` | Assorbe `DaDoveViene`. Props nuove: `daDoveViene?`. Se manca, rende solo i numeri. |
 | `sezioni/DaDoveViene.astro` | Si cancella. È citato in `Territorio.astro`: verificare il riferimento prima. |
 | `sezioni/Territorio.astro` | Si cancella come sezione; i suoi testi passano a `Contatto`. |
-| `sezioni/Contatto.astro` | Props nuove: `territorio?`. **Deve restare opzionale**: il componente è usato anche da `BaseLayout` e da `en/notes/index.astro`. |
+| `sezioni/Contatto.astro` | Props nuove: `territorio?`, facoltativa: senza, rende solo il modulo. |
 | `sezioni/IlProblema.astro` | Ogni riquadro guadagna una vignetta, scelta per indice o per chiave. |
 | `sezioni/BloccoFormazione.astro` | Diventa striscia. Perde `formati[].corpo` e `chiusura` dalla home; restano su `/formazione`. |
 | `sezioni/LeProve.astro` | Ogni scheda guadagna una miniatura, e i tag possono portarne uno in evidenza («In costruzione», «Strumenti miei, per il mio team»). |
 | `sezioni/CosaCostruisco.astro` | **Nuovo.** Tesi, diagramma, e basta. Due disposizioni, orizzontale e verticale, con la soglia a 640px e il numero di frammenti come dato. |
-| `sezioni/ComeLavoro.astro` | Il corpo di ogni passo diventa opzionale: la home non lo passa, `/chi-sono` sì. **Le props esistenti non cambiano**: lo usa anche `CorpoChiSono.astro`. I nomi dei passi arrivano da `ingaggi` di `servizi.ts` invece che da stringhe proprie della home. |
+| `sezioni/ComeLavoro.astro` | Il corpo di ogni passo diventa facoltativo e la home non lo passa. I nomi dei passi arrivano da `ingaggi` di `servizi.ts` invece che da stringhe proprie della home. |
 | `sezioni/Occhiello.astro` | Invariato. Contiene l'ancora `#le-prove`: se la sezione cambia nome, l'ancora resta. |
 | `styles/tokens.css` | Sei token nuovi. |
 | `styles/global.css` | `.base`, `.fascio`, `.interrotto`, `@keyframes fascio`; `sali` passa all'innesco per visibilità. |
@@ -495,9 +495,13 @@ Non è un lavoro solo italiano.
   scrive la copy in `testi-en.md`. La pagina inglese non passa quelle props e la
   sezione si salta: è la regola 2 del `CLAUDE.md` — «un campo vuoto salta la sua
   sezione» — non un'eccezione fatta per l'occasione.
-- Tre componenti hanno consumatori fuori dalla home e le loro props **non
-  possono diventare obbligatorie**: `ComeLavoro` (`CorpoChiSono`), `Contatto`
-  (`BaseLayout`, `en/notes/index`), `DaDoveViene` (citato in `Territorio`).
+- **Nessuno dei componenti toccati ha consumatori fuori dalle due home.**
+  Verificato con `grep -rl "import <Nome> from"`: `Occhiello`, `FasciaNumeri`,
+  `IlProblema`, `ComeLavoro`, `LeProve`, `BloccoFormazione`, `Contatto` sono
+  importati solo da `src/pages/index.astro` e `src/pages/en/index.astro`.
+  Le props restano comunque **facoltative** dove il piano lo dice, perché è la
+  forma giusta — un campo vuoto salta la sua sezione, ed è la regola 2 del
+  `CLAUDE.md` — non perché qualcun altro le ometta.
 - `verifica-rotte.mjs` controlla che non ci sia italiano sulle pagine inglesi.
   Va lasciato severo: se la home inglese resta indietro, deve essere lui a
   dirlo.
