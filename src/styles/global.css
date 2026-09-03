@@ -78,12 +78,42 @@ select:focus-visible,
 @keyframes parola { from { opacity: 0; transform: translateY(16px); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
 @keyframes respira { 0%, 100% { opacity: .5; transform: scale(1); } 50% { opacity: .85; transform: scale(1.05); } }
 
-main > section { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both; }
-main > section:nth-of-type(1) { animation-delay: .02s; }
-main > section:nth-of-type(2) { animation-delay: .1s; }
-main > section:nth-of-type(3) { animation-delay: .18s; }
-main > section:nth-of-type(4) { animation-delay: .26s; }
-main > section:nth-of-type(n + 5) { animation-delay: .32s; }
+/* L'animazione non parte più al caricamento. Prima `main > section` partiva
+   tutta insieme con ritardi progressivi: le sezioni in fondo avevano già
+   finito prima che qualcuno le vedesse, e con una pagina più lunga il difetto
+   peggiora. Adesso parte quando la sezione entra in vista, una volta sola, ed
+   è BaseLayout ad aggiungere `.in-vista` a ogni `main > section`. Senza
+   JavaScript non succede niente: per questo lo stato di partenza è quello
+   finito, non quello nascosto. */
+main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both; }
+
+/* Il fascio che percorre un collegamento. `pathLength="100"` su ogni <path>
+   normalizza la geometria: un solo dasharray vale per curve di lunghezza
+   diversa, e i ritardi restano leggibili. */
+@keyframes fascio { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
+
+.base { stroke: var(--border); stroke-width: 1.5; fill: none; }
+.interrotto { stroke: var(--tratto-inerte); stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; }
+.fascio {
+  stroke: var(--azione);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 11 89;
+  filter: drop-shadow(0 0 4px rgb(168 83 29 / 55%));
+  animation: fascio 3.4s linear infinite;
+}
+
+/* Chi ha chiesto meno movimento non ne riceve nessuno. Il disegno resta
+   leggibile fermo: nessuna informazione vive solo nell'animazione. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 .divider { transform-origin: left; animation: tira .8s cubic-bezier(.22, .8, .3, 1) .4s both; }
 

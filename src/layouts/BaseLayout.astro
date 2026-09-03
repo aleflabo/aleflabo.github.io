@@ -154,5 +154,31 @@ const blocchiLd = [...comuni, ...datiStrutturati];
     <Nav lang={lang} hrefAltro={hrefAltro} attiva={attiva} />
     <main id="contenuto"><slot /></main>
     <Footer lang={lang} />
+    <script is:inline>
+      /* Fa partire l'animazione quando la sezione entra in vista, una volta
+         sola. Senza JavaScript le sezioni restano visibili e ferme:
+         `.in-vista` aggiunge il movimento, non il contenuto. Osserva
+         `main > section` — non un attributo dedicato — perché lo stesso
+         elemento copre anche le sezioni di /servizi, /chi-sono, /ricerca,
+         /formazione e /i-vostri-dati: un attributo che solo i componenti
+         della home ricevessero toglierebbe l'animazione a quelle pagine, in
+         silenzio. */
+      (function () {
+        var pezzi = document.querySelectorAll('main > section');
+        if (!pezzi.length) return;
+        if (!('IntersectionObserver' in window)) {
+          pezzi.forEach(function (p) { p.classList.add('in-vista'); });
+          return;
+        }
+        var osservatore = new IntersectionObserver(function (voci) {
+          voci.forEach(function (v) {
+            if (!v.isIntersecting) return;
+            v.target.classList.add('in-vista');
+            osservatore.unobserve(v.target);
+          });
+        }, { rootMargin: '0px 0px -12% 0px' });
+        pezzi.forEach(function (p) { osservatore.observe(p); });
+      })();
+    </script>
   </body>
 </html>

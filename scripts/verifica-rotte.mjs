@@ -55,7 +55,7 @@ for (const f of trovaHtml("dist")) {
 // Le frasi che il committente non ha ancora approvato non devono uscire.
 // Questa lista è il ponte fra la spec e la pagina: finché una di queste frasi
 // non compare in testi.md — la fonte approvata — non può comparire nemmeno in
-// dist. È il seguito del blocco qui sopra: là i segnaposti evidenti, qui le
+// dist. È il seguito del blocco qui sopra: là i segnaposto evidenti, qui le
 // frasi che sembrano finite e non lo sono.
 const DA_APPROVARE = [
   "Cosa costruisco",
@@ -71,17 +71,37 @@ const DA_APPROVARE = [
 // era il contrario: la legenda di una sua tabella contiene «da dove viene», e
 // bastava a rendere il controllo cieco su quella frase per sempre. Le stringhe
 // inglesi avranno la loro lista quando la copy inglese arrivera'.
-const FONTI_APPROVATE = readFileSync(
-  "docs/superpowers/specs/2026-08-25-sito-italiano/testi.md",
-  "utf8",
-);
-
-for (const f of trovaHtml("dist")) {
-  const html = readFileSync(f, "utf8");
-  for (const frase of DA_APPROVARE) {
-    if (html.includes(frase) && !FONTI_APPROVATE.includes(frase)) {
-      dice(`${f} pubblica «${frase}», che non sta in testi.md`);
+const PERCORSO_TESTI = "docs/superpowers/specs/2026-08-25-sito-italiano/testi.md";
+if (!existsSync(PERCORSO_TESTI)) {
+  dice(`manca ${PERCORSO_TESTI}: impossibile verificare le frasi da approvare`);
+} else {
+  const FONTI_APPROVATE = readFileSync(PERCORSO_TESTI, "utf8");
+  for (const f of trovaHtml("dist")) {
+    const html = readFileSync(f, "utf8");
+    for (const frase of DA_APPROVARE) {
+      if (html.includes(frase) && !FONTI_APPROVATE.includes(frase)) {
+        dice(`${f} pubblica «${frase}», che non sta in testi.md`);
+      }
     }
+  }
+}
+
+// Il movimento deve restare condizionato: alla visibilità e alla preferenza di
+// chi legge. Due regressioni possibili, tutte e due silenziose in pagina.
+{
+  const css = trovaHtml("dist")
+    .map((f) => readFileSync(f, "utf8"))
+    .concat(
+      readdirSync("dist/_astro", { withFileTypes: true })
+        .filter((v) => v.isFile() && v.name.endsWith(".css"))
+        .map((v) => readFileSync(join("dist/_astro", v.name), "utf8")),
+    )
+    .join("\n");
+  if (!css.includes("prefers-reduced-motion")) {
+    dice("il sito costruito non dichiara nessun blocco prefers-reduced-motion");
+  }
+  if (/main\s*>\s*section\s*\{[^}]*animation/.test(css)) {
+    dice("main > section si anima ancora al caricamento invece che entrando in vista");
   }
 }
 
