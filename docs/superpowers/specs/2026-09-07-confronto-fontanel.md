@@ -126,10 +126,91 @@ blocco più lungo, 1.800px, contiene quattro passi e tre progetti diversi.
 Non è una questione di lunghezza — la nostra pagina è metà della sua e va benissimo —
 ma di **quanto si insiste su un'idea prima di passare alla successiva**.
 
+## La rilettura del committente, che è più precisa di questa analisi
+
+Il 7 settembre, letta la tabella qui sopra:
+
+> «quello che mi interessava di più dal sito di fontanel è che scrollando c'è un po' una
+> storia raccontata verso l'esigenza di chi legge. da noi non emerge bene. "il problema"
+> e "metto insieme quello che avete già" non fa capire quanto è possibile accelerare o
+> integrazione tool ai secondo me»
+
+Tre affermazioni, verificate una per una sul costruito e sui dati. **Tutte e tre
+reggono, e due spostano la diagnosi.**
+
+### «I numeri del lettore non ci sono» — falso, ma peggio
+
+Ci sono già, e sono buoni. Due dei tre riquadri di «Il problema» portano una misura
+nelle unità di chi legge:
+
+| | la misura | dove sta |
+|---|---|---|
+| «Mi serve questo pezzo.» | «succede che **ci si mettano in due per un paio di giorni**» | corpo del riquadro, **15px** |
+| «Lo sa fare solo Bruno.» | «**Quarant'anni** di mestiere… **fra due anni** Bruno va in pensione» | corpo del riquadro, **15px** |
+| «Abbiamo provato ChatGPT.» | nessuna | — |
+
+E i miei numeri — 10 articoli, 533 citazioni, 1 Best Paper, 2 anni da CTO — stanno a
+**26px**, in una fascia tutta loro, **due schermate più in alto**.
+
+Quindi non manca il numero del lettore: **manca la gerarchia**. Due uomini per due
+giorni è un numero più forte di 533 citazioni per chiunque arrivi con un preventivo da
+fare, ed è scritto undici pixel più piccolo. Fontanel non ha numeri migliori dei nostri:
+li ha messi a 115px.
+
+**Questo cambia la proposta B.** Non serve inventare un numero: serve promuovere quello
+che c'è già.
+
+### «Non fa capire quanto è possibile accelerare» — vero, ed è un buco nei dati
+
+Non è un problema di scrittura. Il campo `result` di tutti e dieci i progetti in
+`src/data/projects.ts` descrive **lo stato del progetto**, mai **il guadagno del
+cliente**:
+
+> «Procedo gira in produzione presso clienti industriali, è stata selezionata
+> dall'acceleratore B4i di Bocconi e ha chiuso un round angel.»
+> «La pipeline di conversione dei CAD è finita e collaudata; il portale è in
+> costruzione.»
+> «Le operazioni di routine e la documentazione ora girano come invocazioni di agenti a
+> un comando invece che a mano.»
+
+Sono onesti e sono invisibili a chi si chiede quanto ci guadagna. **Il dato non esiste
+nel repo perché non è mai stato misurato**, quindi nessuna riscrittura lo può produrre —
+e inventarlo è vietato due volte: dalla regola 2 e da una frase del sito stesso, su
+`/formazione`: «Non arrivo con una percentuale di risparmio già scritta sulle slide.
+Prima di aver visto come lavorate sarebbe un numero inventato.»
+
+C'è una sola via onesta, e non è di copy: **misurare un prima/dopo su un lavoro vero**,
+anche uno solo, anche approssimato, e scriverlo. Il candidato naturale è il portale
+ricambi, perché il suo «prima» è già scritto in pagina — due persone per due giorni — e
+manca solo il «dopo».
+
+Finché quel numero non esiste, la cosa corretta da fare **non** è aggirare il problema
+con un'altra formulazione: è dire che non c'è.
+
+### «Integrazione tool AI» — vero, e su questo la pagina tace quasi del tutto
+
+Sulla home la parola che allude ai sistemi aziendali è **una**: «gestionali», dentro
+l'elenco dei frammenti del diagramma, «Cartelle, fogli, caselle di posta, gestionali».
+Le altre tre sono documenti. Il nodo centrale dice «Legge e collega, ogni giorno, da
+solo».
+
+Il diagramma fa quindi vedere che l'AI **legge dei documenti sparsi**. Non fa vedere che
+**si aggancia ai software che in azienda girano già**, che è il lavoro vero e la
+differenza fra un assistente e un'integrazione.
+
+Fontanel lo dice tre volte e in tre modi: «Integrazioni con i software già in uso» fra i
+punti delle implementazioni custom, «AIOS si connette ai tuoi software» come prodotto, e
+la lista «CRM, supporto clienti, riunioni, comunicazioni interne, email».
+
 ## Cosa proporrei di cambiare
 
-Tre interventi, in ordine di quanto cambiano la pagina. **Da approvare, e nessuno dei
-tre si può scrivere senza frasi nuove: la regola 2 del CLAUDE.md le vuole da te.**
+Quattro interventi più una misura, in ordine di quanto cambiano la pagina. **Da
+approvare, e ognuno chiede una frase nuova: la regola 2 del CLAUDE.md le vuole da te.**
+
+Il filo che li tiene insieme è quello che il committente ha chiesto — *una storia che
+scorrendo va verso l'esigenza di chi legge* — e in questa forma la pagina la racconta
+così: **il tuo problema, con la tua misura → una porta sola da cui si comincia → cosa
+si aggancia a quello che avete già → chi firma.** Oggi comincia da chi firma.
 
 ### A. La fascia dei numeri scende, e cambia titolo
 
@@ -141,14 +222,56 @@ Costo: nessuna copy nuova per lo spostamento; **una** frase nuova per l'intestaz
 Rischio: la pagina perde presto la prova che so di cosa parlo. Si compensa con la riga
 di credibilità in testata, che resta dov'è.
 
-### B. Il problema acquista un numero che è del lettore
+### B. I numeri che il problema ha già smettono di essere corpo del testo
 
-È «il numero che appartiene a chi legge», già in programma per il terzo giro: i
-quarant'anni di mestiere di Bruno come quaranta celle, una sola piena. Sta bene sotto
-la terza citazione, che è quella su Bruno, e non sostituisce le altre due.
+*Riscritta dopo la rilettura del committente: la versione precedente proponeva di
+aggiungere un numero, ed era sbagliata — i numeri ci sono già.*
 
-Costo: **una o due** frasi nuove, la legenda compresa — è la legenda che rende il
-numero del lettore, non il numero.
+«Due persone per un paio di giorni» e «quarant'anni in una testa sola, due anni alla
+pensione» escono dal corpo a 15px e diventano la cosa grande del riquadro, con la frase
+che li spiega sotto. Non è un'aggiunta: è un'inversione di gerarchia dentro un riquadro
+che esiste già.
+
+Il terzo riquadro, «Abbiamo provato ChatGPT», non ha un numero e **non deve prenderne
+uno inventato**: resta come sta. Un'asimmetria di due su tre è onesta; tre su tre con
+uno finto no.
+
+Sopra i due numeri serve la riga che li rende del lettore — l'equivalente di «1 CELLA =
+1 ORA DELLA SETTIMANA DEL TUO TEAM». È **quella** riga a fare il lavoro, non il numero.
+
+Costo: **una** frase nuova, la riga di legenda. I due numeri sono copy già approvata,
+spostata di posto e di corpo. E le quaranta celle di Bruno, che erano l'idea del terzo
+giro, diventano il modo di disegnare il secondo numero invece di un'invenzione a parte.
+
+### B-bis. Il «quanto» che manca va misurato, non scritto
+
+Nessuno dei dieci progetti registra un guadagno del cliente. Finché non c'è, la pagina
+non può dire di quanto accelera — e non deve fingerlo.
+
+**Non è un intervento di sito: è una misura da fare.** Il candidato è il portale
+ricambi, il cui «prima» è già in pagina («in due per un paio di giorni») e a cui manca
+solo il «dopo». Un solo numero vero, anche approssimato, anche dichiarato come tale,
+vale più di tutta questa specifica.
+
+Costo: niente codice. Una domanda al cliente del portale ricambi.
+
+### D. Il diagramma smette di parlare solo di documenti
+
+Dei quattro frammenti che entrano nel nodo, tre sono documenti (cartelle, fogli,
+caselle di posta) e uno solo allude a un sistema (gestionali). Il diagramma dimostra
+quindi che l'AI **legge**, non che **si aggancia**.
+
+L'intervento più piccolo che chiude il buco è dentro la geometria che già esiste:
+i frammenti si dividono in due nature — quelli che sono documenti e quelli che sono
+software in uso — e la didascalia di sinistra lo dice.
+
+Costo: **una** frase nuova per la didascalia, più i nomi dei sistemi, che però non sono
+copy: sono fatti. E vanno presi da aziende vere, non da un elenco plausibile.
+
+Nota di perimetro: questo è il punto della home dove si passa più vicino all'offerta di
+Procedo, e `.claude/rules/procedo.md` va riletta prima di scrivere. «Tenere collegate
+fonti sparse che l'azienda ha già» sta dentro; l'assistente sulle procedure girate in
+reparto no.
 
 ### C. Una porta sola, dichiarata
 
