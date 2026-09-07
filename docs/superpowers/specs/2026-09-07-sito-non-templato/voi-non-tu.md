@@ -1,22 +1,44 @@
-# Il «voi» — quattordici frasi da riscrivere
+# Il «voi» — il censimento, e la decisione che l'ha chiuso
 
-*Elenco da riempire. Le sostituzioni le scrive il committente; io le monto e
-allineo `testi.md` e `testi-en.md`.*
+*7 settembre 2026. **Chiuso: nessuna frase riscritta, la regola cambiata.***
 
-`.claude/rules/copy-e-tono.md` dice: **«Address companies with «voi», never «tu».»**
-Censite le pagine italiane costruite, frase per frase: quattordici punti la violano.
-Tutte le frasi qui sotto sono **copy approvata**, cioè stanno in `testi.md` — per
-questo non le tocco da solo.
+## L'esito, prima dell'elenco
 
-Il caso più netto è il numero 13, dove il «tu» e il «voi» stanno nella stessa frase.
+Il censimento cercava le violazioni di una regola — `.claude/rules/copy-e-tono.md`
+diceva «alle aziende si dà del voi, mai del tu» — e ne ha trovate quattordici. Messe
+davanti al committente perché le riscrivesse, la risposta è stata di **lasciarle
+esattamente come sono**.
 
-## Come si compila
+Non è una deroga: **la regola era sbagliata**. Le due persone non sono in concorrenza,
+parlano a due lettori diversi, e `src/data/servizi.ts` lo mostra pulito sui quattro
+ingaggi:
 
-Sotto ogni frase c'è una riga `→` vuota. Scrivici la versione al «voi», o `lascia` se
-quella frase deve restare com'è. Dove il passaggio è meccanico ho segnato fra parentesi
-cosa cambierebbe, ma è un promemoria, non una proposta: la parola è tua.
+| campo | a chi parla | registro | esempio |
+|---|---|---|---|
+| `perChi` | la persona che decide | **tu** | «**Hai** un'idea e **vuoi** sapere se regge» |
+| `cosaResta` | l'azienda che lo riceve | **voi** | «Un documento che **potete** far leggere a chiunque» |
 
----
+Il caso che questo documento chiamava «il più netto», il numero 13, è in realtà la
+dimostrazione più chiara: «Mi **scrivi** due righe su cosa **vorreste** smettere di fare
+a mano». *Tu* scrivi a me; *la vostra azienda* vuole smettere di farlo a mano. Una frase,
+due lettori, ed è giusta.
+
+Per proporzione: sulle pagine italiane costruite ci sono **61 forme al «voi» e 13 al
+«tu»**. `/privacy`, `/cookie` e `/i-vostri-dati` sono al voi da cima a fondo — l'ultima
+se lo porta nell'indirizzo — e le pagine legali non sono una questione di stile.
+
+Una sola eccezione osservata e lasciata stare: «Server compresi, e una persona che
+risponde quando **chiami**» è un `cosaResta` scritto al tu.
+
+La regola nuova sta in `.claude/rules/copy-e-tono.md` e dice anche la cosa che serve
+davvero: **non si converte mai una persona nell'altra meccanicamente.** Una frase che le
+mischia è probabilmente giusta; se sembra sbagliata si chiede, non si riscrive.
+
+## L'elenco, tenuto come censimento
+
+Resta qui perché è la prova su cui la decisione è stata presa, non perché ci sia
+qualcosa da fare. Le righe `→` sotto ogni frase sono vuote e **restano vuote**: è quello
+il risultato.
 
 ## `/` — home, sezione «Come lavoro»
 

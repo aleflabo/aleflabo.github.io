@@ -31,7 +31,34 @@ are quoted in Italian because they are rules **about Italian copy**.
   the structured data, and they say two things together: Veneto and Friuli in person,
   everywhere else remotely. Do not let the second half drop — the door to remote work
   stays open on purpose. In the biography places stay as biography, as before.
-- Address companies with **«voi»**, never «tu».
+- **«Tu» to the person reading, «voi» to the company.** This rule used to say «voi,
+  never tu», and a census on 2026-09-07 found fourteen sentences breaking it. They were
+  put in front of the user to rewrite, and he kept them: **not one word changed** — the
+  rule was wrong, not the copy.
+
+  The two persons are not in competition, they address two different readers, and
+  `src/data/servizi.ts` shows the split cleanly across the four engagements:
+
+  | field | who it speaks to | register | example |
+  |---|---|---|---|
+  | `perChi` | the person deciding | **tu** | «**Hai** un'idea e **vuoi** sapere se regge» |
+  | `cosaResta` | the company that receives it | **voi** | «Un documento che **potete** far leggere a chiunque» |
+
+  The clearest case is the one the census had marked as its worst, on `/servizi`:
+  «Mi **scrivi** due righe su cosa **vorreste** smettere di fare a mano.» *You* write to
+  me; *your company* wants to stop doing it by hand. One sentence, two readers, and it
+  is correct.
+
+  Counted on the built Italian pages: 61 «voi» forms and 13 «tu». `/privacy`,
+  `/cookie` and `/i-vostri-dati` are «voi» throughout — the last one carries it in its
+  own URL — and the legal pages are not a matter of style.
+
+  One observed exception, left alone: «Server compresi, e una persona che risponde
+  quando **chiami**» is a `cosaResta` written at «tu».
+
+  **Never convert one into the other mechanically.** A sentence that mixes them is
+  probably right; if it looks wrong, ask rather than rewrite. Copy is never invented —
+  see rule 2 — and that includes changing the person of an approved sentence.
 
 ## Facts not to get wrong
 
