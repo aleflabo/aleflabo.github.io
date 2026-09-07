@@ -10,7 +10,7 @@ export interface TestiRicerca {
   occhiello: string;
   titolo: string;
   introduzione: string;
-  riquadroLabel: string;
+  riquadroLabel?: string;
   riquadroCorpo: string;
   riquadroCorpoMuto: string;
   riquadroLink: string;

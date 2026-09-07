@@ -54,7 +54,11 @@ const GITHUB = 'https://github.com/aleflabo';
   <section class="cosa-centra">
     <div class="container">
       <div class="riquadro">
-        <p class="riquadro-label">{t.riquadroLabel}</p>
+        {/* Potatura degli occhielli: due su cinque sezioni. Cade «Cosa c'entra con la
+            tua azienda», e con lui se ne va una delle quattordici violazioni della
+            regola del «voi» (`.claude/rules/copy-e-tono.md`) — senza scrivere copy
+            nuova, che è il modo giusto di chiuderne una. */}
+        {t.riquadroLabel && <p class="riquadro-label">{t.riquadroLabel}</p>}
         <p class="riquadro-corpo">{t.riquadroCorpo}</p>
         <p class="riquadro-corpo muto">{t.riquadroCorpoMuto}</p>
         <a class="riquadro-link" href={localizedPath(lang, t.hrefRiquadro)}>{t.riquadroLink} &rarr;</a>

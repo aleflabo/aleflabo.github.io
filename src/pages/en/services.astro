@@ -28,9 +28,11 @@ const datiStrutturati = [
   attiva="services"
   datiStrutturati={datiStrutturati}
 >
+  {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
+      il perché sta in CorpoServizi.astro, le stringhe restano nei dati. */}
   <CorpoServizi
     lang="en"
-    t={testiServiziPagina}
+    t={{ ...testiServiziPagina, labelOnesta: undefined, labelDomande: undefined }}
     ingaggi={ingaggi}
     faq={faq}
     perChiNonSono={perChiNonSono}

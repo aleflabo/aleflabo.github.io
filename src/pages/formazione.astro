@@ -39,9 +39,11 @@ const datiStrutturati = [
   attiva="formazione"
   datiStrutturati={datiStrutturati}
 >
+  {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
+      il perché sta in CorpoFormazione.astro, le stringhe restano nei dati. */}
   <CorpoFormazione
     lang="it"
-    t={testiFormazionePagina}
+    t={{ ...testiFormazionePagina, labelOrganizza: undefined, labelCattedra: undefined, labelOnesta: undefined }}
     formati={formati}
     riquadroAiAct={riquadroAiAct}
     strade={strade}

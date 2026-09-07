@@ -15,9 +15,9 @@ export interface TestiChiSonoPagina {
   ctaPrimaria: string;
   ctaCurriculum: string;
   ctaLavori: string;
-  labelComeLavoro: string;
+  labelComeLavoro?: string;
   titoloAbitudini: string;
-  labelFuori: string;
+  labelFuori?: string;
   corpoFuori: string;
   hrefCv: string;
 }

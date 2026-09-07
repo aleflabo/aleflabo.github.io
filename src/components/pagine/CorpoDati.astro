@@ -90,7 +90,11 @@ const {
     <div class="container">
       <div class="colonne">
         <div>
-          <p class="label">{t.labelOnesta}</p>
+          {/* Potatura degli occhielli: quattro su sei sezioni. «Onestà» — lo stesso su
+              tre pagine — e «Perché mi credete» cadono, i loro h2 («Quello che non posso
+              garantirvi», «Su questo ho lavorato davvero») dicono già la stessa cosa.
+              Resta «La risposta corta», che dice al lettore che può fermarsi lì. */}
+          {t.labelOnesta && <p class="label">{t.labelOnesta}</p>}
           <h2 class="section-title">{quelloCheNonPossoGarantirvi.titolo}</h2>
           <div class="righe">
             {quelloCheNonPossoGarantirvi.punti.map((p) => (
@@ -99,7 +103,7 @@ const {
           </div>
         </div>
         <div>
-          <p class="label">{t.labelCredete}</p>
+          {t.labelCredete && <p class="label">{t.labelCredete}</p>}
           <h2 class="section-title">{suQuestoHoLavoratoDavvero.titolo}</h2>
           <div class="righe">
             {suQuestoHoLavoratoDavvero.corpo.map((p) => (

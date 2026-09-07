@@ -66,7 +66,12 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
 
   <section class="abitudini">
     <div class="container">
-      <p class="label">{t.labelComeLavoro}</p>
+      {/* Potatura degli occhielli: quattro su tre sezioni. «Come lavoro, in
+          concreto» ripeteva il suo h2 «Abitudini che vale la pena sapere prima», e
+          «Fuori dal lavoro» non ne aveva uno sotto — la sezione si riconosce dal
+          contenuto. Resta «In breve», che non è un occhiello di sezione ma
+          l'intestazione dell'elenco di fatti accanto al ritratto. */}
+      {t.labelComeLavoro && <p class="label">{t.labelComeLavoro}</p>}
       <h2 class="section-title">{t.titoloAbitudini}</h2>
       <div class="griglia-abitudini">
         {chiSono.abitudini.map((a) => (
@@ -81,7 +86,7 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
 
   <section class="fuori-dal-lavoro">
     <div class="container">
-      <p class="label">{t.labelFuori}</p>
+      {t.labelFuori && <p class="label">{t.labelFuori}</p>}
       <p class="corpo">{t.corpoFuori}</p>
     </div>
   </section>

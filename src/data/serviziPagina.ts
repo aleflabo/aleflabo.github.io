@@ -13,9 +13,9 @@ export interface TestiServiziPagina {
   etichettaQuantoDura: string;
   etichettaCosaResta: string;
   linkLavori: string;
-  labelOnesta: string;
+  labelOnesta?: string;
   titoloOnesta: string;
-  labelDomande: string;
+  labelDomande?: string;
   titoloDomande: string;
   titoloChiusura: string;
   introChiusura: string;

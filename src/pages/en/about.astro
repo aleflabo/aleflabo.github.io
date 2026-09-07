@@ -15,5 +15,7 @@ import { testiChiSonoPagina } from '../../data/en/chiSonoPagina';
   pathIt="/chi-sono"
   attiva="about"
 >
-  <CorpoChiSono lang="en" t={testiChiSonoPagina} chiSono={chiSono} hrefLavori="/work" />
+  {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
+      il perché sta in CorpoChiSono.astro, le stringhe restano nei dati. */}
+  <CorpoChiSono lang="en" t={{ ...testiChiSonoPagina, labelComeLavoro: undefined, labelFuori: undefined }} chiSono={chiSono} hrefLavori="/work" />
 </BaseLayout>
