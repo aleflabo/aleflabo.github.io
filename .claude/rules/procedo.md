@@ -39,24 +39,29 @@ fermarli è stato lui, non una verifica.
 Le fonti sicure per la copy sulle capacità sono i lavori suoi: **Vault**, **Tracking
 costi**, **Agentic Workflow Toolkit**.
 
-## Cosa resta indeciso, e va deciso da lui
+## Il caso deciso: la sezione «Metto insieme quello che avete già»
 
-Il perimetro fine non è scritto qui perché non me l'ha ancora dato, e inventarlo
-sarebbe il difetto che questa regola esiste per evitare. Finché manca **vale la lettura
-conservativa**: nel dubbio, non si dice.
-
-La domanda aperta è concreta e sta già in produzione, sulla home. La sezione «Metto
-insieme quello che avete già» è stata riscritta apposta per stare lontana dall'offerta
-di Procedo — si parla di leggere fonti sparse e tenerle collegate, non di risposte
-fondate sulla documentazione aziendale. Ma due pezzi ci si riavvicinano:
+La sezione della home è stata scritta apposta per stare lontana dall'offerta di
+Procedo: parla di leggere fonti sparse e tenerle collegate, non di risposte fondate
+sulla documentazione aziendale. Due suoi pezzi ci si riavvicinano abbastanza da essere
+stati messi in dubbio, e **il 7 settembre 2026 lui li ha dichiarati dentro il
+perimetro**:
 
 - la didascalia **«Un posto solo dove cercare.»**;
-- la provenienza: **«ogni pezzo resta attaccato al documento da cui viene»**, più la
-  riga «da dove viene».
+- la provenienza — **«ogni pezzo resta attaccato al documento da cui viene»** e la riga
+  «da dove viene».
 
-E due schermate più sotto, sulla stessa pagina, la scheda Procedo dice «chi lavora può
-fare domande alla documentazione della propria azienda».
+Restano dove sono. Il confine è fra *tenere collegate fonti sparse che l'azienda ha
+già* — che si può offrire — e *l'assistente sulle procedure girate in reparto*, che è
+il prodotto di Procedo e non si offre.
 
-**Nessuno può dire se quei due pezzi stanno dentro o fuori il patto finché non lo dice
-lui.** Quando lo dirà, la risposta va scritta qui sopra, in questa sezione, e questa va
-cancellata.
+Che due schermate più sotto la scheda Procedo dica «chi lavora può fare domande alla
+documentazione della propria azienda» non è in contrasto: quella scheda **descrive
+Procedo**, sotto il titolo «Le prove», ed è la citazione al passato che il patto
+consente.
+
+## Nel dubbio
+
+Il perimetro sopra copre i casi che si sono presentati finora, non tutti quelli
+possibili. Per un caso nuovo vale la **lettura conservativa** — nel dubbio non si dice
+— e si chiede a lui, come è successo qui: la risposta poi si scrive in questo file.
