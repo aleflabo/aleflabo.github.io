@@ -95,10 +95,20 @@ picture for the question no number answers — whether it reads right.
 
 Chromium for screenshots installs without root: `npx playwright install chromium`.
 
-## Six traps
+## Seven traps
 
 **Two of these bite the before/after comparison the gate above demands**, and both
 make it report numbers that look plausible and are measured on the wrong thing.
+
+**A long-running `astro dev` goes stale across a branch switch, and the symptom looks
+like a design bug.** On 2026-09-07 a dev server left running since the morning survived
+two `git checkout`s and then served `/` with the whole `.territorio` block in black on
+the dark blue — 1.05:1, invisible — while the rest of the very same component rendered
+correctly. Astro's scope hash for the component had changed underneath it, so those
+scoped rules no longer matched the markup and the text fell back to the body ink. It is
+not a contrast defect, and no amount of colour-tuning fixes it: **restart the dev
+server**. Suspect this whenever one block loses its styling and its neighbours in the
+same file keep theirs.
 
 **`npm run preview` falls back to another port without failing.** If anything already
 holds 4321 — a stray `astro dev` from hours earlier is the usual culprit — preview
