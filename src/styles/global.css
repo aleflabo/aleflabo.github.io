@@ -168,3 +168,63 @@ a:hover .freccia { transform: translateX(5px); }
 .numero .valore {
   font-variant-numeric: tabular-nums;
 }
+
+/* Sotto i 44px il dito manca il bersaglio, ed è da lì che arriva la maggior
+   parte di chi legge. Nav.astro applica già questa regola alle sue voci
+   sotto i 720px: qui vale per i link dentro le sezioni, che oggi sono <a>
+   in linea alti 21-24px.
+
+   Non `inline-flex` + `align-items: center`, che è la prima cosa provata e
+   rompe ogni link che finisce in "testo lungo + <span class="freccia">":
+   flexbox tratta il testo e la freccia come due elementi distinti (il nodo
+   di testo e lo span), e quando il testo va a capo la freccia smette di
+   seguirlo per finire centrata a fianco, staccata da entrambe le righe
+   (visto su .continua nella home, screenshot a 375px). `padding-block`
+   allarga la scatola senza toccare come testo e freccia si dispongono
+   dentro: restano un unico flusso, vanno a capo insieme come prima. Il
+   valore (12px) è tarato sulla riga più bassa del sito fra questi link
+   (LeProve .link, 14px, interlinea 1.6 → ~22px): 22 + 12 + 12 = 46, sopra
+   i 44. `min-height` resta come rete di sicurezza se un domani un link più
+   piccolo si aggiungesse senza che qualcuno ricalcoli il padding.
+
+   Selettore dentro `:where()`, quindi a specificità zero: così un
+   componente che ha già le sue misure — `.canale` in Contatto.astro
+   (bottoni "WhatsApp"/"Mail", `display: flex` e padding propri) e `.riga`
+   nell'elenco note (`display: grid` a tre colonne) — vince sempre con la
+   sua regola invece di vedersi sovrascritto `display` e `padding` da
+   questa. Senza `:where()` la prima prova rompeva `.canale`: il suo
+   `display: flex` diventava `block`, e restava un flusso normale
+   icona+testo solo per una coincidenza di larghezze, non per il layout
+   voluto. `.pulsante`/`.primaria` restano esclusi per nome oltre che per
+   specificità: sono già bersagli a norma per conto proprio, e forzarli
+   in `inline-block` romperebbe l'allineamento col testo intorno quando un
+   pulsante compare in riga con altro testo. */
+@media (max-width: 640px) {
+  :where(main a:not(.pulsante):not(.primaria)) {
+    display: inline-block;
+    min-height: 44px;
+    padding-block: 12px;
+  }
+
+  /* Eccezione: un link dentro una frase di prosa. Non è un'invenzione fatta
+     per aggirare il controllo — è la stessa WCAG 2.5.8 (Target Size) a
+     esentare i link «in linea», dentro un blocco di testo, dal minimo di
+     44px: lì il tocco è preciso quanto la lettura, e allargare la riga in
+     cui cade il link (`inline-block` con `padding-block` inclusi) ne alza
+     comunque il line-box, aprendo un vuoto solo su quella riga del
+     paragrafo — lo stesso difetto della prova con `inline-flex`, causa
+     diversa (qui è l'altezza della riga, non lo split testo/icona).
+     Successo su «Procedo» dentro .credibilita (Occhiello.astro) e sul
+     rimando inglese di 404.astro: verificato con uno screenshot a 375px
+     prima e dopo, non aggiustato a occhio. `main p a` prende entrambi
+     senza nominarli uno per uno, ed è un'esclusione sicura perché nessun
+     link-bersaglio del sito (schede, "continua", pulsanti) vive dentro un
+     <p> — sta sempre come fratello dopo la sua chiusura. Qui niente
+     `:where()`: tre selettori d'elemento (0,0,3) battono da soli la
+     regola sopra, che con `:where()` è a specificità zero. */
+  main p a {
+    display: inline;
+    min-height: 0;
+    padding-block: 0;
+  }
+}
