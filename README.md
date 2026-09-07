@@ -52,6 +52,12 @@ npm run verifica  # build + scripts/verifica-rotte.mjs: routes, RSS, internal
                    # links, hreflang, and no leftover Italian text on English pages
 ```
 
+`scripts/verifica-telefono.mjs` checks horizontal scroll and touch-target size (44px
+minimum) at 320/360/390/414px on a running server; it needs a browser the repo doesn't
+install, so it runs outside `npm run verifica`: `npm i --no-save playwright && npx
+playwright install chromium` once, then `npm run dev` (or `build` + `preview`) in one
+terminal and `node scripts/verifica-telefono.mjs` in another.
+
 `npm run check`, `npm test` and `npm run verifica` are the project's safety net — run
 all three before opening a pull request, and `npm run verifica` again right before
 deploying (see *Deployment* below).

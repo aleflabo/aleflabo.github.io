@@ -1,0 +1,138 @@
+{
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "La home"
+    },
+    {
+      "id": "page-2",
+      "name": "Direzioni scartate"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "title": "La home — disegno tecnico",
+      "page": "page-1",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 5760
+    },
+    {
+      "file": "HomeMobile.dc.html",
+      "title": "La home a 390px",
+      "page": "page-1",
+      "x": 1560,
+      "y": 1080,
+      "w": 390,
+      "h": 7900
+    },
+    {
+      "file": "NodoAgente.dc.html",
+      "title": "Il diagramma, a grandezza reale",
+      "page": "page-1",
+      "x": 1560,
+      "y": 0,
+      "w": 1200,
+      "h": 960
+    },
+    {
+      "file": "DirezioneB.dc.html",
+      "title": "Direzione B — colore e scala",
+      "page": "page-2",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3200
+    },
+    {
+      "file": "DirezioneC.dc.html",
+      "title": "Direzione C — scroll narrativo",
+      "page": "page-2",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 3050
+    },
+    {
+      "file": "ComeLavoro.dc.html",
+      "title": "«Come lavoro» — quattro versioni",
+      "page": "page-1",
+      "x": 0,
+      "y": 9200,
+      "w": 1800,
+      "h": 1820
+    }
+  ],
+  "annotations": [
+    {
+      "id": "come-guardarla",
+      "page": "page-1",
+      "x": -460,
+      "y": 0,
+      "w": 380,
+      "text": "QUARTA PASSATA — I TAGLI\n\nMisurato: la terza passata era piu' LUNGA di oggi sul telefono. Il ritmo era risolto, la lunghezza no.\n\nQuattro tagli:\n\n1. «Cosa costruisco» perde i tre pilastri. Citavano tre progetti mentre «Le prove», due schermate sotto, ne mostra tre: l'Agentic Workflow Toolkit compariva due volte nella stessa pagina. La dichiarazione «strumenti miei, per il mio team» e' scesa sulla sua scheda.\n\n2. «Come lavoro» tiene i nomi e il «Ne esce». I corpi stanno su /servizi, piu' per esteso.\n\n3. Le vignette del telefono da 80 a 64px.\n\n4. Il pie' di pagina: guardato, non ancora toccato — vale 843px su ogni pagina del sito, e i suoi 14 link sono alti 28px.\n\nDesktop 6355 → 5667. Telefono 9357 → 8605 col pie' di pagina di oggi."
+    },
+    {
+      "id": "integrazione",
+      "page": "page-1",
+      "x": -460,
+      "y": 620,
+      "w": 380,
+      "text": "IL CONFINE CON PROCEDO\n\nIl patto di non concorrenza è scritto e in vigore, quindi la sezione «Cosa costruisco» non può descrivere l'offerta di Procedo — video in reparto, procedure passo-passo, assistente sulle procedure. Nella passata precedente lo faceva: era un errore mio, ed è stato tolto.\n\nLe tre prove citate qui sotto sono Vault, Tracking costi e Agentic Workflow Toolkit. Nessuna delle tre è Procedo.\n\nProcedo resta in pagina dove è giusto: nella riga di credibilità in testata e fra «Le prove», al passato, come credenziale.\n\nDa fare: mettere il perimetro del patto in .claude/rules/, altrimenti fra sei mesi qualcuno ce lo rimette dentro."
+    },
+    {
+      "id": "cosa-non-e-fedele",
+      "page": "page-1",
+      "x": -460,
+      "y": 1300,
+      "w": 380,
+      "text": "COSA IN QUESTA TAVOLA NON È FEDELE\n\n1. Non ci sono foto: i punti dove andranno reggono anche vuoti.\n\n2. Le animazioni girano in loop. Sulla pagina vera partono quando la sezione entra in vista, una volta sola, e sotto prefers-reduced-motion non partono affatto.\n\n3. Il footer non c'è.\n\n4. È una tavola desktop a 1440px. Il mobile va guardato a parte.\n\n5. I colori del testo su fondo blu (#a8c0d6, #c7d8e6, #7f9ab3) non hanno un token in tokens.css. Vanno aggiunti lì, non sparsi nei componenti."
+    },
+    {
+      "id": "copy-da-approvare",
+      "page": "page-1",
+      "x": -460,
+      "y": 1960,
+      "w": 380,
+      "text": "TESTI\n\nTutto quello che leggi viene da testi.md, da index.astro o da projects.ts, tranne le parole su fondo arancione chiaro. Quelle le ho scritte io e vanno approvate o riscritte da te.\n\nOra sono in un punto solo: la sezione «Cosa costruisco» — occhiello, titolo, frase d'apertura, le otto etichette del diagramma e i tre titoletti in fondo.\n\nSotto ogni titoletto c'è il frammento di projects.ts da cui l'ho ricavato. I puntini segnano dove la frase originale continua: non sono citazioni intere."
+    },
+    {
+      "id": "scartate",
+      "page": "page-2",
+      "x": -460,
+      "y": 0,
+      "w": 380,
+      "text": "Tenute per memoria, non aggiornate con le decisioni successive.\n\nB — colore e scala: fasce a fondo pieno, tipografia al doppio, una sola animazione.\n\nC — scroll narrativo: la testata resta agganciata per tre schermate. Chiedeva JavaScript vero dove il sito ne spedisce zero, e su mobile l'aggancio è la prima cosa che si rompe."
+    },
+    {
+      "id": "sito-oggi",
+      "page": "page-1",
+      "x": -460,
+      "y": 2650,
+      "w": 380,
+      "text": "IL SITO, OGGI, RISPETTO A QUESTA TAVOLA\n\nDopo l'approvazione sono state prese altre decisioni, tutte volute. Vanno lette come scelte fatte dopo il progetto, non come errori di disegno da correggere.\n\n1. Occhielli: nove qui, tre in pagina. Il committente ha letto la home come «fatta da un'AI»; una skill anti-slop pone il tetto a un occhiello ogni tre sezioni. Restano la riga di posizionamento in testata, «Il problema» e «Le prove». Gli altri sei di questa tavola — «Da dove viene quello che so», «Cosa costruisco», «Come lavoro», «Formazione», «Dove lavoro» e «Parliamone» — sono spariti dalla pagina, non dalla tavola: le stringhe restano nei file dati, le pagine hanno solo smesso di passarle.\n\n2. «Come lavoro»: i quattro nomi qui e in pagina sono già gli stessi — Mezza giornata diagnostica, Audit AI, Software su misura, Canone di servizio, gli ingaggi di servizi.ts. I nomi propri di prima (Ascolto, Diagnosi, Costruisco, Resto) sopravvivono solo dentro ComeLavoro.dc.html, come l'opzione scartata nel confronto.\n\n3. «Le prove» mostra già, qui come in pagina, l'Agentic Workflow Toolkit al posto di Spannum, e il portale ricambi col tag «In costruzione» ripreso: Spannum resta su /lavori, non in home.\n\n4. Trattini lunghi: la pagina non ne ha più, azzerati da una skill anti-slop. Questa tavola, ComeLavoro.dc.html e DirezioneC.dc.html ne hanno ancora, negli intervalli di anni e in qualche inciso — non sono un refuso da correggere qui, sono la versione di prima del taglio.\n\n5. Le lunghezze di questa tavola non sono i bersagli reali. La spec dichiarava desktop 5667px e telefono 8605px; la pagina vera fa 6434px e 8959px, contro un punto di partenza di 6355px e 9357px. I bersagli erano stati misurati su queste tavole, e per la sezione «Parliamone» le tavole erano sbagliate: i colori e la griglia disegnati a occhio su uno screenshot non erano quelli del componente."
+    },
+    {
+      "id": "mobile",
+      "page": "page-1",
+      "x": 2060,
+      "y": 1080,
+      "w": 400,
+      "text": "IL MOBILE NON È UN RIPIEGO\n\nÈ da qui che arriva la maggior parte del traffico, quindi questa tavola vale quanto quella a 1440 — e adesso e' completa, cosi' i numeri sono misurati e non stimati.\n\nIl diagramma gira di 90°: il disordine sopra, il nodo in mezzo, la struttura sotto. La riga «da dove viene» scende lungo il margine destro, passa sotto e risale a sinistra fino al frammento.\n\n7762px disegnati, piu' 843 di pie' di pagina che non abbiamo ancora toccato. Nessuno scorrimento orizzontale — che qui e' un requisito, non un risultato: in questo repo una versione ne aveva aggiunti 16 su /chi-sono e un confronto byte a byte l'aveva dichiarata identica."
+    },
+    {
+      "id": "come-lavoro",
+      "page": "page-1",
+      "x": -460,
+      "y": 9200,
+      "w": 380,
+      "text": "«ASCOLTO, DIAGNOSI, COSTRUISCO, RESTO»\n\nTolti i corpi restano quattro verbi soli, e due di quelli parlano di me invece che del lavoro. L'errore e' del taglio, non della copy: quei nomi erano scritti per essere letti insieme al loro corpo.\n\nQuattro versioni, nessuna delle quali inventa una parola.\n\nIl verdetto e' scomodo: A legge bene ma recupera 110px, cioe' niente. B recupera 400px ma trasforma la sezione in un listino.\n\nQuindi la lunghezza va presa altrove — e c'e' un posto dove costa zero: il modulo di contatto inerte, 556px sul telefono, sette controlli che dichiarano di non funzionare."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
+}

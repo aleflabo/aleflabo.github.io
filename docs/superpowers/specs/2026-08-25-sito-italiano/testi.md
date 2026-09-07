@@ -56,6 +56,19 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.
 - `testo` «Abbiamo provato ChatGPT.»
 - `testo` Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.
+- `testo` Cosa costruisco
+
+### Metto insieme quello che avete già
+
+*TITOLO DI SEZIONE (h2)*
+
+- `testo` I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.
+- `testo` Legge e collega
+- `etichetta` ogni giorno, da solo
+- `etichetta` da dove viene
+- `etichetta` Cartelle, fogli, caselle di posta, gestionali.
+- `etichetta` Un posto solo dove cercare.
+
 - `testo` Come lavoro
 
 ### Come si svolge di solito un lavoro
@@ -178,7 +191,7 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.
 - `testo` Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.
 - `testo` 2021–2024
-- `testo` Dottorato in computer vision, Sapienza — PINlab
+- `testo` Dottorato in computer vision, Sapienza – PINlab
 - `testo` CVPR · ICCV · IROS
 - `testo` Le conferenze principali del settore
 - `testo` 2024–2026
@@ -645,7 +658,7 @@ Sorgente: `tavole/Lavori.dc.html`
 
 *SOTTOTITOLO (h3)*
 
-- `testo` Un video per un matrimonio, generato per intero, con una storia che attraversa diverse scene. Generare una scena è facile e lo fanno tutti; la parte difficile è generarne dieci in cui le stesse persone restano riconoscibili — stesso viso, stessi vestiti, stessa luce — e il racconto tiene dal principio alla fine. Da lì è nato anche il lavoro sulle immagini: mi interessa il punto in cui questi strumenti smettono di essere una dimostrazione e cominciano a reggere una consegna.
+- `testo` Un video per un matrimonio, generato per intero, con una storia che attraversa diverse scene. Generare una scena è facile e lo fanno tutti; la parte difficile è generarne dieci in cui le stesse persone restano riconoscibili (stesso viso, stessi vestiti, stessa luce) e il racconto tiene dal principio alla fine. Da lì è nato anche il lavoro sulle immagini: mi interessa il punto in cui questi strumenti smettono di essere una dimostrazione e cominciano a reggere una consegna.
 - `etichetta` Video generativo
 - `etichetta` Continuità fra le scene
 - `etichetta` Immagini
@@ -913,7 +926,7 @@ Sorgente: `tavole/ChiSono.dc.html`
 
 *TITOLO DI PAGINA (h1)*
 
-- `testo` Ho cominciato a Udine, con una laurea in informatica e sei mesi in Svezia che mi hanno tolto l'idea di restare fermo. Poi Roma: una magistrale in data science e un dottorato al Perception and Intelligence Lab della Sapienza, dove ho passato tre anni su un problema che si può riassumere così — insegnare a un computer a guardare qualcuno che lavora e capire cosa sta facendo.
+- `testo` Ho cominciato a Udine, con una laurea in informatica e sei mesi in Svezia che mi hanno tolto l'idea di restare fermo. Poi Roma: una magistrale in data science e un dottorato al Perception and Intelligence Lab della Sapienza, dove ho passato tre anni su un problema che si può riassumere così: insegnare a un computer a guardare qualcuno che lavora e capire cosa sta facendo.
 - `testo` Nel mezzo un inverno ad Amsterdam a lavorare su una geometria diversa da quella a cui siamo abituati, e quattro anni in aula come assistente alla didattica, che è dove ho scoperto che spiegare una cosa difficile a chi non la conosce è un mestiere a parte.
 - `testo` Quella ricerca poi è diventata un prodotto. Ho co-fondato Procedo e ne sono stato CTO per due anni: video girati in reparto che diventano procedure scritte, dentro aziende vere, con clienti che pagavano e si lamentavano quando qualcosa non funzionava. È lì che ho imparato la parte che all'università non si impara, cioè quanto di quello che scrivi in un articolo sopravvive al contatto con un capannone.
 - `testo` Ho lasciato il ruolo operativo a metà 2026 e oggi lavoro per conto mio. Mi interessa la parte in cui si entra in un'azienda che non si conosce, si guarda come lavora e si capisce dove si perde tempo: da solo posso farla più spesso, e in aziende diverse.

@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 .superpowers/
+
+# Le tavole si ripubblicano dal seme: il file impacchettato (2,5 MB) non serve in git.
+docs/superpowers/specs/**/tavole/*-visuale.html

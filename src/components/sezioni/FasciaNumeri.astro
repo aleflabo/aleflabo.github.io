@@ -4,20 +4,76 @@
 // in cima a /ricerca: ordine, terzo e quarto valore ed etichette
 // differiscono — «2 anni da CTO» non esiste in quell'array, e «citazioni»
 // qui non porta la data).
+//
+// `daDoveViene` è facoltativa (task 5, home-visuale): la fascia scura dei
+// numeri assorbe la sezione «Da dove viene quello che so», che prima viveva
+// più in basso nella pagina — dicevano la stessa cosa a due altezze diverse.
+// Senza questa prop il componente rende solo i numeri, com'era prima.
 interface Props {
   numeri: { numero: string; etichetta: string }[];
+  daDoveViene?: {
+    // Facoltativo (task 14, home-visuale): la potatura degli occhielli
+    // toglie l'etichetta di sezione «Da dove viene quello che so» — una
+    // delle nove che la skill anti-slop aveva contato sulla home contro un
+    // tetto di un occhiello ogni tre sezioni. Il titolo sotto resta e basta
+    // a dire di cosa parla il blocco.
+    occhiello?: string;
+    titolo: string;
+    intro: string;
+    tappe: { valore: string; etichetta: string }[];
+    linkRicerca: string;
+    hrefRicerca: string;
+    linkChiSono: string;
+    hrefChiSono: string;
+  };
 }
-const { numeri } = Astro.props;
+const { numeri, daDoveViene } = Astro.props;
 ---
 
 <section class="fascia-numeri">
   <div class="container">
-    {numeri.map((n) => (
-      <div class="numero">
-        <span class="valore">{n.numero}</span>
-        <span class="etichetta">{n.etichetta}</span>
-      </div>
-    ))}
+    <div class="numeri">
+      {numeri.map((n) => (
+        <div class="numero">
+          <span class="valore">{n.numero}</span>
+          <span class="etichetta">{n.etichetta}</span>
+        </div>
+      ))}
+    </div>
+
+    {daDoveViene && (
+      <>
+        <div class="filo"></div>
+
+        {/* Tre item di griglia, non due: "tappe" deve stare sotto "link" sul
+            telefono ma a fianco di entrambi su desktop (tavole/Main.dc.html
+            vs HomeMobile.dc.html, blocco «2 · FASCIA SCURA» — l'ordine
+            cambia, non solo la larghezza delle colonne). Con `.testo` e
+            `.link` nello stesso div, quell'inversione avrebbe richiesto
+            JavaScript o un trucco `order` sui figli di un `display:contents`;
+            con tre item separati basta un secondo `grid-template-areas`
+            sotto i 640px. */}
+        <div class="ricerca">
+          <div class="testo">
+            {daDoveViene.occhiello && <p class="occhiello">{daDoveViene.occhiello}</p>}
+            <h2>{daDoveViene.titolo}</h2>
+            <p class="intro">{daDoveViene.intro}</p>
+          </div>
+          <div class="tappe">
+            {daDoveViene.tappe.map((t) => (
+              <div class="tappa">
+                <p class="valore">{t.valore}</p>
+                <p class="etichetta">{t.etichetta}</p>
+              </div>
+            ))}
+          </div>
+          <div class="link">
+            <a href={daDoveViene.hrefRicerca}>{daDoveViene.linkRicerca} <span class="freccia">&rarr;</span></a>
+            <a href={daDoveViene.hrefChiSono}>{daDoveViene.linkChiSono} <span class="freccia">&rarr;</span></a>
+          </div>
+        </div>
+      </>
+    )}
   </div>
 </section>
 
@@ -27,28 +83,171 @@ const { numeri } = Astro.props;
     padding: 0;
   }
   .container {
-    padding: 26px 24px;
+    /* Prima era `26px 24px`: la fascia si allunga per ospitare «da dove
+       viene» sotto i numeri, invece dei soli 26px di prima. */
+    padding: 40px 24px 46px;
+  }
+
+  .numeri {
     display: flex;
     gap: 56px;
     flex-wrap: wrap;
+    align-items: baseline;
   }
-  .valore {
+  .numero .valore {
     font-family: var(--font-serif);
     font-size: 26px;
     font-weight: 600;
-    color: var(--surface);
+    color: var(--surface); /* è bianco: su questo fondo scuro fa da testo chiaro */
   }
-  .etichetta {
+  .numero .etichetta {
     font-size: 14px;
     font-weight: 500;
-    color: #a8c0d6;
+    color: var(--su-accent);
     margin-left: 10px;
+  }
+
+  /* Il filo che separa i numeri da «da dove viene»: solo se la prop c'è. */
+  .filo {
+    height: 1px;
+    background: rgb(255 255 255 / 16%);
+    margin: 34px 0 30px;
+  }
+
+  .ricerca {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    grid-template-areas:
+      "testo tappe"
+      "link  tappe";
+    column-gap: 64px;
+    align-items: start;
+  }
+  .testo {
+    grid-area: testo;
+  }
+  .tappe {
+    grid-area: tappe;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .link {
+    grid-area: link;
+    display: flex;
+    gap: 26px;
+    margin-top: 22px;
+  }
+
+  .occhiello {
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--evidenziatore);
+    font-weight: 700;
+  }
+  .testo h2 {
+    margin-top: 14px;
+    font-size: 28px;
+    color: var(--surface);
+  }
+  .intro {
+    margin-top: 16px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--su-accent-forte);
+    max-width: 62ch;
+  }
+
+  .link a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--evidenziatore);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .tappa {
+    /* --evidenziatore al 50%: sul fondo scuro il bordo pieno era troppo
+       acceso, la tavola lo attenua invece di usare un colore nuovo. */
+    border-left: 2px solid color-mix(in srgb, var(--evidenziatore) 50%, transparent);
+    padding-left: 16px;
+  }
+  .tappa .valore {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--surface);
+  }
+  .tappa .etichetta {
+    font-size: 13.5px;
+    color: var(--su-accent);
+    line-height: 1.5;
   }
 
   @media (max-width: 640px) {
     .container {
-      padding: 22px 20px;
-      gap: 28px 36px;
+      padding: 26px 20px 32px;
+    }
+    .numeri {
+      /* Sul telefono i numeri vanno a capo due a due invece di scorrere in
+         riga: con quattro voci il flex-wrap li avrebbe messi 3+1. */
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 24px;
+    }
+    .numero .valore {
+      font-size: 24px;
+    }
+    .numero .etichetta {
+      font-size: 13px;
+      margin-left: 8px;
+    }
+
+    .filo {
+      margin: 26px 0 22px;
+    }
+
+    .ricerca {
+      /* Una colonna sola, con «tappe» fra il testo e i link (vedi il
+         commento sul markup, sopra): l'ordine del telefono non è quello
+         del desktop. */
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "testo"
+        "tappe"
+        "link";
+      column-gap: 0;
+    }
+    .occhiello {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+    }
+    .testo h2 {
+      margin-top: 12px;
+      font-size: 24px;
+    }
+    .intro {
+      margin-top: 14px;
+      font-size: 15px;
+    }
+    .tappe {
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .tappa {
+      padding-left: 14px;
+    }
+    .tappa .valore {
+      font-size: 16px;
+    }
+    .tappa .etichetta {
+      font-size: 13px;
+    }
+    .link {
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
     }
   }
 </style>

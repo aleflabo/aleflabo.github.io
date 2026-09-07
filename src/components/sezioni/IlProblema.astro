@@ -1,9 +1,32 @@
 ---
-// I testi arrivano dalla pagina (task 2, sito-inglese).
+// I testi arrivano dalla pagina (task 2, sito-inglese). Le tre vignette no:
+// sono disegni fissi, uguali in italiano e in inglese, scelti per chiave
+// invece che passati come markup — così le due home chiamano lo stesso
+// componente con le stesse tre stringhe ("richiesta" | "unaTestaSola" |
+// "fuoriDaCasa") e non c'è SVG da ricopiare due volte.
+//
+// Le tre scene vengono ricopiate alla lettera da
+// docs/superpowers/specs/2026-09-03-home-visuale/tavole/Main.dc.html,
+// blocco «3 · IL PROBLEMA» (i colori letterali della tavola sono stati
+// tradotti nei design token che già valgono lo stesso valore esadecimale:
+// #c2b6a2 → --tratto-inerte, #a8531d → --azione, #e6ddd0 → --border,
+// #f0c9a4 → --evidenziatore — stessa scelta fatta in CosaCostruisco.astro).
+//
+// Nessuna delle tre usa `.fascio`: il tratteggio è sempre `.interrotto`,
+// spento. È deliberato — il fascio arancione che scorre vive solo nella
+// sezione «Cosa costruisco», dove qualcosa funziona per davvero, e queste
+// tre vignette raccontano il prima. Un fascio qui toglierebbe senso a
+// quello di sotto.
 interface Props {
   occhiello: string;
   titolo: string;
-  riquadri: { citazione: string; corpo: string }[];
+  riquadri: {
+    citazione: string;
+    corpo: string;
+    // Facoltativa: senza, la scheda resta di solo testo, come prima di
+    // questo task (una scheda non illustrata non è un errore).
+    vignetta?: "richiesta" | "unaTestaSola" | "fuoriDaCasa";
+  }[];
 }
 const { occhiello, titolo, riquadri } = Astro.props;
 ---
@@ -15,6 +38,51 @@ const { occhiello, titolo, riquadri } = Astro.props;
     <div class="griglia">
       {riquadri.map((r) => (
         <div class="scheda">
+          {r.vignetta === "richiesta" && (
+            // La richiesta che non si sa leggere: una foto storta (il
+            // rettangolo ruotato con dentro uno scarabocchio), un tratto
+            // che si interrompe, e un riquadro con un punto interrogativo —
+            // l'unico segno scritto delle tre vignette, non una parola.
+            <svg class="vignetta" viewBox="0 0 286 104" fill="none" aria-hidden="true">
+              <rect x="8" y="26" width="66" height="50" rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" transform="rotate(-7 41 51)" />
+              <path d="M14 68 L30 48 L42 60 L52 50 L68 68" stroke="var(--azione)" stroke-width="1.5" transform="rotate(-7 41 51)" />
+              <circle cx="28" cy="41" r="4" stroke="var(--azione)" stroke-width="1.5" transform="rotate(-7 41 51)" />
+              <path class="interrotto" d="M92 51 L188 51" />
+              <rect x="200" y="27" width="48" height="48" rx="4" stroke="var(--tratto-inerte)" stroke-width="1.5" />
+              <text x="224" y="60" text-anchor="middle" style="font-family: var(--font-serif); font-size: 26px; font-weight: 600;" fill="var(--tratto-inerte)">?</text>
+            </svg>
+          )}
+          {r.vignetta === "unaTestaSola" && (
+            // Il sapere chiuso in una testa sola: un cerchio pieno al
+            // centro, sei cerchi vuoti tratteggiati intorno — nessuna
+            // linea li collega, perché nessuno li ha mai collegati.
+            <svg class="vignetta" viewBox="0 0 286 104" fill="none" aria-hidden="true">
+              <circle cx="143" cy="52" r="19" fill="var(--azione)" />
+              <circle cx="143" cy="52" r="27" stroke="var(--evidenziatore)" stroke-width="1.5" />
+              <circle class="interrotto" cx="52" cy="26" r="13" />
+              <circle class="interrotto" cx="40" cy="76" r="13" />
+              <circle class="interrotto" cx="234" cy="26" r="13" />
+              <circle class="interrotto" cx="246" cy="76" r="13" />
+              <circle class="interrotto" cx="106" cy="90" r="9" />
+              <circle class="interrotto" cx="186" cy="14" r="9" />
+            </svg>
+          )}
+          {r.vignetta === "fuoriDaCasa" && (
+            // I documenti che escono dall'azienda: un perimetro tratteggiato
+            // (il dasharray "5 6" è diverso da quello di `.interrotto`,
+            // quindi qui resta un attributo esplicito invece della classe),
+            // tre righe che lo attraversano, una nuvola fuori dal bordo.
+            <svg class="vignetta" viewBox="0 0 286 104" fill="none" aria-hidden="true">
+              <rect x="6" y="14" width="150" height="76" rx="4" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray="5 6" />
+              <rect x="26" y="34" width="46" height="8" rx="2" fill="var(--border)" />
+              <rect x="26" y="50" width="66" height="8" rx="2" fill="var(--border)" />
+              <rect x="26" y="66" width="38" height="8" rx="2" fill="var(--border)" />
+              <path class="interrotto" d="M156 38 L226 30" />
+              <path class="interrotto" d="M156 52 L226 52" />
+              <path class="interrotto" d="M156 66 L226 74" />
+              <path d="M232 22 a18 14 0 0 1 34 5 a13 12 0 0 1-3 24 h-30 a15 15 0 0 1-1-29 Z" stroke="var(--azione)" stroke-width="1.5" transform="translate(4 20)" />
+            </svg>
+          )}
           <p class="frase">{r.citazione}</p>
           <p class="corpo">{r.corpo}</p>
         </div>
@@ -25,14 +93,17 @@ const { occhiello, titolo, riquadri } = Astro.props;
 
 <style>
   .il-problema {
+    /* Fondo caldo: separa questa sezione, lunga quanto le altre due a
+       fondo bianco, dalla fascia scura sopra e da «Cosa costruisco» sotto. */
+    background: var(--surface-warm);
     border-top: 1px solid var(--border);
     padding: 0;
   }
   .container {
-    padding: 72px 24px;
+    padding: 76px 24px;
   }
   .section-title {
-    font-size: 32px;
+    font-size: 34px;
     margin-top: 18px;
     margin-bottom: 40px;
     max-width: 30ch;
@@ -47,6 +118,16 @@ const { occhiello, titolo, riquadri } = Astro.props;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 30px;
+  }
+  /* Il viewBox resta 0 0 286 104 su entrambe le taglie: qui si fissa solo
+     l'altezza (104px, 64px sotto i 640px) e la larghezza segue al 100% del
+     riquadro, con lo scaling uniforme che l'SVG applica di default — nessun
+     `preserveAspectRatio` da dichiarare, nessuna distorsione. */
+  .vignetta {
+    display: block;
+    width: 100%;
+    height: 104px;
+    margin-bottom: 20px;
   }
   .frase {
     font-family: var(--font-serif);
@@ -79,6 +160,10 @@ const { occhiello, titolo, riquadri } = Astro.props;
     }
     .scheda {
       padding: 24px;
+    }
+    .vignetta {
+      height: 64px;
+      margin-bottom: 16px;
     }
     .frase {
       font-size: 19px;

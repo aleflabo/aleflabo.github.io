@@ -1,0 +1,31 @@
+---
+// Un pezzo del disordine: un riquadro ruotato attorno al proprio centro, con
+// dentro qualche barretta a suggerire del testo. Usato due volte identico da
+// `CosaCostruisco.astro` — una per il disordine largo, una per lo stretto —
+// perché è la stessa cosa disegnata due volte, non due cose che assomigliano.
+//
+// La rotazione attorno al centro (non all'origine) non è estetica: è il patto
+// con `ingombro()` in src/lib/diagramma.ts, che calcola il riquadro
+// contenitore assumendo esattamente quel centro. Romperlo qui vorrebbe dire
+// che i test del task 3 restano verdi mentre la pagina taglia lo stesso.
+import type { Frammento as DatiFrammento } from "../lib/diagramma";
+
+interface Props {
+  f: DatiFrammento;
+}
+const { f } = Astro.props;
+
+// Le barrette dentro il riquadro simulano del testo. Il passo (9px fra una
+// riga e l'altra, 12px dal bordo superiore) e l'alternanza di larghezza
+// (piena, poi ridotta di 14px, poi piena di nuovo) sono quelli della tavola:
+// non un dato di `frammenti()`, che genera solo forma e numero di righe.
+const RIENTRO = 9;
+const larghezzaBarra = (i: number) => f.w - RIENTRO * 2 - (i % 2 === 1 ? 14 : 0);
+---
+
+<g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
+  <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
+  {Array.from({ length: f.righe }).map((_, i) => (
+    <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(i)} height="4" rx="2" fill="var(--border)" />
+  ))}
+</g>

@@ -52,6 +52,63 @@ for (const f of trovaHtml("dist")) {
   }
 }
 
+// Le frasi che il committente non ha ancora approvato non devono uscire.
+// Questa lista è il ponte fra la spec e la pagina: finché una di queste frasi
+// non compare in testi.md — la fonte approvata — non può comparire nemmeno in
+// dist. È il seguito del blocco qui sopra: là i segnaposto evidenti, qui le
+// frasi che sembrano finite e non lo sono.
+const DA_APPROVARE = [
+  "Cosa costruisco",
+  "Metto insieme quello che avete già",
+  // L'ottava stringa mancava (task 14, home-visuale): la lista ne elencava
+  // sette delle otto della sezione, e il paragrafo d'apertura — il più
+  // lungo, quindi quello con più da perdere se qualcuno lo riscrivesse —
+  // passava senza controllo. Alla lettera da testi.md, riga 65.
+  "I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.",
+  "Legge e collega",
+  "ogni giorno, da solo",
+  "da dove viene",
+  "Cartelle, fogli, caselle di posta, gestionali.",
+  "Un posto solo dove cercare.",
+];
+// Solo la fonte italiana. Guardare anche testi-en.md sembrava piu' sicuro ed
+// era il contrario: la legenda di una sua tabella contiene «da dove viene», e
+// bastava a rendere il controllo cieco su quella frase per sempre. Le stringhe
+// inglesi avranno la loro lista quando la copy inglese arrivera'.
+const PERCORSO_TESTI = "docs/superpowers/specs/2026-08-25-sito-italiano/testi.md";
+if (!existsSync(PERCORSO_TESTI)) {
+  dice(`manca ${PERCORSO_TESTI}: impossibile verificare le frasi da approvare`);
+} else {
+  const FONTI_APPROVATE = readFileSync(PERCORSO_TESTI, "utf8");
+  for (const f of trovaHtml("dist")) {
+    const html = readFileSync(f, "utf8");
+    for (const frase of DA_APPROVARE) {
+      if (html.includes(frase) && !FONTI_APPROVATE.includes(frase)) {
+        dice(`${f} pubblica «${frase}», che non sta in testi.md`);
+      }
+    }
+  }
+}
+
+// Il movimento deve restare condizionato: alla visibilità e alla preferenza di
+// chi legge. Due regressioni possibili, tutte e due silenziose in pagina.
+{
+  const css = trovaHtml("dist")
+    .map((f) => readFileSync(f, "utf8"))
+    .concat(
+      readdirSync("dist/_astro", { withFileTypes: true })
+        .filter((v) => v.isFile() && v.name.endsWith(".css"))
+        .map((v) => readFileSync(join("dist/_astro", v.name), "utf8")),
+    )
+    .join("\n");
+  if (!css.includes("prefers-reduced-motion")) {
+    dice("il sito costruito non dichiara nessun blocco prefers-reduced-motion");
+  }
+  if (/main\s*>\s*section\s*\{[^}]*animation/.test(css)) {
+    dice("main > section si anima ancora al caricamento invece che entrando in vista");
+  }
+}
+
 // La pagina 404 deve stare esattamente in dist/404.html: GitHub Pages serve
 // quel file, e solo quello, per ogni indirizzo che non esiste. Se finisse in
 // una sottocartella — come succede a tutte le altre rotte — il sito

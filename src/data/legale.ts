@@ -53,7 +53,7 @@ export const privacy: PaginaLegale = {
       titolo: 'Che cosa raccoglie il sito quando lo visitate',
       paragrafi: [
         'Niente che finisca a me. Le pagine sono file statici: non c\'è un programma che gira sul server, non c\'è un archivio dove annotare le visite, e non uso Google Analytics né altri strumenti di misurazione.',
-        'Il sito è pubblicato su GitHub Pages. Come qualunque servizio che consegna pagine web, GitHub registra i dati tecnici della connessione — indirizzo IP, tipo di browser, pagina richiesta — per far funzionare il servizio e difenderlo dagli abusi. Quei registri restano a GitHub e io non ci accedo. Il trattamento è descritto nella loro informativa privacy.',
+        'Il sito è pubblicato su GitHub Pages. Come qualunque servizio che consegna pagine web, GitHub registra i dati tecnici della connessione (indirizzo IP, tipo di browser, pagina richiesta) per far funzionare il servizio e difenderlo dagli abusi. Quei registri restano a GitHub e io non ci accedo. Il trattamento è descritto nella loro informativa privacy.',
       ],
     },
     {
@@ -79,7 +79,7 @@ export const privacy: PaginaLegale = {
     {
       titolo: 'Per quanto tempo',
       paragrafi: [
-        'Non conservo dati raccolti dal sito, perché il sito non ne raccoglie. Quello che mi mandate direttamente — un messaggio, un allegato — lo tengo finché serve a rispondervi o a lavorare insieme, e poi lo elimino.',
+        'Non conservo dati raccolti dal sito, perché il sito non ne raccoglie. Quello che mi mandate direttamente (un messaggio, un allegato) lo tengo finché serve a rispondervi o a lavorare insieme, e poi lo elimino.',
       ],
     },
     {
@@ -102,7 +102,7 @@ export const cookie: PaginaLegale = {
     {
       titolo: 'Perché non c\'è il banner',
       paragrafi: [
-        'Il banner serve a chiedere il consenso per i cookie che profilano o misurano. Qui non ce ne sono di nessun tipo — né miei né di terzi — quindi non c\'è niente da consentire, e un banner che chiede il permesso per niente è solo un ostacolo in più fra voi e la pagina.',
+        'Il banner serve a chiedere il consenso per i cookie che profilano o misurano. Qui non ce ne sono di nessun tipo, né miei né di terzi, quindi non c\'è niente da consentire, e un banner che chiede il permesso per niente è solo un ostacolo in più fra voi e la pagina.',
       ],
     },
     {

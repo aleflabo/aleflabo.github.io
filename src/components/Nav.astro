@@ -175,11 +175,23 @@ const etichetteToggle =
     color: var(--surface);
     opacity: 0.9;
   }
+  /* La voce attiva è sottolineata con `text-decoration`, non con un
+     `border-bottom`. Il bordo sta in fondo alla scatola del link, e finché
+     la scatola era alta quanto il testo le due cose coincidevano; da quando
+     su un dispositivo tattile il link è alto 44px non coincidono più, e a
+     768px la riga arancione di «Servizi» galleggiava dieci pixel sotto la
+     parola, come un trattino sfuggito. `text-decoration` segue il testo a
+     qualunque altezza abbia la scatola intorno, quindi il problema non si
+     ripresenta la prossima volta che qualcuno cambia quell'altezza.
+     Misure scelte guardando: 2px di spessore come il bordo di prima, e 5px
+     di stacco per lasciare respirare i discendenti di «Servizi». */
   .links a.attiva {
     color: var(--text);
-    border-bottom: 2px solid var(--accent);
     font-weight: 600;
-    padding-bottom: 2px;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
   }
 
   /* --- pulsante a due trattini: misure alla lettera da tavole/HomeMobile.dc.html ---
@@ -224,10 +236,16 @@ const etichetteToggle =
   .inner.it .links a:hover {
     color: var(--azione);
   }
+  /* La testata italiana cambia solo il colore della sottolineatura: il resto
+     — spessore, stacco, il fatto stesso che sia `text-decoration` e non un
+     bordo — sta nella regola generica sopra, e va cambiato una volta sola.
+     Prima erano due `border-bottom` completi, uno per testata: la prima
+     correzione ha toccato solo il generico e a 768px si vedevano tutte e
+     due le righe, la nuova sotto la parola e la vecchia dieci pixel più
+     giù. Un difetto che nasce dall'avere scritto due volte la stessa cosa. */
   .inner.it .links a.attiva {
-    border-bottom: 2px solid var(--azione);
     font-weight: 600;
-    padding-bottom: 2px;
+    text-decoration-color: var(--azione);
   }
   /* Il contorno terracotta è dato dalla classe .pulsante (l'animazione
      viene da .pulsante in global.css), non dalla lingua: stessa identità
@@ -283,6 +301,50 @@ const etichetteToggle =
       align-items: center;
       min-height: 44px;
       width: 100%;
+    }
+  }
+
+  /* Sopra i 720px il menu resta la riga orizzontale, e fino a qui nessuna
+     regola ne alzava le voci: su un tablet a 768px le sette voci stavano a
+     22,4px e il cambio lingua a 20,5 — sotto i 24px del minimo AA, non solo
+     sotto i 44. Il menu a scomparsa non c'entrava: quello è a norma dai 720
+     in giù da sempre, e il buco stava esattamente sopra la sua soglia.
+
+     `pointer: coarse` per la stessa ragione di `global.css`: la domanda è
+     se a toccare sia un dito, non quanto è larga la finestra. `min-width`
+     a 721px perché sotto ci pensa già la regola del menu aperto, e le due
+     non devono litigare sul `display` della stessa voce.
+
+     `inline-block` + `align-content`, la stessa coppia di `global.css`, e non
+     `inline-flex`: provato, e rompeva il cambio lingua. LangSwitch scrive
+     «EN<span> / </span>IT», e in un contenitore flex i tre <span> diventano
+     tre elementi flex, che perdono gli spazi ai loro estremi: a video
+     usciva «EN/IT» attaccato. Guardato a 768px, non dedotto. `inline-block`
+     lascia i tre span nel loro flusso di testo e gli spazi restano.
+
+     `:global()` sul tag per lo stesso motivo dichiarato trenta righe sopra:
+     LangSwitch è un componente a parte e il suo <a class="lang"> porta un
+     altro scope-id. */
+  @media (pointer: coarse) and (min-width: 721px) {
+    .links :global(a) {
+      display: inline-block;
+      min-height: 44px;
+      align-content: center;
+    }
+  }
+
+  /* Il marchio è un link come gli altri e porta alla home, ma non sta dentro
+     `.links`: nessuna delle regole qui sopra lo prendeva, a nessuna
+     larghezza, e restava sotto i 44px anche a menu aperto. Non è esente:
+     l'esenzione di WCAG 2.5.8 vale per i link «in linea» dentro un blocco di
+     testo, e questo è navigazione. Qui la condizione è il solo `pointer:
+     coarse`, senza soglia di larghezza, perché il marchio è identico sopra e
+     sotto i 720px — cambia solo di corpo. */
+  @media (pointer: coarse) {
+    .brand {
+      display: inline-block;
+      min-height: 44px;
+      align-content: center;
     }
   }
 

@@ -18,9 +18,43 @@ interface OpzioneUrgenza {
   checked?: boolean;
 }
 interface Props {
-  eyebrow: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Parliamone» sparisce
+  // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
+  // home ne aveva nove — due venivano proprio da questa sezione, che ne ha
+  // due: questo e quello di `territorio` sotto). Il titolo resta e basta.
+  // L'id "parliamone" sulla <section>, a cui punta la barra di navigazione,
+  // non cambia: sparisce solo l'etichetta visibile, non l'ancora.
+  eyebrow?: string;
   titolo: string;
   intro: string;
+  // Il territorio (task 6, home-visuale): la sezione «Dove lavoro» smette di
+  // essere una sezione a sé e entra qui sopra, perché chi sta per scrivere
+  // è esattamente chi si chiede se si è raggiungibili. Facoltativa: senza
+  // `territorio` la sezione rende solo il modulo. Non perché qualcun altro
+  // ometta la prop — questo componente lo usano soltanto le due home,
+  // `src/pages/index.astro` e `src/pages/en/index.astro` — ma perché è la
+  // forma che il repo usa dappertutto: un campo vuoto salta la sua sezione
+  // invece di far comparire un'intestazione senza contenuto sotto (regola 2
+  // del CLAUDE.md). I testi vengono da `src/data/territorio.ts`.
+  //
+  // `corpo` è tornato (debito dichiarato dalla PR #32): quando il territorio
+  // è entrato qui la tavola non lo rendeva, e il campo è sparito da tutte e
+  // due le lingue — mentre `src/pages/llms.txt.ts` ha continuato a
+  // pubblicarlo. Il riassunto per le macchine e il sito per le persone
+  // dicevano due cose diverse sullo stesso argomento, e l'unico paragrafo
+  // che spiega come va il lavoro a distanza stava solo dalla parte delle
+  // macchine. Le due home passano `{...territorio.it}` per intero, quindi
+  // il campo arrivava già qui: mancava di dichiararlo e di renderlo.
+  territorio?: {
+    // Facoltativo anche qui (task 14, home-visuale), stesso motivo
+    // dell'`eyebrow` sopra: l'occhiello «Dove lavoro» sparisce, il titolo
+    // «Venezia è la mia base» dice già di cosa parla il blocco.
+    occhiello?: string;
+    titolo: string;
+    intro: string;
+    corpo: string;
+    modi: { etichetta: string; dettaglio: string }[];
+  };
   campoAzienda: CampoTesto;
   campoContatto: CampoTesto;
   campoRichiesta: CampoTesto;
@@ -40,6 +74,7 @@ const {
   eyebrow,
   titolo,
   intro,
+  territorio,
   campoAzienda,
   campoContatto,
   campoRichiesta,
@@ -54,7 +89,20 @@ const {
 
 <section class="contatto" id="parliamone">
   <div class="container">
-    <p class="eyebrow">{eyebrow}</p>
+    {territorio && (
+      <div class="territorio">
+        {territorio.occhiello && <p class="occhiello">{territorio.occhiello}</p>}
+        <h2 class="luogo">{territorio.titolo}</h2>
+        <p class="intro-luogo">{territorio.intro}</p>
+        <p class="corpo-luogo">{territorio.corpo}</p>
+        <div class="modi">
+          {territorio.modi.map((m) => (
+            <p><strong>{m.etichetta}</strong> {m.dettaglio}</p>
+          ))}
+        </div>
+      </div>
+    )}
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h2 class="titolo">{titolo}</h2>
     <p class="intro">{intro}</p>
 
@@ -122,6 +170,62 @@ const {
   }
   .container {
     padding: 72px 24px;
+  }
+
+  /* Il territorio (task 6): stessa etichetta e stesso ritmo tipografico
+     dell'ex sezione a sé, ma con la palette del fondo scuro. I colori sono
+     token già esistenti in tokens.css — --evidenziatore da prima di questo
+     ramo, --su-accent e --su-accent-forte introdotti dal task 2 apposta per
+     il testo su fondo scuro — non esadecimali nuovi. Il resto della sezione
+     qui sotto (eyebrow, intro, pillole…) resta con lo stile di produzione,
+     colori scritti a mano: i due linguaggi convivono nello stesso blocco
+     perché rispondono a scelte diverse, non sono uguali fra loro. Chiude
+     con un separatore e uno spazio prima dell'eyebrow «Parliamone»:
+     34px di padding-bottom e 44px di margin-bottom, la stessa misura che il
+     blocco 8 della tavola mette fra il divisorio e l'eyebrow successivo. */
+  .territorio {
+    padding-bottom: 34px;
+    margin-bottom: 44px;
+    border-bottom: 1px solid rgb(255 255 255 / 16%);
+  }
+  .territorio .occhiello {
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--evidenziatore);
+    font-weight: 700;
+  }
+  .territorio .luogo {
+    font-size: 26px;
+    margin-top: 14px;
+    color: var(--surface);
+  }
+  /* `intro-luogo` e `corpo-luogo` sono due capoversi dello stesso testo, non
+     due livelli: una regola sola, e a distinguerli restano i margini — è
+     l'ultimo dei due a staccare dai «modi» qui sotto. */
+  .territorio .intro-luogo,
+  .territorio .corpo-luogo {
+    margin-top: 14px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--su-accent-forte);
+    max-width: 66ch;
+  }
+  .territorio .corpo-luogo {
+    margin-bottom: 26px;
+  }
+  .territorio .modi {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .territorio .modi p {
+    font-size: 14px;
+    color: var(--su-accent);
+  }
+  .territorio .modi strong {
+    color: var(--surface);
+    font-weight: 600;
   }
   .eyebrow {
     font-size: 11.5px;
@@ -283,6 +387,21 @@ const {
   @media (max-width: 640px) {
     .container {
       padding: 48px 20px;
+    }
+    .territorio {
+      padding-bottom: 30px;
+      margin-bottom: 34px;
+    }
+    .territorio .luogo {
+      font-size: 24px;
+    }
+    .territorio .intro-luogo {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .territorio .modi {
+      flex-direction: column;
+      gap: 8px;
     }
     .titolo {
       font-size: 26px;

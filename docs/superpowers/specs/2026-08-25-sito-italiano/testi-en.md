@@ -304,7 +304,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 **[TRADOTTO]** — `testi.md`, home, la linea del tempo
 
-> **2021–2024** — PhD in computer vision, Sapienza — PINlab
+> **2021–2024** — PhD in computer vision, Sapienza – PINlab
 > **CVPR · ICCV · IROS** — The main conferences in the field
 > **2024–2026** — Co-founder and CTO of Procedo, an industrial startup
 >
@@ -1059,8 +1059,8 @@ di `testi.md`, quindi non ha un case study nemmeno in italiano.
 >
 > A wedding video, generated end to end, with a story that runs across several
 > scenes. Generating one scene is easy and everybody does it; the hard part is
-> generating ten in which the same people stay recognisable — same face, same
-> clothes, same light — and the story holds from beginning to end. The work on
+> generating ten in which the same people stay recognisable (same face, same
+> clothes, same light) and the story holds from beginning to end. The work on
 > images came out of that too: what interests me is the point where these tools
 > stop being a demo and start holding up a delivery.
 >
@@ -1423,7 +1423,7 @@ approvati
 > I started in Udine, with a degree in computer science and six months in
 > Sweden that took away any idea of staying put. Then Rome: a master's in data
 > science and a PhD at Sapienza's Perception and Intelligence Lab, where I
-> spent three years on a problem that can be summed up like this — teaching a
+> spent three years on a problem that can be summed up like this: teaching a
 > computer to watch somebody working and understand what they're doing.
 >
 > In the middle, a winter in Amsterdam working on a geometry different from the

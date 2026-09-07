@@ -1,122 +1,163 @@
 ---
-// I testi (e l'href, già risolto per la lingua) arrivano dalla pagina
-// (task 2, sito-inglese). `ore` e `nome` coincidono con `formati` di
-// src/data/formazione.ts, ma il corpo di ogni scheda è un riassunto
-// proprio della home, diverso da `formati[].corpo` (la versione estesa è
-// per /formazione, task 10).
+// La sezione «Formazione» sulla home è ridotta a striscia (task 7,
+// home-visuale): 294px a 1440 contro i 1115 di prima. Il resto — la
+// seconda introduzione, il corpo di ogni formato, la chiusura lunga —
+// continua a esistere per esteso su /formazione, che ha propri
+// componenti (CorpoFormazione.astro) e non passa mai queste props: da
+// qui in poi `formati[].corpo` e `chiusura` sono quindi facoltative,
+// perché la striscia non le rende.
+//
+// `introduzioni` resta un array di due paragrafi (voluto per un'eventuale
+// terza introduzione futura), ma la striscia ne mostra uno solo: quello
+// sull'AI Act. Nell'oggetto scritto in origine (src/pages/index.astro e
+// src/data/en/home.ts) quel paragrafo è il secondo, non il primo — è la
+// pagina, non questo componente, a scegliere quale indice passare.
 interface Props {
-  occhiello: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Formazione» sparisce
+  // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
+  // home ne aveva nove). Il titolo sotto resta e basta a introdurre la
+  // striscia.
+  occhiello?: string;
   titolo: string;
   introduzioni: string[];
-  formati: { ore: string; nome: string; corpo: string }[];
-  chiusura: string;
+  formati: { ore: string; nome: string; corpo?: string }[];
+  chiusura?: string;
   linkChiusura: string;
   hrefChiusura: string;
 }
-const { occhiello, titolo, introduzioni, formati, chiusura, linkChiusura, hrefChiusura } = Astro.props;
+const { occhiello, titolo, introduzioni, formati, linkChiusura, hrefChiusura } = Astro.props;
 ---
 
 <section class="blocco-formazione">
   <div class="container">
-    <p class="label">{occhiello}</p>
-    <h2 class="section-title">{titolo}</h2>
-    {introduzioni.map((intro) => <p class="intro">{intro}</p>)}
+    {/* Tre item di griglia (non due) per lo stesso motivo di FasciaNumeri:
+        «link» sta sotto il titolo sul desktop ma in fondo a tutto sul
+        telefono, dopo l'introduzione e le pastiglie (tavole/Main.dc.html
+        contro HomeMobile.dc.html, blocco «7 · FORMAZIONE») — un'inversione
+        che un'unica colonna di sinistra non renderebbe senza JavaScript o
+        un trucco `order` su un `display:contents`. Con «link» come item di
+        griglia a parte basta un secondo `grid-template-areas` sotto i
+        640px, com'è già in FasciaNumeri.astro. */}
     <div class="griglia">
-      {formati.map((f) => (
-        <div class="scheda">
-          <p class="eyebrow">{f.ore}</p>
-          <h3>{f.nome}</h3>
-          <p class="corpo">{f.corpo}</p>
+      <div class="sinistra">
+        {occhiello && <p class="label">{occhiello}</p>}
+        <h2 class="section-title">{titolo}</h2>
+      </div>
+      <div class="destra">
+        <p class="intro">{introduzioni[0]}</p>
+        <div class="pastiglie">
+          {formati.map((f) => (
+            <span class="pastiglia"><strong>{f.ore}</strong> {f.nome}</span>
+          ))}
         </div>
-      ))}
+      </div>
+      <a class="link-chiusura" href={hrefChiusura}>{linkChiusura} <span class="freccia">&rarr;</span></a>
     </div>
-    <p class="chiusura">{chiusura} <a href={hrefChiusura}>{linkChiusura} <span class="freccia">&rarr;</span></a></p>
   </div>
 </section>
 
 <style>
   .blocco-formazione {
+    /* --surface-warm, non --bg: è il fondo caldo della striscia, distinto
+       dal resto della pagina — voluto, non una ripetizione del fondo
+       generale. */
+    background: var(--surface-warm);
     border-top: 1px solid var(--border);
     padding: 0;
   }
   .container {
-    padding: 72px 24px;
+    /* 52px, non i 72px del blocco intero di prima: la striscia deve
+       restare corta, è una delle due fasce sotto i 450px che fanno da
+       pausa nel ritmo della pagina. */
+    padding: 52px 24px;
   }
-  .section-title {
-    font-size: 32px;
-    margin-top: 18px;
-    margin-bottom: 14px;
-    max-width: 32ch;
-  }
-  .intro {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    max-width: 64ch;
-    margin-bottom: 18px;
-  }
-  .intro:last-of-type {
-    margin-bottom: 40px;
-  }
+
   .griglia {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    grid-template-columns: 400px minmax(0, 1fr);
+    grid-template-areas:
+      "sinistra destra"
+      "link     destra";
+    column-gap: 64px;
+    align-items: start;
   }
-  .scheda {
-    border-left: 1px solid var(--border);
-    padding-left: 22px;
+  .sinistra {
+    grid-area: sinistra;
   }
-  .scheda .eyebrow {
-    font-size: 11.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--azione);
-    font-weight: 700;
-    margin-bottom: 8px;
+  .destra {
+    grid-area: destra;
   }
-  .scheda h3 {
-    font-size: 19px;
-  }
-  .scheda .corpo {
-    margin-top: 12px;
+  .link-chiusura {
+    grid-area: link;
+    margin-top: 18px;
     font-size: 15px;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-size: 26px;
+    margin-top: 14px;
+    margin-bottom: 0;
+    max-width: none;
+  }
+  .intro {
+    font-size: 15.5px;
     line-height: 1.65;
     color: var(--text-muted);
   }
-  .chiusura {
-    margin-top: 34px;
-    font-size: 15px;
-    color: var(--text-muted);
+  .pastiglie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
   }
-  .chiusura a {
-    font-weight: 600;
-    color: var(--accent);
+  .pastiglia {
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 14px;
+  }
+  .pastiglia strong {
+    color: var(--azione);
   }
 
   @media (max-width: 640px) {
     .container {
-      padding: 48px 20px;
+      padding: 40px 20px 44px;
     }
-    .section-title {
-      font-size: 26px;
-      margin-top: 14px;
-      margin-bottom: 12px;
-      max-width: none;
-    }
-    .intro {
-      font-size: 15px;
-      max-width: none;
-    }
-    .intro:last-of-type {
-      margin-bottom: 28px;
+    .label {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
     }
     .griglia {
       grid-template-columns: 1fr;
-      gap: 24px;
+      grid-template-areas:
+        "sinistra"
+        "destra"
+        "link";
+      column-gap: 0;
     }
-    .chiusura {
-      margin-top: 26px;
+    .section-title {
+      font-size: 24px;
+      margin-top: 12px;
+    }
+    .intro {
+      margin-top: 14px;
+      font-size: 15px;
+    }
+    .pastiglie {
+      /* In colonna: è anche quello che porta il tocco della pastiglia
+         sopra i 44px, con il padding maggiore qui sotto. */
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .pastiglia {
+      padding: 11px 14px;
+    }
+    .link-chiusura {
+      margin-top: 14px;
     }
   }
 </style>

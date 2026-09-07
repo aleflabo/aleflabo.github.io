@@ -1,12 +1,14 @@
 ---
 // src/pages/en/index.astro — la home inglese (rotta `/en/`).
 //
-// Gemella della home italiana (src/pages/index.astro, task 2/9, ramo
-// sito-italiano): stessi otto componenti di src/components/sezioni/,
-// alimentati qui da src/data/en/home.ts invece che dalle costanti scritte
-// a mano lì. Nessuna stringa nuova: tutto il testo viene da quel file
-// (task 3, sito-inglese, verificato campo per campo contro le firme dei
-// componenti — task-2-report.md).
+// Gemella della home italiana (src/pages/index.astro), ma a sette sezioni
+// invece di otto: manca <CosaCostruisco /> (task 11, home-visuale — vedi
+// il commento più sotto, prima del montaggio). Gli altri sette componenti
+// vengono da src/components/sezioni/, alimentati qui da src/data/en/home.ts
+// invece che dalle costanti scritte a mano nella home italiana. Nessuna
+// stringa nuova: tutto il testo viene da quel file (task 3, sito-inglese,
+// verificato campo per campo contro le firme dei componenti —
+// task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Occhiello from '../../components/sezioni/Occhiello.astro';
 import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
@@ -14,8 +16,6 @@ import IlProblema from '../../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
 import LeProve from '../../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
-import DaDoveViene from '../../components/sezioni/DaDoveViene.astro';
-import Territorio from '../../components/sezioni/Territorio.astro';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
   occhiello,
@@ -30,6 +30,17 @@ import {
 import { territorio } from '../../data/territorio';
 import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
 import { attivita } from '../../lib/datiStrutturati';
+
+// Niente <CosaCostruisco /> qui (task 11, home-visuale): le otto stringhe
+// della sezione italiana omonima (occhiello, titolo, intro, nodo.titolo,
+// nodo.sottotitolo, ritorno, le due didascalie — vedi il commento sopra
+// `cosaCostruisco` in src/pages/index.astro) non hanno un equivalente
+// approvato in testi-en.md. Non è una dimenticanza: è la regola 2 del
+// CLAUDE.md — un campo vuoto salta la sua sezione, non si allunga il
+// testo per riempirla. Per aggiungerla servirebbe che il committente
+// scrivesse (non traducesse) le otto frasi inglesi in testi-en.md, poi
+// bastano import di CosaCostruisco, l'oggetto in src/data/en/home.ts e il
+// montaggio qui sotto, sullo stesso modello dell'italiana.
 
 // Titolo e descrizione della pagina: composti dai dati già approvati in
 // home.ts, con la stessa regola della home italiana (src/pages/index.astro),
@@ -47,7 +58,8 @@ import { attivita } from '../../lib/datiStrutturati';
 const titoloPagina = `Alessandro Flaborea — ${occhiello.eyebrow}`;
 // La sola composizione dava 66 caratteri, meno di metà della finestra utile
 // in SERP, e non diceva da dove si lavora. La coda sul territorio è la stessa
-// che dice la sezione Territorio, resa in inglese.
+// cosa che dice il blocco territorio dentro Contatto (task 6, home-visuale),
+// resa in inglese.
 const descrizionePagina = `${occhiello.titolo
   .replaceAll('|', ' ')
   .replace(/\s+([,.;:!?])/g, '$1')
@@ -76,12 +88,16 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
-  <FasciaNumeri numeri={numeri} />
+  {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
+      italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
+      «The problem»/«The evidence» sui due componenti sotto che li tengono.
+      Le stringhe restano in src/data/en/home.ts — non si tocca quel file
+      dati — semplicemente non si passano più, sovrascritte a `undefined`
+      dopo lo spread. */}
+  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
   <IlProblema {...ilProblema} />
-  <ComeLavoro {...comeLavoro} />
+  <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} />
-  <DaDoveViene {...daDoveViene} />
-  <Territorio {...territorio.en} />
-  <Contatto {...contatto} />
+  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />
 </BaseLayout>
