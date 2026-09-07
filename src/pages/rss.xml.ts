@@ -23,7 +23,7 @@ import { tutteLeNote } from '../lib/note';
 export async function GET(context: APIContext) {
   const note = await tutteLeNote();
   return rss({
-    title: 'Note - Alessandro Flaborea',
+    title: 'Note – Alessandro Flaborea',
     description: 'Quello che imparo mentre lo imparo.',
     site: context.site!,
     items: note.map((n) => ({

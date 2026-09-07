@@ -190,11 +190,11 @@ Sorgente: `tavole/Main.dc.html`
 
 - `testo` Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.
 - `testo` Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.
-- `testo` 2021-2024
-- `testo` Dottorato in computer vision, Sapienza - PINlab
+- `testo` 2021–2024
+- `testo` Dottorato in computer vision, Sapienza – PINlab
 - `testo` CVPR · ICCV · IROS
 - `testo` Le conferenze principali del settore
-- `testo` 2024-2026
+- `testo` 2024–2026
 - `testo` Co-fondatore e CTO di Procedo, startup industriale
 - `LINK` La ricerca, per intero →
 - `LINK` Chi sono →
@@ -554,7 +554,7 @@ Sorgente: `tavole/Lavori.dc.html`
 
 *TITOLO DI SEZIONE (h2)*
 
-- `etichetta` 2024-2026
+- `etichetta` 2024–2026
 - `testo` Industria · in produzione
 
 ### Procedo
@@ -678,7 +678,7 @@ Sorgente: `tavole/Lavori.dc.html`
 - `etichetta` Mappa interattiva
 - `etichetta` Serie storica 2012-2025
 - `etichetta` Proiezioni al 2034
-- `etichetta` 2024-oggi
+- `etichetta` 2024–oggi
 - `testo` Sistemi di conoscenza
 
 ### Personal Vault
@@ -689,7 +689,7 @@ Sorgente: `tavole/Lavori.dc.html`
 - `etichetta` Wiki curata da un agente
 - `etichetta` Uso quotidiano
 - `etichetta` Vincoli sui dati
-- `etichetta` 2021-2023
+- `etichetta` 2021–2023
 - `testo` Computer vision · MVP
 
 ### HomeSweatHome

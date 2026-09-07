@@ -23,8 +23,8 @@ Due precisazioni sulle fonti:
   due progetti è tradotto dall'italiano approvato.
 - Titoli delle pubblicazioni, sedi (CVPR, ICCV, IROS, ICLR, Pattern
   Recognition…), nomi propri (Procedo, Sapienza, PINlab, Fondimpresa, B4i,
-  HomeSweatHome, Spannum) e numeri (10 articoli, 533 citazioni, 2021-2024,
-  2024-2026) restano invariati e non sono contati né fra i riusati né fra i
+  HomeSweatHome, Spannum) e numeri (10 articoli, 533 citazioni, 2021–2024,
+  2024–2026) restano invariati e non sono contati né fra i riusati né fra i
   tradotti.
 
 ## Le rotte inglesi proposte
@@ -107,7 +107,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 > **Nota.** `en.hero.credibility` esiste ed è più corta: *«PhD in Computer
 > Vision · CVPR/ICCV/IROS · Co-Founder of Procedo»*. L'italiano aggiunge
-> «alla Sapienza» e «dal 2024 al 2026», e il 2024-2026 conta perché dice che
+> «alla Sapienza» e «dal 2024 al 2026», e il 2024–2026 conta perché dice che
 > il ruolo è finito. Per questo ho tradotto invece di riusare.
 
 **[TRADOTTO]** — `testi.md`, home, i quattro numeri
@@ -268,7 +268,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 > the last few years, what has stayed the same, and the concrete risks to your
 > data.
 >
-> **8-12 hours · Workshop by function**
+> **8–12 hours · Workshop by function**
 > Engineering office, purchasing, administration, sales. Each group works on
 > its own documents, so what they learn can be used the next day.
 >
@@ -304,9 +304,9 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 **[TRADOTTO]** — `testi.md`, home, la linea del tempo
 
-> **2021-2024** — PhD in computer vision, Sapienza - PINlab
+> **2021–2024** — PhD in computer vision, Sapienza – PINlab
 > **CVPR · ICCV · IROS** — The main conferences in the field
-> **2024-2026** — Co-founder and CTO of Procedo, an industrial startup
+> **2024–2026** — Co-founder and CTO of Procedo, an industrial startup
 >
 > The research, in full → · About me →
 
@@ -629,7 +629,7 @@ inglese di partenza: tutta tradotta.
 > *Who it's for:* everyone, including people who have never opened ChatGPT.
 > *What you need to provide:* a room and a projector.
 >
-> **8-12 hours · Workshop by function**
+> **8–12 hours · Workshop by function**
 > Engineering office, purchasing, administration, sales: each group works on its
 > own documents and its own cases. We start from a task that takes hours today
 > and try to shorten it, together, during the session.
@@ -763,7 +763,7 @@ Grip). I campi dei case study sono **riusati** dove l'inglese è tuo.
 
 > ## Software for companies
 
-### Procedo — 2024-2026
+### Procedo — 2024–2026
 
 **[TRADOTTO]** — `testi.md`, scheda (occhiello, corpo, etichette)
 
@@ -1113,7 +1113,7 @@ mia resa dell'italiano, non un nome che hai scelto.
 > tradotta sopra usa la parola nuda, come fa l'italiano. Conviene tenere la
 > glossa anche nella scheda.
 
-### Personal Vault — 2024-oggi
+### Personal Vault — 2024–oggi
 
 **[TRADOTTO]** — `testi.md`, scheda
 
@@ -1148,7 +1148,7 @@ mia resa dell'italiano, non un nome che hai scelto.
 > **Result** — A living personal wiki with strict data-governance constraints,
 > used daily to search, brief, and disambiguate across a growing base of notes.
 
-### HomeSweatHome — 2021-2023
+### HomeSweatHome — 2021–2023
 
 **[TRADOTTO]** — `testi.md`, scheda
 

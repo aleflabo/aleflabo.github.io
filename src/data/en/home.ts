@@ -243,7 +243,7 @@ export const bloccoFormazione: BloccoFormazioneProps = {
   ],
   formati: [
     { ore: "4 hours", nome: "Introductory course" },
-    { ore: "8-12 hours", nome: "Workshop by function" },
+    { ore: "8–12 hours", nome: "Workshop by function" },
     { ore: "Length agreed", nome: "Funded programme" },
   ],
   linkChiusura: "How a course gets organised",
@@ -270,9 +270,9 @@ export const daDoveViene: DaDoveVieneProps = {
   titolo: "From research to production",
   intro: "A master's in data science, then a PhD in computer vision at Sapienza, with the work published at conferences where it gets examined thoroughly before it comes out. I was then CTO of an industrial startup for two years, which is the job where you find out how much of that research survives contact with a real company.",
   tappe: [
-    { valore: "2021-2024", etichetta: "PhD in computer vision, Sapienza - PINlab" },
+    { valore: "2021–2024", etichetta: "PhD in computer vision, Sapienza – PINlab" },
     { valore: "CVPR · ICCV · IROS", etichetta: "The main conferences in the field" },
-    { valore: "2024-2026", etichetta: "Co-founder and CTO of Procedo, an industrial startup" },
+    { valore: "2024–2026", etichetta: "Co-founder and CTO of Procedo, an industrial startup" },
   ],
   linkRicerca: "The research, in full",
   hrefRicerca: "/en/research/",
