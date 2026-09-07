@@ -153,6 +153,15 @@ const comeLavoro = {
 // progetto meglio di quanto fosse. Corpo e tag del toolkit sono presi
 // alla lettera da `agentic-toolkit.it.summary` e `.tagIt` in
 // projects.ts; l'occhiello da testi.md («Le prove», scheda toolkit).
+//
+// Il toolkit NON porta `tagInEvidenza` (revisione finale, home-visuale). Il
+// task 9 gli aveva messo «Strumenti miei, per il mio team», che non sta in
+// testi.md né in projects.ts: era scritta qui, e la regola 2 del CLAUDE.md
+// non lo permette. Il commento gemello in data/en/home.ts la citava perfino
+// come motivo per lasciare vuota la scheda inglese — la stessa conclusione
+// vale per l'italiano, che era in produzione. Se serve dire che questi
+// strumenti sono suoi e non una commessa, la frase va approvata prima:
+// «shorten the structure, do not lengthen the text».
 const leProve = {
   occhiello: 'Le prove',
   titolo: 'Alcune cose che ho costruito',
@@ -181,7 +190,6 @@ const leProve = {
       nome: 'Agentic Workflow Toolkit',
       corpo: 'Una suite di skill ad agenti AI che automatizzano le operazioni del team e i flussi ingegneristici, dagli standup quotidiani alla review dei prompt LLM.',
       tag: ['Standup automatico', 'Documentazione rigenerata', 'Revisione dei prompt'],
-      tagInEvidenza: 'Strumenti miei, per il mio team',
       miniatura: 'toolkit' as const,
       link: 'Come funziona',
       href: localizedPath('it', '/lavori/agentic-toolkit'),

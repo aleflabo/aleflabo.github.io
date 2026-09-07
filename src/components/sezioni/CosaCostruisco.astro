@@ -95,7 +95,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     <h2 class="section-title">{titolo}</h2>
     <p class="intro">{intro}</p>
 
-    <!-- ============ disposizione larga (≥641px): sinistra→nodo→destra ============ -->
+    <!-- ============ disposizione larga (≥901px): sinistra→nodo→destra ============ -->
     <div class="diagramma diagramma-larga" style={`aspect-ratio: ${CANVAS_L.larghezza} / ${CANVAS_L.altezza};`}>
       <svg
         width={CANVAS_L.larghezza}
@@ -143,11 +143,11 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
       </div>
 
       <span class="ritorno" style={`left: ${ritornoL.left}; top: ${ritornoL.top};`}>{ritorno}</span>
-      <p class="didascalia" style={`left: ${didascaliaSinistraL.left}; top: ${didascaliaSinistraL.top}; width: ${didascaliaSinistraL.width};`}>{didascaliaSinistra}</p>
-      <p class="didascalia" style={`left: ${didascaliaDestraL.left}; top: ${didascaliaDestraL.top}; width: ${didascaliaDestraL.width};`}>{didascaliaDestra}</p>
+      <p class="didascalia" style={`left: ${didascaliaSinistraL.left}; top: ${didascaliaSinistraL.top}; width: ${didascaliaSinistraL.width};`}><span>{didascaliaSinistra}</span></p>
+      <p class="didascalia" style={`left: ${didascaliaDestraL.left}; top: ${didascaliaDestraL.top}; width: ${didascaliaDestraL.width};`}><span>{didascaliaDestra}</span></p>
     </div>
 
-    <!-- ============ disposizione stretta (≤640px): il diagramma gira di 90° ============
+    <!-- ============ disposizione stretta (≤900px): il diagramma gira di 90° ============
          Sopra il disordine, sotto la struttura, e la riga che torna alla fonte
          scende lungo il margine destro e risale a sinistra: è l'unico modo di
          tenerla visibile senza farla passare sopra i riquadri. -->
@@ -256,7 +256,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     gap: 3px;
     /* L'altezza «vera» è la percentuale passata inline (76/456 sul largo,
        80/592 sullo stretto): a piena larghezza è già più alta di questo
-       minimo, quindi qui sotto non cambia niente di visibile. Ma fra 641px
+       minimo, quindi qui sotto non cambia niente di visibile. Ma fra 901px
        e la soglia stretta il canvas si restringe parecchio mentre il testo
        dentro resta a dimensione fissa — a quel punto la percentuale scende
        sotto quello che titolo (fino a due righe) e sottotitolo (una riga,
@@ -284,7 +284,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     /* Resta su una riga anche quando il riquadro si stringe: è la seconda
        riga corta sotto il titolo, non un paragrafo che ha senso spezzato.
        Andando a capo raddoppierebbe l'altezza richiesta dal nodo proprio
-       nella fascia (641-1120px) dove il riquadro è già più stretto della
+       nella fascia (901-1120px) dove il riquadro è già più stretto della
        sua taglia naturale, vanificando il pavimento sopra. */
     white-space: nowrap;
   }
@@ -309,38 +309,43 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     line-height: 1.45;
     color: var(--text-faint);
   }
+  /* La riga di ritorno passa a x=150 del canvas, cioè in mezzo alla
+     didascalia di sinistra, che è larga 300: il tratteggio le tagliava le
+     parole a ogni larghezza. Le parole interrompono il tratteggio invece di
+     subirlo, com'era già per l'etichetta `.ritorno` qui sopra — per questo
+     lo sfondo sta sullo span interno e non sul paragrafo, che è largo 300
+     anche quando il testo è più corto e coprirebbe il disegno per niente. */
+  .didascalia span {
+    background: var(--bg);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 1px 6px;
+    margin-left: -6px;
+  }
 
   .didascalie-sotto {
     display: none;
   }
 
-  @media (max-width: 640px) {
-    .container {
-      padding: 48px 20px 52px;
-    }
-    .label {
-      font-size: 10.5px;
-      letter-spacing: 0.18em;
-    }
-    .section-title {
-      font-size: 26px;
-      margin-top: 14px;
-      max-width: none;
-      text-wrap: pretty;
-    }
-    .intro {
-      margin-top: 14px;
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: none;
-      text-wrap: pretty;
-    }
-
+  /* La soglia fra i due impianti è 900px, non 640. Il disegno largo si
+     restringe con il riquadro, ma il testo che ci sta sopra è HTML a
+     dimensione fissa: sotto i ~890px il sottotitolo del nodo («ogni giorno,
+     da solo», 153px su una riga sola) diventa più largo del riquadro che
+     dovrebbe contenerlo, e a 641px ne usciva di 25px per lato, proprio dove
+     i fasci si attaccano ai bordi. Misurato, non dedotto: 641px sborda 25,2 ·
+     700px 20,0 · 768px 13,9 · 900px 1,2 · 1024px rientra. Sotto quella soglia
+     tocca all'impianto verticale, che per lo stesso testo ha tutta la
+     larghezza del riquadro. */
+  @media (max-width: 900px) {
     .diagramma-larga {
       display: none;
     }
     .diagramma-stretta {
       display: block;
+      /* Centrato: da 641 a 900px il riquadro stretto è molto più stretto
+         della colonna, e lasciarlo a sinistra apre un vuoto grande quanto
+         il disegno. */
+      margin-inline: auto;
     }
     .diagramma-stretta .nodo {
       box-shadow: 0 0 0 6px rgb(240 201 164 / 32%), 0 10px 28px rgb(168 83 29 / 14%);
@@ -368,5 +373,29 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     .didascalia-sotto + .didascalia-sotto {
       margin-top: 6px;
     }
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 48px 20px 52px;
+    }
+    .label {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+    }
+    .section-title {
+      font-size: 26px;
+      margin-top: 14px;
+      max-width: none;
+      text-wrap: pretty;
+    }
+    .intro {
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: none;
+      text-wrap: pretty;
+    }
+
   }
 </style>

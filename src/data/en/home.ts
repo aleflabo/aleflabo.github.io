@@ -159,10 +159,12 @@ export const comeLavoro: ComeLavoroProps = {
 // costruzione» non esisteva, ma era un errore di ricerca, non un vuoto nei
 // testi approvati — sta in testi-en.md:826, dentro un blocco marcato
 // `[TRADOTTO]` (reso dall'italiano approvato, non tradotto qui al volo).
-// Il toolkit inglese resta invece senza `tagInEvidenza`, e qui il vuoto è
-// reale: la dichiarazione italiana «Strumenti miei, per il mio team» non ha
-// una traduzione approvata in testi-en.md né altrove, e inventarla è vietato
-// quanto lo sarebbe stato tradurre «In costruzione» da soli.
+// Il toolkit resta senza `tagInEvidenza` in tutte e due le lingue. Questo
+// commento diceva che il vuoto era solo inglese, perché l'italiano aveva
+// «Strumenti miei, per il mio team»: la revisione finale ha trovato che
+// quella frase non stava in testi.md né in projects.ts — era stata scritta
+// dentro index.astro, ed è uscita in produzione. È caduta di lì, non
+// tradotta qui. Se serve, la frase si fa approvare prima, in italiano.
 interface Prova {
   eyebrow: string;
   nome: string;
