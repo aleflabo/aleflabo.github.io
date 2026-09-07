@@ -181,11 +181,26 @@ a:hover .freccia { transform: translateX(5px); }
    seguirlo per finire centrata a fianco, staccata da entrambe le righe
    (visto su .continua nella home, screenshot a 375px). `padding-block`
    allarga la scatola senza toccare come testo e freccia si dispongono
-   dentro: restano un unico flusso, vanno a capo insieme come prima. Il
-   valore (12px) è tarato sulla riga più bassa del sito fra questi link
-   (LeProve .link, 14px, interlinea 1.6 → ~22px): 22 + 12 + 12 = 46, sopra
-   i 44. `min-height` resta come rete di sicurezza se un domani un link più
-   piccolo si aggiungesse senza che qualcuno ricalcoli il padding.
+   dentro: restano un unico flusso, vanno a capo insieme come prima.
+
+   Il `padding-block: 12px` che stava qui accanto se n'è andato, ed è il
+   primo debito che la PR #32 aveva dichiarato su se stessa. Il padding si
+   somma a **ogni** link, anche a quelli che i 44px li superavano già: su
+   `/ricerca`, dieci pubblicazioni per il loro link arXiv, erano +288px di
+   pagina sul telefono per un bersaglio che era a norma di suo. `min-height`
+   fa lo stesso lavoro solo dove serve — sotto i 44 alza, sopra non tocca —
+   e `align-content: center` rimette il testo in mezzo alla scatola, che è
+   dove il padding simmetrico lo teneva: per un link piccolo il risultato a
+   video è lo stesso di prima, per uno grande la pagina smette di gonfiarsi.
+
+   La condizione è `pointer: coarse`, non più `max-width: 640px`, ed è il
+   secondo debito. La larghezza non è la domanda giusta: la domanda è se a
+   toccare sia un dito o un mouse. Legata ai 640px la regola lasciava
+   scoperti i tablet — a 768px la home aveva ventinove bersagli sotto i
+   44px, tredici dei quali sotto i 24 del minimo AA — e in cambio allargava
+   i bersagli su un desktop con la finestra stretta, dove il puntatore è
+   preciso e non serve. `pointer: coarse` prende telefoni e tablet a
+   qualsiasi larghezza e lascia stare mouse e trackpad a qualsiasi altra.
 
    Selettore dentro `:where()`, quindi a specificità zero: così un
    componente che ha già le sue misure — `.canale` in Contatto.astro
@@ -199,11 +214,11 @@ a:hover .freccia { transform: translateX(5px); }
    specificità: sono già bersagli a norma per conto proprio, e forzarli
    in `inline-block` romperebbe l'allineamento col testo intorno quando un
    pulsante compare in riga con altro testo. */
-@media (max-width: 640px) {
+@media (pointer: coarse) {
   :where(main a:not(.pulsante):not(.primaria)) {
     display: inline-block;
     min-height: 44px;
-    padding-block: 12px;
+    align-content: center;
   }
 
   /* Eccezione: un link dentro una frase di prosa. Non è un'invenzione fatta
@@ -225,6 +240,5 @@ a:hover .freccia { transform: translateX(5px); }
   main p a {
     display: inline;
     min-height: 0;
-    padding-block: 0;
   }
 }
