@@ -88,10 +88,16 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
-  <FasciaNumeri numeri={numeri} daDoveViene={daDoveViene} />
+  {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
+      italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
+      «The problem»/«The evidence» sui due componenti sotto che li tengono.
+      Le stringhe restano in src/data/en/home.ts — non si tocca quel file
+      dati — semplicemente non si passano più, sovrascritte a `undefined`
+      dopo lo spread. */}
+  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
   <IlProblema {...ilProblema} />
-  <ComeLavoro {...comeLavoro} />
+  <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} />
-  <Contatto {...contatto} territorio={territorio.en} />
+  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />
 </BaseLayout>

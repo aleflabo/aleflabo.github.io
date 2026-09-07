@@ -21,7 +21,7 @@ export const privacy: PaginaLegale = {
       titolo: 'What the site collects when you visit',
       paragrafi: [
         "Nothing that reaches me. The pages are static files: no program runs on the server, there is no store where visits get written down, and I use neither Google Analytics nor any other measurement tool.",
-        "The site is published on GitHub Pages. Like any service that delivers web pages, GitHub records the technical details of the connection — IP address, browser type, page requested — to run the service and protect it from abuse. Those logs stay with GitHub and I have no access to them. Their privacy notice describes that processing.",
+        "The site is published on GitHub Pages. Like any service that delivers web pages, GitHub records the technical details of the connection (IP address, browser type, page requested) to run the service and protect it from abuse. Those logs stay with GitHub and I have no access to them. Their privacy notice describes that processing.",
       ],
     },
     {
@@ -47,7 +47,7 @@ export const privacy: PaginaLegale = {
     {
       titolo: 'For how long',
       paragrafi: [
-        "I keep no data collected by the site, because the site collects none. What you send me directly — a message, an attachment — I keep for as long as it takes to answer you or to work together, and then I delete it.",
+        "I keep no data collected by the site, because the site collects none. What you send me directly (a message, an attachment) I keep for as long as it takes to answer you or to work together, and then I delete it.",
       ],
     },
     {
@@ -70,7 +70,7 @@ export const cookie: PaginaLegale = {
     {
       titolo: "Why there's no banner",
       paragrafi: [
-        'A banner exists to ask consent for cookies that profile or measure. There are none here — neither mine nor anyone else\'s — so there is nothing to consent to, and a banner asking permission for nothing is just one more obstacle between you and the page.',
+        'A banner exists to ask consent for cookies that profile or measure. There are none here, neither mine nor anyone else\'s, so there is nothing to consent to, and a banner asking permission for nothing is just one more obstacle between you and the page.',
       ],
     },
     {

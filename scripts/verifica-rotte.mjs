@@ -60,6 +60,11 @@ for (const f of trovaHtml("dist")) {
 const DA_APPROVARE = [
   "Cosa costruisco",
   "Metto insieme quello che avete già",
+  // L'ottava stringa mancava (task 14, home-visuale): la lista ne elencava
+  // sette delle otto della sezione, e il paragrafo d'apertura — il più
+  // lungo, quindi quello con più da perdere se qualcuno lo riscrivesse —
+  // passava senza controllo. Alla lettera da testi.md, riga 65.
+  "I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.",
   "Legge e collega",
   "ogni giorno, da solo",
   "da dove viene",

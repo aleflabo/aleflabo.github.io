@@ -15,7 +15,11 @@ import Frammento from "../Frammento.astro";
 import GruppoFasci from "../GruppoFasci.astro";
 
 interface Props {
-  occhiello: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Cosa costruisco»
+  // sparisce dalla potatura anti-slop (tetto di un occhiello ogni tre
+  // sezioni, la home ne aveva nove) — il titolo sotto resta e dice già di
+  // cosa parla il diagramma.
+  occhiello?: string;
   titolo: string;
   intro: string;
   nodo: { titolo: string; sottotitolo: string };
@@ -87,7 +91,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
 
 <section class="cosa-costruisco">
   <div class="container">
-    <p class="label">{occhiello}</p>
+    {occhiello && <p class="label">{occhiello}</p>}
     <h2 class="section-title">{titolo}</h2>
     <p class="intro">{intro}</p>
 

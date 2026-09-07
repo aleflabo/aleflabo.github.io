@@ -11,7 +11,7 @@ export const formati: Formato[] = [
     serveDaVoi: "A room and a projector",
   },
   {
-    ore: "8–12 hours",
+    ore: "8-12 hours",
     nome: "Workshop by function",
     corpo: "Engineering office, purchasing, administration, sales: each group works on its own documents and its own cases. We start from a task that takes hours today and try to shorten it, together, during the session.",
     perChi: "One department at a time, small groups",

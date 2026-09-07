@@ -13,7 +13,11 @@
 // src/data/en/home.ts) quel paragrafo è il secondo, non il primo — è la
 // pagina, non questo componente, a scegliere quale indice passare.
 interface Props {
-  occhiello: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Formazione» sparisce
+  // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
+  // home ne aveva nove). Il titolo sotto resta e basta a introdurre la
+  // striscia.
+  occhiello?: string;
   titolo: string;
   introduzioni: string[];
   formati: { ore: string; nome: string; corpo?: string }[];
@@ -36,7 +40,7 @@ const { occhiello, titolo, introduzioni, formati, linkChiusura, hrefChiusura } =
         640px, com'è già in FasciaNumeri.astro. */}
     <div class="griglia">
       <div class="sinistra">
-        <p class="label">{occhiello}</p>
+        {occhiello && <p class="label">{occhiello}</p>}
         <h2 class="section-title">{titolo}</h2>
       </div>
       <div class="destra">

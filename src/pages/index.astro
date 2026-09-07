@@ -227,9 +227,9 @@ const daDoveViene = {
   titolo: 'Dalla ricerca alla produzione',
   intro: "Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.",
   tappe: [
-    { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza — PINlab' },
+    { valore: '2021-2024', etichetta: 'Dottorato in computer vision, Sapienza - PINlab' },
     { valore: 'CVPR · ICCV · IROS', etichetta: 'Le conferenze principali del settore' },
-    { valore: '2024–2026', etichetta: 'Co-fondatore e CTO di Procedo, startup industriale' },
+    { valore: '2024-2026', etichetta: 'Co-fondatore e CTO di Procedo, startup industriale' },
   ],
   linkRicerca: 'La ricerca, per intero',
   hrefRicerca: localizedPath('it', '/ricerca'),
@@ -288,11 +288,19 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
-  <FasciaNumeri numeri={numeri} daDoveViene={daDoveViene} />
+  {/* Potatura degli occhielli (task 14, home-visuale): la home aveva nove
+      etichette di sezione contro un tetto di una ogni tre sezioni — «molto
+      claude like», ha detto il committente, ed è il ritmo templato che la
+      skill anti-slop segnala. Restano solo tre: quello in testata
+      (Occhiello, sopra), «Il problema» e «Le prove». Sui sei componenti
+      sotto la prop occhiello/eyebrow resta facoltativa e le stringhe
+      restano scritte nei rispettivi oggetti qui sopra — semplicemente non
+      si passano più, sovrascrivendole a `undefined` dopo lo spread. */}
+  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
   <IlProblema {...ilProblema} />
-  <CosaCostruisco {...cosaCostruisco} />
-  <ComeLavoro {...comeLavoro} />
+  <CosaCostruisco {...cosaCostruisco} occhiello={undefined} />
+  <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} />
-  <Contatto {...contatto} territorio={territorio.it} />
+  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.it, occhiello: undefined }} />
 </BaseLayout>

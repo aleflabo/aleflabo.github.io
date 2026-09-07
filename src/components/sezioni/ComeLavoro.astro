@@ -12,7 +12,11 @@
 // lo importano solo le due home, mai `CorpoChiSono.astro`), ma perché un
 // campo vuoto che salta la sua parte è la forma giusta in questo repo.
 interface Props {
-  occhiello: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Come lavoro» sparisce
+  // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
+  // home ne aveva nove). Il titolo sotto resta e basta a introdurre i
+  // quattro passi.
+  occhiello?: string;
   titolo: string;
   intro: string;
   passi: { numero: string; nome: string; corpo?: string; neEsce: string }[];
@@ -25,7 +29,7 @@ const { occhiello, titolo, intro, passi, etichettaNeEsce, continua, hrefContinua
 
 <section class="come-lavoro">
   <div class="container">
-    <p class="label">{occhiello}</p>
+    {occhiello && <p class="label">{occhiello}</p>}
     <h2 class="section-title">{titolo}</h2>
     <p class="intro">{intro}</p>
     <div class="passi">

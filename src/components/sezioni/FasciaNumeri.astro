@@ -12,7 +12,12 @@
 interface Props {
   numeri: { numero: string; etichetta: string }[];
   daDoveViene?: {
-    occhiello: string;
+    // Facoltativo (task 14, home-visuale): la potatura degli occhielli
+    // toglie l'etichetta di sezione «Da dove viene quello che so» — una
+    // delle nove che la skill anti-slop aveva contato sulla home contro un
+    // tetto di un occhiello ogni tre sezioni. Il titolo sotto resta e basta
+    // a dire di cosa parla il blocco.
+    occhiello?: string;
     titolo: string;
     intro: string;
     tappe: { valore: string; etichetta: string }[];
@@ -50,7 +55,7 @@ const { numeri, daDoveViene } = Astro.props;
             sotto i 640px. */}
         <div class="ricerca">
           <div class="testo">
-            <p class="occhiello">{daDoveViene.occhiello}</p>
+            {daDoveViene.occhiello && <p class="occhiello">{daDoveViene.occhiello}</p>}
             <h2>{daDoveViene.titolo}</h2>
             <p class="intro">{daDoveViene.intro}</p>
           </div>

@@ -18,7 +18,13 @@ interface OpzioneUrgenza {
   checked?: boolean;
 }
 interface Props {
-  eyebrow: string;
+  // Facoltativo (task 14, home-visuale): l'occhiello «Parliamone» sparisce
+  // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
+  // home ne aveva nove — due venivano proprio da questa sezione, che ne ha
+  // due: questo e quello di `territorio` sotto). Il titolo resta e basta.
+  // L'id "parliamone" sulla <section>, a cui punta la barra di navigazione,
+  // non cambia: sparisce solo l'etichetta visibile, non l'ancora.
+  eyebrow?: string;
   titolo: string;
   intro: string;
   // Il territorio (task 6, home-visuale): la sezione «Dove lavoro» smette di
@@ -34,7 +40,10 @@ interface Props {
   // non lo rende qui, quindi non è fra le proprietà che questo componente
   // accetta.
   territorio?: {
-    occhiello: string;
+    // Facoltativo anche qui (task 14, home-visuale), stesso motivo
+    // dell'`eyebrow` sopra: l'occhiello «Dove lavoro» sparisce, il titolo
+    // «Venezia è la mia base» dice già di cosa parla il blocco.
+    occhiello?: string;
     titolo: string;
     intro: string;
     modi: { etichetta: string; dettaglio: string }[];
@@ -75,7 +84,7 @@ const {
   <div class="container">
     {territorio && (
       <div class="territorio">
-        <p class="occhiello">{territorio.occhiello}</p>
+        {territorio.occhiello && <p class="occhiello">{territorio.occhiello}</p>}
         <h2 class="luogo">{territorio.titolo}</h2>
         <p class="intro-luogo">{territorio.intro}</p>
         <div class="modi">
@@ -85,7 +94,7 @@ const {
         </div>
       </div>
     )}
-    <p class="eyebrow">{eyebrow}</p>
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h2 class="titolo">{titolo}</h2>
     <p class="intro">{intro}</p>
 
