@@ -35,10 +35,16 @@ interface Props {
   // `src/pages/index.astro` e `src/pages/en/index.astro` — ma perché è la
   // forma che il repo usa dappertutto: un campo vuoto salta la sua sezione
   // invece di far comparire un'intestazione senza contenuto sotto (regola 2
-  // del CLAUDE.md). I testi vengono da `src/data/territorio.ts` (occhiello,
-  // titolo, intro, modi): il campo `corpo` di quel file esiste ma la tavola
-  // non lo rende qui, quindi non è fra le proprietà che questo componente
-  // accetta.
+  // del CLAUDE.md). I testi vengono da `src/data/territorio.ts`.
+  //
+  // `corpo` è tornato (debito dichiarato dalla PR #32): quando il territorio
+  // è entrato qui la tavola non lo rendeva, e il campo è sparito da tutte e
+  // due le lingue — mentre `src/pages/llms.txt.ts` ha continuato a
+  // pubblicarlo. Il riassunto per le macchine e il sito per le persone
+  // dicevano due cose diverse sullo stesso argomento, e l'unico paragrafo
+  // che spiega come va il lavoro a distanza stava solo dalla parte delle
+  // macchine. Le due home passano `{...territorio.it}` per intero, quindi
+  // il campo arrivava già qui: mancava di dichiararlo e di renderlo.
   territorio?: {
     // Facoltativo anche qui (task 14, home-visuale), stesso motivo
     // dell'`eyebrow` sopra: l'occhiello «Dove lavoro» sparisce, il titolo
@@ -46,6 +52,7 @@ interface Props {
     occhiello?: string;
     titolo: string;
     intro: string;
+    corpo: string;
     modi: { etichetta: string; dettaglio: string }[];
   };
   campoAzienda: CampoTesto;
@@ -87,6 +94,7 @@ const {
         {territorio.occhiello && <p class="occhiello">{territorio.occhiello}</p>}
         <h2 class="luogo">{territorio.titolo}</h2>
         <p class="intro-luogo">{territorio.intro}</p>
+        <p class="corpo-luogo">{territorio.corpo}</p>
         <div class="modi">
           {territorio.modi.map((m) => (
             <p><strong>{m.etichetta}</strong> {m.dettaglio}</p>
@@ -192,13 +200,19 @@ const {
     margin-top: 14px;
     color: var(--surface);
   }
-  .territorio .intro-luogo {
+  /* `intro-luogo` e `corpo-luogo` sono due capoversi dello stesso testo, non
+     due livelli: una regola sola, e a distinguerli restano i margini — è
+     l'ultimo dei due a staccare dai «modi» qui sotto. */
+  .territorio .intro-luogo,
+  .territorio .corpo-luogo {
     margin-top: 14px;
-    margin-bottom: 26px;
     font-size: 15.5px;
     line-height: 1.65;
     color: var(--su-accent-forte);
     max-width: 66ch;
+  }
+  .territorio .corpo-luogo {
+    margin-bottom: 26px;
   }
   .territorio .modi {
     display: flex;
