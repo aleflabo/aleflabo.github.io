@@ -1,6 +1,8 @@
 # Il sito smette di sembrare templato — primo giro: gli occhielli
 
-*7 settembre 2026. Committente: Alessandro Flaborea. Stato: da approvare.*
+*7 settembre 2026. Committente: Alessandro Flaborea. Stato: **approvata per intero** il
+7 settembre — «approvati tutti, procedi», «In breve» compreso — ed eseguita nello stesso
+ramo.*
 
 ## Da dove nasce
 
@@ -129,7 +131,7 @@ Questo caso chiude anche un difetto del secondo giro senza scrivere copy nuova:
 «la **tua** azienda» è una delle quattordici violazioni della regola del «voi»
 (`.claude/rules/copy-e-tono.md`), e sparisce insieme all'occhiello.
 
-### Il risultato
+### Il risultato — misurato sul costruito dopo l'esecuzione
 
 Dieci occhielli in meno per lingua: gli italiani passano da 34 a 24, gli inglesi da
 32 a 22. Ogni pagina rientra nel suo tetto tranne `/chi-sono`, che con «In breve»

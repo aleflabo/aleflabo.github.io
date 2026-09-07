@@ -9,8 +9,8 @@ export interface TestiDatiPagina {
   titolo: string;
   titoloSituazioni: string;
   introSituazioni: string;
-  labelOnesta: string;
-  labelCredete: string;
+  labelOnesta?: string;
+  labelCredete?: string;
   titoloDomanda: string;
   introDomanda: string;
   etichettaScrivimi: string;

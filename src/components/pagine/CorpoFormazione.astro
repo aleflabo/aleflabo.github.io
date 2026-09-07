@@ -72,7 +72,20 @@ const { lang, t, formati, riquadroAiAct, strade, prenotaMezzora } = Astro.props;
 
   <section class="come-si-organizza">
     <div class="container">
-      <p class="label">{t.labelOrganizza}</p>
+      {/* Potatura degli occhielli (primo giro, `2026-09-07-sito-non-templato.md`).
+          Questa pagina ne aveva cinque su sei sezioni, contro il tetto di uno ogni
+          tre: «Come si organizza» ripeteva il suo h2 «Chi sostiene il costo del
+          corso», «Chi sale in cattedra» diceva la stessa cosa di «Vengo dall'aula»,
+          e «Onestà» — che compariva identico su tre pagine del sito, ed è proprio la
+          ripetizione a far sembrare tutto uscito da uno stampo — stava sopra un
+          titolo, «Che cosa questo corso non è», che è già la dichiarazione.
+          Restano il richiamo di pagina e «Una cosa che conviene sapere», che inquadra
+          una cosa che il suo titolo dà per scontata.
+
+          Le prop sono facoltative e il markup le guarda: le stringhe restano scritte
+          in `formazionePagina.ts`, le pagine smettono di passarle. Stesso idioma
+          della potatura della home (6fc8ff9). */}
+      {t.labelOrganizza && <p class="label">{t.labelOrganizza}</p>}
       <h2 class="section-title">{t.titoloOrganizza}</h2>
       <div class="griglia-strade">
         {strade.map((s) => (
@@ -89,13 +102,13 @@ const { lang, t, formati, riquadroAiAct, strade, prenotaMezzora } = Astro.props;
     <div class="container">
       <div class="colonne">
         <div>
-          <p class="label">{t.labelCattedra}</p>
+          {t.labelCattedra && <p class="label">{t.labelCattedra}</p>}
           <h2 class="section-title">{t.titoloCattedra}</h2>
           <p class="corpo">{t.corpiCattedra[0]}</p>
           <p class="corpo">{t.corpiCattedra[1]}</p>
         </div>
         <div>
-          <p class="label">{t.labelOnesta}</p>
+          {t.labelOnesta && <p class="label">{t.labelOnesta}</p>}
           <h2 class="section-title">{t.titoloOnesta}</h2>
           <div class="righe">
             {t.corpiOnesta.map((p) => (

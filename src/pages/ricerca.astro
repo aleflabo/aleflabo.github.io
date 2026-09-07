@@ -41,5 +41,7 @@ const datiStrutturati = [
   attiva="ricerca"
   datiStrutturati={datiStrutturati}
 >
-  <CorpoRicerca lang="it" t={ricerca} pubblicazioni={pubblicazioni} numeriFascia={numeriFascia} />
+  {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
+      il perché sta in CorpoRicerca.astro, le stringhe restano nei dati. */}
+  <CorpoRicerca lang="it" t={{ ...ricerca, riquadroLabel: undefined }} pubblicazioni={pubblicazioni} numeriFascia={numeriFascia} />
 </BaseLayout>

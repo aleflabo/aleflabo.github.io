@@ -54,7 +54,10 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
 
   <section class="per-chi-non-sono">
     <div class="container">
-      <p class="label">{t.labelOnesta}</p>
+      {/* Potatura degli occhielli: tre su cinque sezioni. Cadono «Onestà», sopra
+          «Per chi non sono», e «Domande», sopra «Quelle che mi vengono fatte quasi
+          sempre»: in tutti e due i casi l'h2 dice già cosa c'è sotto. */}
+      {t.labelOnesta && <p class="label">{t.labelOnesta}</p>}
       <h2 class="section-title">{t.titoloOnesta}</h2>
       <div class="griglia">
         {perChiNonSono.map((riga) => (
@@ -66,7 +69,7 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
 
   <section class="domande">
     <div class="container">
-      <p class="label">{t.labelDomande}</p>
+      {t.labelDomande && <p class="label">{t.labelDomande}</p>}
       <h2 class="section-title">{t.titoloDomande}</h2>
       <Faq domande={faq} />
     </div>

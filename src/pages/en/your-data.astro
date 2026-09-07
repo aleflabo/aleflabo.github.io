@@ -19,9 +19,11 @@ import { testiDatiPagina } from '../../data/en/datiPagina';
   path="/your-data"
   pathIt="/i-vostri-dati"
 >
+  {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
+      il perché sta in CorpoDati.astro, le stringhe restano nei dati. */}
   <CorpoDati
     lang="en"
-    t={testiDatiPagina}
+    t={{ ...testiDatiPagina, labelOnesta: undefined, labelCredete: undefined }}
     situazioniDati={situazioniDati}
     rispostaCorta={rispostaCorta}
     quelloCheNonPossoGarantirvi={quelloCheNonPossoGarantirvi}

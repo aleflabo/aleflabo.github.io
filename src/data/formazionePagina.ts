@@ -8,11 +8,11 @@ export interface TestiFormazionePagina {
   introduzione: string;
   etichettaPerChi: string;
   etichettaServeDaVoi: string;
-  labelOrganizza: string;
+  labelOrganizza?: string;
   titoloOrganizza: string;
-  labelCattedra: string;
+  labelCattedra?: string;
   titoloCattedra: string;
-  labelOnesta: string;
+  labelOnesta?: string;
   titoloOnesta: string;
   titoloChiusura: string;
   introChiusura: string;
