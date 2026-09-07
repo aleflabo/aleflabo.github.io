@@ -5,11 +5,27 @@
 ## Da dove nasce
 
 Guardando la home appena rifatta il committente ha detto che «l'intera struttura è
-molto claude like», e ha indicato `dariofontanel.com` come esempio del contrario.
-Misurata, l'impressione aveva un numero: nove occhielli maiuscoli su otto sezioni,
-contro il tetto di **uno ogni tre sezioni** che la skill anti-slop impone. Sulla home
-la potatura è già stata fatta (ramo `feat/home-visuale`, commit `6fc8ff9`): da nove a
-tre in italiano, da otto a tre in inglese.
+molto claude like», e ha messo accanto un riferimento: **<https://dariofontanel.com/>**.
+
+> «un po' come il sito https://dariofontanel.com/ . mi piace molto perchè scrollando
+> c'è un'animazione molto figa che riesce a far percepire quale valore può dare ad
+> un'azienda. anche la spiegazione di come lavora è molto chiara, mi pare più di
+> quello che abbiamo costruito noi»
+
+Sono due cose distinte, e conviene tenerle separate perché portano a lavori diversi:
+
+1. **Un'animazione che, scorrendo, fa percepire il valore.** Questo pezzo è stato preso
+   sul serio nel ramo `feat/home-visuale` (PR #32): la sezione «Metto insieme quello che
+   avete già» è un diagramma animato che dimostra la tesi invece di raccontarla.
+2. **Una spiegazione di come si lavora più chiara della nostra.** Questo pezzo è ancora
+   aperto. Sulla home i quattro passi hanno preso i nomi degli ingaggi di `/servizi`,
+   ma la chiarezza del riferimento non è stata raggiunta né misurata — resta materia
+   per il terzo giro, insieme a «il numero che appartiene a chi legge».
+
+La parte misurabile della diagnosi, invece, era il numero: nove occhielli maiuscoli su
+otto sezioni, contro il tetto di **uno ogni tre sezioni** che la skill anti-slop impone.
+Sulla home la potatura è già stata fatta (ramo `feat/home-visuale`, commit `6fc8ff9`):
+da nove a tre in italiano, da otto a tre in inglese.
 
 Alla domanda «stai guardando solo la home? perché penso che il problema riguardi tutte
 le nostre pagine» la risposta misurata è **sì, riguarda anche le altre**, e questa
