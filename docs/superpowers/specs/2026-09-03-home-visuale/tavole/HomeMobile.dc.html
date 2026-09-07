@@ -376,38 +376,51 @@
         <p style="font-size: 14px; color: #a8c0d6;"><strong style="color: #ffffff; font-weight: 600;">I corsi</strong> &nbsp;In aula oppure online</p>
       </div>
 
-      <p style="margin-top: 34px; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #f0c9a4; font-weight: 700;">Parliamone</p>
+      <!-- Da qui in giù: gli stessi valori del componente sotto @media (max-width: 640px) —
+           .modulo va a grid-template-columns: 1fr, .invia si impila a piena larghezza. -->
+      <p style="margin-top: 34px; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8bdd2; font-weight: 700;">Parliamone</p>
       <h2 style="margin-top: 12px; font-size: 26px; color: #ffffff; text-wrap: pretty;">Mezz'ora per capire se possiamo lavorare insieme</h2>
-      <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #c7d8e6;">Se non &egrave; il lavoro giusto per me te lo dico subito, e se conosco qualcuno pi&ugrave; adatto ti metto in contatto.</p>
+      <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #cdd9e6;">Se non &egrave; il lavoro giusto per me te lo dico subito, e se conosco qualcuno pi&ugrave; adatto ti metto in contatto.</p>
 
-      <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 30px;">
         <div>
-          <p style="font-size: 13px; color: #a8c0d6; margin-bottom: 8px;">Azienda</p>
-          <div style="background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.22); border-radius: 4px; padding: 14px; font-size: 15px; color: #7f9ab3; min-height: 48px;">Ragione sociale</div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Azienda</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; min-height: 48px;">Ragione sociale</div>
         </div>
         <div>
-          <p style="font-size: 13px; color: #a8c0d6; margin-bottom: 8px;">Come ti scrivo</p>
-          <div style="background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.22); border-radius: 4px; padding: 14px; font-size: 15px; color: #7f9ab3; min-height: 48px;">Mail o telefono</div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Come ti scrivo</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; min-height: 48px;">Mail o telefono</div>
         </div>
         <div>
-          <p style="font-size: 13px; color: #a8c0d6; margin-bottom: 8px;">Cosa vorresti smettere di fare a mano</p>
-          <div style="background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.22); border-radius: 4px; padding: 14px; font-size: 15px; color: #7f9ab3; height: 96px;">Bastano due righe, anche buttate l&igrave;</div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Cosa vorresti smettere di fare a mano</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; height: 96px;">Bastano due righe, anche buttate l&igrave;</div>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="tocco" style="font-size: 13.5px; color: #c7d8e6; border: 1px solid rgba(255,255,255,.22); border-radius: 4px; padding: 0 14px;">Sto solo guardando</span>
-          <span class="tocco" style="font-size: 13.5px; color: #1b3a5b; background: #f0c9a4; border: 1px solid #f0c9a4; border-radius: 4px; padding: 0 14px; font-weight: 600;">Quest'anno</span>
-          <span class="tocco" style="font-size: 13.5px; color: #c7d8e6; border: 1px solid rgba(255,255,255,.22); border-radius: 4px; padding: 0 14px;">Ho un problema adesso</span>
+        <div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 10px;">Quanto &egrave; urgente</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="tocco" style="font-size: 13.5px; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px; padding: 0 14px;">Sto solo guardando</span>
+            <span class="tocco" style="font-size: 13.5px; color: #1b3a5b; background: #ffffff; border: 1px solid #ffffff; border-radius: 4px; padding: 0 14px; font-weight: 600;">Quest'anno</span>
+            <span class="tocco" style="font-size: 13.5px; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px; padding: 0 14px;">Ho un problema adesso</span>
+          </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <span style="background: #a8531d; color: #ffffff; font-size: 16px; font-weight: 600; padding: 16px 24px; border-radius: 4px; text-align: center;">Manda</span>
-          <span style="font-size: 13px; color: #a8c0d6; text-align: center;">Modulo non ancora attivo.</span>
+          <span style="background: #ffffff; color: #1b3a5b; font-size: 16px; font-weight: 600; padding: 16px 24px; border-radius: 4px; text-align: center; opacity: .55;">Manda</span>
+          <span style="font-size: 13px; color: #a8bdd2; text-align: center;">Modulo non ancora attivo.</span>
         </div>
       </div>
 
-      <p style="margin-top: 26px; font-size: 14px; color: #a8c0d6;">Oppure, se preferisci saltare il modulo:</p>
-      <div style="display: flex; gap: 10px; margin-top: 12px;">
-        <a href="#" class="tocco" style="flex: 1; justify-content: center; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid rgba(255,255,255,.3); border-radius: 4px;">WhatsApp</a>
-        <a href="#" class="tocco" style="flex: 1; justify-content: center; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid rgba(255,255,255,.3); border-radius: 4px;">Mail</a>
+      <div style="margin-top: 30px; padding-top: 26px; border-top: 1px solid #3f5e7d;">
+        <p style="font-size: 14px; color: #a8bdd2;">Oppure, se preferisci saltare il modulo:</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+          <a href="#" class="tocco" style="justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.4 8.4 0 0 1 8.4-9 8.5 8.5 0 0 1 8.6 8.4Z"></path></svg>
+            WhatsApp
+          </a>
+          <a href="#" class="tocco" style="justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+            Mail
+          </a>
+        </div>
       </div>
     </div>
   </div>

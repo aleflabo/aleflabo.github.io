@@ -107,6 +107,14 @@
       "text": "Tenute per memoria, non aggiornate con le decisioni successive.\n\nB — colore e scala: fasce a fondo pieno, tipografia al doppio, una sola animazione.\n\nC — scroll narrativo: la testata resta agganciata per tre schermate. Chiedeva JavaScript vero dove il sito ne spedisce zero, e su mobile l'aggancio è la prima cosa che si rompe."
     },
     {
+      "id": "sito-oggi",
+      "page": "page-1",
+      "x": -460,
+      "y": 2650,
+      "w": 380,
+      "text": "IL SITO, OGGI, RISPETTO A QUESTA TAVOLA\n\nDopo l'approvazione sono state prese altre decisioni, tutte volute. Vanno lette come scelte fatte dopo il progetto, non come errori di disegno da correggere.\n\n1. Occhielli: nove qui, tre in pagina. Il committente ha letto la home come «fatta da un'AI»; una skill anti-slop pone il tetto a un occhiello ogni tre sezioni. Restano la riga di posizionamento in testata, «Il problema» e «Le prove». Gli altri sei di questa tavola — «Da dove viene quello che so», «Cosa costruisco», «Come lavoro», «Formazione», «Dove lavoro» e «Parliamone» — sono spariti dalla pagina, non dalla tavola: le stringhe restano nei file dati, le pagine hanno solo smesso di passarle.\n\n2. «Come lavoro»: i quattro nomi qui e in pagina sono già gli stessi — Mezza giornata diagnostica, Audit AI, Software su misura, Canone di servizio, gli ingaggi di servizi.ts. I nomi propri di prima (Ascolto, Diagnosi, Costruisco, Resto) sopravvivono solo dentro ComeLavoro.dc.html, come l'opzione scartata nel confronto.\n\n3. «Le prove» mostra già, qui come in pagina, l'Agentic Workflow Toolkit al posto di Spannum, e il portale ricambi col tag «In costruzione» ripreso: Spannum resta su /lavori, non in home.\n\n4. Trattini lunghi: la pagina non ne ha più, azzerati da una skill anti-slop. Questa tavola, ComeLavoro.dc.html e DirezioneC.dc.html ne hanno ancora, negli intervalli di anni e in qualche inciso — non sono un refuso da correggere qui, sono la versione di prima del taglio.\n\n5. Le lunghezze di questa tavola non sono i bersagli reali. La spec dichiarava desktop 5667px e telefono 8605px; la pagina vera fa 6434px e 8959px, contro un punto di partenza di 6355px e 9357px. I bersagli erano stati misurati su queste tavole, e per la sezione «Parliamone» le tavole erano sbagliate: i colori e la griglia disegnati a occhio su uno screenshot non erano quelli del componente."
+    },
+    {
       "id": "mobile",
       "page": "page-1",
       "x": 2060,
