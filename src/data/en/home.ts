@@ -11,6 +11,7 @@
 // `verifica-rotte.mjs`, che boccia un href interno senza barra.
 import { site } from "../site";
 import { emailContatto } from "../legale";
+import { ingaggi } from "./servizi";
 
 const prenotaMezzoraEn = site.en.prenotaMezzora ?? "";
 
@@ -54,7 +55,10 @@ export const numeri: NumeroFasciaHome[] = [
 interface IlProblemaProps {
   occhiello: string;
   titolo: string;
-  riquadri: { citazione: string; corpo: string }[];
+  // Le tre chiavi scelgono una vignetta disegnata (task 8, home-visuale):
+  // sono immagini, non testo, quindi valgono identiche per l'inglese e
+  // per l'italiano — vedi src/components/sezioni/IlProblema.astro.
+  riquadri: { citazione: string; corpo: string; vignetta?: "richiesta" | "unaTestaSola" | "fuoriDaCasa" }[];
 }
 
 export const ilProblema: IlProblemaProps = {
@@ -64,24 +68,38 @@ export const ilProblema: IlProblemaProps = {
     {
       citazione: '"I need this part."',
       corpo: "An email arrives with a crooked photo. Before anyone can quote a price, someone has to work out which component it is, and it can take two people a couple of days.",
+      vignetta: "richiesta",
     },
     {
       citazione: '"Only Bruno knows how to do it."',
       corpo: "Forty years of the trade sitting in one person's head. Nobody has ever had the time to write it down, and in two years Bruno retires.",
+      vignetta: "unaTestaSola",
     },
     {
       citazione: '"We tried ChatGPT."',
       corpo: "Someone in the office started using it on their own. It isn't clear with which documents, or whether the company agrees, and so far nobody has had the chance to talk about it.",
+      vignetta: "fuoriDaCasa",
     },
   ],
 };
 
 // --- ComeLavoro ---
+// I quattro passi prendono i nomi degli `ingaggi` di ./servizi.ts (stessa
+// decisione dell'italiano, task 10 home-visuale — vedi il commento sopra
+// `comeLavoro` in src/pages/index.astro per il perché). `corpo` è caduto
+// insieme al suo equivalente italiano: senza testo accanto «I listen» e «I
+// stay» erano perfino peggio dei nomi italiani, e il tipo lo segna
+// facoltativo per restare in sincrono con `ComeLavoro.astro`.
+// `nomeIngaggio` cerca per `chiave`, non per indice: stesso principio del
+// file italiano, per non ripetere l'errore già fatto una volta con l'arXiv
+// del CV (dedurre dall'ordine invece di leggere il campo).
+const nomeIngaggio = (chiave: string) => ingaggi.find((i) => i.chiave === chiave)!.nome;
+
 interface ComeLavoroProps {
   occhiello: string;
   titolo: string;
   intro: string;
-  passi: { numero: string; nome: string; corpo: string; neEsce: string }[];
+  passi: { numero: string; nome: string; corpo?: string; neEsce: string }[];
   etichettaNeEsce: string;
   continua: string;
   hrefContinua: string;
@@ -94,26 +112,22 @@ export const comeLavoro: ComeLavoroProps = {
   passi: [
     {
       numero: "01",
-      nome: "I listen",
-      corpo: "I spend half a day at your company, together with the people who do the work every day. It's how I understand how you work, and how you get an idea of the way I think.",
+      nome: nomeIngaggio("understand"),
       neEsce: "A list of the places where time is lost, ordered by what they cost.",
     },
     {
       numero: "02",
-      nome: "Diagnosis",
-      corpo: "Two or three weeks to look at the data you actually have, the systems already in use and who takes care of what. At the end I write what would be worth doing, in what order, and which roads I'd leave alone.",
+      nome: nomeIngaggio("decide"),
       neEsce: "A document that stays yours, and that you can show to whoever you like.",
     },
     {
       numero: "03",
-      nome: "I build",
-      corpo: "I always start with the part that might not work, so that if something turns out to be impossible we find out early, while changing course still costs little.",
+      nome: nomeIngaggio("build"),
       neEsce: "Something your people open on Monday morning and actually use.",
     },
     {
       numero: "04",
-      nome: "I stay",
-      corpo: "Software nobody looks after stops being useful within a few months. If it's needed we stay in touch: maintenance, servers and the changes that come up along the way.",
+      nome: nomeIngaggio("maintain"),
       neEsce: "A person who knows the system and who you can call when you need to.",
     },
   ],
@@ -128,11 +142,36 @@ export const comeLavoro: ComeLavoroProps = {
 // suo `href` puntava a `/en/work/portale-ricambi`, una rotta che non
 // esisterà mai), quindi la scheda resta senza collegamento invece di
 // puntare a un 404 o saltare in italiano.
+//
+// Lo scambio (task 9, home-visuale): Spannum esce dalla home — resta
+// raggiungibile su /en/work — ed entra l'Agentic Workflow Toolkit, con
+// `miniatura` (le tre chiavi valgono identiche in italiano e in inglese:
+// sono disegni, non testo) e il suo tag: `tagIt` diventa qui la traduzione
+// approvata in testi-en.md (sezione «Agentic Workflow Toolkit», scheda
+// `[TRADOTTO]`) — «Automated standup», «Regenerated documentation»,
+// «Prompt review» — non una mia traduzione al volo. `eyebrow` è
+// `agentic-toolkit.en.area` in projects.ts («Agentic tooling»), non la
+// coppia con «· daily use» di testi-en.md: così l'ha voluto il committente
+// per questa scheda (vedi task-9-brief.md).
+//
+// `3D Parts Portal` riprende `tagInEvidenza: "Under construction"` (task 10,
+// home-visuale): questo commento diceva che l'equivalente inglese di «In
+// costruzione» non esisteva, ma era un errore di ricerca, non un vuoto nei
+// testi approvati — sta in testi-en.md:826, dentro un blocco marcato
+// `[TRADOTTO]` (reso dall'italiano approvato, non tradotto qui al volo).
+// Il toolkit resta senza `tagInEvidenza` in tutte e due le lingue. Questo
+// commento diceva che il vuoto era solo inglese, perché l'italiano aveva
+// «Strumenti miei, per il mio team»: la revisione finale ha trovato che
+// quella frase non stava in testi.md né in projects.ts — era stata scritta
+// dentro index.astro, ed è uscita in produzione. È caduta di lì, non
+// tradotta qui. Se serve, la frase si fa approvare prima, in italiano.
 interface Prova {
   eyebrow: string;
   nome: string;
   corpo: string;
   tag: string[];
+  tagInEvidenza?: string;
+  miniatura?: "ricambi" | "procedo" | "toolkit";
   link?: string;
   href?: string;
   esterno?: boolean;
@@ -154,23 +193,26 @@ export const leProve: LeProveProps = {
       nome: "3D Parts Portal",
       corpo: "The customer opens the 3D model of the machine they bought, clicks the part they need, and the request reaches the company already matched to that component's internal code.",
       tag: ["CAD pipeline, 80 tests", "Intellectual property protected"],
+      tagInEvidenza: "Under construction",
+      miniatura: "ricambi",
     },
     {
       eyebrow: "Industry · in production",
       nome: "Procedo",
       corpo: "Video shot on the shop floor becomes step-by-step procedures, and the people doing the work can ask questions of their own company's documentation. I was co-founder and CTO for two years; today I follow it as an advisor.",
       tag: ["Industrial customers", "B4i Bocconi", "Angel round"],
+      miniatura: "procedo",
       link: "How it works",
       href: "/en/work/procedo/",
     },
     {
-      eyebrow: "Live product · open to everyone",
-      nome: "Spannum",
-      corpo: "A working-memory test built to the protocol published in the literature, with the sources cited and the limits stated. It's online and you can try it.",
-      tag: ["Online", "Age norms"],
-      link: "Open it",
-      href: "https://spannum.com",
-      esterno: true,
+      eyebrow: "Agentic tooling",
+      nome: "Agentic Workflow Toolkit",
+      corpo: "A suite of AI-agent skills that automate my team's ops and engineering workflows, from daily standups to LLM-prompt review.",
+      tag: ["Automated standup", "Regenerated documentation", "Prompt review"],
+      miniatura: "toolkit",
+      link: "How it works",
+      href: "/en/work/agentic-toolkit/",
     },
   ],
   continua: "All the work, research included",
@@ -178,12 +220,18 @@ export const leProve: LeProveProps = {
 };
 
 // --- BloccoFormazione ---
+// `formati[].corpo` e `chiusura` sono caduti (task 11, home-visuale): la
+// striscia (task 7) non li ha mai resi — sono facoltativi in
+// BloccoFormazione.astro — e nessun altro componente della home li legge,
+// a differenza dei testi estesi di /en/training, che vivono in un file
+// dati proprio. `en/index.astro` passa `introduzioni[1]` — non `[0]` —
+// alla striscia: è la seconda voce di quest'array, quella sull'AI Act, non
+// la prima.
 interface BloccoFormazioneProps {
   occhiello: string;
   titolo: string;
   introduzioni: string[];
-  formati: { ore: string; nome: string; corpo: string }[];
-  chiusura: string;
+  formati: { ore: string; nome: string }[];
   linkChiusura: string;
   hrefChiusura: string;
 }
@@ -196,33 +244,22 @@ export const bloccoFormazione: BloccoFormazioneProps = {
     "Since February 2025 the AI Act requires companies that use artificial intelligence tools to ensure a minimum level of training for their staff, and to be able to document it. You'll do that course anyway: it may as well be good for something.",
   ],
   formati: [
-    {
-      ore: "4 hours",
-      nome: "Introductory course",
-      corpo: "For the whole company, from the owner to the shop floor. What has changed in the last few years, what has stayed the same, and the concrete risks to your data.",
-    },
-    {
-      ore: "8–12 hours",
-      nome: "Workshop by function",
-      corpo: "Engineering office, purchasing, administration, sales. Each group works on its own documents, so what they learn can be used the next day.",
-    },
-    {
-      ore: "Length agreed",
-      nome: "Funded programme",
-      corpo: "Through accredited training bodies and interprofessional funds, when the company wants a long programme without committing its own cash.",
-    },
+    { ore: "4 hours", nome: "Introductory course" },
+    { ore: "8–12 hours", nome: "Workshop by function" },
+    { ore: "Length agreed", nome: "Funded programme" },
   ],
-  chiusura: "I taught for four years at Sapienza as a teaching assistant, and I was an invited speaker at Ferrari S.p.A.'s Data Science Hub. Courses are organised directly, or through accredited training bodies and interprofessional funds.",
   linkChiusura: "How a course gets organised",
   hrefChiusura: "/en/training/",
 };
 
 // --- DaDoveViene ---
+// `corpo` è caduto (task 11, home-visuale): la fascia scura non lo rende
+// più da quando FasciaNumeri.astro l'ha reso facoltativo e ha smesso di
+// leggerlo (task 5).
 interface DaDoveVieneProps {
   occhiello: string;
   titolo: string;
   intro: string;
-  corpo: string;
   tappe: { valore: string; etichetta: string }[];
   linkRicerca: string;
   hrefRicerca: string;
@@ -234,9 +271,8 @@ export const daDoveViene: DaDoveVieneProps = {
   occhiello: "Where what I know comes from",
   titolo: "From research to production",
   intro: "A master's in data science, then a PhD in computer vision at Sapienza, with the work published at conferences where it gets examined thoroughly before it comes out. I was then CTO of an industrial startup for two years, which is the job where you find out how much of that research survives contact with a real company.",
-  corpo: "Every paper I published came out together with the code. It's the habit I still work with: technical decisions stay written down, and the software I hand over opens and reads.",
   tappe: [
-    { valore: "2021–2024", etichetta: "PhD in computer vision, Sapienza — PINlab" },
+    { valore: "2021–2024", etichetta: "PhD in computer vision, Sapienza – PINlab" },
     { valore: "CVPR · ICCV · IROS", etichetta: "The main conferences in the field" },
     { valore: "2024–2026", etichetta: "Co-founder and CTO of Procedo, an industrial startup" },
   ],

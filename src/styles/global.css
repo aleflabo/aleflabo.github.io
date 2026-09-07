@@ -78,12 +78,49 @@ select:focus-visible,
 @keyframes parola { from { opacity: 0; transform: translateY(16px); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
 @keyframes respira { 0%, 100% { opacity: .5; transform: scale(1); } 50% { opacity: .85; transform: scale(1.05); } }
 
-main > section { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both; }
-main > section:nth-of-type(1) { animation-delay: .02s; }
-main > section:nth-of-type(2) { animation-delay: .1s; }
-main > section:nth-of-type(3) { animation-delay: .18s; }
-main > section:nth-of-type(4) { animation-delay: .26s; }
-main > section:nth-of-type(n + 5) { animation-delay: .32s; }
+/* L'animazione non parte più al caricamento. Prima `main > section` partiva
+   tutta insieme con ritardi progressivi: le sezioni in fondo avevano già
+   finito prima che qualcuno le vedesse, e con una pagina più lunga il difetto
+   peggiora. Adesso parte quando la sezione entra in vista, una volta sola, ed
+   è BaseLayout ad aggiungere `.in-vista` a ogni `main > section`. Senza
+   JavaScript non succede niente: per questo lo stato di partenza è quello
+   finito, non quello nascosto. */
+main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both; }
+
+/* Il fascio che percorre un collegamento. `pathLength="100"` su ogni <path>
+   normalizza la geometria: un solo dasharray vale per curve di lunghezza
+   diversa, e i ritardi restano leggibili. */
+@keyframes fascio { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
+
+.base { stroke: var(--border); stroke-width: 1.5; fill: none; }
+.interrotto { stroke: var(--tratto-inerte); stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; }
+.fascio {
+  stroke: var(--azione);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 11 89;
+  filter: drop-shadow(0 0 4px rgb(168 83 29 / 55%));
+  animation: fascio 3.4s linear infinite;
+}
+
+/* Chi ha chiesto meno movimento non ne riceve nessuno. Il disegno resta
+   leggibile fermo: nessuna informazione vive solo nell'animazione.
+   `scroll-behavior: auto` c'è perché tokens.css accende lo scorrimento
+   morbido (`html { scroll-behavior: smooth }`), che è movimento quanto
+   un'animazione. Un secondo blocco, quasi identico ma senza questa riga,
+   viveva in fondo al file da prima di questo task: due `@media
+   (prefers-reduced-motion: reduce)` distinti sulla stessa condizione sono
+   duplicazione verbatim, non due regole diverse, quindi questo li assorbe
+   entrambi. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 .divider { transform-origin: left; animation: tira .8s cubic-bezier(.22, .8, .3, 1) .4s both; }
 
@@ -132,10 +169,76 @@ a:hover .freccia { transform: translateX(5px); }
   font-variant-numeric: tabular-nums;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+/* Sotto i 44px il dito manca il bersaglio, ed è da lì che arriva la maggior
+   parte di chi legge. Nav.astro applica già questa regola alle sue voci
+   sotto i 720px: qui vale per i link dentro le sezioni, che oggi sono <a>
+   in linea alti 21-24px.
+
+   Non `inline-flex` + `align-items: center`, che è la prima cosa provata e
+   rompe ogni link che finisce in "testo lungo + <span class="freccia">":
+   flexbox tratta il testo e la freccia come due elementi distinti (il nodo
+   di testo e lo span), e quando il testo va a capo la freccia smette di
+   seguirlo per finire centrata a fianco, staccata da entrambe le righe
+   (visto su .continua nella home, screenshot a 375px). `padding-block`
+   allarga la scatola senza toccare come testo e freccia si dispongono
+   dentro: restano un unico flusso, vanno a capo insieme come prima.
+
+   Il `padding-block: 12px` che stava qui accanto se n'è andato, ed è il
+   primo debito che la PR #32 aveva dichiarato su se stessa. Il padding si
+   somma a **ogni** link, anche a quelli che i 44px li superavano già: su
+   `/ricerca`, dieci pubblicazioni per il loro link arXiv, erano +288px di
+   pagina sul telefono per un bersaglio che era a norma di suo. `min-height`
+   fa lo stesso lavoro solo dove serve — sotto i 44 alza, sopra non tocca —
+   e `align-content: center` rimette il testo in mezzo alla scatola, che è
+   dove il padding simmetrico lo teneva: per un link piccolo il risultato a
+   video è lo stesso di prima, per uno grande la pagina smette di gonfiarsi.
+
+   La condizione è `pointer: coarse`, non più `max-width: 640px`, ed è il
+   secondo debito. La larghezza non è la domanda giusta: la domanda è se a
+   toccare sia un dito o un mouse. Legata ai 640px la regola lasciava
+   scoperti i tablet — a 768px la home aveva ventinove bersagli sotto i
+   44px, tredici dei quali sotto i 24 del minimo AA — e in cambio allargava
+   i bersagli su un desktop con la finestra stretta, dove il puntatore è
+   preciso e non serve. `pointer: coarse` prende telefoni e tablet a
+   qualsiasi larghezza e lascia stare mouse e trackpad a qualsiasi altra.
+
+   Selettore dentro `:where()`, quindi a specificità zero: così un
+   componente che ha già le sue misure — `.canale` in Contatto.astro
+   (bottoni "WhatsApp"/"Mail", `display: flex` e padding propri) e `.riga`
+   nell'elenco note (`display: grid` a tre colonne) — vince sempre con la
+   sua regola invece di vedersi sovrascritto `display` e `padding` da
+   questa. Senza `:where()` la prima prova rompeva `.canale`: il suo
+   `display: flex` diventava `block`, e restava un flusso normale
+   icona+testo solo per una coincidenza di larghezze, non per il layout
+   voluto. `.pulsante`/`.primaria` restano esclusi per nome oltre che per
+   specificità: sono già bersagli a norma per conto proprio, e forzarli
+   in `inline-block` romperebbe l'allineamento col testo intorno quando un
+   pulsante compare in riga con altro testo. */
+@media (pointer: coarse) {
+  :where(main a:not(.pulsante):not(.primaria)) {
+    display: inline-block;
+    min-height: 44px;
+    align-content: center;
+  }
+
+  /* Eccezione: un link dentro una frase di prosa. Non è un'invenzione fatta
+     per aggirare il controllo — è la stessa WCAG 2.5.8 (Target Size) a
+     esentare i link «in linea», dentro un blocco di testo, dal minimo di
+     44px: lì il tocco è preciso quanto la lettura, e allargare la riga in
+     cui cade il link (`inline-block` con `padding-block` inclusi) ne alza
+     comunque il line-box, aprendo un vuoto solo su quella riga del
+     paragrafo — lo stesso difetto della prova con `inline-flex`, causa
+     diversa (qui è l'altezza della riga, non lo split testo/icona).
+     Successo su «Procedo» dentro .credibilita (Occhiello.astro) e sul
+     rimando inglese di 404.astro: verificato con uno screenshot a 375px
+     prima e dopo, non aggiustato a occhio. `main p a` prende entrambi
+     senza nominarli uno per uno, ed è un'esclusione sicura perché nessun
+     link-bersaglio del sito (schede, "continua", pulsanti) vive dentro un
+     <p> — sta sempre come fratello dopo la sua chiusura. Qui niente
+     `:where()`: tre selettori d'elemento (0,0,3) battono da soli la
+     regola sopra, che con `:where()` è a specificità zero. */
+  main p a {
+    display: inline;
+    min-height: 0;
   }
 }

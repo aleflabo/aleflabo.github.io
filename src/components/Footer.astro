@@ -186,6 +186,26 @@ const rotte = rottePiePagina[lang];
     color: var(--text);
   }
 
+  /* Il piè di pagina era tredici dei quindici bersagli sotto i 44px che
+     restavano a 390px, ed è l'ultimo debito della PR #32 su questo fronte:
+     le voci delle colonne stavano a 28px (14px per interlinea 2) e Privacy
+     e Cookie a 20,8. Nessuna delle due regole scritte altrove lo copriva —
+     `global.css` parla di `main`, `Nav.astro` di `nav` — e lo script del
+     telefono li riportava apposta invece di escluderli.
+
+     Il costo è dichiarato: sedici pixel per voce, ~+190px di piè di pagina
+     su un telefono. È il prezzo del bersaglio, e si paga solo dove c'è un
+     dito. Il link «Procedo» dentro la frase di presentazione non è qui
+     dentro: sta in un <p> di prosa, ed è esente per WCAG 2.5.8. */
+  @media (pointer: coarse) {
+    .colonna a,
+    .legale a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+
   @media (max-width: 800px) {
     .colonne {
       grid-template-columns: repeat(2, minmax(0, 1fr));

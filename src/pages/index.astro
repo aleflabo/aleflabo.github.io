@@ -10,11 +10,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Occhiello from '../components/sezioni/Occhiello.astro';
 import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../components/sezioni/IlProblema.astro';
+import CosaCostruisco from '../components/sezioni/CosaCostruisco.astro';
 import ComeLavoro from '../components/sezioni/ComeLavoro.astro';
 import LeProve from '../components/sezioni/LeProve.astro';
 import BloccoFormazione from '../components/sezioni/BloccoFormazione.astro';
-import DaDoveViene from '../components/sezioni/DaDoveViene.astro';
-import Territorio from '../components/sezioni/Territorio.astro';
 import Contatto from '../components/sezioni/Contatto.astro';
 import { localizedPath } from '../i18n/ui';
 import { emailContatto } from '../data/legale';
@@ -50,6 +49,9 @@ const numeri = [
 ];
 
 // --- IlProblema ---
+// I tre `vignetta` sono letterali di un tipo unione lato componente
+// (task 8): senza `as const` TypeScript li allargherebbe a `string` e
+// `astro check` li rifiuterebbe allo spread sulle props.
 const ilProblema = {
   occhiello: 'Il problema',
   titolo: 'Le tre cose che mi vengono raccontate più spesso',
@@ -57,23 +59,51 @@ const ilProblema = {
     {
       citazione: '«Mi serve questo pezzo.»',
       corpo: 'Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.',
+      vignetta: 'richiesta' as const,
     },
     {
       citazione: '«Lo sa fare solo Bruno.»',
       corpo: "Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.",
+      vignetta: 'unaTestaSola' as const,
     },
     {
       citazione: '«Abbiamo provato ChatGPT.»',
       corpo: "Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non è chiaro con quali documenti, né se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.",
+      vignetta: 'fuoriDaCasa' as const,
     },
   ],
 };
 
+// --- CosaCostruisco ---
+// Le otto stringhe sono alla lettera da testi.md, sezione «Cosa
+// costruisco»: `verifica-rotte.mjs` fa fallire la build se una di queste
+// finisce in pagina senza stare lì (task 11, home-visuale).
+const cosaCostruisco = {
+  occhiello: 'Cosa costruisco',
+  titolo: 'Metto insieme quello che avete già',
+  intro: "I documenti di un'azienda stanno in cartelle, in caselle di posta e dentro i gestionali, e ognuno di quei posti sa una parte di quello che serve. Costruisco sistemi che li leggono tutti e li tengono collegati, così quello che sapete sta in un posto solo e ogni pezzo resta attaccato al documento da cui viene.",
+  nodo: { titolo: 'Legge e collega', sottotitolo: 'ogni giorno, da solo' },
+  ritorno: 'da dove viene',
+  didascaliaSinistra: 'Cartelle, fogli, caselle di posta, gestionali.',
+  didascaliaDestra: 'Un posto solo dove cercare.',
+};
+
 // --- ComeLavoro ---
-// I quattro passi sono un riassunto per la home, con nomi e testi propri
-// (Ascolto/Diagnosi/Costruisco/Resto): non coincidono con `ingaggi` di
-// src/data/servizi.ts (Capire/Decidere/Costruire/Mantenere), che è la
-// versione estesa per /servizi.
+// I quattro passi prendono ora i nomi degli `ingaggi` di src/data/servizi.ts.
+// Fino a settembre 2026 avevano nomi propri — Ascolto, Diagnosi, Costruisco,
+// Resto — e questo commento diceva apposta che i due elenchi non dovevano
+// coincidere. La ragione è caduta quando i corpi hanno lasciato la home: senza
+// il loro testo accanto, «Ascolto» e «Resto» smettono di parlare del lavoro e
+// parlano della persona, e la sezione suona come una terapia invece che come
+// un mestiere. I nomi degli ingaggi sono già approvati, esistono in inglese, e
+// a 390px stanno comunque su una riga: costano zero. Quello che si paga è che
+// la home comincia a nominare quello che si compra, e da qui in poi i due
+// elenchi vanno tenuti allineati a mano.
+// `nomeIngaggio` cerca per `chiave` invece di indicizzare l'array: è lo
+// stesso errore già commesso una volta con l'arXiv del CV (dedurre dall'ordine
+// invece di leggere il campo) e qui costa una riga in più per evitarlo del
+// tutto.
+const nomeIngaggio = (chiave: string) => ingaggi.find((i) => i.chiave === chiave)!.nome;
 const comeLavoro = {
   occhiello: 'Come lavoro',
   titolo: 'Come si svolge di solito un lavoro',
@@ -81,26 +111,22 @@ const comeLavoro = {
   passi: [
     {
       numero: '01',
-      nome: 'Ascolto',
-      corpo: "Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.",
+      nome: nomeIngaggio('capire'),
       neEsce: 'Una lista dei punti dove si perde tempo, ordinata per quanto costano.',
     },
     {
       numero: '02',
-      nome: 'Diagnosi',
-      corpo: 'Due o tre settimane per guardare i dati che avete davvero, i gestionali già in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.',
+      nome: nomeIngaggio('decidere'),
       neEsce: 'Un documento che resta tuo, e che puoi far leggere a chi vuoi.',
     },
     {
       numero: '03',
-      nome: 'Costruisco',
-      corpo: 'Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.',
+      nome: nomeIngaggio('costruire'),
       neEsce: 'Qualcosa che i tuoi aprono il lunedì mattina e usano davvero.',
     },
     {
       numero: '04',
-      nome: 'Resto',
-      corpo: 'Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.',
+      nome: nomeIngaggio('mantenere'),
       neEsce: 'Una persona che conosce il sistema e che puoi chiamare quando serve.',
     },
   ],
@@ -110,12 +136,32 @@ const comeLavoro = {
 };
 
 // --- LeProve ---
-// `projects.ts` contiene ormai anche «Portale ricambi 3D» (task 6/11), ma
-// i testi restano scritti qui alla lettera dalla tavola invece di essere
-// riletti da lì: i tre corpi di questa sezione sono più corti di quelli
-// di /lavori. Gli `href` vengono risolti qui, non più segnaposto
-// (bloccante 4, revisione finale del ramo sito-italiano): due portano
-// alle schede vere in /lavori, Spannum al prodotto esterno.
+// `projects.ts` contiene ormai anche «Portale ricambi 3D» e «Agentic
+// Workflow Toolkit» (task 6/9/11), ma i testi restano scritti qui alla
+// lettera dalla tavola invece di essere riletti da lì: i tre corpi di
+// questa sezione sono più corti di quelli di /lavori. Gli `href` vengono
+// risolti qui, non più segnaposto (bloccante 4, revisione finale del ramo
+// sito-italiano): due portano alle schede vere in /lavori.
+//
+// Lo scambio (task 9, home-visuale, decisione del committente): Spannum
+// esce dalla home — resta raggiungibile su /lavori — ed entra l'Agentic
+// Workflow Toolkit, l'unica prova pubblicata in cui Alessandro collega
+// sistemi esistenti (MCP, Notion, GitHub). Il portale ricambi riprende
+// `tagInEvidenza: 'In costruzione'`: quel tag sta già in `projects.ts`
+// (`tagIt`), e questa sezione lo aveva lasciato cadere mettendoci sopra
+// «commessa reale» — la pagina più visitata del sito raccontava il
+// progetto meglio di quanto fosse. Corpo e tag del toolkit sono presi
+// alla lettera da `agentic-toolkit.it.summary` e `.tagIt` in
+// projects.ts; l'occhiello da testi.md («Le prove», scheda toolkit).
+//
+// Il toolkit NON porta `tagInEvidenza` (revisione finale, home-visuale). Il
+// task 9 gli aveva messo «Strumenti miei, per il mio team», che non sta in
+// testi.md né in projects.ts: era scritta qui, e la regola 2 del CLAUDE.md
+// non lo permette. Il commento gemello in data/en/home.ts la citava perfino
+// come motivo per lasciare vuota la scheda inglese — la stessa conclusione
+// vale per l'italiano, che era in produzione. Se serve dire che questi
+// strumenti sono suoi e non una commessa, la frase va approvata prima:
+// «shorten the structure, do not lengthen the text».
 const leProve = {
   occhiello: 'Le prove',
   titolo: 'Alcune cose che ho costruito',
@@ -125,6 +171,8 @@ const leProve = {
       nome: 'Portale ricambi 3D',
       corpo: 'Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente.',
       tag: ['Pipeline CAD, 80 test', 'Proprietà intellettuale protetta'],
+      tagInEvidenza: 'In costruzione',
+      miniatura: 'ricambi' as const,
       link: 'Come funziona',
       href: localizedPath('it', '/lavori/portale-ricambi'),
     },
@@ -133,17 +181,18 @@ const leProve = {
       nome: 'Procedo',
       corpo: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.',
       tag: ['Clienti industriali', 'B4i Bocconi', 'Round angel'],
+      miniatura: 'procedo' as const,
       link: 'Come funziona',
       href: localizedPath('it', '/lavori/procedo'),
     },
     {
-      eyebrow: 'Prodotto vivo · aperto a tutti',
-      nome: 'Spannum',
-      corpo: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.',
-      tag: ['Online', 'Norme per età'],
-      link: 'Aprilo',
-      href: 'https://spannum.com',
-      esterno: true,
+      eyebrow: 'Tooling agentico · uso quotidiano',
+      nome: 'Agentic Workflow Toolkit',
+      corpo: 'Una suite di skill ad agenti AI che automatizzano le operazioni del team e i flussi ingegneristici, dagli standup quotidiani alla review dei prompt LLM.',
+      tag: ['Standup automatico', 'Documentazione rigenerata', 'Revisione dei prompt'],
+      miniatura: 'toolkit' as const,
+      link: 'Come funziona',
+      href: localizedPath('it', '/lavori/agentic-toolkit'),
     },
   ],
   continua: 'Tutti i lavori, compresa la ricerca',
@@ -151,10 +200,16 @@ const leProve = {
 };
 
 // --- BloccoFormazione ---
-// `ore` e `nome` coincidono con `formati` di src/data/formazione.ts, ma il
-// corpo di ogni scheda è un riassunto proprio della home, diverso da
-// `formati[].corpo` (la versione estesa è per /formazione, task 10):
-// restano quindi scritti qui, per intero.
+// `ore` e `nome` coincidono con `formati` di src/data/formazione.ts. Il
+// corpo di ogni scheda e la `chiusura` sono caduti (task 11, home-visuale):
+// la striscia (task 7) non li ha mai resi — sono facoltativi nel
+// componente — e a differenza di `daDoveViene.corpo` sotto, qui non
+// servivano nemmeno prima: erano un riassunto proprio della home, mai letto
+// da nessun altro componente. `formati[].corpo` esteso resta invece su
+// /formazione, nel suo file dati. La striscia mostra una sola introduzione,
+// non `introduzioni[0]` ma `introduzioni[1]` — quella sull'AI Act, la
+// seconda in quest'array — passata così più sotto, dov'è la
+// <BloccoFormazione>.
 const bloccoFormazione = {
   occhiello: 'Formazione',
   titolo: 'Si comincia dalle persone',
@@ -163,35 +218,24 @@ const bloccoFormazione = {
     "Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.",
   ],
   formati: [
-    {
-      ore: '4 ore',
-      nome: 'Corso introduttivo',
-      corpo: "Per tutta l'azienda, dal titolare al reparto. Cosa è cambiato negli ultimi anni, cosa è rimasto uguale, e quali sono i rischi concreti per i vostri dati.",
-    },
-    {
-      ore: '8-12 ore',
-      nome: 'Laboratorio per funzione',
-      corpo: "Ufficio tecnico, acquisti, amministrazione, commerciale. Ogni gruppo lavora sui propri documenti, così quello che si impara si può usare il giorno dopo.",
-    },
-    {
-      ore: 'Durata concordata',
-      nome: 'Percorso finanziato',
-      corpo: "Attraverso enti accreditati e fondi interprofessionali, quando l'azienda vuole un percorso lungo senza impegnare cassa propria.",
-    },
+    { ore: '4 ore', nome: 'Corso introduttivo' },
+    { ore: '8-12 ore', nome: 'Laboratorio per funzione' },
+    { ore: 'Durata concordata', nome: 'Percorso finanziato' },
   ],
-  chiusura: 'Ho insegnato quattro anni alla Sapienza come assistente alla didattica, e sono stato relatore invitato al Data Science Hub di Ferrari S.p.A. I corsi si organizzano direttamente oppure attraverso enti accreditati e fondi interprofessionali.',
   linkChiusura: 'Come si organizza un corso',
   hrefChiusura: localizedPath('it', '/formazione'),
 };
 
 // --- DaDoveViene ---
+// `corpo` è caduto (task 11, home-visuale): la fascia scura non lo rende
+// più da quando FasciaNumeri.astro l'ha reso facoltativo e ha smesso di
+// leggerlo (task 5).
 const daDoveViene = {
   occhiello: 'Da dove viene quello che so',
   titolo: 'Dalla ricerca alla produzione',
   intro: "Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che è il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.",
-  corpo: "Ogni articolo che ho pubblicato esce insieme al codice. È l'abitudine con cui lavoro anche adesso: le decisioni tecniche restano scritte e il software che consegno si apre e si legge.",
   tappe: [
-    { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza — PINlab' },
+    { valore: '2021–2024', etichetta: 'Dottorato in computer vision, Sapienza – PINlab' },
     { valore: 'CVPR · ICCV · IROS', etichetta: 'Le conferenze principali del settore' },
     { valore: '2024–2026', etichetta: 'Co-fondatore e CTO di Procedo, startup industriale' },
   ],
@@ -252,12 +296,19 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Occhiello {...occhiello} />
-  <FasciaNumeri numeri={numeri} />
+  {/* Potatura degli occhielli (task 14, home-visuale): la home aveva nove
+      etichette di sezione contro un tetto di una ogni tre sezioni — «molto
+      claude like», ha detto il committente, ed è il ritmo templato che la
+      skill anti-slop segnala. Restano solo tre: quello in testata
+      (Occhiello, sopra), «Il problema» e «Le prove». Sui sei componenti
+      sotto la prop occhiello/eyebrow resta facoltativa e le stringhe
+      restano scritte nei rispettivi oggetti qui sopra — semplicemente non
+      si passano più, sovrascrivendole a `undefined` dopo lo spread. */}
+  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
   <IlProblema {...ilProblema} />
-  <ComeLavoro {...comeLavoro} />
+  <CosaCostruisco {...cosaCostruisco} occhiello={undefined} />
+  <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} />
-  <DaDoveViene {...daDoveViene} />
-  <Territorio {...territorio.it} />
-  <Contatto {...contatto} />
+  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.it, occhiello: undefined }} />
 </BaseLayout>

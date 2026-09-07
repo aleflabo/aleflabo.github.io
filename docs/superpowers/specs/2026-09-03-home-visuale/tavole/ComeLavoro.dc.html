@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #ece7de; color: #141414; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+    a { color: #1b3a5b; text-decoration: none; }
+    a:hover { color: #a8531d; }
+
+    .colonna { width: 390px; background: #faf8f4; border: 1px solid #d8ccb8; border-radius: 6px; overflow: hidden; }
+    .intestazione { padding: 16px 20px 14px; border-bottom: 1px solid #e6ddd0; background: #ffffff; }
+    .etichetta { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+    .misura { margin-top: 6px; font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; }
+    .verdetto { margin-top: 6px; font-size: 12.5px; line-height: 1.45; color: #55504a; }
+    .corpo-sezione { padding: 28px 20px 32px; }
+    .passo { padding: 18px 0; border-top: 1px solid #e6ddd0; }
+    .passo:last-of-type { border-bottom: 1px solid #e6ddd0; }
+    .riga-nome { display: flex; align-items: baseline; gap: 12px; }
+    .numero { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #1b3a5b; }
+    .nome { font-size: 20px; }
+    .nome-lungo { font-size: 18px; line-height: 1.2; }
+    .testo { margin-top: 10px; font-size: 14.5px; line-height: 1.55; color: #55504a; }
+    .ne-esce-et { margin-top: 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700; }
+    .ne-esce-val { margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: #141414; }
+    .occhiello { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700; }
+    .titolo { font-size: 26px; margin-top: 14px; }
+    .intro { margin-top: 12px; margin-bottom: 22px; font-size: 15px; line-height: 1.6; color: #55504a; }
+    .daScrivere { background: rgba(240,201,164,.45); box-shadow: 0 0 0 2px rgba(240,201,164,.45); border-radius: 2px; }
+  </style>
+</helmet>
+
+<div style="padding: 40px; width: 1760px;">
+
+  <p style="font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Come lavoro — quattro versioni a larghezza di telefono</p>
+  <h2 style="font-size: 30px; margin-top: 14px; max-width: 58ch;">Tolti i corpi, restano quattro verbi soli: &laquo;Ascolto&raquo; e &laquo;Resto&raquo; smettono di parlare del lavoro e cominciano a parlare di me.</h2>
+  <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #55504a; max-width: 76ch;">Nessuna di queste versioni inventa una parola: sono tutte fatte con testo gi&agrave; approvato, tagliato in punti diversi. Le altezze sono misurate sul telefono, sulla sezione intera.</p>
+
+  <div style="display: flex; gap: 30px; margin-top: 34px; align-items: flex-start;">
+
+    <!-- ============ OGGI ============ -->
+    <div class="colonna">
+      <div class="intestazione">
+        <p class="etichetta" style="color: #8a8177;">Come &egrave; oggi in produzione</p>
+        <p class="misura" style="color: #8a8177;">1647px</p>
+        <p class="verdetto">Nome, corpo intero e &laquo;Ne esce&raquo;. Si capisce tutto, ed &egrave; il blocco pi&ugrave; grande della pagina.</p>
+      </div>
+      <div class="corpo-sezione">
+        <p class="occhiello">Come lavoro</p>
+        <h2 class="titolo">Come si svolge di solito un lavoro</h2>
+        <p class="intro">Quattro passi. Ci si pu&ograve; fermare dopo ognuno, e quello che &egrave; stato fatto fino a l&igrave; resta comunque tuo.</p>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">01</span><h3 class="nome">Ascolto</h3></div>
+          <p class="testo">Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni. Serve a me per capire come funzionate, e a te per farti un'idea di come ragiono.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una lista dei punti dove si perde tempo, ordinata per quanto costano.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">02</span><h3 class="nome">Diagnosi</h3></div>
+          <p class="testo">Due o tre settimane per guardare i dati che avete davvero, i gestionali gi&agrave; in uso e chi si occupa di cosa. Alla fine scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Un documento che resta tuo, e che puoi far leggere a chi vuoi.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">03</span><h3 class="nome">Costruisco</h3></div>
+          <p class="testo">Comincio sempre dalla parte che potrebbe non funzionare, cos&igrave; se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Qualcosa che i tuoi aprono il luned&igrave; mattina e usano davvero.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">04</span><h3 class="nome">Resto</h3></div>
+          <p class="testo">Un software che nessuno cura smette di essere utile nel giro di qualche mese. Se serve restiamo in contatto: manutenzione, server e le modifiche che vengono fuori strada facendo.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una persona che conosce il sistema e che puoi chiamare quando serve.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ QUELLA CHE NON TI PIACE ============ -->
+    <div class="colonna" style="border-color: #a8531d;">
+      <div class="intestazione" style="background: #fdf3e9;">
+        <p class="etichetta" style="color: #a8531d;">Il taglio di prima &mdash; da scartare</p>
+        <p class="misura" style="color: #a8531d;">947px</p>
+        <p class="verdetto">Solo i nomi. Il pi&ugrave; corto, e quello in cui quattro verbi soli suonano come una terapia invece che come un mestiere.</p>
+      </div>
+      <div class="corpo-sezione">
+        <p class="occhiello">Come lavoro</p>
+        <h2 class="titolo">Come si svolge di solito un lavoro</h2>
+        <p class="intro">Quattro passi. Ci si pu&ograve; fermare dopo ognuno, e quello che &egrave; stato fatto fino a l&igrave; resta comunque tuo.</p>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">01</span><h3 class="nome">Ascolto</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una lista dei punti dove si perde tempo, ordinata per quanto costano.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">02</span><h3 class="nome">Diagnosi</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Un documento che resta tuo, e che puoi far leggere a chi vuoi.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">03</span><h3 class="nome">Costruisco</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Qualcosa che i tuoi aprono il luned&igrave; mattina e usano davvero.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">04</span><h3 class="nome">Resto</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una persona che conosce il sistema e che puoi chiamare quando serve.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ A ============ -->
+    <div class="colonna">
+      <div class="intestazione">
+        <p class="etichetta" style="color: #1b3a5b;">A &mdash; la prima frase di ogni corpo</p>
+        <p class="misura" style="color: #1b3a5b;">~1535px</p>
+        <p class="verdetto">Il testo &egrave; tagliato a fine periodo, non riscritto, e il nome non resta mai solo. Ma recupera <strong>110px in tutto</strong>: tre frasi su quattro erano gi&agrave; corte, e &laquo;Costruisco&raquo; &egrave; un periodo unico che non si pu&ograve; spezzare. Legge bene e non accorcia.</p>
+      </div>
+      <div class="corpo-sezione">
+        <p class="occhiello">Come lavoro</p>
+        <h2 class="titolo">Come si svolge di solito un lavoro</h2>
+        <p class="intro">Quattro passi. Ci si pu&ograve; fermare dopo ognuno, e quello che &egrave; stato fatto fino a l&igrave; resta comunque tuo.</p>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">01</span><h3 class="nome">Ascolto</h3></div>
+          <p class="testo">Passo mezza giornata in azienda, insieme alle persone che fanno il lavoro tutti i giorni.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una lista dei punti dove si perde tempo, ordinata per quanto costano.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">02</span><h3 class="nome">Diagnosi</h3></div>
+          <p class="testo">Due o tre settimane per guardare i dati che avete davvero, i gestionali gi&agrave; in uso e chi si occupa di cosa.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Un documento che resta tuo, e che puoi far leggere a chi vuoi.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">03</span><h3 class="nome">Costruisco</h3></div>
+          <p class="testo">Comincio sempre dalla parte che potrebbe non funzionare, cos&igrave; se qualcosa si rivela impossibile lo scopriamo presto, quando cambiare strada costa ancora poco.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Qualcosa che i tuoi aprono il luned&igrave; mattina e usano davvero.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">04</span><h3 class="nome">Resto</h3></div>
+          <p class="testo">Un software che nessuno cura smette di essere utile nel giro di qualche mese.</p>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una persona che conosce il sistema e che puoi chiamare quando serve.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ B ============ -->
+    <div class="colonna" style="border: 2px solid #1b3a5b;">
+      <div class="intestazione" style="background: #eef3f8;">
+        <p class="etichetta" style="color: #1b3a5b;">B &mdash; i nomi di /servizi &mdash; scelta</p>
+        <p class="misura" style="color: #1b3a5b;">947px &mdash; scelta</p>
+        <p class="verdetto"><strong>Costa esattamente quanto la colonna arancione</strong>: i nomi lunghi stanno comunque su una riga. Stesso risparmio, senza i verbi soli. Esistono anche in inglese (<span style="font-family: ui-monospace, monospace; font-size: 11.5px;">A diagnostic half-day</span>&hellip;), dove il problema era identico: &laquo;I listen&raquo;, &laquo;I stay&raquo;. Il prezzo &egrave; che la home comincia a nominare quello che si compra.</p>
+      </div>
+      <div class="corpo-sezione">
+        <p class="occhiello">Come lavoro</p>
+        <h2 class="titolo">Come si svolge di solito un lavoro</h2>
+        <p class="intro">Quattro passi. Ci si pu&ograve; fermare dopo ognuno, e quello che &egrave; stato fatto fino a l&igrave; resta comunque tuo.</p>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">01</span><h3 class="nome-lungo">Mezza giornata diagnostica</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una lista dei punti dove si perde tempo, ordinata per quanto costano.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">02</span><h3 class="nome-lungo">Audit AI</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Un documento che resta tuo, e che puoi far leggere a chi vuoi.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">03</span><h3 class="nome-lungo">Software su misura</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Qualcosa che i tuoi aprono il luned&igrave; mattina e usano davvero.</p>
+        </div>
+        <div class="passo">
+          <div class="riga-nome"><span class="numero">04</span><h3 class="nome-lungo">Canone di servizio</h3></div>
+          <p class="ne-esce-et">Ne esce</p>
+          <p class="ne-esce-val">Una persona che conosce il sistema e che puoi chiamare quando serve.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="margin-top: 30px; font-size: 13.5px; line-height: 1.6; color: #55504a; max-width: 92ch;">Nota su B: i quattro &laquo;Ne esce&raquo; restano quelli della home e combaciano uno a uno con gli ingaggi di <span style="font-family: ui-monospace, monospace;">servizi.ts</span>. Ma <span style="font-family: ui-monospace, monospace;">index.astro</span> porta un commento che dice apposta che i due elenchi non devono coincidere: quello della home racconta come si svolge un lavoro, quello di /servizi elenca cosa si compra. Sceglierlo &egrave; una decisione di posizionamento, non un ritocco.</p>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #faf8f4; color: #141414; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+    a { color: #141414; text-decoration: none; }
+    a:hover { color: #a8531d; }
+
+    @keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+    @keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes fascio { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
+
+    .base { stroke: #e6ddd0; stroke-width: 1.5; fill: none; }
+    .fascio { stroke: #a8531d; stroke-width: 2.5; fill: none; stroke-linecap: round;
+              stroke-dasharray: 11 89; animation: fascio 3.4s linear infinite;
+              filter: drop-shadow(0 0 4px rgba(168,83,29,.55)); }
+    .interrotto { stroke: #c2b6a2; stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; }
+
+    .marker { background-image: linear-gradient(to top, #f0c9a4 0 14px, transparent 14px);
+              background-size: 0% 100%; background-repeat: no-repeat;
+              animation: evidenzia .85s cubic-bezier(.22,.8,.3,1) .8s both; }
+    .divisore { width: 72px; height: 3px; background: #a8531d; transform-origin: left;
+                animation: tira .8s cubic-bezier(.22,.8,.3,1) .4s both; }
+
+    .daScrivere { background: rgba(240,201,164,.45); box-shadow: 0 0 0 2px rgba(240,201,164,.45); border-radius: 2px; }
+    .chip-copy { display: inline-flex; align-items: center; font-size: 9.5px; letter-spacing: .1em;
+                 text-transform: uppercase; font-weight: 700; color: #a8531d; border: 1px dashed #a8531d;
+                 border-radius: 4px; padding: 3px 7px; line-height: 1.4; white-space: nowrap; flex: none; }
+
+    /* 44px di altezza minima su ogni cosa che si tocca: sotto quella soglia il
+       dito manca il bersaglio, ed e' da qui che arriva piu' di meta' di chi legge. */
+    .tocco { min-height: 44px; display: flex; align-items: center; }
+  </style>
+</helmet>
+
+<div style="background: #faf8f4; width: 390px;">
+
+  <!-- BARRA — sotto i 720px il menu si chiude dietro il pulsante (Nav.astro, .js-ready) -->
+  <div style="background: #faf8f4; border-bottom: 1px solid #e6ddd0;">
+    <div style="padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="#" style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em;">Alessandro Flaborea</a>
+      <div style="display: flex; flex-direction: column; gap: 5px; padding: 6px;">
+        <span style="display: block; width: 22px; height: 1.5px; background: #141414;"></span>
+        <span style="display: block; width: 22px; height: 1.5px; background: #141414;"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 · TESTATA — valori del blocco @media (max-width: 640px) di Occhiello.astro -->
+  <div style="position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -160px; right: -180px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(168,83,29,.09), rgba(168,83,29,0) 70%);"></div>
+    <div style="position: relative; padding: 44px 20px 40px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700; line-height: 1.5; max-width: 22ch;">Consulenza e formazione sull'intelligenza artificiale</p>
+      <h1 style="margin-top: 18px; font-size: 34px; line-height: 1.08; text-wrap: pretty;">Aiuto le aziende a capire <span class="marker">dove serve</span> l'intelligenza artificiale e poi la costruisco.</h1>
+      <div class="divisore" style="margin: 26px 0;"></div>
+      <p style="font-size: 16.5px; line-height: 1.55; color: #55504a; text-wrap: pretty;">Tre anni di dottorato in computer vision, poi due da CTO di una startup che quella ricerca l'ha portata dentro aziende che producono. Adesso lavoro in proprio.</p>
+      <div style="display: flex; flex-direction: column; align-items: stretch; gap: 14px; margin-top: 30px;">
+        <a href="#" style="background: #a8531d; color: #ffffff; font-size: 16px; font-weight: 600; padding: 16px 24px; border-radius: 4px; text-align: center;">Prenota mezz'ora &nbsp;&rarr;</a>
+        <a href="#" class="tocco" style="justify-content: center; font-size: 15px; font-weight: 600; color: #141414; text-decoration: underline; text-underline-offset: 4px;">Guarda cosa ho costruito</a>
+      </div>
+      <p style="margin-top: 32px; font-size: 13.5px; line-height: 1.6; color: #55504a;">Dottorato in computer vision alla Sapienza &middot; Pubblicato a CVPR, ICCV, IROS &middot; Co-fondatore e CTO di <a href="#" style="text-decoration: underline; text-underline-offset: 3px;">Procedo</a> dal 2024 al 2026</p>
+    </div>
+  </div>
+
+  <!-- 2 · FASCIA SCURA — i numeri vanno a capo a due a due, le tappe in colonna -->
+  <div style="background: #1b3a5b;">
+    <div style="padding: 26px 20px 32px;">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px;">
+        <p><span style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #ffffff;">10</span><span style="font-size: 13px; font-weight: 500; color: #a8c0d6; margin-left: 8px;">articoli</span></p>
+        <p><span style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #ffffff;">533</span><span style="font-size: 13px; font-weight: 500; color: #a8c0d6; margin-left: 8px;">citazioni</span></p>
+        <p><span style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #ffffff;">1</span><span style="font-size: 13px; font-weight: 500; color: #a8c0d6; margin-left: 8px;">Best Paper</span></p>
+        <p><span style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; color: #ffffff;">2</span><span style="font-size: 13px; font-weight: 500; color: #a8c0d6; margin-left: 8px;">anni da CTO</span></p>
+      </div>
+      <div style="height: 1px; background: rgba(255,255,255,.16); margin: 26px 0 22px;"></div>
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #f0c9a4; font-weight: 700;">Da dove viene quello che so</p>
+      <h2 style="margin-top: 12px; font-size: 24px; color: #ffffff;">Dalla ricerca alla produzione</h2>
+      <p style="margin-top: 14px; font-size: 15px; line-height: 1.65; color: #c7d8e6; text-wrap: pretty;">Una magistrale in data science, poi un dottorato in computer vision alla Sapienza, con il lavoro pubblicato in conferenze dove viene esaminato a fondo prima di uscire. Sono poi stato due anni CTO di una startup industriale, che &egrave; il mestiere in cui si scopre quanto di quella ricerca sopravvive al contatto con un'azienda vera.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 22px;">
+        <div style="border-left: 2px solid rgba(240,201,164,.5); padding-left: 14px;">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600; color: #ffffff;">2021&ndash;2024</p>
+          <p style="font-size: 13px; color: #a8c0d6; line-height: 1.5;">Dottorato in computer vision, Sapienza &mdash; PINlab</p>
+        </div>
+        <div style="border-left: 2px solid rgba(240,201,164,.5); padding-left: 14px;">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600; color: #ffffff;">CVPR &middot; ICCV &middot; IROS</p>
+          <p style="font-size: 13px; color: #a8c0d6; line-height: 1.5;">Le conferenze principali del settore</p>
+        </div>
+        <div style="border-left: 2px solid rgba(240,201,164,.5); padding-left: 14px;">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600; color: #ffffff;">2024&ndash;2026</p>
+          <p style="font-size: 13px; color: #a8c0d6; line-height: 1.5;">Co-fondatore e CTO di Procedo, startup industriale</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; margin-top: 18px;">
+        <a href="#" class="tocco" style="font-size: 15px; font-weight: 600; color: #f0c9a4; text-decoration: underline; text-underline-offset: 4px;">La ricerca, per intero &rarr;</a>
+        <a href="#" class="tocco" style="font-size: 15px; font-weight: 600; color: #f0c9a4; text-decoration: underline; text-underline-offset: 4px;">Chi sono &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 · IL PROBLEMA — una colonna, la vignetta si restringe con la scheda -->
+  <div style="background: #f4efe7; border-top: 1px solid #e6ddd0;">
+    <div style="padding: 48px 20px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Il problema</p>
+      <h2 style="font-size: 26px; margin-top: 14px; margin-bottom: 24px; text-wrap: pretty;">Le tre cose che mi vengono raccontate pi&ugrave; spesso</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 22px 24px 24px;">
+          <svg width="302" height="64" viewBox="0 0 286 104" fill="none" style="margin-bottom: 16px;" aria-hidden="true">
+            <rect x="8" y="26" width="66" height="50" rx="3" stroke="#c2b6a2" stroke-width="1.5" transform="rotate(-7 41 51)"></rect>
+            <path d="M14 68 L30 48 L42 60 L52 50 L68 68" stroke="#a8531d" stroke-width="1.5" transform="rotate(-7 41 51)"></path>
+            <circle cx="28" cy="41" r="4" stroke="#a8531d" stroke-width="1.5" transform="rotate(-7 41 51)"></circle>
+            <path class="interrotto" d="M92 51 L188 51"></path>
+            <rect x="200" y="27" width="48" height="48" rx="4" stroke="#c2b6a2" stroke-width="1.5"></rect>
+            <text x="224" y="60" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="26" font-weight="600" fill="#c2b6a2">?</text>
+          </svg>
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">&laquo;Mi serve questo pezzo.&raquo;</p>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Arriva una mail con una foto storta. Prima di poter fare un preventivo bisogna capire di quale componente si tratti, e succede che ci si mettano in due per un paio di giorni.</p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 22px 24px 24px;">
+          <svg width="302" height="64" viewBox="0 0 286 104" fill="none" style="margin-bottom: 16px;" aria-hidden="true">
+            <circle cx="143" cy="52" r="19" fill="#a8531d"></circle>
+            <circle cx="143" cy="52" r="27" stroke="#f0c9a4" stroke-width="1.5"></circle>
+            <circle cx="52" cy="26" r="13" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+            <circle cx="40" cy="76" r="13" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+            <circle cx="234" cy="26" r="13" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+            <circle cx="246" cy="76" r="13" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+            <circle cx="106" cy="90" r="9" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+            <circle cx="186" cy="14" r="9" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+          </svg>
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">&laquo;Lo sa fare solo Bruno.&raquo;</p>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Quarant'anni di mestiere che stanno nella testa di una persona sola. Nessuno ha mai avuto il tempo di metterli per iscritto, e fra due anni Bruno va in pensione.</p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 22px 24px 24px;">
+          <svg width="302" height="64" viewBox="0 0 286 104" fill="none" style="margin-bottom: 16px;" aria-hidden="true">
+            <rect x="6" y="14" width="150" height="76" rx="4" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="5 6"></rect>
+            <rect x="26" y="34" width="46" height="8" rx="2" fill="#e6ddd0"></rect>
+            <rect x="26" y="50" width="66" height="8" rx="2" fill="#e6ddd0"></rect>
+            <rect x="26" y="66" width="38" height="8" rx="2" fill="#e6ddd0"></rect>
+            <path class="interrotto" d="M156 38 L226 30"></path>
+            <path class="interrotto" d="M156 52 L226 52"></path>
+            <path class="interrotto" d="M156 66 L226 74"></path>
+            <path d="M232 22 a18 14 0 0 1 34 5 a13 12 0 0 1-3 24 h-30 a15 15 0 0 1-1-29 Z" stroke="#a8531d" stroke-width="1.5" transform="translate(4 20)"></path>
+          </svg>
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.25;">&laquo;Abbiamo provato ChatGPT.&raquo;</p>
+          <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #55504a;">Qualcuno in ufficio ha cominciato a usarlo per conto suo. Non &egrave; chiaro con quali documenti, n&eacute; se l'azienda sia d'accordo, e finora nessuno ha avuto occasione di parlarne.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 · COSA COSTRUISCO — il diagramma gira di 90 gradi.
+       Il disordine sta sopra, la struttura sotto, e la riga che torna alla fonte
+       scende lungo il margine destro e risale a sinistra: e' l'unico modo di
+       tenerla visibile senza farla passare sopra i riquadri. -->
+  <div style="background: #faf8f4; border-top: 1px solid #e6ddd0;">
+    <div style="padding: 48px 20px 52px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;"><span class="daScrivere">Cosa costruisco</span></p>
+        <span class="chip-copy">Da approvare</span>
+      </div>
+      <h2 style="font-size: 26px; margin-top: 14px; text-wrap: pretty;"><span class="daScrivere">Quello che avete gi&agrave;, in una forma che si pu&ograve; interrogare</span></h2>
+      <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #55504a; text-wrap: pretty;"><span class="daScrivere">I dati e gli strumenti di un'azienda sono sparsi in venti posti diversi e nessuno ha tempo di rimetterli in ordine a mano. Costruisco sistemi che li leggono, li tengono collegati e vi rispondono dicendo ogni volta da quale documento arriva la risposta.</span></p>
+
+      <div style="position: relative; width: 350px; height: 592px; margin-top: 30px;">
+        <svg width="350" height="592" viewBox="0 0 350 592" fill="none" style="position: absolute; inset: 0;" aria-hidden="true">
+
+          <!-- sopra: il disordine -->
+          <g transform="rotate(-7 60 40)"><rect x="30" y="22" width="60" height="36" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="38" y="32" width="42" height="4" rx="2" fill="#e6ddd0"></rect><rect x="38" y="41" width="30" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(5 180 34)"><rect x="130" y="16" width="72" height="30" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="138" y="26" width="52" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(-4 288 46)"><rect x="248" y="26" width="56" height="34" rx="3" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></rect><rect x="256" y="36" width="36" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(4 62 108)"><rect x="24" y="86" width="70" height="38" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="32" y="96" width="50" height="4" rx="2" fill="#e6ddd0"></rect><rect x="32" y="105" width="34" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(-6 182 104)"><rect x="134" y="84" width="66" height="34" rx="3" stroke="#c2b6a2" stroke-width="1.5" stroke-dasharray="4 5"></rect><rect x="142" y="94" width="44" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(6 290 116)"><rect x="246" y="92" width="62" height="42" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="254" y="102" width="42" height="4" rx="2" fill="#e6ddd0"></rect><rect x="254" y="111" width="28" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(-3 96 172)"><rect x="52" y="152" width="76" height="34" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="60" y="162" width="54" height="4" rx="2" fill="#e6ddd0"></rect></g>
+          <g transform="rotate(5 232 176)"><rect x="188" y="156" width="72" height="36" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect><rect x="196" y="166" width="48" height="4" rx="2" fill="#e6ddd0"></rect></g>
+
+          <!-- i fasci scendono nel nodo -->
+          <path class="base" pathLength="100" d="M 96 194 C 96 224 175 216 175 246"></path>
+          <path class="base" pathLength="100" d="M 175 200 L 175 246"></path>
+          <path class="base" pathLength="100" d="M 232 198 C 232 226 175 218 175 246"></path>
+          <path class="fascio" pathLength="100" d="M 96 194 C 96 224 175 216 175 246" style="animation-delay: 0s;"></path>
+          <path class="fascio" pathLength="100" d="M 175 200 L 175 246" style="animation-delay: .4s;"></path>
+          <path class="fascio" pathLength="100" d="M 232 198 C 232 226 175 218 175 246" style="animation-delay: .8s;"></path>
+
+          <!-- e ne escono -->
+          <path class="base" pathLength="100" d="M 175 326 L 175 366"></path>
+          <path class="fascio" pathLength="100" d="M 175 326 L 175 366" style="animation-delay: 1.8s;"></path>
+
+          <!-- sotto: la struttura, con i suoi collegamenti -->
+          <path d="M 42 388 L 42 522 M 42 404 L 58 404 M 42 460 L 58 460 M 42 516 L 58 516" stroke="#e0b98f" stroke-width="1.5"></path>
+          <rect x="58" y="366" width="252" height="38" rx="4" fill="#ffffff" stroke="#e6ddd0" stroke-width="1"></rect>
+          <rect x="72" y="378" width="150" height="4" rx="2" fill="#a8531d" opacity=".55"></rect>
+          <rect x="72" y="387" width="104" height="4" rx="2" fill="#e0b98f"></rect>
+          <rect x="58" y="422" width="252" height="38" rx="4" fill="#ffffff" stroke="#e6ddd0" stroke-width="1"></rect>
+          <rect x="72" y="434" width="132" height="4" rx="2" fill="#a8531d" opacity=".55"></rect>
+          <rect x="72" y="443" width="88" height="4" rx="2" fill="#e0b98f"></rect>
+          <rect x="58" y="478" width="252" height="38" rx="4" fill="#fdf3e9" stroke="#a8531d" stroke-width="1.5"></rect>
+          <rect x="72" y="490" width="146" height="4" rx="2" fill="#a8531d" opacity=".55"></rect>
+          <rect x="72" y="499" width="96" height="4" rx="2" fill="#e0b98f"></rect>
+
+          <!-- la riga che torna alla fonte: giu' a destra, poi su a sinistra -->
+          <path class="interrotto" d="M 310 497 L 332 497 L 332 560 L 18 560 L 18 118 L 24 118"></path>
+          <path d="M 22 112 L 32 118 L 22 124" stroke="#c2b6a2" stroke-width="1.5" stroke-linejoin="round"></path>
+        </svg>
+
+        <div style="position: absolute; left: 75px; top: 246px; width: 200px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #ffffff; border: 1.5px solid #a8531d; border-radius: 4px; box-shadow: 0 0 0 6px rgba(240,201,164,.32), 0 10px 28px rgba(168,83,29,.14);">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 600; line-height: 1.2;"><span class="daScrivere">Legge e collega</span></p>
+          <p style="font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #8a8177; font-weight: 700;"><span class="daScrivere">ogni giorno, da solo</span></p>
+        </div>
+
+        <span style="position: absolute; left: 96px; top: 550px; background: #faf8f4; padding: 0 10px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: #a8531d;"><span class="daScrivere">da dove viene</span></span>
+      </div>
+
+      <p style="margin-top: 22px; font-size: 12.5px; line-height: 1.45; color: #8a8177;"><span class="daScrivere">Sopra, venti posti diversi: cartelle, fogli, mail, ticket, gestionali. Sotto, una cosa sola da interrogare, dove ogni risposta resta attaccata al documento da cui viene.</span></p>
+    </div>
+  </div>
+
+  <!-- 5 · COME LAVORO — compressa: restano i nomi e il «Ne esce».
+       I corpi stanno su /servizi, dove sono gia' scritti piu' per esteso. -->
+  <div style="background: #faf8f4; border-top: 1px solid #e6ddd0;">
+    <div style="padding: 48px 20px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Come lavoro</p>
+      <h2 style="font-size: 26px; margin-top: 14px; text-wrap: pretty;">Come si svolge di solito un lavoro</h2>
+      <p style="margin-top: 12px; margin-bottom: 22px; font-size: 15px; line-height: 1.6; color: #55504a;">Quattro passi. Ci si pu&ograve; fermare dopo ognuno, e quello che &egrave; stato fatto fino a l&igrave; resta comunque tuo.</p>
+      <div style="display: flex; flex-direction: column;">
+        <div style="padding: 18px 0; border-top: 1px solid #e6ddd0;">
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #1b3a5b;">01</span>
+            <h3 style="font-size: 20px;">Mezza giornata diagnostica</h3>
+          </div>
+          <p style="margin-top: 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Ne esce</p>
+          <p style="margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: #141414;">Una lista dei punti dove si perde tempo, ordinata per quanto costano.</p>
+        </div>
+        <div style="padding: 18px 0; border-top: 1px solid #e6ddd0;">
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #1b3a5b;">02</span>
+            <h3 style="font-size: 20px;">Audit AI</h3>
+          </div>
+          <p style="margin-top: 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Ne esce</p>
+          <p style="margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: #141414;">Un documento che resta tuo, e che puoi far leggere a chi vuoi.</p>
+        </div>
+        <div style="padding: 18px 0; border-top: 1px solid #e6ddd0;">
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #1b3a5b;">03</span>
+            <h3 style="font-size: 20px;">Software su misura</h3>
+          </div>
+          <p style="margin-top: 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Ne esce</p>
+          <p style="margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: #141414;">Qualcosa che i tuoi aprono il luned&igrave; mattina e usano davvero.</p>
+        </div>
+        <div style="padding: 18px 0; border-top: 1px solid #e6ddd0; border-bottom: 1px solid #e6ddd0;">
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #1b3a5b;">04</span>
+            <h3 style="font-size: 20px;">Canone di servizio</h3>
+          </div>
+          <p style="margin-top: 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Ne esce</p>
+          <p style="margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: #141414;">Una persona che conosce il sistema e che puoi chiamare quando serve.</p>
+        </div>
+      </div>
+      <a href="#" class="tocco" style="margin-top: 8px; font-size: 15px; font-weight: 600; color: #1b3a5b;">I quattro modi di lavorare insieme, per esteso &rarr;</a>
+    </div>
+  </div>
+
+  <!-- 6 · LE PROVE — una colonna, tre schede -->
+  <div style="background: #ffffff; border-top: 1px solid #e6ddd0;">
+    <div style="padding: 44px 20px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Le prove</p>
+      <h2 style="font-size: 26px; margin-top: 14px; margin-bottom: 22px;">Alcune cose che ho costruito</h2>
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+
+        <div style="display: flex; flex-direction: column; gap: 12px; border-top: 3px solid #a8531d; padding-top: 20px;">
+          <svg width="330" height="84" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+            <path d="M30 20 L58 8 L86 20 L86 52 L58 64 L30 52 Z" stroke="#c2b6a2" stroke-width="1.5"></path>
+            <path d="M30 20 L58 32 L86 20 M58 32 V64" stroke="#c2b6a2" stroke-width="1.5"></path>
+            <circle cx="72" cy="26" r="5" fill="#a8531d"></circle>
+            <path class="base" pathLength="100" d="M104 36 L196 36"></path>
+            <path class="fascio" pathLength="100" d="M104 36 L196 36"></path>
+            <rect x="208" y="20" width="106" height="32" rx="4" fill="#fdf3e9" stroke="#a8531d" stroke-width="1.5"></rect>
+            <rect x="222" y="32" width="58" height="4" rx="2" fill="#a8531d"></rect>
+            <rect x="222" y="41" width="34" height="4" rx="2" fill="#e0b98f"></rect>
+          </svg>
+          <p style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Meccanica &middot; commessa reale</p>
+          <h3 style="font-size: 22px;">Portale ricambi 3D</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: #55504a;">Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva gi&agrave; associata al codice interno di quel componente.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Pipeline CAD, 80 test</span>
+            <span style="font-size: 12px; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 5px 10px; background: #fdf3e9; font-weight: 600;">In costruzione</span>
+          </div>
+          <a href="#" class="tocco" style="font-size: 15px; font-weight: 600; color: #1b3a5b;">Come funziona &rarr;</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; border-top: 3px solid #a8531d; padding-top: 20px;">
+          <svg width="330" height="84" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+            <rect x="20" y="14" width="80" height="44" rx="3" stroke="#c2b6a2" stroke-width="1.5"></rect>
+            <path d="M20 24h10M20 34h10M20 44h10M90 24h10M90 34h10M90 44h10" stroke="#c2b6a2" stroke-width="1.5"></path>
+            <path d="M50 26 L68 36 L50 46 Z" fill="#a8531d"></path>
+            <path class="base" pathLength="100" d="M116 36 L196 36"></path>
+            <path class="fascio" pathLength="100" d="M116 36 L196 36"></path>
+            <circle cx="216" cy="18" r="4" fill="#a8531d"></circle><rect x="228" y="15" width="86" height="6" rx="3" fill="#e6ddd0"></rect>
+            <circle cx="216" cy="36" r="4" fill="#a8531d"></circle><rect x="228" y="33" width="72" height="6" rx="3" fill="#e6ddd0"></rect>
+            <circle cx="216" cy="54" r="4" fill="#a8531d"></circle><rect x="228" y="51" width="60" height="6" rx="3" fill="#e6ddd0"></rect>
+          </svg>
+          <p style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Industria &middot; in produzione</p>
+          <h3 style="font-size: 22px;">Procedo</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: #55504a;">I video girati in reparto diventano procedure passo-passo, e chi lavora pu&ograve; fare domande alla documentazione della propria azienda. Ne sono stato co-fondatore e CTO per due anni; oggi la seguo come advisor.</p>
+          <a href="#" class="tocco" style="font-size: 15px; font-weight: 600; color: #1b3a5b;">Come funziona &rarr;</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; border-top: 3px solid #a8531d; padding-top: 20px;">
+          <svg width="330" height="84" viewBox="0 0 338 86" fill="none" aria-hidden="true">
+            <rect x="14" y="10" width="72" height="28" rx="4" stroke="#c2b6a2" stroke-width="1.5"></rect>
+            <circle cx="32" cy="24" r="6" stroke="#a8531d" stroke-width="1.5"></circle>
+            <rect x="44" y="21" width="30" height="5" rx="2.5" fill="#e6ddd0"></rect>
+            <rect x="14" y="48" width="72" height="28" rx="4" stroke="#c2b6a2" stroke-width="1.5"></rect>
+            <rect x="26" y="59" width="10" height="5" rx="2.5" fill="#a8531d"></rect>
+            <rect x="44" y="59" width="30" height="5" rx="2.5" fill="#e6ddd0"></rect>
+            <path class="base" pathLength="100" d="M92 24 C132 24 128 43 168 43"></path>
+            <path class="fascio" pathLength="100" d="M92 24 C132 24 128 43 168 43"></path>
+            <path class="base" pathLength="100" d="M92 62 C132 62 128 43 168 43"></path>
+            <path class="fascio" pathLength="100" d="M92 62 C132 62 128 43 168 43" style="animation-delay: .7s;"></path>
+            <rect x="180" y="18" width="52" height="50" rx="4" fill="#fdf3e9" stroke="#a8531d" stroke-width="1.5"></rect>
+            <path d="M190 32h32M190 43h32M190 54h20" stroke="#a8531d" stroke-width="1.5"></path>
+            <path class="base" pathLength="100" d="M240 43 L282 43"></path>
+            <path class="fascio" pathLength="100" d="M240 43 L282 43" style="animation-delay: 1.4s;"></path>
+            <circle cx="298" cy="43" r="8" stroke="#c2b6a2" stroke-width="1.5"></circle>
+            <path d="M294 43l3 3 6-6" stroke="#a8531d" stroke-width="1.5"></path>
+          </svg>
+          <p style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Tooling agentico &middot; uso quotidiano</p>
+          <h3 style="font-size: 22px;">Agentic Workflow Toolkit</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: #55504a;">Una suite di skill ad agenti AI che automatizzano le operazioni del team e i flussi ingegneristici, dagli standup quotidiani alla review dei prompt LLM.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; color: #55504a; border: 1px solid #e6ddd0; border-radius: 4px; padding: 5px 10px; background: #faf8f4;">Standup automatico</span>
+            <span style="font-size: 12px; color: #a8531d; border: 1px solid #a8531d; border-radius: 4px; padding: 5px 10px; background: #fdf3e9; font-weight: 600;">Strumenti miei, per il mio team</span>
+          </div>
+          <a href="#" class="tocco" style="font-size: 15px; font-weight: 600; color: #1b3a5b;">Come funziona &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 · FORMAZIONE — la striscia va in colonna -->
+  <div style="background: #f4efe7; border-top: 1px solid #e6ddd0;">
+    <div style="padding: 40px 20px 44px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8531d; font-weight: 700;">Formazione</p>
+      <h2 style="font-size: 24px; margin-top: 12px;">Si comincia dalle persone</h2>
+      <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #55504a;">Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 18px;">
+        <span style="font-size: 13.5px; color: #141414; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 11px 14px;"><strong style="color: #a8531d;">4 ore</strong> &nbsp;Corso introduttivo</span>
+        <span style="font-size: 13.5px; color: #141414; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 11px 14px;"><strong style="color: #a8531d;">8-12 ore</strong> &nbsp;Laboratorio per funzione</span>
+        <span style="font-size: 13.5px; color: #141414; background: #ffffff; border: 1px solid #e6ddd0; border-radius: 4px; padding: 11px 14px;"><strong style="color: #a8531d;">Durata concordata</strong> &nbsp;Percorso finanziato</span>
+      </div>
+      <a href="#" class="tocco" style="margin-top: 14px; font-size: 15px; font-weight: 600; color: #1b3a5b;">Come si organizza un corso &rarr;</a>
+    </div>
+  </div>
+
+
+  <!-- 8 · PARLIAMONE — con «Venezia è la mia base» e i tre modi qui sopra -->
+  <div style="background: #1b3a5b;">
+    <div style="padding: 40px 20px 48px;">
+      <p style="font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #f0c9a4; font-weight: 700;">Dove lavoro</p>
+      <h2 style="margin-top: 12px; font-size: 24px; color: #ffffff;">Venezia &egrave; la mia base</h2>
+      <p style="margin-top: 12px; font-size: 15px; line-height: 1.6; color: #c7d8e6;">Vivo e lavoro a Venezia. Le aziende che seguo stanno per lo pi&ugrave; fra Veneto e Friuli, abbastanza vicino perch&eacute; il primo passo si possa fare di persona: mezza giornata in reparto, insieme a chi quel lavoro lo fa tutti i giorni.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 18px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,.16);">
+        <p style="font-size: 14px; color: #a8c0d6;"><strong style="color: #ffffff; font-weight: 600;">In presenza</strong> &nbsp;Veneto e Friuli-Venezia Giulia</p>
+        <p style="font-size: 14px; color: #a8c0d6;"><strong style="color: #ffffff; font-weight: 600;">Da remoto</strong> &nbsp;Il resto d'Italia, e oltre</p>
+        <p style="font-size: 14px; color: #a8c0d6;"><strong style="color: #ffffff; font-weight: 600;">I corsi</strong> &nbsp;In aula oppure online</p>
+      </div>
+
+      <!-- Da qui in giù: gli stessi valori del componente sotto @media (max-width: 640px) —
+           .modulo va a grid-template-columns: 1fr, .invia si impila a piena larghezza. -->
+      <p style="margin-top: 34px; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #a8bdd2; font-weight: 700;">Parliamone</p>
+      <h2 style="margin-top: 12px; font-size: 26px; color: #ffffff; text-wrap: pretty;">Mezz'ora per capire se possiamo lavorare insieme</h2>
+      <p style="margin-top: 14px; font-size: 15px; line-height: 1.6; color: #cdd9e6;">Se non &egrave; il lavoro giusto per me te lo dico subito, e se conosco qualcuno pi&ugrave; adatto ti metto in contatto.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 30px;">
+        <div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Azienda</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; min-height: 48px;">Ragione sociale</div>
+        </div>
+        <div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Come ti scrivo</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; min-height: 48px;">Mail o telefono</div>
+        </div>
+        <div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 8px;">Cosa vorresti smettere di fare a mano</p>
+          <div style="background: #ffffff; border-radius: 4px; padding: 14px; font-size: 15px; color: #999999; height: 96px;">Bastano due righe, anche buttate l&igrave;</div>
+        </div>
+        <div>
+          <p style="font-size: 13px; color: #cdd9e6; margin-bottom: 10px;">Quanto &egrave; urgente</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="tocco" style="font-size: 13.5px; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px; padding: 0 14px;">Sto solo guardando</span>
+            <span class="tocco" style="font-size: 13.5px; color: #1b3a5b; background: #ffffff; border: 1px solid #ffffff; border-radius: 4px; padding: 0 14px; font-weight: 600;">Quest'anno</span>
+            <span class="tocco" style="font-size: 13.5px; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px; padding: 0 14px;">Ho un problema adesso</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <span style="background: #ffffff; color: #1b3a5b; font-size: 16px; font-weight: 600; padding: 16px 24px; border-radius: 4px; text-align: center; opacity: .55;">Manda</span>
+          <span style="font-size: 13px; color: #a8bdd2; text-align: center;">Modulo non ancora attivo.</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px; padding-top: 26px; border-top: 1px solid #3f5e7d;">
+        <p style="font-size: 14px; color: #a8bdd2;">Oppure, se preferisci saltare il modulo:</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+          <a href="#" class="tocco" style="justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.4 8.4 0 0 1 8.4-9 8.5 8.5 0 0 1 8.6 8.4Z"></path></svg>
+            WhatsApp
+          </a>
+          <a href="#" class="tocco" style="justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #ffffff; border: 1px solid #6d8aa8; border-radius: 4px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+            Mail
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
