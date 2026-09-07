@@ -65,7 +65,26 @@ added 16px of horizontal scroll on `/chi-sono`. Look at the pages.
 
 Chromium for screenshots installs without root: `npx playwright install chromium`.
 
-## Two traps
+## Four traps
+
+**Two of these bite the before/after comparison the gate above demands**, and both
+make it report numbers that look plausible and are measured on the wrong thing.
+
+**`npm run preview` falls back to another port without failing.** If anything already
+holds 4321 — a stray `astro dev` from hours earlier is the usual culprit — preview
+prints "Port 4321 is in use, trying another one..." and exits 0. Point the measuring
+script at 4321 and it measures that other server: a dev build, with the Astro toolbar
+in the DOM. Pass `--port` explicitly and check the log line, or `ps aux | grep astro`
+before trusting a single height.
+
+**A Playwright element screenshot taller than the viewport drops touch emulation.**
+`locator.screenshot()` resizes the viewport to capture the whole element and, on
+restore, loses `hasTouch`/`isMobile` — so `pointer: coarse` flips to `fine` and every
+measurement taken *after* that call describes a page no phone ever renders. It cost an
+hour of "the DOM says 44px, the picture says 28px" in September 2026. Measure before
+you screenshot, or scroll the element into view and screenshot the viewport instead.
+The same reason is why `verifica-telefono.mjs` sets `hasTouch: true`: without it
+Chromium is `pointer: fine` and none of the three 44px rules apply at all.
 
 **`tsconfig.json` excludes `studio/`** — it is a project of its own with its own
 dependencies, and including it killed `astro check` with an out-of-memory. If the check
