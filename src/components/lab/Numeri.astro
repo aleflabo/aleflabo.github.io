@@ -1,0 +1,58 @@
+---
+// I quattro numeri. Il valore finale è nel markup; lo script conta da zero
+// solo se il movimento è permesso, e solo quando la fascia entra in vista.
+interface Props { numeri: { valore: number; etichetta: string }[] }
+const { numeri } = Astro.props;
+---
+
+<section class="numeri" data-numeri>
+  <div class="foglio">
+    {numeri.map((n) => (
+      <div class="numero">
+        <span class="valore mono" data-valore={n.valore}>{n.valore}</span>
+        <span class="etichetta">{n.etichetta}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .numeri { padding: 0; border-bottom: 1px solid var(--filo); }
+  .foglio {
+    max-width: var(--maxw-lab);
+    margin: 0 auto;
+    border-inline: 1px solid var(--filo);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .numero { display: grid; gap: 2px; padding: 20px 24px; border-right: 1px solid var(--filo); }
+  .numero:last-child { border-right: 0; }
+  .valore { font-size: 2.125rem; font-weight: 500; letter-spacing: -0.04em; line-height: 1.1; }
+  .etichetta { font-size: 0.8125rem; color: var(--muto); }
+  @media (max-width: 820px) {
+    .foglio { grid-template-columns: 1fr 1fr; }
+    .numero:nth-child(2) { border-right: 0; }
+    .numero:nth-child(-n + 2) { border-bottom: 1px solid var(--filo); }
+  }
+</style>
+
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-numeri]').forEach((fascia) => {
+      const valori = [...fascia.querySelectorAll<HTMLElement>('[data-valore]')];
+      const osservatore = new IntersectionObserver((voci) => {
+        if (!voci.some((v) => v.isIntersecting)) return;
+        osservatore.disconnect();
+        const inizio = performance.now();
+        const passo = (t: number) => {
+          const p = Math.min(1, (t - inizio) / 1400);
+          const curva = 1 - Math.pow(1 - p, 3);
+          valori.forEach((v) => { v.textContent = String(Math.round(Number(v.dataset.valore) * curva)); });
+          if (p < 1) requestAnimationFrame(passo);
+        };
+        requestAnimationFrame(passo);
+      }, { threshold: 0.5 });
+      osservatore.observe(fascia);
+    });
+  }
+</script>

@@ -38,7 +38,7 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` dal 2024 al 2026
 - `etichetta` 10
 - `etichetta` articoli pubblicati
-- `etichetta` 533
+- `etichetta` 597
 - `etichetta` citazioni
 - `etichetta` 1
 - `etichetta` Best Paper Award
@@ -764,8 +764,8 @@ Sorgente: `tavole/Ricerca.dc.html`
 - `testo` Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola.
 - `testo` 10
 - `testo` articoli pubblicati
-- `testo` 533
-- `testo` citazioni, ad agosto 2026
+- `testo` 597
+- `testo` citazioni, a novembre 2026
 - `testo` 3
 - `testo` da primo autore
 - `testo` 1
@@ -1305,3 +1305,35 @@ Sorgente: `tavole/Rotte.dc.html`
 - `testo` Va in prima posizione sulla home italiana: è quello in cui un'azienda che produce si riconosce più in fretta.
 - `testo` Grip
 - `testo` Sta fra i gestionali per materia, e la sua scheda dichiara che nasce da un'iniziativa e non da una commessa.
+
+## / — home «Laboratorio» (2026-11-08)
+
+Sorgente: `../2026-11-08-redesign-laboratorio/mockup-direzioni.html`, scheda A.
+Approvati dal committente con la direzione l'8 novembre 2026 («mi pare ok il resto»;
+spec `2026-11-08-redesign-laboratorio-design.md`, § «Testi»). Le frasi già approvate
+altrove e riusate qui (titolo della sezione lavori, i corpi delle schede, i pulsanti) non
+sono ripetute.
+
+- `testo` costruisco
+- `etichetta` computer vision
+- `etichetta` LLM applicati
+- `etichetta` agenti AI
+- `etichetta` software su misura
+- `etichetta` Venezia
+- `etichetta` ex · CTO · Procedo
+- `etichetta` phd · Sapienza – PINlab
+- `etichetta` pub · CVPR · ICCV · IROS
+- `etichetta` ↑ passaci sopra
+- `etichetta` pose · 11 keypoints
+- `testo` Per le aziende
+- `testo` Per chi è del mestiere
+- `etichetta` diagnosi · audit · software · formazione →
+- `etichetta` paper · codice · note →
+- `etichetta` #parliamone (riga in mono sopra il blocco di contatto, solo in italiano)
+- `etichetta` 4 di 12 · /lavori (12 = le righe di /lavori; `verifica-rotte.mjs` controlla che coincidano)
+- `testo` Ogni articolo che ho pubblicato esce insieme al codice.
+- `etichetta` Python · PyTorch · OpenCV · MediaPipe · Flask + Celery · PostgreSQL · Gemini · AWS · Astro · Angular · Laravel · Nuxt
+- Terminale: `$ cat alessandro.json` con le chiavi `dottorato`, `pubblicato_a`, `cto`, `adesso` e i valori «computer vision, Sapienza – PINlab», «CVPR», «ICCV», «IROS», «Procedo, 2024–2026», «lavoro in proprio».
+- Righe dei lavori: le descrizioni sono le prime frasi delle schede approvate sopra (Portale ricambi 3D, Procedo, Spannum, Fanta Mundial), senza parole nuove.
+- `aria-label` Ritratto di Alessandro Flaborea; al passaggio compare la posa stimata da un modello
+- `solo lettori di schermo` ora locale

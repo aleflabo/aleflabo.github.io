@@ -10,24 +10,20 @@
 // verificato campo per campo contro le firme dei componenti —
 // task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Occhiello from '../../components/sezioni/Occhiello.astro';
-import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
-import IlProblema from '../../components/sezioni/IlProblema.astro';
-import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
-import LeProve from '../../components/sezioni/LeProve.astro';
-import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
+import Testata from '../../components/lab/Testata.astro';
+import Numeri from '../../components/lab/Numeri.astro';
+import Porte from '../../components/lab/Porte.astro';
+import Fascia from '../../components/lab/Fascia.astro';
+import RigheLavori from '../../components/lab/RigheLavori.astro';
+import { getProject } from '../../data/projects';
+import { annoEn } from '../../lib/anno';
+import { homeLab } from '../../data/homeLab';
+import { localizedPath } from '../../i18n/ui';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
   occhiello,
-  numeri,
-  ilProblema,
-  comeLavoro,
-  leProve,
-  bloccoFormazione,
-  daDoveViene,
   contatto,
 } from '../../data/en/home';
-import { territorio } from '../../data/territorio';
 import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
 import { attivita } from '../../lib/datiStrutturati';
 
@@ -77,6 +73,21 @@ const datiStrutturati = [
     servizi: ingaggiInglesi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
   }),
 ];
+// --- Lavori a righe (Laboratorio) ---
+// Nome, anno e immagine da projects.ts; categoria e descrizione da homeLab
+// (prime frasi delle schede approvate). Il contatore viene da homeLab,
+// sorvegliato da verifica-rotte.mjs contro le righe di /lavori.
+const righeLavori = {
+  titolo: homeLab.en.lavori.titolo,
+  contatore: `4 of ${homeLab.en.lavori.totale} · /work`,
+  tutti: homeLab.en.lavori.tutti,
+  hrefTutti: localizedPath('en', '/work'),
+  righe: homeLab.en.lavori.righe.map((r) => {
+    const p = getProject(r.slug)!;
+    return { ...r, nome: p.name, anno: annoEn(p.year), href: localizedPath('en', `/work/${r.slug}`), anteprima: p.anteprima };
+  }),
+};
+
 ---
 
 <BaseLayout
@@ -87,17 +98,10 @@ const datiStrutturati = [
   pathIt="/"
   datiStrutturati={datiStrutturati}
 >
-  <Occhiello {...occhiello} />
-  {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
-      italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
-      «The problem»/«The evidence» sui due componenti sotto che li tengono.
-      Le stringhe restano in src/data/en/home.ts — non si tocca quel file
-      dati — semplicemente non si passano più, sovrascritte a `undefined`
-      dopo lo spread. */}
-  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
-  <IlProblema {...ilProblema} />
-  <ComeLavoro {...comeLavoro} occhiello={undefined} />
-  <LeProve {...leProve} />
-  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
-  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />
+  <Testata lang="en" t={homeLab.en} />
+  <Numeri numeri={homeLab.en.numeri} />
+  <Porte porte={homeLab.en.porte} />
+  <RigheLavori {...righeLavori} />
+  <Fascia voci={homeLab.en.stack} />
+  <Contatto {...contatto} eyebrow={undefined} />
 </BaseLayout>

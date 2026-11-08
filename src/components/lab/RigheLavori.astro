@@ -1,0 +1,150 @@
+---
+// I lavori a righe (spec 2026-11-08). Niente occhiello sopra il titolo.
+// L'anteprima che segue il cursore esiste nel markup solo se almeno un
+// progetto ha un'immagine: oggi nessuno, quindi non si rende.
+// Le righe usano la classe `riga-lavoro`, mai `riga`: su /note quella classe
+// è contata contro il feed RSS da verifica-rotte.mjs.
+import { Image } from 'astro:assets';
+
+interface Riga {
+  anno: string;
+  nome: string;
+  categoria: string;
+  descrizione: string;
+  href: string;
+  anteprima?: ImageMetadata;
+}
+interface Props { titolo: string; contatore: string; righe: Riga[]; tutti: string; hrefTutti: string }
+const { titolo, contatore, righe, tutti, hrefTutti } = Astro.props;
+const conAnteprima = righe.some((r) => r.anteprima);
+---
+
+<section class="lavori">
+  <div class="foglio">
+    <div class="testa">
+      <h2>{titolo}</h2>
+      <span class="contatore mono">{contatore}</span>
+    </div>
+    <div class="righe" data-righe>
+      {conAnteprima && (
+        <div class="anteprima" aria-hidden="true" data-anteprima>
+          {righe.map((r) => r.anteprima ? <Image src={r.anteprima} alt="" widths={[280, 560]} sizes="280px" /> : <span></span>)}
+        </div>
+      )}
+      {righe.map((r) => (
+        <a class="riga-lavoro" href={r.href}>
+          <span class="anno mono">{r.anno}</span>
+          <span class="nome">{r.nome}</span>
+          <span class="categoria mono">{r.categoria}</span>
+          <span class="descrizione">{r.descrizione}</span>
+        </a>
+      ))}
+    </div>
+    <a class="tutti" href={hrefTutti}>{tutti} <span class="freccia">→</span></a>
+  </div>
+</section>
+
+<style>
+  .lavori { padding: 0; border-bottom: 1px solid var(--filo); }
+  .foglio { max-width: var(--maxw-lab); margin: 0 auto; border-inline: 1px solid var(--filo); padding: 36px 28px 32px; }
+  .testa { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  h2 { font-size: 1.75rem; }
+  .contatore { font-size: 0.75rem; color: var(--muto); }
+  .righe { position: relative; }
+  .riga-lavoro {
+    position: relative;
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-top: 1px solid var(--filo);
+  }
+  .riga-lavoro:last-of-type { border-bottom: 1px solid var(--filo); }
+  .anno { font-size: 0.78rem; color: var(--muto); white-space: nowrap; }
+  .nome {
+    font-size: clamp(1.75rem, 4.4vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.25s;
+  }
+  .categoria { font-size: 0.78rem; color: var(--muto); text-align: right; }
+  .descrizione { display: none; grid-column: 2 / -1; font-size: 0.875rem; line-height: 1.5; color: var(--muto); max-width: 60ch; }
+  .riga-lavoro::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 1px;
+    width: 0;
+    background: var(--rilevamento);
+    transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .riga-lavoro:hover .nome, .riga-lavoro:focus-visible .nome { transform: translateX(14px); color: var(--rilevamento-testo); }
+  .riga-lavoro:hover::after, .riga-lavoro:focus-visible::after { width: 100%; }
+  .riga-lavoro:active .nome { transform: translateX(14px) translateY(1px); }
+  .tutti { display: inline-block; margin-top: 18px; font-weight: 500; font-size: 0.9375rem; }
+
+  .anteprima {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 280px;
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--filo);
+    box-shadow: 0 30px 50px -25px rgb(16 19 24 / 45%);
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+    transition: opacity 0.25s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .anteprima.attiva { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .anteprima > :global(*) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.2s; }
+  .anteprima > :global(.mostra) { opacity: 1; }
+
+  @media (hover: none), (max-width: 820px) {
+    .anteprima { display: none; }
+    .descrizione { display: block; }
+    .riga-lavoro { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .descrizione { grid-column: 1; }
+    .categoria { text-align: left; order: 3; }
+  }
+  @media (max-width: 820px) { .foglio { padding-inline: 16px; } }
+</style>
+
+<script>
+  if (matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-righe]').forEach((elenco) => {
+      const anteprima = elenco.querySelector<HTMLElement>('[data-anteprima]');
+      if (!anteprima) return;
+      const immagini = [...anteprima.children] as HTMLElement[];
+      let px = 0, py = 0, cx = 0, cy = 0, giro = 0;
+      const segui = () => {
+        cx += (px - cx) * 0.18;
+        cy += (py - cy) * 0.18;
+        anteprima.style.left = `${cx}px`;
+        anteprima.style.top = `${cy}px`;
+        giro = Math.abs(px - cx) + Math.abs(py - cy) > 0.5 ? requestAnimationFrame(segui) : 0;
+      };
+      elenco.querySelectorAll('.riga-lavoro').forEach((riga, i) => {
+        riga.addEventListener('mouseenter', () => {
+          const ha = immagini[i]?.tagName === 'IMG';
+          immagini.forEach((img, j) => img.classList.toggle('mostra', j === i));
+          anteprima.classList.toggle('attiva', ha);
+        });
+        riga.addEventListener('mouseleave', () => anteprima.classList.remove('attiva'));
+      });
+      elenco.addEventListener('pointermove', (e) => {
+        const r = elenco.getBoundingClientRect();
+        px = e.clientX - r.left + 150;
+        py = e.clientY - r.top;
+        if (!cx) { cx = px; cy = py; }
+        if (!giro) giro = requestAnimationFrame(segui);
+      });
+    });
+  }
+</script>

@@ -1,0 +1,71 @@
+---
+// Il terminale della home. Il testo intero è nel markup (righeTerminale): lo
+// script lo riscrive a macchina solo se il movimento è permesso, quindi senza
+// JavaScript o con `prefers-reduced-motion` il JSON è già lì, completo.
+import type { Locale } from '../../i18n/ui';
+import { righeTerminale } from '../../lib/terminale';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const pezzi = righeTerminale(lang);
+---
+
+<div class="terminale">
+  <div class="testa" aria-hidden="true"><i></i><i></i><i></i></div>
+  <pre data-terminale>{pezzi.map((p) => <span class={p.tipo}>{p.testo}</span>)}</pre>
+</div>
+
+<style>
+  .terminale {
+    background: #0d1015;
+    color: #c9d1dc;
+    border-radius: 8px;
+    overflow: hidden;
+    font: 400 13px/1.65 var(--font-mono);
+  }
+  .testa { display: flex; gap: 6px; padding: 9px 12px; border-bottom: 1px solid #1d222b; }
+  .testa i { width: 9px; height: 9px; border-radius: 50%; background: #2a303b; }
+  pre {
+    margin: 0;
+    padding: 14px 16px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-height: 13.5em;
+    font: inherit;
+  }
+  /* `:global` perché lo script ricrea gli span: quelli nuovi non hanno
+     l'attributo di scope di Astro, e una regola scoped non li vedrebbe. */
+  .terminale :global(.prompt),
+  .terminale :global(.cursore) { color: #8b94a3; }
+  .terminale :global(.chiave) { color: #8fb0ff; }
+  .terminale :global(.stringa) { color: #ffb4c8; }
+</style>
+
+<script>
+  const ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-terminale]').forEach((pre) => {
+    if (ridotto) return;
+    const pezzi = [...pre.children].map((s) => ({ classe: s.className, testo: s.textContent ?? '' }));
+    pre.textContent = '';
+    const cursore = document.createElement('span');
+    cursore.className = 'cursore';
+    cursore.textContent = '▍';
+    pre.append(cursore);
+    let i = 0;
+    let c = 0;
+    let corrente: HTMLSpanElement | null = null;
+    const passo = () => {
+      if (i >= pezzi.length) return;
+      if (!corrente) {
+        corrente = document.createElement('span');
+        corrente.className = pezzi[i].classe;
+        pre.insertBefore(corrente, cursore);
+      }
+      c++;
+      corrente.textContent = pezzi[i].testo.slice(0, c);
+      if (c >= pezzi[i].testo.length) { i++; c = 0; corrente = null; }
+      setTimeout(passo, i < 2 ? 45 : 14);
+    };
+    setTimeout(passo, 500);
+  });
+</script>

@@ -1,0 +1,32 @@
+---
+// «Venezia è la mia base». Stava dentro il blocco di contatto della home;
+// con il Laboratorio vive in /chi-sono (spec 2026-11-08). I testi vengono da
+// src/data/territorio.ts, che alimenta anche i dati strutturati.
+import type { Territorio } from '../../data/territorio';
+type Props = Omit<Territorio, 'occhiello'>;
+const { titolo, intro, corpo, modi } = Astro.props;
+---
+
+<section class="territorio">
+  <div class="container">
+    <h2>{titolo}</h2>
+    <div class="testo">
+      <p>{intro}</p>
+      <p>{corpo}</p>
+    </div>
+    <dl class="modi">
+      {modi.map((m) => <div><dt>{m.etichetta}</dt><dd>{m.dettaglio}</dd></div>)}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .territorio { border-top: 1px solid var(--filo); }
+  .container { display: grid; gap: 16px; }
+  h2 { font-size: 1.75rem; }
+  .testo { display: grid; gap: 12px; color: var(--muto); max-width: 62ch; }
+  .modi { display: flex; flex-wrap: wrap; gap: 12px 36px; margin: 8px 0 0; }
+  .modi div { display: grid; gap: 2px; }
+  dt { font-weight: 600; }
+  dd { margin: 0; color: var(--muto); font-size: 0.9375rem; }
+</style>

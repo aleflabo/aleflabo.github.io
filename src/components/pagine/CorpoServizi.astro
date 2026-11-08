@@ -36,6 +36,9 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
     </div>
   </section>
 
+  {/* Le sezioni arrivate dalla home con il Laboratorio (spec 2026-11-08). */}
+  <slot name="apertura" />
+
   <section class="elenco-ingaggi">
     <div class="container">
       <div class="schede">

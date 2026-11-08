@@ -23,7 +23,7 @@ Due precisazioni sulle fonti:
   due progetti è tradotto dall'italiano approvato.
 - Titoli delle pubblicazioni, sedi (CVPR, ICCV, IROS, ICLR, Pattern
   Recognition…), nomi propri (Procedo, Sapienza, PINlab, Fondimpresa, B4i,
-  HomeSweatHome, Spannum) e numeri (10 articoli, 533 citazioni, 2021–2024,
+  HomeSweatHome, Spannum) e numeri (10 articoli, 597 citazioni, 2021–2024,
   2024–2026) restano invariati e non sono contati né fra i riusati né fra i
   tradotti.
 
@@ -112,7 +112,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 **[TRADOTTO]** — `testi.md`, home, i quattro numeri
 
-> **10** published papers · **533** citations · **1** Best Paper Award ·
+> **10** published papers · **597** citations · **1** Best Paper Award ·
 > **2** years as CTO
 
 ## Il problema
@@ -1233,7 +1233,7 @@ pagina; `site.ts` → `en.research` e `Research.astro` per l'inglese già scritt
 
 **[TRADOTTO]** — `pubblicazioni.ts` → `numeriFascia`
 
-> **10** published papers · **533** citations, as of August 2026 · **3** as
+> **10** published papers · **597** citations, as of November 2026 · **3** as
 > first author · **1** Best Paper Award
 
 ## Cosa c'entra con la tua azienda
@@ -1910,3 +1910,27 @@ più grave.
 7. **Paesello e il video non sono in `projects.ts`.** Esistono solo come schede
    su `/lavori`. Se `/en/work` li mostra, o restano schede senza pagina, o
    qualcuno scrive i due case study — e non c'è italiano da cui tradurli.
+
+# Home «Laboratorio» (2026-11-08)
+
+Le frasi nuove della home. `[RIUSATO]` = già approvato in questo file. `[APPROVATO]` =
+proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»).
+
+- `[APPROVATO]` I build
+- `[APPROVATO]` computer vision · applied LLMs · AI agents · custom software
+- `[APPROVATO]` Venice
+- `[APPROVATO]` ex · CTO · Procedo — phd · Sapienza – PINlab — pub · CVPR · ICCV · IROS
+- `[APPROVATO]` ↑ hover over it
+- `[APPROVATO]` pose · 11 keypoints
+- `[APPROVATO]` For companies
+- `[APPROVATO]` For fellow engineers
+- `[RIUSATO]` I help companies work out where AI is needed, and then I build it.
+- `[RIUSATO]` Every paper I published came out together with the code.
+- `[APPROVATO]` diagnosis · audit · software · training →
+- `[APPROVATO]` papers · code · notes →
+- `[RIUSATO]` Some of the things I've built
+- `[APPROVATO]` 4 of 10 · /work (10 = le righe di /en/work; `verifica-rotte.mjs` controlla che coincidano)
+- `[APPROVATO]` Terminale: chiavi `phd`, `published_at`, `cto`, `now`; valore «working on my own»
+- Righe dei lavori: Procedo, Spannum, Fanta Mundial, Agentic Workflow Toolkit, con categorie e prime frasi `[RIUSATO]` dalle schede sopra.
+- `[APPROVATO]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears
+- `[APPROVATO]` solo lettori di schermo: local time

@@ -37,6 +37,13 @@ export interface Project {
    * ramo sito-italiano). L'italiano mostra il progetto in entrambi i casi.
    */
   soloItaliano?: boolean;
+  /**
+   * Screenshot o GIF del progetto, per l'anteprima che segue il cursore nelle
+   * righe dei lavori della home. Oggi nessun progetto ce l'ha, e finché manca
+   * l'anteprima non si rende affatto: un riquadro vuoto sul sito vero sembra
+   * rotto (spec 2026-11-08, «I lavori a righe»).
+   */
+  anteprima?: ImageMetadata;
   en: CaseCopy;
   it: CaseCopy;
 }

@@ -1,0 +1,27 @@
+---
+// La fascia dello stack che scorre. L'elenco è ripetuto una volta per lo
+// scorrimento continuo; la copia è nascosta ai lettori di schermo.
+interface Props { voci: string[] }
+const { voci } = Astro.props;
+---
+
+<section class="fascia">
+  <div class="nastro mono">
+    <ul>{voci.map((v) => <li>{v}</li>)}</ul>
+    <ul aria-hidden="true">{voci.map((v) => <li>{v}</li>)}</ul>
+  </div>
+</section>
+
+<style>
+  .fascia { padding: 0; border-bottom: 1px solid var(--filo); overflow: hidden; }
+  .nastro { display: flex; width: max-content; font-size: 0.8125rem; color: var(--muto); animation: scorri 32s linear infinite; }
+  ul { display: flex; gap: 36px; list-style: none; margin: 0; padding: 14px 18px; }
+  li { white-space: nowrap; }
+  li + li::before { content: "·"; margin-right: 36px; color: var(--filo); }
+  @keyframes scorri { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .nastro { animation: none; width: auto; }
+    .nastro ul + ul { display: none; }
+    ul { flex-wrap: wrap; gap: 8px 36px; }
+  }
+</style>

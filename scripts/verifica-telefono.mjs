@@ -57,7 +57,7 @@ for (const rotta of ROTTE) {
       // Il piè di pagina è incluso di proposito: i suoi bersagli sotto i
       // 44px erano un difetto reale, e nasconderli qui vorrebbe dire far
       // dire al controllo una cosa falsa. Adesso `Footer.astro` li copre.
-      piccoli: [...document.querySelectorAll("main a, main button, nav a, footer a")]
+      piccoli: [...document.querySelectorAll("main a, main button, nav a, nav button, footer a")]
         .filter((e) => e.getBoundingClientRect().height > 0 && e.getBoundingClientRect().height < 44)
         // L'unica esenzione, e non è una maglia allargata per far passare il
         // controllo: WCAG 2.5.8 esenta i link «in linea», quelli dentro un

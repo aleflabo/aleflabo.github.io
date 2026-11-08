@@ -1,7 +1,7 @@
 body {
-  font-family: var(--font-sans);
-  background: var(--bg);
-  color: var(--text);
+  font-family: var(--font-testo);
+  background: var(--carta);
+  color: var(--inchiostro);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -16,18 +16,38 @@ section {
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-testo);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
+/* L'occhiello non è più maiuscolo spaziato e in colore: era la firma più
+   riconoscibile del sito generato (spec 2026-11-08). Resta una riga in mono,
+   minuscola e grigia, come una quota su un disegno tecnico. */
 .label {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--azione);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  color: var(--muto);
+  font-weight: 400;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+/* Il foglio tecnico: griglia a filo di 48px, sfumata verso i bordi. Va su un
+   elemento vuoto, `aria-hidden`, posizionato dietro il contenuto. */
+.griglia-lab {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--filo) 1px, transparent 1px),
+    linear-gradient(90deg, var(--filo) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 85%);
+  opacity: 0.7;
 }
 .section-title {
   font-size: 2rem;
@@ -49,9 +69,9 @@ h3 {
   top: 0;
   z-index: 100;
   padding: 12px 18px;
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--font-sans);
+  background: var(--inchiostro);
+  color: var(--bianco);
+  font-family: var(--font-testo);
   font-size: 15px;
   font-weight: 600;
   border-radius: 0 0 var(--radius) 0;
@@ -66,7 +86,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--rilevamento-testo);
   outline-offset: 2px;
   border-radius: var(--radius);
 }
@@ -100,7 +120,7 @@ main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both;
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 11 89;
-  filter: drop-shadow(0 0 4px rgb(168 83 29 / 55%));
+  filter: drop-shadow(0 0 4px rgb(255 45 111 / 45%));
   animation: fascio 3.4s linear infinite;
 }
 
@@ -139,13 +159,13 @@ main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both;
 a:hover .freccia { transform: translateX(5px); }
 
 .scheda { transition: transform .3s cubic-bezier(.22, .8, .3, 1), box-shadow .3s; }
-.scheda:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgb(40 24 10 / 10%); }
+.scheda:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgb(16 19 24 / 10%); }
 
 .riga { transition: background .25s, padding-left .25s; border-radius: var(--radius); }
 .riga:hover { background: var(--surface-warm); padding-left: 14px; }
 
 .pulsante { transition: transform .2s, box-shadow .2s; }
-.pulsante:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(168 83 29 / 28%); }
+.pulsante:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(214 25 90 / 28%); }
 
 /* Riscontro alla pressione. C'erano :hover e :focus-visible ma niente
    :active, quindi premendo non succedeva nulla finché non si rilasciava. Su
@@ -160,7 +180,7 @@ a:hover .freccia { transform: translateX(5px); }
 .scheda:active { transform: translateY(1px); }
 
 /* Cifre a larghezza fissa dove i numeri stanno in colonna o cambiano: la
-   fascia «10 · 533 · 1 · 2» e le date dell'elenco note. Con le cifre
+   fascia «10 · 597 · 1 · 2» e le date dell'elenco note. Con le cifre
    proporzionali un 1 è più stretto di un 5, quindi le colonne non si
    allineano e i numeri ballano quando il contenuto cambia. */
 .valore,
@@ -241,4 +261,14 @@ a:hover .freccia { transform: translateX(5px); }
     display: inline;
     min-height: 0;
   }
+}
+
+/* Testo solo per i lettori di schermo: c'è nel documento, non a video. */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

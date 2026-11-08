@@ -298,6 +298,74 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
   .vc .list a { grid-template-columns: 1fr; gap: 4px } .vc .list em { text-align: left }
 }
 
+/* ============ A — PEZZI ============ */
+.pz-wrap { display: grid; gap: 28px; padding-block: 0 40px; max-width: 1240px; margin: 0 auto }
+.pz-cap { font: 400 12px var(--f-mono); color: var(--shell-mute); margin: 0 0 8px }
+.va .pz-nav { display: flex; align-items: center; gap: 22px; padding: 16px 24px; border-bottom: 1px solid var(--a-line); background: color-mix(in srgb, var(--a-paper) 85%, transparent); position: relative }
+.va .pz-nav .logo { font: 500 13px "Geist Mono", monospace; margin-right: auto; letter-spacing: -.02em }
+.va .pz-nav .logo b { color: var(--a-box) }
+.va .pz-nav .voci { display: flex; gap: 20px; font-size: 14px; color: var(--a-mute) }
+.va .pz-nav .voci a { color: inherit; text-decoration: none; padding-block: 4px; position: relative }
+.va .pz-nav .voci a:hover { color: var(--a-ink) }
+.va .pz-nav .voci a.attiva { color: var(--a-ink) }
+.va .pz-nav .voci a.attiva::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--a-box) }
+.va .pz-nav .cta { font: 500 13px "Geist", sans-serif; background: var(--a-ink); color: var(--a-paper); padding: 8px 14px; border-radius: 6px; text-decoration: none }
+.va .pz-nav .lingua { font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-nav .lingua b { color: var(--a-ink); font-weight: 500 }
+.va .pz-nav .burger { display: none; width: 40px; height: 40px; border: 1px solid var(--a-line); border-radius: 6px; background: #fff; position: relative }
+.va .pz-nav .burger i { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--a-ink) }
+.va .pz-nav .burger i:first-child { top: 15px } .va .pz-nav .burger i:last-child { top: 23px }
+.pz-phones { display: flex; gap: 20px; flex-wrap: wrap }
+.pz-phone { width: 360px; max-width: 100%; border: 1px solid var(--shell-line); border-radius: 18px; overflow: hidden }
+.pz-phone .va .pz-nav .voci, .pz-phone .va .pz-nav .cta, .pz-phone .va .pz-nav .lingua { display: none }
+.pz-phone .va .pz-nav .burger { display: block }
+.va .pz-menu { display: grid; padding: 8px 20px 20px; border-bottom: 1px solid var(--a-line) }
+.va .pz-menu a { display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid var(--a-line); font-size: 17px; letter-spacing: -.02em; color: var(--a-ink); text-decoration: none }
+.va .pz-menu a span { font: 400 11px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-menu a.attiva { color: var(--a-dark-box, #d6195a) }
+.va .pz-menu .fondo { display: flex; justify-content: space-between; align-items: center; padding-top: 16px }
+.va .pz-menu .fondo .cta { font: 500 14px "Geist", sans-serif; background: #d6195a; color: #fff; padding: 12px 16px; border-radius: 7px; text-decoration: none }
+.va .pz-modulo { padding: 44px 28px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 40px; border-top: 1px solid var(--a-line); position: relative }
+.va .pz-modulo h3 { margin: 6px 0 12px; font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -.04em; line-height: 1.05; font-weight: 600 }
+.va .pz-modulo .riga-m { font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-modulo p { margin: 0; color: var(--a-mute); line-height: 1.55; max-width: 44ch }
+.va .pz-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; background: #fff; border: 1px solid var(--a-line); border-radius: 10px; padding: 20px }
+.va .pz-form .campo { display: grid; gap: 6px }
+.va .pz-form .campo.largo { grid-column: 1 / -1 }
+.va .pz-form label, .va .pz-form legend { font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-form input, .va .pz-form textarea { font: 400 15px "Geist", sans-serif; border: 1px solid var(--a-line); border-radius: 6px; padding: 11px 12px; background: var(--a-paper); color: var(--a-ink) }
+.va .pz-form input::placeholder, .va .pz-form textarea::placeholder { color: #6b7380 }
+.va .pz-form input:focus, .va .pz-form textarea:focus { outline: 2px solid #d6195a; outline-offset: 1px }
+.va .pz-form fieldset { border: 0; padding: 0; margin: 0; grid-column: 1 / -1; display: grid; gap: 8px }
+.va .pz-form .pillole { display: flex; gap: 8px; flex-wrap: wrap }
+.va .pz-form .pillole label { font: 400 13px "Geist", sans-serif; color: var(--a-ink); border: 1px solid var(--a-line); border-radius: 6px; padding: 9px 12px; cursor: pointer; display: flex; gap: 6px; align-items: center }
+.va .pz-form .pillole input { accent-color: #d6195a; padding: 0 }
+.va .pz-form .pillole label:has(input:checked) { border-color: var(--a-ink); background: var(--a-paper) }
+.va .pz-form .invio { grid-column: 1 / -1; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding-top: 4px }
+.va .pz-form button { font: 500 14px "Geist", sans-serif; background: var(--a-line); color: var(--a-mute); border: 0; border-radius: 7px; padding: 12px 18px; cursor: not-allowed }
+.va .pz-form .inerte { font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-alt { grid-column: 1 / -1; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-top: 1px dashed var(--a-line); padding-top: 14px; font-size: 14px; color: var(--a-mute) }
+.va .pz-alt a { font: 500 14px "Geist", sans-serif; color: var(--a-ink); border: 1px solid var(--a-line); background: #fff; border-radius: 7px; padding: 10px 14px; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; gap: 8px }
+.va .pz-alt a:hover { border-color: var(--a-ink) }
+.va .pz-foot { border-top: 1px solid var(--a-line); padding: 36px 28px 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 28px; position: relative }
+.va .pz-foot .nome { font: 500 14px "Geist Mono", monospace; margin: 0 0 8px }
+.va .pz-foot .nome b { color: var(--a-box) }
+.va .pz-foot .frase { margin: 0; color: var(--a-mute); font-size: 14px; line-height: 1.5; max-width: 34ch }
+.va .pz-foot h4 { margin: 0 0 10px; font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px }
+.va .pz-foot ul a { color: var(--a-ink); text-decoration: none }
+.va .pz-foot ul a:hover { color: #d6195a }
+.va .pz-foot .est::after { content: " ↗"; color: var(--a-mute) }
+.va .pz-fine { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--a-line); margin-top: 8px; padding-block: 16px 22px; font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .pz-fine a { color: var(--a-mute) }
+@media (max-width: 820px) {
+  .va .pz-nav .voci { display: none }
+  .va .pz-modulo { grid-template-columns: 1fr; padding-inline: 16px }
+  .va .pz-form { grid-template-columns: 1fr }
+  .va .pz-foot { grid-template-columns: 1fr 1fr; padding-inline: 16px }
+  .va .pz-foot > div:first-child { grid-column: 1 / -1 }
+}
+
 [data-v] { display: none }
 [data-v].on { display: block }
 </style>
@@ -309,6 +377,7 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
       <a href="#laboratorio" data-t="laboratorio">A · Laboratorio</a>
       <a href="#volto" data-t="volto">B · Nome e volto</a>
       <a href="#manifesto" data-t="manifesto">C · Manifesto</a>
+      <a href="#pezzi" data-t="pezzi">A · Barra, modulo, piè</a>
     </nav>
     <label class="toggle" for="shownew"><input type="checkbox" id="shownew"> evidenzia i testi nuovi</label>
   </div>
@@ -491,6 +560,75 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
   </div>
 </section>
 
+<!-- ================= A · PEZZI ================= -->
+<section data-v="pezzi">
+  <div class="shell">
+    <div class="notes">
+      <div>
+        <h2>A · Barra, modulo, piè di pagina</h2>
+        <p>I tre pezzi che la home usa e che la scheda A non mostrava. Testi tutti già approvati, presi da site.ts e dal blocco di contatto di oggi. Il modulo è ancora spento: si accende quando arriva la chiave Web3Forms.</p>
+      </div>
+      <div class="kv">
+        <div><b>Barra</b> sei voci, «Parliamone», IT / EN; voce attiva sottolineata in rosso</div>
+        <div><b>Telefono</b> sotto i 720px un pulsante apre l'elenco a tutta larghezza, voci alte 48px</div>
+        <div><b>Modulo</b> sul fondo carta, niente più fascia blu scura; placeholder e nota a contrasto AA</div>
+        <div><b>Piè</b> le tre colonne di oggi, link esterni con ↗</div>
+      </div>
+    </div>
+    <div class="pz-wrap">
+      <div>
+        <p class="pz-cap">barra · desktop, pagina /servizi</p>
+        <div class="frame" style="margin:0"><div class="va"><nav class="pz-nav">
+          <span class="logo">alessandro<b>.</b>flaborea</span>
+          <span class="voci"><a href="#pezzi" class="attiva">Servizi</a><a href="#pezzi">Formazione</a><a href="#pezzi">Lavori</a><a href="#pezzi">Ricerca</a><a href="#pezzi">Chi sono</a><a href="#pezzi">Note</a></span>
+          <a class="cta" href="#pezzi">Parliamone</a>
+          <span class="lingua"><b>IT</b> / EN</span>
+          <span class="burger" aria-hidden="true"><i></i><i></i></span>
+        </nav></div></div>
+      </div>
+      <div>
+        <p class="pz-cap">barra · telefono, chiusa e aperta</p>
+        <div class="pz-phones">
+          <div class="pz-phone"><div class="va"><nav class="pz-nav"><span class="logo">alessandro<b>.</b>flaborea</span><span class="burger" aria-hidden="true"><i></i><i></i></span></nav><div style="height:120px"></div></div></div>
+          <div class="pz-phone"><div class="va"><nav class="pz-nav"><span class="logo">alessandro<b>.</b>flaborea</span><span class="burger" aria-hidden="true" style="border-color:#101318"><i style="top:19px;transform:rotate(45deg)"></i><i style="top:19px;transform:rotate(-45deg)"></i></span></nav>
+            <div class="pz-menu">
+              <a href="#pezzi" class="attiva">Servizi <span>/servizi</span></a><a href="#pezzi">Formazione <span>/formazione</span></a><a href="#pezzi">Lavori <span>/lavori</span></a><a href="#pezzi">Ricerca <span>/ricerca</span></a><a href="#pezzi">Chi sono <span>/chi-sono</span></a><a href="#pezzi">Note <span>/note</span></a>
+              <div class="fondo"><a class="cta" href="#pezzi" style="border:0;min-height:0">Parliamone</a><span class="mono" style="font:400 13px 'Geist Mono',monospace;color:#5d6470"><b style="color:#101318;font-weight:500">IT</b> / EN</span></div>
+            </div></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="pz-cap">modulo · in fondo alla home (#parliamone), spento</p>
+        <div class="frame" style="margin:0"><div class="va"><div class="pz-modulo">
+          <div>
+            <span class="riga-m">#parliamone</span>
+            <h3>Mezz'ora per capire se possiamo lavorare insieme</h3>
+            <p>Se non è il lavoro giusto per me te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.</p>
+          </div>
+          <form class="pz-form" onsubmit="return false">
+            <div class="campo"><label for="pz-azienda">Azienda</label><input id="pz-azienda" placeholder="Ragione sociale"></div>
+            <div class="campo"><label for="pz-contatto">Come ti scrivo</label><input id="pz-contatto" placeholder="Mail o telefono"></div>
+            <div class="campo largo"><label for="pz-richiesta">Cosa vorresti smettere di fare a mano</label><textarea id="pz-richiesta" rows="3" placeholder="Bastano due righe, anche buttate lì"></textarea></div>
+            <fieldset><legend>Quanto è urgente</legend><div class="pillole"><label><input type="radio" name="pz-urg" id="pz-u1">Sto solo guardando</label><label><input type="radio" name="pz-urg" id="pz-u2" checked>Quest'anno</label><label><input type="radio" name="pz-urg" id="pz-u3">Ho un problema adesso</label></div></fieldset>
+            <div class="invio"><button type="button" disabled>Manda</button><span class="inerte">Modulo non ancora attivo.</span></div>
+            <div class="pz-alt">Oppure, se preferisci saltare il modulo: <a href="#pezzi">WhatsApp</a><a href="#pezzi">Mail</a></div>
+          </form>
+        </div></div></div>
+      </div>
+      <div>
+        <p class="pz-cap">piè di pagina · tutte le pagine</p>
+        <div class="frame" style="margin:0"><div class="va"><footer class="pz-foot">
+          <div><p class="nome">alessandro<b>.</b>flaborea</p><p class="frase">Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.</p></div>
+          <div><h4>Cosa faccio</h4><ul><li><a href="#pezzi">Servizi</a></li><li><a href="#pezzi">Formazione</a></li><li><a href="#pezzi">Che fine fanno i vostri dati</a></li></ul></div>
+          <div><h4>Le prove</h4><ul><li><a href="#pezzi">Lavori</a></li><li><a href="#pezzi">Ricerca</a></li><li><a href="#pezzi">Chi sono</a></li><li><a href="#pezzi">Note</a></li></ul></div>
+          <div><h4>Altrove</h4><ul><li><a class="est" href="#pezzi">LinkedIn</a></li><li><a class="est" href="#pezzi">GitHub</a></li><li><a class="est" href="#pezzi">Google Scholar</a></li><li><a href="#pezzi">English site</a></li></ul></div>
+          <div class="pz-fine"><span>© 2026 Alessandro Flaborea</span><span><a href="#pezzi">Privacy</a> · <a href="#pezzi">Cookie</a></span></div>
+        </footer></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="shell">
   <div class="end">
     <h3>Cosa nei mockup non è fedele</h3>
@@ -508,7 +646,7 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const views = ['laboratorio','volto','manifesto'];
+  const views = ['laboratorio','volto','manifesto','pezzi'];
   const started = {};
   function show() {
     const v = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : views[0];
@@ -539,6 +677,7 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
     bones: [[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,6],[5,7],[6,8],[7,9],[8,10]]
   };
   const init = {
+    pezzi() {},
     laboratorio() {
       clock('a-clock');
       // touch devices: no hover, so draw the pose once when the card scrolls into view
