@@ -64,3 +64,26 @@ describe("conStatistiche", () => {
     expect(pagina).toEqual(copia);
   });
 });
+
+import { conModulo } from "./informativa";
+import { privacy } from "../data/legale";
+import { privacy as privacyEn } from "../data/en/legale";
+
+describe("conModulo", () => {
+  const sezione = (p: PaginaLegale, titolo: string) => p.sezioni.find((s) => s.titolo === titolo)!;
+  it("interruttore spento: la pagina resta com'è", () => {
+    expect(conModulo(privacy, "it", null)).toBe(privacy);
+  });
+  it("acceso: «Se mi scrivete» parla di Web3Forms e non dice più che il modulo è scollegato", () => {
+    const s = sezione(conModulo(privacy, "it", { accessKey: "k" }), "Se mi scrivete");
+    expect(s.paragrafi[0]).toMatch(/^Se compilate il modulo di contatto, quello che scrivete/);
+    expect(s.paragrafi[0]).toContain("Web3Forms");
+    expect(s.paragrafi.join(" ")).not.toContain("non è ancora collegato");
+    expect(s.paragrafi.length).toBe(sezione(privacy, "Se mi scrivete").paragrafi.length);
+  });
+  it("acceso, in inglese", () => {
+    const s = sezione(conModulo(privacyEn, "en", { accessKey: "k" }), "If you write to me");
+    expect(s.paragrafi[0]).toMatch(/^If you fill in the contact form/);
+    expect(s.paragrafi.join(" ")).not.toContain("isn't connected to any service yet");
+  });
+});
