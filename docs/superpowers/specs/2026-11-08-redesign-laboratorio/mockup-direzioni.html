@@ -466,6 +466,52 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
   .va .pi-nota { grid-template-columns: 1fr; gap: 4px }
 }
 
+/* ============ A — FORMAZIONE ============ */
+.fo-lingua { display: inline-flex; gap: 4px; margin-left: 12px }
+.fo-lingua button { font: 500 12px var(--f-mono); padding: 5px 10px; border-radius: 999px; border: 1px solid var(--shell-line); background: transparent; color: var(--shell-fg); cursor: pointer }
+.fo-lingua button[aria-pressed="true"] { background: var(--shell-fg); color: var(--shell-bg) }
+.va .fo-box { margin: 0 28px 28px; background: #fff; border: 1px solid var(--a-line); border-left: 3px solid #d6195a; border-radius: 6px; padding: 18px 20px; display: grid; gap: 10px }
+.va .fo-box b { font-size: 17px; letter-spacing: -.02em }
+.va .fo-box p { margin: 0; line-height: 1.6; max-width: 70ch }
+.va .fo-fonte { font: 400 12px "Geist Mono", monospace; color: #d6195a; text-decoration: none }
+.va .fo-pratico { padding: 14px 28px; border-block: 1px solid var(--a-line); font: 400 13px "Geist Mono", monospace; color: var(--a-mute); display: flex; gap: 28px; flex-wrap: wrap }
+.va .fo-pratico span + span::before { content: "· "; color: #d6195a; margin-right: 4px }
+.va .fo-fam { font: 400 12px "Geist Mono", monospace; color: var(--a-mute); padding: 28px 28px 8px }
+.va .fo-corso { display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 0; margin: 0 28px; border-top: 1px solid var(--a-line) }
+.va .fo-corso:last-of-type { border-bottom: 1px solid var(--a-line) }
+.va .fo-nome { padding: 22px 20px 22px 0; display: grid; gap: 6px; align-content: start }
+.va .fo-nome h5 { margin: 0; font-size: 24px; letter-spacing: -.035em; font-weight: 600; line-height: 1.05 }
+.va .fo-nome .durata { font: 500 12.5px "Geist Mono", monospace; color: #d6195a }
+.va .fo-livelli { display: grid; grid-template-columns: repeat(var(--n), minmax(0,1fr)); border-left: 1px solid var(--a-line) }
+.va .fo-liv { padding: 22px 20px; display: grid; gap: 10px; align-content: start }
+.va .fo-liv + .fo-liv { border-left: 1px solid var(--a-line) }
+.va .fo-liv .lv { font: 500 12px "Geist Mono", monospace; color: var(--a-ink); display: flex; gap: 10px }
+.va .fo-liv .lv em { font-style: normal; color: #d6195a }
+.va .fo-liv dl { margin: 0; display: grid; gap: 10px; font-size: 14px }
+.va .fo-liv dt { font: 400 11.5px "Geist Mono", monospace; color: var(--a-mute) }
+.va .fo-liv dd { margin: 2px 0 0 }
+.va .fo-liv ol { margin: 4px 0 0; padding-left: 18px; color: var(--a-ink); line-height: 1.5 }
+.va .fo-liv ol li::marker { font: 400 11px "Geist Mono", monospace; color: var(--a-mute) }
+.va .fo-serve { grid-column: 2; border-left: 1px solid var(--a-line); border-top: 1px dashed var(--a-line); padding: 12px 20px; font-size: 14px }
+.va .fo-serve span { font: 400 11.5px "Geist Mono", monospace; color: var(--a-mute); margin-right: 8px }
+.va .fo-resta { margin: 0 28px }
+.va .fo-nota { margin: 10px 0 0; font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .fo-policy { margin: 0 28px; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 24px; background: #fff; border: 1px solid var(--a-line); border-radius: 10px; padding: 22px }
+.va .fo-policy h5 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em }
+.va .fo-policy p { margin: 0 0 10px; color: var(--a-mute); line-height: 1.55 }
+.va .fo-policy ul { margin: 0; padding-left: 18px; line-height: 1.6 }
+.va .fo-policy .avv { font: 400 12px "Geist Mono", monospace; color: var(--a-mute) }
+.va .fo-ph { margin: 0 28px; padding: 16px; border: 1px dashed var(--a-line); border-radius: 8px; font: 400 13px "Geist Mono", monospace; color: var(--a-mute) }
+@media (max-width: 820px) {
+  .va .fo-corso { grid-template-columns: 1fr; margin-inline: 16px }
+  .va .fo-livelli { grid-template-columns: 1fr; border-left: 0 }
+  .va .fo-liv { padding-inline: 0 } .va .fo-liv + .fo-liv { border-left: 0; border-top: 1px solid var(--a-line) }
+  .va .fo-serve { grid-column: 1; border-left: 0; padding-inline: 0 }
+  .va .fo-box, .va .fo-resta, .va .fo-policy, .va .fo-ph { margin-inline: 16px }
+  .va .fo-policy { grid-template-columns: 1fr }
+  .va .fo-pratico, .va .fo-fam { padding-inline: 16px }
+}
+
 [data-v] { display: none }
 [data-v].on { display: block }
 </style>
@@ -479,6 +525,7 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
       <a href="#manifesto" data-t="manifesto">C · Manifesto</a>
       <a href="#pezzi" data-t="pezzi">A · Barra, modulo, piè</a>
       <a href="#pagine" data-t="pagine">A · Pagine interne</a>
+      <a href="#formazione" data-t="formazione">A · Formazione</a>
     </nav>
     <label class="toggle" for="shownew"><input type="checkbox" id="shownew"> evidenzia i testi nuovi</label>
   </div>
@@ -869,6 +916,31 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
   </div>
 </section>
 
+<!-- ================= A · FORMAZIONE ================= -->
+<section data-v="formazione">
+  <div class="shell">
+    <div class="notes">
+      <div>
+        <h2>A · Formazione <span class="fo-lingua" role="group" aria-label="Lingua"><button type="button" data-lingua="it" aria-pressed="true">IT</button><button type="button" data-lingua="en" aria-pressed="false">EN</button></span></h2>
+        <p>La nuova /formazione con le bozze dei testi. Accendi «evidenzia i testi nuovi» in alto: in giallo quello che va approvato, il resto è già approvato. I corsi tecnici hanno base e avanzato affiancati; su telefono vanno uno sotto l'altro. In fondo, il blocco della policy come comparirà anche su /servizi.</p>
+      </div>
+      <div class="kv">
+        <div><b>Famiglie</b> per tutta l'azienda · per i team tecnici</div>
+        <div><b>Durate</b> 4 · 8-12 · base 8 · avanzato 12-16 ore</div>
+        <div><b>Pratico</b> in presenza oppure online, massimo 10 persone</div>
+        <div><b>Norma</b> ogni frase sull'AI Act linka la sua fonte</div>
+      </div>
+    </div>
+    <div class="pz-wrap">
+      <div><p class="pz-cap">/formazione</p>
+      <div class="frame" style="margin:0"><div class="va" id="fo-pagina"></div></div></div>
+      <div><p class="pz-cap">blocco policy su /servizi, dopo i quattro ingaggi</p>
+      <div class="frame" style="margin:0"><div class="va" id="fo-servizi" style="padding-block:28px"></div></div></div>
+    </div>
+  </div>
+  <script type="application/json" id="fo-testi">{"_nota": "Bozze dei testi della nuova /formazione e del blocco policy su /servizi (piano tappa 2, Task 1). Stato: DA APPROVARE. Le voci con \"approvato\": true sono già approvate altrove e riusate alla lettera.", "riquadroAiAct": {"titolo": {"it": "Una cosa che conviene sapere", "en": "Something worth knowing", "approvato": true}, "corpo": [{"it": "Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.", "en": "Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.", "approvato": true}, {"it": "La norma non fissa un numero di ore e non chiede un attestato: chiede di poter mostrare che cosa si è fatto. Il corso introduttivo, con il suo registro presenze, è il modo più semplice di farlo, e serve anche a lavorare meglio.", "en": "The rule sets no number of hours and asks for no certificate: what matters is being able to show what you have done. The introductory course, with its attendance register, is the simplest way to do that, and it also helps people work better."}], "fonte": "commissioneQa"}, "dettagliPratici": [{"it": "In presenza oppure online.", "en": "In person or online."}, {"it": "Al massimo 10 persone per lezione.", "en": "At most 10 people per session."}], "famiglie": {"azienda": {"it": "Per tutta l'azienda", "en": "For the whole company"}, "tecnici": {"it": "Per i team tecnici", "en": "For technical teams"}}, "etichette": {"perChi": {"it": "per chi", "en": "who it's for"}, "programma": {"it": "programma", "en": "programme"}, "serveDaVoi": {"it": "serve da voi", "en": "what you need"}, "base": {"it": "base", "en": "beginner"}, "avanzato": {"it": "avanzato", "en": "advanced"}}, "corsi": [{"nome": {"it": "Corso introduttivo", "en": "Introductory course", "approvato": true}, "famiglia": "azienda", "livelli": [{"durata": {"it": "4 ore", "en": "4 hours"}, "perChi": {"it": "Tutti, compreso chi non ha mai aperto ChatGPT", "en": "Everyone, including people who have never opened ChatGPT", "approvato": true}, "moduli": [{"it": "Come funzionano questi strumenti, e perché a volte sbagliano con sicurezza", "en": "How these tools work, and why they are sometimes confidently wrong"}, {"it": "Accorgersi di un errore: fonti, numeri, citazioni da controllare", "en": "Spotting a mistake: sources, figures and quotes to check"}, {"it": "Che fine fanno i documenti che ci si incolla dentro, e quali impostazioni usare", "en": "What happens to the documents you paste in, and which settings to use"}, {"it": "Dove conviene usarli davvero, con esempi presi dal vostro lavoro", "en": "Where they are actually worth using, with examples from your own work"}, {"it": "Cosa chiede l'AI Act alla vostra azienda, senza allarmismi", "en": "What the AI Act asks of your company, without alarmism"}]}], "serveDaVoi": {"it": "Una sala e un proiettore", "en": "A room and a projector", "approvato": true}}, {"nome": {"it": "Laboratorio per funzione", "en": "Workshop by function", "approvato": true}, "famiglia": "azienda", "livelli": [{"durata": {"it": "8-12 ore", "en": "8–12 hours"}, "perChi": {"it": "Un reparto alla volta, gruppi piccoli", "en": "One department at a time, small groups", "approvato": true}, "moduli": [{"it": "Si sceglie un'attività del reparto che oggi occupa ore", "en": "We pick a task that takes the department hours today"}, {"it": "Si prova con gli strumenti sui documenti veri", "en": "We try the tools on the real documents"}, {"it": "Si misura quanto tempo si risparmia e dove lo strumento sbaglia", "en": "We measure how much time is saved and where the tool gets it wrong"}, {"it": "Si scrive la procedura che il reparto userà dal giorno dopo", "en": "We write the procedure the department will use from the next day"}]}], "serveDaVoi": {"it": "Documenti reali e il permesso di usarli", "en": "Real documents and permission to use them", "approvato": true}}, {"nome": {"it": "Python", "en": "Python"}, "famiglia": "tecnici", "livelli": [{"nome": "base", "durata": {"it": "8 ore", "en": "8 hours"}, "perChi": {"it": "Chi non ha mai programmato, o è arrivato al limite delle formule di Excel", "en": "People who have never programmed, or who have reached the limit of Excel formulas"}, "moduli": [{"it": "Preparare il computer e scrivere il primo programma", "en": "Setting up the computer and writing a first program"}, {"it": "Variabili, liste, condizioni e cicli, su dati veri", "en": "Variables, lists, conditions and loops, on real data"}, {"it": "Leggere e scrivere file Excel e CSV", "en": "Reading and writing Excel and CSV files"}, {"it": "Automatizzare un'attività ripetitiva dell'ufficio", "en": "Automating a repetitive office task"}, {"it": "Farsi aiutare dall'AI a scrivere codice, e come controllarlo", "en": "Getting AI to help you write code, and how to check it"}]}, {"nome": "avanzato", "durata": {"it": "12-16 ore", "en": "12–16 hours"}, "perChi": {"it": "Chi scrive già script e vuole che reggano nel tempo", "en": "People who already write scripts and want them to last"}, "moduli": [{"it": "Un progetto in ordine: ambienti, dipendenze, struttura", "en": "A tidy project: environments, dependencies, structure"}, {"it": "Test automatici", "en": "Automated tests"}, {"it": "Analizzare dati con pandas", "en": "Analysing data with pandas"}, {"it": "Chiamare API e modelli linguistici da Python", "en": "Calling APIs and language models from Python"}, {"it": "Far girare uno script da solo: pianificazione, log, errori", "en": "Running a script on its own: scheduling, logs, errors"}]}], "serveDaVoi": {"it": "Un portatile a testa", "en": "A laptop each"}}, {"nome": {"it": "Claude Code", "en": "Claude Code"}, "famiglia": "tecnici", "livelli": [{"nome": "base", "durata": {"it": "8 ore", "en": "8 hours"}, "perChi": {"it": "Chi vuole costruire piccoli strumenti con un agente, anche senza saper programmare", "en": "People who want to build small tools with an agent, even without knowing how to program"}, "moduli": [{"it": "Cos'è un agente di programmazione e cosa fa sul vostro computer", "en": "What a coding agent is and what it does on your computer"}, {"it": "Dal problema al primo strumento funzionante, in aula", "en": "From a problem to a first working tool, in the session"}, {"it": "Leggere quello che l'agente ha fatto e accorgersi quando sbaglia", "en": "Reading what the agent has done and noticing when it is wrong"}, {"it": "Permessi e dati: cosa non lasciargli fare", "en": "Permissions and data: what not to let it do"}, {"it": "Tenere il lavoro in ordine: versioni e documentazione", "en": "Keeping the work tidy: versions and documentation"}]}, {"nome": "avanzato", "durata": {"it": "12-16 ore", "en": "12–16 hours"}, "perChi": {"it": "Sviluppatori che vogliono lavorare con un agente dentro il proprio codice", "en": "Developers who want to work with an agent inside their own code"}, "moduli": [{"it": "Preparare il progetto: istruzioni, memoria, regole", "en": "Preparing the project: instructions, memory, rules"}, {"it": "Pianificare prima di scrivere: specifiche e piani", "en": "Planning before writing: specs and plans"}, {"it": "Prima i test, poi il codice, con l'agente", "en": "Tests first, then code, with the agent"}, {"it": "Comandi, skill, hook e strumenti esterni (MCP)", "en": "Commands, skills, hooks and external tools (MCP)"}, {"it": "Revisione del codice e più agenti in parallelo", "en": "Code review and several agents in parallel"}]}], "serveDaVoi": {"it": "Un portatile a testa e un account con un piano attivo: senza, si raggiungono subito i limiti d'uso", "en": "A laptop each and an account on an active plan: without one, you hit the usage limits straight away"}}], "cosaResta": {"titolo": {"it": "Cosa resta all'azienda", "en": "What the company keeps"}, "voci": [{"it": "Un attestato di partecipazione per ogni persona.", "en": "A certificate of attendance for each person."}, {"it": "Il registro presenze con il programma svolto, da conservare come prova di quello che avete fatto per l'articolo 4.", "en": "The attendance register with the programme covered, to keep as evidence of what you have done for Article 4."}, {"it": "I materiali del corso.", "en": "The course materials."}], "nota": {"it": "L'attestato certifica la presenza: non è una qualifica e non ha valore legale.", "en": "The certificate records attendance: it is not a qualification and has no legal standing."}}, "policy": {"titolo": {"it": "Servizio a parte: la policy interna sull'uso dell'AI", "en": "A separate service: an internal AI policy"}, "corpo": [{"it": "Un documento che dice a tutti in azienda quali strumenti si usano, con quali dati e chi decide. Risponde alla domanda che arriva sempre dopo il corso: cosa posso incollare in ChatGPT?", "en": "A document that tells everyone in the company which tools are used, with which data, and who decides. It answers the question that always comes after the course: what can I paste into ChatGPT?"}], "consegna": [{"it": "Un documento di 3-5 pagine.", "en": "A 3–5 page document."}, {"it": "Una pagina riassuntiva da far girare in azienda.", "en": "A one-page summary to share around the company."}, {"it": "L'elenco degli strumenti ammessi, con le impostazioni da usare.", "en": "The list of approved tools, with the settings to use."}], "durata": {"it": "Circa una settimana: un'ora di intervista con il titolare, una bozza, una revisione insieme.", "en": "About a week: an hour's interview with the owner, a draft, a review together."}, "avvertenza": {"it": "Non sostituisce il parere di un legale.", "en": "It is not a substitute for legal advice."}}, "faqAiAct": {"titolo": {"it": "L'AI Act, in sette domande", "en": "The AI Act, in seven questions"}, "domande": [{"d": {"it": "Serve un attestato?", "en": "Do we need a certificate?"}, "r": {"it": "No. La Commissione europea scrive che non serve un certificato e che basta tenere un registro interno delle formazioni. L'attestato che rilascio è una prova in più, non un obbligo.", "en": "No. The European Commission says a certificate is not needed and an internal record of training is enough. The certificate I issue is extra evidence, not a requirement."}, "fonte": "commissioneQa"}, {"d": {"it": "Deve farlo un ente accreditato?", "en": "Does it have to be an accredited provider?"}, "r": {"it": "No: la norma non pone requisiti a chi fa formazione. Un ente serve solo se il corso è pagato con un fondo interprofessionale o deve entrare in un catalogo regionale.", "en": "No: the rule sets no requirements on who provides the training. A provider is only needed if the course is paid for by an interprofessional fund or has to go into a regional catalogue."}, "fonte": "commissioneQa"}, {"d": {"it": "Quante ore servono?", "en": "How many hours are needed?"}, "r": {"it": "La norma non le fissa, e non fissa nemmeno un programma: dipende da chi usa quali strumenti e con quali rischi. Il corso introduttivo da quattro ore è la misura di base che propongo.", "en": "The rule doesn't set them, and doesn't set a programme either: it depends on who uses which tools and with what risks. The four-hour introductory course is the basic measure I suggest."}, "fonte": "commissioneQa"}, {"d": {"it": "Vale anche se usiamo solo ChatGPT?", "en": "Does it apply if we only use ChatGPT?"}, "r": {"it": "Sì. L'articolo 4 riguarda chi usa sistemi di intelligenza artificiale per conto dell'azienda, senza soglie di dimensione.", "en": "Yes. Article 4 covers anyone using artificial intelligence systems on the company's behalf, with no size threshold."}, "fonte": "regolamento2026_1744"}, {"d": {"it": "Riguarda anche i collaboratori esterni?", "en": "Does it cover external contractors too?"}, "r": {"it": "Sì: il testo parla del personale e delle altre persone che usano questi sistemi per conto dell'azienda.", "en": "Yes: the text covers staff and other people using these systems on the company's behalf."}, "fonte": "regolamento2026_1744"}, {"d": {"it": "Da quando si rischiano sanzioni?", "en": "From when can there be penalties?"}, "r": {"it": "L'obbligo esiste dal 2 febbraio 2025. Le autorità nazionali vigilano dal 2 agosto 2026.", "en": "The obligation has applied since 2 February 2025. National authorities have supervised it since 2 August 2026."}, "fonte": "commissioneQa"}, {"d": {"it": "La legge italiana aggiunge obblighi?", "en": "Does Italian law add obligations?"}, "r": {"it": "No. La Legge 132 del 2025 dichiara di non produrre obblighi nuovi rispetto all'AI Act.", "en": "No. Law 132 of 2025 states that it creates no new obligations beyond the AI Act."}, "fonte": "legge132"}], "etichettaFonte": {"it": "fonte", "en": "source"}}, "cosaNonE": {"nota": "Si toglie solo la prima voce («Non è un corso di programmazione…» / «It isn't a programming course…»). Le altre restano alla lettera.", "approvato": true}}</script>
+</section>
+
 <div class="shell">
   <div class="end">
     <h3>Cosa nei mockup non è fedele</h3>
@@ -886,7 +958,7 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const views = ['laboratorio','volto','manifesto','pezzi','pagine'];
+  const views = ['laboratorio','volto','manifesto','pezzi','pagine','formazione'];
   const started = {};
   function show() {
     const v = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : views[0];
@@ -918,6 +990,48 @@ body.show-new .nuovo { background: rgb(255 214 0 / .55); box-shadow: 0 0 0 2px r
   };
   const init = {
     pezzi() {},
+    formazione() {
+      const T = JSON.parse(document.getElementById('fo-testi').textContent);
+      const FONTI = {
+        commissioneQa: 'https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers',
+        regolamento2026_1744: 'https://eur-lex.europa.eu/eli/reg/2026/1744/oj',
+        legge132: 'https://www.giurisprudenzapenale.com/wp-content/uploads/2025/09/legge-132-2025.pdf',
+      };
+      const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      let L = 'it';
+      const t = (o) => o ? `<span class="${o.approvato ? '' : 'nuovo'}">${esc(o[L])}</span>` : '';
+      const fonte = (k) => `<a class="fo-fonte" href="${FONTI[k]}" target="_blank" rel="noopener">${esc(T.faqAiAct.etichettaFonte[L])} ↗</a>`;
+      const policy = () => `<div class="fo-policy"><div><h5>${t(T.policy.titolo)}</h5>${T.policy.corpo.map((c) => `<p>${t(c)}</p>`).join('')}<p>${t(T.policy.durata)}</p><span class="avv">${t(T.policy.avvertenza)}</span></div><ul>${T.policy.consegna.map((c) => `<li>${t(c)}</li>`).join('')}</ul></div>`;
+      const corso = (c) => {
+        const liv = c.livelli.map((l) => `<div class="fo-liv">${l.nome ? `<span class="lv">${t(T.etichette[l.nome])} <em>${t(l.durata)}</em></span>` : ''}<dl><div><dt>${t(T.etichette.perChi)}</dt><dd>${t(l.perChi)}</dd></div><div><dt>${t(T.etichette.programma)}</dt><dd><ol>${l.moduli.map((m) => `<li>${t(m)}</li>`).join('')}</ol></dd></div></dl></div>`).join('');
+        const durata = c.livelli.length === 1 ? `<span class="durata">${t(c.livelli[0].durata)}</span>` : '';
+        return `<div class="fo-corso"><div class="fo-nome"><h5>${t(c.nome)}</h5>${durata}</div><div class="fo-livelli" style="--n:${c.livelli.length}">${liv}</div><div class="fo-serve"><span>${t(T.etichette.serveDaVoi)}</span>${t(c.serveDaVoi)}</div></div>`;
+      };
+      const ph = (it, en) => `<div class="fo-ph">${L === 'it' ? it : en}</div>`;
+      const render = () => {
+        const fam = (k) => `<p class="fo-fam">${t(T.famiglie[k])}</p>` + T.corsi.filter((c) => c.famiglia === k).map(corso).join('');
+        document.getElementById('fo-pagina').innerHTML = `
+          <div class="pi-testata"><span class="pi-rotta">${L === 'it' ? '/formazione' : '/en/training'}</span><h3>${L === 'it' ? 'Corsi che si usano il giorno dopo' : 'Courses you use the next day'}</h3></div>
+          <div class="fo-pratico">${T.dettagliPratici.map((p) => `<span>${t(p)}</span>`).join('')}</div>
+          <div style="padding-top:28px"><div class="fo-box"><b>${t(T.riquadroAiAct.titolo)}</b>${T.riquadroAiAct.corpo.map((p) => `<p>${t(p)}</p>`).join('')}${fonte(T.riquadroAiAct.fonte)}</div></div>
+          ${fam('azienda')}${fam('tecnici')}
+          <p class="fo-fam" style="padding-top:36px">${t(T.cosaResta.titolo)}</p>
+          <div class="fo-resta"><div class="pi-celle">${T.cosaResta.voci.map((v) => `<div><p style="color:var(--a-ink)">${t(v)}</p></div>`).join('')}</div><p class="fo-nota">${t(T.cosaResta.nota)}</p></div>
+          <div style="padding-top:28px">${policy()}</div>
+          <p class="fo-fam" style="padding-top:36px">${L === 'it' ? 'Chi sostiene il costo del corso' : 'Who pays for the course'}</p>
+          ${ph('[ le tre strade di oggi, invariate: direttamente · tramite ente accreditato · con i fondi interprofessionali ]', '[ the three routes of today, unchanged ]')}
+          <div class="pi-sez" style="margin-top:28px"><h4>${t(T.faqAiAct.titolo)}</h4>${T.faqAiAct.domande.map((q) => `<div class="pi-faq"><b>${t(q.d)}</b><p>${t(q.r)} ${fonte(q.fonte)}</p></div>`).join('')}</div>
+          <div style="padding-block:28px">${ph('[ «Vengo dall\'aula», invariato ] · [ «Che cosa questo corso non è», senza la frase sulla programmazione ] · [ «Raccontami che azienda siete», sul fondo carta ]', '[ «I come from the classroom», unchanged ] · [ «What this course is not», without the programming line ] · [ closing, on the paper background ]')}</div>`;
+        document.getElementById('fo-servizi').innerHTML = policy();
+      };
+      document.querySelectorAll('[data-lingua]').forEach((b) => b.addEventListener('click', () => {
+        L = b.dataset.lingua;
+        document.querySelectorAll('[data-lingua]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+        render();
+      }));
+      render();
+    },
+
     pagine() {
       const src = document.querySelector('.va .pcard img')?.src;
       document.querySelectorAll('[data-foto]').forEach((i) => { if (src) i.src = src; });
