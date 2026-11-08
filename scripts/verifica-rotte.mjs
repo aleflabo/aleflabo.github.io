@@ -118,6 +118,23 @@ if (!existsSync("dist/404.html")) {
   dice("manca dist/404.html");
 }
 
+// Il contatore dei lavori sulla home («4 di N · /lavori») deve dire quante
+// righe mostra davvero la pagina a cui porta. Il 2026-11-08 il numero era
+// stato calcolato da projects.ts (10), mentre /lavori ne mostra 12: due voci
+// stanno solo nella pagina. Il confronto è fra due cose costruite.
+for (const [home, elenco, schema] of [
+  ["dist/index.html", "dist/lavori/index.html", /4 di (\d+) · \/lavori/],
+  ["dist/en/index.html", "dist/en/work/index.html", /4 of (\d+) · \/work/],
+]) {
+  if (!existsSync(home) || !existsSync(elenco)) continue;
+  const trovato = readFileSync(home, "utf8").match(schema);
+  if (!trovato) continue;
+  const righe = (readFileSync(elenco, "utf8").match(/class="riga"/g) || []).length;
+  if (Number(trovato[1]) !== righe) {
+    dice(`${home} dice «${trovato[0]}» ma ${elenco} mostra ${righe} lavori`);
+  }
+}
+
 // Verifica RSS
 if (!existsSync("dist/rss.xml")) {
   dice("manca il feed RSS");
@@ -216,6 +233,9 @@ const PAROLE_ITALIANE = [
   "scrivimi", "prenota", "grazie", "iscriviti", "contattami",
   "chiudi", "apri", "cerca", "leggi", "torna", "invia",
   "servizi", "formazione", "ricerca", "lavori",
+  // «#parliamone» era visibile sopra il modulo della home inglese (revisione
+  // finale della tappa 1 del Laboratorio, 2026-11-08): l'àncora è italiana.
+  "parliamone",
 ];
 const PAROLE_ITALIANE_SET = new Set(PAROLE_ITALIANE);
 

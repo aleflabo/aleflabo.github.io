@@ -1929,7 +1929,7 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 - `[APPROVATO]` diagnosis · audit · software · training →
 - `[APPROVATO]` papers · code · notes →
 - `[RIUSATO]` Some of the things I've built
-- `[APPROVATO]` 4 of N · /work (N = progetti con pagina inglese, calcolato)
+- `[APPROVATO]` 4 of 10 · /work (10 = le righe di /en/work; `verifica-rotte.mjs` controlla che coincidano)
 - `[APPROVATO]` Terminale: chiavi `phd`, `published_at`, `cto`, `now`; valore «working on my own»
 - Righe dei lavori: Procedo, Spannum, Fanta Mundial, Agentic Workflow Toolkit, con categorie e prime frasi `[RIUSATO]` dalle schede sopra.
 - `[APPROVATO]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears

@@ -1329,7 +1329,8 @@ sono ripetute.
 - `testo` Per chi è del mestiere
 - `etichetta` diagnosi · audit · software · formazione →
 - `etichetta` paper · codice · note →
-- `etichetta` 4 di N · /lavori (N = numero dei progetti in `projects.ts`, calcolato; il «12» del mockup era sbagliato)
+- `etichetta` #parliamone (riga in mono sopra il blocco di contatto, solo in italiano)
+- `etichetta` 4 di 12 · /lavori (12 = le righe di /lavori; `verifica-rotte.mjs` controlla che coincidano)
 - `testo` Ogni articolo che ho pubblicato esce insieme al codice.
 - `etichetta` Python · PyTorch · OpenCV · MediaPipe · Flask + Celery · PostgreSQL · Gemini · AWS · Astro · Angular · Laravel · Nuxt
 - Terminale: `$ cat alessandro.json` con le chiavi `dottorato`, `pubblicato_a`, `cto`, `adesso` e i valori «computer vision, Sapienza – PINlab», «CVPR», «ICCV», «IROS», «Procedo, 2024–2026», «lavoro in proprio».

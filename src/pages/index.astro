@@ -12,7 +12,7 @@ import Numeri from '../components/lab/Numeri.astro';
 import Porte from '../components/lab/Porte.astro';
 import Fascia from '../components/lab/Fascia.astro';
 import RigheLavori from '../components/lab/RigheLavori.astro';
-import { getProject, projects } from '../data/projects';
+import { getProject } from '../data/projects';
 import { annoIt } from '../lib/anno';
 import { homeLab } from '../data/homeLab';
 import Contatto from '../components/sezioni/Contatto.astro';
@@ -64,10 +64,11 @@ const datiStrutturati = [
 ];
 // --- Lavori a righe (Laboratorio) ---
 // Nome, anno e immagine da projects.ts; categoria e descrizione da homeLab
-// (prime frasi delle schede approvate). Il contatore si calcola.
+// (prime frasi delle schede approvate). Il contatore viene da homeLab,
+// sorvegliato da verifica-rotte.mjs contro le righe di /lavori.
 const righeLavori = {
   titolo: homeLab.it.lavori.titolo,
-  contatore: `4 di ${projects.length} · /lavori`,
+  contatore: `4 di ${homeLab.it.lavori.totale} · /lavori`,
   tutti: homeLab.it.lavori.tutti,
   hrefTutti: localizedPath('it', '/lavori'),
   righe: homeLab.it.lavori.righe.map((r) => {
@@ -91,5 +92,5 @@ const righeLavori = {
   <Porte porte={homeLab.it.porte} />
   <RigheLavori {...righeLavori} />
   <Fascia voci={homeLab.it.stack} />
-  <Contatto {...contatto} eyebrow={undefined} />
+  <Contatto {...contatto} eyebrow={undefined} ancora="#parliamone" />
 </BaseLayout>

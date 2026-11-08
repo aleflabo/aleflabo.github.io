@@ -26,6 +26,10 @@ export interface HomeLab {
   stack: string[];
   lavori: {
     titolo: string;
+    /** Quante righe mostra /lavori (o /en/work). Non si ricava da projects.ts:
+     *  la pagina ha anche voci che stanno solo lì. `verifica-rotte.mjs`
+     *  fallisce se questo numero e la pagina divergono. */
+    totale: number;
     tutti: string;
     righe: { slug: string; categoria: string; descrizione: string }[];
   };
@@ -81,6 +85,7 @@ export const homeLab: Record<Locale, HomeLab> = {
     stack,
     lavori: {
       titolo: 'Alcune cose che ho costruito',
+      totale: 12,
       tutti: 'Tutti i lavori, compresa la ricerca',
       righe: [
         { slug: 'portale-ricambi', categoria: 'Meccanica · commessa reale', descrizione: "Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente." },
@@ -133,6 +138,7 @@ export const homeLab: Record<Locale, HomeLab> = {
     stack,
     lavori: {
       titolo: "Some of the things I've built",
+      totale: 10,
       tutti: 'All the work, research included',
       righe: [
         { slug: 'procedo', categoria: 'Industry · in production', descrizione: "A platform that turns video shot on the shop floor into step-by-step procedures, and lets the people doing the work ask questions of their own company's documentation." },

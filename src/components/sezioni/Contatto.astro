@@ -18,6 +18,9 @@ interface OpzioneUrgenza {
   checked?: boolean;
 }
 interface Props {
+  // La riga in mono sopra il titolo («#parliamone»), solo dove c'è testo
+  // approvato: in inglese non c'è, e l'àncora italiana non si mostra.
+  ancora?: string;
   // Facoltativo (task 14, home-visuale): l'occhiello «Parliamone» sparisce
   // dalla potatura anti-slop (tetto di un occhiello ogni tre sezioni, la
   // home ne aveva nove — una veniva da
@@ -43,6 +46,7 @@ interface Props {
   canali: { etichetta: string; href?: string }[];
 }
 const {
+  ancora,
   eyebrow,
   titolo,
   intro,
@@ -61,7 +65,7 @@ const {
 <section class="contatto" id="parliamone">
   <div class="foglio">
     <div class="testa">
-      <p class="ancora mono" aria-hidden="true">#parliamone</p>
+      {ancora && <p class="ancora mono" aria-hidden="true">{ancora}</p>}
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 class="titolo">{titolo}</h2>
       <p class="intro">{intro}</p>

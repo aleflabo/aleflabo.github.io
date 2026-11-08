@@ -15,7 +15,7 @@ import Numeri from '../../components/lab/Numeri.astro';
 import Porte from '../../components/lab/Porte.astro';
 import Fascia from '../../components/lab/Fascia.astro';
 import RigheLavori from '../../components/lab/RigheLavori.astro';
-import { getProject, projects } from '../../data/projects';
+import { getProject } from '../../data/projects';
 import { annoEn } from '../../lib/anno';
 import { homeLab } from '../../data/homeLab';
 import { localizedPath } from '../../i18n/ui';
@@ -75,10 +75,11 @@ const datiStrutturati = [
 ];
 // --- Lavori a righe (Laboratorio) ---
 // Nome, anno e immagine da projects.ts; categoria e descrizione da homeLab
-// (prime frasi delle schede approvate). Il contatore si calcola.
+// (prime frasi delle schede approvate). Il contatore viene da homeLab,
+// sorvegliato da verifica-rotte.mjs contro le righe di /lavori.
 const righeLavori = {
   titolo: homeLab.en.lavori.titolo,
-  contatore: `4 of ${projects.filter((p) => !p.soloItaliano).length} · /work`,
+  contatore: `4 of ${homeLab.en.lavori.totale} · /work`,
   tutti: homeLab.en.lavori.tutti,
   hrefTutti: localizedPath('en', '/work'),
   righe: homeLab.en.lavori.righe.map((r) => {
