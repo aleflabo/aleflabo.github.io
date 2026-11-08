@@ -3,13 +3,14 @@
 // Il corpo, con il suo stile, vive in CorpoFormazione.astro.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoFormazione from '../components/pagine/CorpoFormazione.astro';
-import { formati, riquadroAiAct, strade } from '../data/formazione';
+import { corsi, testiCorsi, riquadroAiAct, dettagliPratici, cosaResta, faqAiAct, strade } from '../data/formazione';
+import { policy } from '../data/servizi';
 import { testiFormazionePagina } from '../data/formazionePagina';
 import { site } from '../data/site';
 import { briciole, corso } from '../lib/datiStrutturati';
 import { localizedPath } from '../i18n/ui';
 
-// I tre formati come `Course`. L'AI Act di febbraio 2025 rende la formazione
+// I corsi come `Course`. L'AI Act di febbraio 2025 rende la formazione
 // un obbligo documentabile, quindi «corso AI obbligatorio» è una domanda che
 // viene fatta davvero: dichiararli aiuta a farsi trovare da quella.
 const dominio = Astro.site!.toString().replace(/\/$/, '');
@@ -17,10 +18,10 @@ const datiStrutturati = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: formati.map((f, i) => ({
+    itemListElement: corsi.map((c, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      item: corso(dominio, { nome: f.nome, descrizione: f.corpo }),
+      item: corso(dominio, { nome: c.nome, descrizione: c.livelli.map((l) => `${l.durata}: ${l.moduli.join('; ')}`).join(' · ') }),
     })),
   },
   briciole(dominio, [
@@ -44,8 +45,13 @@ const datiStrutturati = [
   <CorpoFormazione
     lang="it"
     t={{ ...testiFormazionePagina, labelOrganizza: undefined, labelCattedra: undefined, labelOnesta: undefined }}
-    formati={formati}
+    corsi={corsi}
+    testiCorsi={testiCorsi}
     riquadroAiAct={riquadroAiAct}
+    dettagliPratici={dettagliPratici}
+    cosaResta={cosaResta}
+    faqAiAct={faqAiAct}
+    policy={policy}
     strade={strade}
     prenotaMezzora={site.it.prenotaMezzora ?? ''}
   />
