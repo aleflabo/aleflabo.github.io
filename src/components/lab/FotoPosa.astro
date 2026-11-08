@@ -111,15 +111,28 @@ const { larghezza, altezza } = posa.quadro;
 </style>
 
 <script>
-  if (matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll<HTMLElement>('[data-foto-posa]').forEach((card) => {
-      const osservatore = new IntersectionObserver((voci) => {
-        if (voci.some((v) => v.isIntersecting)) {
-          card.classList.add('accesa');
-          osservatore.disconnect();
-        }
-      }, { threshold: 0.6 });
-      osservatore.observe(card);
-    });
-  }
+  // Sui dispositivi senza mouse la posa si disegna una volta, quando la card
+  // entra nello schermo. La domanda «c'è un mouse?» non si fa una volta sola al
+  // caricamento: la risposta cambia, per esempio quando si attiva l'emulazione
+  // del telefono negli strumenti del browser, e allora la card restava in
+  // attesa di un passaggio del mouse che su touch è un tocco (visto l'8
+  // novembre 2026 dal committente).
+  const senzaMouse = matchMedia('(hover: none)');
+  const ridotto = matchMedia('(prefers-reduced-motion: reduce)');
+  let osservatore: IntersectionObserver | null = null;
+
+  const osserva = () => {
+    if (osservatore || !senzaMouse.matches || ridotto.matches) return;
+    osservatore = new IntersectionObserver((voci) => {
+      voci.forEach((v) => {
+        if (!v.isIntersecting) return;
+        v.target.classList.add('accesa');
+        osservatore?.unobserve(v.target);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll<HTMLElement>('[data-foto-posa]:not(.accesa)').forEach((card) => osservatore!.observe(card));
+  };
+
+  osserva();
+  senzaMouse.addEventListener('change', osserva);
 </script>
