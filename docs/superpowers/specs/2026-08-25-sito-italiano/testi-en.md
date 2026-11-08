@@ -1910,3 +1910,27 @@ più grave.
 7. **Paesello e il video non sono in `projects.ts`.** Esistono solo come schede
    su `/lavori`. Se `/en/work` li mostra, o restano schede senza pagina, o
    qualcuno scrive i due case study — e non c'è italiano da cui tradurli.
+
+# Home «Laboratorio» (2026-11-08)
+
+Le frasi nuove della home. `[RIUSATO]` = già approvato in questo file. `[DA APPROVARE]` =
+proposta di chi implementa, da far approvare al committente prima del merge della tappa 1.
+
+- `[DA APPROVARE]` I build
+- `[DA APPROVARE]` computer vision · applied LLMs · AI agents · custom software
+- `[DA APPROVARE]` Venice
+- `[DA APPROVARE]` ex · CTO · Procedo — phd · Sapienza – PINlab — pub · CVPR · ICCV · IROS
+- `[DA APPROVARE]` ↑ hover over it
+- `[DA APPROVARE]` pose · 11 keypoints
+- `[DA APPROVARE]` For companies
+- `[DA APPROVARE]` For fellow engineers
+- `[RIUSATO]` I help companies work out where AI is needed, and then I build it.
+- `[RIUSATO]` Every paper I published came out together with the code.
+- `[DA APPROVARE]` diagnosis · audit · software · training →
+- `[DA APPROVARE]` papers · code · notes →
+- `[RIUSATO]` Some of the things I've built
+- `[DA APPROVARE]` 4 of N · /work (N = progetti con pagina inglese, calcolato)
+- `[DA APPROVARE]` Terminale: chiavi `phd`, `published_at`, `cto`, `now`; valore «working on my own»
+- Righe dei lavori: Procedo, Spannum, Fanta Mundial, Agentic Workflow Toolkit, con categorie e prime frasi `[RIUSATO]` dalle schede sopra.
+- `[DA APPROVARE]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears
+- `[DA APPROVARE]` solo lettori di schermo: local time

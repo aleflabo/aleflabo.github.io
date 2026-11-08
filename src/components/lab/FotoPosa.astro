@@ -1,0 +1,125 @@
+---
+// Il ritratto in card, con la posa calcolata da un modello (src/data/posa.ts).
+// Desktop: la posa si disegna al passaggio del mouse o al focus da tastiera.
+// Telefono (`hover: none`): una volta sola, quando la card entra nello schermo.
+// Con `prefers-reduced-motion` è visibile subito, ferma.
+//
+// La card è 4:5 come la foto e come il quadro della posa (640×800), e l'SVG ha
+// lo stesso ritaglio dell'immagine (`cover` ↔ `slice`, centrati): così ossa e
+// foto combaciano a qualsiasi dimensione. Nel mockup una dimenticanza su
+// `width/height` dell'SVG aveva spostato tutto lo scheletro.
+import { Image } from 'astro:assets';
+import ritratto from '../../assets/alessandro-flaborea.jpg';
+import { posa } from '../../data/posa';
+import { segmenti } from '../../lib/posa';
+
+interface Props {
+  /** Descrive foto e posa insieme: la card è un'immagine sola per i lettori di schermo. */
+  etichettaCard: string;
+  etichettaPosa: string;
+  suggerimento: string;
+}
+const { etichettaCard, etichettaPosa, suggerimento } = Astro.props;
+const ossa = segmenti(posa);
+const { larghezza, altezza } = posa.quadro;
+---
+
+<figure class="foto-posa">
+  <div class="card" tabindex="0" role="img" aria-label={etichettaCard} data-foto-posa>
+    <Image src={ritratto} alt="" widths={[300, 600]} sizes="(max-width: 820px) 70vw, 270px" loading="eager" />
+    <svg class="posa" viewBox={`0 0 ${larghezza} ${altezza}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {ossa.map((s, i) => <line pathLength="1" style={`--i:${i}`} x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} />)}
+      {posa.punti.map(([x, y], i) => <circle style={`--i:${i}`} cx={x} cy={y} r="8" />)}
+    </svg>
+    <span class="etichetta mono" aria-hidden="true">{etichettaPosa}</span>
+  </div>
+  <figcaption class="suggerimento mono" aria-hidden="true">{suggerimento}</figcaption>
+</figure>
+
+<style>
+  .foto-posa { display: grid; justify-items: center; gap: 14px; margin: 0; }
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 270px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--raggio-grande);
+    overflow: hidden;
+    background: var(--bianco);
+    border: 1px solid var(--filo);
+    box-shadow: 0 40px 60px -40px rgb(16 19 24 / 50%);
+    transform: rotate(-2deg);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: crosshair;
+    outline-offset: 4px;
+  }
+  .card :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: grayscale(1) contrast(1.08); }
+  .posa { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  line {
+    stroke: var(--rilevamento);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: calc(var(--i) * 45ms);
+  }
+  circle {
+    fill: var(--bianco);
+    stroke: var(--rilevamento);
+    stroke-width: 3.5;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0.2);
+    transition: opacity 0.25s, transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+    transition-delay: calc(var(--i) * 40ms);
+  }
+  .etichetta {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: var(--rilevamento-testo);
+    color: var(--bianco);
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: var(--raggio-piccolo);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s 0.5s, transform 0.3s 0.5s;
+  }
+  .suggerimento { font-size: 0.72rem; color: var(--muto); }
+
+  .card:hover, .card:focus-visible, .card.accesa { transform: rotate(0) scale(1.02); }
+  .card:hover line, .card:focus-visible line, .card.accesa line { stroke-dashoffset: 0; }
+  .card:hover circle, .card:focus-visible circle, .card.accesa circle { opacity: 1; transform: none; }
+  .card:hover .etichetta, .card:focus-visible .etichetta, .card.accesa .etichetta { opacity: 1; transform: none; }
+  /* All'ingresso nello schermo la sequenza è più lenta: la si guarda, non la
+     si provoca. */
+  .card.accesa line { transition-duration: 0.7s; transition-delay: calc(400ms + var(--i) * 90ms); }
+  .card.accesa circle { transition-delay: calc(300ms + var(--i) * 70ms); }
+  .card.accesa .etichetta { transition-delay: 1.5s; }
+
+  @media (hover: none) { .suggerimento { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transform: none; }
+    line { stroke-dashoffset: 0; }
+    circle { opacity: 1; transform: none; }
+    .etichetta { opacity: 1; transform: none; }
+    .suggerimento { display: none; }
+  }
+</style>
+
+<script>
+  if (matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-foto-posa]').forEach((card) => {
+      const osservatore = new IntersectionObserver((voci) => {
+        if (voci.some((v) => v.isIntersecting)) {
+          card.classList.add('accesa');
+          osservatore.disconnect();
+        }
+      }, { threshold: 0.6 });
+      osservatore.observe(card);
+    });
+  }
+</script>

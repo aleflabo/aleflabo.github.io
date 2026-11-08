@@ -7,7 +7,8 @@
 // toccare i componenti. Le stringhe restano quelle di sempre, alla
 // lettera da tavole/Main.dc.html (testi.md, sezione «/ — home»).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Occhiello from '../components/sezioni/Occhiello.astro';
+import Testata from '../components/lab/Testata.astro';
+import { homeLab } from '../data/homeLab';
 import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../components/sezioni/IlProblema.astro';
 import CosaCostruisco from '../components/sezioni/CosaCostruisco.astro';
@@ -295,7 +296,7 @@ const datiStrutturati = [
   pathEn="/"
   datiStrutturati={datiStrutturati}
 >
-  <Occhiello {...occhiello} />
+  <Testata lang="it" t={homeLab.it} />
   {/* Potatura degli occhielli (task 14, home-visuale): la home aveva nove
       etichette di sezione contro un tetto di una ogni tre sezioni — «molto
       claude like», ha detto il committente, ed è il ritmo templato che la

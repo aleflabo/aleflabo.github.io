@@ -262,3 +262,13 @@ a:hover .freccia { transform: translateX(5px); }
     min-height: 0;
   }
 }
+
+/* Testo solo per i lettori di schermo: c'è nel documento, non a video. */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

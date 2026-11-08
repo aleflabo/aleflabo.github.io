@@ -10,7 +10,8 @@
 // verificato campo per campo contro le firme dei componenti —
 // task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Occhiello from '../../components/sezioni/Occhiello.astro';
+import Testata from '../../components/lab/Testata.astro';
+import { homeLab } from '../../data/homeLab';
 import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
@@ -87,7 +88,7 @@ const datiStrutturati = [
   pathIt="/"
   datiStrutturati={datiStrutturati}
 >
-  <Occhiello {...occhiello} />
+  <Testata lang="en" t={homeLab.en} />
   {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
       italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
       «The problem»/«The evidence» sui due componenti sotto che li tengono.
