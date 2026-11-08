@@ -1,4 +1,7 @@
 ---
+import type { Locale } from '../../i18n/ui';
+import { moduloContatto } from '../../data/modulo';
+import { attributiModulo } from '../../lib/modulo';
 // I testi arrivano dalla pagina (task 2, sito-inglese). Il modulo resta
 // inerte (nessun `action`) e i pulsanti di prenotazione, WhatsApp e mail
 // restano segnaposto (`href="#"`): non è stato scelto nessun servizio
@@ -18,6 +21,9 @@ interface OpzioneUrgenza {
   checked?: boolean;
 }
 interface Props {
+  lang: Locale;
+  // La riga accanto al pulsante, mostrata solo a modulo acceso.
+  linkInformativa: { testo: string; href: string };
   // La riga in mono sopra il titolo («#parliamone»), solo dove c'è testo
   // approvato: in inglese non c'è, e l'àncora italiana non si mostra.
   ancora?: string;
@@ -46,6 +52,8 @@ interface Props {
   canali: { etichetta: string; href?: string }[];
 }
 const {
+  lang,
+  linkInformativa,
   ancora,
   eyebrow,
   titolo,
@@ -60,6 +68,8 @@ const {
   introAlternativa,
   canali,
 } = Astro.props;
+const modulo = attributiModulo(moduloContatto, lang, Astro.site!.toString());
+const acceso = Boolean(modulo.action);
 ---
 
 <section class="contatto" id="parliamone">
@@ -72,18 +82,22 @@ const {
     </div>
     <div class="scheda">
 
-    <form class="modulo" onsubmit="return false">
+    {/* Spento: nessun `action`, il modulo non invia niente. Acceso: POST semplice a
+        Web3Forms, senza script (src/data/modulo.ts). */}
+    <form class="modulo" action={modulo.action} method={modulo.method} onsubmit={acceso ? undefined : 'return false'}>
+      {Object.entries(modulo.nascosti).map(([n, v]) => <input type="hidden" name={n} value={v} />)}
+      {acceso && <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />}
       <div class="campo">
         <label for="azienda">{campoAzienda.etichetta}</label>
         <input type="text" id="azienda" name="azienda" placeholder={campoAzienda.placeholder} />
       </div>
       <div class="campo">
         <label for="contatto-mail">{campoContatto.etichetta}</label>
-        <input type="text" id="contatto-mail" name="contatto" placeholder={campoContatto.placeholder} />
+        <input type="text" id="contatto-mail" name="contatto" placeholder={campoContatto.placeholder} required={acceso} />
       </div>
       <div class="campo largo">
         <label for="richiesta">{campoRichiesta.etichetta}</label>
-        <textarea id="richiesta" name="richiesta" rows="3" placeholder={campoRichiesta.placeholder}></textarea>
+        <textarea id="richiesta" name="richiesta" rows="3" placeholder={campoRichiesta.placeholder} required={acceso}></textarea>
       </div>
       <fieldset class="campo largo urgenza">
         <legend>{legendaUrgenza}</legend>
@@ -97,8 +111,9 @@ const {
         </div>
       </fieldset>
       <div class="invia">
-        <button type="submit" class="pulsante" disabled>{invia}</button>
-        {notaInerte && <p class="nota-inerte">{notaInerte}</p>}
+        <button type="submit" class="pulsante" disabled={!acceso}>{invia}</button>
+        {!acceso && notaInerte && <p class="nota-inerte">{notaInerte}</p>}
+        {acceso && <a class="informativa" href={linkInformativa.href}>{linkInformativa.testo}</a>}
       </div>
     </form>
 
@@ -192,6 +207,9 @@ const {
     min-height: 44px;
   }
   button:disabled { cursor: not-allowed; }
+  button:not(:disabled) { background: var(--rilevamento-testo); color: var(--bianco); cursor: pointer; }
+  .botcheck { display: none; }
+  .informativa { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muto); text-decoration: underline; text-underline-offset: 3px; }
   .nota-inerte { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muto); }
   .alternativa { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; border-top: 1px dashed var(--filo); padding-top: 14px; }
   .intro-alt { font-size: 0.875rem; color: var(--muto); }
