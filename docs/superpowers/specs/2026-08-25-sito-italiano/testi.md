@@ -38,7 +38,7 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` dal 2024 al 2026
 - `etichetta` 10
 - `etichetta` articoli pubblicati
-- `etichetta` 533
+- `etichetta` 597
 - `etichetta` citazioni
 - `etichetta` 1
 - `etichetta` Best Paper Award
@@ -764,8 +764,8 @@ Sorgente: `tavole/Ricerca.dc.html`
 - `testo` Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola.
 - `testo` 10
 - `testo` articoli pubblicati
-- `testo` 533
-- `testo` citazioni, ad agosto 2026
+- `testo` 597
+- `testo` citazioni, a novembre 2026
 - `testo` 3
 - `testo` da primo autore
 - `testo` 1

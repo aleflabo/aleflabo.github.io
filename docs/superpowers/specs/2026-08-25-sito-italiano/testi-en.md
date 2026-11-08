@@ -23,7 +23,7 @@ Due precisazioni sulle fonti:
   due progetti è tradotto dall'italiano approvato.
 - Titoli delle pubblicazioni, sedi (CVPR, ICCV, IROS, ICLR, Pattern
   Recognition…), nomi propri (Procedo, Sapienza, PINlab, Fondimpresa, B4i,
-  HomeSweatHome, Spannum) e numeri (10 articoli, 533 citazioni, 2021–2024,
+  HomeSweatHome, Spannum) e numeri (10 articoli, 597 citazioni, 2021–2024,
   2024–2026) restano invariati e non sono contati né fra i riusati né fra i
   tradotti.
 
@@ -112,7 +112,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 **[TRADOTTO]** — `testi.md`, home, i quattro numeri
 
-> **10** published papers · **533** citations · **1** Best Paper Award ·
+> **10** published papers · **597** citations · **1** Best Paper Award ·
 > **2** years as CTO
 
 ## Il problema
@@ -1233,7 +1233,7 @@ pagina; `site.ts` → `en.research` e `Research.astro` per l'inglese già scritt
 
 **[TRADOTTO]** — `pubblicazioni.ts` → `numeriFascia`
 
-> **10** published papers · **533** citations, as of August 2026 · **3** as
+> **10** published papers · **597** citations, as of November 2026 · **3** as
 > first author · **1** Best Paper Award
 
 ## Cosa c'entra con la tua azienda

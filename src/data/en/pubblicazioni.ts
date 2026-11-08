@@ -80,7 +80,7 @@ export const pubblicazioni: Pubblicazione[] = [
 // I quattro numeri della fascia in cima a /en/research.
 export const numeriFascia: NumeroFascia[] = [
   { numero: "10", etichetta: "published papers" },
-  { numero: "533", etichetta: "citations, as of August 2026" },
+  { numero: "597", etichetta: "citations, as of November 2026" },
   { numero: "3", etichetta: "as first author" },
   { numero: "1", etichetta: "Best Paper Award" },
 ];

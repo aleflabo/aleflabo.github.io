@@ -180,7 +180,7 @@ a:hover .freccia { transform: translateX(5px); }
 .scheda:active { transform: translateY(1px); }
 
 /* Cifre a larghezza fissa dove i numeri stanno in colonna o cambiano: la
-   fascia «10 · 533 · 1 · 2» e le date dell'elenco note. Con le cifre
+   fascia «10 · 597 · 1 · 2» e le date dell'elenco note. Con le cifre
    proporzionali un 1 è più stretto di un 5, quindi le colonne non si
    allineano e i numeri ballano quando il contenuto cambia. */
 .valore,

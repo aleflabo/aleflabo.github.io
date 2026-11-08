@@ -62,7 +62,7 @@ export const homeLab: Record<Locale, HomeLab> = {
     etichettaOra: 'ora locale',
     numeri: [
       { valore: 10, etichetta: 'articoli pubblicati' },
-      { valore: 533, etichetta: 'citazioni' },
+      { valore: 597, etichetta: 'citazioni' },
       { valore: 1, etichetta: 'Best Paper Award' },
       { valore: 2, etichetta: 'anni da CTO' },
     ],
@@ -115,7 +115,7 @@ export const homeLab: Record<Locale, HomeLab> = {
     etichettaOra: 'local time',
     numeri: [
       { valore: 10, etichetta: 'published papers' },
-      { valore: 533, etichetta: 'citations' },
+      { valore: 597, etichetta: 'citations' },
       { valore: 1, etichetta: 'Best Paper Award' },
       { valore: 2, etichetta: 'years as CTO' },
     ],
