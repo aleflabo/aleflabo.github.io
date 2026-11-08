@@ -115,26 +115,26 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
         <GruppoFasci collegamenti={esconoL} />
 
         <!-- destra: la stessa roba, ma connessa -->
-        <path d="M 872 112 L 916 155 M 872 200 L 916 173 M 872 200 L 916 245 M 872 288 L 916 263 M 940 191 L 940 227" stroke="var(--tratto-tenue)" stroke-width="1.5" />
-        <rect x="752" y="94" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="764" y="106" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="764" y="115" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="752" y="182" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="764" y="194" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="764" y="203" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="752" y="270" width="120" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="764" y="282" width="80" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="764" y="291" width="58" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="916" y="137" width="130" height="36" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="928" y="149" width="90" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="928" y="158" width="68" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="916" y="227" width="130" height="36" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5" />
-        <rect x="928" y="239" width="90" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="928" y="248" width="68" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <path d="M 872 112 L 916 155 M 872 200 L 916 173 M 872 200 L 916 245 M 872 288 L 916 263 M 940 191 L 940 227" stroke="var(--tratto-accento)" stroke-width="1.5" />
+        <rect x="752" y="94" width="120" height="36" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="764" y="106" width="80" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="764" y="115" width="58" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="752" y="182" width="120" height="36" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="764" y="194" width="80" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="764" y="203" width="58" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="752" y="270" width="120" height="36" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="764" y="282" width="80" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="764" y="291" width="58" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="916" y="137" width="130" height="36" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="928" y="149" width="90" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="928" y="158" width="68" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="916" y="227" width="130" height="36" rx="4" fill="var(--rilevamento-velo)" stroke="var(--rilevamento-testo)" stroke-width="1.5" />
+        <rect x="928" y="239" width="90" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="928" y="248" width="68" height="4" rx="2" fill="var(--tratto-accento)" />
 
         <!-- e la riga che dal risultato torna alla sua fonte -->
         <path class="interrotto" d="M 981 263 L 981 424 L 150 424 L 150 332" />
-        <path d="M 144 340 L 150 330 L 156 340" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-linejoin="round" />
+        <path d="M 144 340 L 150 330 L 156 340" stroke="var(--tratto)" stroke-width="1.5" stroke-linejoin="round" />
       </svg>
 
       <div class="nodo" style={`left: ${nodoL.left}; top: ${nodoL.top}; width: ${nodoL.width}; height: ${nodoL.height};`}>
@@ -170,20 +170,20 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
         <GruppoFasci collegamenti={esconoS} />
 
         <!-- sotto: la struttura, con i suoi collegamenti -->
-        <path d="M 42 388 L 42 522 M 42 404 L 58 404 M 42 460 L 58 460 M 42 516 L 58 516" stroke="var(--tratto-tenue)" stroke-width="1.5" />
-        <rect x="58" y="366" width="252" height="38" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="72" y="378" width="150" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="72" y="387" width="104" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="58" y="422" width="252" height="38" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
-        <rect x="72" y="434" width="132" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="72" y="443" width="88" height="4" rx="2" fill="var(--tratto-tenue)" />
-        <rect x="58" y="478" width="252" height="38" rx="4" fill="var(--evidenziatore-tenue)" stroke="var(--azione)" stroke-width="1.5" />
-        <rect x="72" y="490" width="146" height="4" rx="2" fill="var(--azione)" opacity=".55" />
-        <rect x="72" y="499" width="96" height="4" rx="2" fill="var(--tratto-tenue)" />
+        <path d="M 42 388 L 42 522 M 42 404 L 58 404 M 42 460 L 58 460 M 42 516 L 58 516" stroke="var(--tratto-accento)" stroke-width="1.5" />
+        <rect x="58" y="366" width="252" height="38" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="72" y="378" width="150" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="72" y="387" width="104" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="58" y="422" width="252" height="38" rx="4" fill="var(--bianco)" stroke="var(--filo)" stroke-width="1" />
+        <rect x="72" y="434" width="132" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="72" y="443" width="88" height="4" rx="2" fill="var(--tratto-accento)" />
+        <rect x="58" y="478" width="252" height="38" rx="4" fill="var(--rilevamento-velo)" stroke="var(--rilevamento-testo)" stroke-width="1.5" />
+        <rect x="72" y="490" width="146" height="4" rx="2" fill="var(--rilevamento-testo)" opacity=".55" />
+        <rect x="72" y="499" width="96" height="4" rx="2" fill="var(--tratto-accento)" />
 
         <!-- la riga che torna alla fonte: giù a destra, poi su a sinistra -->
         <path class="interrotto" d="M 310 497 L 332 497 L 332 560 L 18 560 L 18 118 L 24 118" />
-        <path d="M 22 112 L 32 118 L 22 124" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-linejoin="round" />
+        <path d="M 22 112 L 32 118 L 22 124" stroke="var(--tratto)" stroke-width="1.5" stroke-linejoin="round" />
       </svg>
 
       <div class="nodo" style={`left: ${nodoS.left}; top: ${nodoS.top}; width: ${nodoS.width}; height: ${nodoS.height};`}>
@@ -227,7 +227,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     margin-top: 16px;
     font-size: 16px;
     line-height: 1.65;
-    color: var(--text-muted);
+    color: var(--muto);
     max-width: 68ch;
   }
 
@@ -267,14 +267,14 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
        vedi sotto) chiedono, e senza un pavimento il riquadro si stringe
        sotto il proprio contenuto invece di contenerlo (revisione task 4). */
     min-height: 70px;
-    background: var(--surface);
-    border: 1.5px solid var(--azione);
-    border-radius: var(--radius);
+    background: var(--bianco);
+    border: 1.5px solid var(--rilevamento-testo);
+    border-radius: var(--raggio-piccolo);
     box-shadow: 0 0 0 7px rgb(240 201 164 / 32%), 0 12px 34px rgb(168 83 29 / 14%);
     text-align: center;
   }
   .nodo-titolo {
-    font-family: var(--font-serif);
+    font-family: var(--font-testo);
     font-size: 19px;
     font-weight: 600;
     line-height: 1.2;
@@ -283,7 +283,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--muto);
     font-weight: 700;
     /* Resta su una riga anche quando il riquadro si stringe: è la seconda
        riga corta sotto il titolo, non un paragrafo che ha senso spezzato.
@@ -297,13 +297,13 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
      starci sopra, per questo porta lo sfondo della pagina. */
   .ritorno {
     position: absolute;
-    background: var(--bg);
+    background: var(--carta);
     padding: 0 12px;
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--azione);
+    color: var(--rilevamento-testo);
     white-space: nowrap;
   }
 
@@ -311,7 +311,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     position: absolute;
     font-size: 12.5px;
     line-height: 1.45;
-    color: var(--text-faint);
+    color: var(--muto);
   }
   /* La riga di ritorno passa a x=150 del canvas, cioè in mezzo alla
      didascalia di sinistra, che è larga 300: il tratteggio le tagliava le
@@ -320,7 +320,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
      lo sfondo sta sullo span interno e non sul paragrafo, che è largo 300
      anche quando il testo è più corto e coprirebbe il disegno per niente. */
   .didascalia span {
-    background: var(--bg);
+    background: var(--carta);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     padding: 1px 6px;
@@ -372,7 +372,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
     .didascalia-sotto {
       font-size: 12.5px;
       line-height: 1.45;
-      color: var(--text-faint);
+      color: var(--muto);
     }
     .didascalia-sotto + .didascalia-sotto {
       margin-top: 6px;
