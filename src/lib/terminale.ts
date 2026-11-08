@@ -3,8 +3,8 @@ import type { Locale } from '../i18n/ui';
 /**
  * Il terminale della home: `cat alessandro.json` e un piccolo JSON di fatti.
  * I fatti sono gli stessi della riga di credibilità approvata (testi.md, home).
- * Le chiavi inglesi sono una proposta finché il committente non le approva
- * (testi-en.md, sezione Laboratorio).
+ * Le chiavi inglesi sono state approvate l'8 novembre 2026 (testi-en.md,
+ * sezione Laboratorio).
  *
  * I pezzi vengono resi tutti nel markup: lo script della home li riscrive a
  * macchina solo se il movimento è permesso. Così il testo c'è anche senza

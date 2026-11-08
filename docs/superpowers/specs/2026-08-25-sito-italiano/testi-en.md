@@ -1913,24 +1913,24 @@ più grave.
 
 # Home «Laboratorio» (2026-11-08)
 
-Le frasi nuove della home. `[RIUSATO]` = già approvato in questo file. `[DA APPROVARE]` =
-proposta di chi implementa, da far approvare al committente prima del merge della tappa 1.
+Le frasi nuove della home. `[RIUSATO]` = già approvato in questo file. `[APPROVATO]` =
+proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»).
 
-- `[DA APPROVARE]` I build
-- `[DA APPROVARE]` computer vision · applied LLMs · AI agents · custom software
-- `[DA APPROVARE]` Venice
-- `[DA APPROVARE]` ex · CTO · Procedo — phd · Sapienza – PINlab — pub · CVPR · ICCV · IROS
-- `[DA APPROVARE]` ↑ hover over it
-- `[DA APPROVARE]` pose · 11 keypoints
-- `[DA APPROVARE]` For companies
-- `[DA APPROVARE]` For fellow engineers
+- `[APPROVATO]` I build
+- `[APPROVATO]` computer vision · applied LLMs · AI agents · custom software
+- `[APPROVATO]` Venice
+- `[APPROVATO]` ex · CTO · Procedo — phd · Sapienza – PINlab — pub · CVPR · ICCV · IROS
+- `[APPROVATO]` ↑ hover over it
+- `[APPROVATO]` pose · 11 keypoints
+- `[APPROVATO]` For companies
+- `[APPROVATO]` For fellow engineers
 - `[RIUSATO]` I help companies work out where AI is needed, and then I build it.
 - `[RIUSATO]` Every paper I published came out together with the code.
-- `[DA APPROVARE]` diagnosis · audit · software · training →
-- `[DA APPROVARE]` papers · code · notes →
+- `[APPROVATO]` diagnosis · audit · software · training →
+- `[APPROVATO]` papers · code · notes →
 - `[RIUSATO]` Some of the things I've built
-- `[DA APPROVARE]` 4 of N · /work (N = progetti con pagina inglese, calcolato)
-- `[DA APPROVARE]` Terminale: chiavi `phd`, `published_at`, `cto`, `now`; valore «working on my own»
+- `[APPROVATO]` 4 of N · /work (N = progetti con pagina inglese, calcolato)
+- `[APPROVATO]` Terminale: chiavi `phd`, `published_at`, `cto`, `now`; valore «working on my own»
 - Righe dei lavori: Procedo, Spannum, Fanta Mundial, Agentic Workflow Toolkit, con categorie e prime frasi `[RIUSATO]` dalle schede sopra.
-- `[DA APPROVARE]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears
-- `[DA APPROVARE]` solo lettori di schermo: local time
+- `[APPROVATO]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears
+- `[APPROVATO]` solo lettori di schermo: local time

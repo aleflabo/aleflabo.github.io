@@ -5,8 +5,7 @@ import { site } from './site';
 /**
  * I testi della home «Laboratorio» (spec 2026-11-08). Italiano da testi.md,
  * sezione «/ — home «Laboratorio»»; inglese da testi-en.md, sezione «Home
- * «Laboratorio»», dove le frasi nuove sono marcate [DA APPROVARE] finché il
- * committente non le approva.
+ * «Laboratorio»», approvate dal committente l'8 novembre 2026.
  */
 export interface HomeLab {
   nome: string;
