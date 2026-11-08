@@ -19,23 +19,11 @@ import { getProject, projects } from '../../data/projects';
 import { annoEn } from '../../lib/anno';
 import { homeLab } from '../../data/homeLab';
 import { localizedPath } from '../../i18n/ui';
-import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
-import IlProblema from '../../components/sezioni/IlProblema.astro';
-import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
-import LeProve from '../../components/sezioni/LeProve.astro';
-import BloccoFormazione from '../../components/sezioni/BloccoFormazione.astro';
 import Contatto from '../../components/sezioni/Contatto.astro';
 import {
   occhiello,
-  numeri,
-  ilProblema,
-  comeLavoro,
-  leProve,
-  bloccoFormazione,
-  daDoveViene,
   contatto,
 } from '../../data/en/home';
-import { territorio } from '../../data/territorio';
 import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
 import { attivita } from '../../lib/datiStrutturati';
 
@@ -112,17 +100,7 @@ const righeLavori = {
   <Testata lang="en" t={homeLab.en} />
   <Numeri numeri={homeLab.en.numeri} />
   <Porte porte={homeLab.en.porte} />
-  {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
-      italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
-      «The problem»/«The evidence» sui due componenti sotto che li tengono.
-      Le stringhe restano in src/data/en/home.ts — non si tocca quel file
-      dati — semplicemente non si passano più, sovrascritte a `undefined`
-      dopo lo spread. */}
-  <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
-  <IlProblema {...ilProblema} />
-  <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <RigheLavori {...righeLavori} />
-  <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
   <Fascia voci={homeLab.en.stack} />
-  <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />
+  <Contatto {...contatto} eyebrow={undefined} />
 </BaseLayout>

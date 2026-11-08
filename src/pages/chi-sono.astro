@@ -5,6 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoChiSono from '../components/pagine/CorpoChiSono.astro';
 import { chiSono } from '../data/chiSono';
 import { testiChiSonoPagina } from '../data/chiSonoPagina';
+import DaDoveViene from '../components/sezioni/DaDoveViene.astro';
+import Territorio from '../components/sezioni/Territorio.astro';
+import { daDoveViene } from '../data/home';
+import { territorio } from '../data/territorio';
 ---
 
 <BaseLayout
@@ -17,5 +21,10 @@ import { testiChiSonoPagina } from '../data/chiSonoPagina';
 >
   {/* Gli occhielli sovrascritti a `undefined` sono la potatura del primo giro:
       il perché sta in CorpoChiSono.astro, le stringhe restano nei dati. */}
-  <CorpoChiSono lang="it" t={{ ...testiChiSonoPagina, labelComeLavoro: undefined, labelFuori: undefined }} chiSono={chiSono} hrefLavori="/lavori" />
+  <CorpoChiSono lang="it" t={{ ...testiChiSonoPagina, labelComeLavoro: undefined, labelFuori: undefined }} chiSono={chiSono} hrefLavori="/lavori">
+    <Fragment slot="dopo-biografia">
+      <DaDoveViene {...daDoveViene} />
+      <Territorio {...territorio.it} />
+    </Fragment>
+  </CorpoChiSono>
 </BaseLayout>

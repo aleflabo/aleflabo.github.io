@@ -64,6 +64,9 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
     </div>
   </section>
 
+  {/* Le sezioni arrivate dalla home con il Laboratorio (spec 2026-11-08). */}
+  <slot name="dopo-biografia" />
+
   <section class="abitudini">
     <div class="container">
       {/* Potatura degli occhielli: quattro su tre sezioni. «Come lavoro, in

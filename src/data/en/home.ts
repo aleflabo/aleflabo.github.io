@@ -11,7 +11,6 @@
 // `verifica-rotte.mjs`, che boccia un href interno senza barra.
 import { site } from "../site";
 import { emailContatto } from "../legale";
-import { ingaggi } from "./servizi";
 
 const prenotaMezzoraEn = site.en.prenotaMezzora ?? "";
 
@@ -37,19 +36,6 @@ export const occhiello: OcchielloProps = {
   credibilita: "PhD in computer vision at Sapienza · Published at CVPR, ICCV, IROS · Co-founder and CTO of Procedo from 2024 to 2026",
   hrefProcedo: "/en/work/",
 };
-
-// --- FasciaNumeri ---
-interface NumeroFasciaHome {
-  numero: string;
-  etichetta: string;
-}
-
-export const numeri: NumeroFasciaHome[] = [
-  { numero: "10", etichetta: "published papers" },
-  { numero: "533", etichetta: "citations" },
-  { numero: "1", etichetta: "Best Paper Award" },
-  { numero: "2", etichetta: "years as CTO" },
-];
 
 // --- IlProblema ---
 interface IlProblemaProps {
@@ -81,175 +67,6 @@ export const ilProblema: IlProblemaProps = {
       vignetta: "fuoriDaCasa",
     },
   ],
-};
-
-// --- ComeLavoro ---
-// I quattro passi prendono i nomi degli `ingaggi` di ./servizi.ts (stessa
-// decisione dell'italiano, task 10 home-visuale — vedi il commento sopra
-// `comeLavoro` in src/pages/index.astro per il perché). `corpo` è caduto
-// insieme al suo equivalente italiano: senza testo accanto «I listen» e «I
-// stay» erano perfino peggio dei nomi italiani, e il tipo lo segna
-// facoltativo per restare in sincrono con `ComeLavoro.astro`.
-// `nomeIngaggio` cerca per `chiave`, non per indice: stesso principio del
-// file italiano, per non ripetere l'errore già fatto una volta con l'arXiv
-// del CV (dedurre dall'ordine invece di leggere il campo).
-const nomeIngaggio = (chiave: string) => ingaggi.find((i) => i.chiave === chiave)!.nome;
-
-interface ComeLavoroProps {
-  occhiello: string;
-  titolo: string;
-  intro: string;
-  passi: { numero: string; nome: string; corpo?: string; neEsce: string }[];
-  etichettaNeEsce: string;
-  continua: string;
-  hrefContinua: string;
-}
-
-export const comeLavoro: ComeLavoroProps = {
-  occhiello: "How I work",
-  titolo: "How a job usually goes",
-  intro: "Four steps. You can stop after any of them, and what has been done up to that point stays yours anyway.",
-  passi: [
-    {
-      numero: "01",
-      nome: nomeIngaggio("understand"),
-      neEsce: "A list of the places where time is lost, ordered by what they cost.",
-    },
-    {
-      numero: "02",
-      nome: nomeIngaggio("decide"),
-      neEsce: "A document that stays yours, and that you can show to whoever you like.",
-    },
-    {
-      numero: "03",
-      nome: nomeIngaggio("build"),
-      neEsce: "Something your people open on Monday morning and actually use.",
-    },
-    {
-      numero: "04",
-      nome: nomeIngaggio("maintain"),
-      neEsce: "A person who knows the system and who you can call when you need to.",
-    },
-  ],
-  etichettaNeEsce: "What comes out of it",
-  continua: "The four ways of working together, in full",
-  hrefContinua: "/en/services/",
-};
-
-// --- LeProve ---
-// `link`/`href` sono opzionali: «3D Parts Portal» non ha una pagina di
-// destinazione (il case study è `soloItaliano`, task 9/sito-inglese — il
-// suo `href` puntava a `/en/work/portale-ricambi`, una rotta che non
-// esisterà mai), quindi la scheda resta senza collegamento invece di
-// puntare a un 404 o saltare in italiano.
-//
-// Lo scambio (task 9, home-visuale): Spannum esce dalla home — resta
-// raggiungibile su /en/work — ed entra l'Agentic Workflow Toolkit, con
-// `miniatura` (le tre chiavi valgono identiche in italiano e in inglese:
-// sono disegni, non testo) e il suo tag: `tagIt` diventa qui la traduzione
-// approvata in testi-en.md (sezione «Agentic Workflow Toolkit», scheda
-// `[TRADOTTO]`) — «Automated standup», «Regenerated documentation»,
-// «Prompt review» — non una mia traduzione al volo. `eyebrow` è
-// `agentic-toolkit.en.area` in projects.ts («Agentic tooling»), non la
-// coppia con «· daily use» di testi-en.md: così l'ha voluto il committente
-// per questa scheda (vedi task-9-brief.md).
-//
-// `3D Parts Portal` riprende `tagInEvidenza: "Under construction"` (task 10,
-// home-visuale): questo commento diceva che l'equivalente inglese di «In
-// costruzione» non esisteva, ma era un errore di ricerca, non un vuoto nei
-// testi approvati — sta in testi-en.md:826, dentro un blocco marcato
-// `[TRADOTTO]` (reso dall'italiano approvato, non tradotto qui al volo).
-// Il toolkit resta senza `tagInEvidenza` in tutte e due le lingue. Questo
-// commento diceva che il vuoto era solo inglese, perché l'italiano aveva
-// «Strumenti miei, per il mio team»: la revisione finale ha trovato che
-// quella frase non stava in testi.md né in projects.ts — era stata scritta
-// dentro index.astro, ed è uscita in produzione. È caduta di lì, non
-// tradotta qui. Se serve, la frase si fa approvare prima, in italiano.
-interface Prova {
-  eyebrow: string;
-  nome: string;
-  corpo: string;
-  tag: string[];
-  tagInEvidenza?: string;
-  miniatura?: "ricambi" | "procedo" | "toolkit";
-  link?: string;
-  href?: string;
-  esterno?: boolean;
-}
-interface LeProveProps {
-  occhiello: string;
-  titolo: string;
-  prove: Prova[];
-  continua: string;
-  hrefContinua: string;
-}
-
-export const leProve: LeProveProps = {
-  occhiello: "The evidence",
-  titolo: "Some of the things I've built",
-  prove: [
-    {
-      eyebrow: "Mechanical engineering · real client project",
-      nome: "3D Parts Portal",
-      corpo: "The customer opens the 3D model of the machine they bought, clicks the part they need, and the request reaches the company already matched to that component's internal code.",
-      tag: ["CAD pipeline, 80 tests", "Intellectual property protected"],
-      tagInEvidenza: "Under construction",
-      miniatura: "ricambi",
-    },
-    {
-      eyebrow: "Industry · in production",
-      nome: "Procedo",
-      corpo: "Video shot on the shop floor becomes step-by-step procedures, and the people doing the work can ask questions of their own company's documentation. I was co-founder and CTO for two years; today I follow it as an advisor.",
-      tag: ["Industrial customers", "B4i Bocconi", "Angel round"],
-      miniatura: "procedo",
-      link: "How it works",
-      href: "/en/work/procedo/",
-    },
-    {
-      eyebrow: "Agentic tooling",
-      nome: "Agentic Workflow Toolkit",
-      corpo: "A suite of AI-agent skills that automate my team's ops and engineering workflows, from daily standups to LLM-prompt review.",
-      tag: ["Automated standup", "Regenerated documentation", "Prompt review"],
-      miniatura: "toolkit",
-      link: "How it works",
-      href: "/en/work/agentic-toolkit/",
-    },
-  ],
-  continua: "All the work, research included",
-  hrefContinua: "/en/work/",
-};
-
-// --- BloccoFormazione ---
-// `formati[].corpo` e `chiusura` sono caduti (task 11, home-visuale): la
-// striscia (task 7) non li ha mai resi — sono facoltativi in
-// BloccoFormazione.astro — e nessun altro componente della home li legge,
-// a differenza dei testi estesi di /en/training, che vivono in un file
-// dati proprio. `en/index.astro` passa `introduzioni[1]` — non `[0]` —
-// alla striscia: è la seconda voce di quest'array, quella sull'AI Act, non
-// la prima.
-interface BloccoFormazioneProps {
-  occhiello: string;
-  titolo: string;
-  introduzioni: string[];
-  formati: { ore: string; nome: string }[];
-  linkChiusura: string;
-  hrefChiusura: string;
-}
-
-export const bloccoFormazione: BloccoFormazioneProps = {
-  occhiello: "Training",
-  titolo: "It starts with people",
-  introduzioni: [
-    "Four hours, at your company or in a classroom, to show people what these tools can do and where their limits are. We work on concrete cases.",
-    "Since February 2025 the AI Act requires companies that use artificial intelligence tools to ensure a minimum level of training for their staff, and to be able to document it. You'll do that course anyway: it may as well be good for something.",
-  ],
-  formati: [
-    { ore: "4 hours", nome: "Introductory course" },
-    { ore: "8–12 hours", nome: "Workshop by function" },
-    { ore: "Length agreed", nome: "Funded programme" },
-  ],
-  linkChiusura: "How a course gets organised",
-  hrefChiusura: "/en/training/",
 };
 
 // --- DaDoveViene ---

@@ -17,6 +17,8 @@ const datiStrutturati = [
     { nome: 'Services', percorso: localizedPath('en', '/services') },
   ]),
 ];
+import IlProblema from '../../components/sezioni/IlProblema.astro';
+import { ilProblema } from '../../data/en/home';
 ---
 
 <BaseLayout
@@ -37,5 +39,9 @@ const datiStrutturati = [
     faq={faq}
     perChiNonSono={perChiNonSono}
     hrefLavori="/work"
-  />
+  >
+    <Fragment slot="apertura">
+      <IlProblema {...ilProblema} />
+    </Fragment>
+  </CorpoServizi>
 </BaseLayout>
