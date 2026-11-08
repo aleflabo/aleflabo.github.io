@@ -241,7 +241,7 @@ export const bloccoFormazione: BloccoFormazioneProps = {
   titolo: "It starts with people",
   introduzioni: [
     "Four hours, at your company or in a classroom, to show people what these tools can do and where their limits are. We work on concrete cases.",
-    "Since February 2025 the AI Act requires companies that use artificial intelligence tools to ensure a minimum level of training for their staff, and to be able to document it. You'll do that course anyway: it may as well be good for something.",
+    "Since February 2025 the AI Act requires companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. You'll do that course anyway: it may as well be good for something.",
   ],
   formati: [
     { ore: "4 hours", nome: "Introductory course" },
