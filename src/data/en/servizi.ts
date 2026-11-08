@@ -1,3 +1,4 @@
+import type { Policy } from '../servizi';
 // Testi inglesi di /en/services. Fonte: docs/superpowers/specs/2026-08-25-sito-italiano/testi-en.md,
 // sezione «2. /en/services» — tutti i blocchi sono [TRADOTTO], tranne il
 // primo `faq[0].link` che riusa l'href risolto verso /en/your-data.
@@ -89,3 +90,16 @@ export const perChiNonSono: string[] = [
   "If you need somebody there every day, it's better to hire a person than to call a consultant.",
   "If the data you'd need doesn't exist, or nobody has ever written it down, the first job is collecting it, and that takes time.",
 ];
+
+/**
+ * La policy interna sull'uso dell'AI: servizio a parte, non incluso nei corsi.
+ * Compare su /servizi (dopo i quattro ingaggi) e su /formazione. Testi
+ * approvati l'8 novembre 2026 (testi-en.md, sezione formazione — Laboratorio).
+ */
+export const policy: Policy = {
+  titolo: "A separate service: an internal AI policy",
+  corpo: ["A document that tells everyone in the company which tools are used, with which data, and who decides. It answers the question that always comes after the course: what can I paste into ChatGPT?"],
+  consegna: ["A 3–5 page document.", "A one-page summary to share around the company.", "The list of approved tools, with the settings to use."],
+  durata: "About a week: an hour's interview with the owner, a draft, a review together.",
+  avvertenza: "It is not a substitute for legal advice.",
+};

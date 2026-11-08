@@ -18,6 +18,7 @@
 // presente nella gemella italiana: la stessa lacuna nei passi del brief
 // aveva già fatto saltare una fascia intera lato italiano in un giro
 // precedente, qui non si ripete.
+import '../../../styles/lavori.css';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import TestataPagina from '../../../components/TestataPagina.astro';
 import RigaLavoro from '../../../components/sezioni/RigaLavoro.astro';
@@ -47,10 +48,11 @@ const scene = ['SCENE 1', 'SCENE 2', 'SCENE 3', 'SCENE 4'];
   pathIt="/lavori"
   attiva="work"
 >
+  <div class="pagina-lavori">
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello="Work"
+        percorso="/en/work"
         titolo="What I've built"
         introduzione="Above, the software made for a company's work; below, the products, the games and the things I built on my own. Each card says how it came about and where it stands."
       />
@@ -168,131 +170,6 @@ const scene = ['SCENE 1', 'SCENE 2', 'SCENE 3', 'SCENE 4'];
       </div>
     </div>
   </section>
+  </div>
 </BaseLayout>
 
-<style>
-  .container {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* --- intestazione --- */
-  .intestazione {
-    padding: 0;
-  }
-  .intestazione .container {
-    padding: 72px 24px 44px;
-  }
-
-  /* --- i due gruppi --- */
-  .gruppo {
-    padding: 0;
-  }
-  .gruppo .container {
-    padding: 0 24px 20px;
-  }
-  .gruppo + .gruppo .container {
-    padding-top: 46px;
-  }
-  .titolo-gruppo {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .intro-gruppo {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-  }
-  .righe {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* --- fotogrammi segnaposto, «A story across several scenes» --- */
-  .scene {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    max-width: 640px;
-  }
-  .fotogramma {
-    aspect-ratio: 16 / 10;
-    background: var(--surface-warm);
-    border: 1px dashed var(--text-faint);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .fotogramma span {
-    font-size: 11px;
-    color: var(--text-faint);
-    letter-spacing: 0.08em;
-  }
-  .nota-scene {
-    margin-top: 10px;
-    font-size: 12.5px;
-    color: var(--text-faint);
-  }
-
-  /* --- chiusura: rimando alla ricerca --- */
-  .chiusura {
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    margin-top: 50px;
-    padding: 0;
-  }
-  .chiusura .container {
-    padding: 60px 24px;
-  }
-  .chiusura h2 {
-    font-size: 26px;
-    max-width: 30ch;
-  }
-  .chiusura .intro {
-    margin-top: 16px;
-    font-size: 16.5px;
-    line-height: 1.65;
-    color: var(--text-muted);
-    max-width: 60ch;
-  }
-  .link-chiusura {
-    display: flex;
-    gap: 26px;
-    margin-top: 24px;
-  }
-  .link-chiusura a {
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  @media (max-width: 640px) {
-    .intestazione .container {
-      padding: 44px 20px 36px;
-    }
-    .gruppo .container {
-      padding: 0 20px 16px;
-    }
-    .gruppo + .gruppo .container {
-      padding-top: 36px;
-    }
-    .scene {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: none;
-    }
-    .chiusura .container {
-      padding: 44px 20px;
-    }
-    .link-chiusura {
-      flex-direction: column;
-      gap: 12px;
-    }
-  }
-</style>

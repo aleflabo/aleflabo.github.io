@@ -1,0 +1,25 @@
+---
+// Una sezione delle pagine interne del Laboratorio: il contenitore a filo da
+// 1040px, come la home. `titolo` facoltativo rende l'<h2> della sezione.
+interface Props { titolo?: string; class?: string; id?: string }
+const { titolo, class: classe, id } = Astro.props;
+---
+
+<section class:list={['foglio-sez', classe]} id={id}>
+  <div class="foglio-in">
+    {titolo && <h2>{titolo}</h2>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .foglio-sez { padding: 0; border-bottom: 1px solid var(--filo); }
+  .foglio-in {
+    max-width: var(--maxw-lab);
+    margin: 0 auto;
+    border-inline: 1px solid var(--filo);
+    padding: 36px 28px;
+  }
+  h2 { font-size: 1.625rem; margin-bottom: 18px; }
+  @media (max-width: 820px) { .foglio-in { padding: 28px 16px; } }
+</style>

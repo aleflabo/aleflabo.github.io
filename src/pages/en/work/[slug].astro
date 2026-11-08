@@ -6,6 +6,7 @@
 // sito-inglese: `attiva="work"`, anno reso da `annoEn`, collegamento di
 // ritorno che dice il titolo della pagina di destinazione (/en/work, il cui
 // h1 è «What I've built»), come fa l'italiano con «Quello che ho costruito».
+import '../../../styles/lavori.css';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import StackChip from '../../../components/StackChip.astro';
 import { projects, getProject } from '../../../data/projects';
@@ -43,18 +44,20 @@ const datiStrutturati = [
 ];
 ---
 <BaseLayout title={`${project.name} — Alessandro Flaborea`} description={c.summary} lang="en" path={path} pathIt={pathIt} ogType="article" attiva="work" datiStrutturati={datiStrutturati}>
-  <article class="container case">
+  <article class="caso">
     <a class="back" href={localizedPath('en', '/work')}>← What I've built</a>
-    <p class="label">{c.area} · {project.role} · {annoEn(project.year)}</p>
+    <p class="meta mono">{c.area} · {project.role} · {annoEn(project.year)}</p>
     <h1>{project.name}</h1>
     <p class="lead muted">{c.summary}</p>
     <div class="chips">{project.stack.map((s) => <StackChip label={s} />)}</div>
     {/* Campo vuoto in projects.ts → sezione saltata invece di
         un'intestazione senza corpo, come la gemella italiana
         (correzione giro 1, task-11-report.md). */}
-    {c.problem && <section><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></section>}
-    {c.approach && <section><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></section>}
-    {c.result && <section><h2>{t.caseStudy.result}</h2><p>{c.result}</p></section>}
+    <div class="celle esito">
+    {c.problem && <div><h2>{t.caseStudy.problem}</h2><p>{c.problem}</p></div>}
+    {c.approach && <div><h2>{t.caseStudy.approach}</h2><p>{c.approach}</p></div>}
+    {c.result && <div><h2>{t.caseStudy.result}</h2><p>{c.result}</p></div>}
+    </div>
     {(project.url || project.repo) && (
       <section class="links">
         {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{t.workLiveLabel} ↗</a>}
@@ -64,13 +67,4 @@ const datiStrutturati = [
     <!-- media (screenshots / video) goes here when available -->
   </article>
 </BaseLayout>
-<style>
-  .case { max-width: 720px; padding-top: 6rem; padding-bottom: 4rem; }
-  .case h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0; }
-  .case .lead { font-size: 1.15rem; margin-bottom: 1rem; }
-  .case .chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .case section { padding: 1.25rem 0; border-top: 1px solid var(--border); }
-  .case h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-  .back { font-size: 0.85rem; color: var(--accent); }
-  .links { display: flex; gap: 1.25rem; }
-</style>
+

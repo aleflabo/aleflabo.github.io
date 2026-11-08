@@ -14,6 +14,13 @@
   --rilevamento-testo: #d6195a;
   --blu-cella: #2b59ff;
   --vivo: #18b26b;
+  /* Tratti dei disegni: linee inerti e l'alone tenue dell'accento. */
+  --tratto: #b9c0cc;
+  --rilevamento-tenue: #ffd3e0;
+  --rilevamento-velo: #fff0f4;
+  --tratto-accento: #ffa3bd;
+  /* Un grado sotto la carta, per gli sfondi al passaggio del mouse. */
+  --carta-2: #eef1f5;
 
   --font-testo: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -22,31 +29,6 @@
   --raggio-piccolo: 6px;
   --raggio-grande: 20px;
 
-  /* Alias dei nomi di prima. Le pagine interne si rifanno nella tappa 2:
-     fino ad allora leggono questi, che puntano già alla palette nuova, così
-     restano leggibili invece di cadere sui valori di ripiego del browser.
-     La tappa 2 li toglie. */
-  --bg: var(--carta);
-  --surface: var(--bianco);
-  --surface-warm: #eef1f5;
-  --text: var(--inchiostro);
-  --text-muted: var(--muto);
-  --text-faint: var(--muto);
-  --border: var(--filo);
-  --accent: var(--inchiostro);
-  --azione: var(--rilevamento-testo);
-  --evidenziatore: #ffd3e0;
-  --evidenziatore-tenue: #fff0f4;
-  --tratto-inerte: #b9c0cc;
-  --tratto-tenue: #ffa3bd;
-  --su-accent: #c3cad6;
-  --su-accent-forte: #e4e8ee;
-  --su-accent-debole: #9aa3b2;
-  --font-serif: var(--font-testo);
-  --font-sans: var(--font-testo);
-  --maxw: 1120px;
-  --gap: 1.25rem;
-  --radius: 4px;
 }
 
 * {

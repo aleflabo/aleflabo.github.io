@@ -100,3 +100,24 @@ export const perChiNonSono: string[] = [
   "Se serve qualcuno presente tutti i giorni, conviene assumere una persona invece di chiamare un consulente.",
   "Se i dati che servirebbero non esistono o nessuno li ha mai messi per iscritto, il primo lavoro è raccoglierli, e richiede tempo.",
 ];
+
+export interface Policy {
+  titolo: string;
+  corpo: string[];
+  consegna: string[];
+  durata: string;
+  avvertenza: string;
+}
+
+/**
+ * La policy interna sull'uso dell'AI: servizio a parte, non incluso nei corsi.
+ * Compare su /servizi (dopo i quattro ingaggi) e su /formazione. Testi
+ * approvati l'8 novembre 2026 (testi.md, sezione formazione — Laboratorio).
+ */
+export const policy: Policy = {
+  titolo: "Servizio a parte: la policy interna sull'uso dell'AI",
+  corpo: ["Un documento che dice a tutti in azienda quali strumenti si usano, con quali dati e chi decide. Risponde alla domanda che arriva sempre dopo il corso: cosa posso incollare in ChatGPT?"],
+  consegna: ["Un documento di 3-5 pagine.", "Una pagina riassuntiva da far girare in azienda.", "L'elenco degli strumenti ammessi, con le impostazioni da usare."],
+  durata: "Circa una settimana: un'ora di intervista con il titolare, una bozza, una revisione insieme.",
+  avvertenza: "Non sostituisce il parere di un legale.",
+};

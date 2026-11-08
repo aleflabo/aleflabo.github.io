@@ -1,0 +1,35 @@
+---
+// La policy interna sull'uso dell'AI, servizio a parte (spec formazione
+// 2026-11-08). Un componente solo per /servizi e /formazione.
+import type { Policy } from '../../data/servizi';
+interface Props { policy: Policy }
+const { policy } = Astro.props;
+---
+
+<div class="policy">
+  <div>
+    <h2>{policy.titolo}</h2>
+    {policy.corpo.map((c) => <p>{c}</p>)}
+    <p>{policy.durata}</p>
+    <p class="avvertenza mono">{policy.avvertenza}</p>
+  </div>
+  <ul>{policy.consegna.map((c) => <li>{c}</li>)}</ul>
+</div>
+
+<style>
+  .policy {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 24px;
+    background: var(--bianco);
+    border: 1px solid var(--filo);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  h2 { font-size: 1.375rem; letter-spacing: -0.03em; margin-bottom: 8px; }
+  p { color: var(--muto); line-height: 1.55; }
+  p + p { margin-top: 10px; }
+  .avvertenza { font-size: 0.75rem; }
+  ul { margin: 0; padding-left: 18px; line-height: 1.6; }
+  @media (max-width: 820px) { .policy { grid-template-columns: 1fr; padding: 18px; } }
+</style>
