@@ -7,12 +7,13 @@ import TestataPagina from '../components/TestataPagina.astro';
 import TestoLegale from '../components/TestoLegale.astro';
 import { privacy as testo } from '../data/legale';
 import { statistiche } from '../data/analytics';
-import { conStatistiche } from '../lib/informativa';
+import { conStatistiche, conModulo } from '../lib/informativa';
+import { moduloContatto } from '../data/modulo';
 
 // L'informativa segue l'interruttore in src/data/analytics.ts: se un
 // giorno il sito conta le visite, questa pagina lo dice dallo stesso
 // posto da cui lo script viene reso, non da una modifica a mano.
-const p = conStatistiche(testo, 'it', statistiche);
+const p = conModulo(conStatistiche(testo, 'it', statistiche), 'it', moduloContatto);
 ---
 
 <BaseLayout

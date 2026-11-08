@@ -24,6 +24,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      // La conferma dopo l'invio del modulo non è una pagina da cercare.
+      filter: (pagina) => !/\/(grazie|en\/thanks)\/$/.test(pagina),
       // `i18n` da solo appaiava gli URL per struttura del percorso: dichiarava
       // gli alternati di /privacy/ ↔ /en/privacy/ e li lasciava fuori per
       // /chi-sono/ ↔ /en/about/, dove gli slug differiscono. Quattro URL su

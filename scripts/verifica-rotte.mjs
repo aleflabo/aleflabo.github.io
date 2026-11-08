@@ -135,6 +135,35 @@ for (const [home, elenco, schema] of [
   }
 }
 
+// Il modulo e l'informativa devono dire la stessa cosa (tappa 3 del
+// Laboratorio). Se una pagina ha un <form> che invia a Web3Forms, la privacy
+// deve nominare Web3Forms e non dire più che il modulo «non è ancora
+// collegato»; se nessuna pagina invia, la privacy non deve nominare Web3Forms.
+// L'interruttore è src/data/modulo.ts: qui si guarda il costruito.
+{
+  const pagine = existsSync("dist") ? trovaHtml("dist") : [];
+  const invia = pagine.some((f) => /<form[^>]+action="https:\/\/api\.web3forms\.com\/submit"/.test(readFileSync(f, "utf8")));
+  // Le frasi che a modulo acceso diventano false. «Per quanto tempo» diceva
+  // che il sito non raccoglie dati: trovato dalla revisione finale della
+  // tappa 3, e la sua sostituzione deve arrivare insieme all'interruttore.
+  for (const [file, ...false_] of [
+    ["dist/privacy/index.html", "non è ancora collegato", "perché il sito non ne raccoglie"],
+    ["dist/en/privacy/index.html", "isn't connected to any service yet", "because the site collects none"],
+  ]) {
+    if (!existsSync(file)) {
+      dice(`manca ${file}: impossibile verificare che modulo e informativa coincidano`);
+      continue;
+    }
+    const html = readFileSync(file, "utf8");
+    if (invia && (false_.some((f) => html.includes(f)) || !html.includes("Web3Forms"))) {
+      dice(`${file}: il modulo invia a Web3Forms ma l'informativa non lo dice`);
+    }
+    if (!invia && html.includes("Web3Forms")) {
+      dice(`${file}: l'informativa nomina Web3Forms ma il modulo è spento`);
+    }
+  }
+}
+
 // Verifica RSS
 if (!existsSync("dist/rss.xml")) {
   dice("manca il feed RSS");

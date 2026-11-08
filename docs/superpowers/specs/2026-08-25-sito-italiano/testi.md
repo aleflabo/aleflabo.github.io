@@ -1437,3 +1437,15 @@ Approvati dal committente l'8 novembre 2026 («ok»), dopo il mockup «A · Form
 - `domanda` La legge italiana aggiunge obblighi?
 - `risposta` No. La Legge 132 del 2025 dichiara di non produrre obblighi nuovi rispetto all'AI Act. (fonte: legge132)
 - `etichetta` fonte
+
+## Modulo di contatto acceso — tappa 3 (2026-11-08)
+
+Approvati dal committente l'8 novembre 2026 («ok»). Compaiono **solo** a interruttore acceso (`src/data/modulo.ts`).
+
+- `testo` (privacy, «Se mi scrivete», primo paragrafo) Se compilate il modulo di contatto, quello che scrivete (azienda, recapito, richiesta e urgenza) passa da Web3Forms, un servizio che lo riceve e me lo inoltra per mail. Web3Forms tratta quei dati per conto mio; per come li conserva vale la sua informativa (web3forms.com/privacy). Il modulo non usa cookie e non carica nulla da fuori: il vostro browser parla con Web3Forms solo nel momento in cui premete «Manda». Io conservo le richieste il tempo necessario a rispondervi e a portare avanti un eventuale lavoro insieme.
+- `LINK` Come uso questi dati: informativa →
+- `titolo` Messaggio partito.
+- `testo` Ti rispondo appena lo leggo. Se è urgente, scrivimi anche su WhatsApp.
+- `LINK` Torna alla home →
+- `oggetto mail` Nuova richiesta da flaborea.com
+- `testo` (privacy, «Per quanto tempo», a modulo acceso; approvato l'8 novembre 2026) Il sito raccoglie solo quello che scrivete nel modulo di contatto, che Web3Forms mi inoltra: per quanto lo conserva Web3Forms vale la sua informativa. Quello che mi mandate direttamente (un messaggio, un allegato) lo tengo finché serve a rispondervi o a lavorare insieme, e poi lo elimino.
