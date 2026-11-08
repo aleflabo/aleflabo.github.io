@@ -1342,3 +1342,98 @@ sono ripetute.
 
 - `aria-label` Indice (indice delle sezioni nelle pagine legali)
 - `etichetta` not_found · 1.00 (riquadro di detection sulla 404; approvato col mockup «A · Pagine interne», 8 novembre 2026)
+
+
+## /formazione e policy — Laboratorio (2026-11-08)
+
+Approvati dal committente l'8 novembre 2026 («ok»), dopo il mockup «A · Formazione». Fonte di lavoro: `../2026-11-08-redesign-laboratorio/testi-formazione.json`. «Che cosa questo corso non è» perde la prima voce, il resto resta alla lettera.
+
+- `testo` Una cosa che conviene sapere
+- `testo` Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.
+- `testo` La norma non fissa un numero di ore e non chiede un attestato: chiede di poter mostrare che cosa si è fatto. Il corso introduttivo, con il suo registro presenze, è il modo più semplice di farlo, e serve anche a lavorare meglio.
+- `testo` In presenza oppure online.
+- `testo` Al massimo 10 persone per lezione.
+- `etichetta` Per tutta l'azienda
+- `etichetta` Per i team tecnici
+- `etichetta` per chi
+- `etichetta` programma
+- `etichetta` serve da voi
+- `etichetta` base
+- `etichetta` avanzato
+- `titolo` Corso introduttivo
+  - `etichetta` 4 ore
+  - `testo` Tutti, compreso chi non ha mai aperto ChatGPT
+    - `testo` Come funzionano questi strumenti, e perché a volte sbagliano con sicurezza
+    - `testo` Accorgersi di un errore: fonti, numeri, citazioni da controllare
+    - `testo` Che fine fanno i documenti che ci si incolla dentro, e quali impostazioni usare
+    - `testo` Dove conviene usarli davvero, con esempi presi dal vostro lavoro
+    - `testo` Cosa chiede l'AI Act alla vostra azienda, senza allarmismi
+  - `testo` Una sala e un proiettore
+- `titolo` Laboratorio per funzione
+  - `etichetta` 8-12 ore
+  - `testo` Un reparto alla volta, gruppi piccoli
+    - `testo` Si sceglie un'attività del reparto che oggi occupa ore
+    - `testo` Si prova con gli strumenti sui documenti veri
+    - `testo` Si misura quanto tempo si risparmia e dove lo strumento sbaglia
+    - `testo` Si scrive la procedura che il reparto userà dal giorno dopo
+  - `testo` Documenti reali e il permesso di usarli
+- `titolo` Python
+  - `etichetta` 8 ore
+  - `testo` Chi non ha mai programmato, o è arrivato al limite delle formule di Excel
+    - `testo` Preparare il computer e scrivere il primo programma
+    - `testo` Variabili, liste, condizioni e cicli, su dati veri
+    - `testo` Leggere e scrivere file Excel e CSV
+    - `testo` Automatizzare un'attività ripetitiva dell'ufficio
+    - `testo` Farsi aiutare dall'AI a scrivere codice, e come controllarlo
+  - `etichetta` 12-16 ore
+  - `testo` Chi scrive già script e vuole che reggano nel tempo
+    - `testo` Un progetto in ordine: ambienti, dipendenze, struttura
+    - `testo` Test automatici
+    - `testo` Analizzare dati con pandas
+    - `testo` Chiamare API e modelli linguistici da Python
+    - `testo` Far girare uno script da solo: pianificazione, log, errori
+  - `testo` Un portatile a testa
+- `titolo` Claude Code
+  - `etichetta` 8 ore
+  - `testo` Chi vuole costruire piccoli strumenti con un agente, anche senza saper programmare
+    - `testo` Cos'è un agente di programmazione e cosa fa sul vostro computer
+    - `testo` Dal problema al primo strumento funzionante, in aula
+    - `testo` Leggere quello che l'agente ha fatto e accorgersi quando sbaglia
+    - `testo` Permessi e dati: cosa non lasciargli fare
+    - `testo` Tenere il lavoro in ordine: versioni e documentazione
+  - `etichetta` 12-16 ore
+  - `testo` Sviluppatori che vogliono lavorare con un agente dentro il proprio codice
+    - `testo` Preparare il progetto: istruzioni, memoria, regole
+    - `testo` Pianificare prima di scrivere: specifiche e piani
+    - `testo` Prima i test, poi il codice, con l'agente
+    - `testo` Comandi, skill, hook e strumenti esterni (MCP)
+    - `testo` Revisione del codice e più agenti in parallelo
+  - `testo` Un portatile a testa e un account con un piano attivo: senza, si raggiungono subito i limiti d'uso
+- `titolo` Cosa resta all'azienda
+- `testo` Un attestato di partecipazione per ogni persona.
+- `testo` Il registro presenze con il programma svolto, da conservare come prova di quello che avete fatto per l'articolo 4.
+- `testo` I materiali del corso.
+- `testo` L'attestato certifica la presenza: non è una qualifica e non ha valore legale.
+- `titolo` Servizio a parte: la policy interna sull'uso dell'AI
+- `testo` Un documento che dice a tutti in azienda quali strumenti si usano, con quali dati e chi decide. Risponde alla domanda che arriva sempre dopo il corso: cosa posso incollare in ChatGPT?
+- `testo` Un documento di 3-5 pagine.
+- `testo` Una pagina riassuntiva da far girare in azienda.
+- `testo` L'elenco degli strumenti ammessi, con le impostazioni da usare.
+- `testo` Circa una settimana: un'ora di intervista con il titolare, una bozza, una revisione insieme.
+- `testo` Non sostituisce il parere di un legale.
+- `titolo` L'AI Act, in sette domande
+- `domanda` Serve un attestato?
+- `risposta` No. La Commissione europea scrive che non serve un certificato e che basta tenere un registro interno delle formazioni. L'attestato che rilascio è una prova in più, non un obbligo. (fonte: commissioneQa)
+- `domanda` Deve farlo un ente accreditato?
+- `risposta` No: la norma non pone requisiti a chi fa formazione. Un ente serve solo se il corso è pagato con un fondo interprofessionale o deve entrare in un catalogo regionale. (fonte: commissioneQa)
+- `domanda` Quante ore servono?
+- `risposta` La norma non le fissa, e non fissa nemmeno un programma: dipende da chi usa quali strumenti e con quali rischi. Il corso introduttivo da quattro ore è la misura di base che propongo. (fonte: commissioneQa)
+- `domanda` Vale anche se usiamo solo ChatGPT?
+- `risposta` Sì. L'articolo 4 riguarda chi usa sistemi di intelligenza artificiale per conto dell'azienda, senza soglie di dimensione. (fonte: regolamento2026_1744)
+- `domanda` Riguarda anche i collaboratori esterni?
+- `risposta` Sì: il testo parla del personale e delle altre persone che usano questi sistemi per conto dell'azienda. (fonte: regolamento2026_1744)
+- `domanda` Da quando si rischiano sanzioni?
+- `risposta` L'obbligo esiste dal 2 febbraio 2025. Le autorità nazionali vigilano dal 2 agosto 2026. (fonte: commissioneQa)
+- `domanda` La legge italiana aggiunge obblighi?
+- `risposta` No. La Legge 132 del 2025 dichiara di non produrre obblighi nuovi rispetto all'AI Act. (fonte: legge132)
+- `etichetta` fonte

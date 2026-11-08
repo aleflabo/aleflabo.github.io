@@ -1938,3 +1938,98 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 
 - `[APPROVATO]` `aria-label` Contents (section index on the legal pages)
 - `[APPROVATO]` not_found · 1.00 (detection box on the 404, approved with the «A · Pagine interne» mockup, 8 November 2026)
+
+
+# /en/training and policy — Laboratorio (2026-11-08)
+
+`[APPROVATO]` dal committente l'8 novembre 2026 («ok»). Fonte di lavoro: `../2026-11-08-redesign-laboratorio/testi-formazione.json`. «What this course is not» drops its first item.
+
+- `testo` Something worth knowing
+- `testo` Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.
+- `testo` The rule sets no number of hours and asks for no certificate: what matters is being able to show what you have done. The introductory course, with its attendance register, is the simplest way to do that, and it also helps people work better.
+- `testo` In person or online.
+- `testo` At most 10 people per session.
+- `etichetta` For the whole company
+- `etichetta` For technical teams
+- `etichetta` who it's for
+- `etichetta` programme
+- `etichetta` what you need
+- `etichetta` beginner
+- `etichetta` advanced
+- `titolo` Introductory course
+  - `etichetta` 4 hours
+  - `testo` Everyone, including people who have never opened ChatGPT
+    - `testo` How these tools work, and why they are sometimes confidently wrong
+    - `testo` Spotting a mistake: sources, figures and quotes to check
+    - `testo` What happens to the documents you paste in, and which settings to use
+    - `testo` Where they are actually worth using, with examples from your own work
+    - `testo` What the AI Act asks of your company, without alarmism
+  - `testo` A room and a projector
+- `titolo` Workshop by function
+  - `etichetta` 8–12 hours
+  - `testo` One department at a time, small groups
+    - `testo` We pick a task that takes the department hours today
+    - `testo` We try the tools on the real documents
+    - `testo` We measure how much time is saved and where the tool gets it wrong
+    - `testo` We write the procedure the department will use from the next day
+  - `testo` Real documents and permission to use them
+- `titolo` Python
+  - `etichetta` 8 hours
+  - `testo` People who have never programmed, or who have reached the limit of Excel formulas
+    - `testo` Setting up the computer and writing a first program
+    - `testo` Variables, lists, conditions and loops, on real data
+    - `testo` Reading and writing Excel and CSV files
+    - `testo` Automating a repetitive office task
+    - `testo` Getting AI to help you write code, and how to check it
+  - `etichetta` 12–16 hours
+  - `testo` People who already write scripts and want them to last
+    - `testo` A tidy project: environments, dependencies, structure
+    - `testo` Automated tests
+    - `testo` Analysing data with pandas
+    - `testo` Calling APIs and language models from Python
+    - `testo` Running a script on its own: scheduling, logs, errors
+  - `testo` A laptop each
+- `titolo` Claude Code
+  - `etichetta` 8 hours
+  - `testo` People who want to build small tools with an agent, even without knowing how to program
+    - `testo` What a coding agent is and what it does on your computer
+    - `testo` From a problem to a first working tool, in the session
+    - `testo` Reading what the agent has done and noticing when it is wrong
+    - `testo` Permissions and data: what not to let it do
+    - `testo` Keeping the work tidy: versions and documentation
+  - `etichetta` 12–16 hours
+  - `testo` Developers who want to work with an agent inside their own code
+    - `testo` Preparing the project: instructions, memory, rules
+    - `testo` Planning before writing: specs and plans
+    - `testo` Tests first, then code, with the agent
+    - `testo` Commands, skills, hooks and external tools (MCP)
+    - `testo` Code review and several agents in parallel
+  - `testo` A laptop each and an account on an active plan: without one, you hit the usage limits straight away
+- `titolo` What the company keeps
+- `testo` A certificate of attendance for each person.
+- `testo` The attendance register with the programme covered, to keep as evidence of what you have done for Article 4.
+- `testo` The course materials.
+- `testo` The certificate records attendance: it is not a qualification and has no legal standing.
+- `titolo` A separate service: an internal AI policy
+- `testo` A document that tells everyone in the company which tools are used, with which data, and who decides. It answers the question that always comes after the course: what can I paste into ChatGPT?
+- `testo` A 3–5 page document.
+- `testo` A one-page summary to share around the company.
+- `testo` The list of approved tools, with the settings to use.
+- `testo` About a week: an hour's interview with the owner, a draft, a review together.
+- `testo` It is not a substitute for legal advice.
+- `titolo` The AI Act, in seven questions
+- `domanda` Do we need a certificate?
+- `risposta` No. The European Commission says a certificate is not needed and an internal record of training is enough. The certificate I issue is extra evidence, not a requirement. (fonte: commissioneQa)
+- `domanda` Does it have to be an accredited provider?
+- `risposta` No: the rule sets no requirements on who provides the training. A provider is only needed if the course is paid for by an interprofessional fund or has to go into a regional catalogue. (fonte: commissioneQa)
+- `domanda` How many hours are needed?
+- `risposta` The rule doesn't set them, and doesn't set a programme either: it depends on who uses which tools and with what risks. The four-hour introductory course is the basic measure I suggest. (fonte: commissioneQa)
+- `domanda` Does it apply if we only use ChatGPT?
+- `risposta` Yes. Article 4 covers anyone using artificial intelligence systems on the company's behalf, with no size threshold. (fonte: regolamento2026_1744)
+- `domanda` Does it cover external contractors too?
+- `risposta` Yes: the text covers staff and other people using these systems on the company's behalf. (fonte: regolamento2026_1744)
+- `domanda` From when can there be penalties?
+- `risposta` The obligation has applied since 2 February 2025. National authorities have supervised it since 2 August 2026. (fonte: commissioneQa)
+- `domanda` Does Italian law add obligations?
+- `risposta` No. Law 132 of 2025 states that it creates no new obligations beyond the AI Act. (fonte: legge132)
+- `etichetta` source
