@@ -14,86 +14,54 @@ interface Props {
 }
 const { anno, areaStato, nome, corpo, tagIt, href } = Astro.props;
 const Tag = href ? 'a' : 'div';
+// L'etichetta di stato («In costruzione», «In produzione», «Online e
+// pubblico»…) ha il bordo verde: è l'informazione che chi legge cerca per
+// prima. Le altre etichette restano neutre.
+const eStato = (t: string) => /^(In |Online|Live)/.test(t);
 ---
 
 <Tag class="riga" {...(href ? { href } : {})}>
-  <span class="anno">{anno}</span>
+  <span class="anno mono">{anno}</span>
   <div class="corpo-riga">
-    <p class="occhiello">{areaStato}</p>
     <h3>{nome}</h3>
     <p class="testo">{corpo}</p>
     <div class="tag">
-      {tagIt.map((t) => <span>{t}</span>)}
+      {tagIt.map((t) => <span class:list={['mono', { stato: eStato(t) }]}>{t}</span>)}
     </div>
     <slot />
   </div>
+  <p class="area mono">{areaStato}</p>
 </Tag>
 
 <style>
-  /* .riga: transizione e hover vengono da global.css, condivisi con le
-     altre liste del sito. Qui solo la griglia propria di questa riga. */
+  /* Una riga dei lavori nel Laboratorio: anno, nome e testo, area e stato a
+     destra in mono. Niente occhiello sopra il titolo (spec 2026-11-08). La
+     classe resta `riga`: il contatore della home conta queste righe. */
   .riga {
     display: grid;
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 28px;
-    padding: 30px 0;
-    border-top: 1px solid var(--border);
-    align-items: start;
+    grid-template-columns: 84px minmax(0, 1fr) 190px;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--filo);
+    align-items: baseline;
   }
-  .anno {
-    font-family: var(--font-serif);
-    font-size: 17px;
-    color: var(--text-muted);
-    padding-top: 6px;
-  }
-  .occhiello {
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--azione);
-    font-weight: 700;
-  }
-  h3 {
-    font-size: 25px;
-    margin-top: 10px;
-  }
-  .testo {
-    margin-top: 12px;
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--text-muted);
-    max-width: 72ch;
-  }
-  .tag {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
+  .anno, .area { font-size: 0.75rem; color: var(--muto); }
+  .area { text-align: right; text-transform: lowercase; }
+  h3 { font-size: 1.875rem; letter-spacing: -0.045em; line-height: 1; transition: color 0.25s; }
+  a.riga:hover h3 { color: var(--rilevamento-testo); }
+  .testo { margin-top: 8px; font-size: 0.9375rem; line-height: 1.55; color: var(--muto); max-width: 62ch; }
+  .tag { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .tag span {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 5px 10px;
-    background: var(--bg);
+    font-size: 0.6875rem;
+    color: var(--muto);
+    border: 1px solid var(--filo);
+    border-radius: 4px;
+    padding: 3px 7px;
+    background: var(--bianco);
   }
-
-  @media (max-width: 640px) {
-    .riga {
-      grid-template-columns: 1fr;
-      gap: 8px;
-      padding: 24px 0;
-    }
-    .anno {
-      padding-top: 0;
-    }
-    h3 {
-      font-size: 22px;
-    }
-    .riga:hover {
-      padding-left: 0;
-    }
+  .tag .stato { border-color: var(--vivo); color: #0f7a49; }
+  @media (max-width: 820px) {
+    .riga { grid-template-columns: 1fr; gap: 6px; }
+    .area { text-align: left; order: -1; }
   }
 </style>

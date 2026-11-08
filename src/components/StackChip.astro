@@ -4,5 +4,6 @@ const { label } = Astro.props;
 ---
 <span class="chip">{label}</span>
 <style>
-  .chip { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--border); padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  /* Etichetta in mono, come quelle delle righe dei lavori. */
+  .chip { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muto); border: 1px solid var(--filo); background: var(--bianco); padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
 </style>
