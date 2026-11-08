@@ -257,9 +257,8 @@ Selettore di lingua: **IT / EN** *(invariato)*
 > tools can do and where their limits are. We work on concrete cases.
 >
 > Since February 2025 the AI Act requires companies that use artificial
-> intelligence tools to ensure a minimum level of training for their staff,
-> and to be able to document it. You'll do that course anyway: it may as well
-> be good for something.
+> intelligence tools to take measures so that their staff develop the skills to
+> use them. You'll do that course anyway: it may as well be good for something.
 
 **[TRADOTTO]** — `testi.md`, home, i tre formati in breve
 
@@ -607,11 +606,11 @@ inglese di partenza: tutta tradotta.
 > ## Something worth knowing
 >
 > Since 2 February 2025, Article 4 of the AI Act asks companies that use
-> artificial intelligence tools to ensure a minimum level of training for their
-> staff, and to be able to document it. It applies to companies that only use
-> ChatGPT too, and it doesn't concern only the IT department.
+> artificial intelligence tools to take measures so that their staff develop the
+> skills to use them. It applies to companies that only use ChatGPT too, and it
+> doesn't concern only the IT department.
 >
-> The basic course that satisfies that requirement is around four hours. It's
+> The basic course that answers that requirement is around four hours. It's
 > training the company will do anyway: it's worth it being good for working
 > better too.
 >

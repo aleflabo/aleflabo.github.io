@@ -30,8 +30,8 @@ export const formati: Formato[] = [
 export const riquadroAiAct: RiquadroAiAct = {
   titolo: "Something worth knowing",
   corpo: [
-    "Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to ensure a minimum level of training for their staff, and to be able to document it. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.",
-    "The basic course that satisfies that requirement is around four hours. It's training the company will do anyway: it's worth it being good for working better too.",
+    "Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.",
+    "The basic course that answers that requirement is around four hours. It's training the company will do anyway: it's worth it being good for working better too.",
   ],
   link: { testo: "Where your data ends up", href: "/en/your-data" },
 };

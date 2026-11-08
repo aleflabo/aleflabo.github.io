@@ -158,7 +158,7 @@ Sorgente: `tavole/Main.dc.html`
 *TITOLO DI SEZIONE (h2)*
 
 - `testo` Quattro ore, in azienda o in aula, per mostrare alle persone cosa questi strumenti sanno fare e quali sono i loro limiti. Si lavora su casi concreti.
-- `testo` Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di poterlo documentare. Quel corso lo farete comunque: tanto vale che serva a qualcosa.
+- `testo` Dal febbraio 2025 l'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Quel corso lo farete comunque: tanto vale che serva a qualcosa.
 - `testo` 4 ore
 
 ### Corso introduttivo
@@ -422,8 +422,8 @@ Sorgente: `tavole/Formazione.dc.html`
 
 - `testo` In aula si lavora sui documenti dell'azienda e sui casi che capitano davvero. L'obiettivo è che ognuno esca con qualcosa che può mettere in pratica subito.
 - `testo` Una cosa che conviene sapere
-- `testo` Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di essere in grado di documentarla. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.
-- `testo` Il corso di base che soddisfa quella richiesta è dell'ordine delle quattro ore. È una formazione che l'azienda farà comunque: vale la pena che serva anche a lavorare meglio.
+- `testo` Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.
+- `testo` Il corso di base che risponde a quella richiesta è dell'ordine delle quattro ore. È una formazione che l'azienda farà comunque: vale la pena che serva anche a lavorare meglio.
 - `LINK` Che fine fanno i vostri dati →
 - `testo` 4 ore
 

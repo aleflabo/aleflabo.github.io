@@ -40,8 +40,8 @@ export interface RiquadroAiAct {
 export const riquadroAiAct: RiquadroAiAct = {
   titolo: "Una cosa che conviene sapere",
   corpo: [
-    "Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di garantire una formazione minima al personale, e di essere in grado di documentarla. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.",
-    "Il corso di base che soddisfa quella richiesta è dell'ordine delle quattro ore. È una formazione che l'azienda farà comunque: vale la pena che serva anche a lavorare meglio.",
+    "Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.",
+    "Il corso di base che risponde a quella richiesta è dell'ordine delle quattro ore. È una formazione che l'azienda farà comunque: vale la pena che serva anche a lavorare meglio.",
   ],
   link: { testo: "Che fine fanno i vostri dati", href: "/i-vostri-dati" },
 };
