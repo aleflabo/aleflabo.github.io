@@ -14,7 +14,11 @@ import Testata from '../../components/lab/Testata.astro';
 import Numeri from '../../components/lab/Numeri.astro';
 import Porte from '../../components/lab/Porte.astro';
 import Fascia from '../../components/lab/Fascia.astro';
+import RigheLavori from '../../components/lab/RigheLavori.astro';
+import { getProject, projects } from '../../data/projects';
+import { annoEn } from '../../lib/anno';
 import { homeLab } from '../../data/homeLab';
+import { localizedPath } from '../../i18n/ui';
 import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../../components/sezioni/IlProblema.astro';
 import ComeLavoro from '../../components/sezioni/ComeLavoro.astro';
@@ -81,6 +85,20 @@ const datiStrutturati = [
     servizi: ingaggiInglesi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
   }),
 ];
+// --- Lavori a righe (Laboratorio) ---
+// Nome, anno e immagine da projects.ts; categoria e descrizione da homeLab
+// (prime frasi delle schede approvate). Il contatore si calcola.
+const righeLavori = {
+  titolo: homeLab.en.lavori.titolo,
+  contatore: `4 of ${projects.filter((p) => !p.soloItaliano).length} · /work`,
+  tutti: homeLab.en.lavori.tutti,
+  hrefTutti: localizedPath('en', '/work'),
+  righe: homeLab.en.lavori.righe.map((r) => {
+    const p = getProject(r.slug)!;
+    return { ...r, nome: p.name, anno: annoEn(p.year), href: localizedPath('en', `/work/${r.slug}`), anteprima: p.anteprima };
+  }),
+};
+
 ---
 
 <BaseLayout
@@ -103,7 +121,7 @@ const datiStrutturati = [
   <FasciaNumeri numeri={numeri} daDoveViene={{ ...daDoveViene, occhiello: undefined }} />
   <IlProblema {...ilProblema} />
   <ComeLavoro {...comeLavoro} occhiello={undefined} />
-  <LeProve {...leProve} />
+  <RigheLavori {...righeLavori} />
   <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
   <Fascia voci={homeLab.en.stack} />
   <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />

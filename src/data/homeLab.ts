@@ -25,6 +25,11 @@ export interface HomeLab {
   numeri: { valore: number; etichetta: string }[];
   porte: { titolo: string; testo: string; piede: string; href: string; percorso: string }[];
   stack: string[];
+  lavori: {
+    titolo: string;
+    tutti: string;
+    righe: { slug: string; categoria: string; descrizione: string }[];
+  };
 }
 
 // Uguale nelle due lingue: nomi propri di strumenti.
@@ -75,6 +80,16 @@ export const homeLab: Record<Locale, HomeLab> = {
       },
     ],
     stack,
+    lavori: {
+      titolo: 'Alcune cose che ho costruito',
+      tutti: 'Tutti i lavori, compresa la ricerca',
+      righe: [
+        { slug: 'portale-ricambi', categoria: 'Meccanica · commessa reale', descrizione: "Il cliente apre il modello 3D della macchina che ha comprato, clicca il pezzo che gli serve, e in azienda la richiesta arriva già associata al codice interno di quel componente." },
+        { slug: 'procedo', categoria: 'Industria · in produzione', descrizione: 'I video girati in reparto diventano procedure passo-passo, e chi lavora può fare domande alla documentazione della propria azienda.' },
+        { slug: 'spannum', categoria: 'Psicometria applicata · online', descrizione: 'Un test della memoria di lavoro costruito seguendo il protocollo pubblicato in letteratura, con le fonti citate e i limiti dichiarati. È online e si può provare.' },
+        { slug: 'fanta-mundial', categoria: 'Gamification · con utenti veri', descrizione: 'Una lega di pronostici sul Mondiale con una quarantina di giocatori attivi.' },
+      ],
+    },
   },
   en: {
     nome: site.en.hero.name,
@@ -117,5 +132,15 @@ export const homeLab: Record<Locale, HomeLab> = {
       },
     ],
     stack,
+    lavori: {
+      titolo: "Some of the things I've built",
+      tutti: 'All the work, research included',
+      righe: [
+        { slug: 'procedo', categoria: 'Industry · in production', descrizione: "A platform that turns video shot on the shop floor into step-by-step procedures, and lets the people doing the work ask questions of their own company's documentation." },
+        { slug: 'spannum', categoria: 'Applied psychometrics · online', descrizione: 'A working-memory test built to the protocol published in the literature, with age norms and the sources cited.' },
+        { slug: 'fanta-mundial', categoria: 'Gamification · with real users', descrizione: 'A World Cup prediction league with around forty active players.' },
+        { slug: 'agentic-toolkit', categoria: 'Agentic tooling · daily use', descrizione: 'A set of agents that automate the repetitive work of a technical team.' },
+      ],
+    },
   },
 };

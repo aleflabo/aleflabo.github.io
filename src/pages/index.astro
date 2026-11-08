@@ -11,6 +11,9 @@ import Testata from '../components/lab/Testata.astro';
 import Numeri from '../components/lab/Numeri.astro';
 import Porte from '../components/lab/Porte.astro';
 import Fascia from '../components/lab/Fascia.astro';
+import RigheLavori from '../components/lab/RigheLavori.astro';
+import { getProject, projects } from '../data/projects';
+import { annoIt } from '../lib/anno';
 import { homeLab } from '../data/homeLab';
 import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../components/sezioni/IlProblema.astro';
@@ -289,6 +292,20 @@ const datiStrutturati = [
     servizi: ingaggi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
   }),
 ];
+// --- Lavori a righe (Laboratorio) ---
+// Nome, anno e immagine da projects.ts; categoria e descrizione da homeLab
+// (prime frasi delle schede approvate). Il contatore si calcola.
+const righeLavori = {
+  titolo: homeLab.it.lavori.titolo,
+  contatore: `4 di ${projects.length} · /lavori`,
+  tutti: homeLab.it.lavori.tutti,
+  hrefTutti: localizedPath('it', '/lavori'),
+  righe: homeLab.it.lavori.righe.map((r) => {
+    const p = getProject(r.slug)!;
+    return { ...r, nome: p.name, anno: annoIt(p.year), href: localizedPath('it', `/lavori/${r.slug}`), anteprima: p.anteprima };
+  }),
+};
+
 ---
 
 <BaseLayout
@@ -314,7 +331,7 @@ const datiStrutturati = [
   <IlProblema {...ilProblema} />
   <CosaCostruisco {...cosaCostruisco} occhiello={undefined} />
   <ComeLavoro {...comeLavoro} occhiello={undefined} />
-  <LeProve {...leProve} />
+  <RigheLavori {...righeLavori} />
   <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
   <Fascia voci={homeLab.it.stack} />
   <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.it, occhiello: undefined }} />
