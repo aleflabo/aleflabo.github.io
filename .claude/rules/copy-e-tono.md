@@ -42,7 +42,7 @@ and numbers, decks included. Read it rather than reconstructing from memory.
 - **No longer operational at Procedo**: co-founder and CTO from July 2024 to July 2026,
   advisor since. All verbs in the past tense. Not "ten years of research": a three-year
   PhD plus two as CTO, and before that a master's in data science.
-- **Ten published papers, 533 citations.**
+- **Ten published papers, 597 citations** (updated by the user on 2026-11-08; 533 until then).
 - **The project is called Grip**, not "Tire Hub" — that was the name it shipped under.
   `/lavori/tire-hub` stays as a permanent redirect.
 - **`flaborea.com` is the live domain** since August 2026. `astro.config.mjs` points

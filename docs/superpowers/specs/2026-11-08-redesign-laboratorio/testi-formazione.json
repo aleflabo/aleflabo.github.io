@@ -1,0 +1,467 @@
+{
+  "_nota": "Bozze dei testi della nuova /formazione e del blocco policy su /servizi (piano tappa 2, Task 1). Stato: APPROVATO dal committente l'8 novembre 2026 («ok»). Le voci con \"approvato\": true sono già approvate altrove e riusate alla lettera.",
+  "riquadroAiAct": {
+    "titolo": {
+      "it": "Una cosa che conviene sapere",
+      "en": "Something worth knowing",
+      "approvato": true
+    },
+    "corpo": [
+      {
+        "it": "Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.",
+        "en": "Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.",
+        "approvato": true
+      },
+      {
+        "it": "La norma non fissa un numero di ore e non chiede un attestato. Il corso introduttivo è la misura più semplice, e il suo registro presenze vi lascia traccia di quello che avete fatto. Serve anche a lavorare meglio.",
+        "en": "The rule sets no number of hours and asks for no certificate. The introductory course is the simplest measure, and its attendance register leaves you a record of what you have done. It also helps people work better."
+      }
+    ],
+    "fonte": "commissioneQa"
+  },
+  "dettagliPratici": [
+    {
+      "it": "In presenza oppure online.",
+      "en": "In person or online."
+    },
+    {
+      "it": "Al massimo 10 persone per lezione.",
+      "en": "At most 10 people per session."
+    }
+  ],
+  "famiglie": {
+    "azienda": {
+      "it": "Per tutta l'azienda",
+      "en": "For the whole company"
+    },
+    "tecnici": {
+      "it": "Per i team tecnici",
+      "en": "For technical teams"
+    }
+  },
+  "etichette": {
+    "perChi": {
+      "it": "per chi",
+      "en": "who it's for"
+    },
+    "programma": {
+      "it": "programma",
+      "en": "programme"
+    },
+    "serveDaVoi": {
+      "it": "serve da voi",
+      "en": "what you need"
+    },
+    "base": {
+      "it": "base",
+      "en": "beginner"
+    },
+    "avanzato": {
+      "it": "avanzato",
+      "en": "advanced"
+    }
+  },
+  "corsi": [
+    {
+      "nome": {
+        "it": "Corso introduttivo",
+        "en": "Introductory course",
+        "approvato": true
+      },
+      "famiglia": "azienda",
+      "livelli": [
+        {
+          "durata": {
+            "it": "4 ore",
+            "en": "4 hours"
+          },
+          "perChi": {
+            "it": "Tutti, compreso chi non ha mai aperto ChatGPT",
+            "en": "Everyone, including people who have never opened ChatGPT",
+            "approvato": true
+          },
+          "moduli": [
+            {
+              "it": "Come funzionano questi strumenti, e perché a volte sbagliano con sicurezza",
+              "en": "How these tools work, and why they are sometimes confidently wrong"
+            },
+            {
+              "it": "Accorgersi di un errore: fonti, numeri, citazioni da controllare",
+              "en": "Spotting a mistake: sources, figures and quotes to check"
+            },
+            {
+              "it": "Che fine fanno i documenti che ci si incolla dentro, e quali impostazioni usare",
+              "en": "What happens to the documents you paste in, and which settings to use"
+            },
+            {
+              "it": "Dove conviene usarli davvero, con esempi presi dal vostro lavoro",
+              "en": "Where they are actually worth using, with examples from your own work"
+            },
+            {
+              "it": "Cosa chiede l'AI Act alla vostra azienda, senza allarmismi",
+              "en": "What the AI Act asks of your company, without alarmism"
+            }
+          ]
+        }
+      ],
+      "serveDaVoi": {
+        "it": "Una sala e un proiettore",
+        "en": "A room and a projector",
+        "approvato": true
+      }
+    },
+    {
+      "nome": {
+        "it": "Laboratorio per funzione",
+        "en": "Workshop by function",
+        "approvato": true
+      },
+      "famiglia": "azienda",
+      "livelli": [
+        {
+          "durata": {
+            "it": "8-12 ore",
+            "en": "8–12 hours"
+          },
+          "perChi": {
+            "it": "Un reparto alla volta, gruppi piccoli",
+            "en": "One department at a time, small groups",
+            "approvato": true
+          },
+          "moduli": [
+            {
+              "it": "Si sceglie un'attività del reparto che oggi occupa ore",
+              "en": "We pick a task that takes the department hours today"
+            },
+            {
+              "it": "Si prova con gli strumenti sui documenti veri",
+              "en": "We try the tools on the real documents"
+            },
+            {
+              "it": "Si misura quanto tempo si risparmia e dove lo strumento sbaglia",
+              "en": "We measure how much time is saved and where the tool gets it wrong"
+            },
+            {
+              "it": "Si scrive la procedura che il reparto userà dal giorno dopo",
+              "en": "We write the procedure the department will use from the next day"
+            }
+          ]
+        }
+      ],
+      "serveDaVoi": {
+        "it": "Documenti reali e il permesso di usarli",
+        "en": "Real documents and permission to use them",
+        "approvato": true
+      }
+    },
+    {
+      "nome": {
+        "it": "Python",
+        "en": "Python"
+      },
+      "famiglia": "tecnici",
+      "livelli": [
+        {
+          "nome": "base",
+          "durata": {
+            "it": "8 ore",
+            "en": "8 hours"
+          },
+          "perChi": {
+            "it": "Chi non ha mai programmato, o è arrivato al limite delle formule di Excel",
+            "en": "People who have never programmed, or who have reached the limit of Excel formulas"
+          },
+          "moduli": [
+            {
+              "it": "Preparare il computer e scrivere il primo programma",
+              "en": "Setting up the computer and writing a first program"
+            },
+            {
+              "it": "Variabili, liste, condizioni e cicli, su dati veri",
+              "en": "Variables, lists, conditions and loops, on real data"
+            },
+            {
+              "it": "Leggere e scrivere file Excel e CSV",
+              "en": "Reading and writing Excel and CSV files"
+            },
+            {
+              "it": "Automatizzare un'attività ripetitiva dell'ufficio",
+              "en": "Automating a repetitive office task"
+            },
+            {
+              "it": "Farsi aiutare dall'AI a scrivere codice, e come controllarlo",
+              "en": "Getting AI to help you write code, and how to check it"
+            }
+          ]
+        },
+        {
+          "nome": "avanzato",
+          "durata": {
+            "it": "12-16 ore",
+            "en": "12–16 hours"
+          },
+          "perChi": {
+            "it": "Chi scrive già script e vuole che reggano nel tempo",
+            "en": "People who already write scripts and want them to last"
+          },
+          "moduli": [
+            {
+              "it": "Un progetto in ordine: ambienti, dipendenze, struttura",
+              "en": "A tidy project: environments, dependencies, structure"
+            },
+            {
+              "it": "Test automatici",
+              "en": "Automated tests"
+            },
+            {
+              "it": "Analizzare dati con pandas",
+              "en": "Analysing data with pandas"
+            },
+            {
+              "it": "Chiamare API e modelli linguistici da Python",
+              "en": "Calling APIs and language models from Python"
+            },
+            {
+              "it": "Far girare uno script da solo: pianificazione, log, errori",
+              "en": "Running a script on its own: scheduling, logs, errors"
+            }
+          ]
+        }
+      ],
+      "serveDaVoi": {
+        "it": "Un portatile a testa",
+        "en": "A laptop each"
+      }
+    },
+    {
+      "nome": {
+        "it": "Claude Code",
+        "en": "Claude Code"
+      },
+      "famiglia": "tecnici",
+      "livelli": [
+        {
+          "nome": "base",
+          "durata": {
+            "it": "8 ore",
+            "en": "8 hours"
+          },
+          "perChi": {
+            "it": "Chi vuole costruire piccoli strumenti con un agente, anche senza saper programmare",
+            "en": "People who want to build small tools with an agent, even without knowing how to program"
+          },
+          "moduli": [
+            {
+              "it": "Cos'è un agente di programmazione e cosa fa sul vostro computer",
+              "en": "What a coding agent is and what it does on your computer"
+            },
+            {
+              "it": "Dal problema al primo strumento funzionante, in aula",
+              "en": "From a problem to a first working tool, in the session"
+            },
+            {
+              "it": "Leggere quello che l'agente ha fatto e accorgersi quando sbaglia",
+              "en": "Reading what the agent has done and noticing when it is wrong"
+            },
+            {
+              "it": "Permessi e dati: cosa non lasciargli fare",
+              "en": "Permissions and data: what not to let it do"
+            },
+            {
+              "it": "Tenere il lavoro in ordine: versioni e documentazione",
+              "en": "Keeping the work tidy: versions and documentation"
+            }
+          ]
+        },
+        {
+          "nome": "avanzato",
+          "durata": {
+            "it": "12-16 ore",
+            "en": "12–16 hours"
+          },
+          "perChi": {
+            "it": "Sviluppatori che vogliono lavorare con un agente dentro il proprio codice",
+            "en": "Developers who want to work with an agent inside their own code"
+          },
+          "moduli": [
+            {
+              "it": "Preparare il progetto: istruzioni, memoria, regole",
+              "en": "Preparing the project: instructions, memory, rules"
+            },
+            {
+              "it": "Pianificare prima di scrivere: specifiche e piani",
+              "en": "Planning before writing: specs and plans"
+            },
+            {
+              "it": "Prima i test, poi il codice, con l'agente",
+              "en": "Tests first, then code, with the agent"
+            },
+            {
+              "it": "Comandi, skill, hook e strumenti esterni (MCP)",
+              "en": "Commands, skills, hooks and external tools (MCP)"
+            },
+            {
+              "it": "Revisione del codice e più agenti in parallelo",
+              "en": "Code review and several agents in parallel"
+            }
+          ]
+        }
+      ],
+      "serveDaVoi": {
+        "it": "Un portatile a testa e un account con un piano attivo: senza, si raggiungono subito i limiti d'uso",
+        "en": "A laptop each and an account on an active plan: without one, you hit the usage limits straight away"
+      }
+    }
+  ],
+  "cosaResta": {
+    "titolo": {
+      "it": "Cosa resta all'azienda",
+      "en": "What the company keeps"
+    },
+    "voci": [
+      {
+        "it": "Un attestato di partecipazione per ogni persona.",
+        "en": "A certificate of attendance for each person."
+      },
+      {
+        "it": "Il registro presenze con il programma svolto, da conservare come prova di quello che avete fatto per l'articolo 4.",
+        "en": "The attendance register with the programme covered, to keep as evidence of what you have done for Article 4."
+      },
+      {
+        "it": "I materiali del corso.",
+        "en": "The course materials."
+      }
+    ],
+    "nota": {
+      "it": "L'attestato certifica la presenza: non è una qualifica e non ha valore legale.",
+      "en": "The certificate records attendance: it is not a qualification and has no legal standing."
+    }
+  },
+  "policy": {
+    "titolo": {
+      "it": "Servizio a parte: la policy interna sull'uso dell'AI",
+      "en": "A separate service: an internal AI policy"
+    },
+    "corpo": [
+      {
+        "it": "Un documento che dice a tutti in azienda quali strumenti si usano, con quali dati e chi decide. Risponde alla domanda che arriva sempre dopo il corso: cosa posso incollare in ChatGPT?",
+        "en": "A document that tells everyone in the company which tools are used, with which data, and who decides. It answers the question that always comes after the course: what can I paste into ChatGPT?"
+      }
+    ],
+    "consegna": [
+      {
+        "it": "Un documento di 3-5 pagine.",
+        "en": "A 3–5 page document."
+      },
+      {
+        "it": "Una pagina riassuntiva da far girare in azienda.",
+        "en": "A one-page summary to share around the company."
+      },
+      {
+        "it": "L'elenco degli strumenti ammessi, con le impostazioni da usare.",
+        "en": "The list of approved tools, with the settings to use."
+      }
+    ],
+    "durata": {
+      "it": "Circa una settimana: un'ora di intervista con il titolare, una bozza, una revisione insieme.",
+      "en": "About a week: an hour's interview with the owner, a draft, a review together."
+    },
+    "avvertenza": {
+      "it": "Non sostituisce il parere di un legale.",
+      "en": "It is not a substitute for legal advice."
+    }
+  },
+  "faqAiAct": {
+    "titolo": {
+      "it": "L'AI Act, in sette domande",
+      "en": "The AI Act, in seven questions"
+    },
+    "domande": [
+      {
+        "d": {
+          "it": "Serve un attestato?",
+          "en": "Do we need a certificate?"
+        },
+        "r": {
+          "it": "No. La Commissione europea scrive che non serve un certificato e che basta tenere un registro interno delle formazioni. L'attestato che rilascio è una prova in più, non un obbligo.",
+          "en": "No. The European Commission says a certificate is not needed and an internal record of training is enough. The certificate I issue is extra evidence, not a requirement."
+        },
+        "fonte": "commissioneQa"
+      },
+      {
+        "d": {
+          "it": "Deve farlo un ente accreditato?",
+          "en": "Does it have to be an accredited provider?"
+        },
+        "r": {
+          "it": "No: la norma non pone requisiti a chi fa formazione. Un ente serve solo se il corso è pagato con un fondo interprofessionale o deve entrare in un catalogo regionale.",
+          "en": "No: the rule sets no requirements on who provides the training. A provider is only needed if the course is paid for by an interprofessional fund or has to go into a regional catalogue."
+        },
+        "fonte": "commissioneQa"
+      },
+      {
+        "d": {
+          "it": "Quante ore servono?",
+          "en": "How many hours are needed?"
+        },
+        "r": {
+          "it": "La norma non le fissa, e non fissa nemmeno un programma: dipende da chi usa quali strumenti e con quali rischi. Il corso introduttivo da quattro ore è la misura di base che propongo.",
+          "en": "The rule doesn't set them, and doesn't set a programme either: it depends on who uses which tools and with what risks. The four-hour introductory course is the basic measure I suggest."
+        },
+        "fonte": "commissioneQa"
+      },
+      {
+        "d": {
+          "it": "Vale anche se usiamo solo ChatGPT?",
+          "en": "Does it apply if we only use ChatGPT?"
+        },
+        "r": {
+          "it": "Sì. L'articolo 4 riguarda chi usa sistemi di intelligenza artificiale per conto dell'azienda, senza soglie di dimensione.",
+          "en": "Yes. Article 4 covers anyone using artificial intelligence systems on the company's behalf, with no size threshold."
+        },
+        "fonte": "regolamento2026_1744"
+      },
+      {
+        "d": {
+          "it": "Riguarda anche i collaboratori esterni?",
+          "en": "Does it cover external contractors too?"
+        },
+        "r": {
+          "it": "Sì: il testo parla del personale e delle altre persone che usano questi sistemi per conto dell'azienda.",
+          "en": "Yes: the text covers staff and other people using these systems on the company's behalf."
+        },
+        "fonte": "regolamento2026_1744"
+      },
+      {
+        "d": {
+          "it": "Da quando si rischiano sanzioni?",
+          "en": "From when can there be penalties?"
+        },
+        "r": {
+          "it": "L'obbligo esiste dal 2 febbraio 2025. Le autorità nazionali vigilano dal 2 agosto 2026.",
+          "en": "The obligation has applied since 2 February 2025. National authorities have supervised it since 2 August 2026."
+        },
+        "fonte": "commissioneQa"
+      },
+      {
+        "d": {
+          "it": "La legge italiana aggiunge obblighi?",
+          "en": "Does Italian law add obligations?"
+        },
+        "r": {
+          "it": "No. La Legge 132 del 2025 dichiara di non produrre obblighi nuovi rispetto all'AI Act.",
+          "en": "No. Law 132 of 2025 states that it creates no new obligations beyond the AI Act."
+        },
+        "fonte": "legge132"
+      }
+    ],
+    "etichettaFonte": {
+      "it": "fonte",
+      "en": "source"
+    }
+  },
+  "cosaNonE": {
+    "nota": "Si toglie solo la prima voce («Non è un corso di programmazione…» / «It isn't a programming course…»). Le altre restano alla lettera.",
+    "approvato": true
+  }
+}

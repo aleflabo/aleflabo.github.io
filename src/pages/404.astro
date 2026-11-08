@@ -36,103 +36,60 @@ const scorciatoie = [
 >
   <section class="quattroquattro">
     <div class="container">
-      <p class="codice">404</p>
-      <h1>Questa pagina non c'è</h1>
-      <div class="divider"></div>
-      <p class="intro">L'indirizzo potrebbe essere cambiato, oppure non è mai esistito. Da qui si riparte:</p>
-
-      <ul class="scorciatoie">
-        {scorciatoie.map((s) => (
-          <li><a href={s.href}>{s.testo} <span class="freccia">&rarr;</span></a></li>
-        ))}
-      </ul>
-
-      <p class="inglese" lang="en">
-        This page doesn't exist. <a href={localizedPath('en', '/')}>Go to the English site &rarr;</a>
-      </p>
+      <div class="codice-box">
+        <span class="codice mono">404<span class="riquadro" aria-hidden="true"><em class="mono">not_found · 1.00</em></span></span>
+      </div>
+      <div class="testo">
+        <h1>Questa pagina non c'è</h1>
+        <p class="intro">L'indirizzo potrebbe essere cambiato, oppure non è mai esistito. Da qui si riparte:</p>
+        <ul class="scorciatoie">
+          {scorciatoie.map((s) => (
+            <li><a href={s.href}>{s.testo} <span class="freccia">&rarr;</span></a></li>
+          ))}
+        </ul>
+        <p class="inglese" lang="en">
+          This page doesn't exist. <a href={localizedPath('en', '/')}>Go to the English site &rarr;</a>
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  /* La 404 del Laboratorio: «404» in mono con il riquadro di detection, come
+     la foto della home (mockup, scheda «A · Pagine interne»). */
+  .quattroquattro { padding: 0; border-bottom: 1px solid var(--filo); }
   .container {
-    max-width: var(--maxw);
+    max-width: var(--maxw-lab);
     margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .quattroquattro {
-    padding: 96px 0 120px;
-  }
-
-  .codice {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--azione);
-    font-variant-numeric: tabular-nums;
-  }
-
-  h1 {
-    margin-top: 18px;
-    font-size: 46px;
-    max-width: 18ch;
-  }
-
-  .intro {
-    max-width: 52ch;
-    margin-top: 22px;
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
-
-  .scorciatoie {
-    margin-top: 32px;
-    padding: 0;
-    list-style: none;
+    border-inline: 1px solid var(--filo);
+    padding: 64px 28px;
     display: grid;
-    gap: 2px;
-    max-width: 420px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
   }
-
-  .scorciatoie a {
-    display: block;
-    padding: 14px 16px 14px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 17px;
-    font-weight: 600;
-    transition: padding-left .25s, background .25s;
+  .codice { position: relative; display: inline-block; font-size: clamp(6rem, 16vw, 11rem); font-weight: 500; line-height: 0.85; letter-spacing: -0.06em; }
+  .riquadro { position: absolute; inset: -6% -4%; border: 2px solid var(--rilevamento); }
+  .riquadro em {
+    position: absolute;
+    top: -22px;
+    left: -2px;
+    background: var(--rilevamento-testo);
+    color: var(--bianco);
+    font-size: 0.6875rem;
+    font-style: normal;
+    letter-spacing: 0;
+    padding: 3px 6px;
+    white-space: nowrap;
   }
-
-  .scorciatoie a:hover {
-    padding-left: 12px;
-    background: var(--surface-warm);
-  }
-
-  .scorciatoie a:active {
-    transform: translateY(1px);
-  }
-
-  .inglese {
-    margin-top: 48px;
-    font-size: 15px;
-    color: var(--text-faint);
-  }
-
-  .inglese a {
-    color: var(--azione);
-    font-weight: 600;
-  }
-
-  @media (max-width: 640px) {
-    .quattroquattro {
-      padding: 56px 0 80px;
-    }
-
-    h1 {
-      font-size: 34px;
-    }
+  h1 { font-size: 2rem; letter-spacing: -0.04em; }
+  .intro { margin-top: 10px; color: var(--muto); }
+  .scorciatoie { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid var(--filo); }
+  .scorciatoie li { border-bottom: 1px solid var(--filo); }
+  .scorciatoie a { display: block; padding: 12px 0; font-weight: 500; }
+  .inglese { margin-top: 18px; font-size: 0.875rem; color: var(--muto); }
+  @media (max-width: 820px) {
+    .container { grid-template-columns: 1fr; padding: 48px 16px; }
   }
 </style>

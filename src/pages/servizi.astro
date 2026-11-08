@@ -3,7 +3,7 @@
 // Il corpo, con il suo stile, vive in CorpoServizi.astro.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoServizi from '../components/pagine/CorpoServizi.astro';
-import { ingaggi, faq, perChiNonSono } from '../data/servizi';
+import { ingaggi, faq, perChiNonSono, policy } from '../data/servizi';
 import { testiServiziPagina } from '../data/serviziPagina';
 import { briciole, faq as faqLd } from '../lib/datiStrutturati';
 import { localizedPath } from '../i18n/ui';
@@ -20,6 +20,9 @@ const datiStrutturati = [
     { nome: 'Servizi', percorso: localizedPath('it', '/servizi') },
   ]),
 ];
+import IlProblema from '../components/sezioni/IlProblema.astro';
+import CosaCostruisco from '../components/sezioni/CosaCostruisco.astro';
+import { ilProblema, cosaCostruisco } from '../data/home';
 ---
 
 <BaseLayout
@@ -39,6 +42,12 @@ const datiStrutturati = [
     ingaggi={ingaggi}
     faq={faq}
     perChiNonSono={perChiNonSono}
+    policy={policy}
     hrefLavori="/lavori"
-  />
+  >
+    <Fragment slot="apertura">
+      <IlProblema {...ilProblema} />
+      <CosaCostruisco {...cosaCostruisco} occhiello={undefined} />
+    </Fragment>
+  </CorpoServizi>
 </BaseLayout>

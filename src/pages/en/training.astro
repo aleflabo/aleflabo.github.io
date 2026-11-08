@@ -3,7 +3,8 @@
 // (rotta `/en/training`).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoFormazione from '../../components/pagine/CorpoFormazione.astro';
-import { formati, riquadroAiAct, strade } from '../../data/en/formazione';
+import { corsi, testiCorsi, riquadroAiAct, dettagliPratici, cosaResta, faqAiAct, strade } from '../../data/en/formazione';
+import { policy } from '../../data/en/servizi';
 import { testiFormazionePagina } from '../../data/en/formazionePagina';
 import { site } from '../../data/site';
 import { briciole, corso } from '../../lib/datiStrutturati';
@@ -15,10 +16,10 @@ const datiStrutturati = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: formati.map((f, i) => ({
+    itemListElement: corsi.map((c, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      item: corso(dominio, { nome: f.nome, descrizione: f.corpo }),
+      item: corso(dominio, { nome: c.nome, descrizione: c.livelli.map((l) => `${l.durata}: ${l.moduli.join('; ')}`).join(' · ') }),
     })),
   },
   briciole(dominio, [
@@ -42,8 +43,13 @@ const datiStrutturati = [
   <CorpoFormazione
     lang="en"
     t={{ ...testiFormazionePagina, labelOrganizza: undefined, labelCattedra: undefined, labelOnesta: undefined }}
-    formati={formati}
+    corsi={corsi}
+    testiCorsi={testiCorsi}
     riquadroAiAct={riquadroAiAct}
+    dettagliPratici={dettagliPratici}
+    cosaResta={cosaResta}
+    faqAiAct={faqAiAct}
+    policy={policy}
     strade={strade}
     prenotaMezzora={site.en.prenotaMezzora ?? ''}
   />

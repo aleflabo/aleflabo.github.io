@@ -10,9 +10,9 @@
 //
 // La regola resta nel foglio unico: non fa danni dove l'elemento non c'è, e
 // tenerla qui evita di far divergere di nuovo i due stili.
-import { Image } from 'astro:assets';
+import FotoPosa from '../lab/FotoPosa.astro';
+import { homeLab } from '../../data/homeLab';
 import TestataPagina from '../TestataPagina.astro';
-import ritratto from '../../assets/alessandro-flaborea.jpg';
 import { localizedPath, type Locale } from '../../i18n/ui';
 import type { TestiChiSonoPagina } from '../../data/chiSonoPagina';
 import type { ChiSonoCopy } from '../../data/chiSono';
@@ -30,17 +30,9 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
     <div class="container">
       <div class="griglia">
         <div class="colonna-foto">
-          <Image
-            class="ritratto"
-            src={ritratto}
-            alt={t.altRitratto}
-            widths={[312, 624, 900]}
-            sizes="(max-width: 900px) 100vw, 312px"
-            loading="eager"
-            fetchpriority="high"
-          />
+          <FotoPosa etichettaCard={homeLab[lang].etichettaCard} etichettaPosa={homeLab[lang].etichettaPosa} suggerimento={homeLab[lang].suggerimentoFoto} />
           <div class="in-breve">
-            <p class="label">{t.labelInBreve}</p>
+            <p class="titolo-in-breve mono">{t.labelInBreve}</p>
             {chiSono.inBreve.map((riga) => (
               <p class="riga-in-breve">{riga}</p>
             ))}
@@ -48,7 +40,7 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
         </div>
 
         <div class="colonna-bio">
-          <TestataPagina occhiello={t.occhiello} titolo={t.titolo} />
+          <TestataPagina percorso={lang === 'it' ? '/chi-sono' : '/en/about'} titolo={t.titolo} />
           <div class="paragrafi">
             {chiSono.paragrafi.map((p, i) => (
               <p class:list={['corpo', { primo: i === 0 }]}>{p}</p>
@@ -63,6 +55,9 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
       </div>
     </div>
   </section>
+
+  {/* Le sezioni arrivate dalla home con il Laboratorio (spec 2026-11-08). */}
+  <slot name="dopo-biografia" />
 
   <section class="abitudini">
     <div class="container">
@@ -92,213 +87,53 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
   </section>
 
 <style>
+  /* Chi sono nel Laboratorio: la stessa card con la posa della home, «in
+     breve» in mono sotto, abitudini in celle (scheda «A · Pagine interne»). */
+  section { padding: 0; border-bottom: 1px solid var(--filo); }
   .container {
-    max-width: var(--maxw);
+    max-width: var(--maxw-lab);
     margin: 0 auto;
-    padding: 0 24px;
+    border-inline: 1px solid var(--filo);
+    padding: 36px 28px;
   }
-
-  /* --- biografia --- */
-  .biografia {
-    padding: 0;
+  .biografia .container { padding: 0; }
+  .griglia { display: grid; grid-template-columns: 300px minmax(0, 1fr); }
+  .colonna-foto { padding: 36px 22px; border-right: 1px solid var(--filo); display: grid; align-content: start; gap: 22px; }
+  .in-breve { display: grid; gap: 4px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--muto); }
+  .titolo-in-breve { color: var(--inchiostro); font-weight: 500; }
+  .colonna-bio { padding: 48px 32px 40px; min-width: 0; }
+  .paragrafi { margin-top: 20px; display: grid; gap: 14px; max-width: 64ch; }
+  .corpo { line-height: 1.6; color: var(--muto); }
+  .primo { color: var(--inchiostro); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .cta-row a {
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 11px 16px;
+    border-radius: var(--raggio-piccolo);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
-  .biografia .container {
-    padding: 72px 24px 60px;
-  }
-  .griglia {
-    display: grid;
-    grid-template-columns: 340px minmax(0, 1fr);
-    gap: 56px;
-    align-items: start;
-  }
-
-  /* --- colonna foto --- */
-  /* La fotografia è scontornata su bianco puro, mentre la colonna sta su
-     fondo crema: `mix-blend-mode: multiply` fa sparire il bianco nel fondo
-     invece di lasciare un rettangolo che stacca. Sul soggetto l'effetto è
-     trascurabile perché il fondo è chiarissimo, e dove il supporto manca
-     resta comunque un'immagine corretta, solo con il suo rettangolo. */
-  .ritratto {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: var(--radius);
-    mix-blend-mode: multiply;
-  }
-  .in-breve {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-top: 22px;
-  }
-  .riga-in-breve {
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
-
-  /* --- colonna bio ---
-     Qui TestataPagina porta solo occhiello/titolo/filetto: la
-     «introduzione» del componente presuppone una sola frase, mentre qui
-     la biografia sono cinque paragrafi con una gerarchia propria (il
-     primo più grande, gli altri no) — non la stessa cosa, non passata
-     come prop. Le misure di titolo e filetto della tavola, in desktop,
-     non coincidono col caso maggioritario delle altre sei pagine (h1
-     42px non 46px, max-width 20ch, filetto 28px non 30px) e restano
-     come override — solo da 641px in su: sotto i 640px il componente
-     azzera già margin-top/max-width dell'h1 e il margine del filetto
-     ai suoi valori mobile, che qui coincidono con quelli della tavola
-     (16px, none, 22px), quindi non serve toccarli di nuovo. Un override
-     senza @media qui vincerebbe per specificità anche sotto i 640px,
-     rompendo il mobile (bug trovato e corretto nel giro di correzioni
-     1, vedi task-1-report.md). Il font-size dell'h1 in mobile (30px
-     invece di 32px) resta invece un override mirato, più sotto. */
-  @media (min-width: 641px) {
-    .colonna-bio :global(h1) {
-      margin-top: 20px;
-      font-size: 42px;
-      max-width: 20ch;
-    }
-    .colonna-bio :global(.divider) {
-      margin: 28px 0;
-    }
-  }
-  .paragrafi {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 62ch;
-  }
-  .paragrafi .corpo {
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
-  .paragrafi .corpo.primo {
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--text);
-  }
-  .cta-row {
-    display: flex;
-    gap: 14px;
-    margin-top: 34px;
-    flex-wrap: wrap;
-  }
-  .cta-row .primaria {
-    background: var(--azione);
-    color: var(--surface);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 14px 28px;
-    border-radius: var(--radius);
-  }
-  .cta-row .secondaria {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 13px 24px;
-  }
-
-  /* --- abitudini --- */
-  .abitudini {
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    padding: 0;
-  }
-  .abitudini .container {
-    padding: 64px 24px;
-  }
-  .section-title {
-    font-size: 28px;
-    margin-top: 18px;
-    margin-bottom: 34px;
-    max-width: 30ch;
-  }
+  .primaria { background: var(--rilevamento-testo); color: var(--bianco); }
+  .secondaria { border: 1px solid var(--filo); background: var(--bianco); color: var(--inchiostro); }
+  .secondaria:hover { border-color: var(--inchiostro); }
+  .section-title { font-size: 1.625rem; margin-bottom: 18px; }
   .griglia-abitudini {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 34px;
+    border-top: 1px solid var(--filo);
+    border-left: 1px solid var(--filo);
   }
-  .griglia-abitudini h3 {
-    font-size: 19px;
-  }
-  .griglia-abitudini .corpo {
-    margin-top: 12px;
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--text-muted);
-  }
-
-  /* --- fuori dal lavoro --- */
-  .fuori-dal-lavoro {
-    border-top: 1px solid var(--border);
-    padding: 0;
-  }
-  .fuori-dal-lavoro .container {
-    padding: 56px 24px;
-  }
-  .fuori-dal-lavoro .label {
-    margin-bottom: 20px;
-  }
-  .fuori-dal-lavoro .corpo {
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--text-muted);
-    max-width: 62ch;
-  }
-
-  @media (max-width: 640px) {
-    .biografia .container {
-      padding: 44px 20px 44px;
-    }
-    .griglia {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-    .colonna-foto {
-      max-width: 280px;
-    }
-    .colonna-bio :global(h1) {
-      font-size: 30px;
-    }
-    .paragrafi {
-      max-width: none;
-    }
-    .paragrafi .corpo.primo {
-      font-size: 16.5px;
-    }
-    .paragrafi .corpo {
-      font-size: 15.5px;
-    }
-    .cta-row {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 12px;
-    }
-    .cta-row a {
-      text-align: center;
-    }
-    .abitudini .container,
-    .fuori-dal-lavoro .container {
-      padding: 44px 20px;
-    }
-    .section-title {
-      font-size: 24px;
-      margin-bottom: 22px;
-      max-width: none;
-    }
-    .griglia-abitudini {
-      grid-template-columns: 1fr;
-      gap: 22px;
-    }
-    .fuori-dal-lavoro .corpo {
-      max-width: none;
-    }
+  .griglia-abitudini > div { padding: 20px; border-right: 1px solid var(--filo); border-bottom: 1px solid var(--filo); }
+  .griglia-abitudini h3 { font-size: 1.0625rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .griglia-abitudini .corpo { font-size: 0.9375rem; }
+  .fuori-dal-lavoro .corpo { max-width: 66ch; }
+  @media (max-width: 820px) {
+    .container { padding: 28px 16px; }
+    .griglia { grid-template-columns: 1fr; }
+    .colonna-foto { border-right: 0; border-bottom: 1px solid var(--filo); padding: 28px 16px; }
+    .colonna-bio { padding: 28px 16px; }
+    .griglia-abitudini { grid-template-columns: 1fr; }
   }
 </style>

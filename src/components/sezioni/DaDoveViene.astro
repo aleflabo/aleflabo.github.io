@@ -1,0 +1,48 @@
+---
+// «Dalla ricerca alla produzione». Stava nella fascia scura della home
+// (FasciaNumeri, ora tolta); con il Laboratorio vive in /chi-sono (spec
+// 2026-11-08). Lo stile definitivo arriva con la tappa 2.
+interface Props {
+  titolo: string;
+  intro: string;
+  tappe: { valore: string; etichetta: string }[];
+  linkRicerca: string;
+  hrefRicerca: string;
+}
+const { titolo, intro, tappe, linkRicerca, hrefRicerca } = Astro.props;
+---
+
+<section class="da-dove-viene">
+  <div class="container">
+    <div class="testo">
+      <h2>{titolo}</h2>
+      <p>{intro}</p>
+      <a class="link" href={hrefRicerca}>{linkRicerca} <span class="freccia">→</span></a>
+    </div>
+    <ol class="tappe">
+      {tappe.map((t) => (
+        <li><span class="valore mono">{t.valore}</span><span class="etichetta">{t.etichetta}</span></li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .da-dove-viene { padding: 0; border-bottom: 1px solid var(--filo); }
+  .container {
+    max-width: var(--maxw-lab);
+    margin: 0 auto;
+    border-inline: 1px solid var(--filo);
+    padding: 36px 28px;
+  }
+  @media (max-width: 820px) { .container { padding: 28px 16px; } }
+  .container { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  h2 { font-size: 1.625rem; margin-bottom: 14px; }
+  p { color: var(--muto); max-width: 60ch; }
+  .link { display: inline-block; margin-top: 18px; font-weight: 500; }
+  .tappe { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .tappe li { display: grid; gap: 2px; padding-left: 14px; border-left: 2px solid var(--rilevamento); }
+  .valore { font-weight: 500; }
+  .etichetta { font-size: 0.875rem; color: var(--muto); }
+  @media (max-width: 820px) { .container { grid-template-columns: 1fr; gap: 28px; } }
+</style>

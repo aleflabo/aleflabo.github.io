@@ -1,3 +1,10 @@
+> **Stato, 8 novembre 2026.** La parte sulla palette e sui caratteri (§ 3, «Cambiare i
+> caratteri» e «Ridurre a un solo colore d'accento») è **superata**: crema, Fraunces e
+> terracotta sono oggi la firma più riconoscibile dei siti generati, e il committente ha
+> scelto un rifacimento completo. Vedi
+> `docs/superpowers/specs/2026-11-08-redesign-laboratorio-design.md`. Le voci di
+> accessibilità e i difetti puntuali restano validi come registro storico.
+
 # Audit di design — 26 agosto 2026
 
 Passata la checklist di [taste-skill](https://www.tasteskill.dev) (`redesign-existing-projects`)

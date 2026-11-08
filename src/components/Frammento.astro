@@ -24,8 +24,8 @@ const larghezzaBarra = (i: number) => f.w - RIENTRO * 2 - (i % 2 === 1 ? 14 : 0)
 ---
 
 <g transform={`rotate(${f.rot} ${f.x + f.w / 2} ${f.y + f.h / 2})`}>
-  <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto-inerte)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
+  <rect x={f.x} y={f.y} width={f.w} height={f.h} rx="3" stroke="var(--tratto)" stroke-width="1.5" stroke-dasharray={f.tratteggio ? "4 5" : undefined} />
   {Array.from({ length: f.righe }).map((_, i) => (
-    <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(i)} height="4" rx="2" fill="var(--border)" />
+    <rect x={f.x + RIENTRO} y={f.y + 12 + i * 9} width={larghezzaBarra(i)} height="4" rx="2" fill="var(--filo)" />
   ))}
 </g>

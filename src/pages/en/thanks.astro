@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CorpoConferma from '../../components/pagine/CorpoConferma.astro';
+import { localizedPath } from '../../i18n/ui';
+---
+
+<BaseLayout
+  title="Message sent — Alessandro Flaborea"
+  description="I'll reply as soon as I've read it. If it's urgent, message me on WhatsApp too."
+  lang="en"
+  path="/thanks"
+  pathIt="/grazie"
+  noindex={true}
+>
+  <CorpoConferma
+    titolo="Message sent."
+    testo="I'll reply as soon as I've read it. If it's urgent, message me on WhatsApp too."
+    link={{ testo: 'Back to the home page →', href: localizedPath('en', '/') }}
+  />
+</BaseLayout>

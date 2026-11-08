@@ -11,9 +11,10 @@
 import TestataPagina from '../TestataPagina.astro';
 import SchedaIngaggio from '../sezioni/SchedaIngaggio.astro';
 import Faq from '../sezioni/Faq.astro';
+import BloccoPolicy from '../sezioni/BloccoPolicy.astro';
 import { localizedPath, type Locale } from '../../i18n/ui';
 import type { TestiServiziPagina } from '../../data/serviziPagina';
-import type { Domanda, Ingaggio } from '../../data/servizi';
+import type { Domanda, Ingaggio, Policy } from '../../data/servizi';
 
 interface Props {
   lang: Locale;
@@ -22,19 +23,23 @@ interface Props {
   faq: Domanda[];
   perChiNonSono: string[];
   hrefLavori: string;
+  policy: Policy;
 }
-const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
+const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props;
 ---
 
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello={t.occhiello}
+        percorso={lang === 'it' ? '/servizi' : '/en/services'}
         titolo={t.titolo}
         introduzione={t.introduzione}
       />
     </div>
   </section>
+
+  {/* Le sezioni arrivate dalla home con il Laboratorio (spec 2026-11-08). */}
+  <slot name="apertura" />
 
   <section class="elenco-ingaggi">
     <div class="container">
@@ -49,6 +54,14 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
         ))}
       </div>
       <a class="continua" href={localizedPath(lang, hrefLavori)}>{t.linkLavori} <span class="freccia">&rarr;</span></a>
+    </div>
+  </section>
+
+  {/* Servizio a parte, dopo i quattro ingaggi e non come quinto: il titolo
+      della pagina è «Quattro modi di lavorare insieme» (spec formazione). */}
+  <section class="policy-sez">
+    <div class="container">
+      <BloccoPolicy policy={policy} />
     </div>
   </section>
 
@@ -77,166 +90,61 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
 
   <section class="come-si-comincia">
     <div class="container">
-      <h2>{t.titoloChiusura}</h2>
-      <p class="intro">{t.introChiusura}</p>
+      <div>
+        <h2>{t.titoloChiusura}</h2>
+        <p class="intro">{t.introChiusura}</p>
+      </div>
       <a class="pulsante cta" href={`${localizedPath(lang, '/')}#parliamone`}>{t.etichettaCta}</a>
     </div>
   </section>
 
 <style>
+  /* Servizi nel Laboratorio: ogni sezione nel foglio a filo da 1040px, niente
+     fondi caldi né fasce scure (spec 2026-11-08, scheda «A · Pagine interne»). */
+  section { padding: 0; border-bottom: 1px solid var(--filo); }
   .container {
-    max-width: var(--maxw);
+    max-width: var(--maxw-lab);
     margin: 0 auto;
-    padding: 0 24px;
+    border-inline: 1px solid var(--filo);
+    padding: 36px 28px;
   }
-
-  /* --- intestazione --- */
-  .intestazione {
-    padding: 0;
-  }
-  .intestazione .container {
-    padding: 72px 24px 44px;
-  }
-  /* TestataPagina riproduce il caso maggioritario (62ch): qui la tavola
-     vuole 60ch, uno scarto minore, quindi resta come override — solo da
-     641px in su, perché sotto i 640px il componente stesso azzera già
-     max-width a "none" (@media nel componente): un override senza
-     @media qui vincerebbe anche lì per specificità, sovrascrivendo
-     quell'azzeramento e rompendo il mobile (bug trovato e corretto nel
-     giro di correzioni 1, vedi task-1-report.md). */
-  @media (min-width: 641px) {
-    .intestazione :global(.intro) {
-      max-width: 60ch;
-    }
-  }
-
-  /* --- schede degli ingaggi --- */
-  .elenco-ingaggi {
-    padding: 0;
-  }
-  .elenco-ingaggi .container {
-    padding: 0 24px 72px;
-  }
-  .schede {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-  .continua {
-    display: inline-block;
-    margin-top: 26px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  /* --- per chi non sono --- */
-  .per-chi-non-sono {
-    border-top: 1px solid var(--border);
-    padding: 0;
-  }
-  .per-chi-non-sono .container {
-    padding: 72px 24px;
-  }
-  .section-title {
-    font-size: 32px;
-    margin-top: 18px;
-    margin-bottom: 30px;
-    max-width: 24ch;
-  }
+  .intestazione .container { padding-top: 48px; padding-bottom: 32px; }
+  .schede { border-bottom: 1px solid var(--filo); }
+  .continua { display: inline-block; margin-top: 18px; font-weight: 500; font-size: 0.9375rem; }
+  .section-title { font-size: 1.625rem; margin-bottom: 18px; }
   .griglia {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 44px;
-    max-width: 900px;
+    border-top: 1px solid var(--filo);
+    border-left: 1px solid var(--filo);
   }
   .riga-testo {
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--text-muted);
-  }
-
-  /* --- domande --- */
-  .domande {
-    border-top: 1px solid var(--border);
-    padding: 0;
-  }
-  .domande .container {
-    padding: 72px 24px;
-  }
-  .domande .section-title {
-    max-width: 30ch;
-  }
-
-  /* --- come si comincia --- */
-  .come-si-comincia {
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    padding: 0;
+    padding: 18px 20px;
+    border-right: 1px solid var(--filo);
+    border-bottom: 1px solid var(--filo);
+    color: var(--muto);
+    font-size: 0.9375rem;
+    line-height: 1.55;
   }
   .come-si-comincia .container {
-    padding: 64px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 28px;
   }
-  .come-si-comincia h2 {
-    font-size: 28px;
-    max-width: 24ch;
+  .come-si-comincia h2 { font-size: 1.625rem; }
+  .come-si-comincia .intro { color: var(--muto); max-width: 52ch; margin-top: 6px; }
+  .cta {
+    background: var(--rilevamento-testo);
+    color: var(--bianco);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 12px 18px;
+    border-radius: var(--raggio-piccolo);
   }
-  .come-si-comincia .intro {
-    margin-top: 18px;
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--text-muted);
-    max-width: 58ch;
-    text-wrap: pretty;
-  }
-  .come-si-comincia .cta {
-    display: inline-block;
-    margin-top: 30px;
-    background: var(--azione);
-    color: var(--surface);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 14px 28px;
-    border-radius: var(--radius);
-  }
-
-  @media (max-width: 640px) {
-    .intestazione .container {
-      padding: 44px 20px 36px;
-    }
-    .elenco-ingaggi .container {
-      padding: 0 20px 48px;
-    }
-    .schede {
-      gap: 18px;
-    }
-    .per-chi-non-sono .container,
-    .domande .container {
-      padding: 48px 20px;
-    }
-    .section-title {
-      font-size: 26px;
-      margin-bottom: 20px;
-      max-width: none;
-    }
-    .griglia {
-      grid-template-columns: 1fr;
-      gap: 18px;
-      max-width: none;
-    }
-    .come-si-comincia .container {
-      padding: 44px 20px;
-    }
-    .come-si-comincia h2 {
-      font-size: 24px;
-      max-width: none;
-    }
-    .come-si-comincia .intro {
-      font-size: 15.5px;
-      max-width: none;
-    }
-    .come-si-comincia .cta {
-      display: block;
-      text-align: center;
-    }
+  @media (max-width: 820px) {
+    .container { padding: 28px 16px; }
+    .griglia { grid-template-columns: 1fr; }
   }
 </style>

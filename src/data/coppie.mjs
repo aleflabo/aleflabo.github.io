@@ -17,7 +17,7 @@
 // I percorsi hanno la barra finale, come li serve GitHub Pages e come li
 // scrive `localizedPath`.
 
-/** Le dieci pagine con una gemella dallo slug diverso o uguale. */
+/** Le pagine con una gemella dallo slug diverso o uguale. */
 const PAGINE = [
   ["/", "/en/"],
   ["/servizi/", "/en/services/"],
@@ -29,6 +29,7 @@ const PAGINE = [
   ["/note/", "/en/notes/"],
   ["/privacy/", "/en/privacy/"],
   ["/cookie/", "/en/cookies/"],
+  ["/grazie/", "/en/thanks/"],
 ];
 
 // Le schede di lavoro con testo inglese approvato. `portale-ricambi` e `grip`

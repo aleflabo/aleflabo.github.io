@@ -30,7 +30,7 @@ try {
 // `max-width: 640px` a `pointer: coarse`: 768 e 1024 sono esattamente le
 // larghezze che prima restavano scoperte, ed è lì che il controllo serve.
 const LARGHEZZE = [320, 360, 390, 414, 768, 1024];
-const ROTTE = ["/", "/servizi/", "/chi-sono/", "/en/"];
+const ROTTE = ["/", "/servizi/", "/chi-sono/", "/en/", "/formazione/", "/lavori/", "/ricerca/", "/privacy/"];
 const INDIRIZZO = process.env.INDIRIZZO ?? "http://localhost:4321";
 
 let errori = 0;
@@ -57,7 +57,7 @@ for (const rotta of ROTTE) {
       // Il piè di pagina è incluso di proposito: i suoi bersagli sotto i
       // 44px erano un difetto reale, e nasconderli qui vorrebbe dire far
       // dire al controllo una cosa falsa. Adesso `Footer.astro` li copre.
-      piccoli: [...document.querySelectorAll("main a, main button, nav a, footer a")]
+      piccoli: [...document.querySelectorAll("main a, main button, nav a, nav button, footer a")]
         .filter((e) => e.getBoundingClientRect().height > 0 && e.getBoundingClientRect().height < 44)
         // L'unica esenzione, e non è una maglia allargata per far passare il
         // controllo: WCAG 2.5.8 esenta i link «in linea», quelli dentro un

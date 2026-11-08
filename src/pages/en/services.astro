@@ -3,7 +3,7 @@
 // (rotta `/en/services`).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoServizi from '../../components/pagine/CorpoServizi.astro';
-import { ingaggi, faq, perChiNonSono } from '../../data/en/servizi';
+import { ingaggi, faq, perChiNonSono, policy } from '../../data/en/servizi';
 import { testiServiziPagina } from '../../data/en/serviziPagina';
 import { briciole, faq as faqLd } from '../../lib/datiStrutturati';
 import { localizedPath } from '../../i18n/ui';
@@ -17,6 +17,8 @@ const datiStrutturati = [
     { nome: 'Services', percorso: localizedPath('en', '/services') },
   ]),
 ];
+import IlProblema from '../../components/sezioni/IlProblema.astro';
+import { ilProblema } from '../../data/en/home';
 ---
 
 <BaseLayout
@@ -36,6 +38,11 @@ const datiStrutturati = [
     ingaggi={ingaggi}
     faq={faq}
     perChiNonSono={perChiNonSono}
+    policy={policy}
     hrefLavori="/work"
-  />
+  >
+    <Fragment slot="apertura">
+      <IlProblema {...ilProblema} />
+    </Fragment>
+  </CorpoServizi>
 </BaseLayout>

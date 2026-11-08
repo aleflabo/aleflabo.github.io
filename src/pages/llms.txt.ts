@@ -10,7 +10,7 @@
 // canonico. Se un domani cambia una descrizione in pagina, cambia qui.
 import type { APIContext } from 'astro';
 import { ingaggi } from '../data/servizi';
-import { formati } from '../data/formazione';
+import { corsi } from '../data/formazione';
 import { pubblicazioni, arxivDi, numeriFascia } from '../data/pubblicazioni';
 import { territorio } from '../data/territorio';
 import { emailContatto } from '../data/legale';
@@ -33,7 +33,7 @@ function frase(...pezzi: string[]): string {
 
 const ROTTE: { percorso: string; nome: string; cosa: string }[] = [
   { percorso: '/servizi/', nome: 'Servizi', cosa: 'I quattro modi di lavorare insieme, con durata e cosa resta al cliente.' },
-  { percorso: '/formazione/', nome: 'Formazione', cosa: 'I tre formati di corso, e come si finanziano.' },
+  { percorso: '/formazione/', nome: 'Formazione', cosa: 'Corsi per tutta l\'azienda e per i team tecnici, le domande sull\'AI Act, e come si finanziano.' },
   { percorso: '/lavori/', nome: 'Lavori', cosa: 'Le schede dei progetti: software per aziende, prodotti e cose costruite in proprio.' },
   { percorso: '/ricerca/', nome: 'Ricerca', cosa: 'Il dottorato e le dieci pubblicazioni.' },
   { percorso: '/chi-sono/', nome: 'Chi sono', cosa: 'La biografia e il modo di lavorare.' },
@@ -68,7 +68,7 @@ export async function GET(context: APIContext) {
     '',
     '## Formazione',
     '',
-    ...formati.map((f) => `- **${f.nome}** (${f.ore}) — ${f.corpo}`),
+    ...corsi.map((c) => `- **${c.nome}** — ${c.livelli.map((l) => `${l.nome ? l.nome + ', ' : ''}${l.durata}: ${l.perChi}`).join('; ')}. ${c.serveDaVoi}.`),
     '',
     '## Ricerca',
     '',

@@ -1,6 +1,6 @@
 ---
-import '@fontsource-variable/fraunces';
-import '@fontsource-variable/inter';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
@@ -35,6 +35,8 @@ interface Props {
   // alternato prometterebbe una gemella in un'altra lingua che non esiste —
   // per una pagina che, di sua natura, non ha né l'una né l'altra.
   paginaErrore?: boolean;
+  // Pagina che non deve finire nei motori (la conferma dopo l'invio del modulo).
+  noindex?: boolean;
   // Dati strutturati propri di questa pagina (FAQPage, ItemList delle
   // pubblicazioni, BreadcrumbList, CreativeWork…), già costruiti dalle
   // funzioni di src/lib/datiStrutturati.ts. `Person` e `WebSite` non stanno
@@ -51,6 +53,7 @@ const {
   pathIt,
   ogType = 'website',
   paginaErrore = false,
+  noindex = false,
   datiStrutturati = [],
   attiva,
 } = Astro.props;
@@ -116,6 +119,7 @@ const blocchiLd = [...comuni, ...datiStrutturati];
     {verificaGoogle && <meta name="google-site-verification" content={verificaGoogle} />}
     {verificaBing && <meta name="msvalidate.01" content={verificaBing} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {noindex && <meta name="robots" content="noindex" />}
     {!paginaErrore && <link rel="canonical" href={canonicalUrl} />}
     {!paginaErrore && enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
     {!paginaErrore && itUrl && <link rel="alternate" hreflang="it" href={itUrl} />}

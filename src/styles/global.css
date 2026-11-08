@@ -1,12 +1,12 @@
 body {
-  font-family: var(--font-sans);
-  background: var(--bg);
-  color: var(--text);
+  font-family: var(--font-testo);
+  background: var(--carta);
+  color: var(--inchiostro);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 .container {
-  max-width: var(--maxw);
+  max-width: var(--maxw-lab);
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -16,25 +16,45 @@ section {
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-testo);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
+/* L'occhiello non è più maiuscolo spaziato e in colore: era la firma più
+   riconoscibile del sito generato (spec 2026-11-08). Resta una riga in mono,
+   minuscola e grigia, come una quota su un disegno tecnico. */
 .label {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--azione);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  color: var(--muto);
+  font-weight: 400;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+/* Il foglio tecnico: griglia a filo di 48px, sfumata verso i bordi. Va su un
+   elemento vuoto, `aria-hidden`, posizionato dietro il contenuto. */
+.griglia-lab {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--filo) 1px, transparent 1px),
+    linear-gradient(90deg, var(--filo) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 85%);
+  opacity: 0.7;
 }
 .section-title {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 .muted {
-  color: var(--text-muted);
+  color: var(--muto);
 }
 
 /* «Salta al contenuto»: primo elemento del body, invisibile finché non
@@ -49,34 +69,29 @@ h3 {
   top: 0;
   z-index: 100;
   padding: 12px 18px;
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--font-sans);
+  background: var(--inchiostro);
+  color: var(--bianco);
+  font-family: var(--font-testo);
   font-size: 15px;
   font-weight: 600;
-  border-radius: 0 0 var(--radius) 0;
+  border-radius: 0 0 var(--raggio-piccolo) 0;
 }
 .salta-al-contenuto:focus {
   left: 0;
 }
-.divider { width: 88px; height: 3px; background: var(--azione); }
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--rilevamento-testo);
   outline-offset: 2px;
-  border-radius: var(--radius);
+  border-radius: var(--raggio-piccolo);
 }
 
 /* --- movimento ------------------------------------------------------- */
 @keyframes sali { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-@keyframes tira { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes evidenzia { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
-@keyframes parola { from { opacity: 0; transform: translateY(16px); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
-@keyframes respira { 0%, 100% { opacity: .5; transform: scale(1); } 50% { opacity: .85; transform: scale(1.05); } }
 
 /* L'animazione non parte più al caricamento. Prima `main > section` partiva
    tutta insieme con ritardi progressivi: le sezioni in fondo avevano già
@@ -92,15 +107,15 @@ main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both;
    diversa, e i ritardi restano leggibili. */
 @keyframes fascio { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
 
-.base { stroke: var(--border); stroke-width: 1.5; fill: none; }
-.interrotto { stroke: var(--tratto-inerte); stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; }
+.base { stroke: var(--filo); stroke-width: 1.5; fill: none; }
+.interrotto { stroke: var(--tratto); stroke-width: 1.5; fill: none; stroke-dasharray: 4 5; }
 .fascio {
-  stroke: var(--azione);
+  stroke: var(--rilevamento-testo);
   stroke-width: 2.5;
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 11 89;
-  filter: drop-shadow(0 0 4px rgb(168 83 29 / 55%));
+  filter: drop-shadow(0 0 4px rgb(255 45 111 / 45%));
   animation: fascio 3.4s linear infinite;
 }
 
@@ -122,30 +137,11 @@ main > section.in-vista { animation: sali .7s cubic-bezier(.22, .8, .3, 1) both;
   }
 }
 
-.divider { transform-origin: left; animation: tira .8s cubic-bezier(.22, .8, .3, 1) .4s both; }
-
-.marker {
-  background-image: linear-gradient(to top, var(--evidenziatore) 0 16px, transparent 16px);
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  animation: evidenzia .85s cubic-bezier(.22, .8, .3, 1) .8s both;
-}
-
-.w { display: inline-block; animation: parola .62s cubic-bezier(.22, .8, .3, 1) both; }
-
-.alone { animation: respira 9s ease-in-out infinite; }
-
 .freccia { display: inline-block; transition: transform .22s; }
 a:hover .freccia { transform: translateX(5px); }
 
-.scheda { transition: transform .3s cubic-bezier(.22, .8, .3, 1), box-shadow .3s; }
-.scheda:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgb(40 24 10 / 10%); }
-
-.riga { transition: background .25s, padding-left .25s; border-radius: var(--radius); }
-.riga:hover { background: var(--surface-warm); padding-left: 14px; }
-
 .pulsante { transition: transform .2s, box-shadow .2s; }
-.pulsante:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(168 83 29 / 28%); }
+.pulsante:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(214 25 90 / 28%); }
 
 /* Riscontro alla pressione. C'erano :hover e :focus-visible ma niente
    :active, quindi premendo non succedeva nulla finché non si rilasciava. Su
@@ -155,12 +151,10 @@ a:hover .freccia { transform: translateX(5px); }
    dita. Sta dopo :hover perché su desktop la pressione avviene mentre il
    puntatore è sopra, e a parità di specificità vince l'ultima regola. */
 .pulsante:active { transform: translateY(1px); box-shadow: none; }
-.riga:active { background: var(--surface-warm); }
-.canale:active,
-.scheda:active { transform: translateY(1px); }
+.canale:active { transform: translateY(1px); }
 
 /* Cifre a larghezza fissa dove i numeri stanno in colonna o cambiano: la
-   fascia «10 · 533 · 1 · 2» e le date dell'elenco note. Con le cifre
+   fascia «10 · 597 · 1 · 2» e le date dell'elenco note. Con le cifre
    proporzionali un 1 è più stretto di un 5, quindi le colonne non si
    allineano e i numeri ballano quando il contenuto cambia. */
 .valore,
@@ -242,3 +236,35 @@ a:hover .freccia { transform: translateX(5px); }
     min-height: 0;
   }
 }
+
+/* Testo solo per i lettori di schermo: c'è nel documento, non a video. */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Le celle del Laboratorio: una griglia a filo, al posto delle schede con
+   ombra. Tre colonne, una sotto gli 820px. */
+.celle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--filo);
+  border-left: 1px solid var(--filo);
+}
+.celle > * {
+  padding: 20px;
+  border-right: 1px solid var(--filo);
+  border-bottom: 1px solid var(--filo);
+  min-width: 0;
+}
+@media (max-width: 820px) { .celle { grid-template-columns: 1fr; } }
+
+/* Coppie etichetta/valore («per chi», «quanto dura»): etichetta in mono
+   minuscolo grigio, valore normale. Va su un <dl>. */
+.dati-mono { display: grid; gap: 10px; margin: 0; }
+.dati-mono dt { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muto); }
+.dati-mono dd { margin: 2px 0 0; font-size: 0.875rem; }

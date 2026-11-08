@@ -12,8 +12,15 @@ import type { SezioneLegale } from '../data/legale';
 interface Props {
   sezioni: SezioneLegale[];
   aggiornamento: string;
+  /** Il riassunto «In breve…» della pagina, reso in un riquadro sopra le sezioni. */
+  introduzione?: string;
+  /** L'etichetta dell'indice per i lettori di schermo («Indice», «Contents»). */
+  etichettaIndice: string;
 }
-const { sezioni, aggiornamento } = Astro.props;
+const { sezioni, aggiornamento, introduzione, etichettaIndice } = Astro.props;
+// Àncore stabili dai titoli: minuscole, senza accenti, trattini.
+const ancora = (t: string) =>
+  t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /** Spezza un paragrafo sui tratti fra apici inversi, senza interpretare HTML. */
 function pezzi(testo: string): { testo: string; codice: boolean }[] {
@@ -29,69 +36,63 @@ function pezzi(testo: string): { testo: string; codice: boolean }[] {
 ---
 
 <div class="testo-legale">
-  {sezioni.map((s) => (
-    <section class="sezione">
-      <h2>{s.titolo}</h2>
-      {s.paragrafi.map((p) => (
-        <p>{pezzi(p).map((x) => (x.codice ? <code>{x.testo}</code> : x.testo))}</p>
-      ))}
-      {s.elenco && (
-        <ul>
-          {s.elenco.map((v) => <li>{v}</li>)}
-        </ul>
-      )}
-    </section>
-  ))}
-  <p class="aggiornamento">{aggiornamento}</p>
+  <nav class="indice" aria-label={etichettaIndice}>
+    {sezioni.map((s) => <a href={`#${ancora(s.titolo)}`}>{s.titolo}</a>)}
+  </nav>
+  <div class="corpo">
+    {introduzione && <p class="in-breve">{introduzione}</p>}
+    {sezioni.map((s) => (
+      <section class="sezione" id={ancora(s.titolo)}>
+        <h2>{s.titolo}</h2>
+        {s.paragrafi.map((p) => (
+          <p>{pezzi(p).map((x) => (x.codice ? <code>{x.testo}</code> : x.testo))}</p>
+        ))}
+        {s.elenco && (
+          <ul>
+            {s.elenco.map((v) => <li>{v}</li>)}
+          </ul>
+        )}
+      </section>
+    ))}
+    <p class="aggiornamento">{aggiornamento}</p>
+  </div>
 </div>
 
 <style>
-  .testo-legale {
-    max-width: 68ch;
-    margin-top: 8px;
+  /* Le pagine legali nel Laboratorio: indice a sinistra, testo a destra, il
+     riassunto in un riquadro (scheda «A · Pagine interne»). */
+  .testo-legale { display: grid; grid-template-columns: 220px minmax(0, 1fr); border-top: 1px solid var(--filo); }
+  .indice {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    display: grid;
+    padding: 24px 22px 24px 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
   }
-
-  .sezione {
-    margin-top: 40px;
+  .indice a { color: var(--muto); padding: 5px 0; }
+  .indice a:hover { color: var(--inchiostro); }
+  .corpo { padding: 24px 0 8px 32px; border-left: 1px solid var(--filo); max-width: calc(68ch + 32px); }
+  .in-breve {
+    background: var(--bianco);
+    border: 1px solid var(--filo);
+    border-left: 3px solid var(--rilevamento-testo);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--inchiostro) !important;
   }
-
-  h2 {
-    font-size: 22px;
-    margin-bottom: 12px;
-  }
-
-  p {
-    margin: 0 0 16px;
-    font-size: 16.5px;
-    line-height: 1.75;
-    color: var(--text-muted);
-    text-wrap: pretty;
-  }
-
-  ul {
-    margin: 0 0 16px;
-    padding-left: 22px;
-  }
-
-  li {
-    margin-bottom: 8px;
-    font-size: 16.5px;
-    line-height: 1.75;
-    color: var(--text-muted);
-  }
-
-  code {
-    padding: 2px 5px;
-    border-radius: 3px;
-    background: var(--surface-warm);
-    font-size: 14.5px;
-  }
-
-  .aggiornamento {
-    margin-top: 48px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 14px;
-    color: var(--text-faint);
+  .sezione { margin-top: 32px; scroll-margin-top: 90px; padding: 0; }
+  h2 { font-size: 1.1875rem; letter-spacing: -0.02em; margin-bottom: 10px; }
+  p { margin: 0 0 14px; font-size: 0.96875rem; line-height: 1.65; color: var(--muto); text-wrap: pretty; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; font-size: 0.96875rem; line-height: 1.65; color: var(--muto); }
+  code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bianco); border: 1px solid var(--filo); border-radius: 4px; padding: 1px 5px; }
+  .aggiornamento { margin-top: 28px; font-family: var(--font-mono); font-size: 0.75rem; }
+  @media (max-width: 820px) {
+    .testo-legale { grid-template-columns: 1fr; }
+    .indice { position: static; padding: 16px 0; border-bottom: 1px solid var(--filo); }
+    .corpo { padding: 20px 0 0; border-left: 0; }
   }
 </style>
