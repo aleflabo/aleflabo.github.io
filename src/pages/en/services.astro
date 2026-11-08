@@ -3,7 +3,7 @@
 // (rotta `/en/services`).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoServizi from '../../components/pagine/CorpoServizi.astro';
-import { ingaggi, faq, perChiNonSono } from '../../data/en/servizi';
+import { ingaggi, faq, perChiNonSono, policy } from '../../data/en/servizi';
 import { testiServiziPagina } from '../../data/en/serviziPagina';
 import { briciole, faq as faqLd } from '../../lib/datiStrutturati';
 import { localizedPath } from '../../i18n/ui';
@@ -38,6 +38,7 @@ import { ilProblema } from '../../data/en/home';
     ingaggi={ingaggi}
     faq={faq}
     perChiNonSono={perChiNonSono}
+    policy={policy}
     hrefLavori="/work"
   >
     <Fragment slot="apertura">

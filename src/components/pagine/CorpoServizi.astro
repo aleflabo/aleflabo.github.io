@@ -11,9 +11,10 @@
 import TestataPagina from '../TestataPagina.astro';
 import SchedaIngaggio from '../sezioni/SchedaIngaggio.astro';
 import Faq from '../sezioni/Faq.astro';
+import BloccoPolicy from '../sezioni/BloccoPolicy.astro';
 import { localizedPath, type Locale } from '../../i18n/ui';
 import type { TestiServiziPagina } from '../../data/serviziPagina';
-import type { Domanda, Ingaggio } from '../../data/servizi';
+import type { Domanda, Ingaggio, Policy } from '../../data/servizi';
 
 interface Props {
   lang: Locale;
@@ -22,8 +23,9 @@ interface Props {
   faq: Domanda[];
   perChiNonSono: string[];
   hrefLavori: string;
+  policy: Policy;
 }
-const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
+const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props;
 ---
 
   <section class="intestazione">
@@ -52,6 +54,14 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
         ))}
       </div>
       <a class="continua" href={localizedPath(lang, hrefLavori)}>{t.linkLavori} <span class="freccia">&rarr;</span></a>
+    </div>
+  </section>
+
+  {/* Servizio a parte, dopo i quattro ingaggi e non come quinto: il titolo
+      della pagina è «Quattro modi di lavorare insieme» (spec formazione). */}
+  <section class="policy-sez">
+    <div class="container">
+      <BloccoPolicy policy={policy} />
     </div>
   </section>
 

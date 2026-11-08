@@ -3,7 +3,7 @@
 // Il corpo, con il suo stile, vive in CorpoServizi.astro.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CorpoServizi from '../components/pagine/CorpoServizi.astro';
-import { ingaggi, faq, perChiNonSono } from '../data/servizi';
+import { ingaggi, faq, perChiNonSono, policy } from '../data/servizi';
 import { testiServiziPagina } from '../data/serviziPagina';
 import { briciole, faq as faqLd } from '../lib/datiStrutturati';
 import { localizedPath } from '../i18n/ui';
@@ -42,6 +42,7 @@ import { ilProblema, cosaCostruisco } from '../data/home';
     ingaggi={ingaggi}
     faq={faq}
     perChiNonSono={perChiNonSono}
+    policy={policy}
     hrefLavori="/lavori"
   >
     <Fragment slot="apertura">
