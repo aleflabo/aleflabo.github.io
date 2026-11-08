@@ -31,3 +31,15 @@ export const paragrafoInformativa: Record<Locale, string> = {
 
 /** Il titolo della sezione da toccare, nelle due lingue. */
 export const titoloSezioneScrivete: Record<Locale, string> = { it: 'Se mi scrivete', en: 'If you write to me' };
+
+/**
+ * Il paragrafo di «Per quanto tempo» a modulo acceso: quello di oggi dice che
+ * il sito non raccoglie dati. Approvato l'8 novembre 2026, dopo la revisione
+ * finale della tappa 3.
+ */
+export const paragrafoConservazione: Record<Locale, string> = {
+  it: "Il sito raccoglie solo quello che scrivete nel modulo di contatto, che Web3Forms mi inoltra: per quanto lo conserva Web3Forms vale la sua informativa. Quello che mi mandate direttamente (un messaggio, un allegato) lo tengo finché serve a rispondervi o a lavorare insieme, e poi lo elimino.",
+  en: "The site only collects what you write in the contact form, which Web3Forms forwards to me: how long Web3Forms keeps it is set out in its own privacy policy. What you send me directly (a message, an attachment) I keep for as long as it takes to answer you or to work together, and then I delete it.",
+};
+
+export const titoloSezioneConservazione: Record<Locale, string> = { it: 'Per quanto tempo', en: 'For how long' };

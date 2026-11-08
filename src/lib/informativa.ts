@@ -1,7 +1,13 @@
 import type { PaginaLegale } from "../data/legale";
 import { sezioneStatistiche, type Statistiche } from "../data/analytics";
 import type { Locale } from "../i18n/ui";
-import { paragrafoInformativa, titoloSezioneScrivete, type ModuloContatto } from "../data/modulo";
+import {
+  paragrafoConservazione,
+  paragrafoInformativa,
+  titoloSezioneConservazione,
+  titoloSezioneScrivete,
+  type ModuloContatto,
+} from "../data/modulo";
 
 /**
  * Aggiunge all'informativa la sezione che descrive lo strumento di statistica,
@@ -40,10 +46,12 @@ export function conModulo(pagina: PaginaLegale, lang: Locale, modulo: ModuloCont
   if (!modulo) return pagina;
   return {
     ...pagina,
-    sezioni: pagina.sezioni.map((s) =>
-      s.titolo === titoloSezioneScrivete[lang]
-        ? { ...s, paragrafi: [paragrafoInformativa[lang], ...s.paragrafi.slice(1)] }
-        : s,
-    ),
+    sezioni: pagina.sezioni.map((s) => {
+      // Il primo paragrafo delle due sezioni che a modulo acceso diventano
+      // false: «Se mi scrivete» e «Per quanto tempo».
+      if (s.titolo === titoloSezioneScrivete[lang]) return { ...s, paragrafi: [paragrafoInformativa[lang], ...s.paragrafi.slice(1)] };
+      if (s.titolo === titoloSezioneConservazione[lang]) return { ...s, paragrafi: [paragrafoConservazione[lang], ...s.paragrafi.slice(1)] };
+      return s;
+    }),
   };
 }

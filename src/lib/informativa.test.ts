@@ -87,3 +87,15 @@ describe("conModulo", () => {
     expect(s.paragrafi.join(" ")).not.toContain("isn't connected to any service yet");
   });
 });
+
+describe("conModulo, «Per quanto tempo»", () => {
+  const sezione = (p: PaginaLegale, titolo: string) => p.sezioni.find((s) => s.titolo === titolo)!;
+  it("acceso: non dice più che il sito non raccoglie dati, in tutte e due le lingue", () => {
+    const it_ = sezione(conModulo(privacy, "it", { accessKey: "k" }), "Per quanto tempo");
+    expect(it_.paragrafi[0]).toMatch(/^Il sito raccoglie solo quello che scrivete nel modulo di contatto/);
+    expect(it_.paragrafi.join(" ")).not.toContain("il sito non ne raccoglie");
+    const en_ = sezione(conModulo(privacyEn, "en", { accessKey: "k" }), "For how long");
+    expect(en_.paragrafi[0]).toMatch(/^The site only collects what you write in the contact form/);
+    expect(en_.paragrafi.join(" ")).not.toContain("the site collects none");
+  });
+});

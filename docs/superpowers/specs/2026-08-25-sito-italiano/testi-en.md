@@ -2043,3 +2043,4 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 - Message sent.
 - I'll reply as soon as I've read it. If it's urgent, message me on WhatsApp too.
 - Back to the home page →
+- `[APPROVATO]` (privacy, «For how long», form switched on; 8 November 2026) The site only collects what you write in the contact form, which Web3Forms forwards to me: how long Web3Forms keeps it is set out in its own privacy policy. What you send me directly (a message, an attachment) I keep for as long as it takes to answer you or to work together, and then I delete it.

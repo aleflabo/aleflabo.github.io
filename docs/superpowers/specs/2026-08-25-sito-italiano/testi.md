@@ -1448,3 +1448,4 @@ Approvati dal committente l'8 novembre 2026 («ok»). Compaiono **solo** a inter
 - `testo` Ti rispondo appena lo leggo. Se è urgente, scrivimi anche su WhatsApp.
 - `LINK` Torna alla home →
 - `oggetto mail` Nuova richiesta da flaborea.com
+- `testo` (privacy, «Per quanto tempo», a modulo acceso; approvato l'8 novembre 2026) Il sito raccoglie solo quello che scrivete nel modulo di contatto, che Web3Forms mi inoltra: per quanto lo conserva Web3Forms vale la sua informativa. Quello che mi mandate direttamente (un messaggio, un allegato) lo tengo finché serve a rispondervi o a lavorare insieme, e poi lo elimino.
