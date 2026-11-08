@@ -2033,3 +2033,13 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 - `domanda` Does Italian law add obligations?
 - `risposta` No. Law 132 of 2025 states that it creates no new obligations beyond the AI Act. (fonte: legge132)
 - `etichetta` source
+
+# Contact form switched on — stage 3 (2026-11-08)
+
+`[APPROVATO]` 8 November 2026. Shown **only** with the switch on (`src/data/modulo.ts`).
+
+- (privacy, «If you write to me», first paragraph) If you fill in the contact form, what you write (company, contact details, request and urgency) goes through Web3Forms, a service that receives it and forwards it to me by email. Web3Forms processes that data on my behalf; how it stores it is set out in its own privacy policy (web3forms.com/privacy). The form uses no cookies and loads nothing from elsewhere: your browser only talks to Web3Forms at the moment you press «Send». I keep requests for as long as it takes to answer you and to carry out any work together.
+- How I use this data: privacy notice →
+- Message sent.
+- I'll reply as soon as I've read it. If it's urgent, message me on WhatsApp too.
+- Back to the home page →
