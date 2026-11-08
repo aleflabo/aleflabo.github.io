@@ -29,7 +29,7 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori } = Astro.props;
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello={t.occhiello}
+        percorso={lang === 'it' ? '/servizi' : '/en/services'}
         titolo={t.titolo}
         introduzione={t.introduzione}
       />

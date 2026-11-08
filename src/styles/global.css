@@ -272,3 +272,25 @@ a:hover .freccia { transform: translateX(5px); }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Le celle del Laboratorio: una griglia a filo, al posto delle schede con
+   ombra. Tre colonne, una sotto gli 820px. */
+.celle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--filo);
+  border-left: 1px solid var(--filo);
+}
+.celle > * {
+  padding: 20px;
+  border-right: 1px solid var(--filo);
+  border-bottom: 1px solid var(--filo);
+  min-width: 0;
+}
+@media (max-width: 820px) { .celle { grid-template-columns: 1fr; } }
+
+/* Coppie etichetta/valore («per chi», «quanto dura»): etichetta in mono
+   minuscolo grigio, valore normale. Va su un <dl>. */
+.dati-mono { display: grid; gap: 10px; margin: 0; }
+.dati-mono dt { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muto); }
+.dati-mono dd { margin: 2px 0 0; font-size: 0.875rem; }

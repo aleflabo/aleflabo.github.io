@@ -37,7 +37,7 @@ const { nota } = Astro.props as { nota: Nota };
 >
   <section class="intestazione">
     <div class="container">
-      <TestataPagina occhiello="Note" titolo={nota.titolo} />
+      <TestataPagina percorso="← /note" titolo={nota.titolo} />
       <p class="meta">
         <span class="data">{dataIt(nota.data)}</span>
         {nota.tag.map((t) => <span class="tag">{t}</span>)}

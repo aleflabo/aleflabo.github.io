@@ -25,7 +25,7 @@ const { lang, t, formati, riquadroAiAct, strade, prenotaMezzora } = Astro.props;
   <section class="intestazione">
     <div class="container">
       <TestataPagina
-        occhiello={t.occhiello}
+        percorso={lang === 'it' ? '/formazione' : '/en/training'}
         titolo={t.titolo}
         introduzione={t.introduzione}
       />

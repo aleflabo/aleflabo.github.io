@@ -48,7 +48,7 @@ const { lang, t, chiSono, hrefLavori } = Astro.props;
         </div>
 
         <div class="colonna-bio">
-          <TestataPagina occhiello={t.occhiello} titolo={t.titolo} />
+          <TestataPagina percorso={lang === 'it' ? '/chi-sono' : '/en/about'} titolo={t.titolo} />
           <div class="paragrafi">
             {chiSono.paragrafi.map((p, i) => (
               <p class:list={['corpo', { primo: i === 0 }]}>{p}</p>
