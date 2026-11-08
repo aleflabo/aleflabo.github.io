@@ -7,6 +7,7 @@
 // Una nota con il solo titolo tradotto produrrebbe una pagina che annuncia
 // l'inglese e poi parla italiano; meglio nessuna pagina, e l'elenco inglese
 // rimanda alla versione italiana marcata `lang="it"`.
+import '../../../styles/note.css';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import TestataPagina from '../../../components/TestataPagina.astro';
 import CorpoNota from '../../../components/CorpoNota.astro';
@@ -34,6 +35,7 @@ const { nota } = Astro.props as { nota: Nota };
   ogType="article"
   attiva="notes"
 >
+  <div class="pagina-note">
   <section class="intestazione">
     <div class="container">
       <TestataPagina percorso="← /en/notes" titolo={nota.titoloEn!} />
@@ -51,62 +53,6 @@ const { nota } = Astro.props as { nota: Nota };
       <a class="indietro" href={localizedPath('en', '/notes')}>All notes <span class="freccia">&larr;</span></a>
     </div>
   </section>
+  </div>
 </BaseLayout>
 
-<style>
-  .container {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .intestazione {
-    padding: 72px 0 0;
-  }
-
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    margin-top: 18px;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
-
-  .tag {
-    padding: 3px 9px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--surface);
-  }
-
-  .articolo {
-    padding: 32px 0 96px;
-  }
-
-  .sommario {
-    max-width: 68ch;
-    margin: 0 0 32px;
-    font-size: 19px;
-    line-height: 1.65;
-    color: var(--text);
-  }
-
-  .indietro {
-    display: inline-block;
-    margin-top: 48px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  @media (max-width: 640px) {
-    .intestazione {
-      padding-top: 48px;
-    }
-
-    .articolo {
-      padding-bottom: 64px;
-    }
-  }
-</style>

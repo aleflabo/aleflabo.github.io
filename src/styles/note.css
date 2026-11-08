@@ -1,0 +1,83 @@
+/* /note, /en/notes e le note singole: stesso markup nelle due lingue, stesso
+   stile. Stava copiato in quattro pagine; con il Laboratorio sta qui, sotto
+   .pagina-note perché il file è globale. Le righe dell'elenco restano
+   `class="riga"`: verifica-rotte.mjs le conta contro il feed RSS. */
+.pagina-note section { padding: 0; border-bottom: 1px solid var(--filo); }
+.pagina-note .container {
+  max-width: var(--maxw-lab);
+  margin: 0 auto;
+  border-inline: 1px solid var(--filo);
+  padding: 36px 28px;
+}
+.pagina-note .intestazione .container { padding-top: 48px; padding-bottom: 32px; }
+.pagina-note .chi-scrive { display: inline-block; margin-top: 16px; font-weight: 500; font-size: 0.9375rem; }
+.pagina-note .righe { border-bottom: 1px solid var(--filo); }
+.pagina-note .riga {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--filo);
+  align-items: baseline;
+}
+.pagina-note .riga .data { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muto); }
+.pagina-note .riga h2 { font-size: 1.1875rem; letter-spacing: -0.025em; transition: color 0.25s; }
+.pagina-note .riga:hover h2 { color: var(--rilevamento-testo); }
+.pagina-note .sommario { margin-top: 4px; color: var(--muto); font-size: 0.9375rem; line-height: 1.55; max-width: 66ch; }
+.pagina-note .tag { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pagina-note .tag span, .pagina-note .meta .tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--muto);
+  border: 1px solid var(--filo);
+  background: var(--bianco);
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+.pagina-note .riquadro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+.pagina-note .riquadro h2 { font-size: 1.625rem; }
+.pagina-note .riquadro .corpo { margin-top: 6px; color: var(--muto); }
+.pagina-note .iscrizione {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  background: var(--bianco);
+  border: 1px solid var(--filo);
+  border-radius: 10px;
+  padding: 14px;
+}
+.pagina-note .iscrizione input {
+  font: 400 0.9375rem var(--font-testo);
+  border: 1px solid var(--filo);
+  border-radius: var(--raggio-piccolo);
+  background: var(--carta);
+  padding: 11px 12px;
+  min-width: 0;
+}
+.pagina-note .iscrizione input::placeholder { color: #626977; }
+.pagina-note .iscrizione button {
+  font: 500 0.875rem var(--font-testo);
+  background: var(--filo);
+  color: var(--muto);
+  border: 0;
+  border-radius: var(--raggio-piccolo);
+  padding: 0 16px;
+  min-height: 44px;
+  cursor: not-allowed;
+}
+.pagina-note .nota-inerte, .pagina-note .rss { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muto); }
+.pagina-note .rss { justify-self: start; }
+/* La nota singola */
+.pagina-note .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muto); }
+.pagina-note .articolo .sommario { color: var(--inchiostro); font-size: 1.1875rem; margin: 0 0 28px; max-width: 65ch; }
+.pagina-note .indietro { display: inline-block; margin-top: 32px; font-weight: 500; }
+@media (max-width: 820px) {
+  .pagina-note .container { padding: 28px 16px; }
+  .pagina-note .riga { grid-template-columns: 1fr; gap: 4px; }
+  .pagina-note .riquadro { grid-template-columns: 1fr; }
+}
