@@ -23,26 +23,21 @@ const p = conStatistiche(testo, 'en', statistiche);
 >
   <section class="pagina">
     <div class="container">
-      <TestataPagina percorso="/en/cookies" titolo={p.titolo} introduzione={p.introduzione} />
-      <TestoLegale sezioni={p.sezioni} aggiornamento={p.aggiornamento} />
+      <TestataPagina percorso="/en/cookies" titolo={p.titolo} />
+      <TestoLegale sezioni={p.sezioni} aggiornamento={p.aggiornamento} introduzione={p.introduzione} etichettaIndice="Contents" />
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .pagina { padding: 0; border-bottom: 1px solid var(--filo); }
   .container {
-    max-width: var(--maxw);
+    max-width: var(--maxw-lab);
     margin: 0 auto;
-    padding: 0 24px;
+    border-inline: 1px solid var(--filo);
+    padding: 48px 28px 40px;
+    display: grid;
+    gap: 28px;
   }
-
-  .pagina {
-    padding: 72px 0 96px;
-  }
-
-  @media (max-width: 640px) {
-    .pagina {
-      padding: 48px 0 72px;
-    }
-  }
+  @media (max-width: 820px) { .container { padding: 28px 16px; } }
 </style>

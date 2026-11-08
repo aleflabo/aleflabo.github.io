@@ -1933,3 +1933,8 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 - Righe dei lavori: Procedo, Spannum, Fanta Mundial, Agentic Workflow Toolkit, con categorie e prime frasi `[RIUSATO]` dalle schede sopra.
 - `[APPROVATO]` `aria-label` Portrait of Alessandro Flaborea; on hover, the pose estimated by a model appears
 - `[APPROVATO]` solo lettori di schermo: local time
+
+# Inner pages «Laboratorio» (2026-11-08)
+
+- `[APPROVATO]` `aria-label` Contents (section index on the legal pages)
+- `[APPROVATO]` not_found · 1.00 (detection box on the 404, approved with the «A · Pagine interne» mockup, 8 November 2026)

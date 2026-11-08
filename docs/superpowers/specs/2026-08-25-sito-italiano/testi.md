@@ -1337,3 +1337,8 @@ sono ripetute.
 - Righe dei lavori: le descrizioni sono le prime frasi delle schede approvate sopra (Portale ricambi 3D, Procedo, Spannum, Fanta Mundial), senza parole nuove.
 - `aria-label` Ritratto di Alessandro Flaborea; al passaggio compare la posa stimata da un modello
 - `solo lettori di schermo` ora locale
+
+## Pagine interne «Laboratorio» (2026-11-08)
+
+- `aria-label` Indice (indice delle sezioni nelle pagine legali)
+- `etichetta` not_found · 1.00 (riquadro di detection sulla 404; approvato col mockup «A · Pagine interne», 8 novembre 2026)
