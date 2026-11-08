@@ -11,6 +11,9 @@
 // task-2-report.md).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Testata from '../../components/lab/Testata.astro';
+import Numeri from '../../components/lab/Numeri.astro';
+import Porte from '../../components/lab/Porte.astro';
+import Fascia from '../../components/lab/Fascia.astro';
 import { homeLab } from '../../data/homeLab';
 import FasciaNumeri from '../../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../../components/sezioni/IlProblema.astro';
@@ -89,6 +92,8 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Testata lang="en" t={homeLab.en} />
+  <Numeri numeri={homeLab.en.numeri} />
+  <Porte porte={homeLab.en.porte} />
   {/* Potatura degli occhielli (task 14, home-visuale), gemella dell'home
       italiana (src/pages/index.astro): restano solo Occhiello (sopra) e
       «The problem»/«The evidence» sui due componenti sotto che li tengono.
@@ -100,5 +105,6 @@ const datiStrutturati = [
   <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Fascia voci={homeLab.en.stack} />
   <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.en, occhiello: undefined }} />
 </BaseLayout>

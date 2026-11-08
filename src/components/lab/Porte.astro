@@ -1,0 +1,70 @@
+---
+// Le due porte: chi ha un'azienda e chi è del mestiere. Ogni porta è un solo
+// link a blocco, senza link annidati; il raggio che percorre il bordo compare
+// al passaggio e al focus.
+interface Props { porte: { titolo: string; testo: string; piede: string; href: string; percorso: string }[] }
+const { porte } = Astro.props;
+---
+
+<section class="porte">
+  <div class="foglio">
+    {porte.map((p) => (
+      <a class="porta" href={p.href}>
+        <span class="raggio" aria-hidden="true"></span>
+        <span class="percorso mono">{p.percorso}</span>
+        <span class="titolo">{p.titolo}</span>
+        <span class="testo">{p.testo}</span>
+        <span class="piede mono">{p.piede}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .porte { padding: 0; border-bottom: 1px solid var(--filo); }
+  .foglio {
+    max-width: var(--maxw-lab);
+    margin: 0 auto;
+    border-inline: 1px solid var(--filo);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .porta {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    padding: 28px 28px 30px;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .porta + .porta { border-left: 1px solid var(--filo); }
+  .porta:hover, .porta:focus-visible { background: var(--bianco); }
+  .porta:active { background: var(--bianco); transform: translateY(1px); }
+  .percorso { font-size: 0.75rem; color: var(--muto); }
+  .titolo { font-size: 1.625rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; }
+  .testo { color: var(--muto); line-height: 1.5; max-width: 44ch; }
+  .piede { font-size: 0.875rem; font-weight: 500; color: var(--rilevamento-testo); }
+  .raggio {
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    pointer-events: none;
+    background: conic-gradient(from var(--angolo), transparent 0 80%, var(--rilevamento) 90%, transparent 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: gira 5s linear infinite;
+  }
+  .porta:hover .raggio, .porta:focus-visible .raggio { opacity: 1; }
+  @property --angolo { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+  @keyframes gira { to { --angolo: 360deg; } }
+  @media (max-width: 820px) {
+    .foglio { grid-template-columns: 1fr; }
+    .porta + .porta { border-left: 0; border-top: 1px solid var(--filo); }
+    .porta { padding: 24px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .raggio { animation: none; } }
+</style>

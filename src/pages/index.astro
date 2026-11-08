@@ -8,6 +8,9 @@
 // lettera da tavole/Main.dc.html (testi.md, sezione «/ — home»).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Testata from '../components/lab/Testata.astro';
+import Numeri from '../components/lab/Numeri.astro';
+import Porte from '../components/lab/Porte.astro';
+import Fascia from '../components/lab/Fascia.astro';
 import { homeLab } from '../data/homeLab';
 import FasciaNumeri from '../components/sezioni/FasciaNumeri.astro';
 import IlProblema from '../components/sezioni/IlProblema.astro';
@@ -297,6 +300,8 @@ const datiStrutturati = [
   datiStrutturati={datiStrutturati}
 >
   <Testata lang="it" t={homeLab.it} />
+  <Numeri numeri={homeLab.it.numeri} />
+  <Porte porte={homeLab.it.porte} />
   {/* Potatura degli occhielli (task 14, home-visuale): la home aveva nove
       etichette di sezione contro un tetto di una ogni tre sezioni — «molto
       claude like», ha detto il committente, ed è il ritmo templato che la
@@ -311,5 +316,6 @@ const datiStrutturati = [
   <ComeLavoro {...comeLavoro} occhiello={undefined} />
   <LeProve {...leProve} />
   <BloccoFormazione {...bloccoFormazione} introduzioni={[bloccoFormazione.introduzioni[1]]} occhiello={undefined} />
+  <Fascia voci={homeLab.it.stack} />
   <Contatto {...contatto} eyebrow={undefined} territorio={{ ...territorio.it, occhiello: undefined }} />
 </BaseLayout>
