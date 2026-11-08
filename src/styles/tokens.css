@@ -14,6 +14,9 @@
   --rilevamento-testo: #d6195a;
   --blu-cella: #2b59ff;
   --vivo: #18b26b;
+  /* Tratti dei disegni: linee inerti e l'alone tenue dell'accento. */
+  --tratto: #b9c0cc;
+  --rilevamento-tenue: #ffd3e0;
 
   --font-testo: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;

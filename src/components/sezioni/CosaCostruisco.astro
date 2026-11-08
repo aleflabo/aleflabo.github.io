@@ -206,17 +206,21 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
 </section>
 
 <style>
+  /* Nel foglio a filo del Laboratorio, come le sezioni intorno. */
   .cosa-costruisco {
-    background: var(--bg);
-    border-top: 1px solid var(--border);
+    background: var(--carta);
+    border-bottom: 1px solid var(--filo);
     padding: 0;
   }
   .container {
-    padding: 80px 24px 84px;
+    max-width: var(--maxw-lab);
+    margin: 0 auto;
+    border-inline: 1px solid var(--filo);
+    padding: 36px 28px 40px;
   }
   .section-title {
-    font-size: 34px;
-    margin-top: 16px;
+    font-size: 1.625rem;
+    margin-top: 10px;
     max-width: 28ch;
   }
   .intro {
@@ -377,7 +381,7 @@ const ritornoS = { left: pct(96, CANVAS_S.larghezza), top: pct(550, CANVAS_S.alt
 
   @media (max-width: 640px) {
     .container {
-      padding: 48px 20px 52px;
+      padding: 28px 16px 32px;
     }
     .label {
       font-size: 10.5px;
