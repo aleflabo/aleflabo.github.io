@@ -1946,7 +1946,7 @@ proposta di chi implementa, approvata dal committente l'8 novembre 2026 («ok»)
 
 - `testo` Something worth knowing
 - `testo` Since 2 February 2025, Article 4 of the AI Act asks companies that use artificial intelligence tools to take measures so that their staff develop the skills to use them. It applies to companies that only use ChatGPT too, and it doesn't concern only the IT department.
-- `testo` The rule sets no number of hours and asks for no certificate: what matters is being able to show what you have done. The introductory course, with its attendance register, is the simplest way to do that, and it also helps people work better.
+- `testo` The rule sets no number of hours and asks for no certificate. The introductory course is the simplest measure, and its attendance register leaves you a record of what you have done. It also helps people work better.
 - `testo` In person or online.
 - `testo` At most 10 people per session.
 - `etichetta` For the whole company

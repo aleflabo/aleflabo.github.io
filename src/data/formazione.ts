@@ -44,7 +44,7 @@ export const riquadroAiAct: RiquadroAiAct = {
   titolo: "Una cosa che conviene sapere",
   corpo: [
     "Dal 2 febbraio 2025 l'articolo 4 dell'AI Act chiede alle aziende che usano strumenti di intelligenza artificiale di prendere misure perché il personale sviluppi le competenze per usarli. Vale anche per chi usa soltanto ChatGPT, e non riguarda solo l'ufficio informatico.",
-    "La norma non fissa un numero di ore e non chiede un attestato: chiede di poter mostrare che cosa si è fatto. Il corso introduttivo, con il suo registro presenze, è il modo più semplice di farlo, e serve anche a lavorare meglio.",
+    "La norma non fissa un numero di ore e non chiede un attestato. Il corso introduttivo è la misura più semplice, e il suo registro presenze vi lascia traccia di quello che avete fatto. Serve anche a lavorare meglio.",
   ],
   fonte: "commissioneQa",
 };

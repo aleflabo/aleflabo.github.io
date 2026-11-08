@@ -30,6 +30,12 @@ describe('formazione', () => {
     }
     for (const r of [riquadroAiAct, en.riquadroAiAct]) expect(fontiAiAct[r.fonte]).toBeDefined();
   });
+  it('il riquadro non dice che la norma chiede di dimostrare qualcosa', () => {
+    // La Commissione dice solo che un registro interno basta (spec formazione,
+    // § «Fonti verificate»); revisione finale della tappa 2.
+    expect(riquadroAiAct.corpo.join(' ')).not.toMatch(/chiede di poter mostrare/);
+    expect(en.riquadroAiAct.corpo.join(' ')).not.toMatch(/being able to show/);
+  });
   it('dichiara il massimo di 10 persone', () => {
     expect(dettagliPratici.join(' ')).toMatch(/10 persone/);
     expect(en.dettagliPratici.join(' ')).toMatch(/10 people/);
