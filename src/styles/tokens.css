@@ -1,29 +1,49 @@
+/* Il Laboratorio (spec 2026-11-08): un foglio tecnico chiaro, griglia a filo,
+   un solo accento. `--rilevamento` è il colore della detection — cursore,
+   posa, linee — ed è grafica, non testo: su carta fa 3,37:1, sopra il 3:1
+   che WCAG chiede agli elementi grafici. Per testo e pulsanti pieni c'è
+   `--rilevamento-testo`, la stessa tinta scurita: 4,77:1 su carta, 5,07:1
+   col bianco sopra. */
 :root {
-  --bg: #faf8f4;
-  --surface: #ffffff;
-  --surface-warm: #f4efe7;
-  --text: #141414;
-  --text-muted: #55504a;
-  --border: #e6ddd0;
-  --accent: #1b3a5b;
-  --azione: #a8531d;
-  --evidenziatore: #f0c9a4;
-  --text-faint: #8a8177;
+  --carta: #f7f8fa;
+  --bianco: #ffffff;
+  --inchiostro: #101318;
+  --muto: #5d6470;
+  --filo: #dfe3ea;
+  --rilevamento: #ff2d6f;
+  --rilevamento-testo: #d6195a;
+  --blu-cella: #2b59ff;
+  --vivo: #18b26b;
 
-  /* Colori nati con i diagrammi e con le fasce scure che crescono. Erano sei
-     valori ripetuti a mano nelle tavole: senza un nome sarebbero finiti
-     ricopiati in ogni componente. */
-  --tratto-inerte: #c2b6a2;
-  --tratto-tenue: #e0b98f;
-  --evidenziatore-tenue: #fdf3e9;
-  --su-accent: #a8c0d6;
-  --su-accent-forte: #c7d8e6;
-  --su-accent-debole: #7f9ab3;
+  --font-testo: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --font-serif: "Fraunces Variable", Georgia, "Times New Roman", serif;
-  --font-sans:
-    "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --maxw-lab: 1040px;
+  --raggio-piccolo: 6px;
+  --raggio-grande: 20px;
 
+  /* Alias dei nomi di prima. Le pagine interne si rifanno nella tappa 2:
+     fino ad allora leggono questi, che puntano già alla palette nuova, così
+     restano leggibili invece di cadere sui valori di ripiego del browser.
+     La tappa 2 li toglie. */
+  --bg: var(--carta);
+  --surface: var(--bianco);
+  --surface-warm: #eef1f5;
+  --text: var(--inchiostro);
+  --text-muted: var(--muto);
+  --text-faint: var(--muto);
+  --border: var(--filo);
+  --accent: var(--inchiostro);
+  --azione: var(--rilevamento-testo);
+  --evidenziatore: #ffd3e0;
+  --evidenziatore-tenue: #fff0f4;
+  --tratto-inerte: #b9c0cc;
+  --tratto-tenue: #ffa3bd;
+  --su-accent: #c3cad6;
+  --su-accent-forte: #e4e8ee;
+  --su-accent-debole: #9aa3b2;
+  --font-serif: var(--font-testo);
+  --font-sans: var(--font-testo);
   --maxw: 1120px;
   --gap: 1.25rem;
   --radius: 4px;
