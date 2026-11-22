@@ -24,7 +24,7 @@ import {
   occhiello,
   contatto,
 } from '../../data/en/home';
-import { ingaggi as ingaggiInglesi } from '../../data/en/servizi';
+import { competenze as competenzeInglesi } from '../../data/en/servizi';
 import { attivita } from '../../lib/datiStrutturati';
 
 // Niente <CosaCostruisco /> qui (task 11, home-visuale): le otto stringhe
@@ -70,7 +70,7 @@ const datiStrutturati = [
   attivita({
     site: dominio,
     lang: 'en',
-    servizi: ingaggiInglesi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
+    servizi: competenzeInglesi.map((c) => ({ nome: c.nome, descrizione: c.corpo[0] })),
   }),
 ];
 // --- Lavori a righe (Laboratorio) ---

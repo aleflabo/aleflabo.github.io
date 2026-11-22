@@ -9,23 +9,23 @@
 // `hrefLavori` è un parametro perché la rotta cambia nome fra le lingue:
 // `/lavori` in italiano, `/work` in inglese — non basta prefissare.
 import TestataPagina from '../TestataPagina.astro';
-import SchedaIngaggio from '../sezioni/SchedaIngaggio.astro';
+import SchedaCompetenza from '../sezioni/SchedaCompetenza.astro';
 import Faq from '../sezioni/Faq.astro';
 import BloccoPolicy from '../sezioni/BloccoPolicy.astro';
 import { localizedPath, type Locale } from '../../i18n/ui';
 import type { TestiServiziPagina } from '../../data/serviziPagina';
-import type { Domanda, Ingaggio, Policy } from '../../data/servizi';
+import type { Competenza, Domanda, Policy } from '../../data/servizi';
 
 interface Props {
   lang: Locale;
   t: TestiServiziPagina;
-  ingaggi: Ingaggio[];
+  competenze: Competenza[];
   faq: Domanda[];
-  perChiNonSono: string[];
   hrefLavori: string;
   policy: Policy;
 }
-const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props;
+const { lang, t, competenze, faq, hrefLavori, policy } = Astro.props;
+const numero = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
   <section class="intestazione">
@@ -41,42 +41,43 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props
   {/* Le sezioni arrivate dalla home con il Laboratorio (spec 2026-11-08). */}
   <slot name="apertura" />
 
-  <section class="elenco-ingaggi">
+  {/* Le quattro competenze con l'indice fisso a sinistra: un riquadro di
+      rilevamento, lo stesso segno della foto in home, segue la competenza che
+      si sta leggendo (scelta del 2026-11-22, variante D). Senza JavaScript
+      l'indice resta un elenco di link alle quattro schede, senza riquadro. */}
+  <section class="elenco-competenze">
     <div class="container">
-      <div class="schede">
-        {ingaggi.map((ingaggio) => (
-          <SchedaIngaggio
-            ingaggio={ingaggio}
-            etichettaPerChi={t.etichettaPerChi}
-            etichettaQuantoDura={t.etichettaQuantoDura}
-            etichettaCosaResta={t.etichettaCosaResta}
-          />
-        ))}
+      <div class="rilievo" data-rilievo>
+        <nav class="indice" aria-label={t.etichettaIndice}>
+          <ol>
+            {competenze.map((c, i) => (
+              <li><a href={`#c-${c.chiave}`}><span class="mono numero">{numero(i)} · {c.etichetta}</span>{c.nome}</a></li>
+            ))}
+          </ol>
+          <div class="riquadro" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="avanzamento" aria-hidden="true"><span></span></div>
+        </nav>
+        <div class="schede">
+          {competenze.map((c, i) => (
+            <SchedaCompetenza
+              competenza={c}
+              numero={numero(i)}
+              etichettaPerChi={t.etichettaPerChi}
+              etichettaQuantoDura={t.etichettaQuantoDura}
+              etichettaCosaResta={t.etichettaCosaResta}
+              etichettaProve={t.etichettaProve}
+            />
+          ))}
+        </div>
       </div>
       <a class="continua" href={localizedPath(lang, hrefLavori)}>{t.linkLavori} <span class="freccia">&rarr;</span></a>
     </div>
   </section>
 
-  {/* Servizio a parte, dopo i quattro ingaggi e non come quinto: il titolo
-      della pagina è «Quattro modi di lavorare insieme» (spec formazione). */}
+  {/* Servizio a parte, dopo le quattro competenze e non come quinta. */}
   <section class="policy-sez">
     <div class="container">
       <BloccoPolicy policy={policy} />
-    </div>
-  </section>
-
-  <section class="per-chi-non-sono">
-    <div class="container">
-      {/* Potatura degli occhielli: tre su cinque sezioni. Cadono «Onestà», sopra
-          «Per chi non sono», e «Domande», sopra «Quelle che mi vengono fatte quasi
-          sempre»: in tutti e due i casi l'h2 dice già cosa c'è sotto. */}
-      {t.labelOnesta && <p class="label">{t.labelOnesta}</p>}
-      <h2 class="section-title">{t.titoloOnesta}</h2>
-      <div class="griglia">
-        {perChiNonSono.map((riga) => (
-          <p class="riga-testo">{riga}</p>
-        ))}
-      </div>
     </div>
   </section>
 
@@ -110,22 +111,55 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props
   }
   .intestazione .container { padding-top: 48px; padding-bottom: 32px; }
   .schede { border-bottom: 1px solid var(--filo); }
+  .rilievo { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 36px; }
+  .indice { position: sticky; top: 104px; align-self: start; font-size: 0.8125rem; }
+  .indice ol { margin: 0; padding: 0; list-style: none; }
+  .indice a { display: block; padding: 12px 14px; color: var(--muto); text-decoration: none; transition: color 0.3s; }
+  .indice .numero { display: block; font-size: 0.6875rem; }
+  .indice li.attiva a { color: var(--inchiostro); }
+  .indice li.attiva .numero { color: var(--rilevamento-testo); }
+  /* Il riquadro esiste solo quando lo script l'ha posizionato (`.pronto`). */
+  .riquadro {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    border: 1.5px solid var(--rilevamento);
+    border-radius: 4px;
+    pointer-events: none;
+    transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), height 0.5s cubic-bezier(0.22, 0.8, 0.3, 1);
+  }
+  .riquadro::after {
+    content: attr(data-etichetta);
+    position: absolute;
+    right: -1.5px;
+    top: -20px;
+    background: var(--rilevamento-testo);
+    color: var(--bianco);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px 3px 0 0;
+    white-space: nowrap;
+  }
+  .riquadro i { position: absolute; width: 8px; height: 8px; border: 0 solid var(--rilevamento-testo); }
+  .riquadro i:nth-child(1) { left: -4px; top: -4px; border-width: 2px 0 0 2px; }
+  .riquadro i:nth-child(2) { right: -4px; top: -4px; border-width: 2px 2px 0 0; }
+  .riquadro i:nth-child(3) { left: -4px; bottom: -4px; border-width: 0 0 2px 2px; }
+  .riquadro i:nth-child(4) { right: -4px; bottom: -4px; border-width: 0 2px 2px 0; }
+  .avanzamento { display: none; height: 2px; margin-top: 16px; background: var(--filo); border-radius: 2px; overflow: hidden; }
+  .avanzamento span { display: block; height: 100%; background: var(--rilevamento); transform-origin: 0 50%; transform: scaleX(var(--avanzamento, 0)); }
+  .indice { --avanzamento: 0; }
+  .pronto .indice { position: sticky; }
+  .pronto .riquadro, .pronto .avanzamento { display: block; }
+  .pronto .indice ol { position: relative; }
+  .pronto .riquadro { position: absolute; }
+  /* Le schede non attive si attenuano solo con lo script attivo. */
+  .pronto .schede :global(.competenza) { opacity: 0.45; transition: opacity 0.4s; }
+  .pronto .schede :global(.competenza.attiva) { opacity: 1; }
   .continua { display: inline-block; margin-top: 18px; font-weight: 500; font-size: 0.9375rem; }
   .section-title { font-size: 1.625rem; margin-bottom: 18px; }
-  .griglia {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--filo);
-    border-left: 1px solid var(--filo);
-  }
-  .riga-testo {
-    padding: 18px 20px;
-    border-right: 1px solid var(--filo);
-    border-bottom: 1px solid var(--filo);
-    color: var(--muto);
-    font-size: 0.9375rem;
-    line-height: 1.55;
-  }
   .come-si-comincia .container {
     display: flex;
     flex-wrap: wrap;
@@ -145,6 +179,66 @@ const { lang, t, ingaggi, faq, perChiNonSono, hrefLavori, policy } = Astro.props
   }
   @media (max-width: 820px) {
     .container { padding: 28px 16px; }
-    .griglia { grid-template-columns: 1fr; }
+    .rilievo { display: block; }
+    .indice { display: none; }
+    .pronto .schede :global(.competenza) { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .riquadro, .indice a, .pronto .schede :global(.competenza) { transition: none; }
   }
 </style>
+
+<script>
+  // Il riquadro di rilevamento dell'indice. La competenza «attiva» è l'ultima
+  // il cui bordo superiore ha passato il 40% dell'altezza dello schermo.
+  // Una sola funzione, chiamata a ogni scroll in un requestAnimationFrame:
+  // quattro schede, nessun bisogno di un observer per ciascuna.
+  const rilievo = document.querySelector<HTMLElement>('[data-rilievo]');
+  if (rilievo) {
+    const schede = [...rilievo.querySelectorAll<HTMLElement>('.competenza')];
+    const voci = [...rilievo.querySelectorAll<HTMLElement>('.indice li')];
+    const riquadro = rilievo.querySelector<HTMLElement>('.riquadro')!;
+    const indice = rilievo.querySelector<HTMLElement>('.indice')!;
+    const contenitore = rilievo.querySelector<HTMLElement>('.schede')!;
+    const ridotto = matchMedia('(prefers-reduced-motion: reduce)');
+
+    // I tag di ogni scheda compaiono quando la scheda entra in vista.
+    if (!ridotto.matches && 'IntersectionObserver' in window) {
+      const osservatore = new IntersectionObserver((elenco) => {
+        elenco.forEach((v) => {
+          if (!v.isIntersecting) return;
+          v.target.classList.remove('attende');
+          osservatore.unobserve(v.target);
+        });
+      }, { threshold: 0.35 });
+      schede.forEach((s) => { s.classList.add('attende'); osservatore.observe(s); });
+    }
+
+    let attiva = -1;
+    let inAttesa = false;
+    const aggiorna = () => {
+      inAttesa = false;
+      const linea = innerHeight * 0.4;
+      let k = 0;
+      schede.forEach((s, i) => { if (s.getBoundingClientRect().top < linea) k = i; });
+      if (k !== attiva) {
+        attiva = k;
+        schede.forEach((s, i) => s.classList.toggle('attiva', i === k));
+        voci.forEach((v, i) => v.classList.toggle('attiva', i === k));
+        riquadro.dataset.etichetta = schede[k].dataset.etichetta ?? '';
+      }
+      const li = voci[k];
+      riquadro.style.transform = `translateY(${li.offsetTop}px)`;
+      riquadro.style.height = `${li.offsetHeight}px`;
+      const r = contenitore.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (linea - r.top) / r.height));
+      indice.style.setProperty('--avanzamento', p.toFixed(3));
+    };
+    const pianifica = () => { if (!inAttesa) { inAttesa = true; requestAnimationFrame(aggiorna); } };
+
+    rilievo.classList.add('pronto');
+    aggiorna();
+    addEventListener('scroll', pianifica, { passive: true });
+    addEventListener('resize', pianifica);
+  }
+</script>

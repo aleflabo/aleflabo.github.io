@@ -9,7 +9,7 @@
 // che alimentano già le pagine, e gli indirizzi da `context.site` come il
 // canonico. Se un domani cambia una descrizione in pagina, cambia qui.
 import type { APIContext } from 'astro';
-import { ingaggi } from '../data/servizi';
+import { competenze } from '../data/servizi';
 import { corsi } from '../data/formazione';
 import { pubblicazioni, arxivDi, numeriFascia } from '../data/pubblicazioni';
 import { territorio } from '../data/territorio';
@@ -64,7 +64,7 @@ export async function GET(context: APIContext) {
     '',
     '## Cosa offro',
     '',
-    ...ingaggi.map((i) => `- **${i.nome}** (${i.durata}) — ${i.corpo[0]} Resta: ${i.cosaResta}.`),
+    ...competenze.map((c) => `- **${c.nome}** (${c.durata}) — ${c.corpo[0]} Resta: ${c.cosaResta}. [${c.tag.join(', ')}]`),
     '',
     '## Formazione',
     '',

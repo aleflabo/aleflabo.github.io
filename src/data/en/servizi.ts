@@ -2,55 +2,74 @@ import type { Policy } from '../servizi';
 // Testi inglesi di /en/services. Fonte: docs/superpowers/specs/2026-08-25-sito-italiano/testi-en.md,
 // sezione «2. /en/services» — tutti i blocchi sono [TRADOTTO], tranne il
 // primo `faq[0].link` che riusa l'href risolto verso /en/your-data.
-import type { Ingaggio, Domanda } from "../servizi";
+import type { Competenza, Domanda } from "../servizi";
 
-export const ingaggi: Ingaggio[] = [
+export const competenze: Competenza[] = [
   {
-    chiave: "understand",
-    etichetta: "Understand",
-    nome: "A diagnostic half-day",
+    chiave: "leadership",
+    etichetta: "leadership",
+    nome: "Fractional CTO",
+    sottotitolo: "technical leadership, when a full-time CTO is too much",
     corpo: [
-      "I come to your company, watch how you work and ask a few questions. It's there to work out whether there's something worth taking on now, and sometimes the conclusion is that it can wait.",
+      "You have software in production, a demo people like, or just an idea, and nobody in-house who can say where it should go technically. I step in as technical director for a few days a month: I look at what's there, write down where it can grow and in what order, decide with you what to build and what not to, and follow whoever builds it. Including the question that always comes up now: where a language model or an AI agent makes sense in the product, and where it's just a fashion.",
+      "The first job is always a map: how the system is made, where it's fragile, what changing it would cost. It stays yours, and whoever comes next starts from there.",
     ],
-    perChi: "It isn't clear where to start",
-    durata: "One morning",
-    cosaResta: "A list of the places where time is lost, with what they cost written next to them",
+    tag: ["fractional CTO", "technical roadmap", "architecture", "technical due diligence", "vendor management"],
+    perChi: "Startups without a CTO, companies with software built by suppliers nobody steers, anyone with a demo who needs to know whether it becomes a product",
+    durata: "By the month, with an hour budget written in the contract and an exit on notice",
+    cosaResta: "A technical roadmap, decisions put in writing, a supplier who knows what to deliver",
+    prove: "Two years as CTO of Procedo; today the technical leadership of a multi-salon management platform",
   },
   {
-    chiave: "decide",
-    etichetta: "Decide",
-    nome: "AI audit",
+    chiave: "building",
+    etichetta: "building",
+    nome: "Project-based development",
+    sottotitolo: "with artificial intelligence, or without it, if it isn't needed",
     corpo: [
-      "I look at the data you actually have, the systems already in use, who takes care of what and under which constraints. Then I write what would be worth doing, in what order, and which roads I'd leave alone.",
-      "The document stays yours. If one day the work passes to somebody else, you hand it to them and they start from there.",
+      "A new feature in software that already exists, an automation that removes a step done by hand, a whole system. When artificial intelligence is needed, I know which kind:",
     ],
-    perChi: "You have an idea and want to know whether it holds up before putting money into it",
-    durata: "Two or three weeks",
-    cosaResta: "A document you can show to anyone, other suppliers included",
+    voci: [
+      { termine: "computer vision", testo: "to recognise a part from a photo or check a step on the shop floor;" },
+      { termine: "RAG", testo: "(an assistant that answers by citing your own documents) to make forty years of manuals and procedures speak;" },
+      { termine: "AI agents", testo: "that do a multi-step job on their own: they read the email, search the management system, prepare the draft;" },
+      { termine: "data extraction", testo: "from PDFs, quotes and forms that someone copies by hand today." },
+    ],
+    dopo: [
+      "When a well-written rule is enough, I write the rule. I start with the part that might not work, in stages you approve one at a time. The code is yours.",
+    ],
+    tag: ["computer vision", "LLM", "RAG", "AI agents", "MCP", "process automation", "document extraction", "Python", "Laravel", "Vue/Nuxt"],
+    perChi: "You have a specific process you want out of the way, or a feature your software doesn't have",
+    durata: "From a few weeks, in stages",
+    cosaResta: "Something people use, the source code, the documentation",
   },
   {
-    chiave: "build",
-    etichetta: "Build",
-    nome: "Custom software",
+    chiave: "security",
+    etichetta: "security",
+    nome: "Security and code health",
     corpo: [
-      "From automating a single step to a complete system. I always start with the part that might not work, so that if something turns out to be impossible we find out while changing course still costs little.",
-      "The code is yours and I hand it over, so you don't stay tied to me longer than necessary.",
+      "When a serious vulnerability comes out, the question «do we have to update?» is followed straight away by two more: «if we update, does something break?» and «what else is there that we don't know about?». I try the update on a copy, look at the code and the server configuration, and write down what's urgent, what can wait and what it costs.",
     ],
-    perChi: "You have a specific process you want out of the way",
-    durata: "From six weeks, in stages you approve one at a time",
-    cosaResta: "Something people actually use, plus the source code",
+    caso: {
+      titolo: "A case, October 2026",
+      testo: "PHP fixes two serious remote code execution vulnerabilities, and the only remedy is updating. On a management system in production I checked that the update broke nothing, and updated the dependencies along the way. Looking at the rest of the system, other weak points nobody had reported came up: fixed in the same intervention.",
+    },
+    tag: ["vulnerability assessment", "CVE", "PHP upgrade", "dependencies", "code review", "server hardening"],
+    perChi: "You have software in production nobody has looked at in a while, or a supplier asking you to trust them",
+    durata: "From a few days to two weeks",
+    cosaResta: "A document with the priorities, readable by non-technical people too, and the fixes if you want them",
   },
   {
-    chiave: "maintain",
-    etichetta: "Maintain",
-    nome: "Service retainer",
+    chiave: "research",
+    etichetta: "research",
+    nome: "Applied research",
     corpo: [
-      "Software nobody looks after stops being useful within a few months. The retainer keeps standing what we built: servers, updates and the hours of changes that are needed along the way.",
-      "Twelve months, renewable, with notice to exit. The included hours are written in the contract.",
+      "Some problems have no off-the-shelf solution: recognising what an operator is doing by watching them (action recognition), estimating their pose (pose estimation), noticing a mistake before it becomes scrap (anomaly detection). These are the problems I did my PhD on. I read the state of the art, tell you whether the problem can be solved today and at what cost, and try it on your data before you invest in it.",
     ],
-    perChi: "You have something in production and would rather not have to think about it",
-    durata: "Twelve months, renewable, with an exit",
-    cosaResta: "Servers included, and a person who answers when you call",
+    tag: ["computer vision", "action recognition", "anomaly detection", "pose estimation", "deep learning", "state of the art", "prototypes"],
+    perChi: "R&D departments, deep-tech startups, funded projects that need a research partner",
+    durata: "A feasibility study in a few weeks",
+    cosaResta: "A reasoned answer, «it can be done / not yet / not like this», and a prototype measured on your data",
+    prove: "10 papers (CVPR, ICCV, IROS), 609 citations, h-index 9",
   },
 ];
 
@@ -64,12 +83,12 @@ export const faq: Domanda[] = [
   {
     domanda: "How much does it cost?",
     risposta:
-      "It depends on three things: how complicated the hardest part is, how many systems you already have that it has to touch, and whether somebody needs to keep it alive afterwards. I don't publish a price list because a price written without knowing your case would be a made-up number. At the end of the diagnostic half-day you have a written quote with the items listed separately, and no obligation to go on.",
+      "It depends on three things: how complicated the hardest part is, how many systems you already have that it has to touch, and whether somebody needs to keep it alive afterwards. I don't publish a price list because a price written without knowing your case would be a made-up number. After the first half hour, or after a morning at your company when it needs a closer look, you have a written quote with the items listed separately, and no obligation to go on.",
   },
   {
     domanda: "How long does it take?",
     risposta:
-      "The half-day is one morning. The audit two or three weeks. A project starts at six weeks and proceeds in stages you approve one at a time, so you can stop at any point without losing what has been done.",
+      "It depends on the work. A security review takes from a few days to two weeks, a feasibility study a few weeks, technical leadership is counted in months. A project proceeds in stages you approve one at a time, so you can stop at any point without losing what has been done.",
   },
   {
     domanda: "What do you need from us?",
@@ -83,21 +102,13 @@ export const faq: Domanda[] = [
   },
 ];
 
-// Le quattro righe di testi-en.md, sezione /en/services, sotto «Who I'm not for».
-export const perChiNonSono: string[] = [
-  "If you're looking for a brochure site or an e-commerce, there are agencies that do it better than me and cost less.",
-  "If the goal is to introduce artificial intelligence without a specific problem in mind, it's worth stopping earlier and looking for the problem.",
-  "If you need somebody there every day, it's better to hire a person than to call a consultant.",
-  "If the data you'd need doesn't exist, or nobody has ever written it down, the first job is collecting it, and that takes time.",
-];
-
 /**
  * La policy interna sull'uso dell'AI: servizio a parte, non incluso nei corsi.
- * Compare su /servizi (dopo i quattro ingaggi) e su /formazione. Testi
+ * Compare su /servizi (dopo le quattro competenze) e su /formazione. Testi
  * approvati l'8 novembre 2026 (testi-en.md, sezione formazione — Laboratorio).
  */
 export const policy: Policy = {
-  titolo: "A separate service: an internal AI policy",
+  titolo: "An internal AI policy",
   corpo: ["A document that tells everyone in the company which tools are used, with which data, and who decides. It answers the question that always comes after the course: what can I paste into ChatGPT?"],
   consegna: ["A 3–5 page document.", "A one-page summary to share around the company.", "The list of approved tools, with the settings to use."],
   durata: "About a week: an hour's interview with the owner, a draft, a review together.",

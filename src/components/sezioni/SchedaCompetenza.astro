@@ -1,0 +1,105 @@
+---
+import type { Competenza } from '../../data/servizi';
+import StackChip from '../StackChip.astro';
+
+// Una delle quattro competenze di /servizi (o /en/services). Testo alla
+// lettera da testi.md / testi-en.md, sezione «/servizi»; i dati vengono da
+// src/data/servizi.ts o src/data/en/servizi.ts, non riscritti qui.
+//
+// Le etichette dei dettagli («Per chi», «Quanto dura», «Cosa resta», «Le
+// prove») sono proprietà obbligatorie, senza valore di riserva: un default
+// in italiano finirebbe in silenzio su /en/services, come è già successo.
+//
+// `id` e `data-etichetta` servono all'indice di CorpoServizi: il link
+// dell'indice punta all'id, il riquadro di rilevamento scrive l'etichetta.
+interface Props {
+  competenza: Competenza;
+  numero: string;
+  etichettaPerChi: string;
+  etichettaQuantoDura: string;
+  etichettaCosaResta: string;
+  etichettaProve: string;
+}
+const { competenza: c, numero, etichettaPerChi, etichettaQuantoDura, etichettaCosaResta, etichettaProve } = Astro.props;
+---
+
+<article class="competenza" id={`c-${c.chiave}`} data-etichetta={`${c.etichetta} · ${numero}`}>
+  <div class="descrizione">
+    <p class="numero mono">{numero} · {c.etichetta}</p>
+    <h2>{c.nome}</h2>
+    {c.sottotitolo && <p class="sottotitolo mono">{c.sottotitolo}</p>}
+    {c.corpo.map((p, i) => <p class:list={['corpo', { muto: i === 0 }]}>{p}</p>)}
+    {c.voci && (
+      <ul class="voci">
+        {c.voci.map((v) => <li><strong>{v.termine}</strong> {v.testo}</li>)}
+      </ul>
+    )}
+    {c.dopo?.map((p) => <p class="corpo">{p}</p>)}
+    {c.caso && (
+      <aside class="caso">
+        <p class="caso-titolo mono">{c.caso.titolo}</p>
+        <p>{c.caso.testo}</p>
+      </aside>
+    )}
+    <ul class="tag">
+      {c.tag.map((t, k) => <li><StackChip label={t} k={k} /></li>)}
+    </ul>
+  </div>
+  <dl class="dati-mono">
+    <div><dt>{etichettaPerChi}</dt><dd>{c.perChi}</dd></div>
+    <div><dt>{etichettaQuantoDura}</dt><dd>{c.durata}</dd></div>
+    <div><dt>{etichettaCosaResta}</dt><dd>{c.cosaResta}</dd></div>
+    {c.prove && <div><dt>{etichettaProve}</dt><dd>{c.prove}</dd></div>}
+  </dl>
+</article>
+
+<style>
+  .competenza {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--filo);
+    scroll-margin-top: 96px;
+  }
+  /* Il numero serve solo dove l'indice a sinistra non c'è (telefono). */
+  .numero { display: none; font-size: 0.75rem; font-weight: 500; color: var(--rilevamento-testo); margin-bottom: 6px; }
+  h2 { font-size: 1.375rem; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .sottotitolo { font-size: 0.75rem; color: var(--muto); margin-bottom: 10px; }
+  .corpo { font-size: 0.9375rem; line-height: 1.6; }
+  .corpo + .corpo, .voci + .corpo { margin-top: 10px; }
+  .muto { color: var(--muto); }
+  .voci { margin: 8px 0 0 1.1em; padding: 0; list-style: disc; font-size: 0.9375rem; line-height: 1.6; }
+  .voci li { margin: 3px 0; }
+  .caso {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--filo);
+    border-left: 2px solid var(--rilevamento-testo);
+    background: var(--bianco);
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+  .caso-titolo { font-size: 0.75rem; font-weight: 500; color: var(--rilevamento-testo); text-transform: lowercase; margin-bottom: 6px; }
+  .tag { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+  /* I tag compaiono uno alla volta quando la scheda entra in vista. Lo stato
+     nascosto vale solo con `.attende`, che mette lo script di CorpoServizi:
+     senza JavaScript i tag restano visibili. */
+  .tag :global(.chip) {
+    display: inline-block;
+    transition: opacity 0.35s, transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+    transition-delay: calc(var(--k, 0) * 45ms);
+  }
+  .competenza:global(.attende) .tag :global(.chip) { opacity: 0; transform: translateY(6px) scale(0.9); }
+  /* Il <dl> è alto quanto la scheda: senza `start` la griglia globale di
+     .dati-mono distribuisce le righe su tutta l'altezza. */
+  .dati-mono { align-content: start; }
+  dt { text-transform: lowercase; }
+  @media (max-width: 820px) {
+    .competenza { grid-template-columns: 1fr; gap: 10px; }
+    .numero { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tag :global(.chip) { transition: none; }
+  }
+</style>

@@ -23,7 +23,7 @@ Due precisazioni sulle fonti:
   due progetti è tradotto dall'italiano approvato.
 - Titoli delle pubblicazioni, sedi (CVPR, ICCV, IROS, ICLR, Pattern
   Recognition…), nomi propri (Procedo, Sapienza, PINlab, Fondimpresa, B4i,
-  HomeSweatHome, Spannum) e numeri (10 articoli, 597 citazioni, 2021–2024,
+  HomeSweatHome, Spannum) e numeri (10 articoli, 609 citazioni, 2021–2024,
   2024–2026) restano invariati e non sono contati né fra i riusati né fra i
   tradotti.
 
@@ -112,7 +112,7 @@ Selettore di lingua: **IT / EN** *(invariato)*
 
 **[TRADOTTO]** — `testi.md`, home, i quattro numeri
 
-> **10** published papers · **597** citations · **1** Best Paper Award ·
+> **10** published papers · **609** citations · **1** Best Paper Award ·
 > **2** years as CTO
 
 ## Il problema
@@ -378,107 +378,134 @@ inglese di partenza per nessuno dei blocchi di questa pagina: è tutta tradotta.
 
 ## Apertura
 
-**[TRADOTTO]**
+**[TRADOTTO]** — riscritto il 2026-11-22 insieme all'italiano: quattro competenze al
+posto dei quattro ingaggi, «Who I'm not for» tolto.
 
 > Services
 >
-> # Four ways of working together
+> # What I can do
 >
-> You start with the first one. Each step stands on its own: you go on when the
-> work calls for it, you can stop at any moment, and what has been done stays
-> yours anyway.
+> Technical leadership, building, security, research. Four different trades, one
+> person: whoever analyses the problem is also whoever then writes the code.
+>
+> (index, screen readers only) The four skills
 
-## I quattro ingaggi
+## Le quattro competenze
 
-**[TRADOTTO]** — `servizi.ts` → `ingaggi[0]`
+**[TRADOTTO]** — `servizi.ts` → `competenze[0]`
 
-> Understand
+> 01 · leadership
 >
-> ## A diagnostic half-day
+> ## Fractional CTO
 >
-> I come to your company, watch how you work and ask a few questions. It's
-> there to work out whether there's something worth taking on now, and
-> sometimes the conclusion is that it can wait.
+> technical leadership, when a full-time CTO is too much
 >
-> **Who it's for** — It isn't clear where to start
-> **How long** — One morning
-> **What you keep** — A list of the places where time is lost, with what they
-> cost written next to them
+> You have software in production, a demo people like, or just an idea, and nobody
+> in-house who can say where it should go technically. I step in as technical
+> director for a few days a month: I look at what's there, write down where it can
+> grow and in what order, decide with you what to build and what not to, and follow
+> whoever builds it. Including the question that always comes up now: where a
+> language model or an AI agent makes sense in the product, and where it's just a
+> fashion.
+>
+> The first job is always a map: how the system is made, where it's fragile, what
+> changing it would cost. It stays yours, and whoever comes next starts from there.
+>
+> `fractional CTO · technical roadmap · architecture · technical due diligence · vendor management`
+>
+> **Who it's for** — Startups without a CTO, companies with software built by
+> suppliers nobody steers, anyone with a demo who needs to know whether it becomes
+> a product
+> **How long** — By the month, with an hour budget written in the contract and an
+> exit on notice
+> **What you keep** — A technical roadmap, decisions put in writing, a supplier who
+> knows what to deliver
+> **The evidence** — Two years as CTO of Procedo; today the technical leadership of
+> a multi-salon management platform
 
-**[TRADOTTO]** — `servizi.ts` → `ingaggi[1]`
+**[TRADOTTO]** — `servizi.ts` → `competenze[1]`
 
-> Decide
+> 02 · building
 >
-> ## AI audit
+> ## Project-based development
 >
-> I look at the data you actually have, the systems already in use, who takes
-> care of what and under which constraints. Then I write what would be worth
-> doing, in what order, and which roads I'd leave alone.
+> with artificial intelligence, or without it, if it isn't needed
 >
-> The document stays yours. If one day the work passes to somebody else, you
-> hand it to them and they start from there.
+> A new feature in software that already exists, an automation that removes a step
+> done by hand, a whole system. When artificial intelligence is needed, I know
+> which kind:
 >
-> **Who it's for** — You have an idea and want to know whether it holds up
-> before putting money into it
-> **How long** — Two or three weeks
-> **What you keep** — A document you can show to anyone, other suppliers
-> included
+> - **computer vision** to recognise a part from a photo or check a step on the
+>   shop floor;
+> - **RAG** (an assistant that answers by citing your own documents) to make forty
+>   years of manuals and procedures speak;
+> - **AI agents** that do a multi-step job on their own: they read the email,
+>   search the management system, prepare the draft;
+> - **data extraction** from PDFs, quotes and forms that someone copies by hand
+>   today.
+>
+> When a well-written rule is enough, I write the rule. I start with the part that
+> might not work, in stages you approve one at a time. The code is yours.
+>
+> `computer vision · LLM · RAG · AI agents · MCP · process automation · document extraction · Python · Laravel · Vue/Nuxt`
+>
+> **Who it's for** — You have a specific process you want out of the way, or a
+> feature your software doesn't have
+> **How long** — From a few weeks, in stages
+> **What you keep** — Something people use, the source code, the documentation
 
-**[TRADOTTO]** — `servizi.ts` → `ingaggi[2]`
+**[TRADOTTO]** — `servizi.ts` → `competenze[2]`
 
-> Build
+> 03 · security
 >
-> ## Custom software
+> ## Security and code health
 >
-> From automating a single step to a complete system. I always start with the
-> part that might not work, so that if something turns out to be impossible we
-> find out while changing course still costs little.
+> When a serious vulnerability comes out, the question «do we have to update?» is
+> followed straight away by two more: «if we update, does something break?» and
+> «what else is there that we don't know about?». I try the update on a copy, look
+> at the code and the server configuration, and write down what's urgent, what can
+> wait and what it costs.
 >
-> The code is yours and I hand it over, so you don't stay tied to me longer
-> than necessary.
+> *A case, October 2026* — PHP fixes two serious remote code execution vulnerabilities, and the only remedy is updating. On a management system in production I checked that the update broke nothing, and updated the dependencies along the way. Looking at the rest of the system, other weak points nobody had reported came up: fixed in the same intervention.
 >
-> **Who it's for** — You have a specific process you want out of the way
-> **How long** — From six weeks, in stages you approve one at a time
-> **What you keep** — Something people actually use, plus the source code
+> `vulnerability assessment · CVE · PHP upgrade · dependencies · code review · server hardening`
+>
+> **Who it's for** — You have software in production nobody has looked at in a
+> while, or a supplier asking you to trust them
+> **How long** — From a few days to two weeks
+> **What you keep** — A document with the priorities, readable by non-technical
+> people too, and the fixes if you want them
 
-**[TRADOTTO]** — `servizi.ts` → `ingaggi[3]`
+**[TRADOTTO]** — `servizi.ts` → `competenze[3]`
 
-> Maintain
+> 04 · research
 >
-> ## Service retainer
+> ## Applied research
 >
-> Software nobody looks after stops being useful within a few months. The
-> retainer keeps standing what we built: servers, updates and the hours of
-> changes that are needed along the way.
+> Some problems have no off-the-shelf solution: recognising what an operator is
+> doing by watching them (action recognition), estimating their pose (pose
+> estimation), noticing a mistake before it becomes scrap (anomaly detection).
+> These are the problems I did my PhD on. I read the state of the art, tell you
+> whether the problem can be solved today and at what cost, and try it on your
+> data before you invest in it.
 >
-> Twelve months, renewable, with notice to exit. The included hours are written
-> in the contract.
+> `computer vision · action recognition · anomaly detection · pose estimation · deep learning · state of the art · prototypes`
 >
-> **Who it's for** — You have something in production and would rather not have
-> to think about it
-> **How long** — Twelve months, renewable, with an exit
-> **What you keep** — Servers included, and a person who answers when you call
+> **Who it's for** — R&D departments, deep-tech startups, funded projects that need
+> a research partner
+> **How long** — A feasibility study in a few weeks
+> **What you keep** — A reasoned answer, «it can be done / not yet / not like
+> this», and a prototype measured on your data
+> **The evidence** — 10 papers (CVPR, ICCV, IROS), 609 citations, h-index 9
 
 **[TRADOTTO]** — `testi.md`, link di sezione
 
 > The evidence: what I've built →
 
-## Per chi non sono
+**[TRADOTTO]** — titolo della policy, anche su /en/training: era «A separate
+service: an internal AI policy».
 
-**[TRADOTTO]** — `servizi.ts` → `perChiNonSono`
-
-> Honesty
->
-> ## Who I'm not for
->
-> - If you're looking for a brochure site or an e-commerce, there are agencies
->   that do it better than me and cost less.
-> - If the goal is to introduce artificial intelligence without a specific
->   problem in mind, it's worth stopping earlier and looking for the problem.
-> - If you need somebody there every day, it's better to hire a person than to
->   call a consultant.
-> - If the data you'd need doesn't exist, or nobody has ever written it down,
->   the first job is collecting it, and that takes time.
+> ## An internal AI policy
 
 ## Domande
 
@@ -499,14 +526,16 @@ inglese di partenza per nessuno dei blocchi di questa pagina: è tutta tradotta.
 > It depends on three things: how complicated the hardest part is, how many
 > systems you already have that it has to touch, and whether somebody needs to
 > keep it alive afterwards. I don't publish a price list because a price
-> written without knowing your case would be a made-up number. At the end of
-> the diagnostic half-day you have a written quote with the items listed
-> separately, and no obligation to go on.
+> written without knowing your case would be a made-up number. After the first
+> half hour, or after a morning at your company when it needs a closer look, you
+> have a written quote with the items listed separately, and no obligation to go
+> on.
 >
 > ### How long does it take?
-> The half-day is one morning. The audit two or three weeks. A project starts
-> at six weeks and proceeds in stages you approve one at a time, so you can
-> stop at any point without losing what has been done.
+> It depends on the work. A security review takes from a few days to two weeks,
+> a feasibility study a few weeks, technical leadership is counted in months. A
+> project proceeds in stages you approve one at a time, so you can stop at any
+> point without losing what has been done.
 >
 > ### What do you need from us?
 > Little, but that little is indispensable: half a day of the people who
@@ -526,10 +555,9 @@ inglese di partenza per nessuno dei blocchi di questa pagina: è tutta tradotta.
 
 > ## How it starts
 >
-> You write me two lines about what you'd like to stop doing by hand and we
-> talk for half an hour. If there's room to work together we meet in person;
-> otherwise I tell you straight away, and if I know someone better suited I put
-> you in touch.
+> You write me two lines about what you'd like to build, fix or understand, and
+> we talk for half an hour. If there's room to work together we meet; otherwise I
+> tell you straight away, and if I know someone better suited I put you in touch.
 >
 > Let's talk, half an hour
 
@@ -1232,7 +1260,7 @@ pagina; `site.ts` → `en.research` e `Research.astro` per l'inglese già scritt
 
 **[TRADOTTO]** — `pubblicazioni.ts` → `numeriFascia`
 
-> **10** published papers · **597** citations, as of November 2026 · **3** as
+> **10** published papers · **609** citations, h-index 9, as of November 2026 · **3** as
 > first author · **1** Best Paper Award
 
 ## Cosa c'entra con la tua azienda

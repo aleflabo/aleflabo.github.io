@@ -38,7 +38,7 @@ Sorgente: `tavole/Main.dc.html`
 - `testo` dal 2024 al 2026
 - `etichetta` 10
 - `etichetta` articoli pubblicati
-- `etichetta` 597
+- `etichetta` 609
 - `etichetta` citazioni
 - `etichetta` 1
 - `etichetta` Best Paper Award
@@ -257,77 +257,97 @@ Sorgente: `tavole/Servizi.dc.html`
 - `LINK` Parliamone
 - `testo` Servizi
 
-### Quattro modi di lavorare insieme
+### Cosa so fare
 
 *TITOLO DI PAGINA (h1)*
 
-- `testo` Si parte dal primo. Ogni passo è a sé: si prosegue quando il lavoro lo richiede, ci si può fermare in qualsiasi momento, e quello che è stato fatto resta comunque vostro.
-- `testo` Capire
+> **Riscritto il 2026-11-22.** Al posto dei quattro ingaggi in sequenza (Capire ·
+> Decidere · Costruire · Mantenere) ci sono le quattro competenze. «Per chi non sono»
+> è stato tolto. La mezza giornata diagnostica non è più un servizio: resta come
+> primo passo, dentro «Quanto costa?».
 
-### Mezza giornata diagnostica
+- `testo` Direzione tecnica, costruzione, sicurezza, ricerca. Quattro mestieri diversi, una persona sola: chi analizza il problema è anche chi poi scrive il codice.
+- `etichetta` (indice, solo per lettori di schermo) Le quattro competenze
+- `testo` 01 · direzione
 
-*TITOLO DI SEZIONE (h2)*
-
-- `testo` Vengo in azienda, guardo come lavorate e faccio un po' di domande. Serve a capire se c'è qualcosa che vale la pena affrontare adesso, e a volte la conclusione è che si può rimandare.
-- `testo` Per chi
-- `testo` Non è chiaro da dove cominciare
-- `testo` Quanto dura
-- `testo` Una mattina
-- `testo` Cosa resta
-- `testo` Una lista dei punti dove si perde tempo, con accanto quanto costano
-- `testo` Decidere
-
-### Audit AI
+### Fractional CTO
 
 *TITOLO DI SEZIONE (h2)*
 
-- `testo` Guardo i dati che avete davvero, i gestionali già in uso, chi si occupa di cosa e con quali vincoli. Poi scrivo cosa converrebbe fare, in che ordine, e quali strade lascerei perdere.
-- `testo` Il documento resta vostro. Se un domani il lavoro passa a qualcun altro, glielo consegnate e riparte da lì.
+- `testo` la direzione tecnica, quando un CTO a tempo pieno è troppo
+- `testo` Avete un software in produzione, una demo che piace, o solo un'idea, e nessuno in casa che sappia dire dove deve andare tecnicamente. Entro come direttore tecnico per qualche giorno al mese: guardo cosa c'è, scrivo dove può crescere e in che ordine, decido con voi cosa costruire e cosa no, e seguo chi lo costruisce. Compresa la domanda che oggi arriva sempre: dove ha senso mettere un modello linguistico o un agente AI nel prodotto, e dove è solo una moda.
+- `testo` Il primo lavoro è sempre una mappa: com'è fatto il sistema, dove è fragile, cosa costerebbe cambiarlo. Resta vostra, e chiunque arrivi dopo riparte da lì.
+- `etichetta` fractional CTO · roadmap tecnica · architettura · due diligence tecnica · gestione fornitori
 - `testo` Per chi
-- `testo` Hai un'idea e vuoi sapere se regge prima di metterci soldi
+- `testo` Startup senza CTO, aziende con un software fatto da fornitori che nessuno governa, chi ha una demo e deve capire se diventa prodotto
 - `testo` Quanto dura
-- `testo` Due o tre settimane
+- `testo` A mesi, con un monte ore scritto nel contratto e uscita su preavviso
 - `testo` Cosa resta
-- `testo` Un documento che potete far leggere a chiunque, compresi altri fornitori
-- `testo` Costruire
+- `testo` Una roadmap tecnica, le decisioni messe per iscritto, un fornitore che sa cosa deve consegnare
+- `testo` Le prove
+- `testo` Due anni da CTO di Procedo; oggi la direzione tecnica di una piattaforma gestionale multi-salone
+- `testo` 02 · costruzione
 
-### Software su misura
+### Sviluppo a progetto
 
 *TITOLO DI SEZIONE (h2)*
 
-- `testo` Dall'automazione di un singolo passaggio al sistema completo. Comincio sempre dalla parte che potrebbe non funzionare, così se qualcosa si rivela impossibile lo scopriamo quando cambiare strada costa ancora poco.
-- `testo` Il codice è vostro e ve lo consegno, così non restate legati a me più del necessario.
+- `testo` con l'intelligenza artificiale, o senza, se non serve
+- `testo` Una funzione nuova in un software che esiste già, un'automazione che toglie di mezzo un passaggio fatto a mano, un sistema intero. Quando serve l'intelligenza artificiale, so quale:
+- `testo` **computer vision** per riconoscere un pezzo da una foto o controllare un passaggio in reparto;
+- `testo` **RAG** (un assistente che risponde citando i vostri documenti) per far parlare quarant'anni di manuali e procedure;
+- `testo` **agenti AI** che fanno da soli un lavoro in più passaggi: leggono la mail, cercano nel gestionale, preparano la bozza;
+- `testo` **estrazione dati** da PDF, preventivi e moduli che oggi qualcuno ricopia a mano.
+- `testo` Quando basta una regola scritta bene, scrivo la regola. Comincio dalla parte che potrebbe non funzionare, a scaglioni che approvate uno alla volta. Il codice è vostro.
+- `etichetta` computer vision · LLM · RAG · agenti AI · MCP · automazione processi · estrazione documenti · Python · Laravel · Vue/Nuxt
 - `testo` Per chi
-- `testo` Hai un processo preciso che vuoi togliere di mezzo
+- `testo` Hai un processo preciso da togliere di mezzo, o una funzione che il tuo software non ha
 - `testo` Quanto dura
-- `testo` Da sei settimane, a scaglioni che approvate uno alla volta
+- `testo` Da qualche settimana, a scaglioni
 - `testo` Cosa resta
-- `testo` Qualcosa che le persone usano davvero, più il codice sorgente
-- `testo` Mantenere
+- `testo` Qualcosa che le persone usano, il codice sorgente, la documentazione
+- `testo` 03 · sicurezza
 
-### Canone di servizio
+### Sicurezza e stato di salute del codice
 
 *TITOLO DI SEZIONE (h2)*
 
-- `testo` Un software che nessuno cura smette di essere utile nel giro di qualche mese. Il canone tiene in piedi quello che abbiamo costruito: server, aggiornamenti e le ore di modifica che servono strada facendo.
-- `testo` Dodici mesi rinnovabili, con uscita su preavviso. Le ore incluse sono scritte nel contratto.
+- `testo` Quando esce una vulnerabilità grave, alla domanda «dobbiamo aggiornare?» ne seguono subito altre due: «se aggiorniamo, si rompe qualcosa?» e «cos'altro c'è che non sappiamo?». Provo l'aggiornamento su una copia, guardo il codice e la configurazione del server, e scrivo cosa è urgente, cosa può aspettare e cosa costa.
+- `etichetta` Un caso, ottobre 2026
+- `testo` PHP corregge due vulnerabilità gravi di esecuzione remota di codice, e l'unica soluzione è aggiornare. Su un gestionale in produzione ho verificato che l'aggiornamento non rompesse niente, e intanto ho aggiornato le dipendenze. Guardando il resto del sistema sono emersi altri punti deboli che nessuno aveva segnalato: corretti nello stesso intervento.
+  > **Ridotto il 2026-11-22**: niente settore, niente numeri, niente difetti specifici —
+  > il cliente è riconoscibile e le falle sarebbero sue. Resta lo schema: intervento
+  > urgente, poi altri punti deboli trovati e corretti.
+
+- `etichetta` vulnerability assessment · CVE · aggiornamento PHP · dipendenze · code review · hardening server
 - `testo` Per chi
-- `testo` Hai qualcosa in produzione e preferiresti non doverci pensare
+- `testo` Hai un software in produzione che nessuno guarda da tempo, o un fornitore che ti chiede di fidarti
 - `testo` Quanto dura
-- `testo` Dodici mesi, rinnovabili, con uscita
+- `testo` Da qualche giorno a due settimane
 - `testo` Cosa resta
-- `testo` Server compresi, e una persona che risponde quando chiami
+- `testo` Un documento con le priorità, leggibile anche da chi non è tecnico, e le correzioni se le volete
+- `testo` 04 · ricerca
+
+### Ricerca applicata
+
+*TITOLO DI SEZIONE (h2)*
+
+- `testo` Certi problemi non hanno una soluzione da catalogo: riconoscere le azioni di un operatore guardandolo (action recognition), stimarne la posa (pose estimation), accorgersi di un errore prima che diventi uno scarto (anomaly detection). Sono i problemi su cui ho fatto il dottorato. Leggo lo stato dell'arte, vi dico se il problema oggi è risolvibile e a che costo, e lo provo sui vostri dati prima che ci investiate.
+- `etichetta` computer vision · action recognition · anomaly detection · pose estimation · deep learning · stato dell'arte · prototipi
+- `testo` Per chi
+- `testo` Reparti R&D, startup deep-tech, progetti finanziati che hanno bisogno di un partner di ricerca
+- `testo` Quanto dura
+- `testo` Uno studio di fattibilità in qualche settimana
+- `testo` Cosa resta
+- `testo` Una risposta argomentata «si può / non ancora / non così», un prototipo misurato sui vostri dati
+- `testo` Le prove
+- `testo` 10 articoli (CVPR, ICCV, IROS), 609 citazioni, h-index 9
 - `LINK` Le prove: quello che ho costruito →
-- `testo` Onestà
 
-### Per chi non sono
+### La policy interna sull'uso dell'AI
 
-*TITOLO DI SEZIONE (h2)*
+*TITOLO DI SEZIONE (h2)* — il titolo era «Servizio a parte: la policy interna sull'uso dell'AI» (2026-11-22, anche su /formazione).
 
-- `testo` Se cerchi un sito vetrina o un e-commerce, ci sono agenzie che lo fanno meglio di me e costano meno.
-- `testo` Se l'obiettivo è introdurre l'intelligenza artificiale senza avere in mente un problema preciso, conviene fermarsi prima e cercare il problema.
-- `testo` Se serve qualcuno presente tutti i giorni, conviene assumere una persona invece di chiamare un consulente.
-- `testo` Se i dati che servirebbero non esistono o nessuno li ha mai messi per iscritto, il primo lavoro è raccoglierli, e richiede tempo.
 - `testo` Domande
 
 ### Quelle che mi vengono fatte quasi sempre
@@ -346,13 +366,18 @@ Sorgente: `tavole/Servizi.dc.html`
 
 *SOTTOTITOLO (h3)*
 
-- `testo` Dipende da tre cose: quanto è complicata la parte più difficile, quanti sistemi che avete già deve toccare, e se serve che qualcuno lo tenga in vita dopo. Non pubblico un listino perché un prezzo scritto senza conoscere il vostro caso sarebbe un numero inventato. Alla fine della mezza giornata diagnostica avete un preventivo scritto con le voci separate, e nessun obbligo di proseguire.
+- `testo` Dipende da tre cose: quanto è complicata la parte più difficile, quanti sistemi che avete già deve toccare, e se serve che qualcuno lo tenga in vita dopo. Non pubblico un listino perché un prezzo scritto senza conoscere il vostro caso sarebbe un numero inventato. Dopo la prima mezz'ora, o dopo una mattina in azienda quando serve guardare da vicino, avete un preventivo scritto con le voci separate, e nessun obbligo di proseguire.
 
 ### Quanto ci vuole?
 
 *SOTTOTITOLO (h3)*
 
-- `testo` La mezza giornata è una mattina. L'audit due o tre settimane. Un progetto parte da sei settimane e procede a scaglioni che approvate uno alla volta, così potete fermarvi a un punto qualsiasi senza perdere quello che è stato fatto.
+- `testo` Dipende dal lavoro. Una verifica di sicurezza va da qualche giorno a due settimane, uno studio di fattibilità richiede qualche settimana, la direzione tecnica si conta a mesi. Un progetto procede a scaglioni che approvate uno alla volta, così potete fermarvi a un punto qualsiasi senza perdere quello che è stato fatto.
+
+  > **Riscritto il 2026-11-22**, con le quattro competenze. Era: «La mezza giornata è
+  > una mattina. L'audit due o tre settimane. Un progetto parte da sei settimane e
+  > procede a scaglioni che approvate uno alla volta, così potete fermarvi a un punto
+  > qualsiasi senza perdere quello che è stato fatto.»
 
 ### Cosa serve da voi?
 
@@ -377,7 +402,7 @@ Sorgente: `tavole/Servizi.dc.html`
 
 *TITOLO DI SEZIONE (h2)*
 
-- `testo` Mi scrivi due righe su cosa vorreste smettere di fare a mano e ci sentiamo mezz'ora. Se c'è margine per lavorare insieme ci vediamo di persona; altrimenti te lo dico subito, e se conosco qualcuno più adatto ti metto in contatto.
+- `testo` Mi scrivete due righe su cosa vorreste costruire, sistemare o capire, e ci sentiamo mezz'ora. Se c'è margine per lavorare insieme ci vediamo; altrimenti ve lo dico subito, e se conosco qualcuno più adatto vi metto in contatto.
 - `LINK` Parliamone, mezz'ora
 - `testo` Alessandro Flaborea
 - `testo` Consulenza e formazione sull'intelligenza artificiale. Dalla ricerca al software che le persone usano.
@@ -764,8 +789,8 @@ Sorgente: `tavole/Ricerca.dc.html`
 - `testo` Dottorato al Perception and Intelligence Lab della Sapienza, dal 2021 al 2024, e un periodo di ricerca all'Università di Amsterdam. Anomaly detection, riconoscimento delle azioni e apprendimento delle procedure: capire cosa sta facendo una persona guardandola.
 - `testo` 10
 - `testo` articoli pubblicati
-- `testo` 597
-- `testo` citazioni, a novembre 2026
+- `testo` 609
+- `testo` citazioni, h-index 9, a novembre 2026
 - `testo` 3
 - `testo` da primo autore
 - `testo` 1

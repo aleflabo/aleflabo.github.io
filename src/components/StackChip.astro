@@ -1,8 +1,10 @@
 ---
-interface Props { label: string; }
-const { label } = Astro.props;
+// `k` è la posizione nella fila: chi lo passa può sfalsare la comparsa dei tag
+// con `transition-delay: calc(var(--k) * …)` (le schede di /servizi).
+interface Props { label: string; k?: number; }
+const { label, k } = Astro.props;
 ---
-<span class="chip">{label}</span>
+<span class="chip" style={k === undefined ? undefined : `--k:${k}`}>{label}</span>
 <style>
   /* Etichetta in mono, come quelle delle righe dei lavori. */
   .chip { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muto); border: 1px solid var(--filo); background: var(--bianco); padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
