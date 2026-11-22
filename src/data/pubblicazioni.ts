@@ -170,7 +170,7 @@ export interface NumeroFascia {
 // I quattro numeri della fascia in cima a /ricerca.
 export const numeriFascia: NumeroFascia[] = [
   { numero: "10", etichetta: "articoli pubblicati" },
-  { numero: "597", etichetta: "citazioni, a novembre 2026" },
+  { numero: "609", etichetta: "citazioni, h-index 9, a novembre 2026" },
   { numero: "3", etichetta: "da primo autore" },
   { numero: "1", etichetta: "Best Paper Award" },
 ];

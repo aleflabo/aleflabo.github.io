@@ -18,7 +18,7 @@ import { homeLab } from '../data/homeLab';
 import Contatto from '../components/sezioni/Contatto.astro';
 import { localizedPath } from '../i18n/ui';
 import { emailContatto } from '../data/legale';
-import { ingaggi } from '../data/servizi';
+import { competenze } from '../data/servizi';
 import { attivita } from '../lib/datiStrutturati';
 
 
@@ -59,7 +59,7 @@ const datiStrutturati = [
   attivita({
     site: dominio,
     lang: 'it',
-    servizi: ingaggi.map((i) => ({ nome: i.nome, descrizione: i.corpo[0] })),
+    servizi: competenze.map((c) => ({ nome: c.nome, descrizione: c.corpo[0] })),
   }),
 ];
 // --- Lavori a righe (Laboratorio) ---

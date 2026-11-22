@@ -3,7 +3,7 @@
 // (rotta `/en/services`).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CorpoServizi from '../../components/pagine/CorpoServizi.astro';
-import { ingaggi, faq, perChiNonSono, policy } from '../../data/en/servizi';
+import { competenze, faq, policy } from '../../data/en/servizi';
 import { testiServiziPagina } from '../../data/en/serviziPagina';
 import { briciole, faq as faqLd } from '../../lib/datiStrutturati';
 import { localizedPath } from '../../i18n/ui';
@@ -34,10 +34,9 @@ import { ilProblema } from '../../data/en/home';
       il perché sta in CorpoServizi.astro, le stringhe restano nei dati. */}
   <CorpoServizi
     lang="en"
-    t={{ ...testiServiziPagina, labelOnesta: undefined, labelDomande: undefined }}
-    ingaggi={ingaggi}
+    t={{ ...testiServiziPagina, labelDomande: undefined }}
+    competenze={competenze}
     faq={faq}
-    perChiNonSono={perChiNonSono}
     policy={policy}
     hrefLavori="/work"
   >
